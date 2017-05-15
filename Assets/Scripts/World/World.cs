@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[ExecuteInEditMode]
 public class World : MonoBehaviour {
 
     const int CHUNK_SIZE = 16;
