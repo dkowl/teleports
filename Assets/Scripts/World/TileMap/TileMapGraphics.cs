@@ -65,5 +65,7 @@ public class TileMapGraphics : MonoBehaviour {
         mesh.vertices = vertices;
         mesh.uv = uvs;
         mesh.triangles = triangles;
+
+        gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
     }
 }
