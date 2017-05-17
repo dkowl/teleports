@@ -44,16 +44,17 @@ public class Unit : MonoBehaviour {
             }
 
             transform.position += offset;
-            if (isRotating_)
+            
+        }
+        if (isRotating_)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationTarget_, dTime * rotationSpeed_ * 360);
+            if (transform.rotation == rotationTarget_)
             {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationTarget_, dTime * rotationSpeed_ * 360);
-                if(transform.rotation == rotationTarget_)
-                {
-                    isRotating_ = false;
-                }
+                isRotating_ = false;
             }
         }
-	}
+    }
 
     public void moveTo(Vector3 moveDest)
     {
