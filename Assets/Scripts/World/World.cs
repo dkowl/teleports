@@ -2,8 +2,8 @@
 
 public class World : MonoBehaviour {
 
-    const int CHUNK_SIZE = 16;
-    const float TILE_SIZE = 1f;
+    public const int CHUNK_SIZE = 16;
+    public const float TILE_SIZE = 2f;
     TileMap tileMap_;
     GameObject tileMapObject_;
     

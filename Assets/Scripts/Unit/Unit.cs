@@ -5,24 +5,40 @@ using UnityEngine;
 public class Unit : MonoBehaviour {
 
     public int hp_, damage_;
-    public float attackRange_, attackCooldown_, moveSpeed_, rotationSpeed_;
+    public float
+        attackRange_, attackCooldown_,
+        moveSpeed_, rotationSpeed_,
+        viewRange_;
+
+    //hp
+    public int damageReceived_;
 
     //pathfinding
-    public Vector3 moveDest_;
+    Vector3 moveDest_;
     bool isMoving_;
-    
-    public Quaternion rotationTarget_, rotationOrigin_;
+
+    Quaternion rotationTarget_;
     bool isRotating_;
+
+    //enemy targeting
+    Unit attackTarget_;
+    public Unit AttackTarget {
+        get
+        {
+            return attackTarget_;
+        }
+        set
+        {
+            attackTarget_ = value;
+        }
+    }
+    float currentAttackCooldown_;
 
     // Use this for initialization
     void Start () {
-        hp_ = 100;
-        damage_ = 25;
-        attackRange_ = 1;
-        attackCooldown_ = 1;
-        moveSpeed_ = 1;
-        rotationSpeed_ = moveSpeed_;
+        damageReceived_ = 0;
         isMoving_ = false;
+        isRotating_ = false;
 	}
 	
 	// Update is called once per frame
@@ -54,14 +70,39 @@ public class Unit : MonoBehaviour {
                 isRotating_ = false;
             }
         }
+
+        currentAttackCooldown_ -= dTime;
+        if (currentAttackCooldown_ < 0) currentAttackCooldown_ = 0;
     }
 
     public void moveTo(Vector3 moveDest)
     {
         moveDest_ = moveDest;
         rotationTarget_ = Quaternion.LookRotation(moveDest_ - transform.position);
-        rotationOrigin_ = transform.rotation;
         isMoving_ = true;
         isRotating_ = true;
+    }
+
+    public void attack()
+    {
+        if(attackTarget_ != null && currentAttackCooldown_ <= 0 && (attackTarget_.transform.position - transform.position).magnitude <= attackRange_)
+        {
+            currentAttackCooldown_ = attackCooldown_;
+            attackTarget_.receiveDamage(damage_);
+        }
+    }
+
+    public void receiveDamage(int damage)
+    {
+        damageReceived_ += damage;
+        if(damageReceived_ >= hp_)
+        {
+            die();
+        }
+    }
+
+    public void die()
+    {
+        Destroy(gameObject);
     }
 }
