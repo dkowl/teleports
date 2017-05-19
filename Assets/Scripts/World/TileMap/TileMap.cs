@@ -1,12 +1,14 @@
 ﻿public class TileMap {
 
+    int seed_;
     int sizeX_, sizeY_;
     Tile[,] tiles_;
 
-    public TileMap(int sizeX, int sizeY)
+    public TileMap(int sizeX, int sizeY, int seed)
     {
         sizeX_ = sizeX;
         sizeY_ = sizeY;
+        seed_ = seed;
 
         generate();
     }

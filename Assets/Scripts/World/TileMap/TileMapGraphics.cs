@@ -6,6 +6,7 @@ public class TileMapGraphics : MonoBehaviour {
 
     int sizeX_, sizeY_;
     float tileSize_;
+    public Material material_;
 
 	// Use this for initialization
 	void Start () {
@@ -17,8 +18,10 @@ public class TileMapGraphics : MonoBehaviour {
 		
 	}
 
-    public void generateMesh(TileMap tileMap, Vector3 offset, float tileSize, Material material)
+    public void generateMesh(TileMap tileMap, Vector3 offset, float tileSize)
     {
+        print(offset);
+
         sizeX_ = tileMap.getSizeX();
         sizeY_ = tileMap.getSizeY();
         tileSize_ = tileSize;
@@ -66,7 +69,7 @@ public class TileMapGraphics : MonoBehaviour {
         mesh.uv = uvs;
         mesh.triangles = triangles;
 
-        gameObject.GetComponent<MeshRenderer>().material = material;
+        gameObject.GetComponent<MeshRenderer>().sharedMaterial = material_;
 
         gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
     }
