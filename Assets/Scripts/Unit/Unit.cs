@@ -77,10 +77,13 @@ public class Unit : MonoBehaviour {
 
     public void moveTo(Vector3 moveDest)
     {
-        moveDest_ = moveDest;
-        rotationTarget_ = Quaternion.LookRotation(moveDest_ - transform.position);
-        isMoving_ = true;
-        isRotating_ = true;
+        if (moveDest != transform.position)
+        {
+            moveDest_ = moveDest;
+            rotationTarget_ = Quaternion.LookRotation(moveDest_ - transform.position);
+            isMoving_ = true;
+            isRotating_ = true;
+        }
     }
 
     public void attack()
