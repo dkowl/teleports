@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour {
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            int layerMask = 1 << 8;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 Debug.DrawRay(transform.position, hit.point, Color.yellow, 1, false);
                 gameObject.GetComponent<Unit>().moveTo(hit.point);
