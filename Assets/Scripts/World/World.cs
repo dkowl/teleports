@@ -36,7 +36,6 @@ public class World : MonoBehaviour {
             {
                 chunks_[(int)c.x, (int)c.y].unload();
                 toRemove_.Add(c);
-                print("Removing"); print(c);
             }
         }
 

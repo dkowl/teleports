@@ -20,8 +20,6 @@ public class TileMapGraphics : MonoBehaviour {
 
     public void generateMesh(TileMap tileMap, Vector3 offset, float tileSize)
     {
-        print(offset);
-
         sizeX_ = tileMap.getSizeX();
         sizeY_ = tileMap.getSizeY();
         tileSize_ = tileSize;

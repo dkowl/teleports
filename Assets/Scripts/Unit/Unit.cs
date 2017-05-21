@@ -46,7 +46,7 @@ public class Unit : MonoBehaviour {
 
         float dTime = Time.deltaTime;
 
-        if (isMoving_)
+        if (canMove())
         {
             Vector3 offset = moveDest_ - transform.position;
 
@@ -60,7 +60,7 @@ public class Unit : MonoBehaviour {
             }
 
             transform.position += offset;
-            
+
         }
         if (isRotating_)
         {
@@ -70,6 +70,8 @@ public class Unit : MonoBehaviour {
                 isRotating_ = false;
             }
         }
+
+        if (attackTarget_ != null) chase();
 
         currentAttackCooldown_ -= dTime;
         if (currentAttackCooldown_ < 0) currentAttackCooldown_ = 0;
@@ -92,6 +94,28 @@ public class Unit : MonoBehaviour {
         {
             currentAttackCooldown_ = attackCooldown_;
             attackTarget_.receiveDamage(damage_);
+            isMoving_ = false;
+        }
+    }
+
+    bool canMove()
+    {
+        return currentAttackCooldown_ == 0 && isMoving_;
+    }
+
+    public void chase()
+    {
+        float dist = Vector3.Distance(attackTarget_.transform.position, transform.position);
+        if (dist <= viewRange_)
+        {
+            if (dist <= attackRange_)
+            {
+                attack();
+            }
+            else
+            {
+                moveTo(attackTarget_.transform.position);
+            }
         }
     }
 

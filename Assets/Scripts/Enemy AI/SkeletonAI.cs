@@ -18,21 +18,6 @@ public class SkeletonAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (targetUnit_ == null) target();
-        else
-        {
-            float dist = Vector3.Distance(target_.transform.position, transform.position);
-            if(dist <= unit_.viewRange_)
-            {
-                if(dist <= unit_.attackRange_)
-                {
-                    unit_.attack();
-                }
-                else
-                {
-                    unit_.moveTo(target_.transform.position);
-                }
-            }
-        }
 	}
 
     void target()
