@@ -34,11 +34,16 @@ public class Unit : MonoBehaviour {
     }
     float currentAttackCooldown_;
 
+    //graphics
+    UnitGraphics graphics_;
+
     // Use this for initialization
     void Start () {
         damageReceived_ = 0;
         isMoving_ = false;
         isRotating_ = false;
+
+        graphics_ = gameObject.AddComponent<UnitGraphics>();
 	}
 	
 	// Update is called once per frame
@@ -131,5 +136,10 @@ public class Unit : MonoBehaviour {
     public void die()
     {
         Destroy(gameObject);
+    }
+
+    public float healthPercentage()
+    {
+        return 1f - (float)damageReceived_ / hp_;
     }
 }
