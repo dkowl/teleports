@@ -6,7 +6,7 @@ public class Unit : MonoBehaviour {
 
     public int hp_, damage_;
     public float
-        attackRange_, attackCooldown_,
+        attackRange_, attackCooldown_, attackTime_,
         moveSpeed_, rotationSpeed_,
         viewRange_;
 
@@ -16,7 +16,7 @@ public class Unit : MonoBehaviour {
 
     //pathfinding
     Vector3 moveDest_;
-    bool isMoving_;
+    public bool isMoving_;
 
     Quaternion rotationTarget_;
     bool isRotating_;
@@ -33,7 +33,10 @@ public class Unit : MonoBehaviour {
             attackTarget_ = value;
         }
     }
-    float currentAttackCooldown_;
+    float
+        currentAttackCooldown_,
+        currentAttackTime_;
+    bool isAttacking_;
 
     //graphics
     UnitGraphics graphics_;
@@ -43,6 +46,7 @@ public class Unit : MonoBehaviour {
         damageReceived_ = 0;
         isMoving_ = false;
         isRotating_ = false;
+        isAttacking_ = false;
         isDead_ = false;
 
         graphics_ = gameObject.AddComponent<UnitGraphics>();
@@ -82,12 +86,15 @@ public class Unit : MonoBehaviour {
 
             if (attackTarget_ != null)
             {
-                if (!attackTarget_.alive()) attackTarget_ = null;
+                if (!attackTarget_.alive()) resetAttack();
                 else
                 {
                     chase();
                 }
             }
+
+            if (isAttacking_) currentAttackTime_ += dTime;
+            else currentAttackTime_ = 0;
         }
 
         currentAttackCooldown_ -= dTime;
@@ -107,11 +114,20 @@ public class Unit : MonoBehaviour {
 
     public void attack()
     {
-        if(attackTarget_ != null && currentAttackCooldown_ <= 0 && (attackTarget_.transform.position - transform.position).magnitude <= attackRange_)
+        if(
+            attackTarget_ != null && 
+            currentAttackCooldown_ <= 0 && 
+            (attackTarget_.transform.position - transform.position).magnitude <= attackRange_
+            )
         {
-            currentAttackCooldown_ = attackCooldown_;
-            attackTarget_.receiveDamage(damage_);
             isMoving_ = false;
+            isAttacking_ = true;
+            if (currentAttackTime_ >= attackTime_)
+            {
+                currentAttackCooldown_ = attackCooldown_;
+                attackTarget_.receiveDamage(damage_);
+                isAttacking_ = false;
+            }
         }
     }
 
@@ -122,7 +138,7 @@ public class Unit : MonoBehaviour {
 
     bool canMove()
     {
-        return currentAttackCooldown_ == 0 && isMoving_ && !isDead_;
+        return !isAttacking_ && isMoving_ && !isDead_;
     }
 
     public void chase()
@@ -137,6 +153,7 @@ public class Unit : MonoBehaviour {
             else
             {
                 moveTo(attackTarget_.transform.position);
+                isAttacking_ = false;
             }
         }
     }
@@ -149,6 +166,13 @@ public class Unit : MonoBehaviour {
         {
             die();
         }
+    }
+
+    public void resetAttack()
+    {
+        isAttacking_ = false;
+        currentAttackTime_ = 0;
+        attackTarget_ = null;
     }
 
     public void die()

@@ -26,6 +26,10 @@ public class PlayerController : MonoBehaviour {
             if (!done && Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 gameObject.GetComponent<Unit>().moveTo(hit.point);
+                if (Input.GetButtonDown("PlayerMove"))
+                {
+                    gameObject.GetComponent<Unit>().resetAttack();
+                }
             }
         }
 	}
