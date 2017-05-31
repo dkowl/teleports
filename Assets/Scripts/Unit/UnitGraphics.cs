@@ -13,6 +13,11 @@ public class UnitGraphics : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
+
+    public void showDamage(int damage)
+    {
+        GameObject obj = Instantiate(Resources.Load("Prefabs/Unit/FloatingDamage"), gameObject.transform) as GameObject;
+        obj.GetComponent<FloatingDamage>().setText(damage.ToString());
+    }
 }

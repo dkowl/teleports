@@ -12,6 +12,7 @@ public class Unit : MonoBehaviour {
 
     //hp
     public int damageReceived_;
+    bool isDead_;
 
     //pathfinding
     Vector3 moveDest_;
@@ -42,6 +43,7 @@ public class Unit : MonoBehaviour {
         damageReceived_ = 0;
         isMoving_ = false;
         isRotating_ = false;
+        isDead_ = false;
 
         graphics_ = gameObject.AddComponent<UnitGraphics>();
 	}
@@ -51,32 +53,42 @@ public class Unit : MonoBehaviour {
 
         float dTime = Time.deltaTime;
 
-        if (canMove())
+        if (alive())
         {
-            Vector3 offset = moveDest_ - transform.position;
-
-            if (moveSpeed_ * dTime < offset.magnitude)
+            if (canMove())
             {
-                offset *= moveSpeed_ * dTime / offset.magnitude;
+                Vector3 offset = moveDest_ - transform.position;
+
+                if (moveSpeed_ * dTime < offset.magnitude)
+                {
+                    offset *= moveSpeed_ * dTime / offset.magnitude;
+                }
+                else
+                {
+                    isMoving_ = false;
+                }
+
+                transform.position += offset;
+
             }
-            else
+            if (isRotating_)
             {
-                isMoving_ = false;
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationTarget_, dTime * rotationSpeed_ * 360);
+                if (transform.rotation == rotationTarget_)
+                {
+                    isRotating_ = false;
+                }
             }
 
-            transform.position += offset;
-
+            if (attackTarget_ != null)
+            {
+                if (!attackTarget_.alive()) attackTarget_ = null;
+                else
+                {
+                    chase();
+                }
+            }
         }
-        if (isRotating_)
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationTarget_, dTime * rotationSpeed_ * 360);
-            if (transform.rotation == rotationTarget_)
-            {
-                isRotating_ = false;
-            }
-        }
-
-        if (attackTarget_ != null) chase();
 
         currentAttackCooldown_ -= dTime;
         if (currentAttackCooldown_ < 0) currentAttackCooldown_ = 0;
@@ -103,9 +115,14 @@ public class Unit : MonoBehaviour {
         }
     }
 
+    public bool alive()
+    {
+        return !isDead_;
+    }
+
     bool canMove()
     {
-        return currentAttackCooldown_ == 0 && isMoving_;
+        return currentAttackCooldown_ == 0 && isMoving_ && !isDead_;
     }
 
     public void chase()
@@ -127,6 +144,7 @@ public class Unit : MonoBehaviour {
     public void receiveDamage(int damage)
     {
         damageReceived_ += damage;
+        graphics_.showDamage(damage);
         if(damageReceived_ >= hp_)
         {
             die();
@@ -135,7 +153,7 @@ public class Unit : MonoBehaviour {
 
     public void die()
     {
-        Destroy(gameObject);
+        isDead_ = true;
     }
 
     public float healthPercentage()
