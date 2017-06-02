@@ -2,15 +2,41 @@
 
     public enum Type
     {
-        GRASS
+        GRASS,
+        WATER
     };
 
     bool isVisible_;
     Type type_;
+    public Type type
+    {
+        get { return type_; }
+        set { type_ = value; }
+    }
 
-    public Tile(Type t)
+    float height_;
+    public float Height
+    {
+        get { return height_; }
+        set { height_ = value; }
+    }
+
+    void deduceType()
+    {
+        if(height_ >= 0)
+        {
+            type_ = Type.GRASS;
+        }
+        else
+        {
+            type_ = Type.WATER;
+        }
+    }
+
+    public Tile(float height)
     {
         isVisible_ = true;
-        type_ = t;
+        height_ = height;
+        deduceType();
     }
 }

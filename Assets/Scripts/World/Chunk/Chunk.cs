@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
 
 public class Chunk {
 
@@ -31,6 +32,15 @@ public class Chunk {
             tileMap_ = new TileMap(CHUNK_SIZE, CHUNK_SIZE, seed_);
             tileMapGraphics_.generateMesh(tileMap_, new Vector3(posX_, 0, posZ_), TILE_SIZE);
             isLoaded_ = true;
+        }
+    }
+
+    public void loadAsync()
+    {
+        if (!isLoaded_)
+        {
+            Thread t = new Thread(load);
+            t.Start();
         }
     }
 

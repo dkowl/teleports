@@ -5,7 +5,7 @@ using UnityEngine;
 public class World : MonoBehaviour {
 
     
-    public const int WORLD_RADIUS = 16; //radius in chunks
+    public const int WORLD_RADIUS = 128; //radius in chunks
     const int WORLD_SIZE = WORLD_RADIUS * 2 + 1;
     const int VIEW_DISTANCE = 1; //in chunks (example: 1 means a 3x3 grid will be kept loaded)
     Chunk[,] chunks_ = new Chunk[WORLD_SIZE, WORLD_SIZE];
