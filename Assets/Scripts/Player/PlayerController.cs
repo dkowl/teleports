@@ -15,10 +15,21 @@ public class PlayerController : MonoBehaviour {
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            bool done = false;
+            int layerMask = 1 << 10; //testing for enemies
+            if (Input.GetButtonDown("PlayerMove") && Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
-                Debug.DrawRay(transform.position, hit.point, Color.yellow, 1, false);
+                gameObject.GetComponent<Unit>().AttackTarget = hit.transform.parent.gameObject.GetComponent<Unit>();
+                done = true;
+            }
+            layerMask = 1 << 8; //testing for ground
+            if (!done && Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+            {
                 gameObject.GetComponent<Unit>().moveTo(hit.point);
+                if (Input.GetButtonDown("PlayerMove"))
+                {
+                    gameObject.GetComponent<Unit>().resetAttack();
+                }
             }
         }
 	}

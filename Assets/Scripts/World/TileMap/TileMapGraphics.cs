@@ -6,6 +6,7 @@ public class TileMapGraphics : MonoBehaviour {
 
     int sizeX_, sizeY_;
     float tileSize_;
+    public Material material_;
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +18,7 @@ public class TileMapGraphics : MonoBehaviour {
 		
 	}
 
-    public void generateMesh(TileMap tileMap, Vector3 offset, float tileSize, Material material)
+    public void generateMesh(TileMap tileMap, Vector3 offset, float tileSize)
     {
         sizeX_ = tileMap.getSizeX();
         sizeY_ = tileMap.getSizeY();
@@ -36,17 +37,20 @@ public class TileMapGraphics : MonoBehaviour {
                 int triangleIndex = (x * sizeX_ + y) * 6;
                 float
                     xPos = offset.x + x * tileSize,
-                    zPos = offset.z + y * tileSize;
+                    zPos = offset.z + y * tileSize,
+                    yPos = 0;
                 //making a square
-                vertices[index] = new Vector3(xPos, 0, zPos);
-                vertices[index + 1] = new Vector3(xPos + tileSize, 0, zPos);
-                vertices[index + 2] = new Vector3(xPos + tileSize, 0, zPos + tileSize);
-                vertices[index + 3] = new Vector3(xPos, 0, zPos + tileSize);
+                vertices[index] = new Vector3(xPos, yPos, zPos);
+                vertices[index + 1] = new Vector3(xPos + tileSize, yPos, zPos);
+                vertices[index + 2] = new Vector3(xPos + tileSize, yPos, zPos + tileSize);
+                vertices[index + 3] = new Vector3(xPos, yPos, zPos + tileSize);
 
-                uvs[index] = new Vector2(0, 0);
-                uvs[index + 1] = new Vector2(1, 0);
-                uvs[index + 2] = new Vector2(1, 1);
-                uvs[index + 3] = new Vector2(0, 1);
+                float left = 0, right = 0, bottom = 0, top = 0;
+                typeToUvs(tileMap.getType(x, y), ref left, ref right, ref bottom, ref top);
+                uvs[index] = new Vector2(left, bottom);
+                uvs[index + 1] = new Vector2(right, bottom);
+                uvs[index + 2] = new Vector2(right, top);
+                uvs[index + 3] = new Vector2(left, top);
 
                 triangles[triangleIndex] = index + 2;
                 triangles[triangleIndex + 1] = index + 1;
@@ -66,8 +70,22 @@ public class TileMapGraphics : MonoBehaviour {
         mesh.uv = uvs;
         mesh.triangles = triangles;
 
-        gameObject.GetComponent<MeshRenderer>().material = material;
+        gameObject.GetComponent<MeshRenderer>().sharedMaterial = material_;
 
         gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
+    }
+
+    void typeToUvs(Tile.Type type, ref float l, ref float r, ref float b, ref float t)
+    {
+        if(type == Tile.Type.GRASS)
+        {
+            l = 0.01f; r = 0.49f;
+            b = 0.0f; t = 1.0f;
+        }
+        else if (type == Tile.Type.WATER)
+        {
+            l = 0.51f; r = 0.99f;
+            b = 0.0f; t = 1.0f;
+        }
     }
 }
