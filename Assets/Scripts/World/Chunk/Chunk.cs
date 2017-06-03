@@ -9,6 +9,7 @@ public class Chunk {
     public const float TILE_SIZE = 2f;
 
     public bool isLoaded_;
+    bool spawnDone_;
     int seed_;
     float posX_, posZ_;
     GameObject gameObject_;
@@ -18,6 +19,7 @@ public class Chunk {
     public Chunk(int seed, float posX, float posZ)
     {
         isLoaded_ = false;
+        spawnDone_ = false;
         seed_ = seed;
         posX_ = posX;
         posZ_ = posZ;
@@ -31,6 +33,15 @@ public class Chunk {
             tileMapGraphics_ = gameObject_.GetComponent<TileMapGraphics>();
             tileMap_ = new TileMap(CHUNK_SIZE, CHUNK_SIZE, seed_);
             tileMapGraphics_.generateMesh(tileMap_, new Vector3(posX_, 0, posZ_), TILE_SIZE);
+
+            //spawn one random enemy at random position
+            if (!spawnDone_)
+            {
+                Vector3 position = new Vector3(posX_ + Random.Range(0, size()), 0, posZ_ + Random.Range(0, size()));
+                EnemySpawner.instance.spawnRandom(position);
+                spawnDone_ = true;
+            }
+
             isLoaded_ = true;
         }
     }

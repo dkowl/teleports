@@ -19,5 +19,6 @@ public class UnitGraphics : MonoBehaviour {
     {
         GameObject obj = Instantiate(Resources.Load("Prefabs/Unit/FloatingDamage"), gameObject.transform) as GameObject;
         obj.GetComponent<FloatingDamage>().setText(damage.ToString());
+        obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().heigth_, 0);
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonAI : MonoBehaviour {
+public class RushAI : MonoBehaviour {
 
     GameObject[] targets_;
     GameObject target_;

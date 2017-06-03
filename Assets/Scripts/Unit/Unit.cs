@@ -11,12 +11,17 @@ public class Unit : MonoBehaviour {
         viewRange_;
 
     //hp
-    public int damageReceived_;
+    int damageReceived_;
     bool isDead_;
+
+    //collision
+    public float
+        innerRadius_,
+        heigth_;
 
     //pathfinding
     Vector3 moveDest_;
-    public bool isMoving_;
+    bool isMoving_;
 
     Quaternion rotationTarget_;
     bool isRotating_;
@@ -44,6 +49,7 @@ public class Unit : MonoBehaviour {
     // Use this for initialization
     void Start () {
         damageReceived_ = 0;
+        rotationSpeed_ = 2;
         isMoving_ = false;
         isRotating_ = false;
         isAttacking_ = false;
@@ -114,10 +120,10 @@ public class Unit : MonoBehaviour {
 
     public void attack()
     {
-        if(
-            attackTarget_ != null && 
-            currentAttackCooldown_ <= 0 && 
-            (attackTarget_.transform.position - transform.position).magnitude <= attackRange_
+        if (
+            attackTarget_ != null &&
+            currentAttackCooldown_ <= 0 &&
+            canReachAttackTarget()
             )
         {
             isMoving_ = false;
@@ -141,12 +147,20 @@ public class Unit : MonoBehaviour {
         return !isAttacking_ && isMoving_ && !isDead_;
     }
 
+    bool canReachAttackTarget()
+    {
+        return 
+            (attackTarget_.transform.position - transform.position).magnitude 
+            <= 
+            attackRange_ + innerRadius_ + attackTarget_.innerRadius_;
+    }
+
     public void chase()
     {
         float dist = Vector3.Distance(attackTarget_.transform.position, transform.position);
         if (dist <= viewRange_)
         {
-            if (dist <= attackRange_)
+            if (canReachAttackTarget())
             {
                 attack();
             }
