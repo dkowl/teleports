@@ -22,7 +22,15 @@ public class EnemySpawner : MonoBehaviour {
     const string enemyFolder_ = "Prefabs/Enemies/";
     string[] enemyName_ = new string[(int)EnemyType.Count];
 
-    List<GameObject> enemies_;
+    GameObject player_;
+
+    class Enemy
+    {
+        public GameObject gameObject_, indicator_;
+        public EnemyType type_;
+    }
+
+    List<Enemy> enemies_;
 
     void Awake()
     {
@@ -46,6 +54,10 @@ public class EnemySpawner : MonoBehaviour {
         enemyName_[(int)EnemyType.Yellow] = "Yellow";
         enemyName_[(int)EnemyType.White] = "White";
         enemyName_[(int)EnemyType.Black] = "Black";
+
+        player_ = GameObject.FindGameObjectWithTag("Player");
+
+        enemies_ = new List<Enemy>();
     }
 
     public void spawn(EnemyType type, Vector3 position)
@@ -53,7 +65,11 @@ public class EnemySpawner : MonoBehaviour {
         string path = enemyFolder_ + enemyName_[(int)type];
         GameObject newEnemy = Instantiate(Resources.Load(path), gameObject.transform) as GameObject;
         newEnemy.transform.position = position;
-        //enemies_.Add(newEnemy);
+        Enemy enemy = new Enemy();
+        enemy.gameObject_ = newEnemy;
+        enemy.type_ = type;
+        enemy.indicator_ = null;
+        enemies_.Add(enemy);
     }
 
     public void spawnRandom(Vector3 position)
@@ -64,6 +80,29 @@ public class EnemySpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		foreach(Enemy enemy in enemies_)
+        {
+            bool isInViewRange = 
+                Vector3.Distance(enemy.gameObject_.transform.position, player_.transform.position)
+                <= 
+                player_.GetComponent<Unit>().viewRange_;
+
+            if (enemy.indicator_ == null)
+            {
+                if (isInViewRange)
+                {
+                    GameObject indicator = Instantiate(Resources.Load("Prefabs/Unit/EnemyIndicator"), gameObject.transform) as GameObject;
+                    indicator.GetComponent<EnemyIndicator>().setEnemy(enemy.gameObject_);
+                    enemy.indicator_ = indicator;
+                }
+            }
+            else
+            {
+                if (!isInViewRange)
+                {
+                    Destroy(enemy.indicator_);
+                }
+            }
+        }
 	}
 }
