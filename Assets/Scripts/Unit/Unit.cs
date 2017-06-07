@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour {
 
+    string name_;
+    public int level_;
+
+    //basic combat stats
     public int hp_, damage_;
     public float
         attackRange_, attackCooldown_, attackTime_,
-        moveSpeed_, rotationSpeed_,
-        viewRange_;
+        moveSpeed_, viewRange_;
+    float rotationSpeed_;
 
     //hp
     int damageReceived_;
@@ -42,6 +46,9 @@ public class Unit : MonoBehaviour {
         currentAttackCooldown_,
         currentAttackTime_;
     bool isAttacking_;
+
+    //kill rewarding
+    Unit lastAttacker_;
 
     //graphics
     UnitGraphics graphics_;
@@ -131,7 +138,7 @@ public class Unit : MonoBehaviour {
             if (currentAttackTime_ >= attackTime_)
             {
                 currentAttackCooldown_ = attackCooldown_;
-                attackTarget_.receiveDamage(damage_);
+                attackTarget_.receiveDamage(damage_, this);
                 isAttacking_ = false;
             }
         }
@@ -172,9 +179,10 @@ public class Unit : MonoBehaviour {
         }
     }
 
-    public void receiveDamage(int damage)
+    public void receiveDamage(int damage, Unit attacker)
     {
         damageReceived_ += damage;
+        lastAttacker_ = attacker;
         graphics_.showDamage(damage);
         if(damageReceived_ >= hp_)
         {
@@ -192,6 +200,12 @@ public class Unit : MonoBehaviour {
     public void die()
     {
         isDead_ = true;
+        if(lastAttacker_ != null)
+        {
+            Xp xp = lastAttacker_.gameObject.GetComponent<Xp>();
+            if (xp != null) ;
+            xp.receiveXp((int)(10 * level_));
+        }
     }
 
     public float healthPercentage()

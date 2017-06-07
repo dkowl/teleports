@@ -6,10 +6,17 @@ using UnityEngine.UI;
 public class FloatingDamage : MonoBehaviour {
 
     public float gravityY_, lifetime_;
+    Text text_;
+
+    void Awake()
+    {
+        text_ = gameObject.transform.GetChild(0).GetChild(0).GetComponent<Text>();
+    }
 
 	// Use this for initialization
 	void Start () {
-	}
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -26,10 +33,13 @@ public class FloatingDamage : MonoBehaviour {
         }
 	}
 
-
+    public void setColor(Color color)
+    {
+        text_.color = color;
+    }
 
     public void setText(string text)
     {
-        gameObject.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = text;
+        text_.text = text;
     }
 }
