@@ -11,7 +11,7 @@ public class PlayerLevel : MonoBehaviour
     void Start()
     {
         Text text = gameObject.GetComponent<Text>();
-        text.text = "Level " + GlobalData.instance.playerData_.level().ToString();
+        text.text = GlobalData.instance.playerData_.level.ToString();
     }
 
     // Update is called once per frame

@@ -203,8 +203,10 @@ public class Unit : MonoBehaviour {
         if(lastAttacker_ != null)
         {
             Xp xp = lastAttacker_.gameObject.GetComponent<Xp>();
-            if (xp != null) ;
-            xp.receiveXp((int)(10 * level_));
+            if (xp != null)
+            {
+                xp.receiveXp((int)(1000 * level_));
+            }
         }
     }
 

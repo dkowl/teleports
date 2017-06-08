@@ -5,11 +5,17 @@ using UnityEngine;
 public class Xp : MonoBehaviour {
 
     public int xp_;
+    public int xp
+    {
+        get { return xp_; }
+    }
     UnitGraphics graphics_;
     
 	void Start () {
         xp_ = 0;
 	}
+
+    
 
     public void receiveXp(int xp)
     {
