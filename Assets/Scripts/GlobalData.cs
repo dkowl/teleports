@@ -21,13 +21,14 @@ public class GlobalData : MonoBehaviour {
         }
     }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public void savePlayer(GameObject player_)
+    {
+        playerData_.xp += player_.GetComponent<Xp>().xp;
+    }
+
+    public void loadPlayer(GameObject player_)
+    {
+    }
+
 }

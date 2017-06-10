@@ -8,8 +8,14 @@ public class GameMain : MonoBehaviour {
 
     public static GameMain instance;
 
-    GameObject[] players_;
+    GameObject player_;
     GameObject mainCanvas_;
+
+    int score_, startXp_;
+    public int Score
+    {
+        get { return score_; }
+    }
 
     bool endScreenOn_;
     GameObject endScreen_;
@@ -29,7 +35,8 @@ public class GameMain : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        players_ = GameObject.FindGameObjectsWithTag("Player");
+        player_ = GameObject.FindGameObjectWithTag("Player");
+        startXp_ = player_.GetComponent<Xp>().xp;
         mainCanvas_ = Instantiate(Resources.Load("Prefabs/UI/MainCanvas"), gameObject.transform) as GameObject;
 
         endScreenOn_ = false;
@@ -38,14 +45,12 @@ public class GameMain : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		foreach(GameObject player in players_)
+        if (!player_.GetComponent<Unit>().alive())
         {
-            if (!player.GetComponent<Unit>().alive())
-            {
-                endScreen();
-            }
-
+            endScreen();
         }
+        score_ = player_.GetComponent<Xp>().xp - startXp_;
+                   
 	}
 
     void endScreen()
@@ -70,6 +75,8 @@ public class GameMain : MonoBehaviour {
 
     public void backToHome()
     {
+        print(player_.name);
+        GlobalData.instance.savePlayer(player_);
         SceneManager.UnloadSceneAsync("World");
         SceneManager.LoadScene("Home");
     }
