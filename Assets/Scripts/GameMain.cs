@@ -77,6 +77,7 @@ public class GameMain : MonoBehaviour {
     {
         GlobalData.instance.savePlayer(player_);
         unpauseGame();
+        XpProgress.startAnimation();
         SceneManager.LoadScene("Home");
     }
 }

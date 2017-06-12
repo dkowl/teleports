@@ -16,25 +16,21 @@ public class XpProgress : MonoBehaviour {
         animationStartSpeed_ = 0,
         animationAcceleration_ = 2000;
 
-    bool animationStarted_;
-    float animationCurrentSpeed_;
+    static bool animationStarted_;
+    static float animationCurrentSpeed_;
 
 
     void Awake()
     {
-        animationStarted_ = true;
     }
     
     void Start () {
         targetXp_ = GlobalData.instance.playerData_.xp;
+        updateUI();
     }
 	
 	// Update is called once per frame
 	void Update () {
-		if(!animationStarted_ && xp_ != targetXp_)
-        {
-            startAnimation();
-        }
         if (animationStarted_)
         {
             float dTime = Time.deltaTime;
@@ -49,21 +45,30 @@ public class XpProgress : MonoBehaviour {
                 stopAnimation();
             }
 
-            int 
-                currentXp = XpLevels.currentXp(xp_), 
-                requiredXp = XpLevels.requiredXp(xp_);
-
-            text_.text = currentXp.ToString() + " / " + requiredXp.ToString();
-            if (requiredXp != 0)
-                slider_.value = (float)currentXp / requiredXp;
-            else slider_.value = 0;
-
-            levelText_.text = XpLevels.level(xp_).ToString();
-
+            updateUI();
+        }
+        else if(xp_ != targetXp_)
+        {
+            xp_ = targetXp_;
+            updateUI();
         }
     }
 
-    void startAnimation()
+    void updateUI()
+    {
+        int
+            currentXp = XpLevels.currentXp(xp_),
+            requiredXp = XpLevels.requiredXp(xp_);
+
+        text_.text = currentXp.ToString() + " / " + requiredXp.ToString();
+        if (requiredXp != 0)
+            slider_.value = (float)currentXp / requiredXp;
+        else slider_.value = 0;
+
+        levelText_.text = XpLevels.level(xp_).ToString();
+    }
+
+    public static void startAnimation()
     {
         animationStarted_ = true;
         animationCurrentSpeed_ = animationStartSpeed_;
