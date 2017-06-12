@@ -18,33 +18,16 @@ public class PlayerData : ScriptableObject {
     {
         get
         {
-            if (level_ > 0)
-                return xpLevels_[level_] - xpLevels_[level_ - 1];
-            else return 0;
+            return XpLevels.requiredXp(xp_);
         }
     }
     public int currentXp
     {
         get
         {
-            if (level_ > 0)
-                return xp_ - xpLevels_[level_ - 1];
-            else return 0;
+            return XpLevels.currentXp(xp_);
         }
     }
-    static int[] xpLevels_ = new int[] {
-        0,
-        400,
-        1000,
-        2200,
-        5000,
-        10000,
-        18000,
-        30000,
-        46000,
-        70000,
-        100000
-    };
 
     int level_;
     public int level
@@ -57,11 +40,6 @@ public class PlayerData : ScriptableObject {
 
     void updateLevel()
     {
-        int i = 0;
-        for(; i<xpLevels_.Length; i++)
-        {
-            if (xpLevels_[i] >= xp_) break;
-        }
-        level_ = i;
+        level_ = XpLevels.level(xp_);
     }
 }

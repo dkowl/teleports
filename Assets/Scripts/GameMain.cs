@@ -75,9 +75,8 @@ public class GameMain : MonoBehaviour {
 
     public void backToHome()
     {
-        print(player_.name);
         GlobalData.instance.savePlayer(player_);
-        SceneManager.UnloadSceneAsync("World");
+        unpauseGame();
         SceneManager.LoadScene("Home");
     }
 }

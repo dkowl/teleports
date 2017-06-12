@@ -14,7 +14,7 @@ public class ButtonPlay : MonoBehaviour {
 	
 	void Play ()
     {
-        SceneManager.UnloadSceneAsync("Home");
+
         SceneManager.LoadScene("World");
 	}
 }
