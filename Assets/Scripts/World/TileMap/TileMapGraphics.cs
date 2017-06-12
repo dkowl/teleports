@@ -28,6 +28,7 @@ public class TileMapGraphics : MonoBehaviour {
 
         Vector3[] vertices = new Vector3[vertexNum];
         Vector2[] uvs = new Vector2[vertexNum];
+        Vector3[] normals = new Vector3[vertexNum];
         int[] triangles = new int[6 * sizeX_ * sizeY_];
         for (int x = 0; x < sizeX_; x++)
         {
@@ -52,6 +53,11 @@ public class TileMapGraphics : MonoBehaviour {
                 uvs[index + 2] = new Vector2(right, top);
                 uvs[index + 3] = new Vector2(left, top);
 
+                for(int i = 0; i<4; i++)
+                {
+                    normals[index + i] = Vector3.up;
+                }
+
                 triangles[triangleIndex] = index + 2;
                 triangles[triangleIndex + 1] = index + 1;
                 triangles[triangleIndex + 2] = index;
@@ -68,6 +74,7 @@ public class TileMapGraphics : MonoBehaviour {
         Mesh mesh = gameObject.GetComponent<MeshFilter>().mesh;
         mesh.vertices = vertices;
         mesh.uv = uvs;
+        mesh.normals = normals;
         mesh.triangles = triangles;
 
         gameObject.GetComponent<MeshRenderer>().sharedMaterial = material_;
