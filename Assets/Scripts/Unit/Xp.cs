@@ -8,14 +8,12 @@ public class Xp : MonoBehaviour {
     public int xp
     {
         get { return xp_; }
+        set { xp_ = value; }
     }
     UnitGraphics graphics_;
     
 	void Start () {
-        xp_ = 0;
-	}
-
-    
+	}    
 
     public void receiveXp(int xp)
     {

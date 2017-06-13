@@ -36,6 +36,7 @@ public class GameMain : MonoBehaviour {
     // Use this for initialization
     void Start () {
         player_ = GameObject.FindGameObjectWithTag("Player");
+        GlobalData.instance.loadPlayer(player_);
         startXp_ = player_.GetComponent<Xp>().xp;
         mainCanvas_ = Instantiate(Resources.Load("Prefabs/UI/MainCanvas"), gameObject.transform) as GameObject;
 
@@ -76,6 +77,7 @@ public class GameMain : MonoBehaviour {
     public void backToHome()
     {
         GlobalData.instance.savePlayer(player_);
+        GlobalData.instance.playerData_.startXp = startXp_;
         unpauseGame();
         XpProgress.startAnimation();
         SceneManager.LoadScene("Home");

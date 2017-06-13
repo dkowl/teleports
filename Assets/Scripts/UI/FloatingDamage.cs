@@ -12,11 +12,6 @@ public class FloatingDamage : MonoBehaviour {
     {
         text_ = gameObject.transform.GetChild(0).GetChild(0).GetComponent<Text>();
     }
-
-	// Use this for initialization
-	void Start () {
-
-    }
 	
 	// Update is called once per frame
 	void Update () {

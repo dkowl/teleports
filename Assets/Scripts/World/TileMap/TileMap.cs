@@ -32,8 +32,7 @@ public class TileMap {
         ModuleBase module = perlin;
 
         Noise2D noise = new Noise2D(sizeX_ * 2 + 1, sizeY_ * 2 + 1, module);
-
-        Debug.Log(posX_.ToString() + " " + posY_.ToString());
+        
         noise.GeneratePlanar(posX_, posX_ + 1.0, posY_, posY_ + 1.0, false);
 
         for(int x = 0; x < sizeX_; x++)

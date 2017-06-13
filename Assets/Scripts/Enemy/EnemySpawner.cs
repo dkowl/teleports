@@ -19,16 +19,16 @@ public class EnemySpawner : MonoBehaviour {
         Count
     };
 
-    const string enemyFolder_ = "Prefabs/Enemies/";
-    string[] enemyName_ = new string[(int)EnemyType.Count];
-
-    GameObject player_;
-
     class Enemy
     {
         public GameObject gameObject_, indicator_;
         public EnemyType type_;
     }
+
+    const string enemyFolder_ = "Prefabs/Enemies/";
+    string[] enemyName_ = new string[(int)EnemyType.Count];
+
+    GameObject player_;
 
     List<Enemy> enemies_;
 
@@ -60,31 +60,14 @@ public class EnemySpawner : MonoBehaviour {
         enemies_ = new List<Enemy>();
     }
 
-    public void spawn(EnemyType type, Vector3 position)
+    // Update is called once per frame
+    void Update()
     {
-        string path = enemyFolder_ + enemyName_[(int)type];
-        GameObject newEnemy = Instantiate(Resources.Load(path), gameObject.transform) as GameObject;
-        newEnemy.transform.position = position;
-        Enemy enemy = new Enemy();
-        enemy.gameObject_ = newEnemy;
-        enemy.type_ = type;
-        enemy.indicator_ = null;
-        enemies_.Add(enemy);
-    }
-
-    public void spawnRandom(Vector3 position)
-    {
-        int id = Random.Range(0, (int)EnemyType.Count);
-        spawn((EnemyType)id, position);
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		foreach(Enemy enemy in enemies_)
+        foreach (Enemy enemy in enemies_)
         {
-            bool isInViewRange = 
+            bool isInViewRange =
                 Vector3.Distance(enemy.gameObject_.transform.position, player_.transform.position)
-                <= 
+                <=
                 player_.GetComponent<Unit>().viewRange_;
 
             if (enemy.indicator_ == null)
@@ -104,5 +87,31 @@ public class EnemySpawner : MonoBehaviour {
                 }
             }
         }
-	}
+    }
+
+    GameObject instantiateEnemy(EnemyType type)
+    {
+        string path = enemyFolder_ + enemyName_[(int)type];
+        return Instantiate(Resources.Load(path), gameObject.transform) as GameObject;
+    }
+
+
+    public void spawn(EnemyType type, Vector3 position)
+    {
+        GameObject newEnemy = instantiateEnemy(type);
+        newEnemy.transform.position = position;
+
+        Enemy enemy = new Enemy();
+        enemy.gameObject_ = newEnemy;
+        enemy.type_ = type;
+        enemy.indicator_ = null;
+        enemies_.Add(enemy);
+    }
+
+    public void spawnRandom(Vector3 position)
+    {
+        int id = Random.Range(0, (int)EnemyType.Count);
+        spawn((EnemyType)id, position);
+    }	
+	
 }

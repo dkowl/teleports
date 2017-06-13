@@ -8,11 +8,11 @@ public class Chunk {
     public const int CHUNK_SIZE = 16;
     public const float TILE_SIZE = 2f;
 
-    public bool isLoaded_;
-    bool spawnDone_;
+    bool isLoaded_;
+    bool spawnDone_; //true if enemies for this chunk were already spawned
     int seed_;
-    float posX_, posZ_;
-    int idX_, idZ_;
+    float posX_, posZ_; //position in world coordinates
+    int idX_, idZ_; //chunk number
     GameObject gameObject_;
     TileMap tileMap_;
     TileMapGraphics tileMapGraphics_;

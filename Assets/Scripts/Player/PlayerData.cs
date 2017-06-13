@@ -6,13 +6,25 @@ using UnityEngine;
 public class PlayerData : ScriptableObject {
 
     public string name_;
-    int xp_;
+    int xp_, startXp_;
     public int xp
     {
         set {
             xp_ = value;
         }
         get { return xp_; }
+    }
+    public int startXp
+    {
+        get
+        {
+            return startXp_;
+        }
+
+        set
+        {
+            startXp_ = value;
+        }
     }
     public int requiredXp
     {
@@ -37,6 +49,8 @@ public class PlayerData : ScriptableObject {
             return level_;
         }
     }
+
+    
 
     void updateLevel()
     {

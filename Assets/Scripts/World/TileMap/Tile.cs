@@ -17,14 +17,14 @@ public class Tile {
         set { type_ = value; }
     }
 
-    float height_;
+    float height_; //overall tile height
     public float Height
     {
         get { return height_; }
         set { height_ = value; }
     }
 
-    Vector4 heightPoints_;
+    Vector4 heightPoints_; //heights of corners of the square
     public Vector4 heightPoints
     {
         get { return heightPoints_; }

@@ -53,8 +53,7 @@ public class Unit : MonoBehaviour {
     //graphics
     UnitGraphics graphics_;
 
-    // Use this for initialization
-    void Start () {
+    void Awake () {
         damageReceived_ = 0;
         rotationSpeed_ = 2;
         isMoving_ = false;
@@ -129,17 +128,19 @@ public class Unit : MonoBehaviour {
     {
         if (
             attackTarget_ != null &&
-            currentAttackCooldown_ <= 0 &&
             canReachAttackTarget()
             )
         {
             isMoving_ = false;
-            isAttacking_ = true;
-            if (currentAttackTime_ >= attackTime_)
+            if (currentAttackCooldown_ <= 0)
             {
-                currentAttackCooldown_ = attackCooldown_;
-                attackTarget_.receiveDamage(damage_, this);
-                isAttacking_ = false;
+                isAttacking_ = true;
+                if (currentAttackTime_ >= attackTime_)
+                {
+                    currentAttackCooldown_ = attackCooldown_;
+                    attackTarget_.receiveDamage(damage_, this);
+                    isAttacking_ = false;
+                }
             }
         }
     }

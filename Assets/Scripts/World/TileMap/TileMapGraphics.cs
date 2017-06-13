@@ -47,6 +47,7 @@ public class TileMapGraphics : MonoBehaviour {
                 vertices[index + 2] = new Vector3(xPos + tileSize, yPos + hPts.w, zPos + tileSize);
                 vertices[index + 3] = new Vector3(xPos, yPos + hPts.y, zPos + tileSize);
 
+                //setting uvs
                 float left = 0, right = 0, bottom = 0, top = 0;
                 typeToUvs(tileMap.getType(x, y), ref left, ref right, ref bottom, ref top);
                 uvs[index] = new Vector2(left, bottom);
@@ -54,11 +55,13 @@ public class TileMapGraphics : MonoBehaviour {
                 uvs[index + 2] = new Vector2(right, top);
                 uvs[index + 3] = new Vector2(left, top);
 
+                //setting normals
                 for(int i = 0; i<4; i++)
                 {
                     normals[index + i] = Vector3.up;
                 }
 
+                //setting triangles
                 triangles[triangleIndex] = index + 2;
                 triangles[triangleIndex + 1] = index + 1;
                 triangles[triangleIndex + 2] = index;
@@ -85,15 +88,20 @@ public class TileMapGraphics : MonoBehaviour {
 
     void typeToUvs(Tile.Type type, ref float l, ref float r, ref float b, ref float t)
     {
+        float padding = 0.03f;
         if(type == Tile.Type.GRASS)
         {
-            l = 0.03f; r = 0.47f;
-            b = 0.53f; t = 0.97f;
+            l = 0f; r = 0.5f;
+            b = 0.5f; t = 1f;
         }
         else if (type == Tile.Type.WATER)
         {
-            l = 0.03f; r = 0.47f;
-            b = 0.03f; t = 0.47f;
+            l = 0f; r = 0.5f;
+            b = 0f; t = 0.5f;
         }
+        l += padding;
+        r -= padding;
+        b += padding;
+        t -= padding;
     }
 }

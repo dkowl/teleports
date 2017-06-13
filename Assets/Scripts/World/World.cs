@@ -8,6 +8,7 @@ public class World : MonoBehaviour {
     public const int WORLD_RADIUS = 128; //radius in chunks
     const int WORLD_SIZE = WORLD_RADIUS * 2 + 1;
     const int VIEW_DISTANCE = 1; //in chunks (example: 1 means a 3x3 grid will be kept loaded)
+    public int seed_;
     Chunk[,] chunks_ = new Chunk[WORLD_SIZE, WORLD_SIZE];
     HashSet<Vector2> loadedList_ = new HashSet<Vector2>();
     HashSet<Vector2> toRemove_ = new HashSet<Vector2>();
@@ -19,7 +20,7 @@ public class World : MonoBehaviour {
             for(int j = 0; j<WORLD_SIZE; j++)
             {
                 float chunkSize = Chunk.CHUNK_SIZE * Chunk.TILE_SIZE;
-                chunks_[i, j] = new Chunk(123456, ((j - WORLD_RADIUS)-0.5f) * chunkSize, ((i - WORLD_RADIUS)-0.5f) * chunkSize);
+                chunks_[i, j] = new Chunk(seed_, ((j - WORLD_RADIUS)-0.5f) * chunkSize, ((i - WORLD_RADIUS)-0.5f) * chunkSize);
             }
         }
     }

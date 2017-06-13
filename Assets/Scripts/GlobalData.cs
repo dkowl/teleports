@@ -22,13 +22,14 @@ public class GlobalData : MonoBehaviour {
     }
 
 
-    public void savePlayer(GameObject player_)
+    public void savePlayer(GameObject player)
     {
-        playerData_.xp += player_.GetComponent<Xp>().xp;
+        playerData_.xp = player.GetComponent<Xp>().xp;
     }
 
-    public void loadPlayer(GameObject player_)
+    public void loadPlayer(GameObject player)
     {
+        player.GetComponent<Xp>().xp = playerData_.xp;
     }
 
 }

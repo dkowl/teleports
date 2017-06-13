@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class RushAI : MonoBehaviour {
 
-    GameObject[] targets_;
-    GameObject target_;
+
+    GameObject[] targets_; //all available targets
+    GameObject target_; //chosen target
     Unit targetUnit_, unit_;
 
-	// Use this for initialization
-	void Start () {
+    
+    //Unity Event Functions
+	void Awake()
+    {
         targets_ = GameObject.FindGameObjectsWithTag("Player");
         unit_ = gameObject.GetComponent<Unit>();
+    }
+
+	void Start () {
         target();
 	}
 	
-	// Update is called once per frame
 	void Update () {
-        if (targetUnit_ == null) target();
+        if (targetUnit_ == null || !targetUnit_.alive()) target();
 	}
 
-    void target()
+    //goal: find target_
+    void findTarget()
     {
         //select closest player
         float minDist = float.MaxValue;
@@ -39,5 +45,18 @@ public class RushAI : MonoBehaviour {
         target_ = targets_[bestArg];
         targetUnit_ = target_.GetComponent<Unit>();
         unit_.AttackTarget = targetUnit_;
+    }
+
+    //goal: assign unit_.AttackTarget
+    void lockTarget()
+    {
+        targetUnit_ = target_.GetComponent<Unit>();
+        unit_.AttackTarget = targetUnit_;
+    }
+
+    void target()
+    {
+        findTarget();
+        lockTarget();
     }
 }

@@ -8,17 +8,20 @@ public class EnemyIndicator : MonoBehaviour {
     GameObject enemy_, player_, indicator_;
     CanvasScaler canvas_;
     bool isVisible_;
+    
 
-	// Use this for initialization
-	void Start () {
+	void Awake () {
         player_ = GameObject.FindGameObjectWithTag("Player");
         indicator_ = gameObject.transform.GetChild(0).GetChild(0).gameObject;
         canvas_ = gameObject.transform.GetChild(0).GetComponent<CanvasScaler>();
+    }
+
+    void Start()
+    {
         isVisible_ = true;
         makeInvisible();
     }
 	
-	// Update is called once per frame
 	void Update ()
     {
         if (enemy_ != null)
