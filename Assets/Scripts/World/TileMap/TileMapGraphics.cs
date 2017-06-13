@@ -40,11 +40,12 @@ public class TileMapGraphics : MonoBehaviour {
                     xPos = offset.x + x * tileSize,
                     zPos = offset.z + y * tileSize,
                     yPos = 0;
+                Vector4 hPts = tileMap.getHeightPoints(x, y);
                 //making a square
-                vertices[index] = new Vector3(xPos, yPos, zPos);
-                vertices[index + 1] = new Vector3(xPos + tileSize, yPos, zPos);
-                vertices[index + 2] = new Vector3(xPos + tileSize, yPos, zPos + tileSize);
-                vertices[index + 3] = new Vector3(xPos, yPos, zPos + tileSize);
+                vertices[index] = new Vector3(xPos, yPos + hPts.x, zPos);
+                vertices[index + 1] = new Vector3(xPos + tileSize, yPos + hPts.z, zPos);
+                vertices[index + 2] = new Vector3(xPos + tileSize, yPos + hPts.w, zPos + tileSize);
+                vertices[index + 3] = new Vector3(xPos, yPos + hPts.y, zPos + tileSize);
 
                 float left = 0, right = 0, bottom = 0, top = 0;
                 typeToUvs(tileMap.getType(x, y), ref left, ref right, ref bottom, ref top);
@@ -86,13 +87,13 @@ public class TileMapGraphics : MonoBehaviour {
     {
         if(type == Tile.Type.GRASS)
         {
-            l = 0.01f; r = 0.49f;
-            b = 0.0f; t = 1.0f;
+            l = 0.03f; r = 0.47f;
+            b = 0.53f; t = 0.97f;
         }
         else if (type == Tile.Type.WATER)
         {
-            l = 0.51f; r = 0.99f;
-            b = 0.0f; t = 1.0f;
+            l = 0.03f; r = 0.47f;
+            b = 0.03f; t = 0.47f;
         }
     }
 }

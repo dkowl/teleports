@@ -29,7 +29,6 @@ public class EnemyIndicator : MonoBehaviour {
             Camera camera = Camera.main;
 
             enemyPos = camera.WorldToViewportPoint(enemy_.transform.position);
-            print(enemy_.name + enemyPos);
 
             if (enemyPos.z > 0 && enemyPos.y > 0 && enemyPos.y < 1 && enemyPos.x > 0 && enemyPos.x < 1)
             {
@@ -55,49 +54,6 @@ public class EnemyIndicator : MonoBehaviour {
             float angle = Mathf.Asin(x / Mathf.Sqrt(x * x + y * y)) * Mathf.Rad2Deg;
             if (y > 0) angle = 180 - angle;
             indicator_.transform.rotation = Quaternion.Euler(0, 0, angle); 
-
-            /*cameraAngle = camera.transform.rotation.eulerAngles.x;
-
-            alpha = cameraAngle - camera.fieldOfView / 2;
-            beta = cameraAngle + camera.fieldOfView / 2;
-
-            h = camera.transform.localPosition.y;
-
-            A = h * Mathf.Tan(alpha * Mathf.Deg2Rad);
-            B = h * Mathf.Tan(beta * Mathf.Deg2Rad);
-
-        
-
-
-
-
-            B = camera.orthographicSize;
-            A = B * camera.aspect;
-            B /= Mathf.Cos(camera.transform.rotation.eulerAngles.x);
-
-            float coeff = 0;
-            if(System.Math.Abs(x/y) < camera.aspect)
-            {
-                coeff = System.Math.Abs(B / y);
-            }
-            else
-            {
-                coeff = System.Math.Abs(A / x);
-            }
-            if (coeff >= 1)
-            {
-                makeInvisible();
-                return;
-            }
-            else makeVisible();
-
-            x *= coeff;
-            y *= coeff;
-            x /= A * 2;
-            x *= canvas_.referenceResolution.x * (camera.aspect / (canvas_.referenceResolution.x / canvas_.referenceResolution.y));
-            y *= (canvas_.referenceResolution.y / B) / 2;
-
-            indicator_.transform.localPosition = new Vector3(x, y, 0);*/
         }
 	}
 

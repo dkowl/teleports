@@ -1,7 +1,10 @@
-﻿public class Tile {
+﻿using UnityEngine;
+
+public class Tile {
 
     public enum Type
     {
+        DESERT,
         GRASS,
         WATER
     };
@@ -19,6 +22,20 @@
     {
         get { return height_; }
         set { height_ = value; }
+    }
+
+    Vector4 heightPoints_;
+    public Vector4 heightPoints
+    {
+        get { return heightPoints_; }
+        set { heightPoints_ = value; }
+    }
+
+    float precp_; //precipitation
+    public float precp
+    {
+        get { return precp_; }
+        set { precp_ = value; }
     }
 
     void deduceType()

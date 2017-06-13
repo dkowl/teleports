@@ -12,6 +12,7 @@ public class Chunk {
     bool spawnDone_;
     int seed_;
     float posX_, posZ_;
+    int idX_, idZ_;
     GameObject gameObject_;
     TileMap tileMap_;
     TileMapGraphics tileMapGraphics_;
@@ -23,6 +24,8 @@ public class Chunk {
         seed_ = seed;
         posX_ = posX;
         posZ_ = posZ;
+        idX_ = (int)((posX_ + size() / 2) / size());
+        idZ_ = (int)((posZ_ + size() / 2) / size());
     }
 
     public void load()
@@ -31,7 +34,7 @@ public class Chunk {
         {
             gameObject_ = Object.Instantiate(Resources.Load("Prefabs/World/Chunk"), GameObject.Find("WorldObject").transform) as GameObject;
             tileMapGraphics_ = gameObject_.GetComponent<TileMapGraphics>();
-            tileMap_ = new TileMap(CHUNK_SIZE, CHUNK_SIZE, seed_);
+            tileMap_ = new TileMap(CHUNK_SIZE, CHUNK_SIZE, seed_, idX_, idZ_);
             tileMapGraphics_.generateMesh(tileMap_, new Vector3(posX_, 0, posZ_), TILE_SIZE);
 
             //spawn one random enemy at random position

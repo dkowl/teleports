@@ -19,7 +19,7 @@ public class World : MonoBehaviour {
             for(int j = 0; j<WORLD_SIZE; j++)
             {
                 float chunkSize = Chunk.CHUNK_SIZE * Chunk.TILE_SIZE;
-                chunks_[i, j] = new Chunk(Random.Range(0, int.MaxValue), ((j - WORLD_RADIUS)-0.5f) * chunkSize, ((i - WORLD_RADIUS)-0.5f) * chunkSize);
+                chunks_[i, j] = new Chunk(123456, ((j - WORLD_RADIUS)-0.5f) * chunkSize, ((i - WORLD_RADIUS)-0.5f) * chunkSize);
             }
         }
     }
