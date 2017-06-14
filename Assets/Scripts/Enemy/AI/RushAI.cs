@@ -6,14 +6,16 @@ public class RushAI : MonoBehaviour {
 
 
     GameObject[] targets_; //all available targets
-    GameObject target_; //chosen target
-    Unit targetUnit_, unit_;
+    Unit unit_;
+    public Skill skill_;
+    Skill.TargetInfo target_;
 
     
     //Unity Event Functions
 	void Awake()
     {
         targets_ = GameObject.FindGameObjectsWithTag("Player");
+        target_ = new Skill.TargetInfo();
         unit_ = gameObject.GetComponent<Unit>();
     }
 
@@ -22,11 +24,12 @@ public class RushAI : MonoBehaviour {
 	}
 	
 	void Update () {
-        if (targetUnit_ == null || !targetUnit_.alive()) target();
+        if (target_.unit == null) target();
+        else chase();
 	}
 
     //goal: find target_
-    void findTarget()
+    void target()
     {
         //select closest player
         float minDist = float.MaxValue;
@@ -42,21 +45,22 @@ public class RushAI : MonoBehaviour {
             }
         }
 
-        target_ = targets_[bestArg];
-        targetUnit_ = target_.GetComponent<Unit>();
-        unit_.AttackTarget = targetUnit_;
+        if (minDist < unit_.ViewRange)
+        {
+            target_.unit = targets_[bestArg].GetComponent<Unit>();
+        }
+        else target_.unit = null;
     }
 
-    //goal: assign unit_.AttackTarget
-    void lockTarget()
+    void chase()
     {
-        targetUnit_ = target_.GetComponent<Unit>();
-        unit_.AttackTarget = targetUnit_;
-    }
-
-    void target()
-    {
-        findTarget();
-        lockTarget();
+        if(unit_.canReachCastTarget(skill_, target_))
+        {
+            unit_.cast(skill_, target_);
+        }
+        else
+        {
+            unit_.moveTo(target_.position);
+        }
     }
 }

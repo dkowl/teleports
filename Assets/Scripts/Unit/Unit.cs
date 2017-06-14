@@ -7,21 +7,64 @@ public class Unit : MonoBehaviour {
     string name_;
     public int level_;
 
-    //basic combat stats
-    public int hp_, damage_;
-    public float
-        attackRange_, attackCooldown_, attackTime_,
-        moveSpeed_, viewRange_;
+    public Attribute
+        size_,
+        hp_,
+        armor_,
+        regen_,
+        damage_,
+        reach_,
+        moveSpeed_,
+        viewRange_;
+
+    #region attribute properties
+    public float Size
+    {
+        get { return size_.value()/2f; }
+    }
+
+    public float Hp
+    {
+        get { return hp_.value(); }
+    }
+
+    public float Armor
+    {
+        get { return armor_.value(); }
+    }
+
+    public float Regen
+    {
+        get { return regen_.value(); }
+    }
+
+    public float Damage
+    {
+        get { return damage_.value(); }
+    }
+
+    public float Reach
+    {
+        get { return reach_.value(); }
+    }
+
+    public float MoveSpeed
+    {
+        get { return moveSpeed_.value(); }
+    }
+
+    public float ViewRange
+    {
+        get { return viewRange_.value(); }
+    }
+    #endregion
+
     float rotationSpeed_;
+    public float height_;
 
     //hp
-    int damageReceived_;
+    float damageReceived_;
     bool isDead_;
-
-    //collision
-    public float
-        innerRadius_,
-        heigth_;
 
     //pathfinding
     Vector3 moveDest_;
@@ -30,22 +73,11 @@ public class Unit : MonoBehaviour {
     Quaternion rotationTarget_;
     bool isRotating_;
 
-    //enemy targeting
-    Unit attackTarget_;
-    public Unit AttackTarget {
-        get
-        {
-            return attackTarget_;
-        }
-        set
-        {
-            attackTarget_ = value;
-        }
-    }
-    float
-        currentAttackCooldown_,
-        currentAttackTime_;
-    bool isAttacking_;
+    //skill casting
+    Skill.TargetInfo castTarget_;
+    public Skill activeSkill_;
+    public float currentCastTime_;
+    public bool isCasting_;
 
     //kill rewarding
     Unit lastAttacker_;
@@ -58,7 +90,7 @@ public class Unit : MonoBehaviour {
         rotationSpeed_ = 2;
         isMoving_ = false;
         isRotating_ = false;
-        isAttacking_ = false;
+        isCasting_ = false;
         isDead_ = false;
 
         graphics_ = gameObject.AddComponent<UnitGraphics>();
@@ -75,9 +107,9 @@ public class Unit : MonoBehaviour {
             {
                 Vector3 offset = moveDest_ - transform.position;
 
-                if (moveSpeed_ * dTime < offset.magnitude)
+                if (MoveSpeed * dTime < offset.magnitude)
                 {
-                    offset *= moveSpeed_ * dTime / offset.magnitude;
+                    offset *= MoveSpeed * dTime / offset.magnitude;
                 }
                 else
                 {
@@ -96,21 +128,31 @@ public class Unit : MonoBehaviour {
                 }
             }
 
-            if (attackTarget_ != null)
+            if (isCasting_)
             {
-                if (!attackTarget_.alive()) resetAttack();
-                else
+                currentCastTime_ += dTime;
+                if (currentCastTime_ >= activeSkill_.CastTime)
                 {
-                    chase();
+                    activeSkill_.cast(this, castTarget_);
+                    isCasting_ = false;
                 }
             }
-
-            if (isAttacking_) currentAttackTime_ += dTime;
-            else currentAttackTime_ = 0;
+            else currentCastTime_ = 0;
         }
+   
+    }
 
-        currentAttackCooldown_ -= dTime;
-        if (currentAttackCooldown_ < 0) currentAttackCooldown_ = 0;
+    public void cast(Skill skill, Skill.TargetInfo target)
+    {
+        if (isCasting_ && activeSkill_ == skill && castTarget_ == target) return;
+        isMoving_ = false;
+        if(skill.CurrentCooldown == 0)
+        {
+            isCasting_ = true;
+            activeSkill_ = skill;
+            castTarget_ = target;
+            currentCastTime_ = 0;
+        }
     }
 
     public void moveTo(Vector3 moveDest)
@@ -118,30 +160,10 @@ public class Unit : MonoBehaviour {
         if (moveDest != transform.position)
         {
             moveDest_ = moveDest;
+            print(moveDest);
             rotationTarget_ = Quaternion.LookRotation(moveDest_ - transform.position);
             isMoving_ = true;
             isRotating_ = true;
-        }
-    }
-
-    public void attack()
-    {
-        if (
-            attackTarget_ != null &&
-            canReachAttackTarget()
-            )
-        {
-            isMoving_ = false;
-            if (currentAttackCooldown_ <= 0)
-            {
-                isAttacking_ = true;
-                if (currentAttackTime_ >= attackTime_)
-                {
-                    currentAttackCooldown_ = attackCooldown_;
-                    attackTarget_.receiveDamage(damage_, this);
-                    isAttacking_ = false;
-                }
-            }
         }
     }
 
@@ -152,67 +174,60 @@ public class Unit : MonoBehaviour {
 
     bool canMove()
     {
-        return !isAttacking_ && isMoving_ && !isDead_;
+        return !isCasting_ && isMoving_ && !isDead_;
     }
 
-    bool canReachAttackTarget()
+    public bool canReachCastTarget(Skill skill, Skill.TargetInfo target)
     {
-        return 
-            (attackTarget_.transform.position - transform.position).magnitude 
-            <= 
-            attackRange_ + innerRadius_ + attackTarget_.innerRadius_;
+        float totalReach = Reach + Size + skill.Reach;
+        if (target.unit != null) totalReach += target.unit.Size;
+
+        return
+            (target.position - transform.position).magnitude
+            <=
+            totalReach;
     }
 
-    public void chase()
+    bool canReachCastTarget()
     {
-        float dist = Vector3.Distance(attackTarget_.transform.position, transform.position);
-        if (dist <= viewRange_)
-        {
-            if (canReachAttackTarget())
-            {
-                attack();
-            }
-            else
-            {
-                moveTo(attackTarget_.transform.position);
-                isAttacking_ = false;
-            }
-        }
+        return canReachCastTarget(activeSkill_, castTarget_);
     }
 
-    public void receiveDamage(int damage, Unit attacker)
+    public void receiveDamage(float damage, Unit attacker)
     {
         damageReceived_ += damage;
         lastAttacker_ = attacker;
         graphics_.showDamage(damage);
-        if(damageReceived_ >= hp_)
+        if(damageReceived_ >= Hp)
         {
             die();
         }
     }
 
-    public void resetAttack()
+    public void resetCast()
     {
-        isAttacking_ = false;
-        currentAttackTime_ = 0;
-        attackTarget_ = null;
+        isCasting_ = false;
+        activeSkill_ = null;
+        currentCastTime_ = 0;
+        castTarget_ = null;
     }
 
     public void die()
     {
+        if (isDead_) return;
         isDead_ = true;
         if(lastAttacker_ != null)
         {
             Xp xp = lastAttacker_.gameObject.GetComponent<Xp>();
             if (xp != null)
             {
-                xp.receiveXp((int)(1000 * level_));
+                xp.receiveXp((1000 * level_));
             }
         }
     }
 
     public float healthPercentage()
     {
-        return 1f - (float)damageReceived_ / hp_;
+        return 1f - (damageReceived_ / Hp);
     }
 }
