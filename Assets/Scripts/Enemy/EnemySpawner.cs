@@ -68,7 +68,7 @@ public class EnemySpawner : MonoBehaviour {
             bool isInViewRange =
                 Vector3.Distance(enemy.gameObject_.transform.position, player_.transform.position)
                 <=
-                player_.GetComponent<Unit>().viewRange_;
+                player_.GetComponent<Unit>().ViewRange;
 
             if (enemy.indicator_ == null)
             {
