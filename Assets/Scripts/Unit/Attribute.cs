@@ -6,10 +6,26 @@ using UnityEngine;
 public class Attribute
 {
     public float raw;
-    float bonus, modifier;
+    public float bonus_, modifier_;
+
+    public Attribute()
+    {
+        bonus_ = 0;
+        modifier_ = 1;
+    }
+
+    public void addBonus(float bonus)
+    {
+        bonus_ += bonus;
+    }
+
+    public void addModifier(float modifier)
+    {
+        modifier_ *= modifier;
+    }
 
     public float value()
     {
-        return (raw + bonus) * (modifier + 1);
+        return (raw + bonus_) * modifier_;
     }
 };

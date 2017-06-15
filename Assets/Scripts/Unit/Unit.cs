@@ -75,9 +75,12 @@ public class Unit : MonoBehaviour {
 
     //skill casting
     Skill.TargetInfo castTarget_;
-    public Skill activeSkill_;
-    public float currentCastTime_;
-    public bool isCasting_;
+    Skill activeSkill_;
+    float currentCastTime_;
+    bool isCasting_;
+
+    //perks
+    public List<Perk> perks_;
 
     //kill rewarding
     Unit lastAttacker_;
@@ -95,6 +98,11 @@ public class Unit : MonoBehaviour {
 
         graphics_ = gameObject.AddComponent<UnitGraphics>();
 	}
+
+    void Start()
+    {
+        applyPerks();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -128,7 +136,7 @@ public class Unit : MonoBehaviour {
                 }
             }
 
-            if (isCasting_)
+            if (isCasting_ && canReachCastTarget())
             {
                 currentCastTime_ += dTime;
                 if (currentCastTime_ >= activeSkill_.CastTime)
@@ -137,7 +145,10 @@ public class Unit : MonoBehaviour {
                     isCasting_ = false;
                 }
             }
-            else currentCastTime_ = 0;
+            else
+            {
+                resetCast();
+            }
         }
    
     }
@@ -160,7 +171,6 @@ public class Unit : MonoBehaviour {
         if (moveDest != transform.position)
         {
             moveDest_ = moveDest;
-            print(moveDest);
             rotationTarget_ = Quaternion.LookRotation(moveDest_ - transform.position);
             isMoving_ = true;
             isRotating_ = true;
@@ -170,6 +180,14 @@ public class Unit : MonoBehaviour {
     public bool alive()
     {
         return !isDead_;
+    }
+
+    void applyPerks()
+    {
+        foreach(Perk perk in perks_)
+        {
+            perk.apply(this);
+        }
     }
 
     bool canMove()

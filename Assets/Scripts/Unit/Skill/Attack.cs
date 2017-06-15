@@ -6,6 +6,6 @@ public class Attack : Skill {
 
 	override public void internalCast(Unit caster, TargetInfo target)
     {
-        target.unit.receiveDamage(caster.damage_.value(), caster);
+        target.unit.receiveDamage(caster.Damage, caster);
     }
 }
