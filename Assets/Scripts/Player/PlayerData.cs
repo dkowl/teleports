@@ -48,9 +48,7 @@ public class PlayerData : ScriptableObject {
             updateLevel();
             return level_;
         }
-    }
-
-    
+    }    
 
     void updateLevel()
     {

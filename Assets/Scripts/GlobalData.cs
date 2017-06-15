@@ -6,6 +6,7 @@ public class GlobalData : MonoBehaviour {
     public static GlobalData instance;
 
     public PlayerData playerData_;
+    public TeleportData teleportData_;
 
     //making sure only one instance exists
     void Awake()

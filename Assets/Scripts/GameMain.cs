@@ -11,6 +11,8 @@ public class GameMain : MonoBehaviour {
     GameObject player_;
     GameObject mainCanvas_;
 
+    float gameTime_;
+
     int score_, startXp_;
     public int Score
     {
@@ -30,26 +32,37 @@ public class GameMain : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-    }
 
-
-    // Use this for initialization
-    void Start () {
         player_ = GameObject.FindGameObjectWithTag("Player");
         GlobalData.instance.loadPlayer(player_);
         startXp_ = player_.GetComponent<Xp>().xp;
         mainCanvas_ = Instantiate(Resources.Load("Prefabs/UI/MainCanvas"), gameObject.transform) as GameObject;
 
         endScreenOn_ = false;
+        gameTime_ = 0;
+    }
+
+
+    // Use this for initialization
+    void Start () {
         unpauseGame();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+        gameTime_ += Time.deltaTime;
+
+        if (gameTime_ >= GlobalData.instance.teleportData_.Time)
+        {
+            endScreen();
+        }
+
         if (!player_.GetComponent<Unit>().alive())
         {
             endScreen();
         }
+
         score_ = player_.GetComponent<Xp>().xp - startXp_;
                    
 	}
