@@ -6,6 +6,8 @@ namespace Teleports.Utils
 {
     public static class Utils
     {
+        public static float baseAspect = 16f / 9f;
+
         public static void makeVisible(this GameObject gameObject)
         {
             gameObject.transform.localScale = Vector3.one;
@@ -16,8 +18,4 @@ namespace Teleports.Utils
             gameObject.transform.localScale = Vector3.zero;
         }
     }
-}
-public class Utils : MonoBehaviour {
-
-	
 }
