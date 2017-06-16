@@ -8,7 +8,7 @@ public class ObjectPositioner : MonoBehaviour {
 
     public float x_, y_, z_, scale_;
 
-	void OnGUI () {
+	void Update () {
 
         Camera camera = Camera.main;
 

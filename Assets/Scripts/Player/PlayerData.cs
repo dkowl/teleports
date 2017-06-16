@@ -48,10 +48,22 @@ public class PlayerData : ScriptableObject {
             updateLevel();
             return level_;
         }
-    }    
+    }
+
+    static int probeLength_ = 5;
+    int rankPoints_;
+    public int RankPoints
+    {
+        get { return rankPoints_; }
+    }
 
     void updateLevel()
     {
         level_ = XpLevels.level(xp_);
+    }
+
+    public void updateRankPoints(int score)
+    {
+        rankPoints_ += (score - rankPoints_) / probeLength_;
     }
 }

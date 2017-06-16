@@ -8,7 +8,6 @@ public class HardHitting : Perk {
 
     public override void applyInternal(Unit target)
     {
-        print("lel");
         target.damage_.addBonus(damageBonus_);
     }
 }

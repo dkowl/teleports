@@ -11,7 +11,11 @@ public class GameMain : MonoBehaviour {
     GameObject player_;
     GameObject mainCanvas_;
 
-    float gameTime_;
+    float gameTime_, teleportTime_;
+    static public float TimeLeft
+    {
+        get { return instance.teleportTime_ - instance.gameTime_; }
+    }
 
     int score_, startXp_;
     public int Score
@@ -46,14 +50,15 @@ public class GameMain : MonoBehaviour {
     // Use this for initialization
     void Start () {
         unpauseGame();
-	}
+        teleportTime_ = GlobalData.instance.teleportData_.Time;
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
         gameTime_ += Time.deltaTime;
 
-        if (gameTime_ >= GlobalData.instance.teleportData_.Time)
+        if (gameTime_ >= teleportTime_)
         {
             endScreen();
         }
@@ -91,6 +96,7 @@ public class GameMain : MonoBehaviour {
     {
         GlobalData.instance.savePlayer(player_);
         GlobalData.instance.playerData_.startXp = startXp_;
+        GlobalData.instance.playerData_.updateRankPoints(Score);
         unpauseGame();
         XpProgress.startAnimation();
         SceneManager.LoadScene("Home");
