@@ -10,6 +10,8 @@ public class Perk : MonoBehaviour {
         get { return isApplied_; }
     }
 
+    public string name_;
+
     void Awake()
     {
         isApplied_ = false;

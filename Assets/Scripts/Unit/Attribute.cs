@@ -6,12 +6,12 @@ using UnityEngine;
 public class Attribute
 {
     public float raw;
-    public float bonus_, modifier_;
+    public float bonus_, multiplier_;
 
     public Attribute()
     {
         bonus_ = 0;
-        modifier_ = 1;
+        multiplier_ = 1;
     }
 
     public void addBonus(float bonus)
@@ -19,13 +19,19 @@ public class Attribute
         bonus_ += bonus;
     }
 
-    public void addModifier(float modifier)
+    public void addMultiplier(float multiplier)
     {
-        modifier_ *= modifier;
+        multiplier_ *= multiplier;
+    }
+
+    public void modify(float bonus, float multiplier)
+    {
+        addBonus(bonus);
+        addMultiplier(multiplier);
     }
 
     public float value()
     {
-        return (raw + bonus_) * modifier_;
+        return (raw + bonus_) * multiplier_;
     }
 };

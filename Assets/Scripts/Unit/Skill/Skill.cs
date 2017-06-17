@@ -38,6 +38,8 @@ public abstract class Skill : MonoBehaviour {
         get { return type_; }
     }
 
+    public string name_;
+
     public Attribute
         reach_,
         castTime_,
