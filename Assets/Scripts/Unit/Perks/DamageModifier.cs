@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class DamageModifier : Perk {
 
-    public float bonus_, multiplier_;
+    public float bonus_ = 0, multiplier_ = 1;
 
-    public override void applyInternal(Unit target)
+    public override void apply(Unit target)
     {
-        base.applyInternal(target);
+        base.apply(target);
 
         target.damage_.modify(bonus_, multiplier_);
     }

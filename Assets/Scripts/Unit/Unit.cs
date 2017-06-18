@@ -78,6 +78,7 @@ public class Unit : MonoBehaviour {
     Skill activeSkill_;
     float currentCastTime_;
     bool isCasting_;
+    public List<Skill> skills_;
 
     //perks
     public List<Perk> perks_;

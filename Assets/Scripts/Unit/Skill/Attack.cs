@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Attack : Skill {
 
-    public float damageMultiplier_;
+    public float damageMultiplier_ = 1;
 
 	override public void internalCast(Unit caster, TargetInfo target)
     {
