@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Attribute
 {
-    public float raw;
+    public float raw_;
     public float bonus_, multiplier_;
 
     public Attribute()
@@ -32,6 +32,6 @@ public class Attribute
 
     public float value()
     {
-        return (raw + bonus_) * multiplier_;
+        return (raw_ + bonus_) * multiplier_;
     }
 };

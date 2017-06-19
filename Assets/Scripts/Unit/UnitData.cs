@@ -5,16 +5,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "unitData", menuName = "Custom/UnitData", order = 1)]
 public class UnitData : ScriptableObject
 {
-
     public string name_;
-    public int 
-        hp_,
-        damage;
+    public int level_;
     public float
         size_,
-        attackRange_,
-        attackTime_,
-        attackCooldown_,
+        hp_,
+        armor_,
+        regen_,
+        damage_,
+        armorIgnore_,
+        reach_,
         moveSpeed_,
-        viewRange_;
+        viewRange_,
+        height_;
 }

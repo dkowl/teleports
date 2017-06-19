@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour {
 
+    public UnitData unitData_;
+
     string name_;
     public int level_;
 
@@ -107,6 +109,8 @@ public class Unit : MonoBehaviour {
         isRotating_ = false;
         isCasting_ = false;
         isDead_ = false;
+
+        loadFromUnitData();
 
         graphics_ = gameObject.AddComponent<UnitGraphics>();
 	}
@@ -221,6 +225,25 @@ public class Unit : MonoBehaviour {
     bool canReachCastTarget()
     {
         return canReachCastTarget(activeSkill_, castTarget_);
+    }
+
+    void loadFromUnitData()
+    {
+        if(unitData_ != null)
+        {
+            name_ = unitData_.name_;
+            level_ = unitData_.level_;
+            attributes_[(int)AttributeType.Size].raw_ = unitData_.size_;
+            attributes_[(int)AttributeType.Hp].raw_ = unitData_.hp_;
+            attributes_[(int)AttributeType.Armor].raw_ = unitData_.armor_;
+            attributes_[(int)AttributeType.Regen].raw_ = unitData_.regen_;
+            attributes_[(int)AttributeType.Damage].raw_ = unitData_.damage_;
+            attributes_[(int)AttributeType.ArmorIgnore].raw_ = unitData_.armorIgnore_;
+            attributes_[(int)AttributeType.Reach].raw_ = unitData_.reach_;
+            attributes_[(int)AttributeType.MoveSpeed].raw_ = unitData_.moveSpeed_;
+            attributes_[(int)AttributeType.ViewRange].raw_ = unitData_.viewRange_;
+            height_ = unitData_.height_;
+        }
     }
 
     public void receiveDamage(float damage, Unit attacker)
