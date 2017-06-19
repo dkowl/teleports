@@ -7,55 +7,66 @@ public class Unit : MonoBehaviour {
     string name_;
     public int level_;
 
-    public Attribute
-        size_,
-        hp_,
-        armor_,
-        regen_,
-        damage_,
-        reach_,
-        moveSpeed_,
-        viewRange_;
+    public enum AttributeType
+    {
+        Size,
+        Hp,
+        Armor,
+        Regen,
+        Damage,
+        ArmorIgnore,
+        Reach,
+        MoveSpeed,
+        ViewRange,
+        Count
+    }
+
+    public Attribute[] attributes_ = new Attribute[(int)AttributeType.Count];
 
     #region attribute properties
     public float Size
     {
-        get { return size_.value()/2f; }
+        get { return attributes_[(int)AttributeType.Size].value()/2f; }
     }
 
     public float Hp
     {
-        get { return hp_.value(); }
+        get { return attributes_[(int)AttributeType.Hp].value(); }
     }
 
     public float Armor
     {
-        get { return armor_.value(); }
+        get { return attributes_[(int)AttributeType.Armor].value(); }
     }
 
     public float Regen
     {
-        get { return regen_.value(); }
+        get { return attributes_[(int)AttributeType.Regen].value(); }
     }
 
     public float Damage
     {
-        get { return damage_.value(); }
+        get { return attributes_[(int)AttributeType.Damage].value(); }
+    }
+
+    public float ArmorIgnore
+    {
+        get { return attributes_[(int)AttributeType.ArmorIgnore].value(); }
     }
 
     public float Reach
     {
-        get { return reach_.value(); }
+        get { return attributes_[(int)AttributeType.Reach].value(); }
     }
 
     public float MoveSpeed
     {
-        get { return moveSpeed_.value(); }
+        get { return attributes_[(int)AttributeType.MoveSpeed].value(); }
     }
 
     public float ViewRange
     {
-        get { return viewRange_.value(); }
+        get { return attributes_[(int)AttributeType.ViewRange].value(); }
     }
     #endregion
 
@@ -214,9 +225,10 @@ public class Unit : MonoBehaviour {
 
     public void receiveDamage(float damage, Unit attacker)
     {
-        damageReceived_ += damage;
-        lastAttacker_ = attacker;
-        graphics_.showDamage(damage);
+        float actualDamage = Mathf.Max(damage - Mathf.Max(Armor - attacker.ArmorIgnore, 0), 0);
+        damageReceived_ += actualDamage;
+        if(actualDamage > 0) lastAttacker_ = attacker;
+        graphics_.showDamage(actualDamage);
         if(damageReceived_ >= Hp)
         {
             die();
