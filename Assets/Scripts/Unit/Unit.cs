@@ -86,6 +86,10 @@ public class Unit : MonoBehaviour {
     Quaternion rotationTarget_;
     bool isRotating_;
 
+    //special states
+    bool isStunned_;
+    float stunTime_;
+
     //skill casting
     Skill.TargetInfo castTarget_;
     Skill activeSkill_;
@@ -109,6 +113,7 @@ public class Unit : MonoBehaviour {
         isRotating_ = false;
         isCasting_ = false;
         isDead_ = false;
+        isStunned_ = false;
 
         loadFromUnitData();
 
@@ -125,8 +130,9 @@ public class Unit : MonoBehaviour {
 
         float dTime = Time.deltaTime;
 
-        if (alive())
+        if (alive() && !isStunned_)
         {
+            //Movement
             if (canMove())
             {
                 Vector3 offset = moveDest_ - transform.position;
@@ -143,6 +149,7 @@ public class Unit : MonoBehaviour {
                 transform.position += offset;
 
             }
+            //Rotation
             if (isRotating_)
             {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationTarget_, dTime * rotationSpeed_ * 360);
@@ -151,7 +158,7 @@ public class Unit : MonoBehaviour {
                     isRotating_ = false;
                 }
             }
-
+            //Skill Casting
             if (isCasting_ && canReachCastTarget())
             {
                 currentCastTime_ += dTime;
@@ -164,6 +171,14 @@ public class Unit : MonoBehaviour {
             else
             {
                 resetCast();
+            }
+        }
+        else if (isStunned_)
+        {
+            stunTime_ -= dTime;
+            if(stunTime_<= 0)
+            {
+                resetStun();
             }
         }
    
@@ -264,6 +279,19 @@ public class Unit : MonoBehaviour {
         activeSkill_ = null;
         currentCastTime_ = 0;
         castTarget_ = null;
+    }
+
+    public void resetStun()
+    {
+        isStunned_ = false;
+        stunTime_ = 0;
+    }
+
+    public void stun(float time)
+    {
+        isStunned_ = true;
+        stunTime_ += time;
+        graphics_.showMessage("Stunned!");
     }
 
     public void die()

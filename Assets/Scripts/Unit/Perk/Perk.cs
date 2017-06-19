@@ -20,4 +20,9 @@ public class Perk : MonoBehaviour {
         }
         else return;
     }
+
+    public virtual void onCast(Unit caster, Skill skill, Skill.TargetInfo target)
+    {
+
+    }
 }

@@ -76,6 +76,11 @@ public abstract class Skill : MonoBehaviour {
     {
         currentCooldown_ = cooldown_.value();
 
+        foreach(Perk perk in caster.perks_)
+        {
+            perk.onCast(caster, this, target);
+        }
+
         internalCast(caster, target);
     }
 

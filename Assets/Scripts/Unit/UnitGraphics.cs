@@ -29,4 +29,12 @@ public class UnitGraphics : MonoBehaviour {
         obj.GetComponent<FloatingDamage>().setColor(Color.yellow);
         obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().height_, 0);
     }
+
+    public void showMessage(string message)
+    {
+        GameObject obj = Instantiate(Resources.Load("Prefabs/Unit/FloatingDamage"), gameObject.transform) as GameObject;
+        obj.GetComponent<FloatingDamage>().setText(message);
+        obj.GetComponent<FloatingDamage>().setColor(Color.yellow);
+        obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().height_, 0);
+    }
 }
