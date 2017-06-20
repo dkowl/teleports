@@ -5,15 +5,21 @@ using UnityEngine;
 public class UnitGraphics : MonoBehaviour {
 
     Healthbar healthbar_;
+    GameObject targetMarker_;
 
 	// Use this for initialization
 	void Start () {
         healthbar_ = gameObject.AddComponent<Healthbar>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	}
+
+    public void updateTarget(Unit target)
+    {
+        if(targetMarker_ == null)
+        {
+            targetMarker_ = Instantiate(Resources.Load("Prefabs/Unit/TargetMarker"), gameObject.transform) as GameObject;
+        }
+        targetMarker_.GetComponent<TargetMarker>().setTargetUnit(target);
+    }
 
     public void showDamage(float damage)
     {

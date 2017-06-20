@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (target_.unit != null) chase();
+
+        unit_.Graphics.updateTarget(target_.unit);
 	}
 
     void chase()

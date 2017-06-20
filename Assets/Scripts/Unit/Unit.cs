@@ -105,6 +105,10 @@ public class Unit : MonoBehaviour {
 
     //graphics
     UnitGraphics graphics_;
+    public UnitGraphics Graphics
+    {
+        get { return graphics_; }
+    }
 
     void Awake () {
         damageReceived_ = 0;
