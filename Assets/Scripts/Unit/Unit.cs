@@ -63,7 +63,9 @@ public class Unit : MonoBehaviour {
 
     public float MoveSpeed
     {
-        get { return attributes_[(int)AttributeType.MoveSpeed].value(); }
+        get {
+            return Mathf.Max(attributes_[(int)AttributeType.MoveSpeed].value(), specialMoveSpeed_);
+        }
     }
 
     public float ViewRange
@@ -81,6 +83,7 @@ public class Unit : MonoBehaviour {
 
     //pathfinding
     Vector3 moveDest_;
+    float specialMoveSpeed_;
     bool isMoving_;
 
     Quaternion rotationTarget_;
@@ -109,6 +112,9 @@ public class Unit : MonoBehaviour {
     {
         get { return graphics_; }
     }
+
+    //controller
+    public UnitController activeController_;
 
     void Awake () {
         damageReceived_ = 0;
@@ -201,15 +207,22 @@ public class Unit : MonoBehaviour {
         }
     }
 
-    public void moveTo(Vector3 moveDest)
+    public void moveTo(Vector3 moveDest, float specialSpeed = 0)
     {
         if (moveDest != transform.position)
         {
             moveDest_ = moveDest;
+            specialMoveSpeed_ = specialSpeed;
             rotationTarget_ = Quaternion.LookRotation(moveDest_ - transform.position);
             isMoving_ = true;
             isRotating_ = true;
         }
+    }
+
+    public void addPerk(Perk perk)
+    {
+        perk.apply(this);
+        perks_.Add(perk);
     }
 
     public bool alive()
@@ -275,6 +288,12 @@ public class Unit : MonoBehaviour {
         {
             die();
         }
+    }
+
+    public void removePerk(Perk perk)
+    {
+        perks_.Remove(perk);
+        perk.unapply(this);
     }
 
     public void resetCast()

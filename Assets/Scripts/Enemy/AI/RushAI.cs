@@ -2,28 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RushAI : MonoBehaviour {
+public class RushAI : UnitController {
 
 
     GameObject[] targets_; //all available targets
-    Unit unit_;
-    public Skill skill_;
-    Skill.TargetInfo target_;
-
     
     //Unity Event Functions
-	void Awake()
+	public override void Awake()
     {
+        base.Awake();
         targets_ = GameObject.FindGameObjectsWithTag("Player");
-        target_ = new Skill.TargetInfo();
-        unit_ = gameObject.GetComponent<Unit>();
+        mainAttack_ = gameObject.GetComponent<Attack>();
     }
 
 	void Start () {
         target();
 	}
-	
-	void Update () {
+
+    public override void control() {
         if (target_.unit == null) target();
         else chase();
 	}
@@ -50,17 +46,5 @@ public class RushAI : MonoBehaviour {
             target_.unit = targets_[bestArg].GetComponent<Unit>();
         }
         else target_.unit = null;
-    }
-
-    void chase()
-    {
-        if(unit_.canReachCastTarget(skill_, target_))
-        {
-            unit_.cast(skill_, target_);
-        }
-        else
-        {
-            unit_.moveTo(target_.position);
-        }
     }
 }

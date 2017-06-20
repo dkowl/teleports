@@ -10,7 +10,7 @@ public class StunApplier : Perk {
     {
         base.onCast(caster, skill, target);
 
-        if(stunChance_ > Random.Range(0f, 1f))
+        if(skill is Attack && stunChance_ > Random.Range(0f, 1f))
         {
             target.unit.stun(stunDuration_);
         }

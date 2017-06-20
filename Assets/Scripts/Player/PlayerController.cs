@@ -2,20 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
-
-    Unit unit_;
-    public Skill mainAttack_;
-    Skill.TargetInfo target_;
-
-	void Awake()
-    {
-        unit_ = gameObject.GetComponent<Unit>();
-        target_ = new Skill.TargetInfo();
-    }
+public class PlayerController : UnitController {
 	
 	// Update is called once per frame
-	void Update () {
+	public override void control () {
         if (Input.GetButton("PlayerMove"))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -44,17 +34,5 @@ public class PlayerController : MonoBehaviour {
         if (target_.unit != null) chase();
 
         unit_.Graphics.updateTarget(target_.unit);
-	}
-
-    void chase()
-    {
-        if (unit_.canReachCastTarget(mainAttack_, target_))
-        {
-            unit_.cast(mainAttack_, target_);
-        }
-        else
-        {
-            unit_.moveTo(target_.position);
-        }
-    }
+	}    
 }

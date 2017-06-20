@@ -66,7 +66,7 @@ public abstract class Skill : MonoBehaviour {
         get { return currentCooldown_; }
     }
     
-    void Update()
+    virtual public void Update()
     {
         currentCooldown_ -= Time.deltaTime;
         if (currentCooldown_ < 0) currentCooldown_ = 0;
