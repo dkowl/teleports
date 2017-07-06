@@ -1,0 +1,2694 @@
+fileFormatVersion: 2
+guid: fee0f680b9fd9964293e7cd4aa3c5d17
+timeCreated: 1499340106
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Base
+    100002: Chest
+    100004: Head
+    100006: Head_end
+    100008: Hip
+    100010: HipSway
+    100012: L_Ankle
+    100014: L_Ankle_FK
+    100016: L_Ankle_IK
+    100018: L_Arm
+    100020: L_Arm_FK
+    100022: L_Arm_IK
+    100024: L_ArmTwist
+    100026: L_ArmTwist_FK
+    100028: L_ArmTwist_IK
+    100030: L_Ball
+    100032: L_Ball_FK
+    100034: L_Ball_IK
+    100036: L_Calf
+    100038: L_Calf_FK
+    100040: L_Calf_IK
+    100042: L_Clavical
+    100044: L_Fingers01
+    100046: L_Fingers02
+    100048: L_Fingers03
+    100050: L_Fingers_end
+    100052: L_Foot_end
+    100054: L_Foot_end_FK
+    100056: L_Foot_end_IK
+    100058: L_Forearm
+    100060: L_Forearm_FK
+    100062: L_Forearm_IK
+    100064: L_Index01
+    100066: L_Index02
+    100068: L_Index03
+    100070: L_Index_end
+    100072: L_Thigh
+    100074: L_Thigh_FK
+    100076: L_Thigh_IK
+    100078: L_Thumb01
+    100080: L_Thumb02
+    100082: L_Thumb03
+    100084: L_Thumb_end
+    100086: L_Wrist
+    100088: L_Wrist_FK
+    100090: L_Wrist_IK
+    100092: lowpolybody_oPP
+    100094: Neck
+    100096: //RootNode
+    100098: R_Ankle
+    100100: R_Ankle_FK
+    100102: R_Ankle_IK
+    100104: R_Arm
+    100106: R_Arm_FK
+    100108: R_Arm_IK
+    100110: R_ArmTwist
+    100112: R_ArmTwist_FK
+    100114: R_ArmTwist_IK
+    100116: R_Ball
+    100118: R_Ball_FK
+    100120: R_Ball_IK
+    100122: R_Calf
+    100124: R_Calf_FK
+    100126: R_Calf_IK
+    100128: R_Clavical
+    100130: R_Fingers01
+    100132: R_Fingers02
+    100134: R_Fingers03
+    100136: R_Fingers_end
+    100138: R_Foot_end
+    100140: R_Foot_end_FK
+    100142: R_Foot_end_IK
+    100144: R_Forearm
+    100146: R_Forearm_FK
+    100148: R_Forearm_IK
+    100150: R_Index01
+    100152: R_Index02
+    100154: R_Index03
+    100156: R_Index_end
+    100158: R_Thigh
+    100160: R_Thigh_FK
+    100162: R_Thigh_IK
+    100164: R_Thumb01
+    100166: R_Thumb02
+    100168: R_Thumb03
+    100170: R_Thumb_end
+    100172: R_Wrist
+    100174: R_Wrist_FK
+    100176: R_Wrist_IK
+    100178: Spine
+    400000: Base
+    400002: Chest
+    400004: Head
+    400006: Head_end
+    400008: Hip
+    400010: HipSway
+    400012: L_Ankle
+    400014: L_Ankle_FK
+    400016: L_Ankle_IK
+    400018: L_Arm
+    400020: L_Arm_FK
+    400022: L_Arm_IK
+    400024: L_ArmTwist
+    400026: L_ArmTwist_FK
+    400028: L_ArmTwist_IK
+    400030: L_Ball
+    400032: L_Ball_FK
+    400034: L_Ball_IK
+    400036: L_Calf
+    400038: L_Calf_FK
+    400040: L_Calf_IK
+    400042: L_Clavical
+    400044: L_Fingers01
+    400046: L_Fingers02
+    400048: L_Fingers03
+    400050: L_Fingers_end
+    400052: L_Foot_end
+    400054: L_Foot_end_FK
+    400056: L_Foot_end_IK
+    400058: L_Forearm
+    400060: L_Forearm_FK
+    400062: L_Forearm_IK
+    400064: L_Index01
+    400066: L_Index02
+    400068: L_Index03
+    400070: L_Index_end
+    400072: L_Thigh
+    400074: L_Thigh_FK
+    400076: L_Thigh_IK
+    400078: L_Thumb01
+    400080: L_Thumb02
+    400082: L_Thumb03
+    400084: L_Thumb_end
+    400086: L_Wrist
+    400088: L_Wrist_FK
+    400090: L_Wrist_IK
+    400092: lowpolybody_oPP
+    400094: Neck
+    400096: //RootNode
+    400098: R_Ankle
+    400100: R_Ankle_FK
+    400102: R_Ankle_IK
+    400104: R_Arm
+    400106: R_Arm_FK
+    400108: R_Arm_IK
+    400110: R_ArmTwist
+    400112: R_ArmTwist_FK
+    400114: R_ArmTwist_IK
+    400116: R_Ball
+    400118: R_Ball_FK
+    400120: R_Ball_IK
+    400122: R_Calf
+    400124: R_Calf_FK
+    400126: R_Calf_IK
+    400128: R_Clavical
+    400130: R_Fingers01
+    400132: R_Fingers02
+    400134: R_Fingers03
+    400136: R_Fingers_end
+    400138: R_Foot_end
+    400140: R_Foot_end_FK
+    400142: R_Foot_end_IK
+    400144: R_Forearm
+    400146: R_Forearm_FK
+    400148: R_Forearm_IK
+    400150: R_Index01
+    400152: R_Index02
+    400154: R_Index03
+    400156: R_Index_end
+    400158: R_Thigh
+    400160: R_Thigh_FK
+    400162: R_Thigh_IK
+    400164: R_Thumb01
+    400166: R_Thumb02
+    400168: R_Thumb03
+    400170: R_Thumb_end
+    400172: R_Wrist
+    400174: R_Wrist_FK
+    400176: R_Wrist_IK
+    400178: Spine
+    4300000: lowpolybody_oPP
+    7400000: Idle
+    7400002: Run
+    7400004: Walk
+    7400006: Turn left
+    7400008: Turn Right
+    7400010: Turn Back
+    7400012: Fist Hit
+    7400014: Stuned
+    9500000: //RootNode
+    13700000: lowpolybody_oPP
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 3
+    animationRotationError: 0
+    animationPositionError: 0
+    animationScaleError: 0
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 5
+      lastFrame: 205
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Hip
+        weight: 1
+      - path: Base/Hip/HipSway
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle/L_Ball
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle/L_Ball/L_Foot_end
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK/L_Ball_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK/L_Ball_FK/L_Foot_end_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK/L_Ball_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK/L_Ball_IK/L_Foot_end_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle/R_Ball
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle/R_Ball/R_Foot_end
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK/R_Ball_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK/R_Ball_FK/R_Foot_end_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK/R_Ball_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK/R_Ball_IK/R_Foot_end_IK
+        weight: 0
+      - path: Base/Hip/Spine
+        weight: 1
+      - path: Base/Hip/Spine/Chest
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02/L_Fingers03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02/L_Fingers03/L_Fingers_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02/L_Index03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02/L_Index03/L_Index_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02/L_Thumb03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02/L_Thumb03/L_Thumb_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK/L_ArmTwist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK/L_ArmTwist_FK/L_Wrist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK/L_ArmTwist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK/L_ArmTwist_IK/L_Wrist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/Neck
+        weight: 1
+      - path: Base/Hip/Spine/Chest/Neck/Head
+        weight: 1
+      - path: Base/Hip/Spine/Chest/Neck/Head/Head_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02/R_Fingers03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02/R_Fingers03/R_Fingers_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02/R_Index03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02/R_Index03/R_Index_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02/R_Thumb03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02/R_Thumb03/R_Thumb_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK/R_ArmTwist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK/R_ArmTwist_FK/R_Wrist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK/R_ArmTwist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK/R_ArmTwist_IK/R_Wrist_IK
+        weight: 0
+      - path: lowpolybody_oPP
+        weight: 0
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Run
+      takeName: Take 001
+      firstFrame: 210
+      lastFrame: 240
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Hip
+        weight: 1
+      - path: Base/Hip/HipSway
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle/L_Ball
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle/L_Ball/L_Foot_end
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK/L_Ball_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK/L_Ball_FK/L_Foot_end_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK/L_Ball_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK/L_Ball_IK/L_Foot_end_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle/R_Ball
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle/R_Ball/R_Foot_end
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK/R_Ball_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK/R_Ball_FK/R_Foot_end_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK/R_Ball_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK/R_Ball_IK/R_Foot_end_IK
+        weight: 0
+      - path: Base/Hip/Spine
+        weight: 1
+      - path: Base/Hip/Spine/Chest
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02/L_Fingers03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02/L_Fingers03/L_Fingers_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02/L_Index03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02/L_Index03/L_Index_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02/L_Thumb03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02/L_Thumb03/L_Thumb_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK/L_ArmTwist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK/L_ArmTwist_FK/L_Wrist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK/L_ArmTwist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK/L_ArmTwist_IK/L_Wrist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/Neck
+        weight: 1
+      - path: Base/Hip/Spine/Chest/Neck/Head
+        weight: 1
+      - path: Base/Hip/Spine/Chest/Neck/Head/Head_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02/R_Fingers03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02/R_Fingers03/R_Fingers_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02/R_Index03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02/R_Index03/R_Index_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02/R_Thumb03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02/R_Thumb03/R_Thumb_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK/R_ArmTwist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK/R_ArmTwist_FK/R_Wrist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK/R_ArmTwist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK/R_ArmTwist_IK/R_Wrist_IK
+        weight: 0
+      - path: lowpolybody_oPP
+        weight: 0
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 245
+      lastFrame: 305
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Hip
+        weight: 1
+      - path: Base/Hip/HipSway
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle/L_Ball
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle/L_Ball/L_Foot_end
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK/L_Ball_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK/L_Ball_FK/L_Foot_end_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK/L_Ball_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK/L_Ball_IK/L_Foot_end_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle/R_Ball
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle/R_Ball/R_Foot_end
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK/R_Ball_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK/R_Ball_FK/R_Foot_end_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK/R_Ball_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK/R_Ball_IK/R_Foot_end_IK
+        weight: 0
+      - path: Base/Hip/Spine
+        weight: 1
+      - path: Base/Hip/Spine/Chest
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02/L_Fingers03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02/L_Fingers03/L_Fingers_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02/L_Index03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02/L_Index03/L_Index_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02/L_Thumb03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02/L_Thumb03/L_Thumb_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK/L_ArmTwist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK/L_ArmTwist_FK/L_Wrist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK/L_ArmTwist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK/L_ArmTwist_IK/L_Wrist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/Neck
+        weight: 1
+      - path: Base/Hip/Spine/Chest/Neck/Head
+        weight: 1
+      - path: Base/Hip/Spine/Chest/Neck/Head/Head_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02/R_Fingers03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02/R_Fingers03/R_Fingers_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02/R_Index03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02/R_Index03/R_Index_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02/R_Thumb03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02/R_Thumb03/R_Thumb_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK/R_ArmTwist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK/R_ArmTwist_FK/R_Wrist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK/R_ArmTwist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK/R_ArmTwist_IK/R_Wrist_IK
+        weight: 0
+      - path: lowpolybody_oPP
+        weight: 0
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Turn left
+      takeName: Take 001
+      firstFrame: 310
+      lastFrame: 345
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Hip
+        weight: 1
+      - path: Base/Hip/HipSway
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle/L_Ball
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle/L_Ball/L_Foot_end
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK/L_Ball_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK/L_Ball_FK/L_Foot_end_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK/L_Ball_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK/L_Ball_IK/L_Foot_end_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle/R_Ball
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle/R_Ball/R_Foot_end
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK/R_Ball_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK/R_Ball_FK/R_Foot_end_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK/R_Ball_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK/R_Ball_IK/R_Foot_end_IK
+        weight: 0
+      - path: Base/Hip/Spine
+        weight: 1
+      - path: Base/Hip/Spine/Chest
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02/L_Fingers03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02/L_Fingers03/L_Fingers_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02/L_Index03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02/L_Index03/L_Index_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02/L_Thumb03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02/L_Thumb03/L_Thumb_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK/L_ArmTwist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK/L_ArmTwist_FK/L_Wrist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK/L_ArmTwist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK/L_ArmTwist_IK/L_Wrist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/Neck
+        weight: 1
+      - path: Base/Hip/Spine/Chest/Neck/Head
+        weight: 1
+      - path: Base/Hip/Spine/Chest/Neck/Head/Head_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02/R_Fingers03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02/R_Fingers03/R_Fingers_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02/R_Index03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02/R_Index03/R_Index_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02/R_Thumb03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02/R_Thumb03/R_Thumb_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK/R_ArmTwist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK/R_ArmTwist_FK/R_Wrist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK/R_ArmTwist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK/R_ArmTwist_IK/R_Wrist_IK
+        weight: 0
+      - path: lowpolybody_oPP
+        weight: 0
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Turn Right
+      takeName: Take 001
+      firstFrame: 350
+      lastFrame: 385
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Hip
+        weight: 1
+      - path: Base/Hip/HipSway
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle/L_Ball
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle/L_Ball/L_Foot_end
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK/L_Ball_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK/L_Ball_FK/L_Foot_end_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK/L_Ball_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK/L_Ball_IK/L_Foot_end_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle/R_Ball
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle/R_Ball/R_Foot_end
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK/R_Ball_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK/R_Ball_FK/R_Foot_end_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK/R_Ball_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK/R_Ball_IK/R_Foot_end_IK
+        weight: 0
+      - path: Base/Hip/Spine
+        weight: 1
+      - path: Base/Hip/Spine/Chest
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02/L_Fingers03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02/L_Fingers03/L_Fingers_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02/L_Index03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02/L_Index03/L_Index_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02/L_Thumb03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02/L_Thumb03/L_Thumb_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK/L_ArmTwist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK/L_ArmTwist_FK/L_Wrist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK/L_ArmTwist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK/L_ArmTwist_IK/L_Wrist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/Neck
+        weight: 1
+      - path: Base/Hip/Spine/Chest/Neck/Head
+        weight: 1
+      - path: Base/Hip/Spine/Chest/Neck/Head/Head_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02/R_Fingers03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02/R_Fingers03/R_Fingers_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02/R_Index03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02/R_Index03/R_Index_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02/R_Thumb03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02/R_Thumb03/R_Thumb_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK/R_ArmTwist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK/R_ArmTwist_FK/R_Wrist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK/R_ArmTwist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK/R_ArmTwist_IK/R_Wrist_IK
+        weight: 0
+      - path: lowpolybody_oPP
+        weight: 0
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Turn Back
+      takeName: Take 001
+      firstFrame: 390
+      lastFrame: 425
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Hip
+        weight: 1
+      - path: Base/Hip/HipSway
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle/L_Ball
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle/L_Ball/L_Foot_end
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK/L_Ball_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK/L_Ball_FK/L_Foot_end_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK/L_Ball_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK/L_Ball_IK/L_Foot_end_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle/R_Ball
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle/R_Ball/R_Foot_end
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK/R_Ball_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK/R_Ball_FK/R_Foot_end_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK/R_Ball_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK/R_Ball_IK/R_Foot_end_IK
+        weight: 0
+      - path: Base/Hip/Spine
+        weight: 1
+      - path: Base/Hip/Spine/Chest
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02/L_Fingers03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02/L_Fingers03/L_Fingers_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02/L_Index03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02/L_Index03/L_Index_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02/L_Thumb03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02/L_Thumb03/L_Thumb_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK/L_ArmTwist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK/L_ArmTwist_FK/L_Wrist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK/L_ArmTwist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK/L_ArmTwist_IK/L_Wrist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/Neck
+        weight: 1
+      - path: Base/Hip/Spine/Chest/Neck/Head
+        weight: 1
+      - path: Base/Hip/Spine/Chest/Neck/Head/Head_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02/R_Fingers03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02/R_Fingers03/R_Fingers_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02/R_Index03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02/R_Index03/R_Index_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02/R_Thumb03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02/R_Thumb03/R_Thumb_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK/R_ArmTwist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK/R_ArmTwist_FK/R_Wrist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK/R_ArmTwist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK/R_ArmTwist_IK/R_Wrist_IK
+        weight: 0
+      - path: lowpolybody_oPP
+        weight: 0
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Fist Hit
+      takeName: Take 001
+      firstFrame: 430
+      lastFrame: 455
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Hip
+        weight: 1
+      - path: Base/Hip/HipSway
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle/L_Ball
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle/L_Ball/L_Foot_end
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK/L_Ball_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK/L_Ball_FK/L_Foot_end_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK/L_Ball_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK/L_Ball_IK/L_Foot_end_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle/R_Ball
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle/R_Ball/R_Foot_end
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK/R_Ball_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK/R_Ball_FK/R_Foot_end_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK/R_Ball_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK/R_Ball_IK/R_Foot_end_IK
+        weight: 0
+      - path: Base/Hip/Spine
+        weight: 1
+      - path: Base/Hip/Spine/Chest
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02/L_Fingers03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02/L_Fingers03/L_Fingers_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02/L_Index03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02/L_Index03/L_Index_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02/L_Thumb03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02/L_Thumb03/L_Thumb_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK/L_ArmTwist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK/L_ArmTwist_FK/L_Wrist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK/L_ArmTwist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK/L_ArmTwist_IK/L_Wrist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/Neck
+        weight: 1
+      - path: Base/Hip/Spine/Chest/Neck/Head
+        weight: 1
+      - path: Base/Hip/Spine/Chest/Neck/Head/Head_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02/R_Fingers03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02/R_Fingers03/R_Fingers_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02/R_Index03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02/R_Index03/R_Index_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02/R_Thumb03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02/R_Thumb03/R_Thumb_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK/R_ArmTwist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK/R_ArmTwist_FK/R_Wrist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK/R_ArmTwist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK/R_ArmTwist_IK/R_Wrist_IK
+        weight: 0
+      - path: lowpolybody_oPP
+        weight: 0
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Stuned
+      takeName: Take 001
+      firstFrame: 460
+      lastFrame: 520
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Hip
+        weight: 1
+      - path: Base/Hip/HipSway
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle/L_Ball
+        weight: 1
+      - path: Base/Hip/HipSway/L_Thigh/L_Calf/L_Ankle/L_Ball/L_Foot_end
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK/L_Ball_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_FK/L_Calf_FK/L_Ankle_FK/L_Ball_FK/L_Foot_end_FK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK/L_Ball_IK
+        weight: 0
+      - path: Base/Hip/HipSway/L_Thigh_IK/L_Calf_IK/L_Ankle_IK/L_Ball_IK/L_Foot_end_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle/R_Ball
+        weight: 1
+      - path: Base/Hip/HipSway/R_Thigh/R_Calf/R_Ankle/R_Ball/R_Foot_end
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK/R_Ball_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_FK/R_Calf_FK/R_Ankle_FK/R_Ball_FK/R_Foot_end_FK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK/R_Ball_IK
+        weight: 0
+      - path: Base/Hip/HipSway/R_Thigh_IK/R_Calf_IK/R_Ankle_IK/R_Ball_IK/R_Foot_end_IK
+        weight: 0
+      - path: Base/Hip/Spine
+        weight: 1
+      - path: Base/Hip/Spine/Chest
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02/L_Fingers03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Fingers01/L_Fingers02/L_Fingers03/L_Fingers_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02/L_Index03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Index01/L_Index02/L_Index03/L_Index_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02/L_Thumb03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm/L_Forearm/L_ArmTwist/L_Wrist/L_Thumb01/L_Thumb02/L_Thumb03/L_Thumb_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK/L_ArmTwist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_FK/L_Forearm_FK/L_ArmTwist_FK/L_Wrist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK/L_ArmTwist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/L_Clavical/L_Arm_IK/L_Forearm_IK/L_ArmTwist_IK/L_Wrist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/Neck
+        weight: 1
+      - path: Base/Hip/Spine/Chest/Neck/Head
+        weight: 1
+      - path: Base/Hip/Spine/Chest/Neck/Head/Head_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02/R_Fingers03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Fingers01/R_Fingers02/R_Fingers03/R_Fingers_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02/R_Index03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Index01/R_Index02/R_Index03/R_Index_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02/R_Thumb03
+        weight: 1
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm/R_Forearm/R_ArmTwist/R_Wrist/R_Thumb01/R_Thumb02/R_Thumb03/R_Thumb_end
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK/R_ArmTwist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_FK/R_Forearm_FK/R_ArmTwist_FK/R_Wrist_FK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK/R_ArmTwist_IK
+        weight: 0
+      - path: Base/Hip/Spine/Chest/R_Clavical/R_Arm_IK/R_Forearm_IK/R_ArmTwist_IK/R_Wrist_IK
+        weight: 0
+      - path: lowpolybody_oPP
+        weight: 0
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human:
+    - boneName: Hip
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Thigh
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Thigh
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Calf
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Calf
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Ankle
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Ankle
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Clavical
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Clavical
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Arm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Arm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Forearm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Forearm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Wrist
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Wrist
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Ball
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Ball
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Thumb01
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Thumb02
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Thumb03
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Index01
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Index02
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Index03
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Fingers01
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Fingers02
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Fingers03
+      humanName: Left Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Thumb01
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Thumb02
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Thumb03
+      humanName: Right Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Index01
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Index02
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Index03
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Fingers01
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Fingers02
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Fingers03
+      humanName: Right Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Chest
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: player_v1.1(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: lowpolybody_oPP
+      parentName: player_v1.1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Base
+      parentName: player_v1.1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Hip
+      parentName: Base
+      position: {x: -0, y: 1, z: 0}
+      rotation: {x: -0.7071068, y: 0.7071068, z: 4.3297813e-17, w: -4.3297803e-17}
+      scale: {x: 1.000001, y: 1.000001, z: 1.0000019}
+    - name: Spine
+      parentName: Hip
+      position: {x: -0.19918461, y: 4.422787e-17, z: 5.4163514e-33}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1.0000005, y: 1.0000005, z: 1.000001}
+    - name: Chest
+      parentName: Spine
+      position: {x: -0.24144702, y: 5.3612007e-17, z: 2.9568732e-17}
+      rotation: {x: -0, y: 0.2736597, z: -0.000000059604638, w: 0.96182656}
+      scale: {x: 1.0000005, y: 1.0000006, z: 1.0000012}
+    - name: Neck
+      parentName: Chest
+      position: {x: -0.15099938, y: 6.7057196e-17, z: 1.7763568e-17}
+      rotation: {x: -0.0000000054529607, y: -0.44430035, z: 0.000000115936565, w: 0.89587796}
+      scale: {x: 1.0000008, y: 1.0000001, z: 1.0000006}
+    - name: Head
+      parentName: Neck
+      position: {x: -0.09663038, y: 2.955062e-17, z: 1.3322676e-17}
+      rotation: {x: 0.0000000060710126, y: 0.010962009, z: 0.000000029181068, w: -0.99994}
+      scale: {x: 1.0000004, y: 1.0000006, z: 1.0000008}
+    - name: Head_end
+      parentName: Head
+      position: {x: -0.19948122, y: 6.977626e-17, z: -2.220446e-16}
+      rotation: {x: 0.6938204, y: -0.6938204, z: -0.13643043, w: 0.13643043}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Clavical
+      parentName: Chest
+      position: {x: -0.013665712, y: 0.07758523, z: -0.008461324}
+      rotation: {x: 0.2664772, y: -0.3660144, z: 0.52480465, w: -0.72083527}
+      scale: {x: 0.9999994, y: 1.0000004, z: 1.000001}
+    - name: L_Arm_FK
+      parentName: L_Clavical
+      position: {x: -0.13889867, y: -8.881784e-18, z: -1.0658141e-16}
+      rotation: {x: -0.55777526, y: 0.42322457, z: -0.063089825, w: 0.7111873}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Forearm_FK
+      parentName: L_Arm_FK
+      position: {x: -0.28049964, y: 1.7388868e-16, z: 1.7763568e-17}
+      rotation: {x: -0.3106054, y: 0.21930645, z: 0.050076358, w: 0.9235374}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_ArmTwist_FK
+      parentName: L_Forearm_FK
+      position: {x: -0.12411455, y: 8.8817837e-17, z: 1.02140514e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Wrist_FK
+      parentName: L_ArmTwist_FK
+      position: {x: -0.123225585, y: 0.000000028988548, z: 0.00000003958154}
+      rotation: {x: -0.12744798, y: 0.22164136, z: 0.3585891, w: 0.8978007}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Arm_IK
+      parentName: L_Clavical
+      position: {x: -0.13889867, y: -8.881784e-18, z: -1.0658141e-16}
+      rotation: {x: -0.5817787, y: 0.4252611, z: -0.038112987, w: 0.69226724}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Forearm_IK
+      parentName: L_Arm_IK
+      position: {x: -0.28049964, y: 1.7388868e-16, z: 1.7763568e-17}
+      rotation: {x: -0.3100825, y: 0.22613715, z: 0.05163637, w: 0.9219786}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_ArmTwist_IK
+      parentName: L_Forearm_IK
+      position: {x: -0.12411455, y: 8.8817837e-17, z: 1.02140514e-16}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Wrist_IK
+      parentName: L_ArmTwist_IK
+      position: {x: -0.123225585, y: 0.000000028988548, z: 0.00000003958154}
+      rotation: {x: -0.113362245, y: 0.21706955, z: 0.36272776, w: 0.89914316}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Arm
+      parentName: L_Clavical
+      position: {x: -0.13889867, y: -8.881784e-18, z: -1.0658141e-16}
+      rotation: {x: -0.64230686, y: 0.12768538, z: -0.11370613, w: 0.74713415}
+      scale: {x: 1.0000006, y: 1, z: 0.9999994}
+    - name: L_Forearm
+      parentName: L_Arm
+      position: {x: -0.28049964, y: 1.7388868e-16, z: 1.7763568e-17}
+      rotation: {x: -0.32284123, y: 0.019825215, z: -0.015005734, w: 0.9461265}
+      scale: {x: 1, y: 1.0000011, z: 0.9999994}
+    - name: L_ArmTwist
+      parentName: L_Forearm
+      position: {x: -0.12411455, y: 8.8817837e-17, z: 1.02140514e-16}
+      rotation: {x: -0, y: -0, z: -0, w: 1}
+      scale: {x: 1.0000002, y: 1, z: 1}
+    - name: L_Wrist
+      parentName: L_ArmTwist
+      position: {x: -0.123225585, y: 0.000000028988548, z: 0.00000003958154}
+      rotation: {x: -0.09532731, y: 0.2652325, z: 0.2892087, w: 0.9148349}
+      scale: {x: 0.99999994, y: 1.000001, z: 1.0000002}
+    - name: L_Thumb01
+      parentName: L_Wrist
+      position: {x: -0.07002603, y: 3.1086245e-17, z: 1.7763568e-17}
+      rotation: {x: -0.0016665149, y: 0.0024363084, z: 0.030970275, w: 0.999516}
+      scale: {x: 1.0000014, y: 1.0000011, z: 1.0000007}
+    - name: L_Thumb02
+      parentName: L_Thumb01
+      position: {x: -0.044849508, y: 6.4392934e-17, z: 2.2204459e-17}
+      rotation: {x: -0.004601947, y: -0.024278997, z: -0.025812468, w: 0.99936134}
+      scale: {x: 1.0000005, y: 1.0000002, z: 1.0000002}
+    - name: L_Thumb03
+      parentName: L_Thumb02
+      position: {x: -0.02554828, y: 1.9845236e-17, z: 1.1546319e-16}
+      rotation: {x: -0.009906401, y: 0.036502287, z: 0.0020013538, w: 0.99928254}
+      scale: {x: 1.0000004, y: 1.0000008, z: 1.0000004}
+    - name: L_Thumb_end
+      parentName: L_Thumb03
+      position: {x: -0.018709686, y: 8.645862e-17, z: -7.9936054e-17}
+      rotation: {x: 0.41026378, y: -0.38544714, z: -0.56592655, w: 0.60236317}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Index01
+      parentName: L_Wrist
+      position: {x: -0.11293719, y: 0.041957054, z: -0.02876899}
+      rotation: {x: 0.08425609, y: -0.27727038, z: -0.15866134, w: 0.94384784}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1.0000006}
+    - name: L_Index02
+      parentName: L_Index01
+      position: {x: -0.035938915, y: -1.4432899e-17, z: 1.5543122e-17}
+      rotation: {x: 0.014640077, y: -0.012472592, z: 0.03516572, w: 0.99919647}
+      scale: {x: 1.0000004, y: 0.99999976, z: 0.99999994}
+    - name: L_Index03
+      parentName: L_Index02
+      position: {x: -0.02352518, y: -6.716849e-17, z: -9.7699626e-17}
+      rotation: {x: 0.00042374604, y: -0.0019973584, z: 0.005912973, w: 0.99998045}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000002}
+    - name: L_Index_end
+      parentName: L_Index03
+      position: {x: -0.029338783, y: -1.2906343e-16, z: -9.5479175e-17}
+      rotation: {x: 0.20486978, y: -0.16696909, z: -0.6092961, w: 0.7476015}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Fingers01
+      parentName: L_Wrist
+      position: {x: -0.080817714, y: 0.05436681, z: -0.06324796}
+      rotation: {x: 0.14923336, y: -0.41229483, z: -0.17786568, w: 0.8809689}
+      scale: {x: 1.0000005, y: 1.0000001, z: 1.0000005}
+    - name: L_Fingers02
+      parentName: L_Fingers01
+      position: {x: -0.038346753, y: 1.110223e-18, z: 8.326673e-17}
+      rotation: {x: 0.008885974, y: -0.005866166, z: 0.036717527, w: 0.99926895}
+      scale: {x: 0.99999976, y: 0.9999999, z: 1.0000001}
+    - name: L_Fingers03
+      parentName: L_Fingers02
+      position: {x: -0.022734381, y: -2.4931446e-16, z: -4.440892e-18}
+      rotation: {x: 0.000266199, y: -0.0009280015, z: 0.0061721182, w: 0.9999805}
+      scale: {x: 1.0000001, y: 1, z: 0.99999994}
+    - name: L_Fingers_end
+      parentName: L_Fingers03
+      position: {x: -0.0256152, y: -2.352285e-16, z: 2.2204459e-17}
+      rotation: {x: 0.094989374, y: -0.07203219, z: -0.5999246, w: 0.79112506}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Clavical
+      parentName: Chest
+      position: {x: -0.013661657, y: -0.0775852, z: -0.008458813}
+      rotation: {x: 0.5248044, y: -0.7208355, z: -0.26647645, w: 0.36601478}
+      scale: {x: 1, y: 1, z: 1.0000011}
+    - name: R_Arm_FK
+      parentName: R_Clavical
+      position: {x: 0.13889894, y: -0.00000015796105, z: 0.0000002808787}
+      rotation: {x: -0.55777526, y: 0.42322457, z: -0.063089825, w: 0.7111873}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Forearm_FK
+      parentName: R_Arm_FK
+      position: {x: 0.28049788, y: 0, z: 0.00000015169095}
+      rotation: {x: 0.97245926, y: -0.008390633, z: -0.22479449, w: 0.060992762}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_ArmTwist_FK
+      parentName: R_Forearm_FK
+      position: {x: 0.12411226, y: 0.0000050640724, z: 0.0000011168561}
+      rotation: {x: 0.9659259, y: -0, z: 0, w: 0.25881907}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Wrist_FK
+      parentName: R_ArmTwist_FK
+      position: {x: 0.123226374, y: 0.0000010801774, z: 0.0000010759361}
+      rotation: {x: 0.23364656, y: -0.005999635, z: 0.20797418, w: 0.9498}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Arm_IK
+      parentName: R_Clavical
+      position: {x: 0.13889894, y: -0.00000015796105, z: 0.0000002808787}
+      rotation: {x: -0.5690688, y: 0.4576618, z: -0.07665436, w: 0.678845}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Forearm_IK
+      parentName: R_Arm_IK
+      position: {x: 0.28049788, y: -0.000002116529, z: 0.00000015169095}
+      rotation: {x: 0.9815951, y: -0.0068044737, z: -0.18062563, w: 0.06163755}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_ArmTwist_IK
+      parentName: R_Forearm_IK
+      position: {x: 0.12411226, y: 0.0000050640724, z: 0.0000011168561}
+      rotation: {x: 0.9659259, y: -1.8490897e-16, z: 6.259772e-16, w: 0.25881907}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Wrist_IK
+      parentName: R_ArmTwist_IK
+      position: {x: 0.123226374, y: 0.0000010801774, z: 0.0000010759361}
+      rotation: {x: 0.23364656, y: -0.005999635, z: 0.20797418, w: 0.9498}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Arm
+      parentName: R_Clavical
+      position: {x: 0.13889894, y: -0.00000015796105, z: 0.0000002808787}
+      rotation: {x: 0.6423071, y: -0.12768847, z: 0.11370438, w: -0.7471336}
+      scale: {x: 1.0000002, y: 0.9999999, z: 0.999999}
+    - name: R_Forearm
+      parentName: R_Arm
+      position: {x: 0.28049788, y: -0.000002116529, z: 0.00000015169095}
+      rotation: {x: -0.9974454, y: 0.01962244, z: 0.015264954, w: -0.066967465}
+      scale: {x: 1.0000005, y: 1.0000005, z: 0.9999997}
+    - name: R_ArmTwist
+      parentName: R_Forearm
+      position: {x: 0.12411226, y: 0.0000050640724, z: 0.0000011168561}
+      rotation: {x: 0.9659258, y: 0.000000087544315, z: 0.00000004470348, w: 0.25881904}
+      scale: {x: 1, y: 1.0000023, z: 1.0000013}
+    - name: R_Wrist
+      parentName: R_ArmTwist
+      position: {x: 0.123226374, y: 0.0000010801774, z: 0.0000010759361}
+      rotation: {x: 0.24013314, y: 0.011213886, z: 0.12122679, w: 0.96307546}
+      scale: {x: 1.0000002, y: 1.0000004, z: 1.000001}
+    - name: R_Thumb01
+      parentName: R_Wrist
+      position: {x: 0.053642035, y: -0.0000007188959, z: -0.045012362}
+      rotation: {x: 0.27407524, y: -0.33678237, z: -0.13041379, w: -0.89132077}
+      scale: {x: 1.0000007, y: 1.0000011, z: 0.99999976}
+    - name: R_Thumb02
+      parentName: R_Thumb01
+      position: {x: 0.044849157, y: 0.0000006430664, z: -0.000000979044}
+      rotation: {x: -0.22080755, y: -0.017986676, z: -0.030402377, w: 0.9746775}
+      scale: {x: 1.000001, y: 1.0000004, z: 1.0000008}
+    - name: R_Thumb03
+      parentName: R_Thumb02
+      position: {x: 0.025554009, y: -0.0000029849652, z: 0.000006471224}
+      rotation: {x: 0.07722372, y: 0.03326916, z: 0.014230503, w: 0.9963569}
+      scale: {x: 1.0000002, y: 1.0000005, z: 1.0000001}
+    - name: R_Thumb_end
+      parentName: R_Thumb03
+      position: {x: 0.018706517, y: 0.0000018095304, z: -0.000007897361}
+      rotation: {x: 0.48537803, y: -0.30828136, z: -0.6113959, w: 0.5436597}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Index01
+      parentName: R_Wrist
+      position: {x: 0.11713379, y: -0.017866228, z: -0.036105905}
+      rotation: {x: -0.7054935, y: 0.016489564, z: 0.017316522, w: 0.7083129}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1.0000005}
+    - name: R_Index02
+      parentName: R_Index01
+      position: {x: 0.035937693, y: 0.000000634585, z: -0.00000048057154}
+      rotation: {x: -0.028954677, y: -0.037215352, z: 0.0019737328, w: 0.9988858}
+      scale: {x: 0.9999997, y: 1.0000004, z: 1.0000014}
+    - name: R_Index03
+      parentName: R_Index02
+      position: {x: 0.023529597, y: -0.0000023710688, z: 0.0000014337568}
+      rotation: {x: 0.00042382255, y: -0.006239742, z: 0.00014554895, w: 0.9999805}
+      scale: {x: 1.0000006, y: 1.0000004, z: 1.0000007}
+    - name: R_Index_end
+      parentName: R_Index03
+      position: {x: 0.029337794, y: 0.0000005657918, z: -0.000000021256469}
+      rotation: {x: 0.5966261, y: 0.21270484, z: -0.5948757, w: 0.4948908}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Fingers01
+      parentName: R_Wrist
+      position: {x: 0.11526043, y: -0.008253875, z: 0.011629349}
+      rotation: {x: -0.7886208, y: -0.08212462, z: -0.08346412, w: 0.6036277}
+      scale: {x: 0.99999994, y: 1.0000007, z: 1.0000006}
+    - name: R_Fingers02
+      parentName: R_Fingers01
+      position: {x: 0.038341746, y: 0.0000017419661, z: -0.0000029722082}
+      rotation: {x: 0.008887439, y: -0.036644924, z: -0.0058220397, w: 0.9992719}
+      scale: {x: 0.9999995, y: 1.0000002, z: 1.0000006}
+    - name: R_Fingers03
+      parentName: R_Fingers02
+      position: {x: 0.022740211, y: -0.0000014637249, z: 0.000001268156}
+      rotation: {x: -0.043352716, y: -0.0061258227, z: -0.001196329, w: 0.99904037}
+      scale: {x: 1.0000001, y: 0.99999976, z: 1.0000001}
+    - name: R_Fingers_end
+      parentName: R_Fingers03
+      position: {x: 0.025611252, y: 0.0000011012896, z: -0.00000093690954}
+      rotation: {x: 0.6474525, y: 0.39364663, z: -0.45841092, w: 0.46444285}
+      scale: {x: 1, y: 1, z: 1}
+    - name: HipSway
+      parentName: Hip
+      position: {x: 2.842171e-16, y: -1.2621774e-31, z: -0}
+      rotation: {x: 0.5108455, y: -0.8558372, z: 0.041573826, w: -0.069650084}
+      scale: {x: 1.0000001, y: 0.9999996, z: 0.9999996}
+    - name: L_Thigh_FK
+      parentName: HipSway
+      position: {x: -0.112146854, y: 3.2890356e-17, z: 4.3298696e-17}
+      rotation: {x: 0.86026263, y: 0.5033575, z: -0.06928468, w: 0.04217999}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Calf_FK
+      parentName: L_Thigh_FK
+      position: {x: -0.42796737, y: 3.216351e-16, z: 1.3830797e-17}
+      rotation: {x: 0.9953948, y: -0.00015960942, z: -0.09584562, w: -0.0016576073}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Ankle_FK
+      parentName: L_Calf_FK
+      position: {x: -0.3972415, y: 1.5220463e-16, z: -2.5757173e-16}
+      rotation: {x: 0.88413835, y: 0.0020898946, z: -0.46716958, w: 0.006900014}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Ball_FK
+      parentName: L_Ankle_FK
+      position: {x: -0.17243633, y: 1.3625524e-17, z: -2.871642e-17}
+      rotation: {x: -0.0023962357, y: -0.37615234, z: -0.0055914824, w: 0.92653793}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Foot_end_FK
+      parentName: L_Ball_FK
+      position: {x: -0.06752743, y: -2.860005e-17, z: 5.08085e-18}
+      rotation: {x: 0.5048679, y: 0.5046985, z: -0.4950875, w: -0.49525368}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Thigh_IK
+      parentName: HipSway
+      position: {x: -0.112146854, y: 3.2890356e-17, z: 4.3298696e-17}
+      rotation: {x: 0.86026263, y: 0.50335747, z: -0.0692846, w: 0.042180102}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Calf_IK
+      parentName: L_Thigh_IK
+      position: {x: -0.42796737, y: 3.216351e-16, z: 1.3830797e-17}
+      rotation: {x: 0.9953948, y: -0.00015960942, z: -0.09584562, w: -0.0016576073}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Ankle_IK
+      parentName: L_Calf_IK
+      position: {x: -0.3972415, y: 1.5220463e-16, z: -2.5757173e-16}
+      rotation: {x: 0.88413835, y: 0.0020898946, z: -0.46716958, w: 0.006900014}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Ball_IK
+      parentName: L_Ankle_IK
+      position: {x: -0.17243633, y: 1.3625524e-17, z: -2.871642e-17}
+      rotation: {x: -0.0023962262, y: -0.37615234, z: -0.005591478, w: 0.92653793}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Foot_end_IK
+      parentName: L_Ball_IK
+      position: {x: -0.06752743, y: -2.860005e-17, z: 5.08085e-18}
+      rotation: {x: 0.5048679, y: 0.5046985, z: -0.4950875, w: -0.49525368}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Thigh_FK
+      parentName: HipSway
+      position: {x: 0.061622318, y: -0.09369932, z: -0.00000006517101}
+      rotation: {x: -0.07001023, y: -0.04096444, z: -0.8513468, w: 0.5182945}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Calf_FK
+      parentName: R_Thigh_FK
+      position: {x: 0.42796817, y: 0.00000012533295, z: 6.2394533e-16}
+      rotation: {x: 0.9953948, y: -0.00015960942, z: -0.09584562, w: -0.0016576073}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Ankle_FK
+      parentName: R_Calf_FK
+      position: {x: 0.39724082, y: 0.00000043343323, z: 0.00000012531736}
+      rotation: {x: 0.88413835, y: 0.0020898946, z: -0.46716958, w: 0.006900014}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Ball_FK
+      parentName: R_Ankle_FK
+      position: {x: 0.17243654, y: -0.000000027328426, z: -0.00000020797714}
+      rotation: {x: -0.0023962357, y: -0.37615234, z: -0.0055914824, w: 0.92653793}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Foot_end_FK
+      parentName: R_Ball_FK
+      position: {x: 0.06752698, y: 0.00000034056737, z: -0.000000001976276}
+      rotation: {x: 0.5048679, y: 0.5046985, z: -0.4950875, w: -0.49525368}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Thigh_IK
+      parentName: HipSway
+      position: {x: 0.061622318, y: -0.09369932, z: -0.00000006517101}
+      rotation: {x: -0.07001023, y: -0.04096444, z: -0.8513468, w: 0.5182945}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Calf_IK
+      parentName: R_Thigh_IK
+      position: {x: 0.42796817, y: 0.00000012533295, z: 6.2394533e-16}
+      rotation: {x: 0.9953948, y: -0.00015960942, z: -0.09584562, w: -0.0016576073}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Ankle_IK
+      parentName: R_Calf_IK
+      position: {x: 0.39724082, y: 0.00000043343323, z: 0.00000012531736}
+      rotation: {x: 0.88413835, y: 0.0020898946, z: -0.46716958, w: 0.006900014}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Ball_IK
+      parentName: R_Ankle_IK
+      position: {x: 0.17243654, y: -0.000000027328426, z: -0.00000020797714}
+      rotation: {x: -0.0023962357, y: -0.37615234, z: -0.0055914824, w: 0.92653793}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Foot_end_IK
+      parentName: R_Ball_IK
+      position: {x: 0.06752698, y: 0.00000034056737, z: -0.000000001976276}
+      rotation: {x: 0.5048679, y: 0.5046985, z: -0.4950875, w: -0.49525368}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Thigh
+      parentName: HipSway
+      position: {x: -0.112146854, y: 3.2890356e-17, z: 4.3298696e-17}
+      rotation: {x: 0.86026263, y: 0.5033575, z: -0.06928464, w: 0.042180054}
+      scale: {x: 1.0000006, y: 1.0000007, z: 1.0000014}
+    - name: L_Calf
+      parentName: L_Thigh
+      position: {x: -0.42796737, y: 3.216351e-16, z: 1.3830797e-17}
+      rotation: {x: -0.9953948, y: 0.00015968083, z: 0.09584561, w: 0.0016576222}
+      scale: {x: 1.0000005, y: 1.0000004, z: 1.0000001}
+    - name: L_Ankle
+      parentName: L_Calf
+      position: {x: -0.3972415, y: 1.5220463e-16, z: -2.5757173e-16}
+      rotation: {x: 0.8841384, y: 0.0020899265, z: -0.4671696, w: 0.00690003}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1}
+    - name: L_Ball
+      parentName: L_Ankle
+      position: {x: -0.17243633, y: 1.3625524e-17, z: -2.871642e-17}
+      rotation: {x: -0.002396322, y: -0.3761524, z: -0.005591512, w: 0.9265379}
+      scale: {x: 1, y: 1.0000001, z: 1.000001}
+    - name: L_Foot_end
+      parentName: L_Ball
+      position: {x: -0.06752743, y: -2.860005e-17, z: 5.08085e-18}
+      rotation: {x: 0.5048679, y: 0.5046985, z: -0.4950875, w: -0.49525368}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Thigh
+      parentName: HipSway
+      position: {x: 0.061622318, y: -0.09369932, z: -0.00000006517101}
+      rotation: {x: -0.07001024, y: -0.04096444, z: -0.85134673, w: 0.5182946}
+      scale: {x: 1.0000005, y: 1.0000002, z: 1}
+    - name: R_Calf
+      parentName: R_Thigh
+      position: {x: 0.42796817, y: 0.00000012533295, z: 5.9285906e-16}
+      rotation: {x: 0.9953948, y: -0.00015964264, z: -0.09584563, w: -0.0016576198}
+      scale: {x: 1.0000008, y: 1.0000006, z: 1.0000011}
+    - name: R_Ankle
+      parentName: R_Calf
+      position: {x: 0.39724082, y: 0.00000043343323, z: 0.00000012531736}
+      rotation: {x: -0.8841384, y: -0.002089898, z: 0.46716955, w: -0.00690003}
+      scale: {x: 1.0000005, y: 1.0000005, z: 1.0000004}
+    - name: R_Ball
+      parentName: R_Ankle
+      position: {x: 0.17243654, y: -0.000000027328426, z: -0.00000020797714}
+      rotation: {x: -0.002396288, y: -0.37615246, z: -0.005591517, w: 0.9265378}
+      scale: {x: 1.0000007, y: 1.000001, z: 1.000001}
+    - name: R_Foot_end
+      parentName: R_Ball
+      position: {x: 0.06752698, y: 0.00000034056737, z: -0.0000000019762763}
+      rotation: {x: 0.5048679, y: 0.5046985, z: -0.4950875, w: -0.49525368}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
