@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Stabilize : MonoBehaviour {
 
-    public float strength_ = 1f, rotationStrength_ = 10f;
+    public Vector3 
+        strength_,
+        rotationStrength_;
 
     void LateUpdate()
     {
@@ -42,11 +44,16 @@ public class Stabilize : MonoBehaviour {
         return x;
     }
 
+    Vector3 shrink(Vector3 x, Vector3 y, bool isAngle = false)
+    {
+        x.x = shrink(x.x, y.x, isAngle);
+        x.y = shrink(x.y, y.y, isAngle);
+        x.z = shrink(x.z, y.z, isAngle);
+        return x;
+    }
+
     Vector3 shrink(Vector3 x, float y, bool isAngle = false)
     {
-        x.x = shrink(x.x, y, isAngle);
-        x.y = shrink(x.y, y, isAngle);
-        x.z = shrink(x.z, y, isAngle);
-        return x;
+        return shrink(x, Vector3.one * y, isAngle);
     }
 }
