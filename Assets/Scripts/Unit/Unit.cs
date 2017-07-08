@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -64,7 +64,7 @@ public class Unit : MonoBehaviour {
     public float MoveSpeed
     {
         get {
-            return Mathf.Max(attributes_[(int)AttributeType.MoveSpeed].value(), specialMoveSpeed_);
+            return attributes_[(int)AttributeType.MoveSpeed].value();
         }
     }
 
@@ -72,6 +72,15 @@ public class Unit : MonoBehaviour {
     {
         get { return attributes_[(int)AttributeType.ViewRange].value(); }
     }
+    #endregion
+
+    #region other properties
+
+    public bool isMoving
+    {
+        get { return isMoving_; }
+    }
+
     #endregion
 
     float rotationSpeed_;
@@ -83,7 +92,6 @@ public class Unit : MonoBehaviour {
 
     //pathfinding
     Vector3 moveDest_;
-    float specialMoveSpeed_;
     bool isMoving_;
 
     Quaternion rotationTarget_;
@@ -115,6 +123,10 @@ public class Unit : MonoBehaviour {
 
     //controller
     public UnitController activeController_;
+
+    //events
+    //cast event
+    public event EventHandler<CastEventArgs> castEvent;
 
     void Awake () {
         damageReceived_ = 0;
@@ -176,6 +188,7 @@ public class Unit : MonoBehaviour {
                 {
                     activeSkill_.cast(this, castTarget_);
                     isCasting_ = false;
+                    if(castEvent != null) castEvent(this, new CastEventArgs(activeSkill_));
                 }
             }
             else
@@ -183,6 +196,7 @@ public class Unit : MonoBehaviour {
                 resetCast();
             }
         }
+        //Stun
         else if (isStunned_)
         {
             stunTime_ -= dTime;
@@ -207,12 +221,11 @@ public class Unit : MonoBehaviour {
         }
     }
 
-    public void moveTo(Vector3 moveDest, float specialSpeed = 0)
+    public void moveTo(Vector3 moveDest)
     {
         if (moveDest != transform.position)
         {
             moveDest_ = moveDest;
-            specialMoveSpeed_ = specialSpeed;
             rotationTarget_ = Quaternion.LookRotation(moveDest_ - transform.position);
             isMoving_ = true;
             isRotating_ = true;
