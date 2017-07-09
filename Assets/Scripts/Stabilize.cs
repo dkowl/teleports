@@ -12,7 +12,6 @@ public class Stabilize : MonoBehaviour {
     {
         gameObject.transform.localPosition = shrink(gameObject.transform.localPosition, strength_ * Time.deltaTime);
         gameObject.transform.localRotation = Quaternion.Euler(shrink(gameObject.transform.localRotation.eulerAngles, rotationStrength_ * Time.deltaTime, true));
-        print(gameObject.transform.localEulerAngles.y);
     }
 
     //shrinks x by y
