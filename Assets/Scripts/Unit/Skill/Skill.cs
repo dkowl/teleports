@@ -65,6 +65,8 @@ public abstract class Skill : MonoBehaviour {
     {
         get { return currentCooldown_; }
     }
+
+    public SkillGraphics graphics_;
     
     virtual public void Update()
     {
