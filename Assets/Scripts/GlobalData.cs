@@ -5,8 +5,16 @@ public class GlobalData : MonoBehaviour {
 
     public static GlobalData instance;
 
+    public AccountState accountData_;
     public PlayerData playerData_;
     public TeleportData teleportData_;
+
+    //Properties
+    public static AccountState Account
+    {
+        get { return instance.accountData_; }
+        set { instance.accountData_ = value; }
+    }
 
     //making sure only one instance exists
     void Awake()

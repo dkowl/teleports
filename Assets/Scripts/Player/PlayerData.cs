@@ -5,8 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "playerData", menuName = "Custom/PlayerData", order = 0)]
 public class PlayerData : ScriptableObject {
 
+    static int probeLength_ = 5;
+
     public string name_;
     int xp_, startXp_;
+    int level_;
+    int rankPoints_;
+
     public int xp
     {
         set {
@@ -40,8 +45,6 @@ public class PlayerData : ScriptableObject {
             return XpLevels.currentXp(xp_);
         }
     }
-
-    int level_;
     public int level
     {
         get {
@@ -49,9 +52,6 @@ public class PlayerData : ScriptableObject {
             return level_;
         }
     }
-
-    static int probeLength_ = 5;
-    int rankPoints_;
     public int RankPoints
     {
         get { return rankPoints_; }
