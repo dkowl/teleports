@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Loader : MonoBehaviour {
 
@@ -23,7 +24,6 @@ public class Loader : MonoBehaviour {
             if (accountManager_.exists(accKey))
             {
                 GlobalData.Account = accountManager_.get(accKey);
-                print("loading remembered acc " + GlobalData.Account.Login);
                 loaded = true;
             }
         }        
@@ -35,5 +35,8 @@ public class Loader : MonoBehaviour {
             PlayerPrefs.SetString(PREF_KEY, account.Login);
             GlobalData.Account = account;
         }
+
+        //go to CharacterSelect
+        SceneManager.LoadScene("CharacterSelect");
     }
 }

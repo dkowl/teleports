@@ -5,6 +5,8 @@ public class GlobalData : MonoBehaviour {
 
     public static GlobalData instance;
 
+    public GameData gameData_;
+
     public AccountState accountData_;
     public PlayerData playerData_;
     public TeleportData teleportData_;
