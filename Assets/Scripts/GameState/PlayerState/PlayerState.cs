@@ -12,10 +12,17 @@ public class PlayerState {
         xp_,
         rankPoints_;
 
+    SkillPointManager skillPointManager_;
+
     //dictionary key lists
     List<string>
         skills_,
         perks_,
         items_;
+
+    PlayerState()
+    {
+        skillPointManager_ = new SkillPointManager(this);
+    }
 	
 }

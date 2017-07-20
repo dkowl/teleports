@@ -16,7 +16,7 @@ public class AccountState{
     public AccountState()
     {
         login_ = "default";
-        characterSlotLimit_ = 3;
+        characterSlotLimit_ = 5;
         characters_ = new GameState[characterSlotLimit_];
     }
 }
