@@ -21,6 +21,4 @@ public class SkillTreeSlot : MonoBehaviour
 
         pointsInvested_ = 0;
     }
-
-    public void addPoint(int branchID, int ) 
 }
