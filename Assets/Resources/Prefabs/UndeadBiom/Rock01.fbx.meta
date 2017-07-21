@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 6ac0f2d45f0c2c847bce0a281a9c6ba9
-timeCreated: 1499615382
+guid: e6956d9db16aec249b42131ae80dfd8d
+timeCreated: 1500650929
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: PM3D_Cylinder3D1
+    4300000: Rock01
   materials:
     importMaterials: 1
     materialName: 0

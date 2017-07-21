@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //represents a slot to put a skill tree in
-public class SkillTreeSlot : MonoBehaviour {
+public class SkillTreeSlot : MonoBehaviour
+{
 
     private bool
         isEmpty_,
@@ -21,5 +22,5 @@ public class SkillTreeSlot : MonoBehaviour {
         pointsInvested_ = 0;
     }
 
-    public void addPoint(int branchID, int )
+    public void addPoint(int branchID, int ) 
 }
