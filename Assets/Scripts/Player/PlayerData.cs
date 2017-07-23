@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "playerData", menuName = "Custom/PlayerData", order = 0)]
-public class PlayerData : ScriptableObject {
+public class PlayerDataa : ScriptableObject {
 
     static int probeLength_ = 5;
 

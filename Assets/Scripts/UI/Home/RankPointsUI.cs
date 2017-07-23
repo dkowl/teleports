@@ -9,6 +9,6 @@ public class RankPointsUI : MonoBehaviour {
 
     void Start()
     {
-        text_.text = "Rank points: " + GlobalData.instance.playerData_.RankPoints.ToString();
+        text_.text = "Rank points: " + MainData.RankPoints.ToString();
     }
 }

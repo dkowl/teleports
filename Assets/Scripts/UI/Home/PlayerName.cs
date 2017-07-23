@@ -8,6 +8,6 @@ public class PlayerName : MonoBehaviour {
 
 	void Start () {
         Text text = gameObject.GetComponent<Text>();
-        text.text = GlobalData.instance.playerData_.name_;
+        text.text = MainData.PlayerName;
 	}
 }

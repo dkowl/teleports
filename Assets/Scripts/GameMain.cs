@@ -94,11 +94,8 @@ public class GameMain : MonoBehaviour {
 
     public void backToHome()
     {
-        GlobalData.instance.savePlayer(player_);
-        GlobalData.instance.playerData_.startXp = startXp_;
-        GlobalData.instance.playerData_.updateRankPoints(Score);
+        MainData.savePlayer(player_);
         unpauseGame();
-        XpProgress.startAnimation();
         SceneManager.LoadScene("Home");
     }
 }

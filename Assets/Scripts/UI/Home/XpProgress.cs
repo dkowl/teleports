@@ -25,8 +25,8 @@ public class XpProgress : MonoBehaviour {
     }
     
     void Start () {
-        xp_ = GlobalData.instance.playerData_.startXp;
-        targetXp_ = GlobalData.instance.playerData_.xp;
+        xp_ = MainData.Xp;
+        targetXp_ = MainData.Xp;
         updateUI();
     }
 	

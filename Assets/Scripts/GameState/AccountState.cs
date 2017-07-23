@@ -6,7 +6,6 @@ public class AccountState{
 
     private string login_;
     private int characterSlotLimit_;
-    private GameState[] characters_;
 
     public string Login
     {
@@ -17,6 +16,5 @@ public class AccountState{
     {
         login_ = "default";
         characterSlotLimit_ = 5;
-        characters_ = new GameState[characterSlotLimit_];
     }
 }

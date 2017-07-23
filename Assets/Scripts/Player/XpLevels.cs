@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class XpLevels {
+public static class XpLevels {
 
     static int[] xpLevels_ = new int[] {
         0,
