@@ -23,8 +23,7 @@ public class CameraController : MonoBehaviour {
             cameraPos.x = playerPos.x;
             cameraPos.y = cameraHeight_;
             cameraPos.z = playerPos.z;
-
-            Camera camera = gameObject.GetComponent<Camera>();
+            
             float angle = 90 - transform.rotation.eulerAngles.x;
             cameraPos.z -= cameraHeight_ * Mathf.Tan(Mathf.Deg2Rad * angle);
 

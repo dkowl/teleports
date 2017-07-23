@@ -25,7 +25,7 @@ public class Menu : MonoBehaviour
                 if (useMainCanvas)
                 {
                     instantiatedObject = Instantiate(Resources.Load(MenuController.MainCanvasPrefabPath), transform) as GameObject;
-                    GameObject temp = Instantiate(Resources.Load(prefabPath), instantiatedObject.transform) as GameObject;
+                    Instantiate(Resources.Load(prefabPath), instantiatedObject.transform);
                 }
                 else
                 {

@@ -33,7 +33,6 @@ public class SnapContent : MonoBehaviour {
         {
             Vector3 newPos = content_.transform.localPosition;
             float distance = Mathf.Abs(newPos.x - closestMult);
-            float distanceSigned = newPos.x - closestMult;
              newPos.x = Mathf.Lerp(posX, closestMult, Time.deltaTime * Mathf.Min(maxSpeed_ / distance, snapStrength_ * tippingPoint_ / (distance * distance)));
             //newPos.x = Mathf.Lerp(posX, closestMult, Time.deltaTime * snapStrength_);
             content_.transform.localPosition = newPos;

@@ -41,7 +41,6 @@ public class Carousel : MonoBehaviour {
     //sets content position to pos
     void enforcePosition(Vector2 pos)
     {
-        Vector2 newPos = pos;
         pos.x *= -1;
         content_.anchoredPosition = pos;
     }
