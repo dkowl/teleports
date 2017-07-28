@@ -11,6 +11,7 @@ public class MainData : MonoBehaviour {
     //inspector fields
     public SaveData saveData;
     public GameData gameData;
+    public Stylesheet stylesheet;
 
     //unity event functions
 	void Awake()
@@ -27,6 +28,11 @@ public class MainData : MonoBehaviour {
     public static PlayerData CurrentPlayerData
     {
         get { return instance.saveData.currentPlayerData(); }
+    }
+
+    public static Stylesheet CurrentStylesheet
+    {
+        get { return instance.stylesheet; }
     }
 
     public static string PlayerName
