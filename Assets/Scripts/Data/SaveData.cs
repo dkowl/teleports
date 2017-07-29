@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[CreateAssetMenu(fileName = "saveData", menuName = "Custom/SaveData", order = 6)]
-public class SaveData : ScriptableObject {
-
-    public string accountName;
-    public byte characterSlotLimit;
-    public byte currentPlayerDataID;
-    public PlayerData[] playerData;
-
-    public PlayerData currentPlayerData()
+public partial class MainData : MonoBehaviour
+{
+    [CreateAssetMenu(fileName = "saveData", menuName = "Custom/SaveData", order = 6)]
+    [System.Serializable]
+    private partial class SaveData : ScriptableObject
     {
-        return playerData[currentPlayerDataID];
+
+        private string accountName;
+        private byte characterSlotLimit;
+        private byte currentPlayerDataID;
+        private PlayerData[] playerData;
+
+        private PlayerData currentPlayerData()
+        {
+            return playerData[currentPlayerDataID];
+        }
     }
 }

@@ -8,7 +8,7 @@ public class GlobalData : MonoBehaviour {
     public GameData gameData_;
 
     public AccountState accountData_;
-    public PlayerData playerData_;
+    public IPlayerData playerData_;
     public TeleportData teleportData_;
 
     //Properties
@@ -35,12 +35,12 @@ public class GlobalData : MonoBehaviour {
 
     public void savePlayer(GameObject player)
     {
-        playerData_.xp = player.GetComponent<Xp>().xp;
+        playerData_.Xp = player.GetComponent<Xp>().xp;
     }
 
     public void loadPlayer(GameObject player)
     {
-        player.GetComponent<Xp>().xp = playerData_.xp;
+        player.GetComponent<Xp>().xp = playerData_.Xp;
     }
 
 }

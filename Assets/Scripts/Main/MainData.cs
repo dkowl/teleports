@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 //singleton managing all the static data
-public class MainData : MonoBehaviour {
+public partial class MainData : MonoBehaviour {
 
     //singleton instance
     private static MainData instance;
 
     //inspector fields
-    public SaveData saveData;
-    public GameData gameData;
+    [SerializeField]
+    private SaveData saveData;
+    [SerializeField]
+    private GameData gameData;
+    [SerializeField]
     public Stylesheet stylesheet;
 
     //unity event functions
@@ -24,8 +28,14 @@ public class MainData : MonoBehaviour {
         instance = null;
     }
 
+    //editor only
+    void OnEnable()
+    {
+        if(Application.isEditor) Awake();
+    }
+
     //properties
-    public static PlayerData CurrentPlayerData
+    public static IPlayerData CurrentPlayerData
     {
         get { return instance.saveData.currentPlayerData(); }
     }
@@ -37,17 +47,17 @@ public class MainData : MonoBehaviour {
 
     public static string PlayerName
     {
-        get { return CurrentPlayerData.name; }
+        get { return CurrentPlayerData.CharacterName; }
     }
 
     public static int RankPoints
     {
-        get { return CurrentPlayerData.rankPoints; }
+        get { return CurrentPlayerData.RankPoints; }
     }
 
     public static int Xp
     {
-        get { return CurrentPlayerData.xp; }
+        get { return CurrentPlayerData.Xp; }
     }
 
 
