@@ -10,4 +10,6 @@ public interface IPlayerData {
     int RankPoints { get; }
 
     void AddXp(int xpToAdd);
+    SkillTreeSlot GetSkillTreeSlot(int id);
+    int GetSkillTreeSlotLevel(int id);
 }

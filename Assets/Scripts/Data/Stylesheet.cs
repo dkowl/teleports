@@ -20,13 +20,31 @@ public class Stylesheet : ScriptableObject
         Default
     }
 
+    public enum ColorPreset
+    {
+        Gray1,
+        Gray2,
+        Gray3,
+        Gray4,
+        Gray5,
+        Black
+    }
+
     public int titleFontSize;
     public int bigFontSize;
     public int mediumBigFontSize;
     public int mediumFontSize;
     public int mediumSmallFontSize;
     public int smallFontSize;
+
     public Color defaultTextColor;
+
+    public Color gray1;
+    public Color gray2;
+    public Color gray3;
+    public Color gray4;
+    public Color gray5;
+    public Color black;
 
     public int GetFontSize(FontSize fontSize)
     {
@@ -57,6 +75,27 @@ public class Stylesheet : ScriptableObject
                 return defaultTextColor;
             default:
                 return defaultTextColor;
+        }
+    }
+
+    public Color GetColorPreset(ColorPreset colorPreset)
+    {
+        switch (colorPreset)
+        {
+            case ColorPreset.Gray1:
+                return gray1;
+            case ColorPreset.Gray2:
+                return gray2;
+            case ColorPreset.Gray3:
+                return gray3;
+            case ColorPreset.Gray4:
+                return gray4;
+            case ColorPreset.Gray5:
+                return gray5;
+            case ColorPreset.Black:
+                return black;
+            default:
+                return Color.white;
         }
     }
 }

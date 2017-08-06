@@ -4,22 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [ExecuteInEditMode]
-public class CharacterSelectMenu : MonoBehaviour {
+public class CharacterSelectMenu : LoadableBehaviour {
 
     public string selectCharacterString, newCharacterString;
     public Text titleText;
     public Text playerNameText;
     public Text playerLevelText;
 
-    void OnEnable()
-    {
-        if (Application.isEditor)
-        {
-            LoadData();
-        }
-    }
-
-    void LoadData()
+    public override void LoadData()
     {
         Stylesheet stylesheet = MainData.CurrentStylesheet;
 
