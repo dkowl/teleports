@@ -1,37 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [System.Serializable]
 public class Attribute
 {
-    public float raw_;
-    public float bonus_, multiplier_;
+    [FormerlySerializedAs("raw_")] [SerializeField] private float raw;
+    [FormerlySerializedAs("bonus_")] [SerializeField] private float bonus;
+    [FormerlySerializedAs("multiplier_")] [SerializeField] private float multiplier;
 
-    public Attribute()
+    public Attribute() : this(0)
     {
-        bonus_ = 0;
-        multiplier_ = 1;
     }
 
-    public void addBonus(float bonus)
+    public Attribute(float raw)
     {
-        bonus_ += bonus;
+        this.raw = raw;
+        bonus = 0;
+        multiplier = 1;
     }
 
-    public void addMultiplier(float multiplier)
+    public void AddBonus(float bonus)
     {
-        multiplier_ *= multiplier;
+        this.bonus += bonus;
     }
 
-    public void modify(float bonus, float multiplier)
+    public void AddMultiplier(float multiplier)
     {
-        addBonus(bonus);
-        addMultiplier(multiplier);
+        this.multiplier *= multiplier;
     }
 
-    public float value()
+    public void Modify(float bonus, float multiplier)
     {
-        return (raw_ + bonus_) * multiplier_;
+        AddBonus(bonus);
+        AddMultiplier(multiplier);
+    }
+
+    public float Value()
+    {
+        return (raw + bonus) * multiplier;
     }
 };

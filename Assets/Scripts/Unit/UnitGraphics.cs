@@ -25,7 +25,7 @@ public class UnitGraphics : MonoBehaviour {
     {
         GameObject obj = Instantiate(Resources.Load("Prefabs/Unit/FloatingDamage"), gameObject.transform) as GameObject;
         obj.GetComponent<FloatingDamage>().setText(damage.ToString());
-        obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().height_, 0);
+        obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().height, 0);
     }
 
     public void showXp(int xp)
@@ -33,7 +33,7 @@ public class UnitGraphics : MonoBehaviour {
         GameObject obj = Instantiate(Resources.Load("Prefabs/Unit/FloatingDamage"), gameObject.transform) as GameObject;
         obj.GetComponent<FloatingDamage>().setText(xp.ToString() + " XP");
         obj.GetComponent<FloatingDamage>().setColor(Color.yellow);
-        obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().height_, 0);
+        obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().height, 0);
     }
 
     public void showMessage(string message)
@@ -41,6 +41,6 @@ public class UnitGraphics : MonoBehaviour {
         GameObject obj = Instantiate(Resources.Load("Prefabs/Unit/FloatingDamage"), gameObject.transform) as GameObject;
         obj.GetComponent<FloatingDamage>().setText(message);
         obj.GetComponent<FloatingDamage>().setColor(Color.yellow);
-        obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().height_, 0);
+        obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().height, 0);
     }
 }

@@ -15,7 +15,7 @@ public partial class MainData : MonoBehaviour {
     [SerializeField]
     private GameData gameData;
     [SerializeField]
-    public Stylesheet stylesheet;
+    private Stylesheet stylesheet;
 
     //unity event functions
 	void Awake()
@@ -35,6 +35,7 @@ public partial class MainData : MonoBehaviour {
     }
 
     //properties
+
     public static IPlayerData CurrentPlayerData
     {
         get { return instance.saveData.currentPlayerData(); }

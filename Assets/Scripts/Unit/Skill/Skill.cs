@@ -48,15 +48,15 @@ public abstract class Skill : MonoBehaviour {
     #region attribute properties
     public float Reach
     {
-        get { return reach_.value(); }
+        get { return reach_.Value(); }
     }
     public float CastTime
     {
-        get { return castTime_.value(); }
+        get { return castTime_.Value(); }
     }
     public float Cooldown
     {
-        get { return cooldown_.value(); }
+        get { return cooldown_.Value(); }
     }
     #endregion
 
@@ -76,7 +76,7 @@ public abstract class Skill : MonoBehaviour {
 
     public void cast(Unit caster, TargetInfo target)
     {
-        currentCooldown_ = cooldown_.value();
+        currentCooldown_ = cooldown_.Value();
 
         foreach(Perk perk in caster.perks_)
         {

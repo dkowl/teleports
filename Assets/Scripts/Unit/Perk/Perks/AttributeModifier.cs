@@ -19,7 +19,7 @@ public class AttributeModifier : Perk {
 
         foreach(AttributeModificationSettings ams in attributeModificationSettings_)
         {
-            target.attributes_[(int)ams.type_].modify(ams.bonus_, ams.multiplier_);
+            target.attributes[(int)ams.type_].Modify(ams.bonus_, ams.multiplier_);
         }
     }
 
@@ -29,7 +29,7 @@ public class AttributeModifier : Perk {
 
         foreach (AttributeModificationSettings ams in attributeModificationSettings_)
         {
-            target.attributes_[(int)ams.type_].modify(-ams.bonus_, 1/ams.multiplier_);
+            target.attributes[(int)ams.type_].Modify(-ams.bonus_, 1/ams.multiplier_);
         }
     }
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour {
 
-    public UnitData unitData_;
+    public IUnitData unitData;
 
-    string name_;
-    public int level_;
+    string unitName;
+    public int level;
 
     public enum AttributeType
     {
@@ -23,54 +23,54 @@ public class Unit : MonoBehaviour {
         Count
     }
 
-    public Attribute[] attributes_ = new Attribute[(int)AttributeType.Count];
+    public Attribute[] attributes = new Attribute[(int)AttributeType.Count];
 
     #region attribute properties
     public float Size
     {
-        get { return attributes_[(int)AttributeType.Size].value()/2f; }
+        get { return attributes[(int)AttributeType.Size].Value()/2f; }
     }
 
     public float Hp
     {
-        get { return attributes_[(int)AttributeType.Hp].value(); }
+        get { return attributes[(int)AttributeType.Hp].Value(); }
     }
 
     public float Armor
     {
-        get { return attributes_[(int)AttributeType.Armor].value(); }
+        get { return attributes[(int)AttributeType.Armor].Value(); }
     }
 
     public float Regen
     {
-        get { return attributes_[(int)AttributeType.Regen].value(); }
+        get { return attributes[(int)AttributeType.Regen].Value(); }
     }
 
     public float Damage
     {
-        get { return attributes_[(int)AttributeType.Damage].value(); }
+        get { return attributes[(int)AttributeType.Damage].Value(); }
     }
 
     public float ArmorIgnore
     {
-        get { return attributes_[(int)AttributeType.ArmorIgnore].value(); }
+        get { return attributes[(int)AttributeType.ArmorIgnore].Value(); }
     }
 
     public float Reach
     {
-        get { return attributes_[(int)AttributeType.Reach].value(); }
+        get { return attributes[(int)AttributeType.Reach].Value(); }
     }
 
     public float MoveSpeed
     {
         get {
-            return attributes_[(int)AttributeType.MoveSpeed].value();
+            return attributes[(int)AttributeType.MoveSpeed].Value();
         }
     }
 
     public float ViewRange
     {
-        get { return attributes_[(int)AttributeType.ViewRange].value(); }
+        get { return attributes[(int)AttributeType.ViewRange].Value(); }
     }
     #endregion
 
@@ -84,7 +84,7 @@ public class Unit : MonoBehaviour {
     #endregion
 
     float rotationSpeed_;
-    public float height_;
+    public float height;
 
     //hp
     float damageReceived_;
@@ -274,20 +274,20 @@ public class Unit : MonoBehaviour {
 
     void loadFromUnitData()
     {
-        if(unitData_ != null)
+        if(unitData != null)
         {
-            name_ = unitData_.name_;
-            level_ = unitData_.level_;
-            attributes_[(int)AttributeType.Size].raw_ = unitData_.size_;
-            attributes_[(int)AttributeType.Hp].raw_ = unitData_.hp_;
-            attributes_[(int)AttributeType.Armor].raw_ = unitData_.armor_;
-            attributes_[(int)AttributeType.Regen].raw_ = unitData_.regen_;
-            attributes_[(int)AttributeType.Damage].raw_ = unitData_.damage_;
-            attributes_[(int)AttributeType.ArmorIgnore].raw_ = unitData_.armorIgnore_;
-            attributes_[(int)AttributeType.Reach].raw_ = unitData_.reach_;
-            attributes_[(int)AttributeType.MoveSpeed].raw_ = unitData_.moveSpeed_;
-            attributes_[(int)AttributeType.ViewRange].raw_ = unitData_.viewRange_;
-            height_ = unitData_.height_;
+            unitName = unitData.Name;
+            level = unitData.Level;
+            attributes[(int)AttributeType.Size] = new Attribute(unitData.Size);
+            attributes[(int)AttributeType.Hp] = new Attribute(unitData.Hp);
+            attributes[(int)AttributeType.Armor] = new Attribute(unitData.Armor);
+            attributes[(int)AttributeType.Regen] = new Attribute(unitData.Regen);
+            attributes[(int)AttributeType.Damage] = new Attribute(unitData.Damage);
+            attributes[(int)AttributeType.ArmorIgnore] = new Attribute(unitData.ArmorIgnore);
+            attributes[(int)AttributeType.Reach] = new Attribute(unitData.Reach);
+            attributes[(int)AttributeType.MoveSpeed] = new Attribute(unitData.MoveSpeed);
+            attributes[(int)AttributeType.ViewRange] = new Attribute(unitData.ViewRange);
+            height = unitData.Height;
         }
     }
 
@@ -339,7 +339,7 @@ public class Unit : MonoBehaviour {
             Xp xp = lastAttacker_.gameObject.GetComponent<Xp>();
             if (xp != null)
             {
-                xp.receiveXp((1000 * level_));
+                xp.receiveXp((1000 * level));
             }
         }
     }
