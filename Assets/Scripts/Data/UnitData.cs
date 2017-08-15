@@ -151,9 +151,4 @@ public class UnitData : ScriptableObject, IUnitData
     }
     #endregion
 
-    /*
-    MEMORY DUMP:
-    Dont use arrays but separate fields for distinct elements of the same type (Attributes) because of the unity inspector
-    */
-
 }
