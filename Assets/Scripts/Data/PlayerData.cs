@@ -105,7 +105,7 @@ public class PlayerData : ScriptableObject, IPlayerData
     {
         get
         {
-            return XpLevels.currentXp(xp);
+            return XpLevels.CurrentXp(xp);
         }
     }
 
@@ -113,7 +113,7 @@ public class PlayerData : ScriptableObject, IPlayerData
     {
         get
         {
-            return XpLevels.requiredXp(xp);
+            return XpLevels.RequiredXp(xp);
         }
     }
 

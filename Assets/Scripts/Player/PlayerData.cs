@@ -34,14 +34,14 @@ public class PlayerDataa : ScriptableObject {
     {
         get
         {
-            return XpLevels.requiredXp(xp_);
+            return XpLevels.RequiredXp(xp_);
         }
     }
     public int currentXp
     {
         get
         {
-            return XpLevels.currentXp(xp_);
+            return XpLevels.CurrentXp(xp_);
         }
     }
     public int level
@@ -58,7 +58,7 @@ public class PlayerDataa : ScriptableObject {
 
     void updateLevel()
     {
-        level_ = XpLevels.level(xp_);
+        level_ = XpLevels.Level(xp_);
     }
 
     public void updateRankPoints(int score)
