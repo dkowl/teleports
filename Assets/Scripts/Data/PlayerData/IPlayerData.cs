@@ -12,4 +12,5 @@ public interface IPlayerData {
     void AddXp(int xpToAdd);
     SkillTreeSlot GetSkillTreeSlot(int id);
     int GetSkillTreeSlotLevel(int id);
+    float GetStat(PlayerStats stat);
 }

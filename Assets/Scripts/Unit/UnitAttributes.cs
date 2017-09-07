@@ -17,7 +17,7 @@ public class UnitAttributes : ScriptableObject {
         private Unit.AttributeType attributeType;
 
         public string name;
-        public int rate;
+        public float startVal, endVal;
     }
 
     [SerializeField]

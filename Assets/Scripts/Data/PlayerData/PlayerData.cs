@@ -98,6 +98,11 @@ public class PlayerData : ScriptableObject, IPlayerData
 
         return result;
     }
+
+    public float GetStat(PlayerStats type)
+    {
+        return 1.0f;
+    }
     #endregion
     #endregion
 

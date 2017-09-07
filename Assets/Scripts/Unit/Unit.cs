@@ -20,8 +20,7 @@ public class Unit : MonoBehaviour {
         Reach,
         MoveSpeed,
         ViewRange,
-        Count,
-        Beniz
+        Count
     }
 
     public Attribute[] attributes = new Attribute[(int)AttributeType.Count];

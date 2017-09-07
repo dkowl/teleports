@@ -15,6 +15,8 @@ public partial class MainData : MonoBehaviour {
     [SerializeField]
     private GameData gameData;
     [SerializeField]
+    private ServerData serverData;
+    [SerializeField]
     private Stylesheet stylesheet;
 
     //unity event functions
@@ -39,6 +41,11 @@ public partial class MainData : MonoBehaviour {
     public static IPlayerData CurrentPlayerData
     {
         get { return instance.saveData.currentPlayerData(); }
+    }
+
+    public static IServerData CurrentServerData
+    {
+        get { return instance.serverData; }
     }
 
     public static Stylesheet CurrentStylesheet
