@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "unitData", menuName = "Custom/UnitData", order = 1)]
-public class UnitData : ScriptableObject, IUnitData
+public class UnitDataEditor : ScriptableObject
 {
     [SerializeField]
     private string unitName;
@@ -53,12 +53,16 @@ public class UnitData : ScriptableObject, IUnitData
     [SerializeField]
     private float height;
 
-    #region interface implementation
+    #region properties
     public string Name
     {
         get
         {
             return unitName;
+        }
+        set
+        {
+            unitName = value;
         }
     }
 
@@ -68,6 +72,10 @@ public class UnitData : ScriptableObject, IUnitData
         {
             return level;
         }
+        set
+        {
+            level = value;
+        }
     }
 
     public float Size
@@ -75,6 +83,10 @@ public class UnitData : ScriptableObject, IUnitData
         get
         {
             return size;
+        }
+        set
+        {
+            size = value;
         }
     }
 
@@ -84,6 +96,10 @@ public class UnitData : ScriptableObject, IUnitData
         {
             return hp;
         }
+        set
+        {
+            hp = value;
+        }
     }
 
     public float Armor
@@ -91,6 +107,10 @@ public class UnitData : ScriptableObject, IUnitData
         get
         {
             return armor;
+        }
+        set
+        {
+            armor = value;
         }
     }
 
@@ -100,6 +120,10 @@ public class UnitData : ScriptableObject, IUnitData
         {
             return regen;
         }
+        set
+        {
+            regen = value;
+        }
     }
 
     public float Damage
@@ -107,6 +131,10 @@ public class UnitData : ScriptableObject, IUnitData
         get
         {
             return damage;
+        }
+        set
+        {
+            damage = value;
         }
     }
 
@@ -116,6 +144,10 @@ public class UnitData : ScriptableObject, IUnitData
         {
             return armorIgnore;
         }
+        set
+        {
+            armorIgnore = value;
+        }
     }
 
     public float Reach
@@ -123,6 +155,10 @@ public class UnitData : ScriptableObject, IUnitData
         get
         {
             return reach;
+        }
+        set
+        {
+            reach = value;
         }
     }
 
@@ -132,6 +168,10 @@ public class UnitData : ScriptableObject, IUnitData
         {
             return moveSpeed;
         }
+        set
+        {
+            moveSpeed = value;
+        }
     }
 
     public float ViewRange
@@ -139,6 +179,10 @@ public class UnitData : ScriptableObject, IUnitData
         get
         {
             return viewRange;
+        }
+        set
+        {
+            viewRange = value;
         }
     }
 
@@ -148,7 +192,10 @@ public class UnitData : ScriptableObject, IUnitData
         {
             return height;
         }
+        set
+        {
+            height = value;
+        }
     }
     #endregion
-
 }

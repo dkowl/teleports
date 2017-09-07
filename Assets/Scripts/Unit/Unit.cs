@@ -291,6 +291,26 @@ public class Unit : MonoBehaviour {
         }
     }
 
+    UnitData ToUnitData()
+    {
+        UnitData result = ScriptableObject.CreateInstance(typeof(UnitData)) as UnitData;
+
+        unitData.Name = unitName;
+        unitData.Level = level;
+        unitData.Size = attributes[(int)AttributeType.Size].Value();
+        unitData.Hp = attributes[(int)AttributeType.Hp].Value();
+        unitData.Armor = attributes[(int)AttributeType.Armor].Value();
+        unitData.Regen = attributes[(int)AttributeType.Regen].Value();
+        unitData.Damage = attributes[(int)AttributeType.Damage].Value();
+        unitData.ArmorIgnore = attributes[(int)AttributeType.ArmorIgnore].Value();
+        unitData.Reach = attributes[(int)AttributeType.Reach].Value();
+        unitData.MoveSpeed = attributes[(int)AttributeType.MoveSpeed].Value();
+        unitData.ViewRange = attributes[(int)AttributeType.ViewRange].Value();
+        unitData.Height = height;
+
+        return result;
+    }
+
     public void receiveDamage(float damage, Unit attacker)
     {
         float actualDamage = Mathf.Max(damage - Mathf.Max(Armor - attacker.ArmorIgnore, 0), 0);

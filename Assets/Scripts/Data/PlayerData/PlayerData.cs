@@ -15,6 +15,7 @@ public class PlayerData : ScriptableObject, IPlayerData
     [SerializeField] private int rankPoints;
     [SerializeField] private List<SkillID> skills;
     [SerializeField] private SkillTreeSlot[] skillTreeSlots = new SkillTreeSlot[SkillTreeSlotNo];
+    [SerializeField] private UnitData liveUnitData;
 
     #region interface implementation
     #region properties
