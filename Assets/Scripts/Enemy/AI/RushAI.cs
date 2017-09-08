@@ -20,7 +20,7 @@ public class RushAI : UnitController {
 	}
 
     public override void control() {
-        if (target_.unit == null) target();
+        if (target_.TargetUnit == null) target();
         else chase();
 	}
 
@@ -43,8 +43,8 @@ public class RushAI : UnitController {
 
         if (minDist < unit_.ViewRange)
         {
-            target_.unit = targets_[bestArg].GetComponent<Unit>();
+            target_.TargetUnit = targets_[bestArg].GetComponent<Unit>();
         }
-        else target_.unit = null;
+        else target_.TargetUnit = null;
     }
 }

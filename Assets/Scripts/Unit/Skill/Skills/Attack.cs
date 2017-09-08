@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Attack : Skill {
 
-    public float damageMultiplier_ = 1;
+    [FormerlySerializedAs("damageMultiplier_")]
+    [SerializeField]
+    private float damageMultiplier = 1;
 
-	override public void internalCast(Unit caster, TargetInfo target)
+	override public void InternalCast(Unit caster, TargetInfo target)
     {
-        target.unit.receiveDamage(caster.Damage * damageMultiplier_, caster);
+        target.TargetUnit.receiveDamage(caster.Damage * damageMultiplier, caster);
     }
 }

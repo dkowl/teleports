@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour {
-
-    public IUnitData unitData;
-
-    string unitName;
-    public int level;
-
+public class Unit : MonoBehaviour
+{
     public enum AttributeType
     {
         Size,
@@ -23,123 +18,127 @@ public class Unit : MonoBehaviour {
         Count
     }
 
-    public Attribute[] attributes = new Attribute[(int)AttributeType.Count];
+    public UnitDataEditor unitDataEditor;
+    public IUnitData unitData;
 
-    #region attribute properties
-    public float Size
-    {
-        get { return attributes[(int)AttributeType.Size].Value()/2f; }
-    }
-
-    public float Hp
-    {
-        get { return attributes[(int)AttributeType.Hp].Value(); }
-    }
-
-    public float Armor
-    {
-        get { return attributes[(int)AttributeType.Armor].Value(); }
-    }
-
-    public float Regen
-    {
-        get { return attributes[(int)AttributeType.Regen].Value(); }
-    }
-
-    public float Damage
-    {
-        get { return attributes[(int)AttributeType.Damage].Value(); }
-    }
-
-    public float ArmorIgnore
-    {
-        get { return attributes[(int)AttributeType.ArmorIgnore].Value(); }
-    }
-
-    public float Reach
-    {
-        get { return attributes[(int)AttributeType.Reach].Value(); }
-    }
-
-    public float MoveSpeed
-    {
-        get {
-            return attributes[(int)AttributeType.MoveSpeed].Value();
-        }
-    }
-
-    public float ViewRange
-    {
-        get { return attributes[(int)AttributeType.ViewRange].Value(); }
-    }
-    #endregion
-
-    #region other properties
-
-    public bool isMoving
-    {
-        get { return isMoving_; }
-    }
-
-    #endregion
-
-    float rotationSpeed_;
-    public float height;
+    private float rotationSpeed;
 
     //hp
-    float damageReceived_;
-    bool isDead_;
+    private float damageReceived;
+    private bool isDead;
 
     //pathfinding
-    Vector3 moveDest_;
-    bool isMoving_;
+    private Vector3 moveDest;
+    private bool isMoving;
 
-    Quaternion rotationTarget_;
-    bool isRotating_;
+    private Quaternion rotationTarget;
+    private bool isRotating;
 
     //special states
-    bool isStunned_;
-    float stunTime_;
+    private bool isStunned;
+    private float stunTime;
 
     //skill casting
-    Skill.TargetInfo castTarget_;
-    Skill activeSkill_;
-    float currentCastTime_;
-    bool isCasting_;
-    public List<Skill> skills_;
+    private Skill.TargetInfo castTarget;
+    private Skill activeSkill;
+    private float currentCastTime;
+    private bool isCasting;
+    public List<Skill> skills;
 
     //perks
-    public List<Perk> perks_;
+    public List<Perk> perks;
 
     //kill rewarding
-    Unit lastAttacker_;
+    private Unit lastAttacker;
 
     //graphics
-    UnitGraphics graphics_;
+    private UnitGraphics graphics;
     public UnitGraphics Graphics
     {
-        get { return graphics_; }
+        get { return graphics; }
     }
 
     //controller
-    public UnitController activeController_;
+    public UnitController activeController;
 
     //events
     //cast event
     public event EventHandler<CastEventArgs> castEvent;
 
+    #region attribute properties
+    public float Size
+    {
+        get { return unitData.GetAttribute(AttributeType.Size).Value() / 2f; }
+    }
+
+    public float Hp
+    {
+        get { return unitData.GetAttribute(AttributeType.Hp).Value(); }
+    }
+
+    public float Armor
+    {
+        get { return unitData.GetAttribute(AttributeType.Armor).Value(); }
+    }
+
+    public float Regen
+    {
+        get { return unitData.GetAttribute(AttributeType.Regen).Value(); }
+    }
+
+    public float Damage
+    {
+        get { return unitData.GetAttribute(AttributeType.Damage).Value(); }
+    }
+
+    public float ArmorIgnore
+    {
+        get { return unitData.GetAttribute(AttributeType.ArmorIgnore).Value(); }
+    }
+
+    public float Reach
+    {
+        get { return unitData.GetAttribute(AttributeType.Reach).Value(); }
+    }
+
+    public float MoveSpeed
+    {
+        get
+        {
+            return unitData.GetAttribute(AttributeType.MoveSpeed).Value();
+        }
+    }
+
+    public float ViewRange
+    {
+        get { return unitData.GetAttribute(AttributeType.ViewRange).Value(); }
+    }
+    #endregion
+
+    #region other properties
+
+    public bool IsMoving
+    {
+        get { return isMoving; }
+    }
+
+    #endregion
+
     void Awake () {
-        damageReceived_ = 0;
-        rotationSpeed_ = 2;
-        isMoving_ = false;
-        isRotating_ = false;
-        isCasting_ = false;
-        isDead_ = false;
-        isStunned_ = false;
+        damageReceived = 0;
+        rotationSpeed = 2;
+        isMoving = false;
+        isRotating = false;
+        isCasting = false;
+        isDead = false;
+        isStunned = false;
 
-        loadFromUnitData();
+        graphics = gameObject.AddComponent<UnitGraphics>();
 
-        graphics_ = gameObject.AddComponent<UnitGraphics>();
+        if (unitDataEditor != null)
+        {
+            unitData = new UnitData(unitDataEditor);
+        }
 	}
 
     void Start()
@@ -152,12 +151,12 @@ public class Unit : MonoBehaviour {
 
         float dTime = Time.deltaTime;
 
-        if (alive() && !isStunned_)
+        if (alive() && !isStunned)
         {
             //Movement
             if (canMove())
             {
-                Vector3 offset = moveDest_ - transform.position;
+                Vector3 offset = moveDest - transform.position;
 
                 if (MoveSpeed * dTime < offset.magnitude)
                 {
@@ -165,30 +164,30 @@ public class Unit : MonoBehaviour {
                 }
                 else
                 {
-                    isMoving_ = false;
+                    isMoving = false;
                 }
 
                 transform.position += offset;
 
             }
             //Rotation
-            if (isRotating_)
+            if (isRotating)
             {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationTarget_, dTime * rotationSpeed_ * 360);
-                if (transform.rotation == rotationTarget_)
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationTarget, dTime * rotationSpeed * 360);
+                if (transform.rotation == rotationTarget)
                 {
-                    isRotating_ = false;
+                    isRotating = false;
                 }
             }
             //Skill Casting
-            if (isCasting_ && canReachCastTarget())
+            if (isCasting && canReachCastTarget())
             {
-                currentCastTime_ += dTime;
-                if (currentCastTime_ >= activeSkill_.CastTime)
+                currentCastTime += dTime;
+                if (currentCastTime >= activeSkill.CastTime)
                 {
-                    activeSkill_.cast(this, castTarget_);
-                    isCasting_ = false;
-                    if(castEvent != null) castEvent(this, new CastEventArgs(activeSkill_));
+                    activeSkill.Cast(this, castTarget);
+                    isCasting = false;
+                    if(castEvent != null) castEvent(this, new CastEventArgs(activeSkill));
                 }
             }
             else
@@ -197,10 +196,10 @@ public class Unit : MonoBehaviour {
             }
         }
         //Stun
-        else if (isStunned_)
+        else if (isStunned)
         {
-            stunTime_ -= dTime;
-            if(stunTime_<= 0)
+            stunTime -= dTime;
+            if(stunTime<= 0)
             {
                 resetStun();
             }
@@ -210,14 +209,14 @@ public class Unit : MonoBehaviour {
 
     public void cast(Skill skill, Skill.TargetInfo target)
     {
-        if (isCasting_ && activeSkill_ == skill && castTarget_ == target) return;
-        isMoving_ = false;
+        if (isCasting && activeSkill == skill && castTarget == target) return;
+        isMoving = false;
         if(skill.CurrentCooldown == 0)
         {
-            isCasting_ = true;
-            activeSkill_ = skill;
-            castTarget_ = target;
-            currentCastTime_ = 0;
+            isCasting = true;
+            activeSkill = skill;
+            castTarget = target;
+            currentCastTime = 0;
         }
     }
 
@@ -225,99 +224,60 @@ public class Unit : MonoBehaviour {
     {
         if (moveDest != transform.position)
         {
-            moveDest_ = moveDest;
-            rotationTarget_ = Quaternion.LookRotation(moveDest_ - transform.position);
-            isMoving_ = true;
-            isRotating_ = true;
+            this.moveDest = moveDest;
+            rotationTarget = Quaternion.LookRotation(this.moveDest - transform.position);
+            isMoving = true;
+            isRotating = true;
         }
     }
 
     public void addPerk(Perk perk)
     {
-        perk.apply(this);
-        perks_.Add(perk);
+        perk.Apply(this);
+        perks.Add(perk);
     }
 
     public bool alive()
     {
-        return !isDead_;
+        return !isDead;
     }
 
     void applyPerks()
     {
-        foreach(Perk perk in perks_)
+        foreach(Perk perk in perks)
         {
-            perk.apply(this);
+            perk.Apply(this);
         }
     }
 
     bool canMove()
     {
-        return !isCasting_ && isMoving_ && !isDead_;
+        return !isCasting && isMoving && !isDead;
     }
 
     public bool canReachCastTarget(Skill skill, Skill.TargetInfo target)
     {
         float totalReach = Reach + Size + skill.Reach;
-        if (target.unit != null) totalReach += target.unit.Size;
+        if (target.TargetUnit != null) totalReach += target.TargetUnit.Size;
 
         return
-            (target.position - transform.position).magnitude
+            (target.Position - transform.position).magnitude
             <=
             totalReach;
     }
 
     bool canReachCastTarget()
     {
-        return canReachCastTarget(activeSkill_, castTarget_);
-    }
-
-    void loadFromUnitData()
-    {
-        if(unitData != null)
-        {
-            unitName = unitData.Name;
-            level = unitData.Level;
-            attributes[(int)AttributeType.Size] = new Attribute(unitData.Size);
-            attributes[(int)AttributeType.Hp] = new Attribute(unitData.Hp);
-            attributes[(int)AttributeType.Armor] = new Attribute(unitData.Armor);
-            attributes[(int)AttributeType.Regen] = new Attribute(unitData.Regen);
-            attributes[(int)AttributeType.Damage] = new Attribute(unitData.Damage);
-            attributes[(int)AttributeType.ArmorIgnore] = new Attribute(unitData.ArmorIgnore);
-            attributes[(int)AttributeType.Reach] = new Attribute(unitData.Reach);
-            attributes[(int)AttributeType.MoveSpeed] = new Attribute(unitData.MoveSpeed);
-            attributes[(int)AttributeType.ViewRange] = new Attribute(unitData.ViewRange);
-            height = unitData.Height;
-        }
-    }
-
-    UnitData ToUnitData()
-    {
-        UnitData result = ScriptableObject.CreateInstance(typeof(UnitData)) as UnitData;
-
-        unitData.Name = unitName;
-        unitData.Level = level;
-        unitData.Size = attributes[(int)AttributeType.Size].Value();
-        unitData.Hp = attributes[(int)AttributeType.Hp].Value();
-        unitData.Armor = attributes[(int)AttributeType.Armor].Value();
-        unitData.Regen = attributes[(int)AttributeType.Regen].Value();
-        unitData.Damage = attributes[(int)AttributeType.Damage].Value();
-        unitData.ArmorIgnore = attributes[(int)AttributeType.ArmorIgnore].Value();
-        unitData.Reach = attributes[(int)AttributeType.Reach].Value();
-        unitData.MoveSpeed = attributes[(int)AttributeType.MoveSpeed].Value();
-        unitData.ViewRange = attributes[(int)AttributeType.ViewRange].Value();
-        unitData.Height = height;
-
-        return result;
+        return canReachCastTarget(activeSkill, castTarget);
     }
 
     public void receiveDamage(float damage, Unit attacker)
     {
         float actualDamage = Mathf.Max(damage - Mathf.Max(Armor - attacker.ArmorIgnore, 0), 0);
-        damageReceived_ += actualDamage;
-        if(actualDamage > 0) lastAttacker_ = attacker;
-        graphics_.showDamage(actualDamage);
-        if(damageReceived_ >= Hp)
+        damageReceived += actualDamage;
+        if(actualDamage > 0) lastAttacker = attacker;
+        graphics.showDamage(actualDamage);
+        if(damageReceived >= Hp)
         {
             die();
         }
@@ -325,47 +285,47 @@ public class Unit : MonoBehaviour {
 
     public void removePerk(Perk perk)
     {
-        perks_.Remove(perk);
+        perks.Remove(perk);
         perk.unapply(this);
     }
 
     public void resetCast()
     {
-        isCasting_ = false;
-        activeSkill_ = null;
-        currentCastTime_ = 0;
-        castTarget_ = null;
+        isCasting = false;
+        activeSkill = null;
+        currentCastTime = 0;
+        castTarget = null;
     }
 
     public void resetStun()
     {
-        isStunned_ = false;
-        stunTime_ = 0;
+        isStunned = false;
+        stunTime = 0;
     }
 
     public void stun(float time)
     {
-        isStunned_ = true;
-        stunTime_ += time;
-        graphics_.showMessage("Stunned!");
+        isStunned = true;
+        stunTime += time;
+        graphics.showMessage("Stunned!");
     }
 
     public void die()
     {
-        if (isDead_) return;
-        isDead_ = true;
-        if(lastAttacker_ != null)
+        if (isDead) return;
+        isDead = true;
+        if(lastAttacker != null)
         {
-            Xp xp = lastAttacker_.gameObject.GetComponent<Xp>();
+            Xp xp = lastAttacker.gameObject.GetComponent<Xp>();
             if (xp != null)
             {
-                xp.receiveXp((1000 * level));
+                xp.receiveXp((1000 * unitData.Level));
             }
         }
     }
 
     public float healthPercentage()
     {
-        return 1f - (damageReceived_ / Hp);
+        return 1f - (damageReceived / Hp);
     }
 }

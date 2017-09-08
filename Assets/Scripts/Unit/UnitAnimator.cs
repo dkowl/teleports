@@ -19,7 +19,7 @@ public class UnitAnimator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         animator_.SetFloat(moveSpeedHash_, unit_.MoveSpeed);
-        animator_.SetBool(isMovingHash_, unit_.isMoving);
+        animator_.SetBool(isMovingHash_, unit_.IsMoving);
 	}
 
     void HandleCastEvent(object sender, CastEventArgs e)

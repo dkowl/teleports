@@ -7,24 +7,24 @@ using Teleports.Utils;
 [RequireComponent(typeof(Unit))]
 public class Healthbar : MonoBehaviour {
 
-    GameObject gameObject_;
-    Unit unit_;
-    public Slider slider_;
+    GameObject healthbar;
+    Unit unit;
+    public Slider slider;
 
 	// Use this for initialization
 	void Start () {
-        gameObject_ = Instantiate(Resources.Load("Prefabs/Unit/Healthbar"), gameObject.transform) as GameObject;
-        unit_ = gameObject.GetComponent<Unit>();
-        gameObject_.transform.localPosition = new Vector3(0, unit_.height + 0.3f, 0);
-        slider_ = gameObject_.transform.GetChild(0).GetChild(0).GetComponent<Slider>();
+        healthbar = Instantiate(Resources.Load("Prefabs/Unit/Healthbar"), gameObject.transform) as GameObject;
+        unit = gameObject.GetComponent<Unit>();
+        healthbar.transform.localPosition = new Vector3(0, unit.unitData.Height + 0.3f, 0);
+        slider = healthbar.transform.GetChild(0).GetChild(0).GetComponent<Slider>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        slider_.value = unit_.healthPercentage();
-        if (!unit_.alive())
+        slider.value = unit.healthPercentage();
+        if (!unit.alive())
         {
-            gameObject_.makeInvisible();
+            healthbar.makeInvisible();
         }
 	}
 }

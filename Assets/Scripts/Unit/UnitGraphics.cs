@@ -4,28 +4,28 @@ using UnityEngine;
 
 public class UnitGraphics : MonoBehaviour {
 
-    Healthbar healthbar_;
-    GameObject targetMarker_;
+    Healthbar healthbar;
+    GameObject targetMarker;
 
 	// Use this for initialization
 	void Start () {
-        healthbar_ = gameObject.AddComponent<Healthbar>();
+        healthbar = gameObject.AddComponent<Healthbar>();
 	}
 
     public void updateTarget(Unit target)
     {
-        if(targetMarker_ == null)
+        if(targetMarker == null)
         {
-            targetMarker_ = Instantiate(Resources.Load("Prefabs/Unit/TargetMarker"), gameObject.transform) as GameObject;
+            targetMarker = Instantiate(Resources.Load("Prefabs/Unit/TargetMarker"), gameObject.transform) as GameObject;
         }
-        targetMarker_.GetComponent<TargetMarker>().setTargetUnit(target);
+        targetMarker.GetComponent<TargetMarker>().setTargetUnit(target);
     }
 
     public void showDamage(float damage)
     {
         GameObject obj = Instantiate(Resources.Load("Prefabs/Unit/FloatingDamage"), gameObject.transform) as GameObject;
         obj.GetComponent<FloatingDamage>().setText(damage.ToString());
-        obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().height, 0);
+        obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().unitData.Height, 0);
     }
 
     public void showXp(int xp)
@@ -33,7 +33,7 @@ public class UnitGraphics : MonoBehaviour {
         GameObject obj = Instantiate(Resources.Load("Prefabs/Unit/FloatingDamage"), gameObject.transform) as GameObject;
         obj.GetComponent<FloatingDamage>().setText(xp.ToString() + " XP");
         obj.GetComponent<FloatingDamage>().setColor(Color.yellow);
-        obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().height, 0);
+        obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().unitData.Height, 0);
     }
 
     public void showMessage(string message)
@@ -41,6 +41,6 @@ public class UnitGraphics : MonoBehaviour {
         GameObject obj = Instantiate(Resources.Load("Prefabs/Unit/FloatingDamage"), gameObject.transform) as GameObject;
         obj.GetComponent<FloatingDamage>().setText(message);
         obj.GetComponent<FloatingDamage>().setColor(Color.yellow);
-        obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().height, 0);
+        obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().unitData.Height, 0);
     }
 }

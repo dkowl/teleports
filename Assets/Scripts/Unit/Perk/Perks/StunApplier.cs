@@ -12,7 +12,7 @@ public class StunApplier : Perk {
 
         if(skill is Attack && stunChance_ > Random.Range(0f, 1f))
         {
-            target.unit.stun(stunDuration_);
+            target.TargetUnit.stun(stunDuration_);
         }
     }
 }

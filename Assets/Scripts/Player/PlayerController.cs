@@ -15,7 +15,7 @@ public class PlayerController : UnitController {
             int layerMask = 1 << 10; //testing for enemies
             if (Input.GetButtonDown("PlayerMove") && Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
-                target_.unit = hit.transform.parent.gameObject.GetComponent<Unit>();
+                target_.TargetUnit = hit.transform.parent.gameObject.GetComponent<Unit>();
                 done = true;
             }
 
@@ -26,13 +26,13 @@ public class PlayerController : UnitController {
                 if (Input.GetButtonDown("PlayerMove"))
                 {
                     unit_.resetCast();
-                    target_.unit = null;
+                    target_.TargetUnit = null;
                 }
             }
         }
 
-        if (target_.unit != null) chase();
+        if (target_.TargetUnit != null) chase();
 
-        unit_.Graphics.updateTarget(target_.unit);
+        unit_.Graphics.updateTarget(target_.TargetUnit);
 	}    
 }

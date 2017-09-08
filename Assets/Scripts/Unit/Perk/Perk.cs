@@ -12,7 +12,7 @@ public class Perk : MonoBehaviour {
 
     public string name_;
 
-	public virtual void apply(Unit target)
+	public virtual void Apply(Unit target)
     {
         if (!isApplied_)
         {

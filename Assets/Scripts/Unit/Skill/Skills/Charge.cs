@@ -12,10 +12,10 @@ public class Charge : Skill {
     UnitController oldController_;
     ChargeController chargeController_;
 
-    public override void internalCast(Unit caster, TargetInfo target) {
+    public override void InternalCast(Unit caster, TargetInfo target) {
         
-        oldController_ = caster.activeController_;
-        targetStartPosition_ = target.unit.gameObject.transform.position;
+        oldController_ = caster.activeController;
+        targetStartPosition_ = target.TargetUnit.gameObject.transform.position;
 
         chargeController_ = caster.gameObject.AddComponent<ChargeController>();
         chargeController_.Target = target;
@@ -29,7 +29,7 @@ public class Charge : Skill {
         public void initialize(Charge charge)
         {
             charge_ = charge;
-            unit_.activeController_ = this;
+            unit_.activeController = this;
             mainAttack_ = charge_.attack_;
             unit_.addPerk(charge_.perk_);
         }
@@ -37,7 +37,7 @@ public class Charge : Skill {
         void finalize()
         {
             unit_.removePerk(charge_.perk_);
-            unit_.activeController_ = charge_.oldController_;
+            unit_.activeController = charge_.oldController_;
         }
 
         public override void control()

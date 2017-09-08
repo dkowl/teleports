@@ -1,35 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.Serialization;
 
 public class AttributeModifier : Perk {
 
 	[System.Serializable]
     public class AttributeModificationSettings
     {
-        public Unit.AttributeType type_;
-        public float bonus_ = 0, multiplier_ = 1;
+        [FormerlySerializedAs("type_")]
+        public Unit.AttributeType type;
+        [FormerlySerializedAs("bonus_")]
+        public float bonus = 0;
+        [FormerlySerializedAs("multiplier_")]
+        public float multiplier = 1;
     }
 
     public List<AttributeModificationSettings> attributeModificationSettings_;
 
-    public override void apply(Unit target)
+    public override void Apply(Unit target)
     {
-        base.apply(target);
+        base.Apply(target);
 
         foreach(AttributeModificationSettings ams in attributeModificationSettings_)
         {
-            target.attributes[(int)ams.type_].Modify(ams.bonus_, ams.multiplier_);
+            target.unitData.GetAttribute(ams.type).Modify(ams.bonus, ams.multiplier);
         }
     }
 
     public override void unapply(Unit target)
     {
-        base.apply(target);
+        base.Apply(target);
 
         foreach (AttributeModificationSettings ams in attributeModificationSettings_)
         {
-            target.attributes[(int)ams.type_].Modify(-ams.bonus_, 1/ams.multiplier_);
+            target.unitData.GetAttribute(ams.type).Modify(-ams.bonus, 1/ams.multiplier);
         }
     }
 }

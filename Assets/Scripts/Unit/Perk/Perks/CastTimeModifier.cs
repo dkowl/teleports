@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class CastTimeModifier : Perk {
 
-    public Skill skillToModify_;
-    public float castTimeModifier_ = 1f;
+    public Skill skillToModify;
+    public float castTimeModifier = 1f;
 
-    public override void apply(Unit target)
+    public override void Apply(Unit target)
     {
-        base.apply(target);
+        base.Apply(target);
 
-        foreach(Skill skill in target.skills_)
+        foreach(Skill skill in target.skills)
         {
-            if(skill.name == skillToModify_.name)
+            if(skill.name == skillToModify.name)
             {
-                skill.castTime_.AddMultiplier(castTimeModifier_);
+                skill.castTime.AddMultiplier(castTimeModifier);
             }
         }
     }

@@ -23,9 +23,9 @@ public class AttributeDrawer : PropertyDrawer {
         Rect multiplierRect = new Rect(position.x + 115, position.y, 25, position.height);
 
         //Draw fields
-        EditorGUI.PropertyField(rawRect, property.FindPropertyRelative("raw_"), GUIContent.none);
-        EditorGUI.PropertyField(bonusRect, property.FindPropertyRelative("bonus_"), GUIContent.none);
-        EditorGUI.PropertyField(multiplierRect, property.FindPropertyRelative("multiplier_"), GUIContent.none);
+        EditorGUI.PropertyField(rawRect, property.FindPropertyRelative("raw"), GUIContent.none);
+        EditorGUI.PropertyField(bonusRect, property.FindPropertyRelative("bonus"), GUIContent.none);
+        EditorGUI.PropertyField(multiplierRect, property.FindPropertyRelative("multiplier"), GUIContent.none);
 
         EditorGUI.indentLevel = indent;
 

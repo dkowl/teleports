@@ -8,7 +8,7 @@ public class GlobalData : MonoBehaviour {
     public GameData gameData_;
 
     public AccountState accountData_;
-    public IPlayerData playerData_;
+    public PlayerData playerData_;
     public TeleportData teleportData_;
 
     //Properties

@@ -1,90 +1,107 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public abstract class Skill : MonoBehaviour {
 
     public class TargetInfo
     {
-        Unit unit_;
-        public Unit unit
+        private Unit targetUnit;
+         Vector3 position;
+
+        public Unit TargetUnit
         {
-            get { return unit_; }
-            set { unit_ = value; }
+            get { return targetUnit; }
+            set { targetUnit = value; }
         }
-        public Vector3 position_;
-        public Vector3 position
+
+        public Vector3 Position
         {
             get
             {
-                if (unit_ != null)
+                if (targetUnit != null)
                 {
-                    return unit.transform.position;
+                    return TargetUnit.transform.position;
                 }
-                else return position_;
+                else return position;
             }
         }
+
     }
 
-    public enum Type
+    public enum SkillType
     {
         Single,
         Area
     };
+    
+    [FormerlySerializedAs("name_")]
+    [SerializeField]
+    new private string name;
 
-    Type type_;
-    public Type type
+    [FormerlySerializedAs("type_")]
+    [SerializeField]
+    SkillType type;
+
+    [FormerlySerializedAs("reach_")]
+    [SerializeField]
+    public Attribute reach;
+
+    [FormerlySerializedAs("castTime_")]
+    [SerializeField]
+    public Attribute castTime;
+
+    [FormerlySerializedAs("cooldown_")]
+    [SerializeField]
+    public Attribute cooldown;
+
+    [FormerlySerializedAs("currentCooldown_")]
+    [SerializeField]
+    float currentCooldown;
+
+    #region properties
+    public SkillType Type
     {
-        get { return type_; }
+        get { return type; }
     }
-
-    public string name_;
-
-    public Attribute
-        reach_,
-        castTime_,
-        cooldown_;
-
-    #region attribute properties
     public float Reach
     {
-        get { return reach_.Value(); }
+        get { return reach.Value(); }
     }
     public float CastTime
     {
-        get { return castTime_.Value(); }
+        get { return castTime.Value(); }
     }
     public float Cooldown
     {
-        get { return cooldown_.Value(); }
+        get { return cooldown.Value(); }
+    }
+    public float CurrentCooldown
+    {
+        get { return currentCooldown; }
     }
     #endregion
 
-    public float currentCooldown_;
-    public float CurrentCooldown
-    {
-        get { return currentCooldown_; }
-    }
-
-    public SkillGraphics graphics_;
+    public SkillGraphics graphics;
     
     virtual public void Update()
     {
-        currentCooldown_ -= Time.deltaTime;
-        if (currentCooldown_ < 0) currentCooldown_ = 0;
+        currentCooldown -= Time.deltaTime;
+        if (currentCooldown < 0) currentCooldown = 0;
     }
 
-    public void cast(Unit caster, TargetInfo target)
+    public void Cast(Unit caster, TargetInfo target)
     {
-        currentCooldown_ = cooldown_.Value();
+        currentCooldown = cooldown.Value();
 
-        foreach(Perk perk in caster.perks_)
+        foreach(Perk perk in caster.perks)
         {
             perk.onCast(caster, this, target);
         }
 
-        internalCast(caster, target);
+        InternalCast(caster, target);
     }
 
-    abstract public void internalCast(Unit caster, TargetInfo target);
+    abstract public void InternalCast(Unit caster, TargetInfo target);
 }

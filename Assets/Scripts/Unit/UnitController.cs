@@ -34,7 +34,7 @@ public abstract class UnitController : MonoBehaviour {
         }
         else
         {
-            unit_.moveTo(target_.position);
+            unit_.moveTo(target_.Position);
         }
     }
 
@@ -42,6 +42,6 @@ public abstract class UnitController : MonoBehaviour {
 
     bool isActive()
     {
-        return this == unit_.activeController_;
+        return this == unit_.activeController;
     }
 }
