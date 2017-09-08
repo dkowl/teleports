@@ -32,6 +32,8 @@ public class UnitData : IUnitData {
         attributes[(int)Unit.AttributeType.Reach] = new Attribute(unitData.Reach);
         attributes[(int)Unit.AttributeType.MoveSpeed] = new Attribute(unitData.MoveSpeed);
         attributes[(int)Unit.AttributeType.ViewRange] = new Attribute(unitData.ViewRange);
+
+        height = unitData.Height;
     }
 
     public string Name
