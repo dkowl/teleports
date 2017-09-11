@@ -17,6 +17,9 @@ public class UnitData : IUnitData {
     [SerializeField]
     private Attribute[] attributes;
 
+    [SerializeField]
+    private bool isInitialized = false;
+
     public UnitData(UnitDataEditor unitData)
     {
         unitName = unitData.Name;
@@ -34,6 +37,8 @@ public class UnitData : IUnitData {
         attributes[(int)Unit.AttributeType.ViewRange] = new Attribute(unitData.ViewRange);
 
         height = unitData.Height;
+
+        isInitialized = true;
     }
 
     public string Name
@@ -63,5 +68,10 @@ public class UnitData : IUnitData {
     public Attribute GetAttribute(Unit.AttributeType type)
     {
         return attributes[(int)type];
+    }
+
+    public bool IsInitialized
+    {
+        get { return isInitialized; }
     }
 }

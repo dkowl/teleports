@@ -23,6 +23,7 @@ public partial class MainData : MonoBehaviour {
 	void Awake()
     {
         instance = this;
+        Debug.Log("MainData initialized!");
     }
 
     void OnDestroy()
@@ -41,6 +42,11 @@ public partial class MainData : MonoBehaviour {
     public static IPlayerData CurrentPlayerData
     {
         get { return instance.saveData.currentPlayerData(); }
+    }
+
+    public static GameData CurrentGameData
+    {
+        get { return instance.gameData; }
     }
 
     public static IServerData CurrentServerData

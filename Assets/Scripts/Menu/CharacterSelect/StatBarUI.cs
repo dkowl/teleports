@@ -16,8 +16,11 @@ public class StatBarUI : LoadableBehaviour {
         IServerData server = MainData.CurrentServerData;
 
         UnitAttributeStats stats = server.GetAttributeStats(statType);
+        IPlayerData playerData = MainData.CurrentPlayerData;
 
+        statNameText.text = statName;
 
+        slider.value = stats.GetSliderValue(playerData.Level, playerData.GetStat(statType));
     }
 
 }

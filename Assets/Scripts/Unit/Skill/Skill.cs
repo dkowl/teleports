@@ -35,6 +35,9 @@ public abstract class Skill : MonoBehaviour {
         Single,
         Area
     };
+
+    [SerializeField]
+    private int uniqueID = UniqueID<Skill>.NextID;
     
     [FormerlySerializedAs("name_")]
     [SerializeField]
@@ -61,21 +64,25 @@ public abstract class Skill : MonoBehaviour {
     float currentCooldown;
 
     #region properties
+    public string Name
+    {
+        get { return name; }
+    }
     public SkillType Type
     {
         get { return type; }
     }
     public float Reach
     {
-        get { return reach.Value(); }
+        get { return reach.GetValue(); }
     }
     public float CastTime
     {
-        get { return castTime.Value(); }
+        get { return castTime.GetValue(); }
     }
     public float Cooldown
     {
-        get { return cooldown.Value(); }
+        get { return cooldown.GetValue(); }
     }
     public float CurrentCooldown
     {
@@ -93,7 +100,7 @@ public abstract class Skill : MonoBehaviour {
 
     public void Cast(Unit caster, TargetInfo target)
     {
-        currentCooldown = cooldown.Value();
+        currentCooldown = cooldown.GetValue();
 
         foreach(Perk perk in caster.perks)
         {

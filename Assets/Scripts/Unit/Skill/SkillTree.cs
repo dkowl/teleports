@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "skillTree", menuName = "Custom/Skill/Tree", order = 0)]
 public class SkillTree : ScriptableObject {
@@ -8,10 +9,13 @@ public class SkillTree : ScriptableObject {
     [System.Serializable]
     public class Level
     {
-        public List<SkillBranch> branches_;
+        [FormerlySerializedAs("branches_")]
+        public List<SkillBranch> branches;
     }
 
-    public List<Level> levels_;
+    [FormerlySerializedAs("levels_")]
+    public List<Level> levels;
 
-    public Color color_;
+    [FormerlySerializedAs("color_")]
+    public Color color;
 }

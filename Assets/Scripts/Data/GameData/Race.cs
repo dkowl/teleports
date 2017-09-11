@@ -12,5 +12,24 @@ public class Race : ScriptableObject {
 
     [FormerlySerializedAs("baseStats_")]
     [SerializeField]
-    private UnitData baseStats;
+    private UnitDataEditor baseStatsEditor;
+
+    private UnitData baseStats = null;
+
+    public string Name
+    {
+        get { return name; }
+    }
+    
+    public UnitData BaseStats
+    {
+        get {
+            if(!baseStats.IsInitialized)
+            {
+                baseStats = new UnitData(baseStatsEditor);
+            }
+
+            return baseStats;
+        }
+    }
 }

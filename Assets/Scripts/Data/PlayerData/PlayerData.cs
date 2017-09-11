@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "saveData", menuName = "Custom/SaveData", order = 6)]
+[CreateAssetMenu(fileName = "playerData", menuName = "Custom/PlayerData", order = 6)]
 public class PlayerData : ScriptableObject, IPlayerData
 {
     private static readonly int SkillTreeSlotNo = 3;
+    private static readonly int SkillSlotNo = 4;
 
     //main attributes
     [SerializeField] private string characterName;
+    [SerializeField] private string raceName;
     [SerializeField] private int xp;
     [SerializeField] private int level = 1;
     [SerializeField] private int rankPoints;
     [SerializeField] private List<SkillID> skills;
     [SerializeField] private SkillTreeSlot[] skillTreeSlots = new SkillTreeSlot[SkillTreeSlotNo];
-    [SerializeField] private UnitData liveUnitData;
+    [SerializeField] private SkillID primarySkill;
+    [SerializeField] private SkillID[] secondarySkills = new SkillID[SkillSlotNo];
+    [SerializeField] private UnitData liveUnitData = null;
 
     #region interface implementation
     #region properties
@@ -23,7 +27,7 @@ public class PlayerData : ScriptableObject, IPlayerData
     {
         get
         {
-            return characterName;
+            return characterName;  
         }
     }
 
@@ -55,6 +59,19 @@ public class PlayerData : ScriptableObject, IPlayerData
         get
         {
             return rankPoints;
+        }
+    }
+
+    public UnitData LiveUnitData
+    {
+        get
+        {
+            if(!liveUnitData.IsInitialized)
+            {
+                liveUnitData = MainData.CurrentGameData.GetRace(raceName).BaseStats;
+            }
+
+            return liveUnitData;
         }
     }
     #endregion
@@ -102,7 +119,29 @@ public class PlayerData : ScriptableObject, IPlayerData
 
     public float GetStat(PlayerStats type)
     {
-        return 1.0f;
+        switch (type)
+        {
+            case PlayerStats.Hp:
+                return LiveUnitData.GetAttribute(Unit.AttributeType.Hp).Value;
+            case PlayerStats.Armor:
+                return LiveUnitData.GetAttribute(Unit.AttributeType.Armor).Value;
+            case PlayerStats.ArmorIgnore:
+                return LiveUnitData.GetAttribute(Unit.AttributeType.ArmorIgnore).Value;
+            case PlayerStats.Damage:
+                return LiveUnitData.GetAttribute(Unit.AttributeType.Damage).Value;
+            case PlayerStats.MoveSpeed:
+                return LiveUnitData.GetAttribute(Unit.AttributeType.MoveSpeed).Value;
+            case PlayerStats.Reach:
+                return LiveUnitData.GetAttribute(Unit.AttributeType.Reach).Value;
+            case PlayerStats.Regen:
+                return LiveUnitData.GetAttribute(Unit.AttributeType.Regen).Value;
+            case PlayerStats.ViewRange:
+                return LiveUnitData.GetAttribute(Unit.AttributeType.ViewRange).Value;
+            case PlayerStats.DamagePerSecond:
+                return LiveUnitData.GetAttribute(Unit.AttributeType.Damage).Value; //TODO: Divide by attack speed
+            default:
+                return 0.0f;
+        }
     }
     #endregion
     #endregion

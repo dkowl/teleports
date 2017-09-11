@@ -10,10 +10,10 @@ public class SkillPanelLevel : MonoBehaviour {
     {
         level_ = level;
 
-        for(int i = 0; i<level_.branches_.Count; i++)
+        for(int i = 0; i<level_.branches.Count; i++)
         {
             GameObject skillPanelBranch = Instantiate(Resources.Load("Prefabs/UI/Skills/SkillPanelBranch"), gameObject.transform) as GameObject;
-            skillPanelBranch.GetComponent<SkillPanelBranch>().initialize(level_.branches_[i]);
+            skillPanelBranch.GetComponent<SkillPanelBranch>().initialize(level_.branches[i]);
         }
     }
 }

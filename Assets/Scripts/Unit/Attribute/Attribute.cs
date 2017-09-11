@@ -37,8 +37,14 @@ public class Attribute
         AddMultiplier(multiplier);
     }
 
-    public float Value()
+    //deprecated
+    public float GetValue()
     {
-        return (raw + bonus) * multiplier;
+        return Value;
+    }
+
+    public float Value
+    {
+        get { return (raw + bonus) * multiplier; }
     }
 };

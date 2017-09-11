@@ -68,50 +68,50 @@ public class Unit : MonoBehaviour
     #region attribute properties
     public float Size
     {
-        get { return unitData.GetAttribute(AttributeType.Size).Value() / 2f; }
+        get { return unitData.GetAttribute(AttributeType.Size).GetValue() / 2f; }
     }
 
     public float Hp
     {
-        get { return unitData.GetAttribute(AttributeType.Hp).Value(); }
+        get { return unitData.GetAttribute(AttributeType.Hp).GetValue(); }
     }
 
     public float Armor
     {
-        get { return unitData.GetAttribute(AttributeType.Armor).Value(); }
+        get { return unitData.GetAttribute(AttributeType.Armor).GetValue(); }
     }
 
     public float Regen
     {
-        get { return unitData.GetAttribute(AttributeType.Regen).Value(); }
+        get { return unitData.GetAttribute(AttributeType.Regen).GetValue(); }
     }
 
     public float Damage
     {
-        get { return unitData.GetAttribute(AttributeType.Damage).Value(); }
+        get { return unitData.GetAttribute(AttributeType.Damage).GetValue(); }
     }
 
     public float ArmorIgnore
     {
-        get { return unitData.GetAttribute(AttributeType.ArmorIgnore).Value(); }
+        get { return unitData.GetAttribute(AttributeType.ArmorIgnore).GetValue(); }
     }
 
     public float Reach
     {
-        get { return unitData.GetAttribute(AttributeType.Reach).Value(); }
+        get { return unitData.GetAttribute(AttributeType.Reach).GetValue(); }
     }
 
     public float MoveSpeed
     {
         get
         {
-            return unitData.GetAttribute(AttributeType.MoveSpeed).Value();
+            return unitData.GetAttribute(AttributeType.MoveSpeed).GetValue();
         }
     }
 
     public float ViewRange
     {
-        get { return unitData.GetAttribute(AttributeType.ViewRange).Value(); }
+        get { return unitData.GetAttribute(AttributeType.ViewRange).GetValue(); }
     }
     #endregion
 
