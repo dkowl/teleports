@@ -4,21 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [ExecuteInEditMode]
-public class TextStyler : MonoBehaviour {
+public class TextStyler : LoadableBehaviour {
 
     public Stylesheet.FontSize fontSize;
     public Stylesheet.TextColor textColor;
 
-	void OnEnable()
+	public override void LoadDataInternal()
     {
-        if (Application.isEditor)
-        {
-            Stylesheet stylesheet = MainData.CurrentStylesheet;
-            Text text = gameObject.GetComponent<Text>();
+        Stylesheet stylesheet = MainData.CurrentStylesheet;
+        Text text = gameObject.GetComponent<Text>();
 
-            text.fontSize = stylesheet.GetFontSize(fontSize);
-            text.color = stylesheet.GetTextColor(textColor);
-        }
-
+        text.fontSize = stylesheet.GetFontSize(fontSize);
+        text.color = stylesheet.GetTextColor(textColor);  
     }
 }

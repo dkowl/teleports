@@ -11,7 +11,7 @@ public class CharacterSelectMenu : LoadableBehaviour {
     public Text playerNameText;
     public Text playerLevelText;
 
-    public override void LoadData()
+    public override void LoadDataInternal()
     {
         Stylesheet stylesheet = MainData.CurrentStylesheet;
 

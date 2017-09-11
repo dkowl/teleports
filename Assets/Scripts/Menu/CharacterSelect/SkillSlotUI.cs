@@ -12,7 +12,7 @@ public class SkillSlotUI : LoadableBehaviour {
     public Stylesheet.ColorPreset lockedColor;
     public Stylesheet.ColorPreset unlockedColor;
 
-    public override void LoadData()
+    public override void LoadDataInternal()
     {
         Stylesheet stylesheet = MainData.CurrentStylesheet;
 

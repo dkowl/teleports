@@ -11,7 +11,7 @@ public class StatBarUI : LoadableBehaviour {
     public Text statNameText, statValueText;
     public Slider slider;
 
-    public override void LoadData()
+    public override void LoadDataInternal()
     {
         IServerData server = MainData.CurrentServerData;
 
@@ -20,7 +20,9 @@ public class StatBarUI : LoadableBehaviour {
 
         statNameText.text = statName;
 
-        slider.value = stats.GetSliderValue(playerData.Level, playerData.GetStat(statType));
+        float statValue = playerData.GetStat(statType);
+        slider.value = stats.GetSliderValue(playerData.Level, statValue);
+        statValueText.text = statValue.ToString();
     }
 
 }

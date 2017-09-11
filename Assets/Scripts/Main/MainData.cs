@@ -7,7 +7,7 @@ using UnityEngine;
 public partial class MainData : MonoBehaviour {
 
     //singleton instance
-    private static MainData instance;
+    public static MainData instance;
 
     //inspector fields
     [SerializeField]

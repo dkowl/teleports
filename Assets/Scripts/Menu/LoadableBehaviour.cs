@@ -6,9 +6,21 @@ using UnityEngine;
 public abstract class LoadableBehaviour : MonoBehaviour {
 
 	void OnEnable()
-    {
+    {        
         LoadData();
     }
 
-    public abstract void LoadData();
+    public void LoadData() {
+        if (MainData.instance == null)
+        {
+            return;
+        }
+        else
+        {
+            Debug.Log("Loading from " + MainData.instance.name);
+            LoadDataInternal();
+        }
+    }
+
+    public abstract void LoadDataInternal();
 }
