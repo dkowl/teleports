@@ -24,11 +24,17 @@ public class PrefabSpawner : MonoBehaviour {
         Despawn();
     }
 
+    public void OnDestroy()
+    {
+        Despawn();
+    }
+
     public void Spawn()
     {
-        if (!isSpawned)
+        if (!isSpawned || spawnedInstance == null)
         {
             spawnedInstance = Instantiate(prefab, transform);
+            spawnedInstance.hideFlags = HideFlags.DontSaveInEditor;
         }
         isSpawned = true;
     }

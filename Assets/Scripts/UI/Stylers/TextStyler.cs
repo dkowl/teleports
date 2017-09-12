@@ -14,6 +14,8 @@ public class TextStyler : LoadableBehaviour {
         Stylesheet stylesheet = MainData.CurrentStylesheet;
         Text text = gameObject.GetComponent<Text>();
 
+        if (text == null) return;
+
         text.fontSize = stylesheet.GetFontSize(fontSize);
         text.color = stylesheet.GetTextColor(textColor);  
     }

@@ -75,17 +75,20 @@ public partial class MainData : MonoBehaviour {
     void OnEnable()
     {
         Initialize();
-        OnInitializedEvent();
     }
 
 
     //public functions
     void Initialize()
     {
-        if (!isInitialized)
+        if (!isInitialized || instance == null)
         {
             instance = this;
             isInitialized = true;
+            if (OnInitializedEvent != null)
+            {
+                OnInitializedEvent();
+            }
             Debug.Log("MainData initialized!");
         }
     }
