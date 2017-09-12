@@ -8,6 +8,7 @@ public partial class MainData : MonoBehaviour {
 
     //singleton instance
     public static MainData instance;
+    static bool isInitialized = false;
 
     //inspector fields
     [SerializeField]
@@ -19,26 +20,10 @@ public partial class MainData : MonoBehaviour {
     [SerializeField]
     private Stylesheet stylesheet;
 
-    //unity event functions
-	void Awake()
-    {
-        instance = this;
-        Debug.Log("MainData initialized!");
-    }
+    public delegate void OnInitialized();
+    public static event OnInitialized OnInitializedEvent;
 
-    void OnDestroy()
-    {
-        instance = null;
-    }
-
-    //editor only
-    void OnEnable()
-    {
-        if(Application.isEditor) Awake();
-    }
-
-    //properties
-
+    #region properties
     public static IPlayerData CurrentPlayerData
     {
         get { return instance.saveData.currentPlayerData(); }
@@ -73,9 +58,37 @@ public partial class MainData : MonoBehaviour {
     {
         get { return CurrentPlayerData.Xp; }
     }
+    #endregion
+
+    //unity event functions
+    void Awake()
+    {
+        Initialize();
+    }
+
+    void OnDestroy()
+    {
+        instance = null;
+    }
+
+    //editor only
+    void OnEnable()
+    {
+        Initialize();
+        OnInitializedEvent();
+    }
 
 
     //public functions
+    void Initialize()
+    {
+        if (!isInitialized)
+        {
+            instance = this;
+            isInitialized = true;
+            Debug.Log("MainData initialized!");
+        }
+    }
 
     //just a hack to keep game bug free
     public static void loadPlayer(GameObject player)

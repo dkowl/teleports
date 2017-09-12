@@ -24,7 +24,7 @@ public class Race : ScriptableObject {
     public UnitData BaseStats
     {
         get {
-            if(!baseStats.IsInitialized)
+            if(baseStats == null || !baseStats.IsInitialized)
             {
                 baseStats = new UnitData(baseStatsEditor);
             }

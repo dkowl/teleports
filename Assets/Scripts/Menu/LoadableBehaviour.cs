@@ -10,14 +10,21 @@ public abstract class LoadableBehaviour : MonoBehaviour {
         LoadData();
     }
 
-    public void LoadData() {
+    void OnDisable()
+    {
+        MainData.OnInitializedEvent -= LoadData;
+    }
+
+    public void LoadData()
+    {
+        MainData.OnInitializedEvent += LoadData;
+
         if (MainData.instance == null)
         {
             return;
         }
         else
         {
-            Debug.Log("Loading from " + MainData.instance.name);
             LoadDataInternal();
         }
     }

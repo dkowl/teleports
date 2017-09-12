@@ -8,11 +8,9 @@ public class PrefabSpawner : MonoBehaviour {
     public GameObject prefab;
 
     [SerializeField]
-    [HideInInspector]
     protected bool isSpawned = false;
 
     [SerializeField]
-    [HideInInspector]
     protected GameObject spawnedInstance;
 
     public void OnEnable()
