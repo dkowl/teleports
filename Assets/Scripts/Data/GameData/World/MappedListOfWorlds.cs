@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GemSlot {
+[System.Serializable]
+public class MappedListOfWorlds : MappedList<WorldData>
+{
 
-    private bool isEmpty;
-	
 }

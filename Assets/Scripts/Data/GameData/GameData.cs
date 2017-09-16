@@ -11,12 +11,13 @@ public class GameData : ScriptableObject {
     [FormerlySerializedAs("races_")]
     private Race[] races;
 
-    [SerializeField]
-    private MappedListOfGems gems;
+    [SerializeField] private MappedListOfGems gems;
+    [SerializeField] private MappedListOfWorlds worlds;
 
     public void OnEnable()
     {
         gems.MakeDict();
+        worlds.MakeDict();
     }
     
     public Race GetRace(string raceName)

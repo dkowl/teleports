@@ -6,7 +6,7 @@ using UnityEngine;
 public class MappedList<T> where T : IUniqueName {
 
     [SerializeField]
-    private List<T> list;
+    private List<T> list = new List<T>();
     
     private Dictionary<string, T> dict;
 
