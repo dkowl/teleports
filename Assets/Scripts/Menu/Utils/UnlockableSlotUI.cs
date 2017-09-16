@@ -56,6 +56,7 @@ public abstract class UnlockableSlotUI : LoadableBehaviour {
     {
         backgroundImage.color = stylesheet.GetColorPreset(unlockedColor);
         foregroundImage.color = Color.clear;
+        Debug.Log(transform.parent.name);
         text.text = "Full";
     }
 }
