@@ -12,5 +12,7 @@ public enum PlayerStats {
     MoveSpeed,
     Reach,
     ViewRange,
+    TeleportPower,
+    TeleportTime,
     Count
 }

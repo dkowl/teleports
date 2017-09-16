@@ -20,6 +20,7 @@ public class PlayerData : ScriptableObject, IPlayerData
     [SerializeField] private SkillID primarySkill;
     [SerializeField] private SkillID[] secondarySkills = new SkillID[SkillSlotNo];
     [SerializeField] private UnitData liveUnitData = null;
+    [SerializeField] private TeleportData teleportData = null;
 
     #region interface implementation
     #region properties
@@ -139,6 +140,10 @@ public class PlayerData : ScriptableObject, IPlayerData
                 return LiveUnitData.GetAttribute(Unit.AttributeType.ViewRange).Value;
             case PlayerStats.DamagePerSecond:
                 return LiveUnitData.GetAttribute(Unit.AttributeType.Damage).Value; //TODO: Divide by attack speed
+            case PlayerStats.TeleportPower:
+                return teleportData.Power;
+            case PlayerStats.TeleportTime:
+                return teleportData.Time;
             default:
                 return 0.0f;
         }

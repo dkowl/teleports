@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+[ExecuteInEditMode]
 [CreateAssetMenu(fileName = "gameData", menuName = "Data/Game")]
 public class GameData : ScriptableObject {
 
     [SerializeField]
     [FormerlySerializedAs("races_")]
     private Race[] races;
+
+    [SerializeField]
+    private MappedListOfGems gems;
+
+    public void OnEnable()
+    {
+        gems.MakeDict();
+    }
     
     public Race GetRace(string raceName)
     {

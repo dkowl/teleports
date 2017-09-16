@@ -59,8 +59,6 @@ public class MainController : MonoBehaviour {
         updateDelegates[(int)SceneState.Ready] = UpdateSceneReady;
         updateDelegates[(int)SceneState.Run] = UpdateSceneRun;
 
-        Debug.Log("delegates set up!");
-
         nextSceneName = startSceneName;
         sceneState = SceneState.Reset;
     }

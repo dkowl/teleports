@@ -31,12 +31,15 @@ public class PrefabSpawner : MonoBehaviour {
 
     public void Spawn()
     {
-        if (!isSpawned || spawnedInstance == null)
+        if (prefab != null)
         {
-            spawnedInstance = Instantiate(prefab, transform);
-            spawnedInstance.hideFlags = HideFlags.DontSaveInEditor;
+            if (!isSpawned || spawnedInstance == null)
+            {
+                spawnedInstance = Instantiate(prefab, transform);
+                spawnedInstance.hideFlags = HideFlags.DontSaveInEditor;
+            }
+            isSpawned = true;
         }
-        isSpawned = true;
     }
 
     public virtual void AfterSpawn()
