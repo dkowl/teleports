@@ -27,7 +27,9 @@ public class Stylesheet : ScriptableObject
         Gray3,
         Gray4,
         Gray5,
-        Black
+        Black,
+        Transparent,
+        Alpha80
     }
 
     public int titleFontSize;
@@ -45,6 +47,8 @@ public class Stylesheet : ScriptableObject
     public Color gray4;
     public Color gray5;
     public Color black;
+
+    public Sprite lockSprite;
 
     public int GetFontSize(FontSize fontSize)
     {
@@ -94,6 +98,10 @@ public class Stylesheet : ScriptableObject
                 return gray5;
             case ColorPreset.Black:
                 return black;
+            case ColorPreset.Transparent:
+                return Color.clear;
+            case ColorPreset.Alpha80:
+                return new Color(0, 0, 0, 0.8f);
             default:
                 return Color.white;
         }

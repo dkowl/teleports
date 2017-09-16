@@ -3,27 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SkillTreeSlot  {
+public class SkillTreeSlot : UnlockableSlot {
 
-    [SerializeField] private bool isUnlocked = false;
-    [SerializeField] private bool isEmpty = true;
     [SerializeField] private int skillTreeId = 0;
-
-    public bool IsUnlocked
-    {
-        get
-        {
-            return isUnlocked;
-        }
-    }
-
-    public bool IsEmpty
-    {
-        get
-        {
-            return isEmpty;
-        }
-    }
 
     public int SkillTreeId
     {
@@ -33,17 +15,11 @@ public class SkillTreeSlot  {
         }
     }
 
-    public void Unlock()
-    {
-        isUnlocked = true;
-    }
-
     public void setTree(int id)
     {
-        if(isUnlocked && isEmpty)
+        if(Fill())
         {
             skillTreeId = id;
-            isEmpty = false;
         }
     }	
 }

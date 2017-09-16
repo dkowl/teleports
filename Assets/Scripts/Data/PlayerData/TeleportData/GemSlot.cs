@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GemSlot {
+[System.Serializable]
+public class GemSlot : UnlockableSlot {
 
-    private bool isEmpty;
+    [SerializeField] private string gemName;
+    [SerializeField] private float essence;
+
+    public int Essence
+    {
+        get { return (int)essence; }
+    }
+
 	
 }

@@ -75,6 +75,11 @@ public class PlayerData : ScriptableObject, IPlayerData
             return liveUnitData;
         }
     }
+
+    public TeleportData CurrentTeleportData
+    {
+        get { return teleportData; }
+    }
     #endregion
 
     #region methods
@@ -141,9 +146,9 @@ public class PlayerData : ScriptableObject, IPlayerData
             case PlayerStats.DamagePerSecond:
                 return LiveUnitData.GetAttribute(Unit.AttributeType.Damage).Value; //TODO: Divide by attack speed
             case PlayerStats.TeleportPower:
-                return teleportData.Power;
+                return CurrentTeleportData.Power;
             case PlayerStats.TeleportTime:
-                return teleportData.Time;
+                return CurrentTeleportData.Time;
             default:
                 return 0.0f;
         }

@@ -18,7 +18,7 @@ public class SkillSlotUI : LoadableBehaviour {
 
         SkillTreeSlot slot = MainData.CurrentPlayerData.GetSkillTreeSlot(skillSlotId);
         string textString;
-        if (!slot.IsUnlocked)
+        if (slot.IsLocked)
         {
             textString = "Locked";
             image.color = stylesheet.GetColorPreset(lockedColor);
