@@ -7,30 +7,29 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(fileName = "gameData", menuName = "Data/Game")]
 public class GameData : ScriptableObject {
 
-    [SerializeField]
-    [FormerlySerializedAs("races_")]
-    private Race[] races;
-
     [SerializeField] private MappedListOfGems gems;
     [SerializeField] private MappedListOfWorlds worlds;
+    [SerializeField] private MappedListOfRaces races;
 
     public void OnEnable()
     {
         gems.MakeDict();
         worlds.MakeDict();
+        races.MakeDict();
     }
     
     public Race GetRace(string raceName)
     {
-        foreach(Race race in races)
-        {
-            if(race.Name == raceName)
-            {
-                return race;
-            }
-        }
+        Race result = races.TryGetValue(raceName);
 
-        Debug.Log("Race " + raceName + " not found.");
-        return null;
+        if (result != null)
+        {
+            return result;
+        }
+        else
+        {
+            Debug.Log("Race " + raceName + " not found.");
+            return null;
+        }
     }
 }

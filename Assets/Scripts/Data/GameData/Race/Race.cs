@@ -4,22 +4,16 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "race", menuName = "Custom/Race", order = 4)]
-public class Race : ScriptableObject {
-
-    [FormerlySerializedAs("name_")]
-    [SerializeField]
-    private string raceName;
+public class Race : UniqueScriptableObject {
 
     [FormerlySerializedAs("baseStats_")]
     [SerializeField]
     private UnitDataEditor baseStatsEditor;
 
-    private UnitData baseStats = null;
+    [SerializeField]
+    private SkinnedMeshRenderer mesh;
 
-    public string Name
-    {
-        get { return name; }
-    }
+    private UnitData baseStats = null;
     
     public UnitData BaseStats
     {
@@ -30,6 +24,14 @@ public class Race : ScriptableObject {
             }
 
             return baseStats;
+        }
+    }
+
+    public SkinnedMeshRenderer Mesh
+    {
+        get
+        {
+            return mesh;
         }
     }
 }

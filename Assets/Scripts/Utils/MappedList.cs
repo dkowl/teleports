@@ -22,4 +22,17 @@ public class MappedList<T> where T : IUniqueName {
         Debug.Log("Dictionary of type " + typeof(T).ToString() + " created from " + dict.Count.ToString() + " items");
     }
 
+    public T TryGetValue(string name)
+    {
+        T result;
+        if(dict.TryGetValue(name, out result))
+        {
+            return result;
+        }
+        else
+        {
+            return default(T);
+        }
+    }
+
 }
