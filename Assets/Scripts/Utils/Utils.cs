@@ -18,4 +18,46 @@ namespace Teleports.Utils
             gameObject.transform.localScale = Vector3.zero;
         }
     }
+
+    public static class RomanNumbers
+    {
+        private static string result;
+        private static int x;
+
+        private static bool CheckAndAppend(string letter, int number)
+        {
+            if (x >= number)
+            {
+                result += letter;
+                x -= number;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static string RomanNumber(int number)
+        {
+            result = "";
+            x = number;
+
+            while (CheckAndAppend("M", 1000)) ;
+            CheckAndAppend("CM", 900);
+            CheckAndAppend("D", 500);
+            CheckAndAppend("CD", 400);
+            while (CheckAndAppend("C", 100)) ;
+            CheckAndAppend("XC", 90);
+            CheckAndAppend("L", 50);
+            CheckAndAppend("XL", 40);
+            while (CheckAndAppend("X", 10)) ;
+            CheckAndAppend("IX", 9);
+            CheckAndAppend("V", 5);
+            CheckAndAppend("IV", 4);
+            while (CheckAndAppend("I", 1)) ;
+
+            return result;
+        }
+    }
 }

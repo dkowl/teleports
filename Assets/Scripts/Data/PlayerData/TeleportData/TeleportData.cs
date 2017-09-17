@@ -10,6 +10,9 @@ public class TeleportData : ScriptableObject {
     private static readonly int GemSlotNo = 6;
 
     [SerializeField]
+    private int tier = 1;
+
+    [SerializeField]
     private float power;
 
     [SerializeField]
@@ -18,6 +21,11 @@ public class TeleportData : ScriptableObject {
 
     [SerializeField]
     private GemSlot[] gemSlots = new GemSlot[GemSlotNo];
+
+    public int Tier
+    {
+        get { return tier; }
+    }
 
 
     public float Power

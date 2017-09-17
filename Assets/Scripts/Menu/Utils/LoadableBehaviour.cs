@@ -12,6 +12,16 @@ public abstract class LoadableBehaviour : MonoBehaviour {
 
     void OnDisable()
     {
+        Unsubscribe();
+    }
+
+    void OnDestroy()
+    {
+        Unsubscribe();
+    }
+
+    private void Unsubscribe()
+    {
         MainData.OnInitializedEvent -= LoadData;
     }
 
