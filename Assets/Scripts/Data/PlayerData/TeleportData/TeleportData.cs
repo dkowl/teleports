@@ -22,6 +22,9 @@ public class TeleportData : ScriptableObject {
     [SerializeField]
     private GemSlot[] gemSlots = new GemSlot[GemSlotNo];
 
+    [SerializeField]
+    private TeleportGraphics graphics;
+
     public int Tier
     {
         get { return tier; }
@@ -41,6 +44,11 @@ public class TeleportData : ScriptableObject {
     public GemSlot GetGemSlot(int id)
     {
         return gemSlots[id];
+    }
+
+    public TeleportGraphics Graphics
+    {
+        get { return graphics; }
     }
 
 }

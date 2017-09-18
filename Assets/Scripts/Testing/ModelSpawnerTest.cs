@@ -4,18 +4,37 @@ using UnityEngine;
 
 public class ModelSpawnerTest : MonoBehaviour {
 
-    public string raceName;
+    public PlayerData playerDataEditor;
+    public Vector3 characterLocalPositionOffset, characterLocalRotationOffset; 
+    public Vector3 teleportLocalPositionOffset, teleportLocalRotationOffset;
 
-    private GameObject spawnedObject;
-    private SkinnedMeshRenderer meshRenderer;
+    private IPlayerData playerData;
+    private GameObject character, teleport;
+
+    public IPlayerData CurrentPlayerData
+    {
+        get
+        {
+            if (playerData == null)
+            {
+                playerData = playerDataEditor;
+            }
+
+            return playerData;
+        }
+    }
 
     public void Awake()
     {
-        spawnedObject = new GameObject(raceName + "model");
-        spawnedObject.transform.parent = transform;
-        spawnedObject.AddComponent<SkinnedMeshRenderer>();
-        meshRenderer = spawnedObject.GetComponent<SkinnedMeshRenderer>(); 
-        meshRenderer = MainData.CurrentGameData.GetRace("raceName").Mesh;
+        Race race = MainData.CurrentGameData.GetRace(CurrentPlayerData.RaceName);
 
+        character = Instantiate(race.Graphics.modelObject, transform);
+        character.GetComponentInChildren<Animator>().runtimeAnimatorController = race.Graphics.uiAnimationController;
+        character.transform.localPosition += characterLocalPositionOffset;
+        character.transform.Rotate(characterLocalRotationOffset, Space.Self);
+
+        teleport = Instantiate(CurrentPlayerData.CurrentTeleportData.Graphics.modelObject, transform);
+        teleport.transform.localPosition += teleportLocalPositionOffset;
+        teleport.transform.Rotate(teleportLocalRotationOffset, Space.Self);
     }
 }

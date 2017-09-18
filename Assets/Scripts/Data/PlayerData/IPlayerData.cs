@@ -5,6 +5,7 @@ using UnityEngine;
 public interface IPlayerData {
 
     string CharacterName { get; }
+    string RaceName { get; }
     int Xp { get; set; }
     int Level { get; }
     int RankPoints { get; }

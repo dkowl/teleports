@@ -32,6 +32,11 @@ public class PlayerData : ScriptableObject, IPlayerData
         }
     }
 
+    public string RaceName
+    {
+        get { return raceName; }
+    }
+
     public int Xp
     {
         get

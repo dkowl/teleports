@@ -4,7 +4,8 @@ using UnityEngine;
 
 [ExecuteInEditMode]
 //singleton managing all the static data
-public partial class MainData : MonoBehaviour {
+[CreateAssetMenu(fileName = "mainData", menuName = "Data/Main")]
+public partial class MainData : ScriptableObject {
 
     //singleton instance
     public static MainData instance;
@@ -24,24 +25,34 @@ public partial class MainData : MonoBehaviour {
     public static event OnInitialized OnInitializedEvent;
 
     #region properties
+    private static MainData Instance{
+        get {
+            if (instance == null)
+            {
+                instance = Resources.Load("Data/mainData") as MainData;
+            }
+            return instance;
+        }
+    }
+
     public static IPlayerData CurrentPlayerData
     {
-        get { return instance.saveData.currentPlayerData(); }
+        get { return Instance.saveData.currentPlayerData(); }
     }
 
     public static GameData CurrentGameData
     {
-        get { return instance.gameData; }
+        get { return Instance.gameData; }
     }
 
     public static IServerData CurrentServerData
     {
-        get { return instance.serverData; }
+        get { return Instance.serverData; }
     }
 
     public static Stylesheet CurrentStylesheet
     {
-        get { return instance.stylesheet; }
+        get { return Instance.stylesheet; }
     }
 
     public static string PlayerName

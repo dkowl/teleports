@@ -11,7 +11,7 @@ public class Race : UniqueScriptableObject {
     private UnitDataEditor baseStatsEditor;
 
     [SerializeField]
-    private SkinnedMeshRenderer mesh;
+    private RaceGraphics graphics;
 
     private UnitData baseStats = null;
     
@@ -27,11 +27,11 @@ public class Race : UniqueScriptableObject {
         }
     }
 
-    public SkinnedMeshRenderer Mesh
+    public RaceGraphics Graphics
     {
         get
         {
-            return mesh;
+            return graphics;
         }
     }
 }
