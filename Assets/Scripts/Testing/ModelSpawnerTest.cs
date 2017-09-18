@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ModelSpawnerTest : MonoBehaviour {
+
+public class ModelSpawnerTest : LoadableBehaviour {
 
     public PlayerData playerDataEditor;
     public Vector3 characterLocalPositionOffset, characterLocalRotationOffset; 
@@ -15,26 +16,33 @@ public class ModelSpawnerTest : MonoBehaviour {
     {
         get
         {
-            if (playerData == null)
-            {
-                playerData = playerDataEditor;
-            }
-
-            return playerData;
+            return MainData.CurrentPlayerData;
         }
     }
 
-    public void Awake()
+    public override void LoadDataInternal()
     {
-        Race race = MainData.CurrentGameData.GetRace(CurrentPlayerData.RaceName);
+        if (Application.isPlaying)
+        {
+            Debug.Log("Loading ze data");
+            Race race = MainData.CurrentGameData.GetRace(CurrentPlayerData.RaceName);
 
-        character = Instantiate(race.Graphics.modelObject, transform);
-        character.GetComponentInChildren<Animator>().runtimeAnimatorController = race.Graphics.uiAnimationController;
-        character.transform.localPosition += characterLocalPositionOffset;
-        character.transform.Rotate(characterLocalRotationOffset, Space.Self);
+            if (character != null)
+            {
+                Destroy(character);
+            }
+            character = Instantiate(race.Graphics.modelObject, transform);
+            character.GetComponentInChildren<Animator>().runtimeAnimatorController = race.Graphics.uiAnimationController;
+            character.transform.localPosition += characterLocalPositionOffset;
+            character.transform.Rotate(characterLocalRotationOffset, Space.Self);
 
-        teleport = Instantiate(CurrentPlayerData.CurrentTeleportData.Graphics.modelObject, transform);
-        teleport.transform.localPosition += teleportLocalPositionOffset;
-        teleport.transform.Rotate(teleportLocalRotationOffset, Space.Self);
+            if (teleport != null)
+            {
+                Destroy(teleport);
+            }
+            teleport = Instantiate(CurrentPlayerData.CurrentTeleportData.Graphics.modelObject, transform);
+            teleport.transform.localPosition += teleportLocalPositionOffset;
+            teleport.transform.Rotate(teleportLocalRotationOffset, Space.Self);
+        }
     }
 }

@@ -45,10 +45,8 @@ public partial class SaveData : ScriptableObject
         get { return currentPlayerDataID; }
         set {
             currentPlayerDataID = (byte)value;
-            Debug.Log("Changing char ID!");
             if(OnCharacterIDChangedEvent != null)
             {
-                Debug.Log("Firing event!");
                 OnCharacterIDChangedEvent();
             }
         }

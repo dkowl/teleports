@@ -10,7 +10,7 @@ public class UnitAttributeStats
 
     public float GetAttributeAvgValue(int level)
     {
-        return Mathf.Lerp(minLvlAvgVal, maxLvlAvgVal, (float)level / XpLevels.MaxLevel);
+        return Mathf.Lerp(minLvlAvgVal, maxLvlAvgVal, (float)(level - 1) / XpLevels.MaxLevel);
     }
 
     public float GetSliderValue(int level, float value)
