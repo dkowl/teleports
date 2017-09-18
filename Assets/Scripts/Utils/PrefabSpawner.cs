@@ -16,7 +16,6 @@ public class PrefabSpawner : MonoBehaviour {
     public void OnEnable()
     {
         Spawn();
-        AfterSpawn();
     }
 
     public void OnDisable()
@@ -35,11 +34,18 @@ public class PrefabSpawner : MonoBehaviour {
         {
             if (!isSpawned || spawnedInstance == null)
             {
+                BeforeSpawn();
                 spawnedInstance = Instantiate(prefab, transform);
                 spawnedInstance.hideFlags = HideFlags.DontSaveInEditor;
+                AfterSpawn();
             }
             isSpawned = true;
         }
+    }
+
+    public virtual void BeforeSpawn()
+    {
+
     }
 
     public virtual void AfterSpawn()

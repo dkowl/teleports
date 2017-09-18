@@ -35,6 +35,11 @@ public partial class MainData : ScriptableObject {
         }
     }
 
+    public static SaveData CurrentSaveData
+    {
+        get { return Instance.saveData; }
+    }
+
     public static IPlayerData CurrentPlayerData
     {
         get { return Instance.saveData.currentPlayerData(); }

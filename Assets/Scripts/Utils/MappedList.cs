@@ -24,6 +24,11 @@ public class MappedList<T> where T : IUniqueName {
 
     public T TryGetValue(string name)
     {
+        if(dict == null)
+        {
+            MakeDict();
+        }
+
         T result;
         if(dict.TryGetValue(name, out result))
         {

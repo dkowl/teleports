@@ -23,11 +23,14 @@ public abstract class LoadableBehaviour : MonoBehaviour {
     private void Unsubscribe()
     {
         MainData.OnInitializedEvent -= LoadData;
+        SaveData.OnCharacterIDChangedEvent -= LoadData;
     }
 
     public void LoadData()
     {
+        Unsubscribe();
         MainData.OnInitializedEvent += LoadData;
+        SaveData.OnCharacterIDChangedEvent += LoadData;
 
         if (MainData.instance == null)
         {
