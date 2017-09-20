@@ -24,7 +24,6 @@ public class ModelSpawnerTest : LoadableBehaviour {
     {
         if (Application.isPlaying)
         {
-            Debug.Log("Loading ze data");
             Race race = MainData.CurrentGameData.GetRace(CurrentPlayerData.RaceName);
 
             if (character != null)

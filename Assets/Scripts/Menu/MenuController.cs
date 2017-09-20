@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO: try making this a ScriptableObject
+
 //singleton controlling menu stack
 public class MenuController : MonoBehaviour {
 
@@ -75,6 +77,19 @@ public class MenuController : MonoBehaviour {
         }
     }
 
+    public bool IsActive(MenuType menuType)
+    {
+        Menu menu = menus[(int)menuType];
+        if (menu != null)
+        {
+            return menus[(int)menuType].IsActive;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     //protected functions
     protected void CloseAll()
     {
@@ -111,10 +126,13 @@ public class MenuController : MonoBehaviour {
     }
 
     //properties
+    public static MenuController Instance
+    {
+        get { return instance; }
+    }
+
     public static string MainCanvasPrefabPath
     {
         get { return instance.mainCanvasPrefabPath; }
     }
-
-
 }
