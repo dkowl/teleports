@@ -5,39 +5,63 @@ using UnityEngine;
 //TODO: try making this a ScriptableObject
 
 //singleton controlling menu stack
-public class MenuController : MonoBehaviour {
+[ExecuteInEditMode]
+[CreateAssetMenu(fileName = "menuController", menuName = "Menu/Controller")]
+public class MenuController : ScriptableObject {
 
     private static MenuController instance;
 
+
+    [System.NonSerialized]
     private Menu[] menus;
+    [System.NonSerialized]
     private Stack<Menu> menuStack;
+    [System.NonSerialized]
+    private Transform spawnTransform;
 
 	public enum MenuType { CreateCharacter, ChooseCharacter, Home, Count };
     public Menu[] menuInspectorLinks;
     public MenuType startMenu;
-    public string mainCanvasPrefabPath;
+    public GameObject mainCanvasPrefab;
 
 
     //unity event functions
     void Awake()
     {
-        instance = this;
+        Initialize();
+    }
 
-        menus = new Menu[(int)MenuType.Count];
-        menuStack = new Stack<Menu>();
-
-        foreach(Menu menu in menuInspectorLinks)
-        {
-            menus[(int)menu.menuType] = menu;
-        }
-
-        OpenMenu(startMenu);
+    void OnEnable()
+    {
+        Initialize();
     }
 
     void OnDestroy()
     {
         CloseAll();
         instance = null;
+    }
+
+    public void FirstStart(Transform newSpawnTransform)
+    {
+        spawnTransform = newSpawnTransform;
+
+        OpenMenu(startMenu);
+    }
+
+    protected void Initialize()
+    {
+        instance = this;
+
+        menus = new Menu[(int)MenuType.Count];
+        menuStack = new Stack<Menu>();
+
+        foreach (Menu menu in menuInspectorLinks)
+        {
+            menus[(int)menu.menuType] = menu;
+        }
+
+        Debug.Log("Menu Controller initialized!");
     }
 
     //public functions
@@ -128,11 +152,26 @@ public class MenuController : MonoBehaviour {
     //properties
     public static MenuController Instance
     {
-        get { return instance; }
+        get
+        {
+            if (instance == null)
+            {
+                instance = Resources.Load("Menu/menuController") as MenuController;
+            }
+            return instance;
+        }
     }
 
-    public static string MainCanvasPrefabPath
+    public static Transform SpawnTransform
     {
-        get { return instance.mainCanvasPrefabPath; }
+        get
+        {
+            return Instance.spawnTransform;
+        }
+    }
+
+    public static GameObject MainCanvasPrefab
+    {
+        get { return MainCanvasPrefab; }
     }
 }

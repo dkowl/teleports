@@ -26,9 +26,9 @@ public abstract class SelectorButtonUI : LoadableBehaviour
 
     public void SetActive()
     {
+        transform.localScale = Vector3.one;
         if (!IsActive())
         {
-            transform.localScale = Vector3.one;
             OnActivate();
         }
     }

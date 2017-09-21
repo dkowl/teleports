@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Menu : MonoBehaviour
+[CreateAssetMenu(fileName = "New Menu", menuName = "Menu/Menu")]
+public class Menu : ScriptableObject
 {
     //private variables
-    private GameObject instantiatedObject;
-    private bool isOpen, isActive;
+    [System.NonSerialized]
+    private GameObject instantiatedObject = null;
+    [System.NonSerialized]
+    private bool isOpen = false, isActive = false;
 
     //inspector variables
-    public string prefabPath;
+    public GameObject prefab;
     public MenuController.MenuType menuType;
     public bool disableMenusUnder; //menu will be closed when enabled back
     [Tooltip("will parent the menu to the MainCanvas prefab")]
@@ -18,18 +21,19 @@ public class Menu : MonoBehaviour
     //public functions
     public void Open()
     {
-        if(!IsOpen)
+        if (!IsOpen)
         {
             if (instantiatedObject == null)
             {
+                Debug.Log("Opening Menu");
                 if (useMainCanvas)
                 {
-                    instantiatedObject = Instantiate(Resources.Load(MenuController.MainCanvasPrefabPath), transform) as GameObject;
-                    Instantiate(Resources.Load(prefabPath), instantiatedObject.transform);
+                    instantiatedObject = Instantiate(MenuController.MainCanvasPrefab, MenuController.SpawnTransform) as GameObject;
+                    Instantiate(prefab, instantiatedObject.transform);
                 }
                 else
                 {
-                    instantiatedObject = Instantiate(Resources.Load(prefabPath), transform) as GameObject;
+                    instantiatedObject = Instantiate(prefab, MenuController.SpawnTransform) as GameObject;
                 }
             }
             else
