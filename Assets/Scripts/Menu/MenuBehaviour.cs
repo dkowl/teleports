@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuBehaviour : MonoBehaviour {
+public abstract class MenuBehaviour : MonoBehaviour {
 
-    public void Start()
-    {
-        MenuController.Instance.FirstStart(transform);
-    }
+    public abstract void OnOpen();
 }

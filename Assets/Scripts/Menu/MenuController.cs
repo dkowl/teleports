@@ -19,7 +19,7 @@ public class MenuController : ScriptableObject {
     [System.NonSerialized]
     private Transform spawnTransform;
 
-	public enum MenuType { CreateCharacter, ChooseCharacter, Home, Count };
+	public enum MenuType { CreateCharacter, ChooseCharacter, Popup, Count };
     public Menu[] menuInspectorLinks;
     public MenuType startMenu;
     public GameObject mainCanvasPrefab;
@@ -82,7 +82,7 @@ public class MenuController : ScriptableObject {
     public void CloseMenu(MenuType menuType)
     {
         Menu menu = menus[(int)menuType];
-        if(menu == menuStack.Peek())
+        if (menu == menuStack.Peek())
         {
             CloseTopMenu();
             if (menu.disableMenusUnder)
@@ -172,6 +172,6 @@ public class MenuController : ScriptableObject {
 
     public static GameObject MainCanvasPrefab
     {
-        get { return MainCanvasPrefab; }
+        get { return Instance.mainCanvasPrefab; }
     }
 }

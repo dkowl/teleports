@@ -10,6 +10,8 @@ public class Menu : ScriptableObject
     private GameObject instantiatedObject = null;
     [System.NonSerialized]
     private bool isOpen = false, isActive = false;
+    [System.NonSerialized]
+    private MenuBehaviour menuBehaviour;
 
     //inspector variables
     public GameObject prefab;
@@ -25,7 +27,6 @@ public class Menu : ScriptableObject
         {
             if (instantiatedObject == null)
             {
-                Debug.Log("Opening Menu");
                 if (useMainCanvas)
                 {
                     instantiatedObject = Instantiate(MenuController.MainCanvasPrefab, MenuController.SpawnTransform) as GameObject;
@@ -39,6 +40,11 @@ public class Menu : ScriptableObject
             else
             {
                 instantiatedObject.SetActive(true);
+            }
+            menuBehaviour = instantiatedObject.GetComponentInChildren<MenuBehaviour>();
+            if(menuBehaviour != null)
+            {
+                menuBehaviour.OnOpen();
             }
             IsOpen = true;
         }
