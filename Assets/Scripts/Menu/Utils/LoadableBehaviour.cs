@@ -24,6 +24,8 @@ public abstract class LoadableBehaviour : MonoBehaviour {
     {
         MainData.OnInitializedEvent -= LoadData;
         SaveData.OnCharacterIDChangedEvent -= LoadData;
+        Menu.OnOpenEvent -= LoadData;
+        Menu.OnCloseEvent -= LoadData;
     }
 
     public void LoadData()
@@ -31,6 +33,8 @@ public abstract class LoadableBehaviour : MonoBehaviour {
         Unsubscribe();
         MainData.OnInitializedEvent += LoadData;
         SaveData.OnCharacterIDChangedEvent += LoadData;
+        Menu.OnOpenEvent += LoadData;
+        Menu.OnCloseEvent += LoadData;
 
         if (MainData.instance == null)
         {

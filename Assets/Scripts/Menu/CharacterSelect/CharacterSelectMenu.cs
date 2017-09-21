@@ -6,6 +6,15 @@ using UnityEngine.UI;
 [ExecuteInEditMode]
 public class CharacterSelectMenu : LoadableBehaviour {
 
+    public enum State
+    {
+        SelectHero,
+        NewHero,
+        CurrentHero
+    }
+
+    private State state;
+
     public string selectCharacterString, newCharacterString;
     public Text titleText;
     public Text playerNameText;
@@ -15,8 +24,27 @@ public class CharacterSelectMenu : LoadableBehaviour {
     {
         Stylesheet stylesheet = MainData.CurrentStylesheet;
 
-        titleText.text = selectCharacterString;
+        string titleString = "";
+        switch (state)
+        {
+            case State.SelectHero:
+                titleString = selectCharacterString;
+                break;
+            case State.NewHero:
+                titleString = newCharacterString;
+                break;
+            case State.CurrentHero:
+                titleString = MainData.CurrentPlayerData.CharacterName;
+                break;
+        }
+        titleText.text = titleString;
         playerNameText.text = MainData.CurrentPlayerData.CharacterName;
         playerLevelText.text = "Level " + MainData.CurrentPlayerData.Level.ToString();
+    }
+
+    public void SetState(State newState)
+    {
+        state = newState;
+        LoadData();
     }
 }

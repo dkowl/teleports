@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuSwitcherButtonUISpawner : MonoBehaviour {
+public class MenuSwitcherButtonUISpawner : PrefabSpawner {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public MenuController.MenuType menuType;
+    public string buttonString;
+    public Transform parentTransform;
+
+    public override void AfterSpawn()
+    {
+        MenuSwitcherButtonUI button = spawnedInstance.GetComponent<MenuSwitcherButtonUI>();
+
+        button.MenuType = menuType;
+        button.ButtonString = buttonString;
+        spawnedInstance.gameObject.transform.SetParent(parentTransform);
+
+        button.LoadData();
+    }
 }

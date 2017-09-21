@@ -13,7 +13,7 @@ public class MenuController : ScriptableObject {
 
 
     [System.NonSerialized]
-    private Menu[] menus;
+    private Menu[] menus = new Menu[(int)MenuType.Count];
     [System.NonSerialized]
     private Stack<Menu> menuStack;
     [System.NonSerialized]
@@ -52,7 +52,6 @@ public class MenuController : ScriptableObject {
     protected void Initialize()
     {
         instance = this;
-
         menus = new Menu[(int)MenuType.Count];
         menuStack = new Stack<Menu>();
 

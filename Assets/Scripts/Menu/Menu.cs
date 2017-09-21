@@ -20,6 +20,13 @@ public class Menu : ScriptableObject
     [Tooltip("will parent the menu to the MainCanvas prefab")]
     public bool useMainCanvas;
 
+    //events
+    public delegate void OnOpen();
+    public static event OnOpen OnOpenEvent;
+
+    public delegate void OnClose();
+    public static event OnClose OnCloseEvent;
+
     //public functions
     public void Open()
     {
@@ -47,6 +54,7 @@ public class Menu : ScriptableObject
                 menuBehaviour.OnOpen();
             }
             IsOpen = true;
+            OnOpenEvent();
         }
     }
 
@@ -57,6 +65,7 @@ public class Menu : ScriptableObject
             Destroy(instantiatedObject);
             instantiatedObject = null;
             IsOpen = false;
+            OnCloseEvent();
         }
     }
 
