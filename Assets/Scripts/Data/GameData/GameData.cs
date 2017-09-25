@@ -10,6 +10,7 @@ public class GameData : ScriptableObject {
     [SerializeField] private MappedListOfGems gems;
     [SerializeField] private MappedListOfWorlds worlds;
     [SerializeField] private MappedListOfRaces races;
+    [SerializeField] private SkillDatabase skillDatabase;
 
     public void OnEnable()
     {
@@ -31,5 +32,10 @@ public class GameData : ScriptableObject {
             Debug.Log("Race " + raceName + " not found.");
             return null;
         }
+    }
+
+    public SkillDatabase CurrentSkillDatabase
+    {
+        get { return skillDatabase; }
     }
 }

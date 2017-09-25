@@ -30,8 +30,8 @@ public class ModelSpawnerTest : LoadableBehaviour {
             {
                 Destroy(character);
             }
-            character = Instantiate(race.Graphics.modelObject, transform);
-            character.GetComponentInChildren<Animator>().runtimeAnimatorController = race.Graphics.uiAnimationController;
+            character = Instantiate(race.Graphics.ModelObject, transform);
+            character.GetComponentInChildren<Animator>().runtimeAnimatorController = race.Graphics.UiAnimationController;
             character.transform.localPosition += characterLocalPositionOffset;
             character.transform.Rotate(characterLocalRotationOffset, Space.Self);
 

@@ -5,8 +5,30 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "raceGraphics", menuName = "Data/Race/Graphics")]
 public class RaceGraphics : ScriptableObject {
 
-    public GameObject modelObject;
-    
-    public RuntimeAnimatorController uiAnimationController;
-    public Sprite icon; 
+    [SerializeField] private GameObject modelObject;
+
+    [SerializeField] private RuntimeAnimatorController uiAnimationController;
+    [SerializeField] private RuntimeAnimatorController worldAnimationController;
+    [SerializeField] private Sprite icon; 
+
+    public GameObject ModelObject
+    {
+        get { return modelObject; }
+    }
+
+    public RuntimeAnimatorController UiAnimationController
+    {
+        get { return uiAnimationController; }
+    }
+
+    public RuntimeAnimatorController WorldAnimationController
+    {
+        get { return worldAnimationController; }
+    }
+
+    public Sprite Icon
+    {
+        get { return icon; }
+    }
+
 }

@@ -6,7 +6,7 @@ public static class PlayerGraphics {
 
 	public static Sprite GetPlayerIcon(IPlayerData playerData)
     {
-        return MainData.CurrentGameData.GetRace(playerData.RaceName).Graphics.icon;
+        return MainData.CurrentGameData.GetRace(playerData.RaceName).Graphics.Icon;
     }
 
     public static Sprite GetTeleportIcon(IPlayerData playerData)

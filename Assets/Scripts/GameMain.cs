@@ -8,23 +8,16 @@ public class GameMain : MonoBehaviour {
 
     public static GameMain instance;
 
-    GameObject player_;
-    GameObject mainCanvas_;
+    GameObject player;
+    GameObject mainCanvas;
 
-    float gameTime_, teleportTime_;
-    static public float TimeLeft
-    {
-        get { return instance.teleportTime_ - instance.gameTime_; }
-    }
+    float gameTime;
+    float teleportTime;
 
-    int score_, startXp_;
-    public int Score
-    {
-        get { return score_; }
-    }
+    int score, startXp;
 
-    bool endScreenOn_;
-    GameObject endScreen_;
+    bool endScreenOn;
+    GameObject endScreen;
 
     void Awake()
     {
@@ -37,65 +30,126 @@ public class GameMain : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        player_ = GameObject.FindGameObjectWithTag("Player");
-        GlobalData.instance.loadPlayer(player_);
-        startXp_ = player_.GetComponent<Xp>().xp;
-        mainCanvas_ = Instantiate(Resources.Load("Prefabs/UI/MainCanvas"), gameObject.transform) as GameObject;
+        MenuController.Instance.CloseAll();
 
-        endScreenOn_ = false;
-        gameTime_ = 0;
+        SpawnPlayer();
+
+        startXp = player.GetComponent<Xp>().xp;
+        mainCanvas = Instantiate(Resources.Load("Prefabs/UI/MainCanvas"), gameObject.transform) as GameObject;
+
+        endScreenOn = false;
+        gameTime = 0;
     }
 
-
-    // Use this for initialization
+    
     void Start () {
-        unpauseGame();
-        teleportTime_ = GlobalData.instance.teleportData_.Time;
+        UnpauseGame();
+        teleportTime = MainData.CurrentPlayerData.CurrentTeleportData.Time;
     }
 	
-	// Update is called once per frame
 	void Update () {
 
-        gameTime_ += Time.deltaTime;
+        gameTime += Time.deltaTime;
 
-        if (gameTime_ >= teleportTime_)
+        if (gameTime >= teleportTime)
         {
-            endScreen();
+            EndScreen();
         }
 
-        if (!player_.GetComponent<Unit>().alive())
+        if (!player.GetComponent<Unit>().alive())
         {
-            endScreen();
+            EndScreen();
         }
 
-        score_ = player_.GetComponent<Xp>().xp - startXp_;
+        score = player.GetComponent<Xp>().xp - startXp;
                    
 	}
 
-    void endScreen()
+    private void EndScreen()
     {
-        if (!endScreenOn_)
+        if (!endScreenOn)
         {
-            pauseGame();
-            endScreen_ = Instantiate(Resources.Load("Prefabs/UI/EndScreen"), mainCanvas_.transform) as GameObject;
-            endScreenOn_ = true;
+            PauseGame();
+            endScreen = Instantiate(Resources.Load("Prefabs/UI/EndScreen"), mainCanvas.transform) as GameObject;
+            endScreenOn = true;
         }
     }
 
-    void pauseGame()
+    private void PauseGame()
     {
         Time.timeScale = 0;
     }
 
-    void unpauseGame()
+    private void UnpauseGame()
     {
         Time.timeScale = 1;
     }
 
-    public void backToHome()
+    private void SpawnPlayer()
     {
-        MainData.savePlayer(player_);
-        unpauseGame();
-        SceneManager.LoadScene("Home");
+        player = GameObject.FindGameObjectWithTag("Player");
+        if(player == null)
+        {
+            player = new GameObject("Player");
+            player.transform.parent = transform;
+            player.tag = "Player";
+        }
+
+        IPlayerData playerData = MainData.CurrentPlayerData;
+        Unit unit = player.GetComponent<Unit>();
+        PlayerController controller = player.GetComponent<PlayerController>();
+        Xp xp = player.GetComponent<Xp>();
+
+        if (unit == null)
+        {
+            unit = player.AddComponent<Unit>();
+        }
+        unit.unitData = playerData.BaseUnitData;
+
+        if (controller == null)
+        {
+            controller = player.AddComponent<PlayerController>();
+        }
+
+        //Instantiating skills
+        GameObject skills = new GameObject("Skills");
+        skills.transform.parent = player.transform;
+
+        GameObject primarySkill = Instantiate(MainData.CurrentGameData.CurrentSkillDatabase.GetSkill(playerData.PrimarySkillId).gameObject, skills.transform);
+        controller.MainAttack = primarySkill.GetComponent<Skill>();
+        unit.ActiveController = controller;
+
+        if(xp == null)
+        {
+            xp = player.AddComponent<Xp>();
+        }
+        xp.xp = playerData.Xp;
+
+        RaceGraphics raceGraphics = MainData.CurrentGameData.GetRace(playerData.RaceName).Graphics;
+        GameObject playerModel = Instantiate(raceGraphics.ModelObject, player.transform);
+        playerModel.transform.localEulerAngles = Vector3.zero;
+
+        Animator animator = playerModel.GetComponentInChildren<Animator>();
+        animator.runtimeAnimatorController = raceGraphics.WorldAnimationController;
+        animator.gameObject.AddComponent<UnitAnimator>();
+       
+    }
+
+    public void BackToHome()
+    {
+        MainData.SavePlayer(player);
+        UnpauseGame();
+        MenuController.Instance.OpenMenu(MenuController.MenuType.ChooseCharacter);
+        MainController.SwitchScene("Test");
+    }
+
+    static public float TimeLeft
+    {
+        get { return instance.teleportTime - instance.gameTime; }
+    }
+
+    public int Score
+    {
+        get { return score; }
     }
 }

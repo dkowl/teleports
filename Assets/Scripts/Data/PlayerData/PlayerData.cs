@@ -68,6 +68,14 @@ public class PlayerData : ScriptableObject, IPlayerData
         }
     }
 
+    public UnitData BaseUnitData
+    {
+        get
+        {
+            return MainData.CurrentGameData.GetRace(RaceName).BaseStats;
+        }
+    }
+
     public UnitData LiveUnitData
     {
         get
@@ -84,6 +92,11 @@ public class PlayerData : ScriptableObject, IPlayerData
     public TeleportData CurrentTeleportData
     {
         get { return teleportData; }
+    }
+
+    public SkillID PrimarySkillId
+    {
+        get { return primarySkill; }
     }
     #endregion
 

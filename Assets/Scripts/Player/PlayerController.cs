@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : UnitController {
 	
 	// Update is called once per frame
-	public override void control () {
+	public override void Control () {
         if (Input.GetButton("PlayerMove"))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -15,24 +15,24 @@ public class PlayerController : UnitController {
             int layerMask = 1 << 10; //testing for enemies
             if (Input.GetButtonDown("PlayerMove") && Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
-                target_.TargetUnit = hit.transform.parent.gameObject.GetComponent<Unit>();
+                target.TargetUnit = hit.transform.parent.gameObject.GetComponent<Unit>();
                 done = true;
             }
 
             layerMask = 1 << 8; //testing for ground
             if (!done && Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
-                unit_.moveTo(hit.point);
+                unit.moveTo(hit.point);
                 if (Input.GetButtonDown("PlayerMove"))
                 {
-                    unit_.resetCast();
-                    target_.TargetUnit = null;
+                    unit.resetCast();
+                    target.TargetUnit = null;
                 }
             }
         }
 
-        if (target_.TargetUnit != null) chase();
+        if (target.TargetUnit != null) Chase();
 
-        unit_.Graphics.updateTarget(target_.TargetUnit);
+        unit.Graphics.updateTarget(target.TargetUnit);
 	}    
 }

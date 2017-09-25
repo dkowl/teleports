@@ -19,7 +19,7 @@ public class Unit : MonoBehaviour
     }
 
     public UnitDataEditor unitDataEditor;
-    public IUnitData unitData;
+    public UnitData unitData;
 
     private float rotationSpeed;
 
@@ -59,7 +59,7 @@ public class Unit : MonoBehaviour
     }
 
     //controller
-    public UnitController activeController;
+    private UnitController activeController;
 
     //events
     //cast event
@@ -122,6 +122,15 @@ public class Unit : MonoBehaviour
         get { return isMoving; }
     }
 
+    public UnitController ActiveController
+    {
+        get { return activeController; }
+        set
+        {
+            activeController = value;
+        }
+    }
+
     #endregion
 
     void Awake () {
@@ -132,6 +141,12 @@ public class Unit : MonoBehaviour
         isCasting = false;
         isDead = false;
         isStunned = false;
+
+        if (skills == null)
+            skills = new List<Skill>();
+
+        if (perks == null)
+            perks = new List<Perk>();
 
         graphics = gameObject.AddComponent<UnitGraphics>();
 

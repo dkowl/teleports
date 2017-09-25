@@ -4,44 +4,56 @@ using UnityEngine;
 
 public abstract class UnitController : MonoBehaviour {
 
-    protected Unit unit_;
-    public Skill mainAttack_;
-    protected Skill.TargetInfo target_;
+    protected Unit unit;
+    protected Skill.TargetInfo target;
+    [SerializeField]
+    protected Skill mainAttack;
+
     public Skill.TargetInfo Target
     {
-        set { target_ = value; }
+        set { target = value; }
+    }
+
+    public Skill MainAttack
+    {
+        get { return mainAttack; }
+        set { mainAttack = value; }
     }
 
     public virtual void Awake()
     {
-        unit_ = gameObject.GetComponent<Unit>();
-        target_ = new Skill.TargetInfo();
+        unit = gameObject.GetComponent<Unit>();
+        target = new Skill.TargetInfo();
+        if(mainAttack == null)
+        {
+            mainAttack = GetComponent<Skill>();
+        }
     }
 
     void Update()
     {
-        if (isActive())
+        if (IsActive())
         {
-            control();
+            Control();
         }
     }
 
-    protected void chase()
+    protected void Chase()
     {
-        if (unit_.canReachCastTarget(mainAttack_, target_))
+        if (unit.canReachCastTarget(mainAttack, target))
         {
-            unit_.cast(mainAttack_, target_);
+            unit.cast(mainAttack, target);
         }
         else
         {
-            unit_.moveTo(target_.Position);
+            unit.moveTo(target.Position);
         }
     }
 
-    public abstract void control();
+    public abstract void Control();
 
-    bool isActive()
+    bool IsActive()
     {
-        return this == unit_.activeController;
+        return this == unit.ActiveController;
     }
 }

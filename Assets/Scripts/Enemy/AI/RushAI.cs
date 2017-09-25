@@ -5,35 +5,34 @@ using UnityEngine;
 public class RushAI : UnitController {
 
 
-    GameObject[] targets_; //all available targets
+    GameObject[] targets; //all available targets
     
     //Unity Event Functions
 	public override void Awake()
     {
         base.Awake();
-        targets_ = GameObject.FindGameObjectsWithTag("Player");
-        mainAttack_ = gameObject.GetComponent<Attack>();
+        targets = GameObject.FindGameObjectsWithTag("Player");
+        mainAttack = gameObject.GetComponent<Attack>();
     }
 
 	void Start () {
-        target();
+        FindTarget();
 	}
 
-    public override void control() {
-        if (target_.TargetUnit == null) target();
-        else chase();
+    public override void Control() {
+        if (base.target.TargetUnit == null) FindTarget();
+        else Chase();
 	}
-
-    //goal: find target_
-    void target()
+    
+    void FindTarget()
     {
         //select closest player
         float minDist = float.MaxValue;
 
         int bestArg = 0;
-        for (int i = 0; i<targets_.Length; i++)
+        for (int i = 0; i<targets.Length; i++)
         {
-            float dist = Vector3.Distance(targets_[i].transform.position, transform.position);
+            float dist = Vector3.Distance(targets[i].transform.position, transform.position);
             if (dist < minDist)
             {
                 minDist = dist;
@@ -41,10 +40,10 @@ public class RushAI : UnitController {
             }
         }
 
-        if (minDist < unit_.ViewRange)
+        if (minDist < unit.ViewRange)
         {
-            target_.TargetUnit = targets_[bestArg].GetComponent<Unit>();
+            base.target.TargetUnit = targets[bestArg].GetComponent<Unit>();
         }
-        else target_.TargetUnit = null;
+        else base.target.TargetUnit = null;
     }
 }

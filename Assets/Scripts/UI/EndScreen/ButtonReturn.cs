@@ -7,6 +7,6 @@ public class ButtonReturn : MonoBehaviour {
 
 	void Awake () {
         Button button = gameObject.GetComponent<Button>();
-        button.onClick.AddListener(GameMain.instance.backToHome);
+        button.onClick.AddListener(GameMain.instance.BackToHome);
     }
 }

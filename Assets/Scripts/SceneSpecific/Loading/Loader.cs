@@ -23,7 +23,7 @@ public class Loader : MonoBehaviour {
             //load acc if it exists
             if (accountManager_.exists(accKey))
             {
-                GlobalData.Account = accountManager_.get(accKey);
+                //GlobalData.Account = accountManager_.get(accKey);
                 loaded = true;
             }
         }        
@@ -33,7 +33,7 @@ public class Loader : MonoBehaviour {
             AccountState account = new AccountState();
             accountManager_.add(account);
             PlayerPrefs.SetString(PREF_KEY, account.Login);
-            GlobalData.Account = account;
+            //GlobalData.Account = account;
         }
 
         //go to CharacterSelect

@@ -109,13 +109,7 @@ public partial class MainData : ScriptableObject {
         }
     }
 
-    //just a hack to keep game bug free
-    public static void loadPlayer(GameObject player)
-    {
-        player.GetComponent<Xp>().xp = instance.saveData.currentPlayerData().Xp;
-    }
-
-    public static void savePlayer(GameObject player)
+    public static void SavePlayer(GameObject player)
     {
         instance.saveData.currentPlayerData().Xp = player.GetComponent<Xp>().xp;
     }
