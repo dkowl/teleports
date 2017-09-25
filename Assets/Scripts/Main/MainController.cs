@@ -27,7 +27,7 @@ public class MainController : MonoBehaviour {
     public LoadingGraphics loadingGraphics;
 
     //public static methods
-    public static void switchScene(string nextSceneName)
+    public static void SwitchScene(string nextSceneName)
     {
         if(mainController!= null)
         {

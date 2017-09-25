@@ -113,8 +113,7 @@ public class MenuController : ScriptableObject {
         }
     }
 
-    //protected functions
-    protected void CloseAll()
+    public void CloseAll()
     {
         while(menuStack.Count > 0)
         {
@@ -122,6 +121,7 @@ public class MenuController : ScriptableObject {
         }
     }
 
+    //protected functions
     protected void HideAll()
     {
         foreach (Menu menu in menuStack)

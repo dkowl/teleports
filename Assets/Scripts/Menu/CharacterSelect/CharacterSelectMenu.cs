@@ -20,6 +20,9 @@ public class CharacterSelectMenu : LoadableBehaviour {
     public Text playerNameText;
     public Text playerLevelText;
 
+    public delegate void MenuStateSwitched();
+    public event MenuStateSwitched MenuStateSwitchedEvent;
+
     public override void LoadDataInternal()
     {
         Stylesheet stylesheet = MainData.CurrentStylesheet;
@@ -46,5 +49,11 @@ public class CharacterSelectMenu : LoadableBehaviour {
     {
         state = newState;
         LoadData();
+        MenuStateSwitchedEvent();
+    }
+
+    public State GetState()
+    {
+        return state;
     }
 }
