@@ -10,7 +10,7 @@ public class UnitAnimator : MonoBehaviour {
 
     int moveSpeedHash;
     int isMovingHash;
-    int attackHash;
+    int attackHash, attackStartHash, attackResetHash;
 
     void Awake()
     {
@@ -19,8 +19,9 @@ public class UnitAnimator : MonoBehaviour {
 
         moveSpeedHash = Animator.StringToHash("moveSpeed");
         isMovingHash = Animator.StringToHash("isMoving");
-        attackHash = Animator.StringToHash("attack");
-
+        attackHash = Animator.StringToHash("cast");
+        attackStartHash = Animator.StringToHash("castStart");
+        attackResetHash = Animator.StringToHash("castReset");
     }
 
 	// Use this for initialization
