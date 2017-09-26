@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "skillGraphics", menuName = "Custom/Skill/Graphics", order = 3)]
 public class SkillGraphics : ScriptableObject {
 
-    public Sprite uiIcon_;
+    [FormerlySerializedAs("uiIcon_")]
+    public Sprite uiIcon;
 
-
+    public AnimationClip castAnimation;
 }
