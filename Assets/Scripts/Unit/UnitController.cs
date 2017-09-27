@@ -42,7 +42,7 @@ public abstract class UnitController : MonoBehaviour {
     {
         if (unit.canReachCastTarget(mainAttack, target))
         {
-            unit.cast(mainAttack, target);
+            unit.Cast(mainAttack, target);
         }
         else
         {

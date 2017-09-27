@@ -161,7 +161,6 @@ public class Unit : MonoBehaviour
         applyPerks();
     }
 	
-	// Update is called once per frame
 	void Update () {
 
         float dTime = Time.deltaTime;
@@ -222,7 +221,7 @@ public class Unit : MonoBehaviour
    
     }
 
-    public void cast(Skill skill, Skill.TargetInfo target)
+    public void Cast(Skill skill, Skill.TargetInfo target)
     {
         if (isCasting && activeSkill == skill && castTarget == target) return;
         isMoving = false;

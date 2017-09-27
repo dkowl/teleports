@@ -44,7 +44,7 @@ public class Charge : Skill {
         {
             if (unit.canReachCastTarget(mainAttack, target))
             {
-                unit.cast(mainAttack, target);
+                unit.Cast(mainAttack, target);
                 finalize();
             }
             else
