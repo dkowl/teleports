@@ -95,7 +95,7 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         get { return name; }
     }
     #endregion
-    
+
     virtual public void Update()
     {
         currentCooldown -= Time.deltaTime;
@@ -115,4 +115,5 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     }
 
     abstract public void InternalCast(Unit caster, TargetInfo target);
+
 }

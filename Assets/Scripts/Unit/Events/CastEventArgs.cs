@@ -6,14 +6,14 @@ public class CastEventArgs : EventArgs {
 
 	public CastEventArgs(Skill skill)
     {
-        skill_ = skill;
+        this.skill = skill;
     }
 
-    private Skill skill_;
+    private Skill skill;
 
     public Skill Skill
     {
-        get { return skill_; }
-        set { skill_ = value; }
+        get { return skill; }
+        set { skill = value; }
     }
 }

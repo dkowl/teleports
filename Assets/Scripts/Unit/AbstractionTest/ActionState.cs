@@ -38,4 +38,9 @@ public abstract class ActionState {
             return false;
         }
     }
+
+    public Unit Unit
+    {
+        get { return unit; }
+    }
 }
