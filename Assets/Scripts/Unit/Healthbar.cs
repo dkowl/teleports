@@ -22,7 +22,7 @@ public class Healthbar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         slider.value = unit.healthPercentage();
-        if (!unit.alive())
+        if (!unit.Alive())
         {
             healthbar.makeInvisible();
         }

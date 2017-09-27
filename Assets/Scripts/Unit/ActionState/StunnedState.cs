@@ -17,6 +17,7 @@ public class StunnedState : ActionState {
         if(stunTime > 0)
         {
             isActive = true;
+            unit.Graphics.showMessage("Stunned!");
         }
     }
 

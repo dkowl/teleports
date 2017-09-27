@@ -15,7 +15,10 @@ public class MovingState : ActionState {
 
     public override void Start()
     {
+        Debug.Log("Movement start");
         isActive = true;
+
+        unit.RotatingState.RotationTarget = Quaternion.LookRotation(moveDest - unit.transform.position);
     }
 
     public override void Update(float dTime)
@@ -35,10 +38,15 @@ public class MovingState : ActionState {
 
             unit.transform.position += offset;
         }
+        else if(IsActive && IsBlocked)
+        {
+            Reset();
+        }
     }
 
     public override void Reset()
     {
+        Debug.Log("Movement Reset");
         isActive = false;
         moveDest = unit.transform.position;
     }
@@ -48,7 +56,7 @@ public class MovingState : ActionState {
         get { return moveDest; }
         set
         {
-            if(value != moveDest && Utils.Approximately(value, unit.transform.position))
+            if(value != moveDest && !Utils.Approximately(value, unit.transform.position))
             {
                 moveDest = value;
                 Start();

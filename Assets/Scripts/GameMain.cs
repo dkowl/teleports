@@ -56,7 +56,7 @@ public class GameMain : MonoBehaviour {
             EndScreen();
         }
 
-        if (!player.GetComponent<Unit>().alive())
+        if (!player.GetComponent<Unit>().Alive())
         {
             EndScreen();
         }

@@ -8,7 +8,7 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     public class TargetInfo
     {
         private Unit targetUnit;
-         Vector3 position;
+        Vector3 position;
 
         public Unit TargetUnit
         {
@@ -115,5 +115,23 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     }
 
     abstract public void InternalCast(Unit caster, TargetInfo target);
+
+    public static bool CanReachCastTarget(Unit unit, Skill skill, TargetInfo target)
+    {
+        if (skill != null && target != null)
+        {
+            float totalReach = unit.Reach + unit.Size + skill.Reach;
+            if (target.TargetUnit != null) totalReach += target.TargetUnit.Size;
+
+            return
+                (target.Position - unit.transform.position).magnitude
+                <=
+                totalReach;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 }

@@ -19,6 +19,12 @@ public abstract class ActionState {
     public abstract void Update(float dTime);
     public abstract void Reset();
 
+    public void AddBlocker(ActionState blocker)
+    {
+        if(!blockers.Contains(blocker))
+            blockers.Add(blocker);
+    }
+
     public bool IsActive
     {
         get { return isActive; }

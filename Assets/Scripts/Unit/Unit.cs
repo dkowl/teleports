@@ -14,57 +14,29 @@ public class Unit : MonoBehaviour
         ArmorIgnore,
         Reach,
         MoveSpeed,
-        RotationSpeed,
         ViewRange,
+        RotationSpeed,
         Count
     }
 
     public UnitDataEditor unitDataEditor;
     public UnitData unitData;
 
-    private float rotationSpeed;
-
-    //hp
+    private List<ActionState> actionStates;
+    private MovingState movingState;
+    private RotatingState rotatingState;
+    private CastingState castingState;
+    private StunnedState stunnedState;
+    private DeadState deadState;
+    
     private float damageReceived;
-    private bool isDead;
 
-    //pathfinding
-    private Vector3 moveDest;
-    private bool isMoving;
-
-    private Quaternion rotationTarget;
-    private bool isRotating;
-
-    //special states
-    private bool isStunned;
-    private float stunTime;
-
-    //skill casting
-    private Skill.TargetInfo castTarget;
-    private Skill activeSkill;
-    private float currentCastTime;
-    private bool isCasting;
     public List<Skill> skills;
-
-    //perks
     public List<Perk> perks;
-
-    //kill rewarding
-    private Unit lastAttacker;
-
-    //graphics
+    
     private UnitGraphics graphics;
-    public UnitGraphics Graphics
-    {
-        get { return graphics; }
-    }
-
-    //controller
+    
     private UnitController activeController;
-
-    //events
-    //cast event
-    public event EventHandler<CastEventArgs> castEvent;
 
     #region attribute properties
     public float Size
@@ -122,7 +94,7 @@ public class Unit : MonoBehaviour
 
     public bool IsMoving
     {
-        get { return isMoving; }
+        get { return movingState.IsActive; }
     }
 
     public UnitController ActiveController
@@ -134,16 +106,50 @@ public class Unit : MonoBehaviour
         }
     }
 
+    public UnitGraphics Graphics
+    {
+        get { return graphics; }
+    }
+
+    public RotatingState RotatingState
+    {
+        get { return rotatingState; }
+    }
+
+    public CastingState CastingState
+    {
+        get { return castingState; }
+    }
     #endregion
 
     void Awake () {
         damageReceived = 0;
-        rotationSpeed = 2;
-        isMoving = false;
-        isRotating = false;
-        isCasting = false;
-        isDead = false;
-        isStunned = false;
+
+        movingState = new MovingState(this);
+        rotatingState = new RotatingState(this);
+        castingState = new CastingState(this);
+        stunnedState = new StunnedState(this);
+        deadState = new DeadState(this);
+
+        movingState.AddBlocker(castingState);
+        movingState.AddBlocker(stunnedState);
+        movingState.AddBlocker(deadState);
+
+        rotatingState.AddBlocker(castingState);
+        rotatingState.AddBlocker(stunnedState);
+        rotatingState.AddBlocker(deadState);
+
+        castingState.AddBlocker(stunnedState);
+        castingState.AddBlocker(deadState);
+
+        stunnedState.AddBlocker(deadState);
+
+        actionStates = new List<ActionState>();
+        actionStates.Add(movingState);
+        actionStates.Add(rotatingState);
+        actionStates.Add(castingState);
+        actionStates.Add(stunnedState);
+        actionStates.Add(deadState);
 
         if (skills == null)
             skills = new List<Skill>();
@@ -161,105 +167,44 @@ public class Unit : MonoBehaviour
 
     void Start()
     {
-        applyPerks();
+        ApplyPerks();
     }
 	
 	void Update () {
 
         float dTime = Time.deltaTime;
 
-        if (alive() && !isStunned)
+        foreach(ActionState state in actionStates)
         {
-            //Movement
-            if (canMove())
-            {
-                Vector3 offset = moveDest - transform.position;
-
-                if (MoveSpeed * dTime < offset.magnitude)
-                {
-                    offset *= MoveSpeed * dTime / offset.magnitude;
-                }
-                else
-                {
-                    isMoving = false;
-                }
-
-                transform.position += offset;
-
-            }
-            //Rotation
-            if (isRotating)
-            {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotationTarget, dTime * rotationSpeed * 360);
-                if (transform.rotation == rotationTarget)
-                {
-                    isRotating = false;
-                }
-            }
-            //Skill Casting
-            if (isCasting && canReachCastTarget())
-            {
-                currentCastTime += dTime;
-                if (currentCastTime >= activeSkill.CastTime)
-                {
-                    activeSkill.Cast(this, castTarget);
-                    isCasting = false;
-                    if(castEvent != null) castEvent(this, new CastEventArgs(activeSkill));
-                }
-            }
-            else
-            {
-                resetCast();
-            }
-        }
-        //Stun
-        else if (isStunned)
-        {
-            stunTime -= dTime;
-            if(stunTime<= 0)
-            {
-                resetStun();
-            }
-        }
-   
+            state.Update(dTime);
+        }   
     }
 
-    public void Cast(Skill skill, Skill.TargetInfo target)
+    public void CastStart(Skill skill, Skill.TargetInfo target)
     {
-        if (isCasting && activeSkill == skill && castTarget == target) return;
-        isMoving = false;
-        if(skill.CurrentCooldown == 0)
-        {
-            isCasting = true;
-            activeSkill = skill;
-            castTarget = target;
-            currentCastTime = 0;
-        }
+        Debug.Log("Trying to cast" + skill.Name + " on " + target.TargetUnit.name);
+        castingState.ActiveSkill = skill;
+        castingState.CastTarget = target;
+        castingState.Start();
     }
 
-    public void moveTo(Vector3 moveDest)
+    public void MoveStart(Vector3 moveDest)
     {
-        if (moveDest != transform.position)
-        {
-            this.moveDest = moveDest;
-            rotationTarget = Quaternion.LookRotation(this.moveDest - transform.position);
-            isMoving = true;
-            isRotating = true;
-        }
+        movingState.MoveDest = moveDest;
     }
 
-    public void addPerk(Perk perk)
+    public void AddPerk(Perk perk)
     {
         perk.Apply(this);
         perks.Add(perk);
     }
 
-    public bool alive()
+    public bool Alive()
     {
-        return !isDead;
+        return !deadState.IsActive;
     }
 
-    void applyPerks()
+    void ApplyPerks()
     {
         foreach(Perk perk in perks)
         {
@@ -267,78 +212,27 @@ public class Unit : MonoBehaviour
         }
     }
 
-    bool canMove()
-    {
-        return !isCasting && isMoving && !isDead;
-    }
-
-    public bool canReachCastTarget(Skill skill, Skill.TargetInfo target)
-    {
-        float totalReach = Reach + Size + skill.Reach;
-        if (target.TargetUnit != null) totalReach += target.TargetUnit.Size;
-
-        return
-            (target.Position - transform.position).magnitude
-            <=
-            totalReach;
-    }
-
-    bool canReachCastTarget()
-    {
-        return canReachCastTarget(activeSkill, castTarget);
-    }
-
-    public void receiveDamage(float damage, Unit attacker)
+    public void ReceiveDamage(float damage, Unit attacker)
     {
         float actualDamage = Mathf.Max(damage - Mathf.Max(Armor - attacker.ArmorIgnore, 0), 0);
         damageReceived += actualDamage;
-        if(actualDamage > 0) lastAttacker = attacker;
+        if(actualDamage > 0) deadState.LastAttacker = attacker;
         graphics.showDamage(actualDamage);
         if(damageReceived >= Hp)
         {
-            die();
+            deadState.Start();
         }
     }
 
-    public void removePerk(Perk perk)
+    public void RemovePerk(Perk perk)
     {
         perks.Remove(perk);
         perk.unapply(this);
     }
 
-    public void resetCast()
+    public void Stun(float time)
     {
-        isCasting = false;
-        activeSkill = null;
-        currentCastTime = 0;
-        castTarget = null;
-    }
-
-    public void resetStun()
-    {
-        isStunned = false;
-        stunTime = 0;
-    }
-
-    public void stun(float time)
-    {
-        isStunned = true;
-        stunTime += time;
-        graphics.showMessage("Stunned!");
-    }
-
-    public void die()
-    {
-        if (isDead) return;
-        isDead = true;
-        if(lastAttacker != null)
-        {
-            Xp xp = lastAttacker.gameObject.GetComponent<Xp>();
-            if (xp != null)
-            {
-                xp.receiveXp((1000 * unitData.Level));
-            }
-        }
+        stunnedState.StunTime = time;
     }
 
     public float healthPercentage()

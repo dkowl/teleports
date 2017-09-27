@@ -5,52 +5,52 @@ using UnityEngine;
 
 public class Charge : Skill {
 
-    public Attack attack_;
-    public Perk perk_;
+    public Attack attack;
+    public Perk perk;
 
-    Vector3 targetStartPosition_;
-    UnitController oldController_;
-    ChargeController chargeController_;
+    Vector3 targetStartPosition;
+    UnitController oldController;
+    ChargeController chargeController;
 
     public override void InternalCast(Unit caster, TargetInfo target) {
         
-        oldController_ = caster.ActiveController;
-        targetStartPosition_ = target.TargetUnit.gameObject.transform.position;
+        oldController = caster.ActiveController;
+        targetStartPosition = target.TargetUnit.gameObject.transform.position;
 
-        chargeController_ = caster.gameObject.AddComponent<ChargeController>();
-        chargeController_.Target = target;
-        chargeController_.initialize(this);
+        chargeController = caster.gameObject.AddComponent<ChargeController>();
+        chargeController.Target = target;
+        chargeController.Initialize(this);
     }
 
     public class ChargeController : UnitController
     {
-        public Charge charge_;
+        public Charge charge;
 
-        public void initialize(Charge charge)
+        public void Initialize(Charge charge)
         {
-            charge_ = charge;
+            this.charge = charge;
             unit.ActiveController = this;
-            mainAttack = charge_.attack_;
-            unit.addPerk(charge_.perk_);
+            mainAttack = this.charge.attack;
+            unit.AddPerk(this.charge.perk);
         }
 
-        void finalize()
+        void Finish()
         {
-            unit.removePerk(charge_.perk_);
-            unit.ActiveController = charge_.oldController_;
+            unit.RemovePerk(charge.perk);
+            unit.ActiveController = charge.oldController;
         }
 
         public override void Control()
         {
-            if (unit.canReachCastTarget(mainAttack, target))
+            if (CanReachCastTarget(unit, mainAttack, target))
             {
-                unit.Cast(mainAttack, target);
-                finalize();
+                unit.CastStart(mainAttack, target);
+                Finish();
             }
             else
             {
-                unit.moveTo(charge_.targetStartPosition_);
-                if (unit.transform.position == charge_.targetStartPosition_) finalize();
+                unit.MoveStart(charge.targetStartPosition);
+                if (unit.transform.position == charge.targetStartPosition) Finish();
             }
         }
     }

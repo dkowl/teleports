@@ -11,6 +11,6 @@ public class Attack : Skill {
 
 	override public void InternalCast(Unit caster, TargetInfo target)
     {
-        target.TargetUnit.receiveDamage(caster.Damage * damageMultiplier, caster);
+        target.TargetUnit.ReceiveDamage(caster.Damage * damageMultiplier, caster);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class UnitAnimator : MonoBehaviour {
 
     int moveSpeedHash;
     int isMovingHash;
-    int attackHash, attackStartHash, attackResetHash;
+    int castHash, castStartHash, castResetHash;
 
     void Awake()
     {
@@ -19,14 +20,15 @@ public class UnitAnimator : MonoBehaviour {
 
         moveSpeedHash = Animator.StringToHash("moveSpeed");
         isMovingHash = Animator.StringToHash("isMoving");
-        attackHash = Animator.StringToHash("cast");
-        attackStartHash = Animator.StringToHash("castStart");
-        attackResetHash = Animator.StringToHash("castReset");
+        castHash = Animator.StringToHash("cast");
+        castStartHash = Animator.StringToHash("castStart");
+        castResetHash = Animator.StringToHash("castReset");
     }
 
 	// Use this for initialization
 	void Start () {
-        unit.castEvent += HandleCastEvent;
+        unit.CastingState.startCastEvent += HandleCastStartEvent;
+        unit.CastingState.resetCastEvent += HandleCastResetEvent;
 	}
 	
 	// Update is called once per frame
@@ -35,8 +37,13 @@ public class UnitAnimator : MonoBehaviour {
         animator.SetBool(isMovingHash, unit.IsMoving);
 	}
 
-    void HandleCastEvent(object sender, CastEventArgs e)
+    void HandleCastStartEvent(object sender, EventArgs e)
     {
-        if(e.Skill is Attack) animator.SetTrigger(attackHash);
+        animator.SetTrigger(castStartHash);
+    }
+
+    void HandleCastResetEvent(object sender, EventArgs e)
+    {
+        animator.SetTrigger(castResetHash);
     }
 }

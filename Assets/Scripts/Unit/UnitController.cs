@@ -40,13 +40,13 @@ public abstract class UnitController : MonoBehaviour {
 
     protected void Chase()
     {
-        if (unit.canReachCastTarget(mainAttack, target))
+        if (Skill.CanReachCastTarget(unit, mainAttack, target))
         {
-            unit.Cast(mainAttack, target);
+            unit.CastStart(mainAttack, target);
         }
         else
         {
-            unit.moveTo(target.Position);
+            unit.MoveStart(target.Position);
         }
     }
 

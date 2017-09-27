@@ -18,8 +18,14 @@ public class CastingState : ActionState {
 
     public override void Start()
     {
-        if(castTarget != null && activeSkill != null && activeSkill.CurrentCooldown == 0 && CanReachCastTarget)
+        /*Debug.Log(
+            "castTarget: " + CastTarget.TargetUnit.name +
+            " ||| activeSkill: " + activeSkill.Name +
+            " ||| current cooldown: " + activeSkill.CurrentCooldown.ToString() +
+            " ||| can reach cast target?: " + CanReachCastTarget.ToString());*/
+        if(!IsActive && castTarget != null && activeSkill != null && activeSkill.CurrentCooldown == 0 && CanReachCastTarget)
         {
+            Debug.Log("Casting start");
             currentCastTime = 0;
             isActive = true;
             if (startCastEvent != null) startCastEvent(this, EventArgs.Empty);
@@ -38,7 +44,7 @@ public class CastingState : ActionState {
                 Reset();
             }
         }
-        else
+        else if(isActive)
         {
             Reset();
         }
@@ -46,6 +52,7 @@ public class CastingState : ActionState {
 
     public override void Reset()
     {
+        Debug.Log("Casting reset");
         castTarget = null;
         activeSkill = null;
         currentCastTime = 0;
@@ -57,20 +64,7 @@ public class CastingState : ActionState {
     {
         get
         {
-            if (activeSkill != null && castTarget != null)
-            {
-                float totalReach = unit.Reach + unit.Size + activeSkill.Reach;
-                if (castTarget.TargetUnit != null) totalReach += castTarget.TargetUnit.Size;
-
-                return
-                    (castTarget.Position - unit.transform.position).magnitude
-                    <=
-                    totalReach;
-            }
-            else
-            {
-                return false;
-            }
+            return Skill.CanReachCastTarget(unit, activeSkill, castTarget);
         }
     }
 
@@ -79,7 +73,7 @@ public class CastingState : ActionState {
         get { return castTarget; }
         set
         {
-            if (IsActive)
+            if (IsActive && castTarget != value)
             {
                 Reset();
             }
@@ -92,7 +86,7 @@ public class CastingState : ActionState {
         get { return activeSkill; }
         set
         {
-            if (IsActive)
+            if (IsActive && activeSkill != value)
             {
                 Reset();
             }
