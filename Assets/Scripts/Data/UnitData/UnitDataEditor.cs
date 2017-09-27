@@ -45,6 +45,9 @@ public class UnitDataEditor : ScriptableObject
     [SerializeField]
     private float moveSpeed;
 
+    [SerializeField]
+    private float rotationSpeed = 2;
+
     [FormerlySerializedAs("viewRange_")]
     [SerializeField]
     private float viewRange;
@@ -171,6 +174,18 @@ public class UnitDataEditor : ScriptableObject
         set
         {
             moveSpeed = value;
+        }
+    }
+
+    public float RotationSpeed
+    {
+        get
+        {
+            return rotationSpeed;
+        }
+        set
+        {
+            rotationSpeed = value;
         }
     }
 

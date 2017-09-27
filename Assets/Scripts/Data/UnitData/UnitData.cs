@@ -34,6 +34,7 @@ public class UnitData : IUnitData {
         attributes[(int)Unit.AttributeType.ArmorIgnore] = new Attribute(unitData.ArmorIgnore);
         attributes[(int)Unit.AttributeType.Reach] = new Attribute(unitData.Reach);
         attributes[(int)Unit.AttributeType.MoveSpeed] = new Attribute(unitData.MoveSpeed);
+        attributes[(int)Unit.AttributeType.RotationSpeed] = new Attribute(unitData.RotationSpeed);
         attributes[(int)Unit.AttributeType.ViewRange] = new Attribute(unitData.ViewRange);
 
         height = unitData.Height;

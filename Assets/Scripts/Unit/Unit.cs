@@ -14,6 +14,7 @@ public class Unit : MonoBehaviour
         ArmorIgnore,
         Reach,
         MoveSpeed,
+        RotationSpeed,
         ViewRange,
         Count
     }
@@ -103,10 +104,12 @@ public class Unit : MonoBehaviour
 
     public float MoveSpeed
     {
-        get
-        {
-            return unitData.GetAttribute(AttributeType.MoveSpeed).GetValue();
-        }
+        get { return unitData.GetAttribute(AttributeType.MoveSpeed).GetValue(); }
+    }
+
+    public float RotationSpeed
+    {
+        get { return unitData.GetAttribute(AttributeType.RotationSpeed).GetValue(); }
     }
 
     public float ViewRange

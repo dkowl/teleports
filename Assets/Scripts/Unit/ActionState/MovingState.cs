@@ -10,7 +10,7 @@ public class MovingState : ActionState {
 
     public MovingState(Unit unit) : base(unit)
     {
-
+        Reset();
     }
 
     public override void Start()
