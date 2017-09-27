@@ -10,6 +10,7 @@ public class GameData : ScriptableObject {
     [SerializeField] private MappedListOfGems gems;
     [SerializeField] private MappedListOfWorlds worlds;
     [SerializeField] private MappedListOfRaces races;
+    [SerializeField] private MappedListOfSkills skills;
     [SerializeField] private SkillDatabase skillDatabase;
 
     public void OnEnable()
@@ -17,6 +18,7 @@ public class GameData : ScriptableObject {
         gems.MakeDict();
         worlds.MakeDict();
         races.MakeDict();
+        skills.MakeDict();
     }
     
     public Race GetRace(string raceName)
@@ -31,6 +33,18 @@ public class GameData : ScriptableObject {
         {
             Debug.Log("Race " + raceName + " not found.");
             return null;
+        }
+    }
+
+    public Skill GetSkill(SkillID skillId)
+    {
+        if (skillId.UsesString())
+        {
+            return skills.TryGetValue(skillId.skillName);
+        }
+        else
+        {
+            return skillDatabase.GetSkill(skillId);
         }
     }
 

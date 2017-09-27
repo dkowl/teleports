@@ -10,9 +10,6 @@ public class SkillDatabase : ScriptableObject {
     [SerializeField]
     private List<SkillTree> skillTrees;
 
-    [SerializeField]
-    private List<Skill> skills;
-
     public Skill GetSkill(SkillID id)
     {
         if(id.elementID != 0)

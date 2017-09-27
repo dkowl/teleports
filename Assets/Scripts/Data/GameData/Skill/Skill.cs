@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public abstract class Skill : MonoBehaviour {
+public abstract class Skill : MonoBehaviour, IUniqueName {
 
     public class TargetInfo
     {
@@ -63,6 +63,8 @@ public abstract class Skill : MonoBehaviour {
     [SerializeField]
     float currentCooldown;
 
+    public SkillGraphics graphics;
+
     #region properties
     public string Name
     {
@@ -88,9 +90,11 @@ public abstract class Skill : MonoBehaviour {
     {
         get { return currentCooldown; }
     }
+    public string UniqueName
+    {
+        get { return name; }
+    }
     #endregion
-
-    public SkillGraphics graphics;
     
     virtual public void Update()
     {
