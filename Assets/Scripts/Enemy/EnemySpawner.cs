@@ -55,7 +55,7 @@ public class EnemySpawner : MonoBehaviour {
         enemyName[(int)EnemyType.White] = "White";
         enemyName[(int)EnemyType.Black] = "Black";
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameMain.Instance.Player;
 
         enemies = new List<Enemy>();
     }

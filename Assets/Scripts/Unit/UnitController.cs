@@ -54,6 +54,6 @@ public abstract class UnitController : MonoBehaviour {
 
     bool IsActive()
     {
-        return this == unit.ActiveController && !GameMain.instance.IsPaused;
+        return this == unit.ActiveController && !GameMain.Instance.IsPaused;
     }
 }

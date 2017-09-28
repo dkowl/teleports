@@ -12,6 +12,6 @@ public class Score : MonoBehaviour {
 	}
 	
 	void Update () {
-        text_.text = "Score: " + GameMain.instance.Score.ToString();
+        text_.text = "Score: " + GameMain.Instance.Score.ToString();
 	}
 }

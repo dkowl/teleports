@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameMain : MonoBehaviour {
 
-    public static GameMain instance;
+    private static GameMain instance;
 
     GameObject player;
     GameObject mainCanvas;
@@ -90,6 +90,8 @@ public class GameMain : MonoBehaviour {
 
     private void SpawnPlayer()
     {
+        if(player != null) { return; }
+
         player = GameObject.FindGameObjectWithTag("Player");
         if(player == null)
         {
@@ -143,6 +145,27 @@ public class GameMain : MonoBehaviour {
         MainData.SavePlayer(player);
         MenuController.Instance.OpenMenu(MenuController.MenuType.ChooseCharacter);
         MainController.SwitchScene("Test");
+    }
+
+    public static GameMain Instance
+    {
+        get { return instance; }
+    }
+
+    public GameObject Player
+    {
+        get
+        {
+            if(player == null)
+            {
+                player = GameObject.FindGameObjectWithTag("Player");
+                if(player == null)
+                {
+                    SpawnPlayer();
+                }
+            }
+            return player;
+        }
     }
 
     public bool IsPaused

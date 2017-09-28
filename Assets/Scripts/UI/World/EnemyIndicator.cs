@@ -11,7 +11,7 @@ public class EnemyIndicator : MonoBehaviour {
     Camera cam;   
 
 	void Awake () {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameMain.Instance.Player;
         indicator = gameObject.transform.GetChild(0).GetChild(0).gameObject;
         canvas = gameObject.transform.GetChild(0).GetComponent<CanvasScaler>();
         cam = Camera.main;
