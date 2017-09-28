@@ -15,7 +15,6 @@ public class MovingState : ActionState {
 
     public override void Start()
     {
-        Debug.Log("Movement start");
         isActive = true;
 
         unit.RotatingState.RotationTarget = Quaternion.LookRotation(moveDest - unit.transform.position);
@@ -46,7 +45,6 @@ public class MovingState : ActionState {
 
     public override void Reset()
     {
-        Debug.Log("Movement Reset");
         isActive = false;
         moveDest = unit.transform.position;
     }

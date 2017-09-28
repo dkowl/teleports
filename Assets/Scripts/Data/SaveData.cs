@@ -18,7 +18,7 @@ public partial class SaveData : ScriptableObject
     public delegate void OnCharacterIDChanged();
     public static event OnCharacterIDChanged OnCharacterIDChangedEvent;
 
-    public IPlayerData currentPlayerData()
+    public IPlayerData CurrentPlayerData()
     {
         return playerData[currentPlayerDataID];
     }

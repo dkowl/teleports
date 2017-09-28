@@ -59,7 +59,7 @@ public static class XpLevels {
         int lvl = Level(xp);
         if (lvl > 0)
             return xpLevels[lvl] - xpLevels[lvl - 1];
-        else return 0;
+        else return 1;
     }
 
     public static int MaxLevel

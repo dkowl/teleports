@@ -19,6 +19,8 @@ public class GameMain : MonoBehaviour {
     bool endScreenOn;
     GameObject endScreen;
 
+    bool isPaused;
+
     void Awake()
     {
         if (instance == null)
@@ -34,10 +36,11 @@ public class GameMain : MonoBehaviour {
 
         SpawnPlayer();
 
-        startXp = player.GetComponent<Xp>().xp;
+        startXp = player.GetComponent<XpComponent>().Xp;
         mainCanvas = Instantiate(Resources.Load("Prefabs/UI/MainCanvas"), gameObject.transform) as GameObject;
 
         endScreenOn = false;
+        isPaused = false;
         gameTime = 0;
     }
 
@@ -61,7 +64,7 @@ public class GameMain : MonoBehaviour {
             EndScreen();
         }
 
-        score = player.GetComponent<Xp>().xp - startXp;
+        score = player.GetComponent<XpComponent>().Xp - startXp;
                    
 	}
 
@@ -77,12 +80,12 @@ public class GameMain : MonoBehaviour {
 
     private void PauseGame()
     {
-        Time.timeScale = 0;
+        isPaused = true;
     }
 
     private void UnpauseGame()
     {
-        Time.timeScale = 1;
+        isPaused = false;
     }
 
     private void SpawnPlayer()
@@ -98,7 +101,7 @@ public class GameMain : MonoBehaviour {
         IPlayerData playerData = MainData.CurrentPlayerData;
         Unit unit = player.GetComponent<Unit>();
         PlayerController controller = player.GetComponent<PlayerController>();
-        Xp xp = player.GetComponent<Xp>();
+        XpComponent xp = player.GetComponent<XpComponent>();
 
         if (unit == null)
         {
@@ -121,9 +124,9 @@ public class GameMain : MonoBehaviour {
 
         if(xp == null)
         {
-            xp = player.AddComponent<Xp>();
+            xp = player.AddComponent<XpComponent>();
         }
-        xp.xp = playerData.Xp;
+        xp.Xp = playerData.Xp;
 
         RaceGraphics raceGraphics = MainData.CurrentGameData.GetRace(playerData.RaceName).Graphics;
         GameObject playerModel = Instantiate(raceGraphics.ModelObject, player.transform);
@@ -138,9 +141,13 @@ public class GameMain : MonoBehaviour {
     public void BackToHome()
     {
         MainData.SavePlayer(player);
-        UnpauseGame();
         MenuController.Instance.OpenMenu(MenuController.MenuType.ChooseCharacter);
         MainController.SwitchScene("Test");
+    }
+
+    public bool IsPaused
+    {
+        get { return isPaused; }
     }
 
     static public float TimeLeft

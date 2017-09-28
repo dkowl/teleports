@@ -19,10 +19,10 @@ public class DeadState : ActionState {
             isActive = true;
             if (lastAttacker != null)
             {
-                Xp xp = lastAttacker.gameObject.GetComponent<Xp>();
+                XpComponent xp = lastAttacker.gameObject.GetComponent<XpComponent>();
                 if (xp != null)
                 {
-                    xp.receiveXp((1000 * unit.unitData.Level));
+                    xp.ReceiveXp((1000 * unit.unitData.Level));
                 }
             }
         }

@@ -42,7 +42,7 @@ public partial class MainData : ScriptableObject {
 
     public static IPlayerData CurrentPlayerData
     {
-        get { return Instance.saveData.currentPlayerData(); }
+        get { return Instance.saveData.CurrentPlayerData(); }
     }
 
     public static GameData CurrentGameData
@@ -111,6 +111,6 @@ public partial class MainData : ScriptableObject {
 
     public static void SavePlayer(GameObject player)
     {
-        instance.saveData.currentPlayerData().Xp = player.GetComponent<Xp>().xp;
+        CurrentPlayerData.Xp = player.GetComponent<XpComponent>().Xp;
     }
 }
