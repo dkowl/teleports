@@ -21,16 +21,16 @@ public class EnemySpawner : MonoBehaviour {
 
     class Enemy
     {
-        public GameObject gameObject_, indicator_;
-        public EnemyType type_;
+        public GameObject gameObject, indicator;
+        public EnemyType type;
     }
 
-    const string enemyFolder_ = "Prefabs/Enemies/";
-    string[] enemyName_ = new string[(int)EnemyType.Count];
+    const string enemyFolder = "Prefabs/Enemies/";
+    string[] enemyName = new string[(int)EnemyType.Count];
 
-    GameObject player_;
+    GameObject player;
 
-    List<Enemy> enemies_;
+    List<Enemy> enemies;
 
     void Awake()
     {
@@ -46,72 +46,72 @@ public class EnemySpawner : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        enemyName_[(int)EnemyType.Red] = "Red";
-        enemyName_[(int)EnemyType.Pink] = "Pink";
-        enemyName_[(int)EnemyType.Blue] = "Blue";
-        enemyName_[(int)EnemyType.Teal] = "Teal";
-        enemyName_[(int)EnemyType.Green] = "Green";
-        enemyName_[(int)EnemyType.Yellow] = "Yellow";
-        enemyName_[(int)EnemyType.White] = "White";
-        enemyName_[(int)EnemyType.Black] = "Black";
+        enemyName[(int)EnemyType.Red] = "Red";
+        enemyName[(int)EnemyType.Pink] = "Pink";
+        enemyName[(int)EnemyType.Blue] = "Blue";
+        enemyName[(int)EnemyType.Teal] = "Teal";
+        enemyName[(int)EnemyType.Green] = "Green";
+        enemyName[(int)EnemyType.Yellow] = "Yellow";
+        enemyName[(int)EnemyType.White] = "White";
+        enemyName[(int)EnemyType.Black] = "Black";
 
-        player_ = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
 
-        enemies_ = new List<Enemy>();
+        enemies = new List<Enemy>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        foreach (Enemy enemy in enemies_)
+        foreach (Enemy enemy in enemies)
         {
             bool isInViewRange =
-                Vector3.Distance(enemy.gameObject_.transform.position, player_.transform.position)
+                Vector3.Distance(enemy.gameObject.transform.position, player.transform.position)
                 <=
-                player_.GetComponent<Unit>().ViewRange;
+                player.GetComponent<Unit>().ViewRange;
 
-            if (enemy.indicator_ == null)
+            if (enemy.indicator == null)
             {
                 if (isInViewRange)
                 {
                     GameObject indicator = Instantiate(Resources.Load("Prefabs/Unit/EnemyIndicator"), gameObject.transform) as GameObject;
-                    indicator.GetComponent<EnemyIndicator>().setEnemy(enemy.gameObject_);
-                    enemy.indicator_ = indicator;
+                    indicator.GetComponent<EnemyIndicator>().SetEnemy(enemy.gameObject);
+                    enemy.indicator = indicator;
                 }
             }
             else
             {
                 if (!isInViewRange)
                 {
-                    Destroy(enemy.indicator_);
+                    Destroy(enemy.indicator);
                 }
             }
         }
     }
 
-    GameObject instantiateEnemy(EnemyType type)
+    GameObject InstantiateEnemy(EnemyType type)
     {
-        string path = enemyFolder_ + enemyName_[(int)type];
+        string path = enemyFolder + enemyName[(int)type];
         return Instantiate(Resources.Load(path), gameObject.transform) as GameObject;
     }
 
 
-    public void spawn(EnemyType type, Vector3 position)
+    public void Spawn(EnemyType type, Vector3 position)
     {
-        GameObject newEnemy = instantiateEnemy(type);
+        GameObject newEnemy = InstantiateEnemy(type);
         newEnemy.transform.position = position;
 
         Enemy enemy = new Enemy();
-        enemy.gameObject_ = newEnemy;
-        enemy.type_ = type;
-        enemy.indicator_ = null;
-        enemies_.Add(enemy);
+        enemy.gameObject = newEnemy;
+        enemy.type = type;
+        enemy.indicator = null;
+        enemies.Add(enemy);
     }
 
-    public void spawnRandom(Vector3 position)
+    public void SpawnRandom(Vector3 position)
     {
         int id = Random.Range(0, (int)EnemyType.Count);
-        spawn((EnemyType)id, position);
+        Spawn((EnemyType)id, position);
     }	
 	
 }

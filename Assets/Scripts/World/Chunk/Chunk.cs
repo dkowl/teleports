@@ -41,7 +41,7 @@ public class Chunk {
             if (!spawnDone_)
             {
                 Vector3 position = new Vector3(posX_ + Random.Range(0, size()), 0, posZ_ + Random.Range(0, size()));
-                EnemySpawner.instance.spawnRandom(position);
+                EnemySpawner.instance.SpawnRandom(position);
                 spawnDone_ = true;
             }
 
