@@ -1,0 +1,8 @@
+movement markers on ground
+rework target indicator
+add target info on top of screen
+add player hp info to UI (not healthbar)
+make enemies attack again - DONE :)
+show rewards as popups at the end
+make sth happen when enemies die
+rework skeleton's combat stats

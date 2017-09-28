@@ -134,8 +134,7 @@ public class Unit : MonoBehaviour
         movingState.AddBlocker(castingState);
         movingState.AddBlocker(stunnedState);
         movingState.AddBlocker(deadState);
-
-        rotatingState.AddBlocker(castingState);
+        
         rotatingState.AddBlocker(stunnedState);
         rotatingState.AddBlocker(deadState);
 
@@ -158,6 +157,11 @@ public class Unit : MonoBehaviour
             perks = new List<Perk>();
 
         graphics = gameObject.AddComponent<UnitGraphics>();
+
+        if(activeController == null)
+        {
+            activeController = gameObject.GetComponent<UnitController>();
+        }
 
         if (unitDataEditor != null)
         {

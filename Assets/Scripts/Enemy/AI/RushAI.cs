@@ -11,7 +11,6 @@ public class RushAI : UnitController {
 	public override void Awake()
     {
         base.Awake();
-        targets = GameObject.FindGameObjectsWithTag("Player");
         mainAttack = gameObject.GetComponent<Attack>();
     }
 
@@ -20,12 +19,13 @@ public class RushAI : UnitController {
 	}
 
     public override void Control() {
-        if (base.target.TargetUnit == null) FindTarget();
+        if (target.TargetUnit == null) FindTarget();
         else Chase();
 	}
     
     void FindTarget()
     {
+        targets = GameObject.FindGameObjectsWithTag("Player");
         //select closest player
         float minDist = float.MaxValue;
 
@@ -42,8 +42,8 @@ public class RushAI : UnitController {
 
         if (minDist < unit.ViewRange)
         {
-            base.target.TargetUnit = targets[bestArg].GetComponent<Unit>();
+            target.TargetUnit = targets[bestArg].GetComponent<Unit>();
         }
-        else base.target.TargetUnit = null;
+        else target.TargetUnit = null;
     }
 }
