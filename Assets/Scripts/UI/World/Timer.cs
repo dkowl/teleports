@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Timer : MonoBehaviour {
 
-    Text text_;
+    TextMeshProUGUI text;
 
     void Awake()
     {
-        text_ = gameObject.GetComponent<Text>();
+        text = gameObject.GetComponent<TextMeshProUGUI>();
     }
 	
 	// Update is called once per frame
@@ -17,6 +18,6 @@ public class Timer : MonoBehaviour {
         float timeLeft = GameMain.TimeLeft;
         int
             minutes = (int)timeLeft / 60, seconds = (int)timeLeft % 60;
-        text_.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+        text.text = minutes.ToString("00") + ":" + seconds.ToString("00");
 	}
 }

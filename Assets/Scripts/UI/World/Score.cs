@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Score : MonoBehaviour {
 
-    Text text_;
+    TextMeshProUGUI text;
      
 	void Awake () {
-        text_ = gameObject.GetComponent<Text>();
+        text = gameObject.GetComponent<TextMeshProUGUI>();
 	}
 	
 	void Update () {
-        text_.text = "Score: " + GameMain.Instance.Score.ToString();
+        text.text = GameMain.Instance.Score.ToString();
 	}
 }
