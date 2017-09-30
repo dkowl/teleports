@@ -111,6 +111,11 @@ public class Unit : MonoBehaviour
         get { return graphics; }
     }
 
+    public MovingState MovingState
+    {
+        get { return movingState; }
+    }
+
     public RotatingState RotatingState
     {
         get { return rotatingState; }

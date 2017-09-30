@@ -8,6 +8,8 @@ public class GameMain : MonoBehaviour {
 
     private static GameMain instance;
 
+    public Camera uiCamera;
+
     GameObject player;
     GameObject mainCanvas;
 
@@ -137,6 +139,8 @@ public class GameMain : MonoBehaviour {
         Animator animator = playerModel.GetComponentInChildren<Animator>();
         animator.runtimeAnimatorController = raceGraphics.WorldAnimationController;
         animator.gameObject.AddComponent<UnitAnimator>();
+
+        player.AddComponent<PlayerWorldUI>();
        
     }
 

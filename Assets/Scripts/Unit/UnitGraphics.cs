@@ -10,7 +10,7 @@ public class UnitGraphics : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         healthbar = gameObject.AddComponent<Healthbar>();
-	}
+    }
 
     public void updateTarget(Unit target)
     {
