@@ -125,6 +125,21 @@ public class Unit : MonoBehaviour
     {
         get { return castingState; }
     }
+
+    public DeadState DeadState
+    {
+        get { return deadState; }
+    }
+
+    public float HealthPercentage
+    {
+        get { return 1f - (damageReceived / Hp); }
+    }
+
+    public float CurrentHp
+    {
+        get { return Hp - damageReceived; }
+    }
     #endregion
 
     void Awake () {
@@ -242,10 +257,5 @@ public class Unit : MonoBehaviour
     public void Stun(float time)
     {
         stunnedState.StunTime = time;
-    }
-
-    public float healthPercentage()
-    {
-        return 1f - (damageReceived / Hp);
     }
 }

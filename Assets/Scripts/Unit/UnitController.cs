@@ -11,6 +11,7 @@ public abstract class UnitController : MonoBehaviour {
 
     public Skill.TargetInfo Target
     {
+        get { return target; }
         set { target = value; }
     }
 

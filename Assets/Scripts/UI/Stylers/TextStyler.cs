@@ -12,11 +12,19 @@ public class TextStyler : LoadableBehaviour {
 	public override void LoadDataInternal()
     {
         Stylesheet stylesheet = MainData.CurrentStylesheet;
+
         Text text = gameObject.GetComponent<Text>();
+        if (text != null)
+        {
+            text.fontSize = stylesheet.GetFontSize(fontSize);
+            text.color = stylesheet.GetTextColor(textColor);
+        }
 
-        if (text == null) return;
-
-        text.fontSize = stylesheet.GetFontSize(fontSize);
-        text.color = stylesheet.GetTextColor(textColor);  
+        TMPro.TextMeshProUGUI tmpText = gameObject.GetComponent<TMPro.TextMeshProUGUI>();
+        if(tmpText != null)
+        {
+            tmpText.fontSize = stylesheet.GetFontSize(fontSize);
+            tmpText.color = stylesheet.GetTextColor(textColor);
+        }
     }
 }

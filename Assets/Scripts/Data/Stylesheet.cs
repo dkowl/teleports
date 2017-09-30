@@ -17,7 +17,8 @@ public class Stylesheet : ScriptableObject
 
     public enum TextColor
     {
-        Default
+        Default,
+        WorldUI
     }
 
     public enum ColorPreset
@@ -40,6 +41,7 @@ public class Stylesheet : ScriptableObject
     public int smallFontSize;
 
     public Color defaultTextColor;
+    public Color worldUiTextColor;
 
     public Color gray1;
     public Color gray2;
@@ -77,6 +79,8 @@ public class Stylesheet : ScriptableObject
         {
             case TextColor.Default:
                 return defaultTextColor;
+            case TextColor.WorldUI:
+                return worldUiTextColor;
             default:
                 return defaultTextColor;
         }
