@@ -56,6 +56,9 @@ public class UnitDataEditor : ScriptableObject
     [SerializeField]
     private float height;
 
+    [SerializeField]
+    private SkillID mainAttack;
+
     #region properties
     public string Name
     {
@@ -211,6 +214,11 @@ public class UnitDataEditor : ScriptableObject
         {
             height = value;
         }
+    }
+
+    public SkillID MainAttack
+    {
+        get { return mainAttack; }
     }
     #endregion
 }

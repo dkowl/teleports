@@ -18,6 +18,9 @@ public class UnitData : IUnitData {
     private Attribute[] attributes;
 
     [SerializeField]
+    private SkillID mainAttack;
+
+    [SerializeField]
     private bool isInitialized = false;
 
     public UnitData(UnitDataEditor unitData)
@@ -38,6 +41,7 @@ public class UnitData : IUnitData {
         attributes[(int)Unit.AttributeType.ViewRange] = new Attribute(unitData.ViewRange);
 
         height = unitData.Height;
+        mainAttack = unitData.MainAttack;
 
         isInitialized = true;
     }

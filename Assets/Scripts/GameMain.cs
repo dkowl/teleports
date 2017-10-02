@@ -122,7 +122,7 @@ public class GameMain : MonoBehaviour {
         GameObject skills = new GameObject("Skills");
         skills.transform.parent = player.transform;
 
-        GameObject primarySkill = Instantiate(MainData.CurrentGameData.CurrentSkillDatabase.GetSkill(playerData.PrimarySkillId).gameObject, skills.transform);
+        GameObject primarySkill = Instantiate(MainData.CurrentGameData.GetSkill(playerData.PrimarySkillId).gameObject, skills.transform);
         controller.MainAttack = primarySkill.GetComponent<Skill>();
         unit.ActiveController = controller;
 
