@@ -204,6 +204,14 @@ public class Unit : MonoBehaviour
         }   
     }
 
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, Size);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, Size + Reach);
+    }
+
     public void CastStart(Skill skill, Skill.TargetInfo target)
     {
         Debug.Log("Trying to cast" + skill.Name + " on " + target.TargetUnit.name);

@@ -18,10 +18,7 @@ public class Race : UniqueScriptableObject {
     public UnitData BaseStats
     {
         get {
-            if(baseStats == null || !baseStats.IsInitialized)
-            {
-                baseStats = new UnitData(baseStatsEditor);
-            }
+            baseStats = new UnitData(baseStatsEditor);
 
             return baseStats;
         }
