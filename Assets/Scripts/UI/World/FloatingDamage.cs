@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class FloatingDamage : MonoBehaviour {
 
-    public float gravityY_, lifetime_;
-    Text text_;
+    public float gravityY, lifetime;
+    TextMeshProUGUI text;
 
     void Awake()
     {
-        text_ = gameObject.transform.GetChild(0).GetChild(0).GetComponent<Text>();
+        text = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
     }
 	
 	// Update is called once per frame
@@ -18,11 +19,11 @@ public class FloatingDamage : MonoBehaviour {
         float dTime = Time.deltaTime;
 
         Vector3 newPosition = transform.position;
-        newPosition.y += gravityY_ * dTime;
+        newPosition.y += gravityY * dTime;
         transform.position = newPosition;
 
-        lifetime_ -= dTime;
-        if(lifetime_ <= 0)
+        lifetime -= dTime;
+        if(lifetime <= 0)
         {
             Destroy(gameObject);
         }
@@ -30,11 +31,11 @@ public class FloatingDamage : MonoBehaviour {
 
     public void setColor(Color color)
     {
-        text_.color = color;
+        text.color = color;
     }
 
     public void setText(string text)
     {
-        text_.text = text;
+        this.text.text = text;
     }
 }

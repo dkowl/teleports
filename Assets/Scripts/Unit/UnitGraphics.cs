@@ -25,6 +25,7 @@ public class UnitGraphics : MonoBehaviour {
     {
         GameObject obj = Instantiate(Resources.Load("Prefabs/Unit/FloatingDamage"), gameObject.transform) as GameObject;
         obj.GetComponent<FloatingDamage>().setText(damage.ToString());
+        obj.GetComponent<FloatingDamage>().setColor(Color.red);
         obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().unitData.Height, 0);
     }
 
@@ -33,6 +34,8 @@ public class UnitGraphics : MonoBehaviour {
         GameObject obj = Instantiate(Resources.Load("Prefabs/Unit/FloatingDamage"), gameObject.transform) as GameObject;
         obj.GetComponent<FloatingDamage>().setText(xp.ToString() + " XP");
         obj.GetComponent<FloatingDamage>().setColor(Color.yellow);
+        obj.GetComponent<FloatingDamage>().lifetime *= 2;
+        obj.GetComponent<FloatingDamage>().gravityY /= 2;
         obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().unitData.Height, 0);
     }
 

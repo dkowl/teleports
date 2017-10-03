@@ -58,24 +58,25 @@ public class GameMain : MonoBehaviour {
 
         if (gameTime >= teleportTime)
         {
-            EndScreen();
+            EndScreen("Time's up!");
         }
 
         if (!player.GetComponent<Unit>().Alive())
         {
-            EndScreen();
+            EndScreen("You died!");
         }
 
         score = player.GetComponent<XpComponent>().Xp - startXp;
                    
 	}
 
-    private void EndScreen()
+    private void EndScreen(string text)
     {
         if (!endScreenOn)
         {
             PauseGame();
             endScreen = Instantiate(Resources.Load("Prefabs/UI/EndScreen"), mainCanvas.transform) as GameObject;
+            endScreen.GetComponent<EndScreenUI>().SetText(text);
             endScreenOn = true;
         }
     }
