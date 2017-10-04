@@ -1,0 +1,661 @@
+fileFormatVersion: 2
+guid: e899f780a4fa1ab4c9cea52fb7b3ac4e
+timeCreated: 1507045002
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Chest
+    100002: //RootNode
+    100004: Head
+    100006: Head_End
+    100008: Hips
+    100010: HipsSway
+    100012: L_Ankle
+    100014: L_Ankle_FK
+    100016: L_Ankle_IK
+    100018: L_Arm
+    100020: L_Arm_FK
+    100022: L_Arm_IK
+    100024: L_Ball
+    100026: L_Ball_FK
+    100028: L_Ball_IK
+    100030: L_Clavical
+    100032: L_Fingers01
+    100034: L_Fingers02
+    100036: L_Fingers03
+    100038: L_Fingers_End
+    100040: L_Forearm
+    100042: L_Forearm_FK
+    100044: L_Forearm_IK
+    100046: L_Index01
+    100048: L_Index02
+    100050: L_Index03
+    100052: L_Index_End
+    100054: L_Shin
+    100056: L_Shin_FK
+    100058: L_Shin_IK
+    100060: L_Thigh
+    100062: L_Thigh_FK
+    100064: L_Thigh_IK
+    100066: L_Thumb01
+    100068: L_Thumb02
+    100070: L_Thumb03
+    100072: L_Thumb_End
+    100074: L_Toe
+    100076: L_Toe_FK
+    100078: L_Toe_IK
+    100080: L_Wrist
+    100082: L_Wrist__IK
+    100084: L_Wrist_FK
+    100086: Neck
+    100088: R_Ankle
+    100090: R_Ankle_FK
+    100092: R_Ankle_IK
+    100094: R_Arm
+    100096: R_Arm_FK
+    100098: R_Arm_IK
+    100100: R_Ball
+    100102: R_Ball_FK
+    100104: R_Ball_IK
+    100106: R_Clavical
+    100108: R_Fingers01
+    100110: R_Fingers02
+    100112: R_Fingers03
+    100114: R_Fingers_End
+    100116: R_Forearm
+    100118: R_Forearm_FK
+    100120: R_Forearm_IK
+    100122: R_Index01
+    100124: R_Index02
+    100126: R_Index03
+    100128: R_Index_End
+    100130: R_Shin
+    100132: R_Shin_FK
+    100134: R_Shin_IK
+    100136: R_Thigh
+    100138: R_Thigh_FK
+    100140: R_Thigh_IK
+    100142: R_Thumb01
+    100144: R_Thumb02
+    100146: R_Thumb03
+    100148: R_Thumb_End
+    100150: R_Toe
+    100152: R_Toe_FK
+    100154: R_Toe_IK
+    100156: R_Wrist
+    100158: R_Wrist__IK
+    100160: R_Wrist_FK
+    100162: Reference
+    100164: Spine01
+    100166: Spine02
+    400000: Chest
+    400002: //RootNode
+    400004: Head
+    400006: Head_End
+    400008: Hips
+    400010: HipsSway
+    400012: L_Ankle
+    400014: L_Ankle_FK
+    400016: L_Ankle_IK
+    400018: L_Arm
+    400020: L_Arm_FK
+    400022: L_Arm_IK
+    400024: L_Ball
+    400026: L_Ball_FK
+    400028: L_Ball_IK
+    400030: L_Clavical
+    400032: L_Fingers01
+    400034: L_Fingers02
+    400036: L_Fingers03
+    400038: L_Fingers_End
+    400040: L_Forearm
+    400042: L_Forearm_FK
+    400044: L_Forearm_IK
+    400046: L_Index01
+    400048: L_Index02
+    400050: L_Index03
+    400052: L_Index_End
+    400054: L_Shin
+    400056: L_Shin_FK
+    400058: L_Shin_IK
+    400060: L_Thigh
+    400062: L_Thigh_FK
+    400064: L_Thigh_IK
+    400066: L_Thumb01
+    400068: L_Thumb02
+    400070: L_Thumb03
+    400072: L_Thumb_End
+    400074: L_Toe
+    400076: L_Toe_FK
+    400078: L_Toe_IK
+    400080: L_Wrist
+    400082: L_Wrist__IK
+    400084: L_Wrist_FK
+    400086: Neck
+    400088: R_Ankle
+    400090: R_Ankle_FK
+    400092: R_Ankle_IK
+    400094: R_Arm
+    400096: R_Arm_FK
+    400098: R_Arm_IK
+    400100: R_Ball
+    400102: R_Ball_FK
+    400104: R_Ball_IK
+    400106: R_Clavical
+    400108: R_Fingers01
+    400110: R_Fingers02
+    400112: R_Fingers03
+    400114: R_Fingers_End
+    400116: R_Forearm
+    400118: R_Forearm_FK
+    400120: R_Forearm_IK
+    400122: R_Index01
+    400124: R_Index02
+    400126: R_Index03
+    400128: R_Index_End
+    400130: R_Shin
+    400132: R_Shin_FK
+    400134: R_Shin_IK
+    400136: R_Thigh
+    400138: R_Thigh_FK
+    400140: R_Thigh_IK
+    400142: R_Thumb01
+    400144: R_Thumb02
+    400146: R_Thumb03
+    400148: R_Thumb_End
+    400150: R_Toe
+    400152: R_Toe_FK
+    400154: R_Toe_IK
+    400156: R_Wrist
+    400158: R_Wrist__IK
+    400160: R_Wrist_FK
+    400162: Reference
+    400164: Spine01
+    400166: Spine02
+    7400000: DeathKnight_Inactive
+    7400002: DeathKnight_Activate
+    7400004: DeathKnight_Idle01
+    7400006: DeathKnight_Walk
+    7400008: DeathKnight_Attack
+    7400010: DeathKnight_HeavyAttack
+    7400012: DeathKnight_RallyTroops
+    7400014: DeathKnight_StunEnter
+    7400016: DeathKnight_Stun
+    7400018: DeathKnight_StunExit
+    7400020: DeathKnight_Death
+    7400022: DeathKnight_ChargeEnter
+    7400024: DeathKnight_Charge
+    7400026: DeathKnight_ChargeExit
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    autoMapExternalMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: DeathKnight_Inactive
+      takeName: Take 001
+      firstFrame: 10
+      lastFrame: 11
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DeathKnight_Activate
+      takeName: Take 001
+      firstFrame: 20
+      lastFrame: 43
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DeathKnight_Idle01
+      takeName: Take 001
+      firstFrame: 44
+      lastFrame: 80
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DeathKnight_Walk
+      takeName: Take 001
+      firstFrame: 82
+      lastFrame: 105
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DeathKnight_Attack
+      takeName: Take 001
+      firstFrame: 108
+      lastFrame: 145
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DeathKnight_HeavyAttack
+      takeName: Take 001
+      firstFrame: 145
+      lastFrame: 184
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DeathKnight_RallyTroops
+      takeName: Take 001
+      firstFrame: 190
+      lastFrame: 225
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DeathKnight_StunEnter
+      takeName: Take 001
+      firstFrame: 225
+      lastFrame: 240
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DeathKnight_Stun
+      takeName: Take 001
+      firstFrame: 241
+      lastFrame: 259
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DeathKnight_StunExit
+      takeName: Take 001
+      firstFrame: 260
+      lastFrame: 276
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DeathKnight_Death
+      takeName: Take 001
+      firstFrame: 276
+      lastFrame: 286
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DeathKnight_ChargeEnter
+      takeName: Take 001
+      firstFrame: 290
+      lastFrame: 295
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DeathKnight_Charge
+      takeName: Take 001
+      firstFrame: 301
+      lastFrame: 316
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DeathKnight_ChargeExit
+      takeName: Take 001
+      firstFrame: 317
+      lastFrame: 322
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
