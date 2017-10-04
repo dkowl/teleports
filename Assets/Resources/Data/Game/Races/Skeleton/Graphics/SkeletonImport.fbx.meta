@@ -3,7 +3,7 @@ guid: b48fb3ece1c0a8b46a9ea3214c1639df
 timeCreated: 1500651162
 licenseType: Free
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: Chest
     100002: Head
@@ -207,7 +207,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
-    optimizeGameObjects: 0
+    optimizeGameObjects: 1
     motionNodeName: Reference
     rigImportErrors: 
     rigImportWarnings: 
@@ -220,7 +220,9 @@ ModelImporter:
     animationPositionError: 0
     animationScaleError: 0
     animationWrapMode: 0
-    extraExposedTransformPaths: []
+    extraExposedTransformPaths:
+    - Reference/Hip/Spine01/Spine02/Chest/R_Clavical/R_Arm/R_Forearm/R_ForearmTwist/R_Wrist
+    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
       name: Walk
@@ -1084,7 +1086,10 @@ ModelImporter:
     globalScale: 8
     meshCompression: 0
     addColliders: 0
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -1100,6 +1105,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

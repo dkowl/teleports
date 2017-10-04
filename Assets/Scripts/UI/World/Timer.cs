@@ -16,8 +16,8 @@ public class Timer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         float timeLeft = GameMain.TimeLeft;
-        int
-            minutes = (int)timeLeft / 60, seconds = (int)timeLeft % 60;
+        int minutes = Mathf.Max((int)timeLeft / 60, 0), 
+            seconds = Mathf.Max((int)timeLeft % 60, 0);
         text.text = minutes.ToString("00") + ":" + seconds.ToString("00");
 	}
 }
