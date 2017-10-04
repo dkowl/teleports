@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 63f609c93078bad448302afd9fec6289
-timeCreated: 1507106486
+guid: 8d6bf6e75f3433e41ab3ed5348ddaf39
+timeCreated: 1507120229
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -317,7 +317,7 @@ ModelImporter:
     400306: Reference
     400308: Spine01
     400310: Spine02
-    2100000: Merged_Skull
+    2100000: blinn2
     4300000: Merged_Skull
     9500000: //RootNode
     13700000: Merged_Skull
@@ -332,7 +332,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
-    optimizeGameObjects: 1
+    optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 

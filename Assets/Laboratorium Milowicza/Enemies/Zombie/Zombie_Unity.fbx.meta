@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 0c9da059786f9644f83dc67f8382542a
-timeCreated: 1507039519
+guid: ad8d1e57f22c05b4dacf831862beba3c
+timeCreated: 1507114918
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -164,7 +164,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
-    optimizeGameObjects: 1
+    optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -220,7 +220,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    rootMotionBoneName: Reference
+    rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
