@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EquipmentSlotData : MonoBehaviour {
+[CreateAssetMenu(fileName = "New EquipmentSlotData", menuName = "Data/Equipment/SlotData")]
+public class EquipmentSlotData : ScriptableObject {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    [SerializeField]
+    private EquipmentSlot slotType;
+
+    [SerializeField]
+    private string boneName;
+
+    public EquipmentSlot SlotType
+    {
+        get { return slotType; }
+    }
 }

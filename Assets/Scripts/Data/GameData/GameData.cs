@@ -12,6 +12,7 @@ public class GameData : ScriptableObject {
     [SerializeField] private MappedListOfRaces races;
     [SerializeField] private MappedListOfSkills skills;
     [SerializeField] private SkillDatabase skillDatabase;
+    [SerializeField] private EquipmentSlotDatabase equipmentSlotDatabase;
 
     public void OnEnable()
     {
@@ -19,6 +20,7 @@ public class GameData : ScriptableObject {
         worlds.MakeDict();
         races.MakeDict();
         skills.MakeDict();
+        equipmentSlotDatabase.Initialize();
     }
     
     public Race GetRace(string raceName)
