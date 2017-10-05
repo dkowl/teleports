@@ -3,7 +3,7 @@ guid: 6247f6df2919b034f83e00ebd9fc9e29
 timeCreated: 1507041742
 licenseType: Free
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: Chest
     100002: Head
@@ -198,15 +198,14 @@ ModelImporter:
     7400012: Skeleton_Stun
     7400014: Skeleton_StunExit
     7400016: Skeleton_Death01
-    7400018: Death02
+    7400018: Skeleton_Death02
     9500000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
-    autoMapExternalMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -481,7 +480,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Death02
+      name: Skeleton_Death02
       takeName: Take 001
       firstFrame: 555
       lastFrame: 690

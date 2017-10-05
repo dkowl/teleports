@@ -1,23 +1,26 @@
 fileFormatVersion: 2
-guid: 8f602193314a89248a887bf54d34ce1c
-timeCreated: 1507042890
+guid: b46c421cc13f62b43ae5700f5cf88ad4
+timeCreated: 1507194905
 licenseType: Free
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: material3
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Sword
-  externalObjects: {}
+    4300000: Scythe_Proxy
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scythe_basic
+    second: {fileID: 2100000, guid: 57922f9509d0d814eb46d0d60c7c5a9a, type: 2}
   materials:
     importMaterials: 1
-    autoMapExternalMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -42,7 +45,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 40
+    globalScale: 30
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
