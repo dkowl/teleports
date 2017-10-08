@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 4aad3e732dbe373469c7bff983a7f926
-timeCreated: 1507193012
+guid: abf5a3f155a0c6644be98b6e2aa314be
+timeCreated: 1507478714
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -15,9 +15,9 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: PM3D_Cube3D1
-    second: {fileID: 2100000, guid: fab7e25ccd8332043868d464cefe060e, type: 2}
+    second: {fileID: 2100000, guid: 46ed496d33156da4caeef6d5bfcb8737, type: 2}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 0
@@ -45,7 +45,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 100
+    globalScale: 22
     meshCompression: 0
     addColliders: 0
     importVisibility: 1

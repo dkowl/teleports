@@ -3,7 +3,7 @@ guid: 6d18907c789f07d4d9de6036c36f6fe3
 timeCreated: 1507102062
 licenseType: Free
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: B_Cloth01
     100002: B_Cloth02
@@ -201,11 +201,10 @@ ModelImporter:
     9500000: //RootNode
   externalObjects: {}
   materials:
-    importMaterials: 1
-    autoMapExternalMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -258,7 +257,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 30
+    globalScale: 6
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
@@ -282,7 +281,7 @@ ModelImporter:
     tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
-  copyAvatar: 0
+  copyAvatar: 1
   humanDescription:
     serializedVersion: 2
     human: []
@@ -299,7 +298,8 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 5a7b1084f72eb9d4c8d82bb6501fada6,
+    type: 3}
   animationType: 2
   humanoidOversampling: 1
   additionalBone: 0

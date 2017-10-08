@@ -17,7 +17,7 @@ ModelImporter:
       name: Scythe_basic1
     second: {fileID: 2100000, guid: cfe0f1ef8464aad4cbb4552875f8a335, type: 2}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 0
@@ -45,7 +45,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 30
+    globalScale: 6
     meshCompression: 0
     addColliders: 0
     importVisibility: 1

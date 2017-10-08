@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: 5ea83c72adc7a164bb8b3502c424c1cf
-timeCreated: 1507121893
+guid: bce711e48d183fd46aaefc739e74ecde
+timeCreated: 1507478328
 licenseType: Free
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: Chest
     100002: DeathKnight
@@ -175,22 +175,25 @@ ModelImporter:
     400164: Reference
     400166: Spine01
     400168: Spine02
-    2100000: DeathKnight
     4300000: DeathKnight
     9500000: //RootNode
     13700000: DeathKnight
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DeathKnight
+    second: {fileID: 2100000, guid: 22bd7ad49b468624fb6853c4b92bb3cc, type: 2}
   materials:
-    importMaterials: 1
-    autoMapExternalMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
-    optimizeGameObjects: 0
+    optimizeGameObjects: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -204,13 +207,17 @@ ModelImporter:
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
-    extraExposedTransformPaths: []
+    extraExposedTransformPaths:
+    - Reference/Hips/HipsSway/R_Thigh/R_Shin/R_Ankle/R_Ball
+    - Reference/Hips/HipsSway/L_Thigh/L_Shin/L_Ankle/L_Ball
+    - Reference/Hips/Spine01/Spine02/Chest/Neck/Head
+    - Reference/Hips/Spine01/Spine02/Chest/R_Clavical/R_Arm/R_Forearm/R_Wrist
     extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 100
+    globalScale: 22
     meshCompression: 0
     addColliders: 0
     importVisibility: 1

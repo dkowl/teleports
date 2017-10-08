@@ -17,7 +17,7 @@ ModelImporter:
       name: material3
     second: {fileID: 2100000, guid: c5c8c82eb769108408edbe1c4731f443, type: 2}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 0
@@ -45,7 +45,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 7.5
     meshCompression: 0
     addColliders: 0
     importVisibility: 1

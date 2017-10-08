@@ -3,7 +3,7 @@ guid: 8d6bf6e75f3433e41ab3ed5348ddaf39
 timeCreated: 1507120229
 licenseType: Free
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: B_Cloth01
     100002: B_Cloth02
@@ -321,18 +321,22 @@ ModelImporter:
     4300000: Merged_Skull
     9500000: //RootNode
     13700000: Merged_Skull
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: blinn2
+    second: {fileID: 2100000, guid: 2fa3e008ea5ff3c43ad62e7086f88324, type: 2}
   materials:
-    importMaterials: 1
-    autoMapExternalMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
-    optimizeGameObjects: 0
+    optimizeGameObjects: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -346,13 +350,14 @@ ModelImporter:
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
-    extraExposedTransformPaths: []
+    extraExposedTransformPaths:
+    - Reference/Hips/Spine01/Spine02/Chest/R_Clavical/R_Arm/R_Foreamr/R_Wrist
     extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 40
+    globalScale: 8.5
     meshCompression: 0
     addColliders: 0
     importVisibility: 1

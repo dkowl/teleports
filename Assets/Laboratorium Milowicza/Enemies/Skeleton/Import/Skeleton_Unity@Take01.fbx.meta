@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 6247f6df2919b034f83e00ebd9fc9e29
-timeCreated: 1507041742
+timeCreated: 1507474982
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -510,7 +510,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 40
+    globalScale: 7.5
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
@@ -534,7 +534,7 @@ ModelImporter:
     tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
-  copyAvatar: 0
+  copyAvatar: 1
   humanDescription:
     serializedVersion: 2
     human: []
@@ -551,7 +551,8 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: b48fb3ece1c0a8b46a9ea3214c1639df,
+    type: 3}
   animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
