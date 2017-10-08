@@ -3,6 +3,7 @@
 
 Documents/doxygen
 *.ods#
+*.odt#
 
 # =============== #
 # Unity generated #
