@@ -22,6 +22,21 @@ public class GameData : ScriptableObject {
         skills.MakeDict();
         items.MakeDict();
     }
+
+    public ItemData GetItem(string itemName)
+    {
+        ItemData result = items.TryGetValue(itemName);
+
+        if (result != null)
+        {
+            return result;
+        }
+        else
+        {
+            Debug.Log("Item " + itemName + " not found.");
+            return null;
+        }
+    }
     
     public Race GetRace(string raceName)
     {

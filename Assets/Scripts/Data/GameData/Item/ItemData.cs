@@ -11,4 +11,19 @@ public class ItemData : UniqueScriptableObject {
     [SerializeField] private EquipmentSlot slot;
     [SerializeField] private ItemGraphics graphics;
 
+    public List<Perk> Perks
+    {
+        get { return perks; }
+    }
+
+    public EquipmentSlot Slot
+    {
+        get { return slot; }
+    }
+
+    public ItemGraphics Graphics
+    {
+        get { return graphics; }
+    }
+
 }

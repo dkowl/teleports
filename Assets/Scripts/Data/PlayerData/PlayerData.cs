@@ -21,6 +21,7 @@ public class PlayerData : ScriptableObject, IPlayerData
     [SerializeField] private SkillID[] secondarySkills = new SkillID[SkillSlotNo];
     [SerializeField] private UnitData liveUnitData = null;
     [SerializeField] private TeleportData teleportData = null;
+    [SerializeField] private InventoryData inventoryData = null;
 
     #region interface implementation
     #region properties
@@ -92,6 +93,11 @@ public class PlayerData : ScriptableObject, IPlayerData
     public TeleportData CurrentTeleportData
     {
         get { return teleportData; }
+    }
+
+    public InventoryData InventoryData
+    {
+        get { return inventoryData; }
     }
 
     public SkillID PrimarySkillId

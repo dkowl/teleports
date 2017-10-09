@@ -8,11 +8,8 @@ public class Item : MonoBehaviour {
     private Unit ownerUnit;
     private EquipmentSlotComponent slotComponent;
 
-    [SerializeField] private string displayName;
-    [SerializeField] private List<Skill> skills;
-    [SerializeField] private List<Perk> perks;
-    [SerializeField] private EquipmentSlot slot;
-    [SerializeField] private ItemGraphics graphics;
+    [SerializeField]
+    private ItemData data;
 
     public void Start()
     {
@@ -32,14 +29,14 @@ public class Item : MonoBehaviour {
             EquipmentSlotComponent[] slotComponents = unit.gameObject.GetComponentsInChildren<EquipmentSlotComponent>();
             foreach(EquipmentSlotComponent slotComp in slotComponents)
             {
-                if(slotComp.SlotType == slot)
+                if(slotComp.SlotType == data.Slot)
                 {
                     slotComp.Equip(this);
                     slotComponent = slotComp;
                 }
             }
 
-            foreach(Perk perk in perks)
+            foreach(Perk perk in data.Perks)
             {
                 unit.AddPerk(perk);
             }
@@ -54,15 +51,21 @@ public class Item : MonoBehaviour {
         if (isEquipped && ownerUnit != null)
         {
             slotComponent.Unequip();
-            foreach(Perk perk in perks)
+            foreach(Perk perk in data.Perks)
             {
                 ownerUnit.RemovePerk(perk);
             }
         }
     }
 
+    public ItemData Data
+    {
+        get { return data; }
+        set { data = value; }
+    }
+
     public ItemGraphics Graphics
     {
-        get { return graphics; }
+        get { return data.Graphics; }
     }
 }

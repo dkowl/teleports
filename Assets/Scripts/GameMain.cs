@@ -93,6 +93,7 @@ public class GameMain : MonoBehaviour {
 
     private void SpawnPlayer()
     {
+        //try finding player object, if not found, spawn new one
         if(player != null) { return; }
 
         player = GameObject.FindGameObjectWithTag("Player");
@@ -103,6 +104,7 @@ public class GameMain : MonoBehaviour {
             player.tag = "Player";
         }
 
+        //Components to be initialized
         IPlayerData playerData = MainData.CurrentPlayerData;
         Unit unit = player.GetComponent<Unit>();
         PlayerController controller = player.GetComponent<PlayerController>();
@@ -119,6 +121,12 @@ public class GameMain : MonoBehaviour {
             controller = player.AddComponent<PlayerController>();
         }
 
+        if (xp == null)
+        {
+            xp = player.AddComponent<XpComponent>();
+        }
+        xp.Xp = playerData.Xp;
+
         //Instantiating skills
         GameObject skills = new GameObject("Skills");
         skills.transform.parent = player.transform;
@@ -127,16 +135,25 @@ public class GameMain : MonoBehaviour {
         controller.MainAttack = primarySkill.GetComponent<Skill>();
         unit.ActiveController = controller;
 
-        if(xp == null)
-        {
-            xp = player.AddComponent<XpComponent>();
-        }
-        xp.Xp = playerData.Xp;
+        //Instantiating items
 
+        GameObject items = new GameObject("Items");
+        items.transform.parent = player.transform;
+
+        foreach(ItemData itemData in playerData.InventoryData.GetEquippedItems())
+        {
+            GameObject itemObject = new GameObject(itemData.UniqueName);
+            itemObject.transform.parent = items.transform;
+            Item item = itemObject.AddComponent<Item>();
+            item.Data = itemData;
+        }
+
+        //Spawn model
         RaceGraphics raceGraphics = MainData.CurrentGameData.GetRace(playerData.RaceName).Graphics;
         GameObject playerModel = Instantiate(raceGraphics.ModelObject, player.transform);
         playerModel.transform.localEulerAngles = Vector3.zero;
 
+        //Set up Animator
         Animator animator = playerModel.GetComponentInChildren<Animator>();
         animator.runtimeAnimatorController = raceGraphics.WorldAnimationController;
         animator.gameObject.AddComponent<UnitAnimator>();

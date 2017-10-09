@@ -60,7 +60,6 @@ public class UnitDataEditor : ScriptableObject
     private SkillID mainAttack;
 
 
-
     #region properties
     public string Name
     {
