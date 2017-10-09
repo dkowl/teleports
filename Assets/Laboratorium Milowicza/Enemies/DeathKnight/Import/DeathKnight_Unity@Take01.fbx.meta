@@ -323,7 +323,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.02864843
+      - time: 0.018513296
         functionName: R_FootStomp
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 88bb0b98d0945dd47a3fdbaea48f6c27,
@@ -331,7 +331,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.49806333
+      - time: 0.48117143
         functionName: L_FootStomp
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 88bb0b98d0945dd47a3fdbaea48f6c27,
