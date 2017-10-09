@@ -302,7 +302,7 @@ ModelImporter:
     - serializedVersion: 16
       name: DeathKnight_Walk
       takeName: Take 001
-      firstFrame: 80
+      firstFrame: 82
       lastFrame: 106
       wrapMode: 0
       orientationOffsetY: 0
@@ -322,7 +322,23 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.079324104
+        functionName: R_FootStomp ()
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 88bb0b98d0945dd47a3fdbaea48f6c27,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5318471
+        functionName: L_FootStomp ()
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 88bb0b98d0945dd47a3fdbaea48f6c27,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
