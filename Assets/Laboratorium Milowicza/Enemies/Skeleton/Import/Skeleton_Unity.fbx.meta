@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 0781ca514dbb5e1419276b04887b7e8a
-timeCreated: 1507041476
+guid: b8ce58b969bb24545ad1319c27a01ef1
+timeCreated: 1507573233
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -191,7 +191,6 @@ ModelImporter:
     400180: //RootNode
     400182: Spine01
     400184: Spine02
-    2100000: material1
     4300000: Skeleton
     9500000: //RootNode
     13700000: Skeleton
@@ -200,7 +199,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: material1
-    second: {fileID: 2100000, guid: 13d1433b3c7cd5b46a469312b7a68ffe, type: 2}
+    second: {fileID: 2100000, guid: 3dda6dcc094bf964bbb21f2991a18ca8, type: 2}
   materials:
     importMaterials: 0
     materialName: 0
@@ -266,7 +265,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    rootMotionBoneName: Reference
+    rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0

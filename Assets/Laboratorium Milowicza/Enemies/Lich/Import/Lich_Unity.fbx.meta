@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 8d6bf6e75f3433e41ab3ed5348ddaf39
-timeCreated: 1507120229
+guid: 292332cf470d5dd4fbc441281330a4fa
+timeCreated: 1507571224
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -317,7 +317,6 @@ ModelImporter:
     400306: Reference
     400308: Spine01
     400310: Spine02
-    2100000: blinn2
     4300000: Merged_Skull
     9500000: //RootNode
     13700000: Merged_Skull
@@ -326,7 +325,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: blinn2
-    second: {fileID: 2100000, guid: 2fa3e008ea5ff3c43ad62e7086f88324, type: 2}
+    second: {fileID: 2100000, guid: 80554d5ffc60f744a9a731f78e0c5ef0, type: 2}
   materials:
     importMaterials: 0
     materialName: 0
