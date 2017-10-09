@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: bce711e48d183fd46aaefc739e74ecde
-timeCreated: 1507478328
+guid: 2422996d11ec3ce4f9e60e940ae40fce
+timeCreated: 1507549227
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -9,172 +9,90 @@ ModelImporter:
     100002: DeathKnight
     100004: //RootNode
     100006: Head
-    100008: Head_End
-    100010: Hips
-    100012: HipsSway
-    100014: L_Ankle
-    100016: L_Ankle_FK
-    100018: L_Ankle_IK
-    100020: L_Arm
-    100022: L_Arm_FK
-    100024: L_Arm_IK
-    100026: L_Ball
-    100028: L_Ball_FK
-    100030: L_Ball_IK
-    100032: L_Clavical
-    100034: L_Fingers01
-    100036: L_Fingers02
-    100038: L_Fingers03
-    100040: L_Fingers_End
-    100042: L_Forearm
-    100044: L_Forearm_FK
-    100046: L_Forearm_IK
-    100048: L_Index01
-    100050: L_Index02
-    100052: L_Index03
-    100054: L_Index_End
-    100056: L_Shin
-    100058: L_Shin_FK
-    100060: L_Shin_IK
-    100062: L_Thigh
-    100064: L_Thigh_FK
-    100066: L_Thigh_IK
-    100068: L_Thumb01
-    100070: L_Thumb02
-    100072: L_Thumb03
-    100074: L_Thumb_End
-    100076: L_Toe
-    100078: L_Toe_FK
-    100080: L_Toe_IK
-    100082: L_Wrist
-    100084: L_Wrist__IK
-    100086: L_Wrist_FK
-    100088: Neck
-    100090: R_Ankle
-    100092: R_Ankle_FK
-    100094: R_Ankle_IK
-    100096: R_Arm
-    100098: R_Arm_FK
-    100100: R_Arm_IK
-    100102: R_Ball
-    100104: R_Ball_FK
-    100106: R_Ball_IK
-    100108: R_Clavical
-    100110: R_Fingers01
-    100112: R_Fingers02
-    100114: R_Fingers03
-    100116: R_Fingers_End
-    100118: R_Forearm
-    100120: R_Forearm_FK
-    100122: R_Forearm_IK
-    100124: R_Index01
-    100126: R_Index02
-    100128: R_Index03
-    100130: R_Index_End
-    100132: R_Shin
-    100134: R_Shin_FK
-    100136: R_Shin_IK
-    100138: R_Thigh
-    100140: R_Thigh_FK
-    100142: R_Thigh_IK
-    100144: R_Thumb01
-    100146: R_Thumb02
-    100148: R_Thumb03
-    100150: R_Thumb_End
-    100152: R_Toe
-    100154: R_Toe_FK
-    100156: R_Toe_IK
-    100158: R_Wrist
-    100160: R_Wrist__IK
-    100162: R_Wrist_FK
-    100164: Reference
-    100166: Spine01
-    100168: Spine02
+    100008: Hips
+    100010: HipsSway
+    100012: L_Ankle
+    100014: L_Arm
+    100016: L_Ball
+    100018: L_Clavical
+    100020: L_Fingers01
+    100022: L_Fingers02
+    100024: L_Fingers03
+    100026: L_Forearm
+    100028: L_Index01
+    100030: L_Index02
+    100032: L_Index03
+    100034: L_Shin
+    100036: L_Thigh
+    100038: L_Thumb01
+    100040: L_Thumb02
+    100042: L_Thumb03
+    100044: L_Wrist
+    100046: Neck
+    100048: R_Ankle
+    100050: R_Arm
+    100052: R_Ball
+    100054: R_Clavical
+    100056: R_Fingers01
+    100058: R_Fingers02
+    100060: R_Fingers03
+    100062: R_Forearm
+    100064: R_Index01
+    100066: R_Index02
+    100068: R_Index03
+    100070: R_Shin
+    100072: R_Thigh
+    100074: R_Thumb01
+    100076: R_Thumb02
+    100078: R_Thumb03
+    100080: R_Wrist
+    100082: Reference
+    100084: Spine01
+    100086: Spine02
     400000: Chest
     400002: DeathKnight
     400004: //RootNode
     400006: Head
-    400008: Head_End
-    400010: Hips
-    400012: HipsSway
-    400014: L_Ankle
-    400016: L_Ankle_FK
-    400018: L_Ankle_IK
-    400020: L_Arm
-    400022: L_Arm_FK
-    400024: L_Arm_IK
-    400026: L_Ball
-    400028: L_Ball_FK
-    400030: L_Ball_IK
-    400032: L_Clavical
-    400034: L_Fingers01
-    400036: L_Fingers02
-    400038: L_Fingers03
-    400040: L_Fingers_End
-    400042: L_Forearm
-    400044: L_Forearm_FK
-    400046: L_Forearm_IK
-    400048: L_Index01
-    400050: L_Index02
-    400052: L_Index03
-    400054: L_Index_End
-    400056: L_Shin
-    400058: L_Shin_FK
-    400060: L_Shin_IK
-    400062: L_Thigh
-    400064: L_Thigh_FK
-    400066: L_Thigh_IK
-    400068: L_Thumb01
-    400070: L_Thumb02
-    400072: L_Thumb03
-    400074: L_Thumb_End
-    400076: L_Toe
-    400078: L_Toe_FK
-    400080: L_Toe_IK
-    400082: L_Wrist
-    400084: L_Wrist__IK
-    400086: L_Wrist_FK
-    400088: Neck
-    400090: R_Ankle
-    400092: R_Ankle_FK
-    400094: R_Ankle_IK
-    400096: R_Arm
-    400098: R_Arm_FK
-    400100: R_Arm_IK
-    400102: R_Ball
-    400104: R_Ball_FK
-    400106: R_Ball_IK
-    400108: R_Clavical
-    400110: R_Fingers01
-    400112: R_Fingers02
-    400114: R_Fingers03
-    400116: R_Fingers_End
-    400118: R_Forearm
-    400120: R_Forearm_FK
-    400122: R_Forearm_IK
-    400124: R_Index01
-    400126: R_Index02
-    400128: R_Index03
-    400130: R_Index_End
-    400132: R_Shin
-    400134: R_Shin_FK
-    400136: R_Shin_IK
-    400138: R_Thigh
-    400140: R_Thigh_FK
-    400142: R_Thigh_IK
-    400144: R_Thumb01
-    400146: R_Thumb02
-    400148: R_Thumb03
-    400150: R_Thumb_End
-    400152: R_Toe
-    400154: R_Toe_FK
-    400156: R_Toe_IK
-    400158: R_Wrist
-    400160: R_Wrist__IK
-    400162: R_Wrist_FK
-    400164: Reference
-    400166: Spine01
-    400168: Spine02
+    400008: Hips
+    400010: HipsSway
+    400012: L_Ankle
+    400014: L_Arm
+    400016: L_Ball
+    400018: L_Clavical
+    400020: L_Fingers01
+    400022: L_Fingers02
+    400024: L_Fingers03
+    400026: L_Forearm
+    400028: L_Index01
+    400030: L_Index02
+    400032: L_Index03
+    400034: L_Shin
+    400036: L_Thigh
+    400038: L_Thumb01
+    400040: L_Thumb02
+    400042: L_Thumb03
+    400044: L_Wrist
+    400046: Neck
+    400048: R_Ankle
+    400050: R_Arm
+    400052: R_Ball
+    400054: R_Clavical
+    400056: R_Fingers01
+    400058: R_Fingers02
+    400060: R_Fingers03
+    400062: R_Forearm
+    400064: R_Index01
+    400066: R_Index02
+    400068: R_Index03
+    400070: R_Shin
+    400072: R_Thigh
+    400074: R_Thumb01
+    400076: R_Thumb02
+    400078: R_Thumb03
+    400080: R_Wrist
+    400082: Reference
+    400084: Spine01
+    400086: Spine02
     4300000: DeathKnight
     9500000: //RootNode
     13700000: DeathKnight
@@ -183,7 +101,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: DeathKnight
-    second: {fileID: 2100000, guid: 22bd7ad49b468624fb6853c4b92bb3cc, type: 2}
+    second: {fileID: 2100000, guid: b78898a965d3ca94abd84466c770435f, type: 2}
   materials:
     importMaterials: 0
     materialName: 0
@@ -208,9 +126,9 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths:
-    - Reference/Hips/HipsSway/R_Thigh/R_Shin/R_Ankle/R_Ball
-    - Reference/Hips/HipsSway/L_Thigh/L_Shin/L_Ankle/L_Ball
     - Reference/Hips/Spine01/Spine02/Chest/Neck/Head
+    - Reference/Hips/HipsSway/L_Thigh/L_Shin/L_Ankle/L_Ball
+    - Reference/Hips/HipsSway/R_Thigh/R_Shin/R_Ankle/R_Ball
     - Reference/Hips/Spine01/Spine02/Chest/R_Clavical/R_Arm/R_Forearm/R_Wrist
     extraUserProperties: []
     clipAnimations: []
