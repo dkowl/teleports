@@ -25,6 +25,11 @@ namespace Teleports.Utils
                 Mathf.Approximately(a.y, b.y) &&
                 Mathf.Approximately(a.z, b.z);
         }
+
+        public static int EnumCount(System.Type type)
+        {
+            return System.Enum.GetValues(type).Length;
+        }
     }
 
     public static class RomanNumbers
