@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: ad8d1e57f22c05b4dacf831862beba3c
-timeCreated: 1507114918
+guid: 6a0393de9ac10424e8c67001d73666ae
+timeCreated: 1507570300
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -149,8 +149,8 @@ ModelImporter:
     400138: Tongue_END
     400140: Zombie
     400142: //RootNode
-    2100000: Zombie
     4300000: Zombie
+    7400000: Take 001
     9500000: //RootNode
     13700000: Zombie
   externalObjects:
@@ -158,7 +158,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Zombie
-    second: {fileID: 2100000, guid: cddf771a1e50a6c40bb4cfbd3de02c56, type: 2}
+    second: {fileID: 2100000, guid: 84f38c6f936becc4faf9f54876678b9a, type: 2}
   materials:
     importMaterials: 0
     materialName: 0
@@ -168,7 +168,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
-    optimizeGameObjects: 1
+    optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -224,7 +224,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    rootMotionBoneName: Reference
+    rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
