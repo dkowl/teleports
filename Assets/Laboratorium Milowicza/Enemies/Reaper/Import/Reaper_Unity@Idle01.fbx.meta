@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 42ef02b04cdb7e243bac00b94cdc8b47
-timeCreated: 1507061361
+timeCreated: 1507539506
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -293,7 +293,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    rootMotionBoneName: 
+    rootMotionBoneName: Reference
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
