@@ -11,6 +11,9 @@ public class Race : UniqueScriptableObject {
     private UnitDataEditor baseStatsEditor;
 
     [SerializeField]
+    private List<EquipmentSlot> availableEqSlots = new List<EquipmentSlot>();
+
+    [SerializeField]
     private RaceGraphics graphics;
 
     private UnitData baseStats = null;

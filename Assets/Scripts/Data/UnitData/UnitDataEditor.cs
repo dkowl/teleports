@@ -59,6 +59,8 @@ public class UnitDataEditor : ScriptableObject
     [SerializeField]
     private SkillID mainAttack;
 
+
+
     #region properties
     public string Name
     {
