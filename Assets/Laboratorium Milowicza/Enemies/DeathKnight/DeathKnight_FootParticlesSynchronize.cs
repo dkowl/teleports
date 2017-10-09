@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Foot_AnimationSynchronize : MonoBehaviour {
+public class DeathKnight_FootParticlesSynchronize : MonoBehaviour {
 
     public ParticleSystem L_Foot_ParticleSystem;
     public ParticleSystem R_Foot_ParticleSystem;

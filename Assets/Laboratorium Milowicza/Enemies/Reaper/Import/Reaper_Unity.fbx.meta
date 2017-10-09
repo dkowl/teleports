@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 5a7b1084f72eb9d4c8d82bb6501fada6
-timeCreated: 1507110636
+guid: e7d3af76c2f324d4bb8aaae5f2c591a2
+timeCreated: 1507569077
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -199,7 +199,6 @@ ModelImporter:
     400188: Reference
     400190: Spine01
     400192: Spine02
-    2100000: Extract11
     4300000: Reaper
     9500000: //RootNode
     13700000: Reaper
@@ -207,8 +206,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Extract11
-    second: {fileID: 2100000, guid: 09dd1a46f4d5cf3499efcc5d8a2581de, type: 2}
+      name: aiAmbientOcclusion1
+    second: {fileID: 2100000, guid: 9197e8db6d32725409b12a83a593435b, type: 2}
   materials:
     importMaterials: 0
     materialName: 0
@@ -233,9 +232,9 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths:
+    - Reference/Hips/Spine01/Spine02/Chest/Neck/Head
     - Reference/Hips
     - Reference/Hips/Spine01/Spine02/Chest/R_Clavical/R_Arm/R_Forearm/R_Wrist
-    - Reference/Hips/Spine01/Spine02/Chest/Neck/Head
     extraUserProperties: []
     clipAnimations: []
     isReadable: 1
