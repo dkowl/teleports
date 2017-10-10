@@ -15,9 +15,9 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Lich_knife
-    second: {fileID: 2100000, guid: 30fafc9caad44094c932593dbc724589, type: 2}
+    second: {fileID: 2100000, guid: 7cc28ae42b8e89241a6dfaeedc9eb01f, type: 2}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 0
