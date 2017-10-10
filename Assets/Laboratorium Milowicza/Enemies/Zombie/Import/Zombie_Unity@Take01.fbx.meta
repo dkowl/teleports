@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f5118d6e4e158d648b72ede397765f92
-timeCreated: 1507539547
+timeCreated: 1507636637
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -511,7 +511,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: ad8d1e57f22c05b4dacf831862beba3c,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 6a0393de9ac10424e8c67001d73666ae,
     type: 3}
   animationType: 2
   humanoidOversampling: 1
