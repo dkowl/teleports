@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 821595b0cdd86d242b04a9ac01572c9c
-timeCreated: 1507149042
+guid: e3f97ff4d77cd4746938b0a0e8415e5f
+timeCreated: 1507632867
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -15,7 +15,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: PM3D_Cube3D_1
-    second: {fileID: 2100000, guid: a6b99cf6795c92043b23d3df69b4eacb, type: 2}
+    second: {fileID: 2100000, guid: ea5035cc28b197f469101a46ccfed390, type: 2}
   materials:
     importMaterials: 0
     materialName: 0
