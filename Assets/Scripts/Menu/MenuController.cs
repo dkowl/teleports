@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//TODO: try making this a ScriptableObject
-
 //singleton controlling menu stack
 [ExecuteInEditMode]
 [CreateAssetMenu(fileName = "menuController", menuName = "Menu/Controller")]
@@ -12,17 +10,14 @@ public class MenuController : ScriptableObject {
     private static MenuController instance;
 
 
-    [System.NonSerialized]
-    private Menu[] menus = new Menu[(int)MenuType.Count];
-    [System.NonSerialized]
-    private Stack<Menu> menuStack;
-    [System.NonSerialized]
-    private Transform spawnTransform;
+    [System.NonSerialized] private Menu[] menus = new Menu[(int)MenuType.Count];
+    [System.NonSerialized] private Stack<Menu> menuStack;
+    [System.NonSerialized] private Transform spawnTransform;
 
 	public enum MenuType { CreateCharacter, ChooseCharacter, Popup, Count };
-    public Menu[] menuInspectorLinks;
-    public MenuType startMenu;
-    public GameObject mainCanvasPrefab;
+    [SerializeField] private Menu[] menuInspectorLinks;
+    [SerializeField] private MenuType startMenu;
+    [SerializeField] private GameObject mainCanvasPrefab;
 
 
     //unity event functions
@@ -122,7 +117,7 @@ public class MenuController : ScriptableObject {
     }
 
     //protected functions
-    protected void HideAll()
+    public void HideAll()
     {
         foreach (Menu menu in menuStack)
         {
@@ -131,7 +126,7 @@ public class MenuController : ScriptableObject {
     }
 
     //will close all menus with disableMenusUnder set to false (close popups)
-    protected void ShowTopMenus()
+    public void ShowTopMenus()
     {
         while(menuStack.Count != 0)
         {
