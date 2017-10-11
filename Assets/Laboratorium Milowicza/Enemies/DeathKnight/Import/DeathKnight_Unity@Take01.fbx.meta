@@ -208,9 +208,9 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     animationCompression: 1
-    animationRotationError: 0.5
-    animationPositionError: 0.5
-    animationScaleError: 0.5
+    animationRotationError: 0
+    animationPositionError: 0
+    animationScaleError: 0
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
@@ -218,8 +218,8 @@ ModelImporter:
     - serializedVersion: 16
       name: DeathKnight_Inactive
       takeName: Take 001
-      firstFrame: 10
-      lastFrame: 20
+      firstFrame: 12
+      lastFrame: 18
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -266,7 +266,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0
+        functionName: EyeActivate
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 88bb0b98d0945dd47a3fdbaea48f6c27,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -534,7 +542,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.96341515
+        functionName: EyeDeactivate
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 88bb0b98d0945dd47a3fdbaea48f6c27,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
