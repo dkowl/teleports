@@ -235,6 +235,7 @@ ModelImporter:
     - Reference/Hips/Spine01/Spine02/Chest/Neck/Head
     - Reference/Hips
     - Reference/Hips/Spine01/Spine02/Chest/R_Clavical/R_Arm/R_Forearm/R_Wrist
+    - Reference/Hips/Spine01/Spine02/Chest/L_Clavical/L_Arm/L_Forearm/L_Wrist
     extraUserProperties: []
     clipAnimations: []
     isReadable: 1
