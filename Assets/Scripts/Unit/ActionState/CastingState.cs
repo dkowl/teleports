@@ -25,7 +25,7 @@ public class CastingState : ActionState {
             " ||| can reach cast target?: " + CanReachCastTarget.ToString());*/
         if(!IsActive && castTarget != null && activeSkill != null && activeSkill.CurrentCooldown == 0 && CanReachCastTarget)
         {
-            Debug.Log("Casting start");
+            //Debug.Log("Casting start");
             currentCastTime = 0;
             isActive = true;
             if (startCastEvent != null) startCastEvent(this, EventArgs.Empty);
@@ -51,8 +51,7 @@ public class CastingState : ActionState {
     }
 
     public override void Reset()
-    {
-        Debug.Log("Casting reset");
+    { 
         castTarget = null;
         activeSkill = null;
         currentCastTime = 0;

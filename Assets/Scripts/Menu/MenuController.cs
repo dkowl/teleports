@@ -1,20 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 //singleton controlling menu stack
 [ExecuteInEditMode]
 [CreateAssetMenu(fileName = "menuController", menuName = "Menu/Controller")]
-public class MenuController : ScriptableObject {
+public class MenuController : ScriptableObject
+{
+    public enum MenuType { CreateCharacter, ChooseCharacter, Popup, Test, Count };
 
     private static MenuController instance;
 
+    [NonSerialized] private Menu[] menus = new Menu[(int)MenuType.Count];
+    [NonSerialized] private Stack<Menu> menuStack;
+    [NonSerialized] private Transform spawnTransform;
 
-    [System.NonSerialized] private Menu[] menus = new Menu[(int)MenuType.Count];
-    [System.NonSerialized] private Stack<Menu> menuStack;
-    [System.NonSerialized] private Transform spawnTransform;
-
-	public enum MenuType { CreateCharacter, ChooseCharacter, Popup, Count };
     [SerializeField] private Menu[] menuInspectorLinks;
     [SerializeField] private MenuType startMenu;
     [SerializeField] private GameObject mainCanvasPrefab;
@@ -37,13 +38,6 @@ public class MenuController : ScriptableObject {
         instance = null;
     }
 
-    public void FirstStart(Transform newSpawnTransform)
-    {
-        spawnTransform = newSpawnTransform;
-
-        OpenMenu(startMenu);
-    }
-
     protected void Initialize()
     {
         instance = this;
@@ -52,19 +46,26 @@ public class MenuController : ScriptableObject {
 
         foreach (Menu menu in menuInspectorLinks)
         {
-            menus[(int)menu.menuType] = menu;
+            menus[(int)menu.MenuType] = menu;
         }
 
         Debug.Log("Menu Controller initialized!");
     }
 
     //public functions
+    public void FirstStart(Transform newSpawnTransform)
+    {
+        spawnTransform = newSpawnTransform;
+
+        OpenMenu(startMenu);
+    }
+
     public void OpenMenu(MenuType menuType)
     {
         Menu menu = menus[(int)menuType];
         if (menu != null && !menu.IsOpen)
         {
-            if (menu.disableMenusUnder)
+            if (menu.DisableMenusUnder)
             {
                 HideAll();
             }
@@ -79,7 +80,7 @@ public class MenuController : ScriptableObject {
         if (menu == menuStack.Peek())
         {
             CloseTopMenu();
-            if (menu.disableMenusUnder)
+            if (menu.DisableMenusUnder)
             {
                 ShowTopMenus();
             }
@@ -95,6 +96,22 @@ public class MenuController : ScriptableObject {
         }
     }
 
+    public void CloseAll()
+    {
+        while (menuStack.Count > 0)
+        {
+            CloseTopMenu();
+        }
+    }
+
+    public void HideAll()
+    {
+        foreach (Menu menu in menuStack)
+        {
+            menu.Hide();
+        }
+    }
+
     public bool IsActive(MenuType menuType)
     {
         Menu menu = menus[(int)menuType];
@@ -106,24 +123,7 @@ public class MenuController : ScriptableObject {
         {
             return false;
         }
-    }
-
-    public void CloseAll()
-    {
-        while(menuStack.Count > 0)
-        {
-            CloseTopMenu();
-        }
-    }
-
-    //protected functions
-    public void HideAll()
-    {
-        foreach (Menu menu in menuStack)
-        {
-            menu.Hide();
-        }
-    }
+    }    
 
     //will close all menus with disableMenusUnder set to false (close popups)
     public void ShowTopMenus()
@@ -131,7 +131,7 @@ public class MenuController : ScriptableObject {
         while(menuStack.Count != 0)
         {
             Menu menu = menuStack.Peek();
-            if (!menu.disableMenusUnder)
+            if (!menu.DisableMenusUnder)
             {
                 CloseTopMenu();
             }

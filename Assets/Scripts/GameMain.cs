@@ -96,69 +96,7 @@ public class GameMain : MonoBehaviour {
         //try finding player object, if not found, spawn new one
         if(player != null) { return; }
 
-        player = GameObject.FindGameObjectWithTag("Player");
-        if(player == null)
-        {
-            player = new GameObject("Player");
-            player.transform.parent = transform;
-            player.tag = "Player";
-        }
-
-        //Components to be initialized
-        IPlayerData playerData = MainData.CurrentPlayerData;
-        Unit unit = player.GetComponent<Unit>();
-        PlayerController controller = player.GetComponent<PlayerController>();
-        XpComponent xp = player.GetComponent<XpComponent>();
-
-        if (unit == null)
-        {
-            unit = player.AddComponent<Unit>();
-        }
-        unit.unitData = playerData.BaseUnitData;
-
-        if (controller == null)
-        {
-            controller = player.AddComponent<PlayerController>();
-        }
-
-        if (xp == null)
-        {
-            xp = player.AddComponent<XpComponent>();
-        }
-        xp.Xp = playerData.Xp;
-
-        //Instantiating skills
-        GameObject skills = new GameObject("Skills");
-        skills.transform.parent = player.transform;
-
-        GameObject primarySkill = Instantiate(MainData.CurrentGameData.GetSkill(playerData.PrimarySkillId).gameObject, skills.transform);
-        controller.MainAttack = primarySkill.GetComponent<Skill>();
-        unit.ActiveController = controller;
-
-        //Instantiating items
-
-        GameObject items = new GameObject("Items");
-        items.transform.parent = player.transform;
-
-        foreach(ItemData itemData in playerData.InventoryData.GetEquippedItems())
-        {
-            GameObject itemObject = new GameObject(itemData.UniqueName);
-            itemObject.transform.parent = items.transform;
-            Item item = itemObject.AddComponent<Item>();
-            item.Data = itemData;
-        }
-
-        //Spawn model
-        RaceGraphics raceGraphics = MainData.CurrentGameData.GetRace(playerData.RaceName).Graphics;
-        GameObject playerModel = Instantiate(raceGraphics.ModelObject, player.transform);
-        playerModel.transform.localEulerAngles = Vector3.zero;
-
-        //Set up Animator
-        Animator animator = playerModel.GetComponentInChildren<Animator>();
-        animator.runtimeAnimatorController = raceGraphics.WorldAnimationController;
-        animator.gameObject.AddComponent<UnitAnimator>();
-
-        player.AddComponent<PlayerWorldUI>();
+        player = PlayerSpawner.Spawn(new PlayerSpawnerParams(gameObject, PlayerSpawnerParams.SpawnType.World));
        
     }
 

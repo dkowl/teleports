@@ -214,7 +214,7 @@ public class Unit : MonoBehaviour
 
     public void CastStart(Skill skill, Skill.TargetInfo target)
     {
-        Debug.Log("Trying to cast" + skill.Name + " on " + target.TargetUnit.name);
+        //Debug.Log("Trying to cast" + skill.Name + " on " + target.TargetUnit.name);
         castingState.ActiveSkill = skill;
         castingState.CastTarget = target;
         castingState.Start();

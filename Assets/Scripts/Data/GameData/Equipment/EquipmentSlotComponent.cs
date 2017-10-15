@@ -14,11 +14,11 @@ public class EquipmentSlotComponent : MonoBehaviour {
         get { return slotType; }
     }
 
-    public void Equip(Item item)
+    public void Equip(ItemData itemData)
     {
         Unequip();
 
-        itemObject = Instantiate(item.Graphics.Prefab, transform);
+        itemObject = Instantiate(itemData.Graphics.Prefab, transform);
         isEmpty = false;
     }
 

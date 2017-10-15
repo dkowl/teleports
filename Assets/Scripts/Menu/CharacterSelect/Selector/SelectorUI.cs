@@ -21,7 +21,12 @@ public class SelectorUI : MonoBehaviour {
         animation = GetComponent<Animation>();
     }
 
-    public void Hide()
+    public void Start()
+    {
+        Hide(true);
+    }
+
+    public void Hide(bool instant = false)
     {
         if (inSelectState)
         {
@@ -39,7 +44,10 @@ public class SelectorUI : MonoBehaviour {
             mainMenu.SetState(CharacterSelectMenu.State.SelectHero);
             inSelectState = true;
         }
-
+        if (instant)
+        {
+            animation[animName].speed *= 1000;
+        }
         animation.Play(animName);
     }
 }

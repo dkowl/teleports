@@ -26,15 +26,7 @@ public class Item : MonoBehaviour {
     {
         if (!isEquipped)
         {
-            EquipmentSlotComponent[] slotComponents = unit.gameObject.GetComponentsInChildren<EquipmentSlotComponent>();
-            foreach(EquipmentSlotComponent slotComp in slotComponents)
-            {
-                if(slotComp.SlotType == data.Slot)
-                {
-                    slotComp.Equip(this);
-                    slotComponent = slotComp;
-                }
-            }
+            slotComponent = ItemSpawner.Spawn(unit.gameObject, data);
 
             foreach(Perk perk in data.Perks)
             {
@@ -62,10 +54,5 @@ public class Item : MonoBehaviour {
     {
         get { return data; }
         set { data = value; }
-    }
-
-    public ItemGraphics Graphics
-    {
-        get { return data.Graphics; }
     }
 }

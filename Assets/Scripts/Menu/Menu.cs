@@ -1,24 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "New Menu", menuName = "Menu/Menu")]
 public class Menu : ScriptableObject
 {
     //private variables
-    [System.NonSerialized]
-    private GameObject instantiatedObject = null;
-    [System.NonSerialized]
-    private bool isOpen = false, isActive = false;
-    [System.NonSerialized]
-    private MenuBehaviour menuBehaviour;
+    [NonSerialized] private GameObject instantiatedObject = null;
+    [NonSerialized] private bool isOpen = false, isActive = false;
+    [NonSerialized] private MenuBehaviour menuBehaviour;
 
     //inspector variables
-    public GameObject prefab;
-    public MenuController.MenuType menuType;
-    public bool disableMenusUnder; //menu will be closed when enabled back
+    [SerializeField] private GameObject prefab;
+    [SerializeField] private MenuController.MenuType menuType;
+    [SerializeField] private bool disableMenusUnder;
     [Tooltip("will parent the menu to the MainCanvas prefab")]
-    public bool useMainCanvas;
+    [SerializeField] private bool useMainCanvas;
 
     //events
     public delegate void OnOpen();
@@ -48,13 +46,18 @@ public class Menu : ScriptableObject
             {
                 instantiatedObject.SetActive(true);
             }
+
             menuBehaviour = instantiatedObject.GetComponentInChildren<MenuBehaviour>();
             if(menuBehaviour != null)
             {
                 menuBehaviour.OnOpen();
             }
             IsOpen = true;
-            OnOpenEvent();
+
+            if (OnOpenEvent != null)
+            {
+                OnOpenEvent();
+            }
         }
     }
 
@@ -65,7 +68,10 @@ public class Menu : ScriptableObject
             Destroy(instantiatedObject);
             instantiatedObject = null;
             IsOpen = false;
-            OnCloseEvent();
+            if (OnCloseEvent != null)
+            {
+                OnCloseEvent();
+            }
         }
     }
 
@@ -100,5 +106,20 @@ public class Menu : ScriptableObject
     public bool IsActive
     {
         get { return isActive; }
+    }
+
+    public MenuController.MenuType MenuType
+    {
+        get { return menuType; }
+    }
+
+    public bool DisableMenusUnder
+    {
+        get { return disableMenusUnder; }
+    }
+
+    public bool UseMainCanvas
+    {
+        get { return useMainCanvas; }
     }
 }

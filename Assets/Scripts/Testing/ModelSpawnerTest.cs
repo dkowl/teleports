@@ -24,14 +24,12 @@ public class ModelSpawnerTest : LoadableBehaviour {
     {
         if (Application.isPlaying)
         {
-            Race race = MainData.CurrentGameData.GetRace(CurrentPlayerData.RaceName);
-
             if (character != null)
             {
                 Destroy(character);
+                character.tag = "Untagged";
             }
-            character = Instantiate(race.Graphics.ModelObject, transform);
-            character.GetComponentInChildren<Animator>().runtimeAnimatorController = race.Graphics.UiAnimationController;
+            character = PlayerSpawner.Spawn(new PlayerSpawnerParams(gameObject, PlayerSpawnerParams.SpawnType.UI));
             character.transform.localPosition += characterLocalPositionOffset;
             character.transform.Rotate(characterLocalRotationOffset, Space.Self);
 

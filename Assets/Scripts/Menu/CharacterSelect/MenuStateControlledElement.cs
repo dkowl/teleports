@@ -43,6 +43,7 @@ public class MenuStateControlledElement : LoadableBehaviour {
                 menu = GetComponentInParent<CharacterSelectMenu>();
                 menu.MenuStateSwitchedEvent -= LoadData;
                 menu.MenuStateSwitchedEvent += LoadData;
+                LoadData();
             }
             return menu;
         }
