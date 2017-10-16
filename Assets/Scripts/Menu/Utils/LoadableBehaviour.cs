@@ -20,6 +20,15 @@ public abstract class LoadableBehaviour : MonoBehaviour {
         Unsubscribe();
     }
 
+    private void Subscribe()
+    {
+        Unsubscribe();
+        MainData.OnInitializedEvent += LoadData;
+        SaveData.OnCharacterIDChangedEvent += LoadData;
+        Menu.OnOpenEvent += LoadData;
+        Menu.OnCloseEvent += LoadData;
+    }
+
     private void Unsubscribe()
     {
         MainData.OnInitializedEvent -= LoadData;
@@ -30,11 +39,7 @@ public abstract class LoadableBehaviour : MonoBehaviour {
 
     public void LoadData()
     {
-        Unsubscribe();
-        MainData.OnInitializedEvent += LoadData;
-        SaveData.OnCharacterIDChangedEvent += LoadData;
-        Menu.OnOpenEvent += LoadData;
-        Menu.OnCloseEvent += LoadData;
+        Subscribe();
 
         if (MainData.instance == null)
         {

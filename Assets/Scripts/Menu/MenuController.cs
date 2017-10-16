@@ -8,7 +8,7 @@ using System;
 [CreateAssetMenu(fileName = "menuController", menuName = "Menu/Controller")]
 public class MenuController : ScriptableObject
 {
-    public enum MenuType { CreateCharacter, ChooseCharacter, Popup, Test, Count };
+    public enum MenuType { CreateCharacter, ChooseCharacter, Popup, TestA, TestB, Count };
 
     private static MenuController instance;
 

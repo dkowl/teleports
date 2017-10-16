@@ -9,7 +9,7 @@ public class Menu : ScriptableObject
     //private variables
     [NonSerialized] private GameObject instantiatedObject = null;
     [NonSerialized] private bool isOpen = false, isActive = false;
-    [NonSerialized] private MenuBehaviour menuBehaviour;
+    [NonSerialized] private MenuBehaviour[] menuBehaviours;
 
     //inspector variables
     [SerializeField] private GameObject prefab;
@@ -47,8 +47,8 @@ public class Menu : ScriptableObject
                 instantiatedObject.SetActive(true);
             }
 
-            menuBehaviour = instantiatedObject.GetComponentInChildren<MenuBehaviour>();
-            if(menuBehaviour != null)
+            menuBehaviours = instantiatedObject.GetComponentsInChildren<MenuBehaviour>();
+            foreach(var menuBehaviour in menuBehaviours)
             {
                 menuBehaviour.OnOpen();
             }

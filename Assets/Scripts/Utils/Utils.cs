@@ -30,6 +30,18 @@ namespace Teleports.Utils
         {
             return System.Enum.GetValues(type).Length;
         }
+
+        public static bool HasParameter(this Animator animator, string name)
+        {
+            foreach(var parameter in animator.parameters)
+            {
+                if(parameter.name == name)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     public static class RomanNumbers

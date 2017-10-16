@@ -19,7 +19,7 @@ public class MappedList<T> where T : IUniqueName {
             dict.Add(item.UniqueName, item);
         }
 
-        Debug.Log("Dictionary of type " + typeof(T).ToString() + " created from " + dict.Count.ToString() + " items");
+        //Debug.Log("Dictionary of type " + typeof(T).ToString() + " created from " + dict.Count.ToString() + " items");
     }
 
     public T TryGetValue(string name)
