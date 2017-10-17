@@ -9,14 +9,14 @@ public abstract class MenuBehaviour : LoadableBehaviour {
 
     public enum State
     {
-        Opening,
-        Open,
-        Closing,
         Closed,
-        Loading
+        Opening,
+        Loading,
+        Open,
+        Closing
     }
 
-    protected State state;
+    protected State state, previousState;
 
     Animator animator;
     protected bool[] hasParameter;
@@ -62,15 +62,37 @@ public abstract class MenuBehaviour : LoadableBehaviour {
         OnLoadInternal();
     }
 
-    protected virtual void OnOpenInternal() { }
-    protected virtual void OnCloseInternal() { }
-    protected virtual void OnLoadInternal() { }
+    public void OpenFinish()
+    {
+        CurrentState = State.Open;
+    }
+
+    public void CloseFinish()
+    {
+        CurrentState = State.Closed;
+    }
+
+    public void LoadFinish()
+    {
+        CurrentState = previousState;
+    }
+
+    protected virtual void OnOpenInternal() {
+        OpenFinish();
+    }
+    protected virtual void OnCloseInternal() {
+        CloseFinish();
+    }
+    protected virtual void OnLoadInternal() {
+        LoadFinish();
+    }
 
     public State CurrentState
     {
         get { return state; }
         protected set
         {
+            previousState = state;
             state = value;
             Debug.Log("Changing state to " + state.ToString());
             if (hasParameter[(int)state])

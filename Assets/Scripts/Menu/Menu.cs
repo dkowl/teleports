@@ -19,11 +19,11 @@ public class Menu : ScriptableObject
     [SerializeField] private bool useMainCanvas;
 
     //events
-    public delegate void OnOpen();
-    public static event OnOpen OnOpenEvent;
+    public delegate void OnShow();
+    public static event OnShow OnShowEvent;
 
-    public delegate void OnClose();
-    public static event OnClose OnCloseEvent;
+    public delegate void OnHide();
+    public static event OnHide OnHideEvent;
 
     //public functions
     public void Open()
@@ -42,36 +42,10 @@ public class Menu : ScriptableObject
                     instantiatedObject = Instantiate(prefab, MenuController.SpawnTransform) as GameObject;
                 }
             }
-            else
-            {
-                instantiatedObject.SetActive(true);
-            }
 
             menuBehaviours = instantiatedObject.GetComponentsInChildren<MenuBehaviour>();
-            foreach(var menuBehaviour in menuBehaviours)
-            {
-                menuBehaviour.OnOpen();
-            }
             IsOpen = true;
-
-            if (OnOpenEvent != null)
-            {
-                OnOpenEvent();
-            }
-        }
-    }
-
-    public void Close()
-    {
-        if (IsOpen && instantiatedObject != null)
-        {
-            Destroy(instantiatedObject);
-            instantiatedObject = null;
-            IsOpen = false;
-            if (OnCloseEvent != null)
-            {
-                OnCloseEvent();
-            }
+            Show();
         }
     }
 
@@ -80,17 +54,55 @@ public class Menu : ScriptableObject
         if (IsOpen && !isActive && instantiatedObject != null)
         {
             instantiatedObject.SetActive(true);
+
+            foreach (var menuBehaviour in menuBehaviours)
+            {
+                menuBehaviour.OnOpen();
+            }
+
             isActive = true;
+
+            if (OnShowEvent != null)
+            {
+                OnShowEvent();
+            }
         }
     }
 
-    public void Hide()
+    public void Close()
+    {
+        if (IsOpen && instantiatedObject != null)
+        {
+            if (Hide())
+            {
+                Destroy(instantiatedObject);
+                instantiatedObject = null;
+                IsOpen = false;
+            }
+        }
+    }
+
+    public bool Hide()
     {
         if(IsOpen && isActive && instantiatedObject != null)
         {
-            instantiatedObject.SetActive(false);
+            foreach (var menuBehaviour in menuBehaviours)
+            {
+                menuBehaviour.OnClose();
+            }
+
+            if (IsClosing) return false;
+
+            instantiatedObject.SetActive(false);            
+
             isActive = false;
+
+            if (OnHideEvent != null)
+            {
+                OnHideEvent();
+            }
         }
+        return true;
     }
 
     //properties
@@ -100,12 +112,26 @@ public class Menu : ScriptableObject
         private set
         {
             isOpen = value;
-            isActive = value;
         }
     }
     public bool IsActive
     {
         get { return isActive; }
+    }
+
+    public bool IsClosing
+    {
+        get
+        {
+            foreach(var menuBehaviour in menuBehaviours)
+            {
+                if(menuBehaviour.CurrentState == MenuBehaviour.State.Closing)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     public MenuController.MenuType MenuType

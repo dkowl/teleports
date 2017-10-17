@@ -72,6 +72,22 @@ public class MenuController : ScriptableObject
             menuStack.Push(menu);
             menu.Open();
         }
+        else{
+            ShowMenu(menuType);
+        }
+    }
+
+    public void ShowMenu(MenuType menuType)
+    {
+        Menu menu = menus[(int)menuType];
+        if (menu != null && menu.IsOpen)
+        {
+            while(menuStack.Peek().MenuType != menuType)
+            {
+                CloseTopMenu();
+            }
+            menuStack.Peek().Show();
+        }
     }
 
     public void CloseMenu(MenuType menuType)
