@@ -5,7 +5,7 @@ using UnityEngine;
 using Teleports.Utils;
 
 [RequireComponent(typeof(Animator))]
-public abstract class MenuBehaviour : LoadableBehaviour {
+public class MenuBehaviour : LoadableBehaviour {
 
     public enum State
     {
@@ -20,6 +20,9 @@ public abstract class MenuBehaviour : LoadableBehaviour {
 
     Animator animator;
     protected bool[] hasParameter;
+
+    public delegate void CommandFinish();
+    public event CommandFinish OpenFinishEvent, CloseFinishEvent, LoadFinishEvent;
 
     protected void Awake()
     {
@@ -45,6 +48,10 @@ public abstract class MenuBehaviour : LoadableBehaviour {
             CurrentState = State.Opening;
             OnOpenInternal();
         }
+        else
+        {
+            OpenFinish();
+        }
     }
 
     public virtual void OnClose()
@@ -53,6 +60,10 @@ public abstract class MenuBehaviour : LoadableBehaviour {
         {
             CurrentState = State.Closing;
             OnCloseInternal();
+        }
+        else
+        {
+            CloseFinish();
         }
     }
 
@@ -65,16 +76,19 @@ public abstract class MenuBehaviour : LoadableBehaviour {
     public void OpenFinish()
     {
         CurrentState = State.Open;
+        if (OpenFinishEvent != null) OpenFinishEvent();
     }
 
     public void CloseFinish()
     {
         CurrentState = State.Closed;
+        if (CloseFinishEvent != null) CloseFinishEvent();
     }
 
     public void LoadFinish()
     {
         CurrentState = previousState;
+        if (LoadFinishEvent != null) LoadFinishEvent();
     }
 
     protected virtual void OnOpenInternal() {
