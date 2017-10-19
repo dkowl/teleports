@@ -1,0 +1,579 @@
+fileFormatVersion: 2
+guid: f71bf3e4443457741b1ece0db102f892
+timeCreated: 1508406678
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Chest
+    100002: Chest_FK
+    100004: CorpseEater
+    100006: //RootNode
+    100008: Head
+    100010: Head_End
+    100012: Hip
+    100014: Hip_Sway
+    100016: Jaw
+    100018: Jaw_End
+    100020: joint09
+    100022: L_Arm
+    100024: L_Clavical
+    100026: L_Forearm
+    100028: L_Forearm_Twist
+    100030: L_IndexFinger01
+    100032: L_IndexFinger02
+    100034: L_IndexFinger03
+    100036: L_IndexFinger_End
+    100038: L_MidleFinger01
+    100040: L_MidleFinger02
+    100042: L_MidleFinger03
+    100044: L_MidleFinger_End
+    100046: L_PinkyFinger01
+    100048: L_PinkyFinger02
+    100050: L_PinkyFinger03
+    100052: L_PinkyFinger_End
+    100054: L_ThumbFinger01
+    100056: L_ThumbFinger02
+    100058: L_ThumbFinger03
+    100060: L_ThumbFinger_End
+    100062: L_Wrist
+    100064: Neck
+    100066: R_Arm
+    100068: R_Clavical
+    100070: R_Forearm
+    100072: R_Forearm_Twist
+    100074: R_IndexFinger01
+    100076: R_IndexFinger02
+    100078: R_IndexFinger03
+    100080: R_IndexFinger_End
+    100082: R_MidleFinger01
+    100084: R_MidleFinger02
+    100086: R_MidleFinger03
+    100088: R_MidleFinger_End
+    100090: R_PinkyFinger01
+    100092: R_PinkyFinger02
+    100094: R_PinkyFinger03
+    100096: R_PinkyFinger_End
+    100098: R_ThumbFinger01
+    100100: R_ThumbFinger02
+    100102: R_ThumbFinger03
+    100104: R_ThumbFinger_End
+    100106: R_Wrist
+    100108: Root
+    100110: Spine01
+    100112: Spine01_FK
+    100114: Spine02
+    100116: Spine02_FK
+    100118: Tail01
+    100120: Tail02
+    100122: Tail03
+    100124: Tail04
+    100126: Tail05
+    100128: Tail06
+    100130: Tail07
+    100132: Tail08
+    100134: Tail10
+    100136: Tail_End
+    400000: Chest
+    400002: Chest_FK
+    400004: CorpseEater
+    400006: //RootNode
+    400008: Head
+    400010: Head_End
+    400012: Hip
+    400014: Hip_Sway
+    400016: Jaw
+    400018: Jaw_End
+    400020: joint09
+    400022: L_Arm
+    400024: L_Clavical
+    400026: L_Forearm
+    400028: L_Forearm_Twist
+    400030: L_IndexFinger01
+    400032: L_IndexFinger02
+    400034: L_IndexFinger03
+    400036: L_IndexFinger_End
+    400038: L_MidleFinger01
+    400040: L_MidleFinger02
+    400042: L_MidleFinger03
+    400044: L_MidleFinger_End
+    400046: L_PinkyFinger01
+    400048: L_PinkyFinger02
+    400050: L_PinkyFinger03
+    400052: L_PinkyFinger_End
+    400054: L_ThumbFinger01
+    400056: L_ThumbFinger02
+    400058: L_ThumbFinger03
+    400060: L_ThumbFinger_End
+    400062: L_Wrist
+    400064: Neck
+    400066: R_Arm
+    400068: R_Clavical
+    400070: R_Forearm
+    400072: R_Forearm_Twist
+    400074: R_IndexFinger01
+    400076: R_IndexFinger02
+    400078: R_IndexFinger03
+    400080: R_IndexFinger_End
+    400082: R_MidleFinger01
+    400084: R_MidleFinger02
+    400086: R_MidleFinger03
+    400088: R_MidleFinger_End
+    400090: R_PinkyFinger01
+    400092: R_PinkyFinger02
+    400094: R_PinkyFinger03
+    400096: R_PinkyFinger_End
+    400098: R_ThumbFinger01
+    400100: R_ThumbFinger02
+    400102: R_ThumbFinger03
+    400104: R_ThumbFinger_End
+    400106: R_Wrist
+    400108: Root
+    400110: Spine01
+    400112: Spine01_FK
+    400114: Spine02
+    400116: Spine02_FK
+    400118: Tail01
+    400120: Tail02
+    400122: Tail03
+    400124: Tail04
+    400126: Tail05
+    400128: Tail06
+    400130: Tail07
+    400132: Tail08
+    400134: Tail10
+    400136: Tail_End
+    4300000: CorpseEater
+    7400000: Devourer_WalkUnderground
+    7400002: Devourer_Surface
+    7400004: Devourer_Idle01
+    7400006: Devourer_Walk
+    7400008: Devourer_Swipe
+    7400010: Devourer_TailStrike
+    7400012: Devourer_Dive
+    7400014: Devourer_Bite
+    7400016: Devourer_StunEnter
+    7400018: Devourer_Stun
+    7400020: Devourer_StunExit
+    7400022: Devourer_Death
+    9500000: //RootNode
+    13700000: CorpseEater
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: aiSkin1
+    second: {fileID: 2100000, guid: d4eeef1f14d2a4643af0b5da84746ca0, type: 2}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0
+    animationPositionError: 0
+    animationScaleError: 0
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Devourer_WalkUnderground
+      takeName: Take 001
+      firstFrame: 10
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Devourer_Surface
+      takeName: Take 001
+      firstFrame: 15
+      lastFrame: 70
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Devourer_Idle01
+      takeName: Take 001
+      firstFrame: 70
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Devourer_Walk
+      takeName: Take 001
+      firstFrame: 125
+      lastFrame: 139
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Devourer_Swipe
+      takeName: Take 001
+      firstFrame: 145
+      lastFrame: 173
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Devourer_TailStrike
+      takeName: Take 001
+      firstFrame: 173
+      lastFrame: 198
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Devourer_Dive
+      takeName: Take 001
+      firstFrame: 198
+      lastFrame: 231
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Devourer_Bite
+      takeName: Take 001
+      firstFrame: 240
+      lastFrame: 284
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Devourer_StunEnter
+      takeName: Take 001
+      firstFrame: 284
+      lastFrame: 305
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Devourer_Stun
+      takeName: Take 001
+      firstFrame: 305
+      lastFrame: 345
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Devourer_StunExit
+      takeName: Take 001
+      firstFrame: 345
+      lastFrame: 364
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Devourer_Death
+      takeName: Take 001
+      firstFrame: 364
+      lastFrame: 460
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 60
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: Root
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
