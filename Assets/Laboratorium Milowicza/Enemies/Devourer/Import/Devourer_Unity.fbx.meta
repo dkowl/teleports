@@ -241,7 +241,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0
+        functionName: GroundErupt
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a04177b7d610a6049aff8dd5948f7ecb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -297,7 +305,39 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0
+        functionName: WalkTrailStart
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a04177b7d610a6049aff8dd5948f7ecb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0
+        functionName: RightHandWalk
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a04177b7d610a6049aff8dd5948f7ecb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.52380943
+        functionName: LeftHandWalk
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a04177b7d610a6049aff8dd5948f7ecb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.99633706
+        functionName: WalkTrailStop
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a04177b7d610a6049aff8dd5948f7ecb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -325,7 +365,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.24285252
+        functionName: Swipe
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a04177b7d610a6049aff8dd5948f7ecb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -353,7 +401,23 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.6080586
+        functionName: TailStrike
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a04177b7d610a6049aff8dd5948f7ecb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.37362632
+        functionName: TailTrail
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a04177b7d610a6049aff8dd5948f7ecb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -381,7 +445,23 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.29670298
+        functionName: GroundDig
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a04177b7d610a6049aff8dd5948f7ecb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8681322
+        functionName: StopEmission
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a04177b7d610a6049aff8dd5948f7ecb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -437,7 +517,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.4947635
+        functionName: SideFlop
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a04177b7d610a6049aff8dd5948f7ecb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -521,7 +609,23 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.60439575
+        functionName: SideHeavyFlop
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a04177b7d610a6049aff8dd5948f7ecb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.6190475
+        functionName: TailSmack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: a04177b7d610a6049aff8dd5948f7ecb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -565,7 +669,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    rootMotionBoneName: Root
+    rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
