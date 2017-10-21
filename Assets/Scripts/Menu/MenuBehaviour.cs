@@ -20,6 +20,7 @@ public class MenuBehaviour : LoadableBehaviour {
 
     Animator animator;
     protected bool[] hasParameter;
+    protected CommandQueue commandQ = new CommandQueue();
 
     public delegate void CommandFinish();
     public event CommandFinish OpenFinishEvent, CloseFinishEvent, LoadFinishEvent;
@@ -38,7 +39,12 @@ public class MenuBehaviour : LoadableBehaviour {
 
     public override void LoadDataInternal()
     {
-        OnLoad();
+        AddCommand(MenuBehaviourCommand.Type.Load);
+    }
+
+    public void AddCommand(MenuBehaviourCommand.Type type)
+    {
+        commandQ.AddCommand(new MenuBehaviourCommand(this, type));
     }
 
     public virtual void OnOpen()
@@ -92,13 +98,24 @@ public class MenuBehaviour : LoadableBehaviour {
     }
 
     protected virtual void OnOpenInternal() {
-        OpenFinish();
+        if (!hasParameter[(int)State.Opening])
+        {
+            OpenFinish();
+        }
     }
     protected virtual void OnCloseInternal() {
-        CloseFinish();
+
+        if (!hasParameter[(int)State.Closing])
+        {
+            CloseFinish();
+        }
     }
     protected virtual void OnLoadInternal() {
-        LoadFinish();
+
+        if (!hasParameter[(int)State.Loading])
+        {
+            LoadFinish();
+        }
     }
 
     public State CurrentState
@@ -106,6 +123,7 @@ public class MenuBehaviour : LoadableBehaviour {
         get { return state; }
         protected set
         {
+            if (state == value) return;
             previousState = state;
             state = value;
             Debug.Log("Changing state to " + state.ToString());

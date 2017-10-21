@@ -11,11 +11,12 @@ public class CommandQueue {
         Instant
     }
 
-    protected LinkedList<Command> commands;
+    protected LinkedList<Command> commands = new LinkedList<Command>();
 
     public void Update()
     {
-        if(commands.Count == 0)
+        Debug.Log("Updating Queue, command count: " + commands.Count.ToString());
+        if (commands.Count == 0)
         {
             return;
         }
@@ -25,15 +26,19 @@ public class CommandQueue {
         if(currentCommand.State == CommandState.Pending)
         {
             currentCommand.Start();
+            Debug.Log("Starting command, count: " + commands.Count.ToString());
         }
         else if(currentCommand.State == CommandState.Finished)
         {
+            Debug.Log("Removing command, command count: " + commands.Count.ToString());
             commands.RemoveFirst();
+            Update();
         }
     }
 
     public void AddCommand(Command command, AddMode addMode = AddMode.Standard)
     {
+        Debug.Log("Adding command, command count: " + commands.Count.ToString());
         command.RegisterFinishCallback(Update);
 
         switch (addMode)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Command
 {
-    protected CommandState state;
+    protected CommandState state = CommandState.Pending;
     public delegate void FinishCallback();
     protected FinishCallback finishCallback;
 
@@ -16,11 +16,14 @@ public abstract class Command
 
     public void Finish()
     {
-        FinishInternal();
-        state = CommandState.Finished;
-        if (finishCallback != null)
+        if (state == CommandState.InProgress)
         {
-            finishCallback();
+            FinishInternal();
+            state = CommandState.Finished;
+            if (finishCallback != null)
+            {
+                finishCallback();
+            }
         }
     }
 
