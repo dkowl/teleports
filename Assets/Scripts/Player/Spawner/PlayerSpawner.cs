@@ -8,15 +8,12 @@ public static class PlayerSpawner {
     {
         GameObject player;
         
-        player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null)
-        {
-            player = new GameObject("Player");
-            player.transform.localPosition = Vector3.zero;
-            player.transform.localEulerAngles = new Vector3(0, 180, 0);
-            player.transform.parent = p.ParentObject.transform;
-            player.tag = "Player";
-        }
+        player = new GameObject("Player");
+        player.transform.localPosition = Vector3.zero;
+        player.transform.localEulerAngles = new Vector3(0, 180, 0);
+        player.transform.parent = p.ParentObject.transform;
+        player.tag = "Player";
+        
 
         //Common
         IPlayerData playerData = MainData.CurrentPlayerData;

@@ -104,7 +104,7 @@ public class GameMain : MonoBehaviour {
     {
         MainData.SavePlayer(player);
         MenuController.Instance.OpenMenu(MenuController.MenuType.ChooseCharacter);
-        MainController.SwitchScene("Test");
+        MainController.SwitchScene("Main");
     }
 
     public static GameMain Instance

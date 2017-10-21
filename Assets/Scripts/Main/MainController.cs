@@ -13,7 +13,7 @@ public class MainController : MonoBehaviour {
     private static MainController mainController;
     
     //private variables
-    private string currentSceneName;
+    private string currentSceneName = "Main";
     private string nextSceneName;
     private AsyncOperation resourceUnloadTask;
     private AsyncOperation sceneLoadTask;
@@ -23,7 +23,7 @@ public class MainController : MonoBehaviour {
     private UpdateDelegate[] updateDelegates;
 
     //inspector variables
-    public string startSceneName = "Loading";
+    public string startSceneName = "Main";
     public LoadingGraphics loadingGraphics;
 
     //public static methods
@@ -60,7 +60,7 @@ public class MainController : MonoBehaviour {
         updateDelegates[(int)SceneState.Run] = UpdateSceneRun;
 
         nextSceneName = startSceneName;
-        sceneState = SceneState.Reset;
+        sceneState = SceneState.Run;
     }
 
     void OnDestroy()
