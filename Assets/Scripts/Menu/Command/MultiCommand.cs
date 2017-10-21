@@ -10,13 +10,18 @@ public class MultiCommand : Command {
 
     public MultiCommand(Command[] commands)
     {
+        Debug.Log("Creating MultiCommand from " + commands.Length.ToString() + " commands");
         subCommands = commands;
         finishedCount = 0;
     }
 
     protected override void StartInternal()
     {
-        foreach(var subCommand in subCommands)
+        if (subCommands.Length == 0)
+        {
+            Finish();
+        }
+        foreach (var subCommand in subCommands)
         {
             subCommand.RegisterFinishCallback(OnSubCommandFinished);
             subCommand.Start();

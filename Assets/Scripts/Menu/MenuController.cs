@@ -15,6 +15,7 @@ public class MenuController : ScriptableObject
     [NonSerialized] private Menu[] menus = new Menu[(int)MenuType.Count];
     [NonSerialized] private Stack<Menu> menuStack;
     [NonSerialized] private Transform spawnTransform;
+    [NonSerialized] private CommandQueue commandQ = new CommandQueue();
 
     [SerializeField] private Menu[] menuInspectorLinks;
     [SerializeField] private MenuType startMenu;
@@ -52,6 +53,15 @@ public class MenuController : ScriptableObject
         Debug.Log("Menu Controller initialized!");
     }
 
+    protected void AddCommand(Menu menu, MenuCommand.Type type)
+    {
+        if (type == MenuCommand.Type.Close)
+        {
+            AddCommand(menu, MenuCommand.Type.Hide);
+        }
+        commandQ.AddCommand(new MenuCommand(menu, type));
+    }
+
     //public functions
     public void FirstStart(Transform newSpawnTransform)
     {
@@ -70,7 +80,7 @@ public class MenuController : ScriptableObject
                 HideAll();
             }
             menuStack.Push(menu);
-            menu.Open();
+            AddCommand(menu, MenuCommand.Type.Open);
         }
         else{
             ShowMenu(menuType);
@@ -86,7 +96,7 @@ public class MenuController : ScriptableObject
             {
                 CloseTopMenu();
             }
-            menuStack.Peek().Show();
+            AddCommand(menuStack.Peek(), MenuCommand.Type.Show);
         }
     }
 
@@ -108,7 +118,7 @@ public class MenuController : ScriptableObject
         if (menuStack.Count != 0)
         {
             Menu menu = menuStack.Pop();
-            menu.Close();
+            AddCommand(menu, MenuCommand.Type.Close);
         }
     }
 
@@ -124,7 +134,7 @@ public class MenuController : ScriptableObject
     {
         foreach (Menu menu in menuStack)
         {
-            menu.Hide();
+            AddCommand(menu, MenuCommand.Type.Hide);
         }
     }
 
@@ -153,7 +163,7 @@ public class MenuController : ScriptableObject
             }
             else
             {
-                menu.Show();
+                AddCommand(menu, MenuCommand.Type.Show);
                 break;
             }
         }

@@ -12,10 +12,10 @@ public class MenuControllerCommand : Command {
         Close
     }
 
-    protected Menu menu;
+    protected MenuController.MenuType menu;
     protected Type type;
 
-    public MenuControllerCommand(Menu menu, Type type)
+    public MenuControllerCommand(MenuController.MenuType menu, Type type)
     {
         this.menu = menu;
         this.type = type;
@@ -26,16 +26,12 @@ public class MenuControllerCommand : Command {
         switch (type)
         {
             case Type.Open:
-                menu.Open();
                 break;
             case Type.Show:
-                menu.Show();
                 break;
             case Type.Hide:
-                menu.Hide();
                 break;
             case Type.Close:
-                menu.Close();
                 break;
 
         }

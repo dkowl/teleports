@@ -6,9 +6,10 @@ public class PopupMenuUI : MenuBehaviour {
 
     public MenuController.MenuType menuType;
 
-    public override void OnOpen()
+    protected override void OnOpenInternal()
     {
         GetComponent<Animation>().Play("OnOpen");
+        base.OnOpenInternal();
     }
 
     public void Close()

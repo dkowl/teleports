@@ -6,7 +6,7 @@ public abstract class Command
 {
     protected CommandState state = CommandState.Pending;
     public delegate void FinishCallback();
-    protected FinishCallback finishCallback;
+    protected List<FinishCallback> finishCallbacks = new List<FinishCallback>();
 
     public void Start()
     {
@@ -20,16 +20,17 @@ public abstract class Command
         {
             FinishInternal();
             state = CommandState.Finished;
-            if (finishCallback != null)
+            foreach(var finishCallback in finishCallbacks)
             {
                 finishCallback();
             }
+            finishCallbacks.Clear();
         }
     }
 
     public void RegisterFinishCallback(FinishCallback callback)
     {
-        finishCallback = callback;
+        finishCallbacks.Add(callback);
     }
 
     protected abstract void StartInternal();

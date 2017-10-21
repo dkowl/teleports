@@ -31,9 +31,12 @@ public class MenuBehaviour : LoadableBehaviour {
 
         hasParameter = new bool[Utils.EnumCount(typeof(State))];
         string[] enumNames = Enum.GetNames(typeof(State));
-        for(int i = 0; i<enumNames.Length; i++)
+        if (animator != null)
         {
-            hasParameter[i] = animator.HasParameter(enumNames[i]);
+            for (int i = 0; i < enumNames.Length; i++)
+            {
+                hasParameter[i] = animator.HasParameter(enumNames[i]);
+            }
         }
     }
 

@@ -10,6 +10,7 @@ public class Menu : ScriptableObject
     [NonSerialized] private GameObject instantiatedObject = null;
     [NonSerialized] private bool isOpen = false, isActive = false;
     [NonSerialized] private MenuBehaviour[] menuBehaviours;
+    [NonSerialized] private CommandQueue commandQ = new CommandQueue();
 
     //inspector variables
     [SerializeField] private GameObject prefab;
@@ -18,14 +19,27 @@ public class Menu : ScriptableObject
     [Tooltip("will parent the menu to the MainCanvas prefab")]
     [SerializeField] private bool useMainCanvas;
 
-    //events
+    //static events for LoadableBehaviours
     public delegate void OnShow();
     public static event OnShow OnShowEvent;
 
     public delegate void OnHide();
     public static event OnHide OnHideEvent;
 
+    //non-static events for MenuCommands
+    public delegate void CommandFinish();
+    public event CommandFinish ShowFinishEvent, HideFinishEvent;
+
     //public functions
+    public void AddCommand(MenuCommand.Type type)
+    {
+        if(type == MenuCommand.Type.Close)
+        {
+            AddCommand(MenuCommand.Type.Hide);
+        }
+        commandQ.AddCommand(new MenuCommand(this, type));
+    }
+
     public void Open()
     {
         if (!IsOpen)
@@ -45,7 +59,7 @@ public class Menu : ScriptableObject
 
             menuBehaviours = instantiatedObject.GetComponentsInChildren<MenuBehaviour>();
             IsOpen = true;
-            Show();
+            AddCommand(MenuCommand.Type.Show);
         }
     }
 
@@ -55,54 +69,79 @@ public class Menu : ScriptableObject
         {
             instantiatedObject.SetActive(true);
 
-            foreach (var menuBehaviour in menuBehaviours)
+            Command[] commands = new MenuBehaviourCommand[menuBehaviours.Length];
+            for(int i = 0; i<menuBehaviours.Length; i++)
             {
-                menuBehaviour.OnOpen();
+                commands[i] = new MenuBehaviourCommand(menuBehaviours[i], MenuBehaviourCommand.Type.Open);
             }
+            MultiCommand multiCommand = new MultiCommand(commands);
+            multiCommand.RegisterFinishCallback(ShowFinish);
+            commandQ.AddCommand(multiCommand, CommandQueue.AddMode.Instant);
+        }
+        else
+        {
+            ShowFinish();
+        }
+    }
 
-            isActive = true;
+    public void ShowFinish()
+    {
+        isActive = true;
 
-            if (OnShowEvent != null)
-            {
-                OnShowEvent();
-            }
+        if (OnShowEvent != null)
+        {
+            OnShowEvent();
+        }
+        if(ShowFinishEvent != null)
+        {
+            ShowFinishEvent();
         }
     }
 
     public void Close()
     {
         if (IsOpen && instantiatedObject != null)
-        {
-            if (Hide())
-            {
-                Destroy(instantiatedObject);
-                instantiatedObject = null;
-                IsOpen = false;
-            }
+        {            
+            Destroy(instantiatedObject);
+            instantiatedObject = null;
+            IsOpen = false;            
         }
     }
 
-    public bool Hide()
+    public void Hide()
     {
         if(IsOpen && isActive && instantiatedObject != null)
         {
-            foreach (var menuBehaviour in menuBehaviours)
+            Command[] commands = new MenuBehaviourCommand[menuBehaviours.Length];
+            for (int i = 0; i < menuBehaviours.Length; i++)
             {
-                menuBehaviour.OnClose();
+                commands[i] = new MenuBehaviourCommand(menuBehaviours[i], MenuBehaviourCommand.Type.Close);
             }
-
-            if (IsClosing) return false;
-
-            instantiatedObject.SetActive(false);            
-
-            isActive = false;
-
-            if (OnHideEvent != null)
-            {
-                OnHideEvent();
-            }
+            MultiCommand multiCommand = new MultiCommand(commands);
+            multiCommand.RegisterFinishCallback(HideFinish);
+            commandQ.AddCommand(multiCommand);
         }
-        return true;
+        else
+        {
+            HideFinish();
+        }
+    }
+
+    public void HideFinish()
+    {
+        instantiatedObject.SetActive(false);
+
+        isActive = false;
+
+        if (OnHideEvent != null)
+        {
+            OnHideEvent();
+        }
+
+        if(HideFinishEvent != null)
+        {
+            HideFinishEvent();
+        }
     }
 
     //properties

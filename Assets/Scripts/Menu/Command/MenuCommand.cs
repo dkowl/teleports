@@ -28,15 +28,19 @@ public class MenuCommand : Command {
         {
             case Type.Open:
                 menu.Open();
+                Finish();
                 break;
             case Type.Show:
+                menu.ShowFinishEvent += Finish;
                 menu.Show();
                 break;
             case Type.Hide:
+                menu.HideFinishEvent += Finish;
                 menu.Hide();
                 break;
             case Type.Close:
                 menu.Close();
+                Finish();
                 break;
 
         }
@@ -44,6 +48,15 @@ public class MenuCommand : Command {
 
     protected override void FinishInternal()
     {
+        switch (type)
+        {
+            case Type.Show:
+                menu.ShowFinishEvent -= Finish;
+                break;
+            case Type.Hide:
+                menu.HideFinishEvent -= Finish;
+                break;
+        }
     }
 
 }
