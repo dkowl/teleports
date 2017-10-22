@@ -9,6 +9,8 @@ public class MeshTriangularizator : MonoBehaviour {
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
 
+    public RuntimeAnimatorController animController;
+
     public static Mesh Triangularize(SkinnedMeshRenderer meshRenderer)
     {
         Mesh mesh = new Mesh();
@@ -35,6 +37,8 @@ public class MeshTriangularizator : MonoBehaviour {
         Vector2[] newUvs = new Vector2[l];
         Vector3[] normals = mesh.normals;
         Vector3[] newNormals = new Vector3[l];
+        Color[] newColors = new Color[l];
+        float randomValue = 0f;
 
         for(int i = 0; i<l; i++)
         {
@@ -43,13 +47,21 @@ public class MeshTriangularizator : MonoBehaviour {
             int oldVertIndex = triangles[i];
             newVertices[i] = vertices[oldVertIndex];
             newUvs[i] = uvs[oldVertIndex];
-            newNormals[i] = normals[oldVertIndex];
+            //newNormals[i] = normals[oldVertIndex];
+
+            if (i % 3 == 0)
+            {
+                randomValue = 1 - (newVertices[i].y - mesh.bounds.min.y) / mesh.bounds.size.y;
+            }
+            newColors[i] = new Color(randomValue, 0, 0);
         }
 
         mesh.vertices = newVertices;
         mesh.triangles = newTriangles;
         mesh.uv = newUvs;
-        mesh.normals = newNormals;
+        //mesh.normals = newNormals;
+        mesh.colors = newColors;
+        mesh.RecalculateNormals();
 
         return mesh;
     }
@@ -63,8 +75,8 @@ public class MeshTriangularizator : MonoBehaviour {
 
             instantiatedObject = new GameObject("TriangularizedMesh");
             instantiatedObject.transform.parent = gameObject.transform;
-            instantiatedObject.transform.localPosition = modelObject.transform.localPosition;
-            instantiatedObject.transform.localRotation = modelObject.transform.localRotation;
+            instantiatedObject.transform.position = modelObject.transform.position;
+            instantiatedObject.transform.rotation = modelObject.transform.rotation;
 
             meshFilter = instantiatedObject.AddComponent<MeshFilter>();
             meshFilter.sharedMesh = Triangularize(modelMeshRenderer);
@@ -72,6 +84,24 @@ public class MeshTriangularizator : MonoBehaviour {
             meshRenderer = instantiatedObject.AddComponent<MeshRenderer>();
             meshRenderer.material = modelMeshRenderer.sharedMaterial;
             meshRenderer.material.shader = Shader.Find("Custom/Explode");
+            meshRenderer.material.SetFloat("_FloorHeight", meshRenderer.bounds.min.y);
+
+            if(animController != null)
+            {
+                Animator anim = instantiatedObject.AddComponent<Animator>();
+                anim.runtimeAnimatorController = animController;
+
+                modelObject.transform.parent.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void Stop()
+    {
+        if(animController!= null && instantiatedObject != null && modelObject != null)
+        {
+            Destroy(instantiatedObject);
+            modelObject.transform.parent.gameObject.SetActive(true);
         }
     }
 
