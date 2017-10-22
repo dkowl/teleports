@@ -6,7 +6,7 @@ Shader "Custom/Explode" {
 		_Color ("Color", Color) = (1,1,1,1)
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
 		_Progress("Progress", Range(0, 1)) = 0.0
-		_Spread("Spread", Float) = 10
+		_Spread("Spread", Float) = 1
 		_Gravity("Gravity", Float) = 10
 		_FloorHeight("Floor Height", Float) = 0.0
 	}
