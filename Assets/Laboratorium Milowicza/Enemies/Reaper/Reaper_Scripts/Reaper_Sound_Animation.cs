@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Reaper_Sound_Animation : MonoBehaviour {
 
-    public AudioClip[] Reaper_Sounds;
     public AudioSource Reaper_Audio;
-
+    public AudioClip[] Reaper_Clips;
 
     void ScytheAttack() {
-        AudioClip clip = Reaper_Sounds[0];
+        AudioClip clip = Reaper_Clips[0];
         Reaper_Audio.clip = clip;
         Reaper_Audio.Play();
     }
