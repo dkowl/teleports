@@ -252,7 +252,15 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.24999978
+        functionName: ScytheAttack
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 08a47cef6b88c4649819787961b2f35e,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
