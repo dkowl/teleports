@@ -250,6 +250,14 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.34859154
+        functionName: Surface_Roar
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 237aa7a039e0e2d4e99de63794126945,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -622,6 +630,14 @@ ModelImporter:
         functionName: TailSmack
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: a04177b7d610a6049aff8dd5948f7ecb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.014084581
+        functionName: Death_Roar
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 237aa7a039e0e2d4e99de63794126945,
           type: 3}
         floatParameter: 0
         intParameter: 0

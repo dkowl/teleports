@@ -12,4 +12,16 @@ public class Zombie_Sound_Animation : MonoBehaviour {
         Zombie_Audio.clip = clip;
         Zombie_Audio.Play();
     }
+    void L_Foot_Step()
+    {
+        AudioClip clip = Zombie_Clips[1];
+        Zombie_Audio.clip = clip;
+        Zombie_Audio.Play();
+    }
+    void Hit()
+    {
+        AudioClip clip = Zombie_Clips[2];
+        Zombie_Audio.clip = clip;
+        Zombie_Audio.Play();
+    }
 }
