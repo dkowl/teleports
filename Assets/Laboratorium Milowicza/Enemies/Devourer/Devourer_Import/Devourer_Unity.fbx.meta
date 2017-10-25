@@ -258,6 +258,14 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0
+        functionName: Surface
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 237aa7a039e0e2d4e99de63794126945,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -382,6 +390,14 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.47753194
+        functionName: Hit
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 237aa7a039e0e2d4e99de63794126945,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -466,6 +482,14 @@ ModelImporter:
         functionName: StopEmission
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: a04177b7d610a6049aff8dd5948f7ecb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.23591544
+        functionName: Dive
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 237aa7a039e0e2d4e99de63794126945,
           type: 3}
         floatParameter: 0
         intParameter: 0
@@ -636,6 +660,14 @@ ModelImporter:
         messageOptions: 0
       - time: 0.014084581
         functionName: Death_Roar
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 237aa7a039e0e2d4e99de63794126945,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.6056336
+        functionName: Death_Thump
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 237aa7a039e0e2d4e99de63794126945,
           type: 3}
