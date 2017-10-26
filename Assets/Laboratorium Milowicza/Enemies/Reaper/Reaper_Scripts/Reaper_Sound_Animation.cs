@@ -12,4 +12,14 @@ public class Reaper_Sound_Animation : MonoBehaviour {
         Reaper_Audio.clip = clip;
         Reaper_Audio.Play();
     }
+    void TerrifySound() {
+        AudioClip clip = Reaper_Clips[1];
+        Reaper_Audio.clip = clip;
+        Reaper_Audio.Play();
+    }
+    void ClothFlap() {
+        AudioClip clip = Reaper_Clips[2];
+        Reaper_Audio.clip = clip;
+        Reaper_Audio.Play();
+    }
 }
