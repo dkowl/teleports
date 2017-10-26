@@ -46,4 +46,9 @@ public class Devourer_Audio_Animation : MonoBehaviour {
         Devourer_Body_Audio.clip = clip;
         Devourer_Body_Audio.Play();
     }
+    void Breath() {
+        AudioClip clip = Devourer_Clips[6];
+        Devourer_Body_Audio.clip = clip;
+        Devourer_Body_Audio.Play();
+    }
 }

@@ -22,4 +22,9 @@ public class Reaper_Sound_Animation : MonoBehaviour {
         Reaper_Audio.clip = clip;
         Reaper_Audio.Play();
     }
+    void ScythePlant() {
+        AudioClip clip = Reaper_Clips[3];
+        Reaper_Audio.clip = clip;
+        Reaper_Audio.Play();
+    }
 }
