@@ -42,6 +42,43 @@ namespace Teleports.Utils
             }
             return false;
         }
+
+        public static T GetComponentInChildrenNamed<T>(this GameObject gameObject, string name) where T : Component
+        {
+            Transform foundTransform = gameObject.transform.Find(name);
+            if (foundTransform != null)
+            {
+                return foundTransform.gameObject.GetComponent<T>();
+            }
+            else return null;
+        }
+
+        public static T GetComponentInChildrenNamed<T>(this Component component, string name) where T : Component
+        {
+            return component.gameObject.GetComponentInChildrenNamed<T>(name);
+        }
+
+        public static void FindOrSpawnChildWithComponent<T>(this Component parentComponent, ref T component, string name, bool restrictFindChildrenWithName = false) where T : Component
+        {
+            if(component == null)
+            {
+                if (restrictFindChildrenWithName)
+                {
+                    component = parentComponent.GetComponentInChildrenNamed<T>(name);
+                }
+                else
+                {
+                    component = parentComponent.GetComponentInChildren<T>();
+                }
+                
+                if(component == null)
+                {
+                    GameObject spawnedObject = new GameObject(name);
+                    spawnedObject.transform.parent = parentComponent.transform;
+                    component = spawnedObject.AddComponent<T>();
+                }
+            }
+        }
     }
 
     public static class RomanNumbers

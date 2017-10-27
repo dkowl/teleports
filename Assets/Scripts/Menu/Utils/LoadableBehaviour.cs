@@ -5,7 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public abstract class LoadableBehaviour : MonoBehaviour {
 
-	void OnEnable()
+	virtual protected void OnEnable()
     {        
         LoadData();
     }

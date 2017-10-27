@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Teleports.Utils;
 
-[RequireComponent(typeof(Animator))]
 public class MenuBehaviour : LoadableBehaviour {
 
     public enum State
