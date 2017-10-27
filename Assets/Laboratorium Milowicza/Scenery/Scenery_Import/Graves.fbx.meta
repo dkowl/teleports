@@ -1,0 +1,157 @@
+fileFormatVersion: 2
+guid: db53a961446df5a469fe45828080d726
+timeCreated: 1508862603
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Grave01
+    100002: Grave02
+    100004: Grave03
+    100006: Grave04
+    100008: Grave04_5
+    100010: Grave06
+    100012: Grave08
+    100014: //RootNode
+    400000: Grave01
+    400002: Grave02
+    400004: Grave03
+    400006: Grave04
+    400008: Grave04_5
+    400010: Grave06
+    400012: Grave08
+    400014: //RootNode
+    2300000: Grave01
+    2300002: Grave02
+    2300004: Grave03
+    2300006: Grave04
+    2300008: Grave04_5
+    2300010: Grave06
+    2300012: Grave08
+    3300000: Grave01
+    3300002: Grave02
+    3300004: Grave03
+    3300006: Grave04
+    3300008: Grave04_5
+    3300010: Grave06
+    3300012: Grave08
+    4300000: Grave01
+    4300002: Grave02
+    4300004: Grave03
+    4300006: Grave04
+    4300008: Grave04_5
+    4300010: Grave06
+    4300012: Grave08
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grave01
+    second: {fileID: 2100000, guid: db2afcb4f9d83344c846e7c2e3b3c476, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grave02
+    second: {fileID: 2100000, guid: ea15639a82b9a7641a1fd2294cadaed2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grave03
+    second: {fileID: 2100000, guid: 184c26d46b88ecd47887e223ad9860fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grave04
+    second: {fileID: 2100000, guid: 55fc28a78d449d042970c9bbfead93f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grave04_5
+    second: {fileID: 2100000, guid: 396ad48c19bc62a47906d3d71a9252bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grave06
+    second: {fileID: 2100000, guid: 362d43c22110ade4b931254fc428bcdb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grave08
+    second: {fileID: 2100000, guid: dac65ebd37f78654ab2b9e6c388f832e, type: 2}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 30
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
