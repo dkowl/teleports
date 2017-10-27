@@ -6,6 +6,7 @@ public class Reaper_Particle_Animation : MonoBehaviour {
 
     public ParticleSystem TerrifyParticleSystem;
     public ParticleSystem PlantScytheParticleSystem;
+    public ParticleSystem DeathParticleSystem;
  
     void Terrify()
     {
@@ -14,5 +15,8 @@ public class Reaper_Particle_Animation : MonoBehaviour {
     void PlantScythe()
     {
         PlantScytheParticleSystem.Play();
+    }
+    void Ghosts() {
+        DeathParticleSystem.Play();
     }
 }

@@ -27,4 +27,9 @@ public class Reaper_Sound_Animation : MonoBehaviour {
         Reaper_Audio.clip = clip;
         Reaper_Audio.Play();
     }
+    void Death() {
+        AudioClip clip = Reaper_Clips[4];
+        Reaper_Audio.clip = clip;
+        Reaper_Audio.Play();
+    }
 }
