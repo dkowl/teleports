@@ -62,6 +62,11 @@ public static class XpLevels {
         else return 1;
     }
 
+    public static float Progress(int xp)
+    {
+        return (float)CurrentXp(xp) / RequiredXp(xp);
+    }
+
     public static int MaxLevel
     {
         get

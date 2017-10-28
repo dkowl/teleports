@@ -5,13 +5,48 @@ using UnityEngine;
 
 public class ProgressBarUI : BaseProgressBarUI {
 
+    public enum ValueType
+    {
+        XP,
+        RP
+    }
+
+    [SerializeField] protected ValueType valueType;
+
+    protected override string NameTextString()
+    {
+        return "Level " + XpLevels.Level((int)DisplayValue).ToString();
+    }
+
     protected override float CurrentValue()
     {
-        return XpLevels.CurrentXp(MainData.CurrentPlayerData.Xp);
+        switch (valueType)
+        {
+            case ValueType.XP:
+                return MainData.CurrentPlayerData.Xp;
+            case ValueType.RP:
+                return 0;
+            default:
+                return 0;
+        }
     }
 
     protected override float MaxValue()
     {
-        return XpLevels.RequiredXp(MainData.CurrentPlayerData.Xp);
+        int xp = (int)DisplayValue;
+        return xp + XpLevels.RequiredXp(xp) - XpLevels.CurrentXp(xp);
+    }
+
+    protected override float SliderValue()
+    {
+        if (valueType == ValueType.XP)
+        {
+            maxValue = MaxValue();
+            return Mathf.Clamp(XpLevels.Progress((int)DisplayValue), 0f, 1f);
+        }
+        else
+        {
+            return base.SliderValue();
+        }
     }
 }

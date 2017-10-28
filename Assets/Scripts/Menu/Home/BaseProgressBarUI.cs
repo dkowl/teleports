@@ -52,7 +52,8 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         }        
         DisplayValue = Animate(DisplayValue, currentValue, animationType);
 
-        if(valueText != null) valueText.text = ValueTextString();
+        if (nameText != null) nameText.text = NameTextString();
+        if (valueText != null) valueText.text = ValueTextString();        
     }
 
     protected override void OnLoadInternal()
@@ -95,8 +96,8 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
                     (
                     disp +
                     asymptoticAnimationSpeed * (cur - disp),
-                    0, 
-                    maxValue
+                    0,
+                    maxValue + 1
                     );
                 break;
         }
@@ -121,6 +122,11 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         return result;
     }
 
+    protected virtual string NameTextString()
+    {
+        return "";
+    }
+
     protected virtual string ValueTextString()
     {
         switch (valueTextType)
@@ -132,10 +138,15 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
             case ValueTextType.TwoValues:
                 return displayValue.ToString("F0") + "/" + maxValue.ToString("F0");
             case ValueTextType.Percentage:
-                return (displayValue / maxValue).ToString("P0");
+                return slider.value.ToString("P0");
             default:
                 return "";
         }
+    }
+
+    protected virtual float SliderValue()
+    {
+        return Mathf.Clamp(displayValue / maxValue, 0f, 1f);
     }
 
     protected abstract float CurrentValue();
@@ -147,7 +158,7 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         set
         {
             displayValue = value;
-            slider.value = Mathf.Clamp(displayValue / maxValue, 0f, 1f);
+            slider.value = SliderValue();
         }
     }
 
