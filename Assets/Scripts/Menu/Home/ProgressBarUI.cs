@@ -15,7 +15,7 @@ public class ProgressBarUI : BaseProgressBarUI {
 
     protected override string NameTextString()
     {
-        return "Level " + XpLevels.Level((int)DisplayValue).ToString();
+        return "Level " + Levels.xp.Level((int)DisplayValue).ToString();
     }
 
     protected override float CurrentValue()
@@ -34,7 +34,7 @@ public class ProgressBarUI : BaseProgressBarUI {
     protected override float MaxValue()
     {
         int xp = (int)DisplayValue;
-        return xp + XpLevels.RequiredXp(xp) - XpLevels.CurrentXp(xp);
+        return xp + Levels.xp.Required(xp) - Levels.xp.Current(xp);
     }
 
     protected override float SliderValue()
@@ -42,7 +42,7 @@ public class ProgressBarUI : BaseProgressBarUI {
         if (valueType == ValueType.XP)
         {
             maxValue = MaxValue();
-            return Mathf.Clamp(XpLevels.Progress((int)DisplayValue), 0f, 1f);
+            return Mathf.Clamp(Levels.xp.Progress((int)DisplayValue), 0f, 1f);
         }
         else
         {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class XpLevels {
+public class Levels {
 
     private static int[] xpLevels = new int[] {
         0,
@@ -37,41 +37,52 @@ public static class XpLevels {
         100000
     };
 
-    public static int Level(int xp)
+    public static Levels xp = new Levels(xpLevels);
+
+    private int[] levels;   
+    
+    public Levels(int[] levels)
+    {
+        this.levels = levels;
+    } 
+
+    public int Level(int xp)
     {        
-        for (int i = 0; i < xpLevels.Length; i++)
+        for (int i = 0; i < levels.Length; i++)
         {
-            if (xpLevels[i] >= xp)  return i;
+            if (levels[i] >= xp)  return i;
         }
         return 0;
     }
 
-    public static int CurrentXp(int xp)
+    public int Current(int xp)
     {
         int lvl = Level(xp);
         if (lvl > 0)
-            return xp - xpLevels[lvl - 1];
+            return xp - levels[lvl - 1];
         else return 0;
     }
 
-    public static int RequiredXp(int xp)
+    public int Required(int xp)
     {
         int lvl = Level(xp);
         if (lvl > 0)
-            return xpLevels[lvl] - xpLevels[lvl - 1];
+            return levels[lvl] - levels[lvl - 1];
         else return 1;
     }
 
-    public static float Progress(int xp)
+    public float Progress(int xp)
     {
-        return (float)CurrentXp(xp) / RequiredXp(xp);
+        return (float)Current(xp) / Required(xp);
     }
 
-    public static int MaxLevel
+    public int MaxLevel
     {
         get
         {
-            return xpLevels.Length;
+            return levels.Length;
         }
     }
+
+
 }

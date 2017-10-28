@@ -58,15 +58,15 @@ public class XpProgress : MonoBehaviour {
     void updateUI()
     {
         int
-            currentXp = XpLevels.CurrentXp(xp_),
-            requiredXp = XpLevels.RequiredXp(xp_);
+            currentXp = Levels.xp.Current(xp_),
+            requiredXp = Levels.xp.Required(xp_);
 
         text_.text = currentXp.ToString() + " / " + requiredXp.ToString();
         if (requiredXp != 0)
             slider_.value = (float)currentXp / requiredXp;
         else slider_.value = 0;
 
-        levelText_.text = XpLevels.Level(xp_).ToString();
+        levelText_.text = Levels.xp.Level(xp_).ToString();
     }
 
     public static void startAnimation()

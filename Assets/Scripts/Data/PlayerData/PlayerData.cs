@@ -184,7 +184,7 @@ public class PlayerData : ScriptableObject, IPlayerData
     {
         get
         {
-            return XpLevels.CurrentXp(xp);
+            return Levels.xp.Current(xp);
         }
     }
 
@@ -192,7 +192,7 @@ public class PlayerData : ScriptableObject, IPlayerData
     {
         get
         {
-            return XpLevels.RequiredXp(xp);
+            return Levels.xp.Required(xp);
         }
     }
 
