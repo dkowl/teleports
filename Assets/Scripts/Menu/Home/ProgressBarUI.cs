@@ -40,15 +40,19 @@ public class ProgressBarUI : BaseProgressBarUI {
 
     protected override string SecondaryTextString(int id)
     {
-        switch (id)
+        if (valueType == ValueType.RP)
         {
-            case 0:
-                return CurrentLevels.Owned((int)DisplayValue).ToString();
-            case 1:
-                return (CurrentLevels.Owned((int)DisplayValue) + CurrentLevels.Required((int)DisplayValue)).ToString();
-            default:
-                return "";
+            switch (id)
+            {
+                case 0:
+                    return CurrentLevels.Owned((int)DisplayValue).ToString();
+                case 1:
+                    return (CurrentLevels.Owned((int)DisplayValue) + CurrentLevels.Required((int)DisplayValue)).ToString();
+                default:
+                    return "";
+            }
         }
+        else return "";
     }
 
     protected override float CurrentValue()
