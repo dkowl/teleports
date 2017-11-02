@@ -20,7 +20,7 @@ public class MenuBehaviourCommand : Command {
         this.menuBehaviour = menuBehaviour;
         this.type = type;
 
-        Debug.Log("Creating command " + type.ToString());
+        //Debug.Log("Creating command " + type.ToString());
     }
 
     protected override void StartInternal()

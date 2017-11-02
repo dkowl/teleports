@@ -18,7 +18,8 @@ public class Stylesheet : ScriptableObject
     public enum TextColor
     {
         Default,
-        WorldUI
+        WorldUI,
+        HomeMenu
     }
 
     public enum ColorPreset
@@ -42,6 +43,7 @@ public class Stylesheet : ScriptableObject
 
     public Color defaultTextColor;
     public Color worldUiTextColor;
+    public Color homeMenuTextColor = Color.white;
 
     public Color gray1;
     public Color gray2;
@@ -81,6 +83,8 @@ public class Stylesheet : ScriptableObject
                 return defaultTextColor;
             case TextColor.WorldUI:
                 return worldUiTextColor;
+            case TextColor.HomeMenu:
+                return homeMenuTextColor;
             default:
                 return defaultTextColor;
         }

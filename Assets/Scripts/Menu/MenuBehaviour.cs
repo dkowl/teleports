@@ -128,7 +128,7 @@ public class MenuBehaviour : LoadableBehaviour {
             if (state == value) return;
             previousState = state;
             state = value;
-            Debug.Log("Changing state to " + state.ToString());
+            //Debug.Log("Changing state to " + state.ToString());
             if (hasParameter[(int)state])
             {
                 Debug.Log("Triggering " + state.ToString());

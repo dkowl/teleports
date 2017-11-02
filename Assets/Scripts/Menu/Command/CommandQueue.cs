@@ -28,12 +28,12 @@ public class CommandQueue {
 
         if(currentCommand.State == CommandState.Pending)
         {
-            Debug.Log("Starting " + debugString + ", count: " + commands.Count.ToString());
+            //Debug.Log("Starting " + debugString + ", count: " + commands.Count.ToString());
             currentCommand.Start();
         }
         else if(currentCommand.State == CommandState.Finished)
         {
-            Debug.Log("Removing " + debugString + ", count: " + commands.Count.ToString());
+            //Debug.Log("Removing " + debugString + ", count: " + commands.Count.ToString());
             commands.RemoveFirst();
             Update();
         }
@@ -42,7 +42,7 @@ public class CommandQueue {
     public void AddCommand(Command command, AddMode addMode = AddMode.Standard)
     {
         DebugStringUpdate(command);
-        Debug.Log("Adding " + debugString + ", count: " + commands.Count.ToString());
+        //Debug.Log("Adding " + debugString + ", count: " + commands.Count.ToString());
         command.RegisterFinishCallback(Update);
 
         switch (addMode)

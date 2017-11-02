@@ -33,7 +33,7 @@ public class GameData : ScriptableObject {
         }
         else
         {
-            Debug.Log("Item " + itemName + " not found.");
+            //Debug.Log("Item " + itemName + " not found.");
             return null;
         }
     }

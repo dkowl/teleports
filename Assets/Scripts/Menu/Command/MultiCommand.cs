@@ -10,7 +10,7 @@ public class MultiCommand : Command {
 
     public MultiCommand(Command[] commands)
     {
-        Debug.Log("Creating MultiCommand from " + commands.Length.ToString() + " commands");
+        //Debug.Log("Creating MultiCommand from " + commands.Length.ToString() + " commands");
         subCommands = commands;
         finishedCount = 0;
     }
