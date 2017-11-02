@@ -43,9 +43,24 @@ namespace Teleports.Utils
             return false;
         }
 
+        public static Transform FindRecursive(this Transform transform, string name)
+        {
+            Transform result = transform.Find(name);
+            if (result != null) return result;
+            else
+            {
+                for(int i = 0; i < transform.childCount; i++)
+                {
+                    result = transform.GetChild(i).Find(name);
+                    if (result != null) return result;
+                }
+            }
+            return null;
+        }
+
         public static T GetComponentInChildrenNamed<T>(this GameObject gameObject, string name) where T : Component
         {
-            Transform foundTransform = gameObject.transform.Find(name);
+            Transform foundTransform = gameObject.transform.FindRecursive(name);
             if (foundTransform != null)
             {
                 return foundTransform.gameObject.GetComponent<T>();
