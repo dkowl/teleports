@@ -23,7 +23,7 @@ public class MainController : MonoBehaviour {
     private UpdateDelegate[] updateDelegates;
 
     //inspector variables
-    public string startSceneName = "Main";
+    public string startSceneName = "Start";
     public LoadingGraphics loadingGraphics;
 
     //public static methods
@@ -109,7 +109,7 @@ public class MainController : MonoBehaviour {
     //Loading and updating progress
     private void UpdateSceneLoad()
     {
-        if (sceneLoadTask.isDone)
+        if (sceneLoadTask == null || sceneLoadTask.isDone)
         {
             sceneState = SceneState.Unload;
         }

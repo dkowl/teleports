@@ -15,7 +15,7 @@ public class PlayButtonUI : MonoBehaviour {
 
     public void OnClick()
     {
-        MenuController.Instance.CloseAll();
+        MenuController.Instance.HideAll();
         MainController.SwitchScene("World");
     }
 }

@@ -34,7 +34,7 @@ public class GameMain : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        MenuController.Instance.CloseAll();
+        MenuController.Instance.HideAll();
 
         SpawnPlayer();
 
@@ -103,8 +103,8 @@ public class GameMain : MonoBehaviour {
     public void BackToHome()
     {
         MainData.SavePlayer(player);
-        MenuController.Instance.OpenMenu(MenuController.MenuType.ChooseCharacter);
-        MainController.SwitchScene("Main");
+        MenuController.Instance.OpenMenu(MenuController.MenuType.Home);
+        MainController.SwitchScene("Start");
     }
 
     public static GameMain Instance

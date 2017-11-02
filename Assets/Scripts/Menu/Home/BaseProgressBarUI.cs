@@ -24,8 +24,13 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         Custom
     }
 
-    private float displayValue;
+    [SerializeField] private float displayValue;
 
+    private PrefabSpawner spawner;
+    private bool firstStart = true;
+    private float currentFreezeTime = 0;
+
+    [SerializeField] protected GameObject prefab;
     [SerializeField] protected Slider slider;
     [SerializeField] protected Text nameText;
     [SerializeField] protected Text valueText;
@@ -37,10 +42,20 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
     [SerializeField] protected AnimationType animationType;
     [SerializeField] protected float linearAnimationSpeed = 0.01f;
     [SerializeField] protected float asymptoticAnimationSpeed = 0.05f;
+    [SerializeField] protected float freezeTime = 0;
 
     protected override void OnEnable()
     {
         base.OnEnable();
+
+        spawner = gameObject.GetComponent<PrefabSpawner>();
+        if(spawner == null)
+        {
+            spawner = gameObject.AddComponent<PrefabSpawner>();
+        }
+        spawner.prefab = prefab;
+        spawner.Spawn();
+
         this.FindOrSpawnChildWithComponent(ref slider, "Slider");
         this.FindOrSpawnChildWithComponent(ref nameText, "NameText", true);
         this.FindOrSpawnChildWithComponent(ref valueText, "ValueText", true);
@@ -49,13 +64,20 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         {
             this.FindOrSpawnChildWithComponent(ref secondaryTexts[i], "SecondaryText" + i.ToString(), true);
         }
-        SkipAnimation();
+
+        if (firstStart)
+        {
+            SkipAnimation();
+            firstStart = false;
+        }
     }
 
     void Update()
     {
         if (displayValue < MinValue() || displayValue > maxValue)
             SkipAnimation();
+        else if(currentFreezeTime > 0)
+            currentFreezeTime -= Time.deltaTime;
         else
             Animate(DisplayValue, currentValue, animationType);
 
@@ -65,6 +87,7 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         {
             if(secondaryTexts[i] != null) secondaryTexts[i].text = SecondaryTextString(i);
         }
+        slider.value = SliderValue();
     }
 
     protected override void OnLoadInternal()
@@ -121,6 +144,16 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         Animate(displayValue, currentValue, AnimationType.None);
     }
 
+    public void Freeze(float time)
+    {
+        currentFreezeTime = Mathf.Max(time, currentFreezeTime);
+    }
+
+    public void Freeze()
+    {
+        Freeze(freezeTime);
+    }
+
     protected virtual bool DetectChange()
     {
         bool result = false;
@@ -136,6 +169,7 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
             maxValue = nextMaxValue;
             result = true;
         }
+        if (result) Freeze();
         return result;
     }
 
@@ -185,7 +219,6 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         set
         {
             displayValue = value;
-            slider.value = SliderValue();
         }
     }
 

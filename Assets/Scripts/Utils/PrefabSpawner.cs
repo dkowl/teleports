@@ -6,11 +6,8 @@ using UnityEngine;
 public class PrefabSpawner : MonoBehaviour {
 
     public GameObject prefab;
-
-    [SerializeField]
-    protected bool isSpawned = false;
-
-    [SerializeField]
+    
+    protected bool isSpawned = false;    
     protected GameObject spawnedInstance;
 
     public void OnEnable()
@@ -36,7 +33,7 @@ public class PrefabSpawner : MonoBehaviour {
             {
                 BeforeSpawn();
                 spawnedInstance = Instantiate(prefab, transform);
-                spawnedInstance.hideFlags = HideFlags.DontSaveInEditor;
+                spawnedInstance.hideFlags = HideFlags.DontSave;
                 AfterSpawn();
             }
             isSpawned = true;
