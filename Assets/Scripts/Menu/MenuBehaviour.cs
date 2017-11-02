@@ -99,6 +99,26 @@ public class MenuBehaviour : LoadableBehaviour {
         if (LoadFinishEvent != null) LoadFinishEvent();
     }
 
+    public void Skip()
+    {
+        if (animator.HasParameter("Skip"))
+        {
+            animator.SetTrigger("Skip");
+        }
+        switch (CurrentState)
+        {
+            case State.Closing:
+                CloseFinish();
+                break;
+            case State.Loading:
+                LoadFinish();
+                break;
+            case State.Opening:
+                OpenFinish();
+                break;
+        }
+    }
+
     protected virtual void OnOpenInternal() {
         if (!hasParameter[(int)State.Opening])
         {

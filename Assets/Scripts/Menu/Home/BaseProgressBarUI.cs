@@ -142,6 +142,7 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
     public void SkipAnimation()
     {
         Animate(displayValue, currentValue, AnimationType.None);
+        Skip();
     }
 
     public void Freeze(float time)
