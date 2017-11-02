@@ -29,6 +29,8 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
     [SerializeField] protected Slider slider;
     [SerializeField] protected Text nameText;
     [SerializeField] protected Text valueText;
+    [SerializeField] protected int secondaryTextNo;
+    [SerializeField] protected Text[] secondaryTexts;
     [SerializeField] protected float currentValue;
     [SerializeField] protected float maxValue;
     [SerializeField] protected ValueTextType valueTextType;
@@ -42,18 +44,27 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         this.FindOrSpawnChildWithComponent(ref slider, "Slider");
         this.FindOrSpawnChildWithComponent(ref nameText, "NameText", true);
         this.FindOrSpawnChildWithComponent(ref valueText, "ValueText", true);
+        secondaryTexts = new Text[secondaryTextNo];
+        for (int i = 0; i<secondaryTextNo; i++)
+        {
+            this.FindOrSpawnChildWithComponent(ref secondaryTexts[i], "SecondaryText" + i.ToString(), true);
+        }
+        SkipAnimation();
     }
 
     void Update()
     {
-        if(Mathf.Approximately(currentValue, DisplayValue))
-        {
-            return;
-        }        
-        DisplayValue = Animate(DisplayValue, currentValue, animationType);
+        if (displayValue < MinValue() || displayValue > maxValue)
+            SkipAnimation();
+        else
+            Animate(DisplayValue, currentValue, animationType);
 
         if (nameText != null) nameText.text = NameTextString();
-        if (valueText != null) valueText.text = ValueTextString();        
+        if (valueText != null) valueText.text = ValueTextString();
+        for (int i = 0; i < secondaryTextNo; i++)
+        {
+            if(secondaryTexts[i] != null) secondaryTexts[i].text = SecondaryTextString(i);
+        }
     }
 
     protected override void OnLoadInternal()
@@ -101,7 +112,13 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
                     );
                 break;
         }
+        DisplayValue = disp;
         return disp;
+    }
+
+    public void SkipAnimation()
+    {
+        Animate(displayValue, currentValue, AnimationType.None);
     }
 
     protected virtual bool DetectChange()
@@ -134,14 +151,19 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
             case ValueTextType.None:
                 return "";
             case ValueTextType.OneValue:
-                return displayValue.ToString("F0");
+                return (displayValue - MinValue()).ToString("F0");
             case ValueTextType.TwoValues:
-                return displayValue.ToString("F0") + "/" + maxValue.ToString("F0");
+                return (displayValue - MinValue()).ToString("F0") + " / " + (maxValue - MinValue()).ToString("F0");
             case ValueTextType.Percentage:
                 return slider.value.ToString("P0");
             default:
                 return "";
         }
+    }
+
+    protected virtual string SecondaryTextString(int id)
+    {
+        return "";
     }
 
     protected virtual float SliderValue()
@@ -151,6 +173,11 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
 
     protected abstract float CurrentValue();
     protected abstract float MaxValue();
+
+    protected virtual float MinValue()
+    {
+        return 0;
+    }
 
     protected float DisplayValue
     {

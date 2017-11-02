@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Teleports.Utils;
 
 public class ProgressBarUI : BaseProgressBarUI {
 
@@ -15,7 +16,39 @@ public class ProgressBarUI : BaseProgressBarUI {
 
     protected override string NameTextString()
     {
-        return "Level " + Levels.xp.Level((int)DisplayValue).ToString();
+        switch (valueType)
+        {
+            case ValueType.XP:
+                return "Level " + CurrentLevels.Level((int)DisplayValue).ToString();
+            case ValueType.RP:
+                return "Rank " + RomanNumbers.RomanNumber(CurrentLevels.Level((int)DisplayValue));
+        }
+        return "Name";
+    }
+
+    protected override string ValueTextString()
+    {
+        if (valueType == ValueType.XP && CurrentLevels.Level((int)DisplayValue) == CurrentLevels.MaxLevel)
+        {
+            return "Max";
+        }
+        else
+        {
+            return base.ValueTextString();
+        }
+    }
+
+    protected override string SecondaryTextString(int id)
+    {
+        switch (id)
+        {
+            case 0:
+                return CurrentLevels.Owned((int)DisplayValue).ToString();
+            case 1:
+                return (CurrentLevels.Owned((int)DisplayValue) + CurrentLevels.Required((int)DisplayValue)).ToString();
+            default:
+                return "";
+        }
     }
 
     protected override float CurrentValue()
@@ -25,7 +58,7 @@ public class ProgressBarUI : BaseProgressBarUI {
             case ValueType.XP:
                 return MainData.CurrentPlayerData.Xp;
             case ValueType.RP:
-                return 0;
+                return MainData.CurrentPlayerData.RankPoints;
             default:
                 return 0;
         }
@@ -33,20 +66,48 @@ public class ProgressBarUI : BaseProgressBarUI {
 
     protected override float MaxValue()
     {
-        int xp = (int)DisplayValue;
-        return xp + Levels.xp.Required(xp) - Levels.xp.Current(xp);
+        int disp = (int)DisplayValue;
+        return Mathf.Min(disp + CurrentLevels.Required(disp) - CurrentLevels.Current(disp), CurrentLevels.MaxValue);
+    }
+
+    protected override float MinValue()
+    {
+        if(valueType == ValueType.XP)
+        {
+            return CurrentLevels.Owned((int)DisplayValue);
+        }
+        else
+        {
+            return base.MinValue();
+        }
     }
 
     protected override float SliderValue()
     {
-        if (valueType == ValueType.XP)
+        if (valueType == ValueType.XP || valueType == ValueType.RP)
         {
             maxValue = MaxValue();
-            return Mathf.Clamp(Levels.xp.Progress((int)DisplayValue), 0f, 1f);
+            return Mathf.Clamp(CurrentLevels.Progress((int)DisplayValue), 0f, 1f);
         }
         else
         {
             return base.SliderValue();
+        }
+    }
+
+    protected Levels CurrentLevels
+    {
+        get
+        {
+            switch (valueType)
+            {
+                case ValueType.XP:
+                    return Levels.xp;
+                case ValueType.RP:
+                    return Levels.rp;
+                default:
+                    return Levels.xp;
+            }
         }
     }
 }
