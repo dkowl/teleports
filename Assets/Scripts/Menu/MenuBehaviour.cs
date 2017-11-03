@@ -77,8 +77,15 @@ public class MenuBehaviour : LoadableBehaviour {
 
     public virtual void OnLoad()
     {
-        CurrentState = State.Loading;
-        OnLoadInternal();
+        if (DetectChange())
+        {
+            CurrentState = State.Loading;
+            OnLoadInternal();
+        }
+        else
+        {
+            LoadFinish();
+        }
     }
 
     public void OpenFinish()
@@ -95,13 +102,13 @@ public class MenuBehaviour : LoadableBehaviour {
 
     public void LoadFinish()
     {
-        CurrentState = previousState;
+        if(CurrentState == State.Loading) CurrentState = previousState;
         if (LoadFinishEvent != null) LoadFinishEvent();
     }
 
     public void Skip()
     {
-        if (animator.HasParameter("Skip"))
+        if (animator != null && animator.HasParameter("Skip"))
         {
             animator.SetTrigger("Skip");
         }
@@ -140,6 +147,11 @@ public class MenuBehaviour : LoadableBehaviour {
         }
     }
 
+    protected virtual bool DetectChange()
+    {
+        return true;
+    }
+
     public State CurrentState
     {
         get { return state; }
@@ -148,7 +160,7 @@ public class MenuBehaviour : LoadableBehaviour {
             if (state == value) return;
             previousState = state;
             state = value;
-            //Debug.Log("Changing state to " + state.ToString());
+            Debug.Log("Changing state of " + name + " (" + previousState.ToString() + " ===> " + state.ToString() + ")");
             if (hasParameter[(int)state])
             {
                 Debug.Log("Triggering " + state.ToString());

@@ -43,6 +43,7 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
     [SerializeField] protected float linearAnimationSpeed = 0.01f;
     [SerializeField] protected float asymptoticAnimationSpeed = 0.05f;
     [SerializeField] protected float freezeTime = 0;
+    [SerializeField] protected bool detectChangeInUpdate = true;
 
     protected override void OnEnable()
     {
@@ -74,6 +75,9 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
 
     void Update()
     {
+        if (detectChangeInUpdate)
+            DetectChange();
+
         if (displayValue < MinValue() || displayValue > maxValue)
             SkipAnimation();
         else if(currentFreezeTime > 0)
@@ -90,18 +94,20 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         slider.value = SliderValue();
     }
 
-    protected override void OnLoadInternal()
+    /*protected override void OnLoadInternal()
     {
         if (!DetectChange())
         {
+            Debug.Log("Loading " + name + " - no change detected!");
             LoadFinish();
             return;
         }
         else
         {
+            Debug.Log("Loading " + name + " - change!");
             base.OnLoadInternal();
         }
-    }
+    }*/
 
     public float Animate(float disp, float cur, AnimationType type)
     {
@@ -141,7 +147,11 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
 
     public void SkipAnimation()
     {
-        Animate(displayValue, currentValue, AnimationType.None);
+        Debug.Log("Skipping animation!");
+        do
+        {
+            Animate(displayValue, currentValue, AnimationType.None);
+        } while (DetectChange());
         Skip();
     }
 
@@ -155,7 +165,7 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         Freeze(freezeTime);
     }
 
-    protected virtual bool DetectChange()
+    protected override bool DetectChange()
     {
         bool result = false;
         float nextCurrentValue = CurrentValue();
@@ -170,7 +180,11 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
             maxValue = nextMaxValue;
             result = true;
         }
-        if (result) Freeze();
+        if (result)
+        {
+            Freeze();
+            Debug.Log("Change detected! New currentValue: " + currentValue.ToString() + " New maxValue: " + maxValue.ToString());
+        }
         return result;
     }
 
