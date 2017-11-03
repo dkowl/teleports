@@ -168,9 +168,15 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         if (result)
         {
             Freeze();
+            OnChangeDetected();
             Debug.Log("Change detected! New currentValue: " + currentValue.ToString() + " New maxValue: " + maxValue.ToString());
         }
         return result;
+    }
+
+    protected virtual void OnChangeDetected()
+    {
+
     }
 
     protected virtual string NameTextString()

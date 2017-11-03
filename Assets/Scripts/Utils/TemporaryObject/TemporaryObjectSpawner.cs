@@ -7,7 +7,7 @@ public class TemporaryObjectSpawner : MonoBehaviour
 
     [SerializeField] TemporaryObject[] objects;
 
-    public void Spawn(int objectId)
+    public void SpawnTemporaryObject(int objectId)
     {
         objects[objectId].Spawn();
     }

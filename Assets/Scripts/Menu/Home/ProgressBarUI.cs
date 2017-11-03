@@ -12,7 +12,14 @@ public class ProgressBarUI : BaseProgressBarUI {
         RP
     }
 
+    private float delta;
+
     [SerializeField] protected ValueType valueType;
+
+    protected override void OnChangeDetected()
+    {
+        delta = currentValue - DisplayValue;
+    }
 
     protected override string NameTextString()
     {
@@ -48,6 +55,18 @@ public class ProgressBarUI : BaseProgressBarUI {
                     return CurrentLevels.Owned((int)DisplayValue).ToString();
                 case 1:
                     return (CurrentLevels.Owned((int)DisplayValue) + CurrentLevels.Required((int)DisplayValue)).ToString();
+                case 2:
+                    return DeltaString;
+                default:
+                    return "";
+            }
+        }
+        if(valueType == ValueType.XP)
+        {
+            switch (id)
+            {
+                case 2:
+                    return DeltaString;
                 default:
                     return "";
             }
@@ -96,6 +115,16 @@ public class ProgressBarUI : BaseProgressBarUI {
         else
         {
             return base.SliderValue();
+        }
+    }
+
+    protected string DeltaString
+    {
+        get {
+            if (delta > 0)
+                return '+' + delta.ToString();
+            else
+                return delta.ToString();
         }
     }
 
