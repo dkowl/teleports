@@ -94,21 +94,6 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         slider.value = SliderValue();
     }
 
-    /*protected override void OnLoadInternal()
-    {
-        if (!DetectChange())
-        {
-            Debug.Log("Loading " + name + " - no change detected!");
-            LoadFinish();
-            return;
-        }
-        else
-        {
-            Debug.Log("Loading " + name + " - change!");
-            base.OnLoadInternal();
-        }
-    }*/
-
     public float Animate(float disp, float cur, AnimationType type)
     {
         int direction;
