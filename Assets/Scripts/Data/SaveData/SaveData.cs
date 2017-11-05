@@ -34,6 +34,11 @@ public partial class SaveData
         }
     }
 
+    public string AccountName
+    {
+        get { return accountName; }
+    }
+
     public int CharacterSlotLimit
     {
         get { return characterSlotLimit; }

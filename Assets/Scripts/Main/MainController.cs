@@ -65,7 +65,6 @@ public class MainController : MonoBehaviour {
 
     void OnDestroy()
     {
-        //Clean up delegates
         if(updateDelegates != null)
         {
             for(int i = 0; i < updateDelegates.Length; i++)
@@ -74,8 +73,7 @@ public class MainController : MonoBehaviour {
             }
             updateDelegates = null;
         }
-
-        //Clean up singleton instance
+        
         if(mainController != null)
         {
             mainController = null;
@@ -90,23 +88,34 @@ public class MainController : MonoBehaviour {
         }
     }
 
+    void OnApplicationQuit()
+    {
+        MainData.SaveDataSO.Save();
+    }
+
     //private methods
     private void UpdateSceneReset()
     {
-        //Run GC
         System.GC.Collect();
         sceneState = SceneState.Preload;
     }
-
-    //Start displaying loading screen, assign load task
+    
     private void UpdateScenePreload()
     {
         loadingGraphics.SetActive(true);
         sceneLoadTask = SceneManager.LoadSceneAsync(nextSceneName);
+
+        if(currentSceneName == "Main" && nextSceneName == "Start")
+        {
+            MainData.SaveDataSO.Load();
+        }
+        else if(currentSceneName == "World" && nextSceneName == "Start")
+        {
+            MainData.SaveDataSO.Save();
+        }
         sceneState = SceneState.Load;
     }
-
-    //Loading and updating progress
+    
     private void UpdateSceneLoad()
     {
         if (sceneLoadTask == null || sceneLoadTask.isDone)
@@ -118,8 +127,7 @@ public class MainController : MonoBehaviour {
             loadingGraphics.UpdateProgress(sceneLoadTask.progress);
         }
     }
-
-    //Unloading unused resources
+    
     private void UpdateSceneUnload()
     {
         if(resourceUnloadTask == null)
@@ -135,22 +143,19 @@ public class MainController : MonoBehaviour {
             }
         }
     }
-
-    //Hide loading screen, set current scene
+    
     private void UpdateScenePostload()
     {
         loadingGraphics.SetActive(false);
         currentSceneName = nextSceneName;
         sceneState = SceneState.Ready;
     }
-
-    //Stuff to do before running
+    
     private void UpdateSceneReady()
     {
         sceneState = SceneState.Run;
     }
-
-    //Keep checking if nextScene was changed
+    
     private void UpdateSceneRun()
     {
         if(currentSceneName != nextSceneName)

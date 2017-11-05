@@ -49,6 +49,9 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
     {
         base.OnEnable();
 
+        SaveDataSO.LoadEvent -= LoadEventHandler;
+        SaveDataSO.LoadEvent += LoadEventHandler;
+
         spawner = gameObject.GetComponent<PrefabSpawner>();
         if(spawner == null)
         {
@@ -64,12 +67,6 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         for (int i = 0; i<secondaryTextNo; i++)
         {
             this.FindOrSpawnChildWithComponent(ref secondaryTexts[i], "SecondaryText" + i.ToString(), true);
-        }
-
-        if (firstStart)
-        {
-            SkipAnimation();
-            firstStart = false;
         }
     }
 
@@ -150,6 +147,19 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         Freeze(freezeTime);
     }
 
+    public void LoadEventHandler()
+    {
+        if (firstStart) return;
+        else
+        {
+            firstStart = true;
+            if (!DetectChange())
+            {
+                firstStart = false;
+            }
+        }
+    }
+
     protected override bool DetectChange()
     {
         bool result = false;
@@ -167,7 +177,15 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         }
         if (result)
         {
-            Freeze();
+            if (firstStart)
+            {
+                SkipAnimation();
+                firstStart = false;
+            }
+            else
+            {
+                Freeze();
+            }
             OnChangeDetected();
             Debug.Log("Change detected! New currentValue: " + currentValue.ToString() + " New maxValue: " + maxValue.ToString());
         }

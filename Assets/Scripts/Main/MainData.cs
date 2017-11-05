@@ -40,6 +40,11 @@ public partial class MainData : ScriptableObject {
         get { return Instance.saveData.saveData; }
     }
 
+    public static SaveDataSO SaveDataSO
+    {
+        get { return Instance.saveData; }
+    }
+
     public static IPlayerData CurrentPlayerData
     {
         get { return CurrentSaveData.CurrentPlayerData(); }
@@ -101,6 +106,7 @@ public partial class MainData : ScriptableObject {
         {
             instance = this;
             isInitialized = true;
+
             if (OnInitializedEvent != null)
             {
                 OnInitializedEvent();
