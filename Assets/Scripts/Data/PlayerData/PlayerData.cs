@@ -45,7 +45,7 @@ public class PlayerData : IPlayerData
         }
         set
         {
-            if(value > xp)
+            if(value >= xp)
             {
                 AddXp(value - xp);
             }

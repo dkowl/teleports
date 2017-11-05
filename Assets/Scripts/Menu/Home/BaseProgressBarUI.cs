@@ -177,17 +177,18 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         }
         if (result)
         {
+            Debug.Log("Change detected! New currentValue: " + currentValue.ToString() + " New maxValue: " + maxValue.ToString());
             if (firstStart)
             {
                 SkipAnimation();
                 firstStart = false;
+                return false;
             }
             else
             {
                 Freeze();
             }
             OnChangeDetected();
-            Debug.Log("Change detected! New currentValue: " + currentValue.ToString() + " New maxValue: " + maxValue.ToString());
         }
         return result;
     }
