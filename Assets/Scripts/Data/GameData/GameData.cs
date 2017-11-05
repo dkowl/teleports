@@ -13,6 +13,7 @@ public class GameData : ScriptableObject {
     [SerializeField] private MappedListOfSkills skills;
     [SerializeField] private MappedListOfItems items;
     [SerializeField] private SkillDatabase skillDatabase;
+    [SerializeField] private GraphicsData graphicsData;
 
     public void OnEnable()
     {
@@ -68,5 +69,10 @@ public class GameData : ScriptableObject {
     public SkillDatabase CurrentSkillDatabase
     {
         get { return skillDatabase; }
+    }
+
+    public GraphicsData GraphicsData
+    {
+        get { return graphicsData; }
     }
 }

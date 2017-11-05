@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[CreateAssetMenu(fileName = "playerData", menuName = "Custom/PlayerData", order = 6)]
-public class PlayerData : ScriptableObject, IPlayerData
+[Serializable]
+public class PlayerData : IPlayerData
 {
     private static readonly int SkillTreeSlotNo = 3;
     private static readonly int SkillSlotNo = 4;

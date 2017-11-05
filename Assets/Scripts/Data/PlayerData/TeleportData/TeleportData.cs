@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-
-[CreateAssetMenu(fileName = "teleportData", menuName = "Custom/TeleportData", order = 1)]
-public class TeleportData : ScriptableObject {
+[System.Serializable]
+public class TeleportData {
 
     private static readonly int GemSlotNo = 6;
 
@@ -23,7 +22,7 @@ public class TeleportData : ScriptableObject {
     private GemSlot[] gemSlots = new GemSlot[GemSlotNo];
 
     [SerializeField]
-    private TeleportGraphics graphics;
+    private string graphicsId;
 
     public int Tier
     {
@@ -48,7 +47,7 @@ public class TeleportData : ScriptableObject {
 
     public TeleportGraphics Graphics
     {
-        get { return graphics; }
+        get { return MainData.CurrentGameData.GraphicsData.Teleport.TryGetValue(graphicsId); }
     }
 
 }

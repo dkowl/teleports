@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "saveData", menuName = "Custom/SaveData", order = 6)]
 [System.Serializable]
-public partial class SaveData : ScriptableObject
+public partial class SaveData
 {
     [SerializeField]
     private string accountName;
