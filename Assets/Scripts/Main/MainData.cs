@@ -13,7 +13,7 @@ public partial class MainData : ScriptableObject {
 
     //inspector fields
     [SerializeField]
-    private SaveData saveData;
+    private SaveDataSO saveData;
     [SerializeField]
     private GameData gameData;
     [SerializeField]
@@ -37,12 +37,12 @@ public partial class MainData : ScriptableObject {
 
     public static SaveData CurrentSaveData
     {
-        get { return Instance.saveData; }
+        get { return Instance.saveData.saveData; }
     }
 
     public static IPlayerData CurrentPlayerData
     {
-        get { return Instance.saveData.CurrentPlayerData(); }
+        get { return CurrentSaveData.CurrentPlayerData(); }
     }
 
     public static GameData CurrentGameData

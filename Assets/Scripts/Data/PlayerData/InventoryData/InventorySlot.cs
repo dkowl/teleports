@@ -7,8 +7,8 @@ using ItemID = System.String;
 [System.Serializable]
 public struct InventorySlot
 {
-    private ItemID id;
-    private int count;
+    [SerializeField] private ItemID id;
+    [SerializeField] private int count;
 
     public bool Empty
     {

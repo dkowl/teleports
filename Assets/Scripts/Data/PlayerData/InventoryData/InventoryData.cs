@@ -5,8 +5,8 @@ using Teleports.Utils;
 
 using ItemID = System.String;
 
-[CreateAssetMenu(menuName = "Data/Inventoty/Data")]
-public class InventoryData : ScriptableObject {
+[System.Serializable]
+public class InventoryData {
     
     [SerializeField] private int maxItems = 32;
     [SerializeField] private List<InventorySlot> invSlots;
