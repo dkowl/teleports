@@ -24,11 +24,22 @@ public class TeleportData {
     [SerializeField]
     private string graphicsId;
 
+    public void CorrectInvalidData()
+    {
+        if(tier < 1)
+        {
+            tier = 1;
+        }
+        if(gemSlots.Length < GemSlotNo)
+        {
+            gemSlots = new GemSlot[GemSlotNo];
+        }
+    }
+
     public int Tier
     {
         get { return tier; }
     }
-
 
     public float Power
     {

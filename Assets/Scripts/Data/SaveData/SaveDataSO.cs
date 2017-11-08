@@ -29,6 +29,7 @@ public class SaveDataSO : ScriptableObject {
         }
         string jsonString = File.ReadAllText(SavePath);
         saveData = JsonUtility.FromJson<SaveData>(jsonString);
+        saveData.CorrectInvalidData();
         LoadEvent();
     }
 

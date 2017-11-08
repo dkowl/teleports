@@ -34,6 +34,14 @@ public partial class SaveData
         }
     }
 
+    public void CorrectInvalidData()
+    {
+        foreach(var data in playerData)
+        {
+            data.CorrectInvalidData();
+        }
+    }
+
     public string AccountName
     {
         get { return accountName; }

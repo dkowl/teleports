@@ -22,6 +22,23 @@ public class PlayerData : IPlayerData
     [SerializeField] private TeleportData teleportData = null;
     [SerializeField] private InventoryData inventoryData = null;
 
+    public void CorrectInvalidData()
+    {
+        if(level < 1)
+        {
+            level = 1;
+        }
+        if(skillTreeSlots.Length < SkillTreeSlotNo)
+        {
+            skillTreeSlots = new SkillTreeSlot[SkillTreeSlotNo];
+        }
+        if(secondarySkills.Length < SkillSlotNo)
+        {
+            secondarySkills = new SkillID[SkillSlotNo];
+        }
+        teleportData.CorrectInvalidData();
+    }
+
     #region interface implementation
     #region properties
     public string CharacterName

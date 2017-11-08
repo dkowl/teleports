@@ -24,7 +24,7 @@ public class MenuBehaviour : LoadableBehaviour {
     public delegate void CommandFinish();
     public event CommandFinish OpenFinishEvent, CloseFinishEvent, LoadFinishEvent;
 
-    protected void Awake()
+    public virtual void Awake()
     {
         animator = GetComponent<Animator>();
 

@@ -49,8 +49,8 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
     {
         base.OnEnable();
 
-        SaveDataSO.LoadEvent -= LoadEventHandler;
-        SaveDataSO.LoadEvent += LoadEventHandler;
+        SaveDataSO.LoadEvent -= SkipNextAnimation;
+        SaveDataSO.LoadEvent += SkipNextAnimation;
 
         spawner = gameObject.GetComponent<PrefabSpawner>();
         if(spawner == null)
@@ -147,7 +147,7 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         Freeze(freezeTime);
     }
 
-    public void LoadEventHandler()
+    public void SkipNextAnimation()
     {
         if (firstStart) return;
         else

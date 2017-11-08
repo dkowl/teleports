@@ -13,7 +13,7 @@ public class CharacterSelectMenu : LoadableBehaviour {
         CurrentHero
     }
 
-    private State state = State.CurrentHero;
+    private State state = State.SelectHero;
 
     public string selectCharacterString, newCharacterString;
     public Text titleText;

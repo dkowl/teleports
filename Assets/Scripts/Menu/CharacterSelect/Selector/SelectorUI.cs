@@ -23,7 +23,7 @@ public class SelectorUI : MonoBehaviour {
 
     public void Start()
     {
-        Hide(true);
+        //Hide(true);
     }
 
     public void Hide(bool instant = false)

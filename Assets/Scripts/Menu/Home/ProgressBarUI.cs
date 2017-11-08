@@ -16,6 +16,14 @@ public class ProgressBarUI : BaseProgressBarUI {
 
     [SerializeField] protected ValueType valueType;
 
+    public override void Awake()
+    {
+        base.Awake();
+
+        SaveData.OnCharacterIDChangedEvent -= SkipNextAnimation;
+        SaveData.OnCharacterIDChangedEvent += SkipNextAnimation;
+    }
+
     protected override void OnChangeDetected()
     {
         delta = currentValue - DisplayValue;
