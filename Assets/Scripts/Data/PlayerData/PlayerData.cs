@@ -22,6 +22,18 @@ public class PlayerData : IPlayerData
     [SerializeField] private TeleportData teleportData = null;
     [SerializeField] private InventoryData inventoryData = null;
 
+    public PlayerData(string name, string raceName)
+    {
+        CorrectInvalidData();
+        characterName = name;
+        this.raceName = raceName;
+        xp = 0;
+        level = 1;
+        rankPoints = 0;
+        skills = new List<SkillID>();
+        primarySkill = MainData.CurrentGameData.GetRace(raceName).BaseStatsEditor.MainAttack;
+    }
+
     public void CorrectInvalidData()
     {
         if(level < 1)

@@ -27,6 +27,11 @@ public class Race : UniqueScriptableObject {
         }
     }
 
+    public UnitDataEditor BaseStatsEditor
+    {
+        get { return baseStatsEditor; }
+    }
+
     public RaceGraphics Graphics
     {
         get
