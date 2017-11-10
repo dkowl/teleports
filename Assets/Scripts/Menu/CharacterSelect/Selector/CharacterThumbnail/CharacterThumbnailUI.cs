@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CharacterThumbnailUI : SelectorButtonUI {
 
-    public Image playerIcon, teleportIcon;
+    public Image playerIcon, teleportIcon, newHeroIcon;
     public Text characterName, characterLvl;
 
     private int characterSlotID = 0;
@@ -18,11 +18,24 @@ public class CharacterThumbnailUI : SelectorButtonUI {
 
         if (playerData != null)
         {
+            playerIcon.gameObject.SetActive(true);
+            teleportIcon.gameObject.SetActive(true);
+            newHeroIcon.gameObject.SetActive(false);
+
             playerIcon.sprite = PlayerGraphics.GetPlayerIcon(playerData);
             teleportIcon.sprite = PlayerGraphics.GetTeleportIcon(playerData);
 
             characterName.text = playerData.CharacterName;
             characterLvl.text = "Lvl " + playerData.Level.ToString();
+        }
+        else
+        {
+            playerIcon.gameObject.SetActive(false);
+            teleportIcon.gameObject.SetActive(false);
+            newHeroIcon.gameObject.SetActive(true);
+
+            characterName.text = "Empty";
+            characterLvl.text = "";
         }
     }
 

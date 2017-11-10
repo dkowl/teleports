@@ -12,8 +12,15 @@ public class SkillSlotUI : UnlockableSlotUI {
 
     protected override UnlockableSlot GetSlot()
     {
-        skillSlot = MainData.CurrentPlayerData.GetSkillTreeSlot(skillSlotId);
-        return skillSlot;
+        if (MainData.CurrentPlayerData != null)
+        {
+            skillSlot = MainData.CurrentPlayerData.GetSkillTreeSlot(skillSlotId);
+            return skillSlot;
+        }
+        else
+        {
+            return new UnlockableSlot();
+        }
     }
 
     protected override void OnFull()

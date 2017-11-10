@@ -13,8 +13,18 @@ public class TeleportPanelUI : LoadableBehaviour {
 
     public override void LoadDataInternal()
     {
-        ownerNameText.text = MainData.CurrentPlayerData.CharacterName + "'s";
-        tierText.text = "Tier " + RomanNumbers.RomanNumber(MainData.CurrentPlayerData.CurrentTeleportData.Tier);
-        rankPointsText.text = MainData.CurrentPlayerData.RankPoints.ToString();
+        IPlayerData playerData = MainData.CurrentPlayerData;
+        if (playerData != null)
+        {
+            ownerNameText.text = playerData.CharacterName + "'s";
+            tierText.text = "Tier " + RomanNumbers.RomanNumber(playerData.CurrentTeleportData.Tier);
+            rankPointsText.text = playerData.RankPoints.ToString();
+        }
+        else
+        {
+            ownerNameText.text = "Empty";
+            tierText.text = "";
+            rankPointsText.text = "";
+        }
     }
 }

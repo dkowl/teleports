@@ -12,8 +12,15 @@ public class GemSlotUI : UnlockableSlotUI {
 
     protected override UnlockableSlot GetSlot()
     {
-        gemSlot = MainData.CurrentPlayerData.CurrentTeleportData.GetGemSlot(gemSlotID);
-        return gemSlot;
+        if(MainData.CurrentPlayerData != null)
+        {
+            gemSlot = MainData.CurrentPlayerData.CurrentTeleportData.GetGemSlot(gemSlotID);
+            return gemSlot;
+        }
+        else
+        {
+            return new UnlockableSlot();
+        }
     }
 
     protected override void OnFull()

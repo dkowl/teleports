@@ -19,10 +19,18 @@ public class StatBarUI : LoadableBehaviour {
         IPlayerData playerData = MainData.CurrentPlayerData;
 
         statNameText.text = statName;
-
-        float statValue = playerData.GetStat(statType);
-        slider.value = stats.GetSliderValue(playerData.Level, statValue);
-        statValueText.text = statValue.ToString();
+        
+        if (playerData != null)
+        {
+            float statValue = playerData.GetStat(statType);
+            slider.value = stats.GetSliderValue(playerData.Level, statValue);
+            statValueText.text = statValue.ToString();
+        }
+        else
+        {
+            slider.value = 0;
+            statValueText.text = "?";
+        }
     }
 
 }
