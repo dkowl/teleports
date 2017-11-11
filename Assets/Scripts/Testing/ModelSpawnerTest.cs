@@ -29,14 +29,17 @@ public class ModelSpawnerTest : LoadableBehaviour {
                 Destroy(character);
                 character.tag = "Untagged";
             }
-            character = PlayerSpawner.Spawn(new PlayerSpawnerParams(gameObject, PlayerSpawnerParams.SpawnType.UI));
-            character.transform.localPosition += characterLocalPositionOffset;
-            character.transform.Rotate(characterLocalRotationOffset, Space.Self);
-
             if (teleport != null)
             {
                 Destroy(teleport);
             }
+            character = PlayerSpawner.Spawn(new PlayerSpawnerParams(gameObject, PlayerSpawnerParams.SpawnType.UI));
+            if (character == null)
+                return;
+            character.transform.localPosition += characterLocalPositionOffset;
+            character.transform.Rotate(characterLocalRotationOffset, Space.Self);
+
+            
             teleport = Instantiate(CurrentPlayerData.CurrentTeleportData.Graphics.modelObject, transform);
             teleport.transform.localPosition += teleportLocalPositionOffset;
             teleport.transform.Rotate(teleportLocalRotationOffset, Space.Self);

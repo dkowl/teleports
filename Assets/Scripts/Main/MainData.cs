@@ -106,6 +106,7 @@ public partial class MainData : ScriptableObject {
         {
             instance = this;
             isInitialized = true;
+            CurrentSaveData.CorrectInvalidData();
 
             if (OnInitializedEvent != null)
             {

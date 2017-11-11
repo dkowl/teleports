@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogWindowStarterButton : MonoBehaviour {
+public abstract class DialogWindowStarterButton : MonoBehaviour {
 
     [SerializeField] protected string textString;
     protected DialogWindow window;
@@ -13,9 +13,10 @@ public class DialogWindowStarterButton : MonoBehaviour {
         GetComponent<Button>().onClick.AddListener(Click);
     }
 
-	public void Callback()
+    protected abstract List<ButtonChoice> Choices();
+    protected virtual string TextString()
     {
-        MenuController.Instance.CloseTopMenu();
+        return textString;
     }
 
     public void Click()
@@ -27,14 +28,7 @@ public class DialogWindowStarterButton : MonoBehaviour {
             window = windowMenu.InstantiatedObject.GetComponent<DialogWindow>();
             if(window == null) window = windowMenu.InstantiatedObject.GetComponentInChildren<DialogWindow>();
 
-            List<ButtonChoice> choices = new List<ButtonChoice>();
-            choices.Add(new ButtonChoice("Yes", Callback));
-            choices.Add(new ButtonChoice("No", Callback));
-
-            window.Setup(textString, choices);
-        }
-        else
-        {
+            window.Setup(TextString(), Choices());
         }
     }
 }

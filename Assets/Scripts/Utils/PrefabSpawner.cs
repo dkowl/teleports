@@ -17,7 +17,6 @@ public class PrefabSpawner : MonoBehaviour {
 
     public void OnEnable()
     {
-        isInitialized = false;
         Spawn();
     }
 
@@ -35,7 +34,8 @@ public class PrefabSpawner : MonoBehaviour {
     {
         if (!isInitialized)
         {
-
+            if (spawnedInstances != null && spawnedInstances.Count > 0)
+                Despawn();
             Utils.InitWithValues(ref isSpawned, spawnAmount, false);
             Utils.InitWithValues(ref spawnedInstances, spawnAmount, null);
             OnInitialize();

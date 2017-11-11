@@ -85,6 +85,7 @@ public class PlayerData : IPlayerData
     {
         get
         {
+            level = Levels.xp.Level(xp);
             return level;
         }
     }

@@ -24,6 +24,12 @@ public class ProgressBarUI : BaseProgressBarUI {
         SaveData.OnCharacterIDChangedEvent += SkipNextAnimation;
     }
 
+    protected override bool DetectChange()
+    {
+        if (MainData.CurrentPlayerData == null) return false;
+        return base.DetectChange();
+    }
+
     protected override void OnChangeDetected()
     {
         delta = currentValue - DisplayValue;

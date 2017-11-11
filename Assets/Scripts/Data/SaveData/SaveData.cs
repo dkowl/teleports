@@ -17,14 +17,22 @@ public partial class SaveData
     public delegate void OnCharacterIDChanged();
     public static event OnCharacterIDChanged OnCharacterIDChangedEvent;
 
+    public void DeleteCurrentPlayer()
+    {
+        playerData[currentPlayerDataID] = null;
+        OnCharacterIDChangedEvent();
+    }
+
     public IPlayerData CurrentPlayerData()
     {
+        if (playerData[currentPlayerDataID].CharacterName == "")
+            return null;
         return playerData[currentPlayerDataID];
     }
 
     public IPlayerData GetPlayerData(int id)
     {
-        if(id < playerData.Length)
+        if(id < playerData.Length && playerData[id].CharacterName != "")
         {
             return playerData[id];
         }
