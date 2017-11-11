@@ -4,36 +4,24 @@ using UnityEngine;
 using System;
 using Text = TMPro.TextMeshProUGUI;
 
-public class DialogWindow : MenuBehaviour {
-
-    public class Choice
-    {
-        public delegate void Callback();
-
-        private string text;
-        private Callback callback;
-
-        public Choice(string text, Callback callback)
-        {
-            this.text = text;
-            this.callback = callback;
-        }
-
-        public void InvokeCallback()
-        {
-            callback();
-        }
-
-        public string Text
-        {
-            get { return text; }
-        }
-    }
+public class DialogWindow : MenuBehaviour {    
 
     [SerializeField] protected Text text;
-    [SerializeField] protected RectTransform buttonSpawnTransform;
     [SerializeField] protected GameObject buttonPrefab;
+    [SerializeField] protected ButtonSpawner buttonSpawner;
 
     protected string textString;
-    protected List<Choice> choices;
+    protected List<ButtonChoice> choices;
+
+    public void Setup(string textString, List<ButtonChoice> choices)
+    {
+        this.textString = textString;
+        this.choices = choices;
+
+        buttonSpawner.SpawnAmount = choices.Count;
+        buttonSpawner.Choices = choices;
+
+        text.text = textString;
+        buttonSpawner.Respawn();
+    }
 }

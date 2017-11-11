@@ -169,6 +169,11 @@ public class MenuController : ScriptableObject
         }
     }
 
+    public Menu GetMenu(MenuType menuType)
+    {
+        return menus[(int)menuType];
+    }
+
     //properties
     public static MenuController Instance
     {

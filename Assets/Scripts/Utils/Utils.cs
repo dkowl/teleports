@@ -94,6 +94,37 @@ namespace Teleports.Utils
                 }
             }
         }
+
+        public static void Extend<T>(this List<T> list, int targetCount, T defaultValue)
+        {
+            if(list == null)
+            {
+                list = new List<T>();
+            }
+
+            if(list.Capacity < targetCount)
+            {
+                list.Capacity = targetCount;
+            }
+
+            if (list.Count < targetCount)
+            {
+                for(int i = 0; i<targetCount - list.Count; i++)
+                {
+                    list.Add(defaultValue);
+                }
+            }
+        }
+
+        public static void InitWithValues<T>(ref List<T> list, int targetCount, T defaultValue)
+        {
+            list = new List<T>(targetCount);
+
+            for(int i = 0; i< targetCount; i++)
+            {
+                list.Add(defaultValue);
+            }
+        }
     }
 
     public static class RomanNumbers

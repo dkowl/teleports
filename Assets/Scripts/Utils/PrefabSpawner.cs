@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Teleports.Utils;
 
 [ExecuteInEditMode]
 public class PrefabSpawner : MonoBehaviour {
@@ -12,10 +13,11 @@ public class PrefabSpawner : MonoBehaviour {
     protected List<GameObject> spawnedInstances;
     protected int currentId;
 
-    private bool isInitialized;
+    private bool isInitialized = false;
 
     public void OnEnable()
     {
+        isInitialized = false;
         Spawn();
     }
 
@@ -33,13 +35,9 @@ public class PrefabSpawner : MonoBehaviour {
     {
         if (!isInitialized)
         {
-            isSpawned = new List<bool>();
-            spawnedInstances = new List<GameObject>();
-            for (int i = 0; i < spawnAmount; i++)
-            {
-                isSpawned.Add(false);
-                spawnedInstances.Add(null);
-            }
+
+            Utils.InitWithValues(ref isSpawned, spawnAmount, false);
+            Utils.InitWithValues(ref spawnedInstances, spawnAmount, null);
             OnInitialize();
             isInitialized = true;
         }
@@ -82,7 +80,7 @@ public class PrefabSpawner : MonoBehaviour {
 
     public void Despawn()
     {
-        for (currentId = 0; currentId < spawnAmount; currentId++)
+        for (currentId = 0; currentId < spawnedInstances.Count; currentId++)
         {
             if (isSpawned[currentId])
             {
@@ -90,6 +88,12 @@ public class PrefabSpawner : MonoBehaviour {
             }
             isSpawned[currentId] = false;
         }
+    }
+
+    public void Respawn()
+    {
+        Despawn();
+        Spawn();
     }
 
     public GameObject SpawnedInstance
@@ -100,5 +104,16 @@ public class PrefabSpawner : MonoBehaviour {
     public GameObject Prefab
     {
         set { prefab = value; }
+    }
+
+    public int SpawnAmount
+    {
+        set {
+            Despawn();
+            spawnAmount = value;
+            isInitialized = false;
+            Initialize();
+            Spawn();
+        }
     }
 }

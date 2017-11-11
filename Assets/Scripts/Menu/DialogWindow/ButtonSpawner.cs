@@ -9,32 +9,28 @@ public class ButtonSpawner : PrefabSpawner {
 
     public delegate void OnClickCallback();
 
-    protected string textString;
-    protected OnClickCallback callback;
-    protected RectTransform spawnTransform;
+    [SerializeField] protected RectTransform spawnTransform;
+    protected List<ButtonChoice> choices;
 
     protected override void AfterSpawn()
     {
+        if (choices != null && currentId < choices.Count)
+        {
+            SpawnedInstance.transform.SetParent(spawnTransform);
 
-        Button button = SpawnedInstance.GetComponent<Button>();
-        Text text = null;
-        button.FindOrSpawnChildWithComponent(ref text, "Text");
-        text.text = textString;
-        button.onClick.AddListener(Invoke);
+            Button button = SpawnedInstance.GetComponent<Button>();
+
+            Text text = null;
+            button.FindOrSpawnChildWithComponent(ref text, "Text");
+            text.text = choices[currentId].Text;
+
+            button.onClick.AddListener(choices[currentId].InvokeCallback);
+        }
     }
 
-    public void Invoke()
+    public List<ButtonChoice> Choices
     {
-        callback();
+        set { choices = value; }
     }
 
-    public string TextString
-    {
-        set { textString = value; }
-    }
-
-    public OnClickCallback Callback
-    {
-        set { callback = value; }
-    }
 }

@@ -187,4 +187,9 @@ public class Menu : ScriptableObject
     {
         get { return useMainCanvas; }
     }
+
+    public GameObject InstantiatedObject
+    {
+        get { return instantiatedObject; }
+    }
 }
