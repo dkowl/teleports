@@ -7,12 +7,12 @@ public class CharacterThumbnailUISpawner : PrefabSpawner {
     public int characterSlotID;
     public Transform parentTransform;
 
-    public override void AfterSpawn()
+    protected override void AfterSpawn()
     {
-        CharacterThumbnailUI thumbnail = spawnedInstance.GetComponent<CharacterThumbnailUI>();
+        CharacterThumbnailUI thumbnail = SpawnedInstance.GetComponent<CharacterThumbnailUI>();
 
         thumbnail.SetCharacterSlotID(characterSlotID);
-        spawnedInstance.gameObject.transform.SetParent(parentTransform);
-        spawnedInstance.transform.SetSiblingIndex(characterSlotID);
+        SpawnedInstance.gameObject.transform.SetParent(parentTransform);
+        SpawnedInstance.transform.SetSiblingIndex(characterSlotID);
     }
 }

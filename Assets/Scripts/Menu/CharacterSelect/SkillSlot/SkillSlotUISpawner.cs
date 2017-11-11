@@ -8,9 +8,9 @@ public class SkillSlotUISpawner : PrefabSpawner
     [SerializeField]
     private int skillSlotID;
 
-    public override void AfterSpawn()
+    protected override void AfterSpawn()
     {
-        SkillSlotUI slot = spawnedInstance.GetComponent<SkillSlotUI>();
+        SkillSlotUI slot = SpawnedInstance.GetComponent<SkillSlotUI>();
 
         slot.SetSlotID(skillSlotID);
         slot.LoadData();

@@ -7,9 +7,9 @@ public class GemSlotUISpawner : PrefabSpawner {
     [SerializeField]
     private int gemSlotID;
 
-    public override void AfterSpawn()
+    protected override void AfterSpawn()
     {
-        GemSlotUI slot = spawnedInstance.GetComponent<GemSlotUI>();
+        GemSlotUI slot = SpawnedInstance.GetComponent<GemSlotUI>();
 
         slot.SetSlotID(gemSlotID);
         slot.LoadData();

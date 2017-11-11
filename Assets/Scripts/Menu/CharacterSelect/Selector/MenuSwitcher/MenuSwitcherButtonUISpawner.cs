@@ -8,13 +8,13 @@ public class MenuSwitcherButtonUISpawner : PrefabSpawner {
     public string buttonString;
     public Transform parentTransform;
 
-    public override void AfterSpawn()
+    protected override void AfterSpawn()
     {
-        MenuSwitcherButtonUI button = spawnedInstance.GetComponent<MenuSwitcherButtonUI>();
+        MenuSwitcherButtonUI button = SpawnedInstance.GetComponent<MenuSwitcherButtonUI>();
 
         button.MenuType = menuType;
         button.ButtonString = buttonString;
-        spawnedInstance.gameObject.transform.SetParent(parentTransform);
+        SpawnedInstance.gameObject.transform.SetParent(parentTransform);
 
         button.LoadData();
     }

@@ -5,10 +5,14 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class PrefabSpawner : MonoBehaviour {
 
-    public GameObject prefab;
+    [SerializeField] protected GameObject prefab;
+    [SerializeField] protected int spawnAmount = 1;
     
-    protected bool isSpawned = false;    
-    protected GameObject spawnedInstance;
+    protected List<bool> isSpawned;
+    protected List<GameObject> spawnedInstances;
+    protected int currentId;
+
+    private bool isInitialized;
 
     public void OnEnable()
     {
@@ -25,37 +29,76 @@ public class PrefabSpawner : MonoBehaviour {
         Despawn();
     }
 
-    public void Spawn()
+    public void Initialize()
     {
-        if (prefab != null)
+        if (!isInitialized)
         {
-            if (!isSpawned || spawnedInstance == null)
+            isSpawned = new List<bool>();
+            spawnedInstances = new List<GameObject>();
+            for (int i = 0; i < spawnAmount; i++)
             {
-                BeforeSpawn();
-                spawnedInstance = Instantiate(prefab, transform);
-                spawnedInstance.hideFlags = HideFlags.DontSave;
-                AfterSpawn();
+                isSpawned.Add(false);
+                spawnedInstances.Add(null);
             }
-            isSpawned = true;
+            OnInitialize();
+            isInitialized = true;
         }
     }
 
-    public virtual void BeforeSpawn()
+    public void Spawn()
+    {
+        Initialize();
+        if (prefab != null)
+        {
+            for (currentId = 0; currentId < spawnAmount; currentId++)
+            {
+                if (!isSpawned[currentId] || spawnedInstances[currentId] == null)
+                {
+                    BeforeSpawn();
+                    spawnedInstances[currentId] = Instantiate(prefab, transform);
+                    spawnedInstances[currentId].hideFlags = HideFlags.DontSave;
+                    AfterSpawn();
+                }
+                isSpawned[currentId] = true;
+
+            }
+        }
+    }
+
+    protected virtual void OnInitialize()
     {
 
     }
 
-    public virtual void AfterSpawn()
+    protected virtual void BeforeSpawn()
+    {
+
+    }
+
+    protected virtual void AfterSpawn()
     {
 
     }
 
     public void Despawn()
     {
-        if (isSpawned)
+        for (currentId = 0; currentId < spawnAmount; currentId++)
         {
-            DestroyImmediate(spawnedInstance);
+            if (isSpawned[currentId])
+            {
+                DestroyImmediate(spawnedInstances[currentId]);
+            }
+            isSpawned[currentId] = false;
         }
-        isSpawned = false;
+    }
+
+    public GameObject SpawnedInstance
+    {
+        get { return spawnedInstances[currentId]; }
+    }
+
+    public GameObject Prefab
+    {
+        set { prefab = value; }
     }
 }

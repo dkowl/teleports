@@ -57,7 +57,7 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         {
             spawner = gameObject.AddComponent<PrefabSpawner>();
         }
-        spawner.prefab = prefab;
+        spawner.Prefab = prefab;
         spawner.Spawn();
 
         this.FindOrSpawnChildWithComponent(ref slider, "Slider");

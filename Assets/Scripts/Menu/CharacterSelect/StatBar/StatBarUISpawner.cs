@@ -7,9 +7,9 @@ public class StatBarUISpawner : PrefabSpawner {
     public PlayerStats statType;
     public string statName;
 
-    public override void AfterSpawn()
+    protected override void AfterSpawn()
     {
-        StatBarUI statBar = spawnedInstance.GetComponent<StatBarUI>();
+        StatBarUI statBar = SpawnedInstance.GetComponent<StatBarUI>();
 
         statBar.statType = statType;
         statBar.statName = statName;
