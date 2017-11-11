@@ -4,12 +4,10 @@ using UnityEngine;
 
 
 public class ModelSpawnerTest : LoadableBehaviour {
-
-    public PlayerData playerDataEditor;
+    
     public Vector3 characterLocalPositionOffset, characterLocalRotationOffset; 
     public Vector3 teleportLocalPositionOffset, teleportLocalRotationOffset;
-
-    private IPlayerData playerData;
+    
     private GameObject character, teleport;
     private bool shouldRespawnModels = true;
 
@@ -58,13 +56,5 @@ public class ModelSpawnerTest : LoadableBehaviour {
     {
         shouldRespawnModels = true;
         LoadDataInternal();
-    }
-
-    public IPlayerData CurrentPlayerData
-    {
-        get
-        {
-            return MainData.CurrentPlayerData;
-        }
     }
 }
