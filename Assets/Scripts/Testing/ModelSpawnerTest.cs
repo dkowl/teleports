@@ -11,23 +11,29 @@ public class ModelSpawnerTest : LoadableBehaviour {
 
     private IPlayerData playerData;
     private GameObject character, teleport;
+    private bool shouldRespawnModels = true;
 
-    public IPlayerData CurrentPlayerData
+    protected override void OnDestroy()
     {
-        get
-        {
-            return MainData.CurrentPlayerData;
-        }
+        base.OnDisable();
+        SaveData.OnCharacterIDChangedEvent -= OnModelChanged;
     }
 
     public override void LoadDataInternal()
     {
         if (Application.isPlaying)
         {
+            SaveData.OnCharacterIDChangedEvent -= OnModelChanged;
+            SaveData.OnCharacterIDChangedEvent += OnModelChanged;
+
             if (character != null)
             {
-                Destroy(character);
-                character.tag = "Untagged";
+                if (shouldRespawnModels)
+                {
+                    Destroy(character);
+                    character.tag = "Untagged";
+                }
+                else return;
             }
             if (teleport != null)
             {
@@ -43,6 +49,22 @@ public class ModelSpawnerTest : LoadableBehaviour {
             teleport = Instantiate(CurrentPlayerData.CurrentTeleportData.Graphics.modelObject, transform);
             teleport.transform.localPosition += teleportLocalPositionOffset;
             teleport.transform.Rotate(teleportLocalRotationOffset, Space.Self);
+
+            shouldRespawnModels = false;
+        }
+    }
+
+    public void OnModelChanged()
+    {
+        shouldRespawnModels = true;
+        LoadDataInternal();
+    }
+
+    public IPlayerData CurrentPlayerData
+    {
+        get
+        {
+            return MainData.CurrentPlayerData;
         }
     }
 }

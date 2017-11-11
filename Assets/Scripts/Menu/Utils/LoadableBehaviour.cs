@@ -10,12 +10,12 @@ public abstract class LoadableBehaviour : MonoBehaviour {
         LoadData();
     }
 
-    void OnDisable()
+    virtual protected void OnDisable()
     {
         Unsubscribe();
     }
 
-    void OnDestroy()
+    virtual protected void OnDestroy()
     {
         Unsubscribe();
     }
