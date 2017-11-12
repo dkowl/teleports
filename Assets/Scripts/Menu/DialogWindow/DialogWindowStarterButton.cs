@@ -18,9 +18,14 @@ public abstract class DialogWindowStarterButton : MonoBehaviour {
     {
         return textString;
     }
+    protected virtual bool IsActive()
+    {
+        return true;
+    }
 
     public void Click()
     {
+        if (!IsActive()) return;
         MenuController.Instance.OpenMenu(MenuController.MenuType.DialogWindow);
         Menu windowMenu = MenuController.Instance.GetMenu(MenuController.MenuType.DialogWindow);
         if (windowMenu.InstantiatedObject != null)

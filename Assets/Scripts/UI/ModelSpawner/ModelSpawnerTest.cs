@@ -57,4 +57,12 @@ public class ModelSpawnerTest : LoadableBehaviour {
         shouldRespawnModels = true;
         LoadDataInternal();
     }
+
+    public IPlayerData CurrentPlayerData
+    {
+        get
+        {
+            return MainData.CurrentPlayerData;
+        }
+    }
 }
