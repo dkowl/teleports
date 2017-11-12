@@ -33,6 +33,8 @@ namespace Teleports.Utils
 
         public static bool HasParameter(this Animator animator, string name)
         {
+            if (animator.gameObject.activeSelf) return false;
+
             foreach(var parameter in animator.parameters)
             {
                 if(parameter.name == name)

@@ -24,7 +24,7 @@ public abstract class ModelSpawner : LoadableBehaviour {
             for(int i = 0; i<modelSpawnData.Count; i++)
             {
                 ModelSpawnData msData = modelSpawnData[i];
-                if (msData.spawnedObject != null && msData.shouldRespawn)
+                if (msData.spawnedObject != null)
                 {
                     if (msData.shouldRespawn)
                     {
@@ -52,4 +52,14 @@ public abstract class ModelSpawner : LoadableBehaviour {
     }
 
     protected abstract GameObject GetModel(int id = 0);
+
+    public void ShouldRespawn()
+    {
+        print("I should respawn!");
+        foreach(var i in modelSpawnData)
+        {
+            i.shouldRespawn = true;
+        }
+        LoadDataInternal();
+    }
 }

@@ -13,7 +13,7 @@ public class ModelSpawnerTest : LoadableBehaviour {
 
     protected override void OnDestroy()
     {
-        base.OnDisable();
+        base.OnDestroy();
         SaveData.OnCharacterIDChangedEvent -= OnModelChanged;
     }
 

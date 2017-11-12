@@ -5,14 +5,11 @@ using UnityEngine;
 [ExecuteInEditMode]
 public abstract class LoadableBehaviour : MonoBehaviour {
 
+    private bool isSubscribed = false;
+
 	virtual protected void OnEnable()
     {        
         LoadData();
-    }
-
-    virtual protected void OnDisable()
-    {
-        Unsubscribe();
     }
 
     virtual protected void OnDestroy()
@@ -20,27 +17,50 @@ public abstract class LoadableBehaviour : MonoBehaviour {
         Unsubscribe();
     }
 
-    protected void Subscribe()
+    protected virtual void Subscribe()
     {
-        Unsubscribe();
-        MainData.OnInitializedEvent += LoadData;
-        SaveData.OnCharacterIDChangedEvent += LoadData;
-        Menu.OnShowEvent += LoadData;
-        Menu.OnHideEvent += LoadData;
+        if (!isSubscribed)
+        {
+            Unsubscribe();
+            MainData.OnInitializedEvent += LoadData;
+            SaveData.OnCharacterIDChangedEvent += LoadData;
+            Menu.OnShowEvent += LoadData;
+            Menu.OnHideEvent += LoadData;
+            SubscribeInternal();
+            isSubscribed = true;
+        }
     }
 
-    protected void Unsubscribe()
+    protected virtual void Unsubscribe()
     {
-        MainData.OnInitializedEvent -= LoadData;
-        SaveData.OnCharacterIDChangedEvent -= LoadData;
-        Menu.OnShowEvent -= LoadData;
-        Menu.OnHideEvent -= LoadData;
+        if (isSubscribed)
+        {
+            MainData.OnInitializedEvent -= LoadData;
+            SaveData.OnCharacterIDChangedEvent -= LoadData;
+            Menu.OnShowEvent -= LoadData;
+            Menu.OnHideEvent -= LoadData;
+            UnsubscribeInternal();
+            isSubscribed = false;
+        }
+    }
+
+    protected virtual void SubscribeInternal()
+    {
+
+    }
+
+    protected virtual void UnsubscribeInternal()
+    {
+
     }
 
     public void LoadData()
     {
-        Subscribe();
-        LoadDataInternal();        
+        if (gameObject.activeSelf)
+        {
+            Subscribe();
+            LoadDataInternal();
+        }
     }
 
     public abstract void LoadDataInternal();
