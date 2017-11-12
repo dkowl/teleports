@@ -6,9 +6,9 @@ using UnityEngine;
 public class MappedList<T> where T : IUniqueName {
 
     [SerializeField]
-    private List<T> list = new List<T>();
+    protected List<T> list = new List<T>();
     
-    private Dictionary<string, T> dict;
+    protected Dictionary<string, T> dict;
 
     public void MakeDict()
     {

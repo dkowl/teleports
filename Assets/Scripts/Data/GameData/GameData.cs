@@ -54,6 +54,11 @@ public class GameData : ScriptableObject {
         }
     }
 
+    public List<Race> GetPlayableRaces()
+    {
+        return races.GetPlayableRaces();
+    }
+
     public Skill GetSkill(SkillID skillId)
     {
         if (skillId.UsesString())
