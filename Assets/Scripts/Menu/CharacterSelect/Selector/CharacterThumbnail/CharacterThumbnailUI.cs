@@ -16,6 +16,8 @@ public class CharacterThumbnailUI : SelectorButtonUI {
     {
         base.LoadDataInternal();
 
+        playerData = MainData.CurrentSaveData.GetPlayerData(characterSlotID);
+
         if (playerData != null)
         {
             playerIcon.gameObject.SetActive(true);
@@ -57,7 +59,6 @@ public class CharacterThumbnailUI : SelectorButtonUI {
     public void SetCharacterSlotID(int id)
     {
         characterSlotID = id;
-        playerData = MainData.CurrentSaveData.GetPlayerData(characterSlotID);
         LoadDataInternal();
     }
 

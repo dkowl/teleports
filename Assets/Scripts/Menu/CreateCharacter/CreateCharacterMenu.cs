@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Text = TMPro.TextMeshProUGUI;
+using InputField = TMPro.TMP_InputField;
 using System;
 
 public class CreateCharacterMenu : MonoBehaviour {
@@ -14,8 +15,15 @@ public class CreateCharacterMenu : MonoBehaviour {
     //UI elements
     [SerializeField] Text raceText;
     [SerializeField] Text raceDescriptionText;
+    [SerializeField] InputField nameInputField;
 
     public event Action RaceIdChangedEvent;
+
+    void Awake()
+    {
+        raceId = 0;
+        OnRaceIdChanged();
+    }
 
     public void IncrementRaceId()
     {
@@ -31,6 +39,22 @@ public class CreateCharacterMenu : MonoBehaviour {
         if (raceId < 0)
             raceId = Races.Count - 1;
         OnRaceIdChanged();
+    }
+
+    public void CreateCharacter()
+    {
+        MainData.CurrentSaveData.CreateNewPlayer(Name, Race.UniqueName);
+        Return();
+    }
+    
+    public void Return()
+    {
+        MenuController.Instance.OpenMenu(MenuController.MenuType.ChooseCharacter);
+    }
+
+    public string Name
+    {
+        get { return nameInputField.text; }
     }
 
     public Race Race
@@ -53,6 +77,7 @@ public class CreateCharacterMenu : MonoBehaviour {
     {
         raceText.text = Race.UniqueName;
         raceDescriptionText.text = Race.Description;
-        RaceIdChangedEvent();
+        if(RaceIdChangedEvent != null)
+            RaceIdChangedEvent();
     }
 }

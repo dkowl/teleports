@@ -160,7 +160,7 @@ public class MenuBehaviour : LoadableBehaviour {
             if (state == value) return;
             previousState = state;
             state = value;
-            Debug.Log("Changing state of " + name + " (" + previousState.ToString() + " ===> " + state.ToString() + ")");
+            //Debug.Log("Changing state of " + name + " (" + previousState.ToString() + " ===> " + state.ToString() + ")");
             if (hasParameter[(int)state])
             {
                 Debug.Log("Triggering " + state.ToString());

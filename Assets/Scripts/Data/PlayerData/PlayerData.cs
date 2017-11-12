@@ -15,28 +15,44 @@ public class PlayerData : IPlayerData
     [SerializeField] private int level = 1;
     [SerializeField] private int rankPoints;
     [SerializeField] private List<SkillID> skills;
-    [SerializeField] private SkillTreeSlot[] skillTreeSlots = new SkillTreeSlot[SkillTreeSlotNo];
+    [SerializeField] private SkillTreeSlot[] skillTreeSlots;
     [SerializeField] private SkillID primarySkill;
-    [SerializeField] private SkillID[] secondarySkills = new SkillID[SkillSlotNo];
-    [SerializeField] private UnitData liveUnitData = null;
-    [SerializeField] private TeleportData teleportData = null;
-    [SerializeField] private InventoryData inventoryData = null;
+    [SerializeField] private SkillID[] secondarySkills;
+    [SerializeField] private UnitData liveUnitData;
+    [SerializeField] private TeleportData teleportData;
+    [SerializeField] private InventoryData inventoryData;
 
     public PlayerData(string name, string raceName)
     {
-        CorrectInvalidData();
         characterName = name;
         this.raceName = raceName;
         xp = 0;
         level = 1;
         rankPoints = 0;
         skills = new List<SkillID>();
+        skillTreeSlots = new SkillTreeSlot[SkillTreeSlotNo];
+        for (int i = 0; i < skillTreeSlots.Length; i++)
+        {
+            skillTreeSlots[i] = new SkillTreeSlot();
+        }
         primarySkill = MainData.CurrentGameData.GetRace(raceName).BaseStatsEditor.MainAttack;
+        secondarySkills = new SkillID[SkillSlotNo];
+        for (int i = 0; i < secondarySkills.Length; i++)
+        {
+            secondarySkills[i] = new SkillID();
+        }
+        liveUnitData = MainData.CurrentGameData.GetRace(raceName).BaseStats;
         teleportData = new TeleportData();
+        inventoryData = new InventoryData();
+        CorrectInvalidData();
     }
 
     public void CorrectInvalidData()
     {
+        if (!ValidateName(characterName))
+        {
+            characterName = "";
+        }
         if(level < 1)
         {
             level = 1;
@@ -44,12 +60,29 @@ public class PlayerData : IPlayerData
         if(skillTreeSlots.Length < SkillTreeSlotNo)
         {
             skillTreeSlots = new SkillTreeSlot[SkillTreeSlotNo];
+            for(int i = 0; i<skillTreeSlots.Length; i++)
+            {
+                skillTreeSlots[i] = new SkillTreeSlot();
+            }
         }
         if(secondarySkills.Length < SkillSlotNo)
         {
             secondarySkills = new SkillID[SkillSlotNo];
+            for(int i = 0; i<secondarySkills.Length; i++)
+            {
+                secondarySkills[i] = new SkillID();
+            }
         }
         teleportData.CorrectInvalidData();
+    }
+
+    public static bool ValidateName(string name)
+    {
+        if (name.Length < 3)
+        {
+            return false;
+        }
+        return true;
     }
 
     #region interface implementation

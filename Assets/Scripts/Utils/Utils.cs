@@ -33,7 +33,7 @@ namespace Teleports.Utils
 
         public static bool HasParameter(this Animator animator, string name)
         {
-            if (animator.gameObject.activeSelf) return false;
+            if (!animator.gameObject.activeInHierarchy) return false;
 
             foreach(var parameter in animator.parameters)
             {

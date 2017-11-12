@@ -30,7 +30,7 @@ public class MappedList<T> where T : IUniqueName {
         }
 
         T result;
-        if(dict.TryGetValue(name, out result))
+        if(name != null && dict.TryGetValue(name, out result))
         {
             return result;
         }

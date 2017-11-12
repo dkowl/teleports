@@ -24,8 +24,8 @@ public class ButtonSpawner : PrefabSpawner {
             button.FindOrSpawnChildWithComponent(ref text, "Text");
             text.text = choices[currentId].Text;
 
-            button.onClick.AddListener(choices[currentId].InvokeCallback);
             button.onClick.AddListener(MenuController.Instance.CloseTopMenu);
+            button.onClick.AddListener(choices[currentId].InvokeCallback);
         }
     }
 

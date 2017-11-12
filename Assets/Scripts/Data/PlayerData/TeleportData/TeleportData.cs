@@ -12,7 +12,7 @@ public class TeleportData {
     [SerializeField] private float power;
     [FormerlySerializedAs("time_")]
     [SerializeField] private float time;
-    [SerializeField] private GemSlot[] gemSlots = new GemSlot[GemSlotNo];
+    [SerializeField] private GemSlot[] gemSlots;
     [SerializeField] private string graphicsId;
 
     public TeleportData()
@@ -20,6 +20,13 @@ public class TeleportData {
         tier = 1;
         power = 100;
         time = 60;
+
+        gemSlots = new GemSlot[GemSlotNo];
+        for (int i = 0; i < gemSlots.Length; i++)
+        {
+            gemSlots[i] = new GemSlot();
+        }
+
         graphicsId = "T_001";
         CorrectInvalidData();
     }
@@ -33,6 +40,10 @@ public class TeleportData {
         if(gemSlots.Length < GemSlotNo)
         {
             gemSlots = new GemSlot[GemSlotNo];
+            for (int i = 0; i < gemSlots.Length; i++)
+            {
+                gemSlots[i] = new GemSlot();
+            }
         }
     }
 

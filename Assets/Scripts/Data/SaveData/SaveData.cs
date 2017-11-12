@@ -23,16 +23,26 @@ public partial class SaveData
         OnCharacterIDChangedEvent();
     }
 
+    public void CreateNewPlayer(string name, string raceName)
+    {
+        if(CurrentPlayerData() == null)
+        {
+            playerData[currentPlayerDataID] = new PlayerData(name, raceName);
+        }
+        else
+        {
+            Debug.Log("Hero slot already taken");
+        }
+    }
+
     public IPlayerData CurrentPlayerData()
     {
-        if (playerData[currentPlayerDataID].CharacterName == "")
-            return null;
-        return playerData[currentPlayerDataID];
+        return GetPlayerData(currentPlayerDataID);
     }
 
     public IPlayerData GetPlayerData(int id)
     {
-        if(id < playerData.Length && playerData[id].CharacterName != "")
+        if(id < playerData.Length && playerData[id] != null && playerData[id].CharacterName != "")
         {
             return playerData[id];
         }

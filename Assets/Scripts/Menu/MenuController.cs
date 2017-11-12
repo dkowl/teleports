@@ -67,7 +67,10 @@ public class MenuController : ScriptableObject
     {
         spawnTransform = newSpawnTransform;
 
-        OpenMenu(startMenu);
+        if (MainData.CurrentPlayerData != null)
+            OpenMenu(startMenu);
+        else
+            OpenMenu(MenuType.ChooseCharacter);
     }
 
     public void OpenMenu(MenuType menuType)
@@ -172,6 +175,16 @@ public class MenuController : ScriptableObject
     public Menu GetMenu(MenuType menuType)
     {
         return menus[(int)menuType];
+    }
+
+    public void DisplayMenuStack()
+    {
+        Debug.Log("Stack Begin v");
+        foreach(var menu in menuStack)
+        {
+            Debug.Log(menu.MenuType.ToString());
+        }
+        Debug.Log("Stack End ^");
     }
 
     //properties

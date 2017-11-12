@@ -12,6 +12,13 @@ public class InventoryData {
     [SerializeField] private List<InventorySlot> invSlots;
     [SerializeField] private ItemID[] eq = new ItemID[Utils.EnumCount(typeof(EquipmentSlot))];
 
+    public InventoryData()
+    {
+        maxItems = 32;
+        Utils.InitWithValues(ref invSlots, maxItems, new InventorySlot());
+        eq = new ItemID[Utils.EnumCount(typeof(EquipmentSlot))];
+    }
+
     public void Add(ItemID id)
     {
         foreach(InventorySlot slot in invSlots)
