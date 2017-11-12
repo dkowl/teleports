@@ -10,6 +10,7 @@ public class Race : UniqueScriptableObject {
     [SerializeField] private UnitDataEditor baseStatsEditor;
     [SerializeField] private bool isPlayable = false;
     [SerializeField] private List<EquipmentSlot> availableEqSlots = new List<EquipmentSlot>();
+    [SerializeField] private TextAsset description;
     [SerializeField] private RaceGraphics graphics;
 
     private UnitData baseStats = null;
@@ -31,6 +32,11 @@ public class Race : UniqueScriptableObject {
     public bool IsPlayable
     {
         get { return isPlayable; }
+    }
+
+    public string Description
+    {
+        get { return description.text; }
     }
 
     public RaceGraphics Graphics

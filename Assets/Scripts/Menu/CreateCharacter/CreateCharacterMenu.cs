@@ -13,6 +13,7 @@ public class CreateCharacterMenu : MonoBehaviour {
 
     //UI elements
     [SerializeField] Text raceText;
+    [SerializeField] Text raceDescriptionText;
 
     public event Action RaceIdChangedEvent;
 
@@ -51,6 +52,7 @@ public class CreateCharacterMenu : MonoBehaviour {
     void OnRaceIdChanged()
     {
         raceText.text = Race.UniqueName;
+        raceDescriptionText.text = Race.Description;
         RaceIdChangedEvent();
     }
 }

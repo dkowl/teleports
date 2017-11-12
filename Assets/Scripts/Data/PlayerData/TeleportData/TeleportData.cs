@@ -8,21 +8,21 @@ public class TeleportData {
 
     private static readonly int GemSlotNo = 6;
 
-    [SerializeField]
-    private int tier = 1;
-
-    [SerializeField]
-    private float power;
-
-    [SerializeField]
+    [SerializeField] private int tier = 1;
+    [SerializeField] private float power;
     [FormerlySerializedAs("time_")]
-    private float time;
+    [SerializeField] private float time;
+    [SerializeField] private GemSlot[] gemSlots = new GemSlot[GemSlotNo];
+    [SerializeField] private string graphicsId;
 
-    [SerializeField]
-    private GemSlot[] gemSlots = new GemSlot[GemSlotNo];
-
-    [SerializeField]
-    private string graphicsId;
+    public TeleportData()
+    {
+        tier = 1;
+        power = 100;
+        time = 60;
+        graphicsId = "T_001";
+        CorrectInvalidData();
+    }
 
     public void CorrectInvalidData()
     {

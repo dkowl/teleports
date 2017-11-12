@@ -32,6 +32,7 @@ public class PlayerData : IPlayerData
         rankPoints = 0;
         skills = new List<SkillID>();
         primarySkill = MainData.CurrentGameData.GetRace(raceName).BaseStatsEditor.MainAttack;
+        teleportData = new TeleportData();
     }
 
     public void CorrectInvalidData()
