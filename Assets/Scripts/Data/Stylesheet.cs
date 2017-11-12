@@ -19,7 +19,8 @@ public class Stylesheet : ScriptableObject
     {
         Default,
         WorldUI,
-        HomeMenu
+        HomeMenu,
+        InputFieldPlaceholder
     }
 
     public enum ColorPreset
@@ -31,7 +32,8 @@ public class Stylesheet : ScriptableObject
         Gray5,
         Black,
         Transparent,
-        Alpha80
+        Alpha80,
+        White
     }
 
     public int titleFontSize;
@@ -85,6 +87,10 @@ public class Stylesheet : ScriptableObject
                 return worldUiTextColor;
             case TextColor.HomeMenu:
                 return homeMenuTextColor;
+            case TextColor.InputFieldPlaceholder:
+                Color result = homeMenuTextColor;
+                result.a = 0.25f;
+                return result;
             default:
                 return defaultTextColor;
         }
@@ -94,6 +100,8 @@ public class Stylesheet : ScriptableObject
     {
         switch (colorPreset)
         {
+            case ColorPreset.White:
+                return Color.white;
             case ColorPreset.Gray1:
                 return gray1;
             case ColorPreset.Gray2:

@@ -55,7 +55,6 @@ public abstract class ModelSpawner : LoadableBehaviour {
 
     public void ShouldRespawn()
     {
-        print("I should respawn!");
         foreach(var i in modelSpawnData)
         {
             i.shouldRespawn = true;

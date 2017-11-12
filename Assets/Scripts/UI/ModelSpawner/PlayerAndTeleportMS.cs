@@ -23,11 +23,13 @@ public class PlayerAndTeleportMS : ModelSpawner {
 
     protected override void SubscribeInternal()
     {
+        base.SubscribeInternal();
         SaveData.OnCharacterIDChangedEvent += ShouldRespawn;
     }
 
     protected override void UnsubscribeInternal()
     {
+        base.UnsubscribeInternal();
         SaveData.OnCharacterIDChangedEvent -= ShouldRespawn;
     }
 }

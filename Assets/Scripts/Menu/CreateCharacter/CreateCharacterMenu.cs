@@ -1,17 +1,56 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Text = TMPro.TextMeshProUGUI;
+using System;
 
 public class CreateCharacterMenu : MonoBehaviour {
 
+    //Data
     List<Race> races;
+    int raceId = 0;
 
-    void Awake()
+    //UI elements
+    [SerializeField] Text raceText;
+
+    public event Action RaceIdChangedEvent;
+
+    public void IncrementRaceId()
     {
-        races = MainData.CurrentGameData.GetPlayableRaces();
-        foreach(Race race in races)
+        raceId++;
+        if (raceId >= Races.Count)
+            raceId = 0;
+        OnRaceIdChanged();
+    }
+
+    public void DecrementRaceId()
+    {
+        raceId--;
+        if (raceId < 0)
+            raceId = Races.Count - 1;
+        OnRaceIdChanged();
+    }
+
+    public Race Race
+    {
+        get { return Races[raceId]; }
+    }
+
+    List<Race> Races{
+        get
         {
-            print(race.UniqueName);
+            if(races == null)
+            {
+                races = MainData.CurrentGameData.GetPlayableRaces();
+            }
+            return races;
         }
+    }
+
+    void OnRaceIdChanged()
+    {
+        raceText.text = Race.UniqueName;
+        RaceIdChangedEvent();
     }
 }
