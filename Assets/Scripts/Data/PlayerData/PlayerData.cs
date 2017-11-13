@@ -177,12 +177,12 @@ public class PlayerData : IPlayerData
     public void AddXp(int xpToAdd)
     {
         UpdateRankPoints(xpToAdd);
-        while(xpToAdd >= RequiredXp)
+        /*while(xpToAdd >= RequiredXp)
         {
             xp += RequiredXp;
             xpToAdd -= RequiredXp;
             LevelUp();
-        }
+        }*/
         xp += xpToAdd;                
     }
 
