@@ -17,7 +17,7 @@ public abstract class LoadableBehaviour : MonoBehaviour {
         Unsubscribe();
     }
 
-    protected virtual void Subscribe()
+    private void Subscribe()
     {
         if (!isSubscribed)
         {
@@ -27,7 +27,7 @@ public abstract class LoadableBehaviour : MonoBehaviour {
         }
     }
 
-    protected virtual void Unsubscribe()
+    private void Unsubscribe()
     {
         if (isSubscribed)
         {

@@ -16,16 +16,14 @@ public class ProgressBarUI : BaseProgressBarUI {
 
     [SerializeField] protected ValueType valueType;
 
-    public override void Awake()
+    protected override void Awake()
     {
         base.Awake();
-
-        SaveData.OnCharacterIDChangedEvent -= SkipNextAnimation;
-        SaveData.OnCharacterIDChangedEvent += SkipNextAnimation;
     }
 
     protected override bool DetectChange()
     {
+        print("Detecting change");
         if (MainData.CurrentPlayerData == null) return false;
         return base.DetectChange();
     }

@@ -26,8 +26,7 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
 
     [SerializeField] private float displayValue;
 
-    private PrefabSpawner spawner;
-    private bool firstStart = true;
+    private ProgressBarSpawner spawner;
     private float currentFreezeTime = 0;
 
     [SerializeField] protected GameObject prefab;
@@ -43,31 +42,21 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
     [SerializeField] protected float linearAnimationSpeed = 0.01f;
     [SerializeField] protected float asymptoticAnimationSpeed = 0.05f;
     [SerializeField] protected float freezeTime = 0;
-    [SerializeField] protected bool detectChangeInUpdate = true;
+    [SerializeField] protected bool detectChangeInUpdate = false;
+    [SerializeField] protected bool animateByDefault = true;
+    [SerializeField] protected bool animateNextChange = false;
 
-    protected override void OnEnable()
+    protected override void Awake()
     {
-        base.OnEnable();
+        base.Awake();
 
-        SaveDataSO.LoadEvent -= SkipNextAnimation;
-        SaveDataSO.LoadEvent += SkipNextAnimation;
-
-        spawner = gameObject.GetComponent<PrefabSpawner>();
+        spawner = gameObject.GetComponent<ProgressBarSpawner>();
         if(spawner == null)
         {
-            spawner = gameObject.AddComponent<PrefabSpawner>();
+            spawner = gameObject.AddComponent<ProgressBarSpawner>();
         }
         spawner.Prefab = prefab;
         spawner.Spawn();
-
-        this.FindOrSpawnChildWithComponent(ref slider, "Slider");
-        this.FindOrSpawnChildWithComponent(ref nameText, "NameText", true);
-        this.FindOrSpawnChildWithComponent(ref valueText, "ValueText", true);
-        secondaryTexts = new Text[secondaryTextNo];
-        for (int i = 0; i<secondaryTextNo; i++)
-        {
-            this.FindOrSpawnChildWithComponent(ref secondaryTexts[i], "SecondaryText" + i.ToString(), true);
-        }
     }
 
     void Update()
@@ -75,12 +64,14 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         if (detectChangeInUpdate)
             DetectChange();
 
-        if (displayValue < MinValue() || displayValue > maxValue)
+        if ((!animateByDefault && !animateNextChange) || displayValue < MinValue() || displayValue > maxValue)
             SkipAnimation();
-        else if(currentFreezeTime > 0)
+        else if (currentFreezeTime > 0)
             currentFreezeTime -= Time.deltaTime;
-        else
+        else if (DisplayValue != currentValue)
             Animate(DisplayValue, currentValue, animationType);
+        else if(CurrentState != State.Loading)
+            animateNextChange = false;
 
         if (nameText != null) nameText.text = NameTextString();
         if (valueText != null) valueText.text = ValueTextString();
@@ -91,73 +82,14 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         slider.value = SliderValue();
     }
 
-    public float Animate(float disp, float cur, AnimationType type)
+    protected override void SubscribeInternal()
     {
-        int direction;
-        if (disp < cur) direction = 1;
-        else direction = -1;
-        switch (type)
-        {
-            case AnimationType.None:
-                disp = cur;
-                break;
-            case AnimationType.Linear:
-                disp = disp + linearAnimationSpeed * maxValue * direction;
-                if(direction == 1)
-                {
-                    disp = Mathf.Clamp(disp, 0, cur);
-                }
-                else
-                {
-                    disp = Mathf.Clamp(disp, cur, maxValue);
-                }
-                break;
-            case AnimationType.Asymptotic:
-                disp = Animate(disp, cur, AnimationType.Linear);
-                disp = Mathf.Clamp
-                    (
-                    disp +
-                    asymptoticAnimationSpeed * (cur - disp),
-                    0,
-                    maxValue + 1
-                    );
-                break;
-        }
-        DisplayValue = disp;
-        return disp;
+
     }
 
-    public void SkipAnimation()
+    protected override void UnsubscribeInternal()
     {
-        Debug.Log("Skipping animation!");
-        do
-        {
-            Animate(displayValue, currentValue, AnimationType.None);
-        } while (DetectChange());
-        Skip();
-    }
 
-    public void Freeze(float time)
-    {
-        currentFreezeTime = Mathf.Max(time, currentFreezeTime);
-    }
-
-    public void Freeze()
-    {
-        Freeze(freezeTime);
-    }
-
-    public void SkipNextAnimation()
-    {
-        if (firstStart) return;
-        else
-        {
-            firstStart = true;
-            if (!DetectChange())
-            {
-                firstStart = false;
-            }
-        }
     }
 
     protected override bool DetectChange()
@@ -165,12 +97,12 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         bool result = false;
         float nextCurrentValue = CurrentValue();
         float nextMaxValue = MaxValue();
-        if(currentValue != nextCurrentValue)
+        if (currentValue != nextCurrentValue)
         {
             currentValue = nextCurrentValue;
             result = true;
         }
-        if(maxValue != nextMaxValue)
+        if (maxValue != nextMaxValue)
         {
             maxValue = nextMaxValue;
             result = true;
@@ -178,20 +110,15 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         if (result)
         {
             Debug.Log("Change detected! New currentValue: " + currentValue.ToString() + " New maxValue: " + maxValue.ToString());
-            if (firstStart)
-            {
-                SkipAnimation();
-                firstStart = false;
-                return false;
-            }
-            else
-            {
-                Freeze();
-            }
+            Freeze();
             OnChangeDetected();
         }
         return result;
     }
+
+    protected abstract float CurrentValue();
+
+    protected abstract float MaxValue();
 
     protected virtual void OnChangeDetected()
     {
@@ -230,13 +157,87 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         return Mathf.Clamp(displayValue / maxValue, 0f, 1f);
     }
 
-    protected abstract float CurrentValue();
-    protected abstract float MaxValue();
-
     protected virtual float MinValue()
     {
         return 0;
     }
+
+    public void ChildrenSetup()
+    {
+        this.FindOrSpawnChildWithComponent(ref slider, "Slider");
+        this.FindOrSpawnChildWithComponent(ref nameText, "NameText", true);
+        this.FindOrSpawnChildWithComponent(ref valueText, "ValueText", true);
+        secondaryTexts = new Text[secondaryTextNo];
+        for (int i = 0; i < secondaryTextNo; i++)
+        {
+            this.FindOrSpawnChildWithComponent(ref secondaryTexts[i], "SecondaryText" + i.ToString(), true);
+        }
+    }
+
+    public float Animate(float disp, float cur, AnimationType type)
+    {
+        if (disp == cur) return cur;
+        //print("Animating: " + disp.ToString() + " ===> " + cur.ToString() + " (" + type.ToString() + ")");
+        int direction;
+        if (disp < cur) direction = 1;
+        else direction = -1;
+        switch (type)
+        {
+            case AnimationType.None:
+                disp = cur;
+                break;
+            case AnimationType.Linear:
+                disp = disp + linearAnimationSpeed * maxValue * direction;
+                if (direction == 1)
+                {
+                    disp = Mathf.Clamp(disp, 0, cur);
+                }
+                else
+                {
+                    disp = Mathf.Clamp(disp, cur, maxValue);
+                }
+                break;
+            case AnimationType.Asymptotic:
+                disp = Animate(disp, cur, AnimationType.Linear);
+                disp = Mathf.Clamp
+                    (
+                    disp +
+                    asymptoticAnimationSpeed * (cur - disp),
+                    0,
+                    maxValue + 1
+                    );
+                break;
+        }
+        DisplayValue = disp;
+        return disp;
+    }
+
+    public void AnimateNextChange()
+    {
+        animateNextChange = true;
+    }
+
+    public void SkipAnimation()
+    {
+        Debug.Log("Skipping animation!");
+        do
+        {
+            Animate(displayValue, currentValue, AnimationType.None);
+        } while (DetectChange());
+        Skip();
+    }
+
+    public void Freeze(float time)
+    {
+        currentFreezeTime = Mathf.Max(time, currentFreezeTime);
+    }
+
+    public void Freeze()
+    {
+        Freeze(freezeTime);
+    }
+
+
 
     protected float DisplayValue
     {
