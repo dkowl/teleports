@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Teleports.Utils;
 
-public class ProgressBarUI : BaseProgressBarUI {
+public class ProgressBarUI : BaseProgressBarUI, IMessageHandler<RunFinishedMessage> {
 
     public enum ValueType
     {
@@ -19,6 +19,7 @@ public class ProgressBarUI : BaseProgressBarUI {
     protected override void Awake()
     {
         base.Awake();
+        MainData.MessageBus.Subscribe(this);
     }
 
     protected override bool DetectChange()
@@ -128,6 +129,11 @@ public class ProgressBarUI : BaseProgressBarUI {
         {
             return base.SliderValue();
         }
+    }
+
+    public void Handle(RunFinishedMessage message)
+    {
+        Debug.Log("MESSAGE HANDLED LOL");
     }
 
     protected string DeltaString

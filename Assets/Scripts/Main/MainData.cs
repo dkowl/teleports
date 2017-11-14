@@ -12,17 +12,56 @@ public partial class MainData : ScriptableObject {
     static bool isInitialized = false;
 
     //inspector fields
-    [SerializeField]
-    private SaveDataSO saveData;
-    [SerializeField]
-    private GameData gameData;
-    [SerializeField]
-    private ServerData serverData;
-    [SerializeField]
-    private Stylesheet stylesheet;
+    [SerializeField] private SaveDataSO saveData;
+    [SerializeField] private GameData gameData;
+    [SerializeField] private ServerData serverData;
+    [SerializeField] private Stylesheet stylesheet;
+
+    IMessageBus messageBus;
 
     public delegate void OnInitialized();
     public static event OnInitialized OnInitializedEvent;
+
+    //unity event functions
+    void Awake()
+    {
+        Initialize();
+    }
+
+    void OnDestroy()
+    {
+        instance = null;
+    }
+
+    //editor only
+    void OnEnable()
+    {
+        Initialize();
+    }
+
+
+    //public functions
+    void Initialize()
+    {
+        if (!isInitialized || instance == null)
+        {
+            instance = this;
+            CurrentSaveData.CorrectInvalidData();
+            messageBus = new MessageBus();
+
+            isInitialized = true;
+            if (OnInitializedEvent != null)
+            {
+                OnInitializedEvent();
+            }
+            Debug.Log("MainData initialized!");
+        }
+    }
+
+    public static void SavePlayer(GameObject player)
+    {
+        CurrentPlayerData.Xp = player.GetComponent<XpComponent>().Xp;
+    }
 
     #region properties
     private static MainData Instance{
@@ -79,45 +118,10 @@ public partial class MainData : ScriptableObject {
     {
         get { return CurrentPlayerData.Xp; }
     }
+
+    public static IMessageBus MessageBus
+    {
+        get { return Instance.messageBus; }
+    }
     #endregion
-
-    //unity event functions
-    void Awake()
-    {
-        Initialize();
-    }
-
-    void OnDestroy()
-    {
-        instance = null;
-    }
-
-    //editor only
-    void OnEnable()
-    {
-        Initialize();
-    }
-
-
-    //public functions
-    void Initialize()
-    {
-        if (!isInitialized || instance == null)
-        {
-            instance = this;
-            isInitialized = true;
-            CurrentSaveData.CorrectInvalidData();
-
-            if (OnInitializedEvent != null)
-            {
-                OnInitializedEvent();
-            }
-            Debug.Log("MainData initialized!");
-        }
-    }
-
-    public static void SavePlayer(GameObject player)
-    {
-        CurrentPlayerData.Xp = player.GetComponent<XpComponent>().Xp;
-    }
 }

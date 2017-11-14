@@ -103,6 +103,7 @@ public class GameMain : MonoBehaviour {
     public void BackToHome()
     {
         MainData.SavePlayer(player);
+        MainData.MessageBus.Publish(new RunFinishedMessage(Score));
         MenuController.Instance.OpenMenu(MenuController.MenuType.Home);
         MainController.SwitchScene("Start");
     }
