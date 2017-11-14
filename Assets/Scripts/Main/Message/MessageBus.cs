@@ -7,5 +7,18 @@ public class MessageBus : IMessageBus {
 
     Dictionary<Type, List<object>> subscribers;
 
-    //public void Subscribe(IMessageHandler)
+    public void Subscribe(object subscriber)
+    {
+
+    }
+
+    public void Unsubscribe(object subscriber)
+    {
+
+    }
+
+    public void Publish<T>(T message) where T : IMessage
+    {
+
+    }
 }
