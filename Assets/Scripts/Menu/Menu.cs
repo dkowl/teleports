@@ -72,7 +72,7 @@ public class Menu : ScriptableObject
             Command[] commands = new MenuBehaviourCommand[menuBehaviours.Length];
             for(int i = 0; i<menuBehaviours.Length; i++)
             {
-                commands[i] = new MenuBehaviourCommand(menuBehaviours[i], MenuBehaviourCommand.Type.Open);
+                commands[i] = new MenuBehaviourCommand(menuBehaviours[i], MenuBehaviourCommand.Type.Open, true);
             }
             MultiCommand multiCommand = new MultiCommand(commands);
             multiCommand.RegisterFinishCallback(ShowFinish);
@@ -115,7 +115,7 @@ public class Menu : ScriptableObject
             Command[] commands = new MenuBehaviourCommand[menuBehaviours.Length];
             for (int i = 0; i < menuBehaviours.Length; i++)
             {
-                commands[i] = new MenuBehaviourCommand(menuBehaviours[i], MenuBehaviourCommand.Type.Close);
+                commands[i] = new MenuBehaviourCommand(menuBehaviours[i], MenuBehaviourCommand.Type.Close, true);
             }
             MultiCommand multiCommand = new MultiCommand(commands);
             multiCommand.RegisterFinishCallback(HideFinish);

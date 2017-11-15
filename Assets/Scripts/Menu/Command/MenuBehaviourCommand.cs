@@ -14,17 +14,25 @@ public class MenuBehaviourCommand : Command {
 
     protected MenuBehaviour menuBehaviour;
     protected Type type;
+    protected bool isExternal; //is it called from outside of the MenuBehaviour
 
-    public MenuBehaviourCommand(MenuBehaviour menuBehaviour, Type type)
+    public MenuBehaviourCommand(MenuBehaviour menuBehaviour, Type type, bool isExternal = false)
     {
         this.menuBehaviour = menuBehaviour;
         this.type = type;
+        this.isExternal = isExternal;
 
         //Debug.Log("Creating command " + type.ToString());
     }
 
     protected override void StartInternal()
     {
+        if (isExternal)
+        {
+            menuBehaviour.AddCommand(type);
+            Finish();
+            return;
+        }
         switch (type)
         {
             case Type.Open:

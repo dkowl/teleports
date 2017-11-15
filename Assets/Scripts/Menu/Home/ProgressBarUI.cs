@@ -24,7 +24,6 @@ public class ProgressBarUI : BaseProgressBarUI, IMessageHandler<RunFinishedMessa
 
     protected override bool DetectChange()
     {
-        print("Detecting change");
         if (MainData.CurrentPlayerData == null) return false;
         return base.DetectChange();
     }
@@ -133,7 +132,7 @@ public class ProgressBarUI : BaseProgressBarUI, IMessageHandler<RunFinishedMessa
 
     public void Handle(RunFinishedMessage message)
     {
-        Debug.Log("MESSAGE HANDLED LOL");
+        AnimateNextChange();
     }
 
     protected string DeltaString

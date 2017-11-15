@@ -59,37 +59,49 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         spawner.Spawn();
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        DetectChange();
+    }
+
     void Update()
     {
         if (detectChangeInUpdate)
             DetectChange();
 
-        if ((!animateByDefault && !animateNextChange) || displayValue < MinValue() || displayValue > maxValue)
-            SkipAnimation();
-        else if (currentFreezeTime > 0)
-            currentFreezeTime -= Time.deltaTime;
-        else if (DisplayValue != currentValue)
-            Animate(DisplayValue, currentValue, animationType);
-        else if(CurrentState != State.Loading)
-            animateNextChange = false;
-
-        if (nameText != null) nameText.text = NameTextString();
-        if (valueText != null) valueText.text = ValueTextString();
-        for (int i = 0; i < secondaryTextNo; i++)
+        if (IsAnimating)
         {
-            if(secondaryTexts[i] != null) secondaryTexts[i].text = SecondaryTextString(i);
+            if (animateByDefault || animateNextChange)
+            {
+                if (currentFreezeTime > 0)
+                    currentFreezeTime -= Time.deltaTime;
+                else if (DisplayValue != currentValue)
+                    Animate(DisplayValue, currentValue, animationType);
+            }
+            else
+            {
+                SkipAnimation();
+            }
+
+            if (nameText != null) nameText.text = NameTextString();
+            if (valueText != null) valueText.text = ValueTextString();
+            for (int i = 0; i < secondaryTextNo; i++)
+            {
+                if (secondaryTexts[i] != null) secondaryTexts[i].text = SecondaryTextString(i);
+            }
+            slider.value = SliderValue();
         }
-        slider.value = SliderValue();
+        else if (CurrentState != State.Loading)
+                animateNextChange = false;
     }
 
     protected override void SubscribeInternal()
     {
-
     }
 
     protected override void UnsubscribeInternal()
     {
-
     }
 
     protected override bool DetectChange()
@@ -220,11 +232,12 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
     public void SkipAnimation()
     {
         Debug.Log("Skipping animation!");
+        Skip();
+        if (DisplayValue == currentValue) return;
         do
         {
             Animate(displayValue, currentValue, AnimationType.None);
         } while (DetectChange());
-        Skip();
     }
 
     public void Freeze(float time)
@@ -237,7 +250,13 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         Freeze(freezeTime);
     }
 
-
+    public bool IsAnimating
+    {
+        get
+        {
+            return currentValue != DisplayValue;
+        }
+    }
 
     protected float DisplayValue
     {

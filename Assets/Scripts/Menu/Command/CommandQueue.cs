@@ -79,11 +79,20 @@ public class CommandQueue {
         Update();
     }
 
+    //Debug Methods
     private void DebugStringUpdate(Command command)
     {
         if (command is MenuCommand) debugString = "MenuCommand";
         else if (command is MenuBehaviourCommand) debugString = "MenuBehaviourCommand";
         else if (command is MultiCommand) debugString = "MultiCommand";
         else debugString = "Command";
+    }
+
+    public void DebugPrintQueue()
+    {
+        foreach(var command in commands)
+        {
+            Debug.Log(command.GetType().ToString());
+        }
     }
 }
