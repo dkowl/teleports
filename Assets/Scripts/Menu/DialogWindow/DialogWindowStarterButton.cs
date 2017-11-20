@@ -8,9 +8,14 @@ public abstract class DialogWindowStarterButton : MonoBehaviour {
     [SerializeField] protected string textString;
     protected DialogWindow window;
 
-    void Awake()
+    void OnEnable()
     {
         GetComponent<Button>().onClick.AddListener(Click);
+    }
+
+    void OnDisable()
+    {
+        GetComponent<Button>().onClick.RemoveListener(Click);
     }
 
     protected abstract List<ButtonChoice> Choices();

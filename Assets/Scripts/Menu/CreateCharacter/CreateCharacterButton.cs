@@ -34,7 +34,7 @@ public class CreateCharacterButton : DialogWindowStarterButton {
             case PlayerDataValidator.NameValidationResult.TooShort:
                 return "Name must be at least " + PlayerDataValidator.MinNameLength.ToString() + " characters long";
             case PlayerDataValidator.NameValidationResult.TooLong:
-                return "Name must be shorter than " + PlayerDataValidator.MaxNameLength.ToString() + "characters";
+                return "Name must be shorter than " + PlayerDataValidator.MaxNameLength.ToString() + " characters";
             default:
                 return "Unexpected name validation error";
         }

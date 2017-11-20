@@ -11,12 +11,17 @@ public class CharacterThumbnailUI : SelectorButtonUI {
 
     private int characterSlotID = 0;
     private IPlayerData playerData = null;
+    private CreateHeroConfirmDWSB createHeroConfirmDWSB;
 
     public override void LoadDataInternal()
     {
         base.LoadDataInternal();
 
         playerData = MainData.CurrentSaveData.GetPlayerData(characterSlotID);
+        if (createHeroConfirmDWSB == null)
+        {
+            createHeroConfirmDWSB = gameObject.AddComponent<CreateHeroConfirmDWSB>();
+        }
 
         if (playerData != null)
         {
@@ -48,7 +53,8 @@ public class CharacterThumbnailUI : SelectorButtonUI {
 
     protected override void OnActivate()
     {
-        MainData.CurrentSaveData.CurrentSlotID = characterSlotID;
+        if(MainData.CurrentSaveData.GetPlayerData(characterSlotID) != null) 
+            MainData.CurrentSaveData.CurrentSlotID = characterSlotID;
     }
 
     protected override void OnDeactivate()
@@ -59,6 +65,7 @@ public class CharacterThumbnailUI : SelectorButtonUI {
     public void SetCharacterSlotID(int id)
     {
         characterSlotID = id;
+        createHeroConfirmDWSB.CharacterSlotId = id;
         LoadDataInternal();
     }
 
