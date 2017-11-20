@@ -10,6 +10,8 @@ public class PlayerHpBarUI : BaseProgressBarUI {
     void Start()
     {
         playerUnit = GameMain.Instance.Player.GetComponent<Unit>();
+        DetectChange();
+        SkipAnimation();
     }
 
     protected override string NameTextString()

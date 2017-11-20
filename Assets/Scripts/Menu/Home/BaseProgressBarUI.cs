@@ -274,6 +274,7 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         set
         {
             displayValue = value;
+            UpdateUiElements();
         }
     }
 
