@@ -11,14 +11,15 @@ public class CreateCharacterButton : DialogWindowStarterButton {
     {
         string heroName = menu.Name;
         var result = new List<ButtonChoice>();
-        if (!PlayerData.ValidateName(heroName))
+        switch (PlayerDataValidator.ValidateName(heroName))
         {
-            result.Add(new ButtonChoice("OK", DoNothing));
-        }
-        else
-        {
-            result.Add(new ButtonChoice("Yes", menu.CreateCharacter));
-            result.Add(new ButtonChoice("No", DoNothing));
+            case PlayerDataValidator.NameValidationResult.OK:
+                result.Add(new ButtonChoice("Yes", menu.CreateCharacter));
+                result.Add(new ButtonChoice("No", DoNothing));
+                break;
+            default:
+                result.Add(new ButtonChoice("OK", DoNothing));
+                break;
         }
         return result;
     }
@@ -26,13 +27,16 @@ public class CreateCharacterButton : DialogWindowStarterButton {
     protected override string TextString()
     {
         string heroName = menu.Name;
-        if (!PlayerData.ValidateName(heroName))
+        switch (PlayerDataValidator.ValidateName(heroName))
         {
-            return "Name must be at least 3 characters long";
-        }
-        else
-        {
-            return "Create new hero " + heroName + "?";
+            case PlayerDataValidator.NameValidationResult.OK:
+                return "Create new hero " + heroName + "?";
+            case PlayerDataValidator.NameValidationResult.TooShort:
+                return "Name must be at least " + PlayerDataValidator.MinNameLength.ToString() + " characters long";
+            case PlayerDataValidator.NameValidationResult.TooLong:
+                return "Name must be shorter than " + PlayerDataValidator.MaxNameLength.ToString() + "characters";
+            default:
+                return "Unexpected name validation error";
         }
     }
 

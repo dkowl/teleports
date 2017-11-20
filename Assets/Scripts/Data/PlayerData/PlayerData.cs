@@ -49,7 +49,7 @@ public class PlayerData : IPlayerData
 
     public void CorrectInvalidData()
     {
-        if (!ValidateName(characterName))
+        if (PlayerDataValidator.ValidateName(characterName) != PlayerDataValidator.NameValidationResult.OK)
         {
             characterName = "";
         }
@@ -74,15 +74,6 @@ public class PlayerData : IPlayerData
             }
         }
         teleportData.CorrectInvalidData();
-    }
-
-    public static bool ValidateName(string name)
-    {
-        if (name.Length < 3)
-        {
-            return false;
-        }
-        return true;
     }
 
     #region interface implementation
