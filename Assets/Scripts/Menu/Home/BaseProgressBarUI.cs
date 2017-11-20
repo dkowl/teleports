@@ -83,14 +83,7 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
             {
                 SkipAnimation();
             }
-
-            if (nameText != null) nameText.text = NameTextString();
-            if (valueText != null) valueText.text = ValueTextString();
-            for (int i = 0; i < secondaryTextNo; i++)
-            {
-                if (secondaryTexts[i] != null) secondaryTexts[i].text = SecondaryTextString(i);
-            }
-            slider.value = SliderValue();
+            UpdateUiElements();
         }
         else if (CurrentState != State.Loading)
                 animateNextChange = false;
@@ -126,6 +119,12 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
             OnChangeDetected();
         }
         return result;
+    }
+
+    protected override void OnOpenInternal()
+    {
+        UpdateUiElements();
+        base.OnOpenInternal();
     }
 
     protected abstract float CurrentValue();
@@ -248,6 +247,17 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
     public void Freeze()
     {
         Freeze(freezeTime);
+    }
+
+    void UpdateUiElements()
+    {
+        if (nameText != null) nameText.text = NameTextString();
+        if (valueText != null) valueText.text = ValueTextString();
+        for (int i = 0; i < secondaryTextNo; i++)
+        {
+            if (secondaryTexts[i] != null) secondaryTexts[i].text = SecondaryTextString(i);
+        }
+        slider.value = SliderValue();
     }
 
     public bool IsAnimating
