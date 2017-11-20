@@ -49,6 +49,7 @@ public static class PlayerSpawner {
                     unit = player.AddComponent<Unit>();
                 }
                 unit.unitData = playerData.BaseUnitData;
+                unit.unitData.Name = playerData.CharacterName;
 
                 if (controller == null)
                 {

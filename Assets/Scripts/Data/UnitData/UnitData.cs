@@ -48,10 +48,8 @@ public class UnitData : IUnitData {
 
     public string Name
     {
-        get
-        {
-            return unitName;
-        }
+        get { return unitName; }
+        set { unitName = value; }
     }
 
     public int Level
