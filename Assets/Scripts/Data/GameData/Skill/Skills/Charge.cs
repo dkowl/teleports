@@ -44,7 +44,7 @@ public class Charge : Skill {
         {
             if (CanReachCastTarget(unit, mainAttack, target))
             {
-                unit.CastStart(mainAttack, target);
+                unit.CastingState.Start(mainAttack, target);
                 Finish();
             }
             else

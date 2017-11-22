@@ -22,7 +22,7 @@ public class DeadState : ActionState {
                 XpComponent xp = lastAttacker.gameObject.GetComponent<XpComponent>();
                 if (xp != null)
                 {
-                    xp.ReceiveXp((1000 * unit.unitData.Level));
+                    xp.ReceiveXp((1000 * unit.UnitData.Level));
                 }
             }
         }

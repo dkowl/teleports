@@ -43,7 +43,7 @@ public abstract class UnitController : MonoBehaviour {
     {
         if (Skill.CanReachCastTarget(unit, mainAttack, target))
         {
-            unit.CastStart(mainAttack, target);
+            unit.CastingState.Start(mainAttack, target);
         }
         else
         {

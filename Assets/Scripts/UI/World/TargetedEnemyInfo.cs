@@ -36,7 +36,7 @@ public class TargetedEnemyInfo : MonoBehaviour {
         else
         {
             slider.value = targetUnit.HealthPercentage;
-            nameText.text = targetUnit.unitData.Name;
+            nameText.text = targetUnit.UnitData.Name;
             hpText.text = targetUnit.CurrentHp.ToString() + " / " + targetUnit.Hp.ToString();
             gameObject.makeVisible();
         }
