@@ -109,14 +109,6 @@ public class Unit : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, Size + Reach);
     }
 
-    public void CastStart(Skill skill, Skill.TargetInfo target)
-    {
-        //Debug.Log("Trying to cast" + skill.Name + " on " + target.TargetUnit.name);
-        castingState.ActiveSkill = skill;
-        castingState.CastTarget = target;
-        castingState.Start();
-    }
-
     public void MoveStart(Vector3 moveDest)
     {
         movingState.MoveDest = moveDest;

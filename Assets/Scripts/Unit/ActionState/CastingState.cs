@@ -59,7 +59,24 @@ public class CastingState : ActionState {
         if (resetCastEvent != null) resetCastEvent(this, EventArgs.Empty);
     }
 
-    public bool CanReachCastTarget
+    public void Start(Skill skill, Skill.TargetInfo target, bool interrupt = false)
+    {
+        if (IsActive)
+        {
+            if (interrupt)
+                Reset();
+            else
+            {
+                Debug.Log("Already casting another skill");
+                return;
+            }
+        }
+        activeSkill = skill;
+        castTarget = target;
+        Start();
+    }
+
+    bool CanReachCastTarget
     {
         get
         {
@@ -67,30 +84,14 @@ public class CastingState : ActionState {
         }
     }
 
-    public Skill.TargetInfo CastTarget
+    Skill.TargetInfo CastTarget
     {
         get { return castTarget; }
-        set
-        {
-            if (IsActive && castTarget != value)
-            {
-                Reset();
-            }
-            castTarget = value;
-        }
     }
 
-    public Skill ActiveSkill
+    Skill ActiveSkill
     {
         get { return activeSkill; }
-        set
-        {
-            if (IsActive && activeSkill != value)
-            {
-                Reset();
-            }
-            activeSkill = value;
-        }
     }
 
 }
