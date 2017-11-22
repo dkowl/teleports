@@ -23,7 +23,7 @@ public class AttributeModifier : Perk {
 
         foreach(AttributeModificationSettings ams in attributeModificationSettings_)
         {
-            target.unitData.GetAttribute(ams.type).Modify(ams.bonus, ams.multiplier);
+            target.UnitData.GetAttribute(ams.type).Modify(ams.bonus, ams.multiplier);
         }
     }
 
@@ -33,7 +33,7 @@ public class AttributeModifier : Perk {
 
         foreach (AttributeModificationSettings ams in attributeModificationSettings_)
         {
-            target.unitData.GetAttribute(ams.type).Modify(-ams.bonus, 1/ams.multiplier);
+            target.UnitData.GetAttribute(ams.type).Modify(-ams.bonus, 1/ams.multiplier);
         }
     }
 }

@@ -19,8 +19,9 @@ public class Unit : MonoBehaviour
         Count
     }
 
-    public UnitDataEditor unitDataEditor;
-    public UnitData unitData;
+    [SerializeField]
+    private UnitDataEditor unitDataEditor;
+    private UnitData unitData;
 
     private List<ActionState> actionStates;
     private MovingState movingState;
@@ -37,110 +38,6 @@ public class Unit : MonoBehaviour
     private UnitGraphics graphics;
     
     private UnitController activeController;
-
-    #region attribute properties
-    public float Size
-    {
-        get { return unitData.GetAttribute(AttributeType.Size).GetValue() / 2f; }
-    }
-
-    public float Hp
-    {
-        get { return unitData.GetAttribute(AttributeType.Hp).GetValue(); }
-    }
-
-    public float Armor
-    {
-        get { return unitData.GetAttribute(AttributeType.Armor).GetValue(); }
-    }
-
-    public float Regen
-    {
-        get { return unitData.GetAttribute(AttributeType.Regen).GetValue(); }
-    }
-
-    public float Damage
-    {
-        get { return unitData.GetAttribute(AttributeType.Damage).GetValue(); }
-    }
-
-    public float ArmorIgnore
-    {
-        get { return unitData.GetAttribute(AttributeType.ArmorIgnore).GetValue(); }
-    }
-
-    public float Reach
-    {
-        get { return unitData.GetAttribute(AttributeType.Reach).GetValue(); }
-    }
-
-    public float MoveSpeed
-    {
-        get { return unitData.GetAttribute(AttributeType.MoveSpeed).GetValue(); }
-    }
-
-    public float RotationSpeed
-    {
-        get { return unitData.GetAttribute(AttributeType.RotationSpeed).GetValue(); }
-    }
-
-    public float ViewRange
-    {
-        get { return unitData.GetAttribute(AttributeType.ViewRange).GetValue(); }
-    }
-    #endregion
-
-    #region other properties
-
-    public bool IsMoving
-    {
-        get { return movingState.IsActive; }
-    }
-
-    public UnitController ActiveController
-    {
-        get { return activeController; }
-        set
-        {
-            activeController = value;
-        }
-    }
-
-    public UnitGraphics Graphics
-    {
-        get { return graphics; }
-    }
-
-    public MovingState MovingState
-    {
-        get { return movingState; }
-    }
-
-    public RotatingState RotatingState
-    {
-        get { return rotatingState; }
-    }
-
-    public CastingState CastingState
-    {
-        get { return castingState; }
-    }
-
-    public DeadState DeadState
-    {
-        get { return deadState; }
-    }
-
-    public float HealthPercentage
-    {
-        get { return 1f - (damageReceived / Hp); }
-    }
-
-    public float CurrentHp
-    {
-        get { return Hp - damageReceived; }
-    }
-    #endregion
 
     void Awake () {
         damageReceived = 0;
@@ -265,5 +162,112 @@ public class Unit : MonoBehaviour
     public void Stun(float time)
     {
         stunnedState.StunTime = time;
+    }
+
+    #region attribute properties
+    public float Size
+    {
+        get { return unitData.GetAttribute(AttributeType.Size).GetValue() / 2f; }
+    }
+
+    public float Hp
+    {
+        get { return unitData.GetAttribute(AttributeType.Hp).GetValue(); }
+    }
+
+    public float Armor
+    {
+        get { return unitData.GetAttribute(AttributeType.Armor).GetValue(); }
+    }
+
+    public float Regen
+    {
+        get { return unitData.GetAttribute(AttributeType.Regen).GetValue(); }
+    }
+
+    public float Damage
+    {
+        get { return unitData.GetAttribute(AttributeType.Damage).GetValue(); }
+    }
+
+    public float ArmorIgnore
+    {
+        get { return unitData.GetAttribute(AttributeType.ArmorIgnore).GetValue(); }
+    }
+
+    public float Reach
+    {
+        get { return unitData.GetAttribute(AttributeType.Reach).GetValue(); }
+    }
+
+    public float MoveSpeed
+    {
+        get { return unitData.GetAttribute(AttributeType.MoveSpeed).GetValue(); }
+    }
+
+    public float RotationSpeed
+    {
+        get { return unitData.GetAttribute(AttributeType.RotationSpeed).GetValue(); }
+    }
+
+    public float ViewRange
+    {
+        get { return unitData.GetAttribute(AttributeType.ViewRange).GetValue(); }
+    }
+    #endregion
+    
+    public bool IsMoving
+    {
+        get { return movingState.IsActive; }
+    }
+
+    public UnitController ActiveController
+    {
+        get { return activeController; }
+        set
+        {
+            activeController = value;
+        }
+    }
+
+    public UnitData UnitData
+    {
+        get { return unitData; }
+        set { unitData = value; }
+    }
+
+    public UnitGraphics Graphics
+    {
+        get { return graphics; }
+    }
+
+    public MovingState MovingState
+    {
+        get { return movingState; }
+    }
+
+    public RotatingState RotatingState
+    {
+        get { return rotatingState; }
+    }
+
+    public CastingState CastingState
+    {
+        get { return castingState; }
+    }
+
+    public DeadState DeadState
+    {
+        get { return deadState; }
+    }
+
+    public float HealthPercentage
+    {
+        get { return 1f - (damageReceived / Hp); }
+    }
+
+    public float CurrentHp
+    {
+        get { return Hp - damageReceived; }
     }
 }

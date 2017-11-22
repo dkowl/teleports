@@ -10,26 +10,6 @@ public struct InventorySlot
     [SerializeField] private ItemID id;
     [SerializeField] private int count;
 
-    public bool Empty
-    {
-        get { return count == 0; }
-    }
-
-    public ItemID itemID
-    {
-        get
-        {
-            if (!Empty)
-            {
-                return id;
-            }
-            else
-            {
-                return null;
-            }
-        }
-    }
-
     public void Add(ItemID id)
     {
         if (this.id == id)
@@ -48,6 +28,26 @@ public struct InventorySlot
         if (!Empty)
         {
             count--;
+        }
+    }
+
+    public bool Empty
+    {
+        get { return count == 0; }
+    }
+
+    public ItemID itemID
+    {
+        get
+        {
+            if (!Empty)
+            {
+                return id;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

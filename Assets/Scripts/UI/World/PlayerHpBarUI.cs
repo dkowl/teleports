@@ -17,7 +17,7 @@ public class PlayerHpBarUI : BaseProgressBarUI {
     protected override string NameTextString()
     {
         if (playerUnit != null)
-            return playerUnit.unitData.Name;
+            return playerUnit.UnitData.Name;
         else
             return "Player";
     }
