@@ -22,7 +22,7 @@ public class PlayerController : UnitController {
             layerMask = 1 << 8; //testing for ground
             if (!done && Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
-                unit.MoveStart(hit.point);
+                unit.MovingState.Start(hit.point);
                 if (Input.GetButtonDown("PlayerMove"))
                 {
                     unit.CastingState.Reset();

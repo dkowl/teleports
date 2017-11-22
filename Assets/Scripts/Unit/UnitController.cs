@@ -47,7 +47,7 @@ public abstract class UnitController : MonoBehaviour {
         }
         else
         {
-            unit.MoveStart(target.Position);
+            unit.MovingState.Start(target.Position);
         }
     }
 

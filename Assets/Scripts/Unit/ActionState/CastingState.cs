@@ -66,10 +66,7 @@ public class CastingState : ActionState {
             if (interrupt)
                 Reset();
             else
-            {
-                Debug.Log("Already casting another skill");
                 return;
-            }
         }
         activeSkill = skill;
         castTarget = target;

@@ -49,7 +49,7 @@ public class Charge : Skill {
             }
             else
             {
-                unit.MoveStart(charge.targetStartPosition);
+                unit.MovingState.Start(charge.targetStartPosition);
                 if (unit.transform.position == charge.targetStartPosition) Finish();
             }
         }

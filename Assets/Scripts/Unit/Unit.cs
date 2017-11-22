@@ -109,11 +109,6 @@ public class Unit : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, Size + Reach);
     }
 
-    public void MoveStart(Vector3 moveDest)
-    {
-        movingState.MoveDest = moveDest;
-    }
-
     public void AddPerk(Perk perk)
     {
         perk.Apply(this);

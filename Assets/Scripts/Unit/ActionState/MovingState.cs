@@ -49,16 +49,17 @@ public class MovingState : ActionState {
         moveDest = unit.transform.position;
     }
 
+    public void Start(Vector3 newMoveDest)
+    {
+        if (newMoveDest != moveDest && !Utils.Approximately(newMoveDest, unit.transform.position))
+        {
+            moveDest = newMoveDest;
+            Start();
+        }
+    }
+
     public Vector3 MoveDest
     {
         get { return moveDest; }
-        set
-        {
-            if(value != moveDest && !Utils.Approximately(value, unit.transform.position))
-            {
-                moveDest = value;
-                Start();
-            }
-        }
     }
 }
