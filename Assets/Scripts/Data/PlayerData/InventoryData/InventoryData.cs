@@ -14,6 +14,11 @@ public class InventoryData {
 
     public InventoryData()
     {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
         maxItems = 32;
         Utils.InitWithValues(ref invSlots, maxItems, new InventorySlot());
         eq = new ItemID[Utils.EnumCount(typeof(EquipmentSlot))];
@@ -108,6 +113,14 @@ public class InventoryData {
         }
 
         return result;
+    }
+
+    public void CorrectInvalidData()
+    {
+        if(maxItems == 0)
+        {
+            Initialize();
+        }
     }
    
 }

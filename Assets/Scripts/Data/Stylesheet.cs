@@ -33,7 +33,8 @@ public class Stylesheet : ScriptableObject
         Black,
         Transparent,
         Alpha80,
-        White
+        White,
+        Background
     }
 
     public int titleFontSize;
@@ -53,6 +54,7 @@ public class Stylesheet : ScriptableObject
     public Color gray4;
     public Color gray5;
     public Color black;
+    public Color backgroundColor;
 
     public Sprite lockSprite;
 
@@ -118,6 +120,8 @@ public class Stylesheet : ScriptableObject
                 return Color.clear;
             case ColorPreset.Alpha80:
                 return new Color(0, 0, 0, 0.8f);
+            case ColorPreset.Background:
+                return backgroundColor;
             default:
                 return Color.white;
         }

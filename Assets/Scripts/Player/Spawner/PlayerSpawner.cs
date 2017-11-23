@@ -71,7 +71,6 @@ public static class PlayerSpawner {
                 unit.ActiveController = controller;
 
                 //Instantiating items
-
                 GameObject items = new GameObject("Items");
                 items.transform.parent = player.transform;
 

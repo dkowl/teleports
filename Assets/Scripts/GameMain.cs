@@ -61,7 +61,7 @@ public class GameMain : MonoBehaviour {
             EndScreen("Time's up!");
         }
 
-        if (!player.GetComponent<Unit>().Alive())
+        if (!player.GetComponent<Unit>().Alive)
         {
             EndScreen("You died!");
         }

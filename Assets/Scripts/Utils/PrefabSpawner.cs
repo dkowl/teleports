@@ -32,7 +32,7 @@ public class PrefabSpawner : MonoBehaviour {
 
     public void Initialize()
     {
-        if (!isInitialized)
+        if (!isInitialized || spawnAmount != spawnedInstances.Count)
         {
             if (spawnedInstances != null && spawnedInstances.Count > 0)
                 Despawn();

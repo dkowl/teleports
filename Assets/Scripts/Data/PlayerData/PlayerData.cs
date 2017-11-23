@@ -74,6 +74,7 @@ public class PlayerData : IPlayerData
             }
         }
         teleportData.CorrectInvalidData();
+        inventoryData.CorrectInvalidData();
     }
 
     #region interface implementation

@@ -115,11 +115,6 @@ public class Unit : MonoBehaviour
         perks.Add(perk);
     }
 
-    public bool Alive()
-    {
-        return !deadState.IsActive;
-    }
-
     void ApplyPerks()
     {
         foreach(Perk perk in perks)
@@ -246,6 +241,11 @@ public class Unit : MonoBehaviour
     public DeadState DeadState
     {
         get { return deadState; }
+    }
+
+    public bool Alive
+    {
+        get { return !deadState.IsActive; }
     }
 
     public float HealthPercentage
