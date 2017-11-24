@@ -26,6 +26,7 @@ public class InventoryData {
 
     public void Add(ItemID id)
     {
+        //stack on existing slot
         foreach(InventorySlot slot in invSlots)
         {
             if(!slot.Empty && slot.itemID == id)
@@ -35,6 +36,7 @@ public class InventoryData {
             }
         }
 
+        //add to empty slot
         foreach(InventorySlot slot in invSlots)
         {
             if (slot.Empty)
@@ -44,6 +46,7 @@ public class InventoryData {
             }
         }
 
+        //add extra slot if possible
         if(invSlots.Count < maxItems)
         {
             InventorySlot slot = new InventorySlot();
@@ -100,19 +103,20 @@ public class InventoryData {
 
     public List<ItemData> GetEquippedItems()
     {
-        List<ItemData> result = new List<ItemData>();
+        return GetItems(eq);
+    }
 
-        foreach(ItemID id in eq)
+    public List<ItemData> GetAllItemsInInventory()
+    {
+        List<ItemID> ids = new List<ItemID>();
+        foreach(var slot in invSlots)
         {
-            ItemData itemData = MainData.CurrentGameData.GetItem(id);
-            if(itemData != null)
+            if(!slot.Empty)
             {
-                result.Add(itemData);
+                ids.Add(slot.itemID);
             }
-            
         }
-
-        return result;
+        return GetItems(ids);
     }
 
     public void CorrectInvalidData()
@@ -121,6 +125,22 @@ public class InventoryData {
         {
             Initialize();
         }
+    }
+
+    List<ItemData> GetItems(IEnumerable<ItemID> itemIds)
+    {
+        List<ItemData> result = new List<ItemData>();
+
+        foreach (ItemID id in itemIds)
+        {
+            ItemData itemData = MainData.CurrentGameData.GetItem(id);
+            if (itemData != null)
+            {
+                result.Add(itemData);
+            }
+
+        }
+        return result;
     }
    
 }

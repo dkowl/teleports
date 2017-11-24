@@ -14,7 +14,7 @@ public class CameraMeshTargeter : MonoBehaviour {
     void Awake()
     {
         cam = GetComponent<Camera>();
-        mesh = meshFilter.mesh;
+        SetTarget(meshFilter);
     }
 
     void Update()
@@ -28,6 +28,14 @@ public class CameraMeshTargeter : MonoBehaviour {
         Rect boundingViewportRect = GetBoundingViewportRect(cornerPoints, cam);
         CenterCameraOnViewportRect(cam, boundingViewportRect, paddingPercentage);
         SetDistanceFromPoint(cam, mesh.bounds.center, distance);
+    }
+
+    void SetTarget(MeshFilter newTarget)
+    {
+        if (newTarget == meshFilter) return;
+
+        meshFilter = newTarget;
+        mesh = meshFilter.mesh;
     }
 
     List<Vector3> GetAllCornerPoints(Bounds bounds, Vector3 position)
