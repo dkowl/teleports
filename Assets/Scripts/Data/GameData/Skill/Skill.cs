@@ -35,9 +35,6 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         Single,
         Area
     };
-
-    [SerializeField]
-    private int uniqueID = UniqueID<Skill>.NextID;
     
     [FormerlySerializedAs("name_")]
     [SerializeField]
