@@ -90,19 +90,25 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         if (currentCooldown < 0) currentCooldown = 0;
     }
 
-    public void Cast(Unit caster, TargetInfo target)
+    abstract public void InternalCast(Unit caster, TargetInfo target);
+    abstract public void InternalCast(Unit caster, List<CastTarget> targets);
+
+    protected virtual SkillTargeter GetTargeter()
+    {
+        return new SkillTargeter_Point();
+    }
+
+    public void Cast(Unit caster, TargetInfo targetInfo)
     {
         currentCooldown = cooldown.Value;
 
         foreach(Perk perk in caster.perks)
         {
-            perk.onCast(caster, this, target);
+            perk.onCast(caster, this, targetInfo);
         }
-
-        InternalCast(caster, target);
+        //InternalCast(caster, targetInfo);
+        InternalCast(caster, Targeter.GetTargets(targetInfo));
     }
-
-    abstract public void InternalCast(Unit caster, TargetInfo target);
 
     public bool CanReachCastTarget(TargetInfo targetInfo)
     {
@@ -176,5 +182,13 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     public SkillGraphics Graphics
     {
         get { return graphics; }
+    }
+
+    private SkillTargeter Targeter
+    {
+        get
+        {
+            return GetTargeter();
+        }
     }
 }

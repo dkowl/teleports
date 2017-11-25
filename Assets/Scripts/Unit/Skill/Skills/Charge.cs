@@ -22,6 +22,17 @@ public class Charge : Skill {
         chargeController.Initialize(this);
     }
 
+    public override void InternalCast(Unit caster, List<CastTarget> targets)
+    {
+        CastTarget target = targets[0];
+        oldController = caster.ActiveController;
+        targetStartPosition = target.Unit.gameObject.transform.position;
+
+        chargeController = caster.gameObject.AddComponent<ChargeController>();
+        chargeController.Target = new TargetInfo(caster, target.Unit);
+        chargeController.Initialize(this);
+    }
+
     public class ChargeController : UnitController
     {
         public Charge charge;

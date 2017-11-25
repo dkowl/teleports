@@ -13,4 +13,12 @@ public class Attack : Skill {
     {
         target.TargetUnit.ReceiveDamage(caster.Damage * damageMultiplier, caster);
     }
+
+    override public void InternalCast(Unit caster, List<CastTarget> targets)
+    {
+        foreach (var target in targets)
+        {
+            target.Unit.ReceiveDamage(caster.Damage * damageMultiplier, caster);
+        }
+    }
 }
