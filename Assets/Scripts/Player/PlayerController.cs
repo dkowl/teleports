@@ -12,14 +12,14 @@ public class PlayerController : UnitController {
             RaycastHit hit;
             bool done = false;
 
-            int layerMask = 1 << 10; //testing for enemies
+            int layerMask = (int)LayerMask.Enemy; //testing for enemies
             if (Input.GetButtonDown("PlayerMove") && Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 target.TargetUnit = hit.transform.parent.gameObject.GetComponent<Unit>();
                 done = true;
             }
 
-            layerMask = 1 << 8; //testing for ground
+            layerMask = (int)LayerMask.Ground; //testing for ground
             if (!done && Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 unit.MovingState.Start(hit.point);
