@@ -47,7 +47,7 @@ public class MeshTriangularizator : MonoBehaviour {
             int oldVertIndex = triangles[i];
             newVertices[i] = vertices[oldVertIndex];
             newUvs[i] = uvs[oldVertIndex];
-            //newNormals[i] = normals[oldVertIndex];
+            newNormals[i] = normals[oldVertIndex];
 
             if (i % 3 == 0)
             {
@@ -59,7 +59,7 @@ public class MeshTriangularizator : MonoBehaviour {
         mesh.vertices = newVertices;
         mesh.triangles = newTriangles;
         mesh.uv = newUvs;
-        //mesh.normals = newNormals;
+        mesh.normals = newNormals;
         mesh.colors = newColors;
         mesh.RecalculateNormals();
 

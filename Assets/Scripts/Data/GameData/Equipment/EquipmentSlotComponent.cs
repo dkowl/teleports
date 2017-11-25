@@ -30,4 +30,9 @@ public class EquipmentSlotComponent : MonoBehaviour {
         }
         isEmpty = true;
     }
+
+    public bool IsEmpty
+    {
+        get { return isEmpty; }
+    }
 }

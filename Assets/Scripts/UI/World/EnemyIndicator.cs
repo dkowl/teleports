@@ -6,14 +6,11 @@ using Teleports.Utils;
 
 public class EnemyIndicator : MonoBehaviour {
 
-    GameObject enemy, player, indicator;
-    CanvasScaler canvas;
+    GameObject enemy, indicator;
     Camera cam;   
 
 	void Awake () {
-        player = GameMain.Instance.Player;
         indicator = gameObject.transform.GetChild(0).GetChild(0).gameObject;
-        canvas = gameObject.transform.GetChild(0).GetComponent<CanvasScaler>();
         cam = Camera.main;
     }
 
