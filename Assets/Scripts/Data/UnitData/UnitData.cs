@@ -77,4 +77,9 @@ public class UnitData : IUnitData {
     {
         get { return isInitialized; }
     }
+
+    public SkillID MainAttack
+    {
+        get { return mainAttack; }
+    }
 }

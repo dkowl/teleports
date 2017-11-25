@@ -56,7 +56,7 @@ public class TileMap {
                 {
                     v[i] = Mathf.Max(noise[iX + (int)offsets[i].x, iY + (int)offsets[i].y], 0) * 0;
                 }
-                tiles_[x, y].heightPoints = v;                    
+                tiles_[x, y].HeightPoints = v;                    
             }
         }
     }
@@ -68,12 +68,12 @@ public class TileMap {
 
     public Vector4 getHeightPoints(int x, int y)
     {
-        return tiles_[x, y].heightPoints;
+        return tiles_[x, y].HeightPoints;
     }
 
-    public Tile.Type getType(int x, int y)
+    public Tile.TerrainType getType(int x, int y)
     {
-        return tiles_[x, y].type;
+        return tiles_[x, y].Type;
     }
 
     public int getSizeX() { return sizeX_; }

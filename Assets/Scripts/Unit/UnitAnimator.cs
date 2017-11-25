@@ -24,14 +24,13 @@ public class UnitAnimator : MonoBehaviour {
         castStartHash = Animator.StringToHash("castStart");
         castResetHash = Animator.StringToHash("castReset");
     }
-
-	// Use this for initialization
+    
 	void Start () {
         unit.CastingState.startCastEvent += HandleCastStartEvent;
+        unit.CastingState.castEvent += HandleCastEvent;
         unit.CastingState.resetCastEvent += HandleCastResetEvent;
 	}
 	
-	// Update is called once per frame
 	void Update () {
         animator.SetFloat(moveSpeedHash, unit.MoveSpeed);
         animator.SetBool(isMovingHash, unit.IsMoving);
@@ -40,6 +39,11 @@ public class UnitAnimator : MonoBehaviour {
     void HandleCastStartEvent(object sender, EventArgs e)
     {
         animator.SetTrigger(castStartHash);
+    }
+
+    void HandleCastEvent(object sender, EventArgs e)
+    {
+        animator.SetTrigger(castHash);
     }
 
     void HandleCastResetEvent(object sender, EventArgs e)

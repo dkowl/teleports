@@ -32,7 +32,7 @@ public class CameraMeshTargeter : MonoBehaviour {
 
     void SetTarget(MeshFilter newTarget)
     {
-        if (newTarget == meshFilter) return;
+        if (newTarget == meshFilter && mesh != null) return;
 
         meshFilter = newTarget;
         mesh = meshFilter.mesh;

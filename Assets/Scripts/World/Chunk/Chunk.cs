@@ -35,7 +35,7 @@ public class Chunk {
             gameObject_ = Object.Instantiate(Resources.Load("Prefabs/World/Chunk"), GameObject.Find("WorldObject").transform) as GameObject;
             tileMapGraphics_ = gameObject_.GetComponent<TileMapGraphics>();
             tileMap_ = new TileMap(CHUNK_SIZE, CHUNK_SIZE, seed_, idX_, idZ_);
-            tileMapGraphics_.generateMesh(tileMap_, new Vector3(posX_, 0, posZ_), TILE_SIZE);
+            tileMapGraphics_.GenerateMesh(tileMap_, new Vector3(posX_, 0, posZ_), TILE_SIZE);
 
             //spawn one random enemy at random position
             if (!spawnDone_)

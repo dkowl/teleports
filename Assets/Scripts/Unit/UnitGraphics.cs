@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitGraphics : MonoBehaviour {
-
-    Healthbar healthbar;
+    
     GameObject targetMarker;
 
 	// Use this for initialization
 	void Start () {
-        healthbar = gameObject.AddComponent<Healthbar>();
+        gameObject.AddComponent<Healthbar>();
     }
 
     public void updateTarget(Unit target)
@@ -18,7 +17,7 @@ public class UnitGraphics : MonoBehaviour {
         {
             targetMarker = Instantiate(Resources.Load("Prefabs/Unit/TargetMarker"), gameObject.transform) as GameObject;
         }
-        targetMarker.GetComponent<TargetMarker>().setTargetUnit(target);
+        targetMarker.GetComponent<TargetMarker>().SetTargetUnit(target);
     }
 
     public void showDamage(float damage)

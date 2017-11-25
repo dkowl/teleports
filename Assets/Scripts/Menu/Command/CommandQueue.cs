@@ -11,6 +11,7 @@ public class CommandQueue {
         Instant
     }
 
+    private static readonly bool debugMode = false;
     private string debugString = "command";
 
     protected LinkedList<Command> commands = new LinkedList<Command>();
@@ -28,12 +29,12 @@ public class CommandQueue {
 
         if(currentCommand.State == CommandState.Pending)
         {
-            //Debug.Log("Starting " + debugString + ", count: " + commands.Count.ToString());
+            if(debugMode) Debug.Log("Starting " + debugString + ", count: " + commands.Count.ToString());
             currentCommand.Start();
         }
         else if(currentCommand.State == CommandState.Finished)
         {
-            //Debug.Log("Removing " + debugString + ", count: " + commands.Count.ToString());
+            if (debugMode) Debug.Log("Removing " + debugString + ", count: " + commands.Count.ToString());
             commands.RemoveFirst();
             Update();
         }
@@ -42,7 +43,7 @@ public class CommandQueue {
     public void AddCommand(Command command, AddMode addMode = AddMode.Standard)
     {
         DebugStringUpdate(command);
-        //Debug.Log("Adding " + debugString + ", count: " + commands.Count.ToString());
+        if (debugMode) Debug.Log("Adding " + debugString + ", count: " + commands.Count.ToString());
         command.RegisterFinishCallback(Update);
 
         switch (addMode)
@@ -82,6 +83,7 @@ public class CommandQueue {
     //Debug Methods
     private void DebugStringUpdate(Command command)
     {
+        if (!debugMode) return;
         if (command is MenuCommand) debugString = "MenuCommand";
         else if (command is MenuBehaviourCommand) debugString = "MenuBehaviourCommand";
         else if (command is MultiCommand) debugString = "MultiCommand";

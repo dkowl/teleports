@@ -5,14 +5,8 @@ using UnityEngine;
 public class CameraRotateAround : MonoBehaviour {
 
     public Transform target;
-    Camera cam;
 
     public float speed = 60;
-
-    void Awake()
-    {
-        cam = GetComponent<Camera>();
-    }
 
     void Update()
     {

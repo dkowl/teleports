@@ -77,7 +77,7 @@ public class CastingState : ActionState {
     {
         get
         {
-            return Skill.CanReachCastTarget(unit, activeSkill, castTarget);
+            return activeSkill.CanReachCastTarget(castTarget);
         }
     }
 

@@ -33,7 +33,7 @@ public struct WorldPositionGrid
         {
             int currentRow = currentIndex / cols;
             int currentCol = currentIndex % rows;
-            return startPosition + new Vector3(offsetX * cols, 0, offsetZ * rows);
+            return startPosition + new Vector3(offsetX * currentCol, 0, offsetZ * currentRow);
         }
     }
 

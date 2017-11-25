@@ -43,8 +43,7 @@ public class EnemySpawner : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-
-    // Use this for initialization
+    
     void Start () {
         enemyName[(int)EnemyType.Red] = "Red";
         enemyName[(int)EnemyType.Pink] = "Pink";
@@ -59,8 +58,7 @@ public class EnemySpawner : MonoBehaviour {
 
         enemies = new List<Enemy>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         foreach (Enemy enemy in enemies)
@@ -95,7 +93,6 @@ public class EnemySpawner : MonoBehaviour {
         return Instantiate(Resources.Load(path), gameObject.transform) as GameObject;
     }
 
-
     public void Spawn(EnemyType type, Vector3 position)
     {
         GameObject newEnemy = InstantiateEnemy(type);
@@ -112,6 +109,6 @@ public class EnemySpawner : MonoBehaviour {
     {
         int id = Random.Range(0, (int)EnemyType.Count);
         Spawn((EnemyType)id, position);
-    }	
+    }
 	
 }

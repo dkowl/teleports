@@ -5,7 +5,7 @@ using UnityEngine;
 public class OscillatingMovement : MonoBehaviour {
 
     public float period_ = 1;
-    public Vector3 begin_, amplitude_;
+    public Vector3 begin, amplitude;
 
     Vector3 startPos_;
     float value_ = 0;
@@ -35,6 +35,6 @@ public class OscillatingMovement : MonoBehaviour {
             increasing_ = !increasing_;
         }
 
-        transform.localPosition = startPos_ + begin_ + value_ * amplitude_;
+        transform.localPosition = startPos_ + begin + value_ * amplitude;
 	}
 }

@@ -34,6 +34,11 @@ public class Race : UniqueScriptableObject {
         get { return isPlayable; }
     }
 
+    public List<EquipmentSlot> AvailableEqSlots
+    {
+        get { return availableEqSlots; }
+    }
+
     public string Description
     {
         get { return description.text; }

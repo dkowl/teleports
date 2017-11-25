@@ -15,7 +15,7 @@ public class CastTimeModifier : Perk {
         {
             if(skill.name == skillToModify.name)
             {
-                skill.castTime.AddMultiplier(castTimeModifier);
+                skill.ModifyAttribute(Skill.AttributeType.CastTime, 0, castTimeModifier);
             }
         }
     }
