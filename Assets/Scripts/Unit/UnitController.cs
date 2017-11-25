@@ -24,7 +24,7 @@ public abstract class UnitController : MonoBehaviour {
     public virtual void Awake()
     {
         unit = gameObject.GetComponent<Unit>();
-        target = new Skill.TargetInfo();
+        target = new Skill.TargetInfo(unit, null);
         if(mainAttack == null)
         {
             mainAttack = GetComponent<Skill>();
@@ -41,7 +41,7 @@ public abstract class UnitController : MonoBehaviour {
 
     protected void Chase()
     {
-        if (Skill.CanReachCastTarget(unit, mainAttack, target))
+        if (mainAttack.CanReachCastTarget(target))
         {
             unit.CastingState.Start(mainAttack, target);
         }

@@ -42,7 +42,7 @@ public class Charge : Skill {
 
         public override void Control()
         {
-            if (CanReachCastTarget(unit, mainAttack, target))
+            if (mainAttack.CanReachCastTarget(target))
             {
                 unit.CastingState.Start(mainAttack, target);
                 Finish();

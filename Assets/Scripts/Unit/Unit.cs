@@ -149,52 +149,52 @@ public class Unit : MonoBehaviour
     #region attribute properties
     public float Size
     {
-        get { return unitData.GetAttribute(AttributeType.Size).GetValue() / 2f; }
+        get { return unitData.GetAttribute(AttributeType.Size).Value / 2f; }
     }
 
     public float Hp
     {
-        get { return unitData.GetAttribute(AttributeType.Hp).GetValue(); }
+        get { return unitData.GetAttribute(AttributeType.Hp).Value; }
     }
 
     public float Armor
     {
-        get { return unitData.GetAttribute(AttributeType.Armor).GetValue(); }
+        get { return unitData.GetAttribute(AttributeType.Armor).Value; }
     }
 
     public float Regen
     {
-        get { return unitData.GetAttribute(AttributeType.Regen).GetValue(); }
+        get { return unitData.GetAttribute(AttributeType.Regen).Value; }
     }
 
     public float Damage
     {
-        get { return unitData.GetAttribute(AttributeType.Damage).GetValue(); }
+        get { return unitData.GetAttribute(AttributeType.Damage).Value; }
     }
 
     public float ArmorIgnore
     {
-        get { return unitData.GetAttribute(AttributeType.ArmorIgnore).GetValue(); }
+        get { return unitData.GetAttribute(AttributeType.ArmorIgnore).Value; }
     }
 
     public float Reach
     {
-        get { return unitData.GetAttribute(AttributeType.Reach).GetValue(); }
+        get { return unitData.GetAttribute(AttributeType.Reach).Value; }
     }
 
     public float MoveSpeed
     {
-        get { return unitData.GetAttribute(AttributeType.MoveSpeed).GetValue(); }
+        get { return unitData.GetAttribute(AttributeType.MoveSpeed).Value; }
     }
 
     public float RotationSpeed
     {
-        get { return unitData.GetAttribute(AttributeType.RotationSpeed).GetValue(); }
+        get { return unitData.GetAttribute(AttributeType.RotationSpeed).Value; }
     }
 
     public float ViewRange
     {
-        get { return unitData.GetAttribute(AttributeType.ViewRange).GetValue(); }
+        get { return unitData.GetAttribute(AttributeType.ViewRange).Value; }
     }
     #endregion
     
