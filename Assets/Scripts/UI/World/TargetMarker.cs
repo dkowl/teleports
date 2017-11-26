@@ -38,7 +38,7 @@ public class TargetMarker : MonoBehaviour {
 
     void Update()
     {
-        if (targetUnit != null) {
+        if (targetUnit != null && targetUnit.Alive) {
             transform.position = targetUnit.gameObject.transform.position;
             gameObject.makeVisible();
         }

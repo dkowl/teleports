@@ -5,13 +5,20 @@ using UnityEngine;
 public class UnitGraphics : MonoBehaviour {
     
     GameObject targetMarker;
+    Unit unit;
 
 	// Use this for initialization
 	void Start () {
         gameObject.AddComponent<Healthbar>();
+        unit = GetComponent<Unit>();
     }
 
-    public void updateTarget(Unit target)
+    void Update()
+    {
+        if(unit.ActiveController is PlayerController) UpdateTarget(unit.ActiveController.Target.TargetUnit);
+    }
+
+    public void UpdateTarget(Unit target)
     {
         if(targetMarker == null)
         {

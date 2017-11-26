@@ -33,7 +33,7 @@ public abstract class UnitController : MonoBehaviour {
 
     void Update()
     {
-        if (IsActive())
+        if (IsActive)
         {
             Control();
         }
@@ -53,8 +53,8 @@ public abstract class UnitController : MonoBehaviour {
 
     public abstract void Control();
 
-    bool IsActive()
+    bool IsActive
     {
-        return this == unit.ActiveController && !GameMain.Instance.IsPaused;
+        get { return this == unit.ActiveController; }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 
 public abstract class Skill : MonoBehaviour, IUniqueName {
 
+    [System.Serializable]
     public class TargetInfo
     {
         Unit caster;

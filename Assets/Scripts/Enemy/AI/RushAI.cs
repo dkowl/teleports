@@ -20,7 +20,17 @@ public class RushAI : UnitController {
 
     public override void Control() {
         if (target.TargetUnit == null) FindTarget();
-        else Chase();
+        else
+        {
+            if (target.TargetUnit.Alive)
+            {
+                Chase();
+            }
+            else
+            {
+                target.TargetUnit = null;
+            }
+        }
 	}
     
     void FindTarget()
@@ -30,17 +40,21 @@ public class RushAI : UnitController {
         float minDist = float.MaxValue;
 
         int bestArg = 0;
+        bool found = false;
         for (int i = 0; i<targets.Length; i++)
         {
+            if (!targets[i].GetComponent<Unit>().Alive) continue;
+
             float dist = Vector3.Distance(targets[i].transform.position, transform.position);
             if (dist < minDist)
             {
                 minDist = dist;
                 bestArg = i;
+                found = true;
             }
         }
 
-        if (minDist < unit.ViewRange)
+        if (found && minDist < unit.ViewRange)
         {
             target.TargetUnit = targets[bestArg].GetComponent<Unit>();
         }
