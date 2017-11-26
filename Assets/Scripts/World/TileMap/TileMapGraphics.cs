@@ -61,7 +61,7 @@ public class TileMapGraphics : MonoBehaviour {
 
         gameObject.AddComponent<MeshFilter>();
         gameObject.AddComponent<MeshRenderer>();
-        gameObject.AddComponent<MeshCollider>();
+        MeshCollider meshCollider = gameObject.AddComponent<MeshCollider>();
 
         Mesh mesh = gameObject.GetComponent<MeshFilter>().mesh;
         mesh.vertices = vertices;
@@ -71,7 +71,7 @@ public class TileMapGraphics : MonoBehaviour {
 
         gameObject.GetComponent<MeshRenderer>().sharedMaterial = material;
 
-        gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
+        meshCollider.sharedMesh = mesh;
     }
 
     void TypeToUvs(Tile.TerrainType type, ref float l, ref float r, ref float b, ref float t)

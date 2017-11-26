@@ -43,6 +43,7 @@ public class RotatingState : ActionState {
             if(value != rotationTarget && value != unit.transform.rotation)
             {
                 rotationTarget = value;
+                rotationTarget = Quaternion.Euler(0, rotationTarget.eulerAngles.y, 0);
                 Start();
             }
         }

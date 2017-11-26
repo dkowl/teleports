@@ -39,8 +39,28 @@ public class Unit : MonoBehaviour
     
     private UnitController activeController;
 
+    private new CapsuleCollider collider;
+    private new Rigidbody rigidbody;
+    private CharacterController characterController;
+
     void Awake () {
         damageReceived = 0;
+        
+        //Add some physics
+        //collider = gameObject.AddComponent<CapsuleCollider>();
+        /*rigidbody = gameObject.AddComponent<Rigidbody>();
+        rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+        rigidbody.drag = 10;
+        rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+        //rigidbody.maxDepenetrationVelocity = 20;
+        rigidbody.useGravity = false;
+        rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;*/
+
+        if (GetComponentInChildren<Collider>() == null)
+        {
+            collider = gameObject.AddComponent<CapsuleCollider>();
+        }
+        characterController = gameObject.AddComponent<CharacterController>();
 
         movingState = new MovingState(this);
         rotatingState = new RotatingState(this);
@@ -83,12 +103,20 @@ public class Unit : MonoBehaviour
         if (unitDataEditor != null)
         {
             unitData = new UnitData(unitDataEditor);
-        }
-	}
+        }        
+    }
 
     void Start()
     {
         ApplyPerks();
+
+        //rigidbody.mass = unitData.Height * Size * Size * 4 * 100;
+
+        if (collider != null)
+        {
+            collider.radius = Size;
+            collider.height = unitData.Height - 2 * Size;
+        }
     }
 	
 	void Update () {
@@ -97,8 +125,14 @@ public class Unit : MonoBehaviour
 
         foreach(ActionState state in actionStates)
         {
-            state.Update(dTime);
+           // if(!(state is MovingState))
+                state.Update(dTime);
         }   
+    }
+
+    void FixedUpdate()
+    {
+        //movingState.Update(Time.deltaTime);
     }
 
     void OnDrawGizmos()
@@ -256,5 +290,15 @@ public class Unit : MonoBehaviour
     public float CurrentHp
     {
         get { return Hp - damageReceived; }
+    }
+
+    public Rigidbody Rigidbody
+    {
+        get { return rigidbody; }
+    }
+
+    public CharacterController CharacterController
+    {
+        get { return characterController; }
     }
 }

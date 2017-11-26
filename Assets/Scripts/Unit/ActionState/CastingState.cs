@@ -34,7 +34,7 @@ public class CastingState : ActionState {
 
     public override void Update(float dTime)
     {
-        if (isActive && !IsBlocked && CanReachCastTarget)
+        if (isActive && !IsBlocked)
         {
             currentCastTime += dTime;
             if (currentCastTime >= activeSkill.CastTime)

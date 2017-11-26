@@ -9,10 +9,11 @@ public class SkillTargeter_Cone : SkillTargeter {
     [SerializeField] Vector3 coneVector;
 
 
-	public override List<CastTarget> GetTargets(Skill.TargetInfo targetInfo)
+	public override List<CastTarget> GetTargets(Skill skill, Skill.TargetInfo targetInfo)
     {
         var result = new List<CastTarget>();
 
+        //Physics.Sp
         return result;
     }
 }

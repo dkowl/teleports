@@ -89,8 +89,7 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         currentCooldown -= Time.deltaTime;
         if (currentCooldown < 0) currentCooldown = 0;
     }
-
-    abstract public void InternalCast(Unit caster, TargetInfo target);
+    
     abstract public void InternalCast(Unit caster, List<CastTarget> targets);
 
     protected virtual SkillTargeter GetTargeter()
@@ -107,7 +106,7 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
             perk.onCast(caster, this, targetInfo);
         }
         //InternalCast(caster, targetInfo);
-        InternalCast(caster, Targeter.GetTargets(targetInfo));
+        InternalCast(caster, Targeter.GetTargets(this, targetInfo));
     }
 
     public bool CanReachCastTarget(TargetInfo targetInfo)

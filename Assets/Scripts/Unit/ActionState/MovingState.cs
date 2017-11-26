@@ -25,6 +25,7 @@ public class MovingState : ActionState {
         if (IsActive && !IsBlocked)
         {
             Vector3 offset = moveDest - unit.transform.position;
+            offset.y = 0;
 
             if (unit.MoveSpeed * dTime < offset.magnitude)
             {
@@ -34,8 +35,8 @@ public class MovingState : ActionState {
             {
                 Reset();
             }
-
-            unit.transform.position += offset;
+            Debug.Log(offset);
+            unit.CharacterController.Move(offset);
         }
         else if(IsActive && IsBlocked)
         {

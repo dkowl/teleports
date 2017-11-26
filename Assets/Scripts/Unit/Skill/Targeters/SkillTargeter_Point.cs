@@ -5,11 +5,17 @@ using UnityEngine;
 
 public class SkillTargeter_Point : SkillTargeter {
 
-    public override List<CastTarget> GetTargets(Skill.TargetInfo targetInfo)
+    public override List<CastTarget> GetTargets(Skill skill, Skill.TargetInfo targetInfo)
     {
         var result = new List<CastTarget>();
-        if(targetInfo.TargetUnit != null)
+        if (targetInfo.TargetUnit != null && skill.CanReachCastTarget(targetInfo))
+        {
             result.Add(new CastTarget(targetInfo.TargetUnit, CastTarget.TypeFlag.Primary));
+        }
+        else
+        {
+            targetInfo.TargetUnit.Graphics.showMessage("Miss!");
+        }
         return result;
     }
 }
