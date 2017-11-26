@@ -50,7 +50,7 @@ public class Unit : MonoBehaviour
         //collider = gameObject.AddComponent<CapsuleCollider>();
         rigidbody = gameObject.AddComponent<Rigidbody>();
         rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
-        rigidbody.drag = 4;
+        rigidbody.drag = 10;
         rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
         //rigidbody.maxDepenetrationVelocity = 20;
         rigidbody.useGravity = false;
