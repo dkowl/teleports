@@ -65,6 +65,11 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         DetectChange();
     }
 
+    protected override void OnDisable()
+    {
+        SkipAnimation();
+    }
+
     void Update()
     {
         if (detectChangeInUpdate)
@@ -231,6 +236,7 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
     public void SkipAnimation()
     {
         Debug.Log("Skipping animation!");
+        animateNextChange = false;
         Skip();
         if (DisplayValue == currentValue) return;
         do

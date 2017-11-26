@@ -6,9 +6,9 @@ public class CommandQueue {
 
     public enum AddMode
     {
-        Standard,
-        Priority,
-        Instant
+        Standard, //adds last
+        Priority, //adds after all commands in progress
+        Instant //add first
     }
 
     private static readonly bool debugMode = false;
@@ -78,6 +78,20 @@ public class CommandQueue {
         }
 
         Update();
+    }
+
+    public void FinishAll()
+    {
+        while(commands.Count != 0)
+        {
+            Command command = commands.First.Value;
+            if (command.State == CommandState.Pending)
+                command.Start();
+            if(command.State == CommandState.InProgress)
+                command.Finish();
+
+            Update();
+        }
     }
 
     //Debug Methods

@@ -39,6 +39,11 @@ public class MenuBehaviour : LoadableBehaviour {
         }
     }
 
+    protected virtual void OnDisable()
+    {
+        Skip();
+    }
+
     public override void LoadDataInternal()
     {
         print("Adding Load Command");
