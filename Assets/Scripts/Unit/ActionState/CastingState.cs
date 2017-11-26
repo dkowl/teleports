@@ -5,9 +5,18 @@ using UnityEngine;
 
 public class CastingState : ActionState {
 
+    public enum State
+    {
+        BeforeCast,
+        AfterCast,
+        Ready
+    }
+
     protected Skill.TargetInfo castTarget;
     protected Skill activeSkill;
     protected float currentCastTime;
+    protected float currentLockTime;
+    protected State state;
 
     public event EventHandler startCastEvent, castEvent, resetCastEvent;
 
@@ -25,9 +34,9 @@ public class CastingState : ActionState {
             " ||| can reach cast target?: " + CanReachCastTarget.ToString());*/
         if(!IsActive && castTarget != null && activeSkill != null && activeSkill.CurrentCooldown == 0 && CanReachCastTarget)
         {
-            //Debug.Log("Casting start");
             currentCastTime = 0;
             isActive = true;
+            state = State.BeforeCast;
             if (startCastEvent != null) startCastEvent(this, EventArgs.Empty);
         }
     }
@@ -36,12 +45,21 @@ public class CastingState : ActionState {
     {
         if (isActive && !IsBlocked)
         {
-            currentCastTime += dTime;
-            if (currentCastTime >= activeSkill.CastTime)
+            if (state == State.BeforeCast)
             {
-                activeSkill.Cast(unit, castTarget);
-                if (castEvent != null) castEvent(this, EventArgs.Empty);
-                Reset();
+                currentCastTime += dTime;
+                if (currentCastTime >= activeSkill.CastTime)
+                {
+                    activeSkill.Cast(unit, castTarget);
+                    if (castEvent != null) castEvent(this, EventArgs.Empty);
+                    state = State.AfterCast;
+                }
+            }
+            else if(state == State.AfterCast)
+            {
+                currentLockTime += dTime;
+                if (currentLockTime >= activeSkill.AfterCastLockTime)
+                    Reset();
             }
         }
         else if(isActive)
@@ -55,7 +73,9 @@ public class CastingState : ActionState {
         castTarget = null;
         activeSkill = null;
         currentCastTime = 0;
+        currentLockTime = 0;
         isActive = false;
+        state = State.Ready;
         if (resetCastEvent != null) resetCastEvent(this, EventArgs.Empty);
     }
 

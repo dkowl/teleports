@@ -67,7 +67,8 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     {
         Reach,
         CastTime,
-        Cooldown
+        Cooldown,
+        AfterCastLockTime
     }
     
     [FormerlySerializedAs("name_")]
@@ -80,6 +81,7 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     [SerializeField] private Attribute castTime;
     [FormerlySerializedAs("cooldown_")]
     [SerializeField] private Attribute cooldown;
+    [SerializeField] private Attribute afterCastLockTime;
     [SerializeField] private SkillGraphics graphics;
 
     float currentCooldown;
@@ -171,6 +173,11 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     public float Cooldown
     {
         get { return cooldown.Value; }
+    }
+
+    public float AfterCastLockTime
+    {
+        get { return afterCastLockTime.Value; }
     }
 
     public float CurrentCooldown

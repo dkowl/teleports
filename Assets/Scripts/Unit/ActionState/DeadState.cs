@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Teleports.Utils;
 
 public class DeadState : ActionState {
 
@@ -25,6 +26,9 @@ public class DeadState : ActionState {
                     xp.ReceiveXp((1000 * unit.UnitData.Level));
                 }
             }
+            unit.Rigidbody.constraints = 0;
+            unit.Rigidbody.useGravity = true;
+            unit.gameObject.SetLayerIncludingChildren(0);
         }
     }
 

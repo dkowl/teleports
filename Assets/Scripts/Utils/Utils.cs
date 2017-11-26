@@ -127,6 +127,31 @@ namespace Teleports.Utils
                 list.Add(defaultValue);
             }
         }
+
+        public static List<GameObject> GetChildren(this GameObject gameObject)
+        {
+            Queue<Transform> queue = new Queue<Transform>();
+            queue.Enqueue(gameObject.transform);
+            var result = new List<GameObject>();
+            while(queue.Count > 0)
+            {
+                Transform currentTransform = queue.Dequeue();
+                for(int i = 0; i<currentTransform.childCount; i++)
+                {
+                    queue.Enqueue(currentTransform.GetChild(i));
+                }
+                result.Add(currentTransform.gameObject);
+            }
+            return result;
+        }
+
+        public static void SetLayerIncludingChildren(this GameObject gameObject, int layer)
+        {
+            foreach(var gObject in gameObject.GetChildren())
+            {
+                gObject.layer = layer;
+            }
+        }
     }
 
     public static class RomanNumbers

@@ -48,19 +48,18 @@ public class Unit : MonoBehaviour
         
         //Add some physics
         //collider = gameObject.AddComponent<CapsuleCollider>();
-        /*rigidbody = gameObject.AddComponent<Rigidbody>();
+        rigidbody = gameObject.AddComponent<Rigidbody>();
         rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
-        rigidbody.drag = 10;
+        rigidbody.drag = 4;
         rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
         //rigidbody.maxDepenetrationVelocity = 20;
         rigidbody.useGravity = false;
-        rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;*/
+        rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
         if (GetComponentInChildren<Collider>() == null)
         {
             collider = gameObject.AddComponent<CapsuleCollider>();
         }
-        characterController = gameObject.AddComponent<CharacterController>();
 
         movingState = new MovingState(this);
         rotatingState = new RotatingState(this);
@@ -110,7 +109,7 @@ public class Unit : MonoBehaviour
     {
         ApplyPerks();
 
-        //rigidbody.mass = unitData.Height * Size * Size * 4 * 100;
+        rigidbody.mass = Mathf.Sqrt(unitData.Height * Size * Size) * 4 * 100;
 
         if (collider != null)
         {
@@ -125,14 +124,15 @@ public class Unit : MonoBehaviour
 
         foreach(ActionState state in actionStates)
         {
-           // if(!(state is MovingState))
+           if(!(state is MovingState || state is RotatingState))
                 state.Update(dTime);
         }   
     }
 
     void FixedUpdate()
     {
-        //movingState.Update(Time.deltaTime);
+        rotatingState.Update(Time.deltaTime);
+        movingState.Update(Time.deltaTime);
     }
 
     void OnDrawGizmos()

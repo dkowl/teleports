@@ -13,6 +13,7 @@ public static class PlayerSpawner {
         player.transform.localEulerAngles = new Vector3(0, 180, 0);
         player.transform.parent = p.ParentObject.transform;
         player.tag = "Player";
+        player.layer = 10;
         
 
         //Common
