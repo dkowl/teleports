@@ -15,7 +15,6 @@ public class MovingState : ActionState {
 
     public override void Start()
     {
-        Debug.Log("Start");
         isActive = true;
 
         unit.RotatingState.RotationTarget = Quaternion.LookRotation(moveDest - unit.transform.position);
@@ -36,8 +35,7 @@ public class MovingState : ActionState {
             {
                 Reset();
             }
-
-            Debug.Log("cojes");
+            
             unit.Rigidbody.velocity = targetVelocity;
             //unit.Rigidbody.velocity = CalculateVelocity(unit.Rigidbody.velocity, targetVelocity);
             //unit.Rigidbody.AddForce(CalculateForce(unit.Rigidbody.velocity, targetVelocity), ForceMode.Acceleration);

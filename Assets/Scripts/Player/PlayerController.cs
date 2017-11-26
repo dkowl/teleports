@@ -31,7 +31,11 @@ public class PlayerController : UnitController {
             }
         }
 
-        if (target.TargetUnit != null) Chase();
+        if (target.TargetUnit != null)
+        {
+            if (target.TargetUnit.DeadState.IsActive) target.TargetUnit = null;
+            else Chase();
+        }
 
         unit.Graphics.updateTarget(target.TargetUnit);
 	}    
