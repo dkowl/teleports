@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Sirenix.Serialization;
+using Sirenix.OdinInspector;
 
 [ExecuteInEditMode]
 [CreateAssetMenu(fileName = "gameData", menuName = "Data/Game")]
+[ShowOdinSerializedPropertiesInInspector]
 public class GameData : ScriptableObject {
 
-    [SerializeField] private MappedListOfGems gems;
-    [SerializeField] private MappedListOfWorlds worlds;
-    [SerializeField] private MappedListOfRaces races;
-    [SerializeField] private MappedListOfSkills skills;
-    [SerializeField] private MappedListOfItems items;
+    [SerializeField] private MappedList<Gem> gems;
+    [SerializeField] private MappedList<WorldData> worlds;
+    [SerializeField] private MappedList<Race> races;
+    [SerializeField] private MappedList<Skill> skills;
+    [SerializeField] private MappedList<ItemData> items;
     [SerializeField] private SkillDatabase skillDatabase;
     [SerializeField] private GraphicsData graphicsData;
 
@@ -56,7 +59,17 @@ public class GameData : ScriptableObject {
 
     public List<Race> GetPlayableRaces()
     {
-        return races.GetPlayableRaces();
+        var result = new List<Race>();
+
+        foreach (Race race in races.AllValues)
+        {
+            if (race.IsPlayable)
+            {
+                result.Add(race);
+            }
+        }
+
+        return result;
     }
 
     public Skill GetSkill(SkillID skillId)

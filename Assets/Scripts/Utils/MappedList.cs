@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 
 [System.Serializable]
+[ShowOdinSerializedPropertiesInInspector]
 public class MappedList<T> where T : IUniqueName {
 
     [SerializeField]
@@ -38,6 +41,11 @@ public class MappedList<T> where T : IUniqueName {
         {
             return default(T);
         }
+    }
+
+    public IList<T> AllValues
+    {
+        get { return list.AsReadOnly(); }
     }
 
 }
