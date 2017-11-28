@@ -43,7 +43,7 @@ public class RushAI : UnitController {
         bool found = false;
         for (int i = 0; i<targets.Length; i++)
         {
-            if (!targets[i].GetComponent<Unit>().Alive) continue;
+            if (targets[i].GetComponent<Unit>() != null && !targets[i].GetComponent<Unit>().Alive) continue;
 
             float dist = Vector3.Distance(targets[i].transform.position, transform.position);
             if (dist < minDist)
