@@ -4,23 +4,8 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    public enum AttributeType
-    {
-        Size,
-        Hp,
-        Armor,
-        Regen,
-        Damage,
-        ArmorIgnore,
-        Reach,
-        MoveSpeed,
-        ViewRange,
-        RotationSpeed,
-        Count
-    }
 
     [SerializeField]
-    private UnitDataEditor unitDataEditor;
     private UnitData unitData;
 
     private List<ActionState> actionStates;
@@ -99,9 +84,9 @@ public class Unit : MonoBehaviour
             activeController = gameObject.GetComponent<UnitController>();
         }
 
-        if (unitDataEditor != null)
+        if (unitData == null)
         {
-            unitData = new UnitData(unitDataEditor);
+            unitData = new UnitData();
         }        
     }
 
@@ -183,52 +168,52 @@ public class Unit : MonoBehaviour
     #region attribute properties
     public float Size
     {
-        get { return unitData.GetAttribute(AttributeType.Size).Value / 2f; }
+        get { return unitData.GetAttribute(UnitAttribute.Type.Size).Value / 2f; }
     }
 
     public float Hp
     {
-        get { return unitData.GetAttribute(AttributeType.Hp).Value; }
+        get { return unitData.GetAttribute(UnitAttribute.Type.Hp).Value; }
     }
 
     public float Armor
     {
-        get { return unitData.GetAttribute(AttributeType.Armor).Value; }
+        get { return unitData.GetAttribute(UnitAttribute.Type.Armor).Value; }
     }
 
     public float Regen
     {
-        get { return unitData.GetAttribute(AttributeType.Regen).Value; }
+        get { return unitData.GetAttribute(UnitAttribute.Type.Regen).Value; }
     }
 
     public float Damage
     {
-        get { return unitData.GetAttribute(AttributeType.Damage).Value; }
+        get { return unitData.GetAttribute(UnitAttribute.Type.Damage).Value; }
     }
 
     public float ArmorIgnore
     {
-        get { return unitData.GetAttribute(AttributeType.ArmorIgnore).Value; }
+        get { return unitData.GetAttribute(UnitAttribute.Type.ArmorIgnore).Value; }
     }
 
     public float Reach
     {
-        get { return unitData.GetAttribute(AttributeType.Reach).Value; }
+        get { return unitData.GetAttribute(UnitAttribute.Type.Reach).Value; }
     }
 
     public float MoveSpeed
     {
-        get { return unitData.GetAttribute(AttributeType.MoveSpeed).Value; }
+        get { return unitData.GetAttribute(UnitAttribute.Type.MoveSpeed).Value; }
     }
 
     public float RotationSpeed
     {
-        get { return unitData.GetAttribute(AttributeType.RotationSpeed).Value; }
+        get { return unitData.GetAttribute(UnitAttribute.Type.RotationSpeed).Value; }
     }
 
     public float ViewRange
     {
-        get { return unitData.GetAttribute(AttributeType.ViewRange).Value; }
+        get { return unitData.GetAttribute(UnitAttribute.Type.ViewRange).Value; }
     }
     #endregion
     

@@ -8,7 +8,7 @@ using Sirenix.OdinInspector;
 [ExecuteInEditMode]
 [CreateAssetMenu(fileName = "gameData", menuName = "Data/Game")]
 [ShowOdinSerializedPropertiesInInspector]
-public class GameData : ScriptableObject {
+public class GameData : SerializedScriptableObject {
 
     [SerializeField] private MappedList<Gem> gems;
     [SerializeField] private MappedList<WorldData> worlds;

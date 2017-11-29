@@ -6,6 +6,7 @@ using UnityEngine;
 public class ItemData : UniqueScriptableObject {
 
     [SerializeField] private string displayName;
+
     [SerializeField] private List<Skill> skills;
     [SerializeField] private List<Perk> perks;
     [SerializeField] private EquipmentSlot slot;

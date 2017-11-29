@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomPropertyDrawer(typeof(Attribute))]
+[CustomPropertyDrawer(typeof(UnitAttribute))]
 public class AttributeDrawer : PropertyDrawer { 
 
 	override public void OnGUI(Rect position, SerializedProperty property, GUIContent label)

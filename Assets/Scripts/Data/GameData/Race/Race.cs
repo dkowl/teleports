@@ -7,26 +7,17 @@ using UnityEngine.Serialization;
 public class Race : UniqueScriptableObject {
 
     [FormerlySerializedAs("baseStats_")]
-    [SerializeField] private UnitDataEditor baseStatsEditor;
+    [SerializeField] private UnitData baseStats;
     [SerializeField] private bool isPlayable = false;
     [SerializeField] private List<EquipmentSlot> availableEqSlots = new List<EquipmentSlot>();
     [SerializeField] private TextAsset description;
     [SerializeField] private RaceGraphics graphics;
-
-    private UnitData baseStats = null;
     
     public UnitData BaseStats
     {
         get {
-            baseStats = new UnitData(baseStatsEditor);
-
             return baseStats;
         }
-    }
-
-    public UnitDataEditor BaseStatsEditor
-    {
-        get { return baseStatsEditor; }
     }
 
     public bool IsPlayable

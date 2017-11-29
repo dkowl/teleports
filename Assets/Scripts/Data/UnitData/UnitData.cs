@@ -1,21 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 [System.Serializable]
+[ShowOdinSerializedPropertiesInInspector]
 public class UnitData : IUnitData {
 
-    [SerializeField]
+    [SerializeField, PropertyOrder(-5)]
     private string unitName;
 
-    [SerializeField]
+    [SerializeField, PropertyOrder(-4)]
     private int level;
 
-    [SerializeField]
-    private float height;
+    [SerializeField, HideInInspector]
+    private UnitAbility[] abilities;
 
+    [ListDrawerSettings(ListElementLabelName = "Name", IsReadOnly = true)]
     [SerializeField]
-    private Attribute[] attributes;
+    [InlineProperty]
+    private UnitAttribute[] attributes;
 
     [SerializeField]
     private SkillID mainAttack;
@@ -23,27 +27,27 @@ public class UnitData : IUnitData {
     [SerializeField]
     private bool isInitialized = false;
 
-    public UnitData(UnitDataEditor unitData)
+    public UnitData()
     {
-        unitName = unitData.Name;
-        level = unitData.Level;
+        Initialize();
+    }
 
-        attributes = new Attribute[(int)Unit.AttributeType.Count];
-        attributes[(int)Unit.AttributeType.Size] = new Attribute(unitData.Size);
-        attributes[(int)Unit.AttributeType.Hp] = new Attribute(unitData.Hp);
-        attributes[(int)Unit.AttributeType.Armor] = new Attribute(unitData.Armor);
-        attributes[(int)Unit.AttributeType.Regen] = new Attribute(unitData.Regen);
-        attributes[(int)Unit.AttributeType.Damage] = new Attribute(unitData.Damage);
-        attributes[(int)Unit.AttributeType.ArmorIgnore] = new Attribute(unitData.ArmorIgnore);
-        attributes[(int)Unit.AttributeType.Reach] = new Attribute(unitData.Reach);
-        attributes[(int)Unit.AttributeType.MoveSpeed] = new Attribute(unitData.MoveSpeed);
-        attributes[(int)Unit.AttributeType.RotationSpeed] = new Attribute(unitData.RotationSpeed);
-        attributes[(int)Unit.AttributeType.ViewRange] = new Attribute(unitData.ViewRange);
+    [Button]
+    public void Initialize()
+    {
+        var abilityTypes = (UnitAbility.Type[])System.Enum.GetValues(typeof(UnitAbility.Type));
+        abilities = new UnitAbility[abilityTypes.Length];
+        for(int i = 0; i<abilities.Length; i++)
+        {
+            abilities[i] = new UnitAbility(abilityTypes[i]);
+        }
 
-        height = unitData.Height;
-        mainAttack = unitData.MainAttack;
-
-        isInitialized = true;
+        var attributeTypes = (UnitAttribute.Type[])System.Enum.GetValues(typeof(UnitAttribute.Type));
+        attributes = new UnitAttribute[attributeTypes.Length];
+        for (int i = 0; i < attributes.Length; i++)
+        {
+            attributes[i] = new UnitAttribute(attributeTypes[i]);
+        }
     }
 
     public string Name
@@ -60,15 +64,36 @@ public class UnitData : IUnitData {
         }
     }
 
+    [ShowInInspector, GUIColor(1, 0.5f, 0.5f), PropertyOrder(-3)]
+    public int Strength
+    {
+        get { return abilities[(int)UnitAbility.Type.STR].Value; }
+        set { abilities[(int)UnitAbility.Type.STR].Value = value; }
+    }
+
+    [ShowInInspector, GUIColor(0.5f, 1, 0.5f), PropertyOrder(-2)]
+    public int Dexterity
+    {
+        get { return abilities[(int)UnitAbility.Type.DEX].Value; }
+        set { abilities[(int)UnitAbility.Type.STR].Value = value; }
+    }
+
+    [ShowInInspector, GUIColor(0.5f, 0.5f, 1), PropertyOrder(-1)]
+    public int Intelligence
+    {
+        get { return abilities[(int)UnitAbility.Type.INT].Value; }
+        set { abilities[(int)UnitAbility.Type.STR].Value = value; }
+    }
+
     public float Height
     {
         get
         {
-            return height;
+            return GetAttribute(UnitAttribute.Type.Height).Value;
         }
     }
 
-    public Attribute GetAttribute(Unit.AttributeType type)
+    public Attribute GetAttribute(UnitAttribute.Type type)
     {
         return attributes[(int)type];
     }

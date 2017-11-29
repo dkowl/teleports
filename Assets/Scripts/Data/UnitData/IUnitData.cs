@@ -18,5 +18,5 @@ public interface IUnitData {
     float ViewRange { get; set; }
     float Height { get; set; }*/
 
-    Attribute GetAttribute(Unit.AttributeType type);
+    Attribute GetAttribute(UnitAttribute.Type type);
 }

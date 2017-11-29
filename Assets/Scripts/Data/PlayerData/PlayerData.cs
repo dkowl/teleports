@@ -35,7 +35,7 @@ public class PlayerData : IPlayerData
         {
             skillTreeSlots[i] = new SkillTreeSlot();
         }
-        primarySkill = MainData.CurrentGameData.GetRace(raceName).BaseStatsEditor.MainAttack;
+        primarySkill = MainData.CurrentGameData.GetRace(raceName).BaseStats.MainAttack;
         secondarySkills = new SkillID[SkillSlotNo];
         for (int i = 0; i < secondarySkills.Length; i++)
         {
@@ -207,23 +207,23 @@ public class PlayerData : IPlayerData
         switch (type)
         {
             case PlayerStats.Hp:
-                return LiveUnitData.GetAttribute(Unit.AttributeType.Hp).Value;
+                return LiveUnitData.GetAttribute(UnitAttribute.Type.Hp).Value;
             case PlayerStats.Armor:
-                return LiveUnitData.GetAttribute(Unit.AttributeType.Armor).Value;
+                return LiveUnitData.GetAttribute(UnitAttribute.Type.Armor).Value;
             case PlayerStats.ArmorIgnore:
-                return LiveUnitData.GetAttribute(Unit.AttributeType.ArmorIgnore).Value;
+                return LiveUnitData.GetAttribute(UnitAttribute.Type.ArmorIgnore).Value;
             case PlayerStats.Damage:
-                return LiveUnitData.GetAttribute(Unit.AttributeType.Damage).Value;
+                return LiveUnitData.GetAttribute(UnitAttribute.Type.Damage).Value;
             case PlayerStats.MoveSpeed:
-                return LiveUnitData.GetAttribute(Unit.AttributeType.MoveSpeed).Value;
+                return LiveUnitData.GetAttribute(UnitAttribute.Type.MoveSpeed).Value;
             case PlayerStats.Reach:
-                return LiveUnitData.GetAttribute(Unit.AttributeType.Reach).Value;
+                return LiveUnitData.GetAttribute(UnitAttribute.Type.Reach).Value;
             case PlayerStats.Regen:
-                return LiveUnitData.GetAttribute(Unit.AttributeType.Regen).Value;
+                return LiveUnitData.GetAttribute(UnitAttribute.Type.Regen).Value;
             case PlayerStats.ViewRange:
-                return LiveUnitData.GetAttribute(Unit.AttributeType.ViewRange).Value;
+                return LiveUnitData.GetAttribute(UnitAttribute.Type.ViewRange).Value;
             case PlayerStats.DamagePerSecond:
-                return LiveUnitData.GetAttribute(Unit.AttributeType.Damage).Value; //TODO: Divide by attack speed
+                return LiveUnitData.GetAttribute(UnitAttribute.Type.Damage).Value; //TODO: Divide by attack speed
             case PlayerStats.TeleportPower:
                 return CurrentTeleportData.Power;
             case PlayerStats.TeleportTime:

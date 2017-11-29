@@ -8,7 +8,7 @@ public class AttributeModifier : Perk {
     public class AttributeModificationSettings
     {
         [FormerlySerializedAs("type_")]
-        public Unit.AttributeType type;
+        public UnitAttribute.Type type;
         [FormerlySerializedAs("bonus_")]
         public float bonus = 0;
         [FormerlySerializedAs("multiplier_")]
