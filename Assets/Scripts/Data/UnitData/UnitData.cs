@@ -14,8 +14,9 @@ public class UnitData {
     [SerializeField, InlineProperty, LabelWidth(labelWidth)] private UnitAbilities abilities;    
     [SerializeField, InlineProperty, LabelWidth(labelWidth)] private UnitAttributes attributes;
     [SerializeField, InlineProperty, LabelWidth(labelWidth)] private SkillID mainAttack;
-    [SerializeField, LabelWidth(labelWidth)] private List<string> perks;
+    [SerializeField, LabelWidth(labelWidth)] private List<PerkID> perks;
     [SerializeField, LabelWidth(labelWidth)] private List<SkillID> skills;
+    [SerializeField, LabelWidth(labelWidth)] private List<ItemID> items;
     [SerializeField, HideInInspector] private bool isInitialized;
 
     public UnitData()
@@ -29,7 +30,7 @@ public class UnitData {
     {
         unitName = "New Unit";
         level = 1;
-        perks = new List<string>();
+        perks = new List<PerkID>();
         skills = new List<SkillID>();
         isInitialized = true;
     }

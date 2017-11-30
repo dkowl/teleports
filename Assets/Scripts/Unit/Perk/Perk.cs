@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.Serialization;
+using Sirenix.OdinInspector;
 
-public abstract class Perk : MonoBehaviour, IUniqueName {
+public abstract class Perk : SerializedMonoBehaviour, IUniqueName {
 
-    [SerializeField] bool isApplied;
+    [SerializeField, HideInInspector] bool isApplied;
     [SerializeField] string uniqueName;
 
     protected abstract void ApplyInternal(Unit target);

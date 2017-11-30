@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using ItemID = System.String;
-
 [System.Serializable]
 public struct InventorySlot
 {

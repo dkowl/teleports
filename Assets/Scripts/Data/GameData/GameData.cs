@@ -13,6 +13,7 @@ public class GameData : SerializedScriptableObject {
     [SerializeField] private MappedList<Gem> gems;
     [SerializeField] private MappedList<WorldData> worlds;
     [SerializeField] private MappedList<Race> races;
+    [SerializeField] private MappedList<Perk> perks;
     [SerializeField] private MappedList<Skill> skills;
     [SerializeField] private MappedList<ItemData> items;
     [SerializeField] private SkillDatabase skillDatabase;
@@ -23,6 +24,7 @@ public class GameData : SerializedScriptableObject {
         gems.MakeDict();
         worlds.MakeDict();
         races.MakeDict();
+        perks.MakeDict();
         skills.MakeDict();
         items.MakeDict();
     }
@@ -92,5 +94,15 @@ public class GameData : SerializedScriptableObject {
     public GraphicsData GraphicsData
     {
         get { return graphicsData; }
+    }
+
+    public IList<string> PerkNames
+    {
+        get { return perks.AllNames; }
+    }
+
+    public IList<string> ItemNames
+    {
+        get { return items.AllNames; }
     }
 }

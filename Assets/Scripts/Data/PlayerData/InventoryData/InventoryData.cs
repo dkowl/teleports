@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Teleports.Utils;
 
-using ItemID = System.String;
-
 [System.Serializable]
 public class InventoryData {
     

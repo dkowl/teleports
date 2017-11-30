@@ -48,4 +48,17 @@ public class MappedList<T> where T : IUniqueName {
         get { return list.AsReadOnly(); }
     }
 
+    public IList<string> AllNames
+    {
+        get
+        {
+            var names = new List<string>();
+            foreach(var element in list)
+            {
+                names.Add(element.UniqueName);
+            }
+            return names;
+        }
+    }
+
 }
