@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Sirenix.OdinInspector;
 
 [System.Serializable]
 public class Attribute
 {
-    [FormerlySerializedAs("raw_")] [SerializeField] private float raw;
-    [FormerlySerializedAs("bonus_")] [SerializeField] private float bonus;
-    [FormerlySerializedAs("multiplier_")] [SerializeField] private float multiplier;
+    [FormerlySerializedAs("raw_"), SerializeField, HideLabel, LabelWidth(15), HorizontalGroup("1")] private float raw;
+    [FormerlySerializedAs("bonus_"), SerializeField, LabelWidth(15), LabelText("+"), HorizontalGroup("1")] private float bonus;
+    [FormerlySerializedAs("multiplier_"), SerializeField, LabelWidth(15), LabelText("*"), HorizontalGroup("1")] private float multiplier;
 
     public Attribute() : this(0)
     {
@@ -37,6 +38,7 @@ public class Attribute
         AddMultiplier(multiplier);
     }
 
+    [ShowInInspector, HideLabel, LabelWidth(15), HorizontalGroup("1")]
     public float Value
     {
         get { return (raw + bonus) * multiplier; }

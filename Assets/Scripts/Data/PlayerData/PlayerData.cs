@@ -207,23 +207,23 @@ public class PlayerData : IPlayerData
         switch (type)
         {
             case PlayerStats.Hp:
-                return LiveUnitData.GetAttribute(UnitAttribute.Type.Hp).Value;
+                return LiveUnitData.GetAttribute(UnitAttributes.Type.Hp).Value;
             case PlayerStats.Armor:
-                return LiveUnitData.GetAttribute(UnitAttribute.Type.Armor).Value;
+                return LiveUnitData.GetAttribute(UnitAttributes.Type.Armor).Value;
             case PlayerStats.ArmorIgnore:
-                return LiveUnitData.GetAttribute(UnitAttribute.Type.ArmorIgnore).Value;
+                return 0; //TODO
             case PlayerStats.Damage:
-                return LiveUnitData.GetAttribute(UnitAttribute.Type.Damage).Value;
+                return 0; //TODO
             case PlayerStats.MoveSpeed:
-                return LiveUnitData.GetAttribute(UnitAttribute.Type.MoveSpeed).Value;
+                return LiveUnitData.GetAttribute(UnitAttributes.Type.MoveSpeed).Value;
             case PlayerStats.Reach:
-                return LiveUnitData.GetAttribute(UnitAttribute.Type.Reach).Value;
+                return LiveUnitData.GetAttribute(UnitAttributes.Type.Reach).Value;
             case PlayerStats.Regen:
-                return LiveUnitData.GetAttribute(UnitAttribute.Type.Regen).Value;
+                return LiveUnitData.GetAttribute(UnitAttributes.Type.Regen).Value;
             case PlayerStats.ViewRange:
-                return LiveUnitData.GetAttribute(UnitAttribute.Type.ViewRange).Value;
+                return LiveUnitData.GetAttribute(UnitAttributes.Type.ViewRange).Value;
             case PlayerStats.DamagePerSecond:
-                return LiveUnitData.GetAttribute(UnitAttribute.Type.Damage).Value; //TODO: Divide by attack speed
+                return 0; //TODO: Divide by attack speed
             case PlayerStats.TeleportPower:
                 return CurrentTeleportData.Power;
             case PlayerStats.TeleportTime:

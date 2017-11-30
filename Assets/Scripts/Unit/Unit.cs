@@ -26,7 +26,6 @@ public class Unit : MonoBehaviour
 
     private new CapsuleCollider collider;
     private new Rigidbody rigidbody;
-    private CharacterController characterController;
 
     void Awake () {
         damageReceived = 0;
@@ -168,52 +167,52 @@ public class Unit : MonoBehaviour
     #region attribute properties
     public float Size
     {
-        get { return unitData.GetAttribute(UnitAttribute.Type.Size).Value / 2f; }
+        get { return unitData.GetAttribute(UnitAttributes.Type.Size).Value / 2f; }
     }
 
     public float Hp
     {
-        get { return unitData.GetAttribute(UnitAttribute.Type.Hp).Value; }
+        get { return unitData.GetAttribute(UnitAttributes.Type.Hp).Value; }
     }
 
     public float Armor
     {
-        get { return unitData.GetAttribute(UnitAttribute.Type.Armor).Value; }
+        get { return unitData.GetAttribute(UnitAttributes.Type.Armor).Value; }
     }
 
     public float Regen
     {
-        get { return unitData.GetAttribute(UnitAttribute.Type.Regen).Value; }
+        get { return unitData.GetAttribute(UnitAttributes.Type.Regen).Value; }
     }
 
     public float Damage
     {
-        get { return unitData.GetAttribute(UnitAttribute.Type.Damage).Value; }
+        get { return 10; } //TODO
     }
 
     public float ArmorIgnore
     {
-        get { return unitData.GetAttribute(UnitAttribute.Type.ArmorIgnore).Value; }
+        get { return 0; } //TODO
     }
 
     public float Reach
     {
-        get { return unitData.GetAttribute(UnitAttribute.Type.Reach).Value; }
+        get { return unitData.GetAttribute(UnitAttributes.Type.Reach).Value; }
     }
 
     public float MoveSpeed
     {
-        get { return unitData.GetAttribute(UnitAttribute.Type.MoveSpeed).Value; }
+        get { return unitData.GetAttribute(UnitAttributes.Type.MoveSpeed).Value; }
     }
 
     public float RotationSpeed
     {
-        get { return unitData.GetAttribute(UnitAttribute.Type.RotationSpeed).Value; }
+        get { return unitData.GetAttribute(UnitAttributes.Type.RotationSpeed).Value; }
     }
 
     public float ViewRange
     {
-        get { return unitData.GetAttribute(UnitAttribute.Type.ViewRange).Value; }
+        get { return unitData.GetAttribute(UnitAttributes.Type.ViewRange).Value; }
     }
     #endregion
     
@@ -280,10 +279,5 @@ public class Unit : MonoBehaviour
     public Rigidbody Rigidbody
     {
         get { return rigidbody; }
-    }
-
-    public CharacterController CharacterController
-    {
-        get { return characterController; }
     }
 }

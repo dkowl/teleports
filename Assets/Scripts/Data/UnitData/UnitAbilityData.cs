@@ -17,21 +17,21 @@ public static class UnitAbilityData {
         }
     }
 
-    private static Data[] data = new Data[Utils.EnumCount(typeof(UnitAbility.Type))];
+    private static Data[] data = new Data[Utils.EnumCount(typeof(UnitAbilities.Type))];
 
     static UnitAbilityData()
     {
-        data[(int)UnitAbility.Type.STR] = new Data("Strength", Color.red);
-        data[(int)UnitAbility.Type.DEX] = new Data("Dexterity", Color.green);
-        data[(int)UnitAbility.Type.INT] = new Data("Intelligence", Color.blue);
+        data[(int)UnitAbilities.Type.STR] = new Data("Strength", Color.red);
+        data[(int)UnitAbilities.Type.DEX] = new Data("Dexterity", Color.green);
+        data[(int)UnitAbilities.Type.INT] = new Data("Intelligence", Color.blue);
     }
 
-    public static string GetName(UnitAbility.Type type)
+    public static string GetName(UnitAbilities.Type type)
     {
         return data[(int)type].name;
     }
 
-    public static Color GetColor(UnitAbility.Type type)
+    public static Color GetColor(UnitAbilities.Type type)
     {
         return data[(int)type].color;
     }

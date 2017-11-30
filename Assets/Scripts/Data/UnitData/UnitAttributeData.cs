@@ -15,24 +15,22 @@ public class UnitAttributeData{
         }
     }
 
-    private static Data[] data = new Data[Utils.EnumCount(typeof(UnitAttribute.Type))];
+    private static Data[] data = new Data[Utils.EnumCount(typeof(UnitAttributes.Type))];
 
     static UnitAttributeData()
     {
-        data[(int)UnitAttribute.Type.Size] = new Data("Size");
-        data[(int)UnitAttribute.Type.Armor] = new Data("Armor");
-        data[(int)UnitAttribute.Type.ArmorIgnore] = new Data("Piercing");
-        data[(int)UnitAttribute.Type.Damage] = new Data("Damage");
-        data[(int)UnitAttribute.Type.Height] = new Data("Height");
-        data[(int)UnitAttribute.Type.Hp] = new Data("Health Points");
-        data[(int)UnitAttribute.Type.MoveSpeed] = new Data("Movement Speed");
-        data[(int)UnitAttribute.Type.Reach] = new Data("Reach");
-        data[(int)UnitAttribute.Type.Regen] = new Data("Regeneration");
-        data[(int)UnitAttribute.Type.RotationSpeed] = new Data("Rotation Speed");
-        data[(int)UnitAttribute.Type.ViewRange] = new Data("ViewRange");
+        data[(int)UnitAttributes.Type.Size] = new Data("Size");
+        data[(int)UnitAttributes.Type.Armor] = new Data("Armor");
+        data[(int)UnitAttributes.Type.Height] = new Data("Height");
+        data[(int)UnitAttributes.Type.Hp] = new Data("Health Points");
+        data[(int)UnitAttributes.Type.MoveSpeed] = new Data("Movement Speed");
+        data[(int)UnitAttributes.Type.Reach] = new Data("Reach");
+        data[(int)UnitAttributes.Type.Regen] = new Data("Regeneration");
+        data[(int)UnitAttributes.Type.RotationSpeed] = new Data("Rotation Speed");
+        data[(int)UnitAttributes.Type.ViewRange] = new Data("View Range");
     }
 
-    public static string GetName(UnitAttribute.Type type)
+    public static string GetName(UnitAttributes.Type type)
     {
         return data[(int)type].name;
     }

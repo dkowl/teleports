@@ -5,49 +5,33 @@ using Sirenix.OdinInspector;
 
 [System.Serializable]
 [ShowOdinSerializedPropertiesInInspector]
-public class UnitData : IUnitData {
+public class UnitData {
 
-    [SerializeField, PropertyOrder(-5)]
-    private string unitName;
+    private const int labelWidth = 110;
 
-    [SerializeField, PropertyOrder(-4)]
-    private int level;
-
-    [SerializeField, HideInInspector]
-    private UnitAbility[] abilities;
-
-    [ListDrawerSettings(ListElementLabelName = "Name", IsReadOnly = true)]
-    [SerializeField]
-    [InlineProperty]
-    private UnitAttribute[] attributes;
-
-    [SerializeField]
-    private SkillID mainAttack;
-
-    [SerializeField]
-    private bool isInitialized = false;
+    [SerializeField, PropertyOrder(-5), LabelWidth(labelWidth)] private string unitName;
+    [SerializeField, PropertyOrder(-4), LabelWidth(labelWidth)] private int level;
+    [SerializeField, InlineProperty, LabelWidth(labelWidth)] private UnitAbilities abilities;    
+    [SerializeField, InlineProperty, LabelWidth(labelWidth)] private UnitAttributes attributes;
+    [SerializeField, InlineProperty, LabelWidth(labelWidth)] private SkillID mainAttack;
+    [SerializeField, LabelWidth(labelWidth)] private List<string> perks;
+    [SerializeField, LabelWidth(labelWidth)] private List<SkillID> skills;
+    [SerializeField, HideInInspector] private bool isInitialized;
 
     public UnitData()
     {
+        isInitialized = false;
         Initialize();
     }
 
-    [Button]
+    [Button, HideIf("IsInitialized")]
     public void Initialize()
     {
-        var abilityTypes = (UnitAbility.Type[])System.Enum.GetValues(typeof(UnitAbility.Type));
-        abilities = new UnitAbility[abilityTypes.Length];
-        for(int i = 0; i<abilities.Length; i++)
-        {
-            abilities[i] = new UnitAbility(abilityTypes[i]);
-        }
-
-        var attributeTypes = (UnitAttribute.Type[])System.Enum.GetValues(typeof(UnitAttribute.Type));
-        attributes = new UnitAttribute[attributeTypes.Length];
-        for (int i = 0; i < attributes.Length; i++)
-        {
-            attributes[i] = new UnitAttribute(attributeTypes[i]);
-        }
+        unitName = "New Unit";
+        level = 1;
+        perks = new List<string>();
+        skills = new List<SkillID>();
+        isInitialized = true;
     }
 
     public string Name
@@ -64,38 +48,17 @@ public class UnitData : IUnitData {
         }
     }
 
-    [ShowInInspector, GUIColor(1, 0.5f, 0.5f), PropertyOrder(-3)]
-    public int Strength
-    {
-        get { return abilities[(int)UnitAbility.Type.STR].Value; }
-        set { abilities[(int)UnitAbility.Type.STR].Value = value; }
-    }
-
-    [ShowInInspector, GUIColor(0.5f, 1, 0.5f), PropertyOrder(-2)]
-    public int Dexterity
-    {
-        get { return abilities[(int)UnitAbility.Type.DEX].Value; }
-        set { abilities[(int)UnitAbility.Type.STR].Value = value; }
-    }
-
-    [ShowInInspector, GUIColor(0.5f, 0.5f, 1), PropertyOrder(-1)]
-    public int Intelligence
-    {
-        get { return abilities[(int)UnitAbility.Type.INT].Value; }
-        set { abilities[(int)UnitAbility.Type.STR].Value = value; }
-    }
-
     public float Height
     {
         get
         {
-            return GetAttribute(UnitAttribute.Type.Height).Value;
+            return GetAttribute(UnitAttributes.Type.Height).Value;
         }
     }
 
-    public Attribute GetAttribute(UnitAttribute.Type type)
+    public Attribute GetAttribute(UnitAttributes.Type type)
     {
-        return attributes[(int)type];
+        return attributes.GetAttribute(type);
     }
 
     public bool IsInitialized
