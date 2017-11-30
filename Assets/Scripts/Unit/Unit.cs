@@ -17,8 +17,8 @@ public class Unit : MonoBehaviour
     
     private float damageReceived;
 
-    public List<Skill> skills;
-    public List<Perk> perks;
+    private List<Skill> skills;
+    private List<Perk> perks;
     
     private UnitGraphics graphics;
     
@@ -156,7 +156,7 @@ public class Unit : MonoBehaviour
     public void RemovePerk(Perk perk)
     {
         perks.Remove(perk);
-        perk.unapply(this);
+        perk.Unapply(this);
     }
 
     public void Stun(float time)
@@ -236,11 +236,6 @@ public class Unit : MonoBehaviour
         set { unitData = value; }
     }
 
-    public UnitGraphics Graphics
-    {
-        get { return graphics; }
-    }
-
     public MovingState MovingState
     {
         get { return movingState; }
@@ -274,6 +269,21 @@ public class Unit : MonoBehaviour
     public float CurrentHp
     {
         get { return Hp - damageReceived; }
+    }
+
+    public IList<Perk> Perks
+    {
+        get { return perks.AsReadOnly(); }
+    }
+
+    public IList<Skill> Skills
+    {
+        get { return skills.AsReadOnly(); }
+    }
+
+    public UnitGraphics Graphics
+    {
+        get { return graphics; }
     }
 
     public Rigidbody Rigidbody

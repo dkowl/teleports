@@ -12,7 +12,7 @@ public class Charge : Skill {
     UnitController oldController;
     ChargeController chargeController;
 
-    public override void InternalCast(Unit caster, List<CastTarget> targets)
+    public override void CastInternal(Unit caster, List<CastTarget> targets)
     {
         CastTarget target = targets[0];
         oldController = caster.ActiveController;
@@ -43,7 +43,7 @@ public class Charge : Skill {
 
         public override void Control()
         {
-            if (mainAttack.CanReachCastTarget(target))
+            if (mainAttack.CanReachTarget(target))
             {
                 unit.CastingState.Start(mainAttack, target);
                 Finish();

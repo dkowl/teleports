@@ -5,20 +5,13 @@ using UnityEngine;
 
 public class CastingState : ActionState {
 
-    public enum State
-    {
-        BeforeCast,
-        AfterCast,
-        Ready
-    }
-
-    protected Skill.TargetInfo castTarget;
+    protected Skill.TargetInfo targetInfo;
     protected Skill activeSkill;
     protected float currentCastTime;
     protected float currentLockTime;
     protected State state;
 
-    public event EventHandler startCastEvent, castEvent, resetCastEvent;
+    public event Action<CastEventArgs> startCastEvent, castEvent, resetCastEvent;
 
     public CastingState(Unit unit) : base(unit)
     {
@@ -32,12 +25,12 @@ public class CastingState : ActionState {
             " ||| activeSkill: " + activeSkill.Name +
             " ||| current cooldown: " + activeSkill.CurrentCooldown.ToString() +
             " ||| can reach cast target?: " + CanReachCastTarget.ToString());*/
-        if(!IsActive && castTarget != null && activeSkill != null && activeSkill.CurrentCooldown == 0 && CanReachCastTarget)
+        if(!IsActive && targetInfo != null && activeSkill != null && activeSkill.CurrentCooldown == 0 && CanReachTarget)
         {
             currentCastTime = 0;
             isActive = true;
             state = State.BeforeCast;
-            if (startCastEvent != null) startCastEvent(this, EventArgs.Empty);
+            if (startCastEvent != null) startCastEvent(new CastEventArgs(this));
         }
     }
 
@@ -50,8 +43,8 @@ public class CastingState : ActionState {
                 currentCastTime += dTime;
                 if (currentCastTime >= activeSkill.CastTime)
                 {
-                    activeSkill.Cast(unit, castTarget);
-                    if (castEvent != null) castEvent(this, EventArgs.Empty);
+                    activeSkill.Cast(unit, targetInfo);
+                    if (castEvent != null) castEvent(new CastEventArgs(this));
                     state = State.AfterCast;
                 }
             }
@@ -70,13 +63,13 @@ public class CastingState : ActionState {
 
     public override void Reset()
     { 
-        castTarget = null;
+        targetInfo = null;
         activeSkill = null;
         currentCastTime = 0;
         currentLockTime = 0;
         isActive = false;
         state = State.Ready;
-        if (resetCastEvent != null) resetCastEvent(this, EventArgs.Empty);
+        if (resetCastEvent != null) resetCastEvent(new CastEventArgs(this));
     }
 
     public void Start(Skill skill, Skill.TargetInfo target, bool interrupt = false)
@@ -89,26 +82,61 @@ public class CastingState : ActionState {
                 return;
         }
         activeSkill = skill;
-        castTarget = target;
+        targetInfo = target;
         Start();
     }
 
-    bool CanReachCastTarget
+    bool CanReachTarget
     {
         get
         {
-            return activeSkill.CanReachCastTarget(castTarget);
+            return activeSkill.CanReachTarget(targetInfo);
         }
     }
 
-    Skill.TargetInfo CastTarget
+    Skill.TargetInfo TargetInfo
     {
-        get { return castTarget; }
+        get { return targetInfo; }
     }
 
     Skill ActiveSkill
     {
         get { return activeSkill; }
+    }
+
+    public enum State
+    {
+        BeforeCast,
+        AfterCast,
+        Ready
+    }
+
+    public class CastEventArgs
+    {
+        Skill skill;
+        Skill.TargetInfo targetInfo;
+
+        public CastEventArgs(Skill skill, Skill.TargetInfo targetInfo)
+        {
+            this.skill = skill;
+            this.targetInfo = targetInfo;
+        }
+
+        public CastEventArgs(CastingState castingState)
+        {
+            skill = castingState.ActiveSkill;
+            targetInfo = castingState.TargetInfo;
+        }
+
+        public Skill Skill
+        {
+            get { return skill; }
+        }
+
+        public Skill.TargetInfo TargetInfo
+        {
+            get { return targetInfo; }
+        }
     }
 
 }

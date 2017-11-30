@@ -36,17 +36,17 @@ public class UnitAnimator : MonoBehaviour {
         animator.SetBool(isMovingHash, unit.IsMoving);
 	}
 
-    void HandleCastStartEvent(object sender, EventArgs e)
+    void HandleCastStartEvent(CastingState.CastEventArgs eventArgs)
     {
         animator.SetTrigger(castStartHash);
     }
 
-    void HandleCastEvent(object sender, EventArgs e)
+    void HandleCastEvent(CastingState.CastEventArgs eventArgs)
     {
         animator.SetTrigger(castHash);
     }
 
-    void HandleCastResetEvent(object sender, EventArgs e)
+    void HandleCastResetEvent(CastingState.CastEventArgs eventArgs)
     {
         animator.SetTrigger(castResetHash);
     }

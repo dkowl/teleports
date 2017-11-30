@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class StunApplier : Perk {
 
-    public float stunDuration_, stunChance_;
+    [SerializeField] float stunDuration;
+    [SerializeField] float stunChance;
 
-    public override void onCast(Unit caster, Skill skill, Skill.TargetInfo target)
+    protected override void ApplyInternal(Unit target)
     {
-        base.onCast(caster, skill, target);
+        target.CastingState.castEvent += Stun;
+    }
 
-        if(skill is Attack && stunChance_ > Random.Range(0f, 1f))
+    protected override void UnapplyInternal(Unit target)
+    {
+        target.CastingState.castEvent -= Stun;
+    }
+
+    public void Stun(CastingState.CastEventArgs eventArgs)
+    {
+        Unit unit = eventArgs.TargetInfo.TargetUnit;
+        if(Random.value < stunChance)
         {
-            target.TargetUnit.Stun(stunDuration_);
+            unit.Stun(stunDuration);
         }
     }
 }

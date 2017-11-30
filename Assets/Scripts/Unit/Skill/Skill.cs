@@ -4,84 +4,12 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 public abstract class Skill : MonoBehaviour, IUniqueName {
-
-    [System.Serializable]
-    public class TargetInfo
-    {
-        Unit caster;
-        TargetType targetType;
-        Unit targetUnit;
-        Vector3 targetPosition;        
-
-        public TargetInfo(Unit caster, Unit targetUnit) 
-            : this(caster, TargetType.Unit, targetUnit, Vector3.zero)
-        { }
-
-        public TargetInfo(Unit caster, Vector3 targetPosition)
-            : this(caster, TargetType.Position, null, targetPosition)
-        { }
-
-        TargetInfo(Unit caster, TargetType targetType, Unit targetUnit, Vector3 targetPosition)
-        {
-            this.caster = caster;
-            this.targetType = targetType;
-            this.targetUnit = targetUnit;
-            this.targetPosition = targetPosition;
-        }
-
-        public Unit Caster
-        {
-            get { return caster; }
-        }
-
-        public TargetType TargetType
-        {
-            get { return targetType; }
-        }
-
-        public Unit TargetUnit
-        {
-            get { return targetUnit; }
-            set { targetUnit = value; }
-        }
-
-        public Vector3 Position
-        {
-            get
-            {
-                if (targetUnit != null)
-                {
-                    return TargetUnit.transform.position;
-                }
-                else return targetPosition;
-            }
-        }
-    }
-
-    public enum TargetType
-    {
-        Unit,
-        Position
-    };
-
-    public enum AttributeType
-    {
-        Reach,
-        CastTime,
-        Cooldown,
-        AfterCastLockTime
-    }
-    
-    [FormerlySerializedAs("name_")]
-    [SerializeField] new private string name;
-    [FormerlySerializedAs("type_")]
-    [SerializeField] private TargetType type;
-    [FormerlySerializedAs("reach_")]
-    [SerializeField] private Attribute reach;
-    [FormerlySerializedAs("castTime_")]
-    [SerializeField] private Attribute castTime;
-    [FormerlySerializedAs("cooldown_")]
-    [SerializeField] private Attribute cooldown;
+       
+    [FormerlySerializedAs("name_"), SerializeField] new private string name;
+    [FormerlySerializedAs("type_"), SerializeField] private TargetType type;
+    [FormerlySerializedAs("reach_"), SerializeField] private Attribute reach;
+    [FormerlySerializedAs("castTime_"), SerializeField] private Attribute castTime;
+    [FormerlySerializedAs("cooldown_"), SerializeField] private Attribute cooldown;
     [SerializeField] private Attribute afterCastLockTime;
     [SerializeField] private SkillGraphics graphics;
 
@@ -93,7 +21,7 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         if (currentCooldown < 0) currentCooldown = 0;
     }
     
-    abstract public void InternalCast(Unit caster, List<CastTarget> targets);
+    abstract public void CastInternal(Unit caster, List<CastTarget> targets);
 
     protected virtual SkillTargeter GetTargeter()
     {
@@ -103,16 +31,10 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     public void Cast(Unit caster, TargetInfo targetInfo)
     {
         currentCooldown = cooldown.Value;
-
-        foreach(Perk perk in caster.perks)
-        {
-            perk.onCast(caster, this, targetInfo);
-        }
-        //InternalCast(caster, targetInfo);
-        InternalCast(caster, Targeter.GetTargets(this, targetInfo));
+        CastInternal(caster, Targeter.GetTargets(this, targetInfo));
     }
 
-    public bool CanReachCastTarget(TargetInfo targetInfo)
+    public bool CanReachTarget(TargetInfo targetInfo)
     {
         Unit caster = targetInfo.Caster;
         if (caster != null)
@@ -146,6 +68,8 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
                 return cooldown;
             case AttributeType.Reach:
                 return reach;
+            case AttributeType.AfterCastLockTime:
+                return afterCastLockTime;
             default:
                 return null;
         }
@@ -196,6 +120,73 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         get
         {
             return GetTargeter();
+        }
+    }
+
+    public enum TargetType
+    {
+        Unit,
+        Position
+    };
+
+    public enum AttributeType
+    {
+        Reach,
+        CastTime,
+        Cooldown,
+        AfterCastLockTime
+    }
+
+    [System.Serializable]
+    public class TargetInfo
+    {
+        Unit caster;
+        TargetType targetType;
+        Unit targetUnit;
+        Vector3 targetPosition;
+
+        public TargetInfo(Unit caster, Unit targetUnit)
+            : this(caster, TargetType.Unit, targetUnit, Vector3.zero)
+        { }
+
+        public TargetInfo(Unit caster, Vector3 targetPosition)
+            : this(caster, TargetType.Position, null, targetPosition)
+        { }
+
+        TargetInfo(Unit caster, TargetType targetType, Unit targetUnit, Vector3 targetPosition)
+        {
+            this.caster = caster;
+            this.targetType = targetType;
+            this.targetUnit = targetUnit;
+            this.targetPosition = targetPosition;
+        }
+
+        public Unit Caster
+        {
+            get { return caster; }
+        }
+
+        public TargetType TargetType
+        {
+            get { return targetType; }
+        }
+
+        public Unit TargetUnit
+        {
+            get { return targetUnit; }
+            set { targetUnit = value; }
+        }
+
+        public Vector3 Position
+        {
+            get
+            {
+                if (targetUnit != null)
+                {
+                    return TargetUnit.transform.position;
+                }
+                else return targetPosition;
+            }
         }
     }
 }

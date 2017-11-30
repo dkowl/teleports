@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class CastTimeModifier : Perk {
 
-    public Skill skillToModify;
-    public float castTimeModifier = 1f;
+    [SerializeField] protected Skill skillToModify;
+    [SerializeField] protected float castTimeModifier = 1f;
 
-    public override void Apply(Unit target)
+    protected override void ApplyInternal(Unit target)
     {
-        base.Apply(target);
-
-        foreach(Skill skill in target.skills)
+        foreach(Skill skill in target.Skills)
         {
             if(skill.name == skillToModify.name)
             {
                 skill.ModifyAttribute(Skill.AttributeType.CastTime, 0, castTimeModifier);
+            }
+        }
+    }
+
+    protected override void UnapplyInternal(Unit target)
+    {
+        foreach (Skill skill in target.Skills)
+        {
+            if (skill.name == skillToModify.name)
+            {
+                skill.ModifyAttribute(Skill.AttributeType.CastTime, 0, 1/castTimeModifier);
             }
         }
     }

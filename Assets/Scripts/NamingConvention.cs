@@ -6,20 +6,6 @@ namespace NamingConvention
 {
     public abstract class NamingConvention : SomeBaseClass
     {
-
-        public class NestedClass
-        {
-        }
-
-        public struct NestedStruct
-        {
-        }
-
-        public enum EnumName
-        {
-            EnumVariable
-        }
-
         public static readonly int ConstantVariable;
 
         [SerializeField] protected int inspectorVariable;
@@ -63,6 +49,19 @@ namespace NamingConvention
         private int PrivateProperty
         {
             get { return privateVariable; }
+        }
+
+        public class NestedClass
+        {
+        }
+
+        public struct NestedStruct
+        {
+        }
+
+        public enum EnumName
+        {
+            EnumVariable
         }
     }
 

@@ -41,7 +41,7 @@ public abstract class UnitController : MonoBehaviour {
 
     protected void Chase()
     {
-        if (mainAttack.CanReachCastTarget(target))
+        if (mainAttack.CanReachTarget(target))
         {
             unit.CastingState.Start(mainAttack, target);
         }

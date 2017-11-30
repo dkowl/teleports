@@ -9,7 +9,7 @@ public class Attack : Skill {
     [SerializeField]
     private float damageMultiplier = 1;
 
-    override public void InternalCast(Unit caster, List<CastTarget> targets)
+    override public void CastInternal(Unit caster, List<CastTarget> targets)
     {
         foreach (var target in targets)
         {

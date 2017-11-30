@@ -2,31 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Perk : MonoBehaviour {
+public abstract class Perk : MonoBehaviour, IUniqueName {
 
-    bool isApplied_ = false;
-    public bool isApplied
+    [SerializeField] bool isApplied;
+    [SerializeField] string uniqueName;
+
+    protected abstract void ApplyInternal(Unit target);
+    protected abstract void UnapplyInternal(Unit target);
+
+	public void Apply(Unit target)
     {
-        get { return isApplied_; }
-    }
-
-    public string name_;
-
-	public virtual void Apply(Unit target)
-    {
-        if (!isApplied_)
+        if (!isApplied)
         {
-            isApplied_ = true;
+            ApplyInternal(target);
+            isApplied = true;
         }
         else return;
     }
 
-    public virtual void unapply(Unit target)
+    public void Unapply(Unit target)
     {
+        UnapplyInternal(target);
+        isApplied = false;
     }
 
-    public virtual void onCast(Unit caster, Skill skill, Skill.TargetInfo target)
+    public bool IsApplied
     {
+        get { return isApplied; }
+    }
 
+    public string UniqueName
+    {
+        get { return uniqueName; }
     }
 }
