@@ -4,6 +4,7 @@ using UnityEngine;
 using Sirenix.Serialization;
 using Sirenix.OdinInspector;
 
+[CreateAssetMenu(menuName = "Data/Item/AssetData")]
 public class ItemAssetData : UniqueScriptableObject {
 
     [SerializeField] private ItemData baseItemData;

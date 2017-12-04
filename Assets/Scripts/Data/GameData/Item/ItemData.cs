@@ -14,7 +14,7 @@ public class ItemData {
     [SerializeField, FoldoutGroup("Details", false)] private EquipmentSlotType primarySlot;
     [SerializeField, FoldoutGroup("Details", false)] private ItemGraphics graphics;
 
-    private ItemData()
+    protected ItemData()
     {
         displayName = "New Item";
     }
