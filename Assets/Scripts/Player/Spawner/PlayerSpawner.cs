@@ -77,7 +77,7 @@ public static class PlayerSpawner {
 
                 foreach (ItemData itemData in playerData.InventoryData.GetEquippedItems())
                 {
-                    GameObject itemObject = new GameObject(itemData.UniqueName);
+                    GameObject itemObject = new GameObject(itemData.DisplayName);
                     itemObject.transform.parent = items.transform;
                     Item item = itemObject.AddComponent<Item>();
                     item.Data = itemData;

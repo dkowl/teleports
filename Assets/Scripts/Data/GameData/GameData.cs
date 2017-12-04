@@ -15,7 +15,7 @@ public class GameData : SerializedScriptableObject {
     [SerializeField] private MappedList<Race> races;
     [SerializeField] private MappedList<Perk> perks;
     [SerializeField] private MappedList<Skill> skills;
-    [SerializeField] private MappedList<ItemData> items;
+    [SerializeField] private MappedList<ItemAssetData> items;
     [SerializeField] private SkillDatabase skillDatabase;
     [SerializeField] private GraphicsData graphicsData;
 
@@ -31,11 +31,11 @@ public class GameData : SerializedScriptableObject {
 
     public ItemData GetItem(string itemName)
     {
-        ItemData result = items.TryGetValue(itemName);
+        ItemAssetData result = items.TryGetValue(itemName);
 
         if (result != null)
         {
-            return result;
+            return result.GenerateItem();
         }
         else
         {

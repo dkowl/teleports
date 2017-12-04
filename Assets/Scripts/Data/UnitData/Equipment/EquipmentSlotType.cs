@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EquipmentSlot
+public enum EquipmentSlotType
 {
     Head,
     Torso,

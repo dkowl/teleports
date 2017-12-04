@@ -5,12 +5,12 @@ using UnityEngine;
 public class EquipmentSlotComponent : MonoBehaviour {
 
     [SerializeField]
-    private EquipmentSlot slotType;
+    private EquipmentSlotType slotType;
 
     private GameObject itemObject = null;
     private bool isEmpty = true;
 
-    public EquipmentSlot SlotType{
+    public EquipmentSlotType SlotType{
         get { return slotType; }
     }
 

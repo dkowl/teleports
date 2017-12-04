@@ -9,7 +9,7 @@ public static class ItemSpawner{
         EquipmentSlotComponent[] slotComponents = parentObject.GetComponentsInChildren<EquipmentSlotComponent>();
         foreach (EquipmentSlotComponent slotComp in slotComponents)
         {
-            if (slotComp.SlotType == itemData.Slot)
+            if (slotComp.SlotType == itemData.PrimarySlot)
             {
                 slotComp.Equip(itemData);
                 return slotComp;

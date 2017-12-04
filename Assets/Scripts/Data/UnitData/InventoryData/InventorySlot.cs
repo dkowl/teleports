@@ -1,22 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 [System.Serializable]
 public struct InventorySlot
 {
-    [SerializeField] private ItemID id;
+    [SerializeField, HideIf("Empty")] private ItemData item;
     [SerializeField] private int count;
+    [SerializeField, HideInInspector] private int maxCount;
 
-    public void Add(ItemID id)
+    public InventorySlot(int maxCount)
     {
-        if (this.id == id)
+        item = null;
+        count = 0;
+        this.maxCount = maxCount;
+    }
+
+    public void Add(ItemData item)
+    {
+        if (this.item == item)
         {
             count++;
         }
         else
         {
-            this.id = id;
+            this.item = item;
             count = 1;
         }
     }
@@ -34,13 +43,13 @@ public struct InventorySlot
         get { return count == 0; }
     }
 
-    public ItemID itemID
+    public ItemData Item
     {
         get
         {
             if (!Empty)
             {
-                return id;
+                return item;
             }
             else
             {

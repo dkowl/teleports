@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 using Teleports.Utils;
 
 [System.Serializable]
 public class InventoryData {
     
-    [SerializeField] private int maxItems = 32;
-    [SerializeField] private List<InventorySlot> invSlots;
-    [SerializeField] private ItemID[] eq = new ItemID[Utils.EnumCount(typeof(EquipmentSlot))];
+    [SerializeField] private int maxSlots = 32;
+    [SerializeField] private EquipmentData equipmentData;
+    [SerializeField, ListDrawerSettings(NumberOfItemsPerPage = 8)] private List<InventorySlot> invSlots;
 
     public InventoryData()
     {
@@ -17,19 +18,18 @@ public class InventoryData {
 
     public void Initialize()
     {
-        maxItems = 32;
-        Utils.InitWithValues(ref invSlots, maxItems, new InventorySlot());
-        eq = new ItemID[Utils.EnumCount(typeof(EquipmentSlot))];
+        maxSlots = 32;
+        Utils.InitWithValues(ref invSlots, maxSlots, new InventorySlot());
     }
 
-    public void Add(ItemID id)
+    public void Add(ItemData item)
     {
         //stack on existing slot
         foreach(InventorySlot slot in invSlots)
         {
-            if(!slot.Empty && slot.itemID == id)
+            if(!slot.Empty && slot.Item == item)
             {
-                slot.Add(id);
+                slot.Add(item);
                 return;
             }
         }
@@ -39,16 +39,16 @@ public class InventoryData {
         {
             if (slot.Empty)
             {
-                slot.Add(id);
+                slot.Add(item);
                 return;
             }
         }
 
         //add extra slot if possible
-        if(invSlots.Count < maxItems)
+        if(invSlots.Count < maxSlots)
         {
             InventorySlot slot = new InventorySlot();
-            slot.Add(id);
+            slot.Add(item);
             invSlots.Add(slot);
         }
 
@@ -56,20 +56,20 @@ public class InventoryData {
         return;
     }
 
-    public bool Contains(ItemID id)
+    public bool Contains(ItemData item)
     {
         foreach(InventorySlot slot in invSlots)
         {
-            if (slot.itemID == id) return true;
+            if (slot.Item == item) return true;
         }
         return false;
     }
 
-    public void Remove(ItemID id)
+    public void Remove(ItemData item)
     {
         foreach (InventorySlot slot in invSlots)
         {
-            if (!slot.Empty && slot.itemID == id)
+            if (!slot.Empty && slot.Item == item)
             {
                 slot.Pop();
                 return;
@@ -77,49 +77,42 @@ public class InventoryData {
         }
     }
 
-    public void Equip(ItemID id)
+    public void Equip(ItemData item)
     {
-        if (Contains(id))
+        if (Contains(item))
         {
-            ItemData item = MainData.CurrentGameData.GetItem(id);
-            int slotID = (int)item.Slot;
-            Unequip(item.Slot);
-            Remove(id);
-            eq[slotID] = id;
+            Remove(item);
+            equipmentData.GetEquipmentSlot(item.PrimarySlot).Equip(item);
         }
     }
 
-    public void Unequip(EquipmentSlot slot)
+    public void Unequip(EquipmentSlotType slot)
     {
-        int slotID = (int)slot;
-        if (eq[slotID] != null)
-        {
-            Add(eq[slotID]);
-            eq[slotID] = null;
-        }
+        ItemData unequippedItem = equipmentData.Unequip(slot);
+        Add(unequippedItem);
     }
 
     public List<ItemData> GetEquippedItems()
     {
-        return GetItems(eq);
+        return equipmentData.GetEquippedItems();
     }
 
     public List<ItemData> GetAllItemsInInventory()
     {
-        List<ItemID> ids = new List<ItemID>();
+        List<ItemData> result = new List<ItemData>();
         foreach(var slot in invSlots)
         {
             if(!slot.Empty)
             {
-                ids.Add(slot.itemID);
+                result.Add(slot.Item);
             }
         }
-        return GetItems(ids);
+        return result;
     }
 
     public void CorrectInvalidData()
     {
-        if(maxItems == 0)
+        if(maxSlots == 0)
         {
             Initialize();
         }

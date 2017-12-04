@@ -16,7 +16,7 @@ public class UnitData {
     [SerializeField, InlineProperty, LabelWidth(labelWidth)] private SkillID mainAttack;
     [SerializeField, LabelWidth(labelWidth)] private List<PerkID> perks;
     [SerializeField, LabelWidth(labelWidth)] private List<SkillID> skills;
-    [SerializeField, LabelWidth(labelWidth)] private List<ItemID> items;
+    [SerializeField, LabelWidth(labelWidth)] private InventoryData inventory;
     [SerializeField, HideInInspector] private bool isInitialized;
 
     public UnitData()
