@@ -6,11 +6,11 @@ using Sirenix.OdinInspector;
 [System.Serializable]
 public class EquipmentData {
 
-    [SerializeField, InlineProperty] private EquipmentSlotData head;
-    [SerializeField, InlineProperty] private EquipmentSlotData torso;
-    [SerializeField, InlineProperty] private EquipmentSlotData legs;
-    [SerializeField, InlineProperty] private EquipmentSlotData leftArm;
-    [SerializeField, InlineProperty] private EquipmentSlotData rightArm;
+    [SerializeField, TabGroup("Head"), HideLabel] private EquipmentSlotData head;
+    [SerializeField, TabGroup("Torso"), HideLabel] private EquipmentSlotData torso;
+    [SerializeField, TabGroup("Legs"), HideLabel] private EquipmentSlotData legs;
+    [SerializeField, TabGroup("Left Arm"), HideLabel] private EquipmentSlotData leftArm;
+    [SerializeField, TabGroup("Right Arm"), HideLabel] private EquipmentSlotData rightArm;
 
     public EquipmentSlotData GetEquipmentSlot(EquipmentSlotType type)
     {

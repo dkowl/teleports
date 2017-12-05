@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using Sirenix.OdinInspector;
 
 [CreateAssetMenu(fileName = "newSaveData", menuName = "Data/Save")]
-public class SaveDataSO : ScriptableObject {
+public class SaveDataSO : SerializedScriptableObject {
 
     public SaveData saveData;
 

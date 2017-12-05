@@ -4,11 +4,17 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 [System.Serializable]
-public struct InventorySlot
+public class InventorySlot
 {
     [SerializeField, HideIf("Empty")] private ItemData item;
     [SerializeField] private int count;
     [SerializeField, HideInInspector] private int maxCount;
+
+    public InventorySlot()
+    {
+        item = null;
+        count = 0;
+    }
 
     public InventorySlot(int maxCount)
     {
@@ -35,6 +41,14 @@ public struct InventorySlot
         if (!Empty)
         {
             count--;
+        }
+    }
+
+    public void CorrectInvalidData()
+    {
+        if (Empty)
+        {
+            item = null;
         }
     }
 

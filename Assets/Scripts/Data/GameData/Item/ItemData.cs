@@ -8,6 +8,8 @@ public class ItemData {
 
     [SerializeField] private string displayName;
 
+    [SerializeField, FoldoutGroup("Details", false), EnumToggleButtons] private ItemType typeFlags;
+    [SerializeField, FoldoutGroup("Details", false), ShowIf("IsWeapon")] private WeaponData weaponData;
     [SerializeField, FoldoutGroup("Details", false)] private List<Skill> skills;
     [SerializeField, FoldoutGroup("Details", false)] private List<Perk> perks;
     [SerializeField, FoldoutGroup("Details", false)] private EquipmentSlotType[] slots;
@@ -40,8 +42,8 @@ public class ItemData {
 
     public static bool operator == (ItemData data1, ItemData data2)
     {
-        if (data1 == null)
-            return data2 == null;
+        if ((object)data1 == null)
+            return (object)data2 == null;
 
         else return data1.Equals(data2);
     }
@@ -68,6 +70,11 @@ public class ItemData {
         //TODO: calculate more accurately than just names     
     }
 
+    public bool IsType(ItemType type)
+    {
+        return (type & typeFlags) == type;
+    }
+
     public string DisplayName
     {
         get { return displayName; }
@@ -91,6 +98,12 @@ public class ItemData {
     public ItemGraphics Graphics
     {
         get { return graphics; }
+    }
+
+    //properties for [ShowIf] Odin Attribute
+    bool IsWeapon
+    {
+        get { return IsType(ItemType.Weapon); }
     }
 
 }

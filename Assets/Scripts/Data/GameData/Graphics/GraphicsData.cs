@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 
 [CreateAssetMenu(fileName = "GraphicsData", menuName = "Data/Graphics")]
 [ShowOdinSerializedPropertiesInInspector]
-public class GraphicsData : ScriptableObject {
+public class GraphicsData : SerializedScriptableObject {
 
     [SerializeField] private MappedList<TeleportGraphics> teleportGraphics;
 
