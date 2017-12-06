@@ -82,17 +82,33 @@ public class InventoryData {
         if (Contains(item))
         {
             Remove(item);
-            equipmentData.GetEquipmentSlot(item.PrimarySlot).Equip(item);
+            equipmentData.Equip(item);
         }
     }
 
-    public void Unequip(EquipmentSlotType slot)
+    public void Equip(int inventorySlotId)
+    {
+        if (IsValidSlotId(inventorySlotId))
+        {
+            InventorySlot inventorySlot = invSlots[inventorySlotId];
+            if (inventorySlot.Empty)
+                return;
+
+            ItemData item = inventorySlot.Item;
+            if(equipmentData.CanEquip(item).Status == EquipmentData.CanEquipStatus.Yes)
+            {
+                equipmentData.Equip(item);
+            }
+        }
+    }
+
+    /*public void Unequip(EquipmentSlotType slot)
     {
         ItemData unequippedItem = equipmentData.Unequip(slot);
         Add(unequippedItem);
-    }
+    }*/
 
-    public List<ItemData> GetEquippedItems()
+    public IList<EquipmentData.EquippedItemInfo> GetEquippedItems()
     {
         return equipmentData.GetEquippedItems();
     }
@@ -132,6 +148,11 @@ public class InventoryData {
 
         }
         return result;
+    }
+
+    private bool IsValidSlotId(int id)
+    {
+        return id >= 0 && id < invSlots.Count;
     }
    
 }

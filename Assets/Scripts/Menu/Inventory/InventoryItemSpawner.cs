@@ -23,6 +23,7 @@ public class InventoryItemSpawner  {
         {
             GameObject spawnedItem = GameObject.Instantiate(itemPrefab) as GameObject;
             spawnedItem.transform.position = spawnPlace.CurrentPosition;
+            spawnPlace.GoToNextPosition();
         }
     }
 

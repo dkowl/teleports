@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
-public class InventoryMenu : MonoBehaviour {
+public class InventoryMenu : SerializedMonoBehaviour {
 
     InventoryData inventoryData;
     InventoryItemSpawner itemSpawner;

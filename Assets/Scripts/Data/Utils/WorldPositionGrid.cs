@@ -27,6 +27,12 @@ public struct WorldPositionGrid
         currentIndex = 0;
     }
 
+    public void GoToNextPosition()
+    {
+        currentIndex++;
+        currentIndex %= MaxIndex;
+    }
+
     public Vector3 CurrentPosition
     {
         get
@@ -41,8 +47,7 @@ public struct WorldPositionGrid
     {
         get
         {
-            currentIndex++;
-            currentIndex %= MaxIndex;
+            GoToNextPosition();
             return CurrentPosition;
         }
     }

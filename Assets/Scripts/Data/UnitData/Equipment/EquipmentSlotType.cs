@@ -4,9 +4,10 @@ using UnityEngine;
 
 public enum EquipmentSlotType
 {
-    Head,
-    Torso,
-    Legs,
-    LeftArm,
-    RightArm
+    None = 0,
+    Head = 10,
+    Torso = 20,
+    Legs = 30,
+    LeftArm = 40,
+    RightArm = 50
 }

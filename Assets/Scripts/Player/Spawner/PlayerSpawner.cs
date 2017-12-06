@@ -31,9 +31,9 @@ public static class PlayerSpawner {
         {
             case PlayerSpawnerParams.SpawnType.UI:
 
-                foreach (ItemData itemData in playerData.InventoryData.GetEquippedItems())
+                foreach (var itemInfo in playerData.InventoryData.GetEquippedItems())
                 {
-                    ItemSpawner.Spawn(p.ParentObject, itemData);
+                    ItemSpawner.Spawn(p.ParentObject, itemInfo.Item, itemInfo.PrimarySlot);
                 }
                 animator.runtimeAnimatorController = raceGraphics.UiAnimationController;
                 break;               
@@ -72,15 +72,17 @@ public static class PlayerSpawner {
                 unit.ActiveController = controller;
 
                 //Instantiating items
-                GameObject items = new GameObject("Items");
+                GameObject items = new GameObject("Items");   
                 items.transform.parent = player.transform;
 
-                foreach (ItemData itemData in playerData.InventoryData.GetEquippedItems())
+                foreach (var itemInfo in playerData.InventoryData.GetEquippedItems())
                 {
+                    ItemData itemData = itemInfo.Item;
                     GameObject itemObject = new GameObject(itemData.DisplayName);
                     itemObject.transform.parent = items.transform;
                     Item item = itemObject.AddComponent<Item>();
                     item.Data = itemData;
+                    item.PrimarySlot = itemInfo.PrimarySlot;
                 }
 
                 //Set up Animator

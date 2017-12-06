@@ -12,8 +12,7 @@ public class ItemData {
     [SerializeField, FoldoutGroup("Details", false), ShowIf("IsWeapon")] private WeaponData weaponData;
     [SerializeField, FoldoutGroup("Details", false)] private List<Skill> skills;
     [SerializeField, FoldoutGroup("Details", false)] private List<Perk> perks;
-    [SerializeField, FoldoutGroup("Details", false)] private EquipmentSlotType[] slots;
-    [SerializeField, FoldoutGroup("Details", false)] private EquipmentSlotType primarySlot;
+    [SerializeField, FoldoutGroup("Details", false)] private EquipmentSlotCombination[] slotCombinations;
     [SerializeField, FoldoutGroup("Details", false)] private ItemGraphics graphics;
 
     protected ItemData()
@@ -21,12 +20,12 @@ public class ItemData {
         displayName = "New Item";
     }
 
-    public ItemData(string displayName, List<Skill> skills, List<Perk> perks, EquipmentSlotType[] slots, ItemGraphics graphics)
+    public ItemData(string displayName, List<Skill> skills, List<Perk> perks, EquipmentSlotCombination[] slotCombinations, ItemGraphics graphics)
     {
         this.displayName = displayName;
         this.skills = skills;
         this.perks = perks;
-        this.slots = slots;
+        this.slotCombinations = slotCombinations;
         this.graphics = graphics;
     }
 
@@ -35,8 +34,7 @@ public class ItemData {
         displayName = other.displayName;
         skills = other.skills;
         perks = other.perks;
-        slots = other.slots;
-        primarySlot = other.primarySlot;
+        slotCombinations = other.slotCombinations;
         graphics = other.graphics;
     }
 
@@ -85,14 +83,9 @@ public class ItemData {
         get { return perks; }
     }
 
-    public EquipmentSlotType[] Slots
+    public IList<EquipmentSlotCombination> SlotCombinations
     {
-        get { return slots; }
-    }
-
-    public EquipmentSlotType PrimarySlot
-    {
-        get { return primarySlot; }
+        get { return System.Array.AsReadOnly(slotCombinations); }
     }
 
     public ItemGraphics Graphics

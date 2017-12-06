@@ -7,6 +7,7 @@ public class Item : MonoBehaviour {
     private bool isEquipped;
     private Unit ownerUnit;
     private EquipmentSlotComponent slotComponent;
+    private EquipmentSlotType primarySlot;
 
     [SerializeField]
     private ItemData data;
@@ -26,7 +27,7 @@ public class Item : MonoBehaviour {
     {
         if (!isEquipped)
         {
-            slotComponent = ItemSpawner.Spawn(unit.gameObject, data);
+            slotComponent = ItemSpawner.Spawn(unit.gameObject, data, primarySlot);
 
             foreach(Perk perk in data.Perks)
             {
@@ -54,5 +55,10 @@ public class Item : MonoBehaviour {
     {
         get { return data; }
         set { data = value; }
+    }
+
+    public EquipmentSlotType PrimarySlot
+    {
+        set { primarySlot = value; }
     }
 }

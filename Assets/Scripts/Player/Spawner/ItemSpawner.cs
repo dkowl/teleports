@@ -4,12 +4,12 @@ using UnityEngine;
 
 public static class ItemSpawner{
 
-	public static EquipmentSlotComponent Spawn(GameObject parentObject, ItemData itemData)
+	public static EquipmentSlotComponent Spawn(GameObject parentObject, ItemData itemData, EquipmentSlotType slotType)
     {
         EquipmentSlotComponent[] slotComponents = parentObject.GetComponentsInChildren<EquipmentSlotComponent>();
         foreach (EquipmentSlotComponent slotComp in slotComponents)
         {
-            if (slotComp.SlotType == itemData.PrimarySlot)
+            if (slotComp.SlotType == slotType)
             {
                 slotComp.Equip(itemData);
                 return slotComp;
