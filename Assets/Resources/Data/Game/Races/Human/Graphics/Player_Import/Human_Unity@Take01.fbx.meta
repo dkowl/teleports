@@ -113,7 +113,7 @@ ModelImporter:
     400102: Reference
     400104: Spine01_Bind
     400106: Spine02_Bind
-    7400000: Human_Idle01
+    7400000: Human_Idle001
     7400002: Human_LookAtChest
     7400004: Human_LookAtLegs
     7400006: Human_LookAtBoots
@@ -153,10 +153,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Human_Idle01
+      name: Human_Idle001
       takeName: Take 001
       firstFrame: 10
-      lastFrame: 69
+      lastFrame: 70
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -164,7 +164,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 0
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0

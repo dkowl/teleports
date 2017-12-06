@@ -1,0 +1,305 @@
+fileFormatVersion: 2
+guid: 547294b9131ad544e9340c4d4ba36d29
+timeCreated: 1512568425
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Chest_Bind
+    100002: Chest_FK
+    100004: Chest_IK
+    100006: Head_Aim
+    100008: Head_Bind
+    100010: Head_End
+    100012: Head_End 1
+    100014: Head_End 2
+    100016: Head_FK
+    100018: Hip_Bind
+    100020: Hip_Fk
+    100022: Hip_IK
+    100024: //RootNode
+    100026: L_Ankle_Bind
+    100028: L_Ankle_FK
+    100030: L_Ankle_IK
+    100032: L_Arm_Bind
+    100034: L_Arm_FK
+    100036: L_Arm_IK
+    100038: L_Ball_Bind
+    100040: L_Ball_FK
+    100042: L_Ball_IK
+    100044: L_Clavical_Bind
+    100046: L_Finger01_Bind
+    100048: L_Finger02_Bind
+    100050: L_Finger03_Bind
+    100052: L_Finger_End
+    100054: L_Forearm_Bind
+    100056: L_Forearm_FK
+    100058: L_Forearm_IK
+    100060: L_Index01_Bind
+    100062: L_Index02_Bind
+    100064: L_Index03_Bind
+    100066: L_Index_End
+    100068: L_Shin_Bind
+    100070: L_Shin_FK
+    100072: L_Shin_IK
+    100074: L_Thigh_Bind
+    100076: L_Thigh_FK
+    100078: L_Thigh_IK
+    100080: L_Thumb01_Bind
+    100082: L_Thumb02_Bind
+    100084: L_Thumb03_Bind
+    100086: L_Thumb_End
+    100088: L_Toe_End
+    100090: L_Toe_FK_End
+    100092: L_Toe_IK_End
+    100094: L_Wrist_Bind
+    100096: L_Wrist_FK
+    100098: L_Wrist_IK
+    100100: L_Wrist_Twist_Bind
+    100102: Neck_Bind
+    100104: R_Ankle_Bind
+    100106: R_Ankle_FK
+    100108: R_Ankle_IK
+    100110: R_Arm_Bind
+    100112: R_Arm_FK
+    100114: R_Arm_IK
+    100116: R_Ball_Bind
+    100118: R_Ball_FK
+    100120: R_Ball_IK
+    100122: R_Clavical_Bind
+    100124: R_Finger01_Bind
+    100126: R_Finger02_Bind
+    100128: R_Finger03_Bind
+    100130: R_Finger_End
+    100132: R_Forearm_Bind
+    100134: R_Forearm_FK
+    100136: R_Forearm_IK
+    100138: R_Index01_Bind
+    100140: R_Index02_Bind
+    100142: R_Index03_Bind
+    100144: R_Index_End
+    100146: R_Shin_Bind
+    100148: R_Shin_FK
+    100150: R_Shin_IK
+    100152: R_Thigh_Bind
+    100154: R_Thigh_FK
+    100156: R_Thigh_IK
+    100158: R_Thumb01_Bind
+    100160: R_Thumb02_Bind
+    100162: R_Thumb03_Bind
+    100164: R_Thumb_End
+    100166: R_Toe_End
+    100168: R_Toe_FK_End
+    100170: R_Toe_IK_End
+    100172: R_Wrist_Bind
+    100174: R_Wrist_FK
+    100176: R_Wrist_IK
+    100178: R_Wrist_Twist_Bind
+    100180: Reference
+    100182: Spine01_Bind
+    100184: Spine01_FK
+    100186: Spine02_Bind
+    100188: Spine02_FK
+    400000: Chest_Bind
+    400002: Chest_FK
+    400004: Chest_IK
+    400006: Head_Aim
+    400008: Head_Bind
+    400010: Head_End
+    400012: Head_End 1
+    400014: Head_End 2
+    400016: Head_FK
+    400018: Hip_Bind
+    400020: Hip_Fk
+    400022: Hip_IK
+    400024: //RootNode
+    400026: L_Ankle_Bind
+    400028: L_Ankle_FK
+    400030: L_Ankle_IK
+    400032: L_Arm_Bind
+    400034: L_Arm_FK
+    400036: L_Arm_IK
+    400038: L_Ball_Bind
+    400040: L_Ball_FK
+    400042: L_Ball_IK
+    400044: L_Clavical_Bind
+    400046: L_Finger01_Bind
+    400048: L_Finger02_Bind
+    400050: L_Finger03_Bind
+    400052: L_Finger_End
+    400054: L_Forearm_Bind
+    400056: L_Forearm_FK
+    400058: L_Forearm_IK
+    400060: L_Index01_Bind
+    400062: L_Index02_Bind
+    400064: L_Index03_Bind
+    400066: L_Index_End
+    400068: L_Shin_Bind
+    400070: L_Shin_FK
+    400072: L_Shin_IK
+    400074: L_Thigh_Bind
+    400076: L_Thigh_FK
+    400078: L_Thigh_IK
+    400080: L_Thumb01_Bind
+    400082: L_Thumb02_Bind
+    400084: L_Thumb03_Bind
+    400086: L_Thumb_End
+    400088: L_Toe_End
+    400090: L_Toe_FK_End
+    400092: L_Toe_IK_End
+    400094: L_Wrist_Bind
+    400096: L_Wrist_FK
+    400098: L_Wrist_IK
+    400100: L_Wrist_Twist_Bind
+    400102: Neck_Bind
+    400104: R_Ankle_Bind
+    400106: R_Ankle_FK
+    400108: R_Ankle_IK
+    400110: R_Arm_Bind
+    400112: R_Arm_FK
+    400114: R_Arm_IK
+    400116: R_Ball_Bind
+    400118: R_Ball_FK
+    400120: R_Ball_IK
+    400122: R_Clavical_Bind
+    400124: R_Finger01_Bind
+    400126: R_Finger02_Bind
+    400128: R_Finger03_Bind
+    400130: R_Finger_End
+    400132: R_Forearm_Bind
+    400134: R_Forearm_FK
+    400136: R_Forearm_IK
+    400138: R_Index01_Bind
+    400140: R_Index02_Bind
+    400142: R_Index03_Bind
+    400144: R_Index_End
+    400146: R_Shin_Bind
+    400148: R_Shin_FK
+    400150: R_Shin_IK
+    400152: R_Thigh_Bind
+    400154: R_Thigh_FK
+    400156: R_Thigh_IK
+    400158: R_Thumb01_Bind
+    400160: R_Thumb02_Bind
+    400162: R_Thumb03_Bind
+    400164: R_Thumb_End
+    400166: R_Toe_End
+    400168: R_Toe_FK_End
+    400170: R_Toe_IK_End
+    400172: R_Wrist_Bind
+    400174: R_Wrist_FK
+    400176: R_Wrist_IK
+    400178: R_Wrist_Twist_Bind
+    400180: Reference
+    400182: Spine01_Bind
+    400184: Spine01_FK
+    400186: Spine02_Bind
+    400188: Spine02_FK
+    7400000: Human_1HSlash
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Human_1HSlash
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 37
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
