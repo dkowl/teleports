@@ -17,6 +17,14 @@ public partial class SaveData
     public delegate void OnCharacterIDChanged();
     public static event OnCharacterIDChanged OnCharacterIDChangedEvent;
 
+    public SaveData()
+    {
+        accountName = "New account";
+        characterSlotLimit = 3;
+        currentPlayerDataID = 0;
+        playerData = new PlayerData[characterSlotLimit];
+    }
+
     public void DeleteCurrentPlayer()
     {
         playerData[currentPlayerDataID] = null;
