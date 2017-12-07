@@ -128,6 +128,16 @@ namespace Teleports.Utils
             }
         }
 
+        public static void InitWithNew<T>(ref List<T> list, int targetCount) where T : new()
+        {
+            list = new List<T>(targetCount);
+
+            for (int i = 0; i < targetCount; i++)
+            {
+                list.Add(new T());
+            }
+        }
+
         public static List<GameObject> GetChildren(this GameObject gameObject)
         {
             Queue<Transform> queue = new Queue<Transform>();

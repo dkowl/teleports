@@ -12,6 +12,15 @@ public class EquipmentData {
     [SerializeField, TabGroup("Left Arm"), HideLabel] private EquipmentSlotData leftArm;
     [SerializeField, TabGroup("Right Arm"), HideLabel] private EquipmentSlotData rightArm;
 
+    public EquipmentData()
+    {
+        head = new EquipmentSlotData();
+        torso = new EquipmentSlotData();
+        legs = new EquipmentSlotData();
+        leftArm = new EquipmentSlotData();
+        rightArm = new EquipmentSlotData();
+    }
+
     public EquipmentSlotData GetEquipmentSlot(EquipmentSlotType type)
     {
         switch (type)

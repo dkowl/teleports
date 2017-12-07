@@ -9,7 +9,7 @@ public class EquipmentSlotData {
     [SerializeField, HideIf("Empty"), HideLabel] private ItemData item;
     [SerializeField, HideIf("Empty")] private bool primary;
     [SerializeField, ShowIf("locked")] private bool locked;
-    [SerializeField, ShowIf("Empty")] private bool empty;
+    [SerializeField] private bool empty;
 
     public EquipmentSlotData()
     {

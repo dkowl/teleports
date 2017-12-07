@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 
 public class InventoryMenu : SerializedMonoBehaviour {
 
-    InventoryData inventoryData;
+    [OdinSerialize, System.NonSerialized] public InventoryData inventoryData;
     InventoryItemSpawner itemSpawner;
 
     void OnEnable()

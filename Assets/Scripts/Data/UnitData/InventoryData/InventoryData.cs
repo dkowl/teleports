@@ -19,7 +19,8 @@ public class InventoryData {
     public void Initialize()
     {
         maxSlots = 32;
-        Utils.InitWithValues(ref invSlots, maxSlots, new InventorySlot());
+        equipmentData = new EquipmentData();
+        Utils.InitWithNew(ref invSlots, maxSlots);
     }
 
     public void Add(ItemData item)

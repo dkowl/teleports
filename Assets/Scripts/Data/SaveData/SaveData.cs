@@ -64,7 +64,7 @@ public partial class SaveData
     {
         foreach(var data in playerData)
         {
-            data.CorrectInvalidData();
+            if (data != null) data.CorrectInvalidData();
         }
     }
 
