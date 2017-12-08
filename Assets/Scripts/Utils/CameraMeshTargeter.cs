@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class CameraMeshTargeter : MonoBehaviour {
 
-    [SerializeField] MeshFilter meshFilter;
+    [SerializeField, OnValueChanged("UpdateMesh")] MeshFilter meshFilter;
     [SerializeField] Camera cam;
     [SerializeField] float paddingPercentage = 0.1f;
     [SerializeField] float distance = 10.0f;
@@ -22,6 +23,13 @@ public class CameraMeshTargeter : MonoBehaviour {
         Target();
     }
 
+    public void SetTarget(MeshFilter newTarget)
+    {
+        meshFilter = newTarget;
+        UpdateMesh();
+        Target();
+    }
+
     void Target()
     {
         List<Vector3> cornerPoints = GetAllCornerPoints(mesh.bounds, meshFilter.transform.position);
@@ -30,11 +38,8 @@ public class CameraMeshTargeter : MonoBehaviour {
         SetDistanceFromPoint(cam, mesh.bounds.center, distance);
     }
 
-    void SetTarget(MeshFilter newTarget)
+    void UpdateMesh()
     {
-        if (newTarget == meshFilter && mesh != null) return;
-
-        meshFilter = newTarget;
         mesh = meshFilter.mesh;
     }
 
@@ -125,4 +130,13 @@ public class CameraMeshTargeter : MonoBehaviour {
         camera.transform.localPosition += (targetDistance - currentDistance) * planeNormal;
     }
 
+    public Camera Camera
+    {
+        get { return cam; }
+    }
+
+    public MeshFilter TargetMeshFilter
+    {
+        get { return meshFilter; }
+    }
 }

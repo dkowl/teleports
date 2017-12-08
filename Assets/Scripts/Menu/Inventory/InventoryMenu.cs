@@ -11,7 +11,25 @@ public class InventoryMenu : SerializedMonoBehaviour {
 
     void OnEnable()
     {
-        inventoryData = MainData.CurrentPlayerData.InventoryData;
+        inventoryData = new InventoryData();
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Greatsword"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Handaxe"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Warhammer"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Greatsword"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Handaxe"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Warhammer"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Greatsword"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Handaxe"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Warhammer"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Greatsword"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Handaxe"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Warhammer"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Greatsword"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Handaxe"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Warhammer"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Greatsword"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Handaxe"));
+        inventoryData.Add(MainData.CurrentGameData.GetItem("Warhammer"));
         InitItemSpawner();
         itemSpawner.Spawn();
     }
