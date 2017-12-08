@@ -3,19 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class TextureAtlasFromModels : MonoBehaviour {
+[System.Serializable]
+public class TextureAtlasFromModels {
 
-    public int width = 128;
-    public int height = 128;
-    public TextureFormat textureFormat = TextureFormat.ARGB32;
-    public bool mipmap = true;
-    public int padding = 1;
-    public int maximumAtlasSize = 1024;
-    public Texture2D atlas;
-    public Rect[] atlasUvs;
-    public Texture2D[] textures;
-    public MeshFilter[] meshFilters;
-    public CameraMeshTargeter cameraTargeter;
+    [SerializeField] private int width = 128;
+    [SerializeField] private int height = 128;
+    [SerializeField] private TextureFormat textureFormat = TextureFormat.ARGB32;
+    [SerializeField] private bool mipmap = true;
+    [SerializeField] private int padding = 4;
+    [SerializeField] private int maximumAtlasSize = 1024;
+
+    [ShowInInspector] private MeshFilter[] meshFilters;
+    [ShowInInspector] private CameraMeshTargeter cameraTargeter;
+
+    [ShowInInspector, ReadOnly] private Texture2D atlas;
+    [ShowInInspector, ReadOnly] private Rect[] atlasUvs;
+    [ShowInInspector, ReadOnly] private int textureCount;
+    private Texture2D[] textures;
+
+    public TextureAtlasFromModels(MeshFilter[] meshFilters, CameraMeshTargeter cameraTargeter)
+    {
+        this.meshFilters = meshFilters;
+        this.cameraTargeter = cameraTargeter;
+
+        GenerateAtlas();
+    }
 
     [Button]
     public void GenerateAtlas()
@@ -29,13 +41,11 @@ public class TextureAtlasFromModels : MonoBehaviour {
         RenderTexture.active = myRT;
         cam.targetTexture = myRT;
 
-
-
         for (int i = 0; i < meshFilters.Length; i++)
         {
             cameraTargeter.SetTarget(meshFilters[i]);
             cam.Render();
-            textures[i] = new Texture2D(width, height);
+            textures[i] = new Texture2D(width, height, textureFormat, mipmap);
             textures[i].ReadPixels(new Rect(0, 0, width, height), 0, 0);
             textures[i].Apply();
         }
@@ -45,6 +55,27 @@ public class TextureAtlasFromModels : MonoBehaviour {
         cameraTargeter.SetTarget(previousTargetMeshFilter);
 
         atlas = new Texture2D(16, 16);
+        textureCount = textures.Length;
         atlasUvs = atlas.PackTextures(textures, padding, maximumAtlasSize);
+    }
+
+    public Rect GetUv(int id)
+    {
+        if (id >= 0 && id < textureCount)
+        {
+            return atlasUvs[id];
+        }
+        else
+            return Rect.zero;
+    }
+
+    public Texture2D Atlas
+    {
+        get { return atlas; }
+    }
+
+    public int TextureCount
+    {
+        get { return textureCount; }
     }
 }

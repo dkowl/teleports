@@ -15,20 +15,26 @@ public class PrefabSpawner : MonoBehaviour {
 
     private bool isInitialized = false;
 
-    public void OnEnable()
+    private void OnEnable()
     {
         Spawn();
     }
 
-    public void OnDisable()
+    private void OnDisable()
     {
         Despawn();
     }
 
-    public void OnDestroy()
+    private void OnDestroy()
     {
         Despawn();
     }
+
+    protected virtual void OnInitialize() { }
+
+    protected virtual void BeforeSpawn() { }
+    
+    protected virtual void AfterSpawn() { }
 
     public void Initialize()
     {
@@ -61,21 +67,6 @@ public class PrefabSpawner : MonoBehaviour {
 
             }
         }
-    }
-
-    protected virtual void OnInitialize()
-    {
-
-    }
-
-    protected virtual void BeforeSpawn()
-    {
-
-    }
-
-    protected virtual void AfterSpawn()
-    {
-
     }
 
     public void Despawn()

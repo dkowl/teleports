@@ -23,6 +23,7 @@ public class InventoryItemSpawner  {
         {
             GameObject spawnedItem = GameObject.Instantiate(itemPrefab) as GameObject;
             spawnedItem.transform.position = spawnPlace.CurrentPosition;
+            spawnedItems.Add(spawnedItem);
             spawnPlace.GoToNextPosition();
         }
     }
@@ -34,5 +35,10 @@ public class InventoryItemSpawner  {
             if (item != null)
                 GameObject.Destroy(item);
         }
+    }
+
+    public IList<GameObject> SpawnedItems
+    {
+        get { return spawnedItems.AsReadOnly(); }
     }
 }

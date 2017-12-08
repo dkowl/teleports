@@ -40,7 +40,7 @@ public class CameraMeshTargeter : MonoBehaviour {
 
     void UpdateMesh()
     {
-        mesh = meshFilter.mesh;
+        mesh = meshFilter.sharedMesh;
     }
 
     List<Vector3> GetAllCornerPoints(Bounds bounds, Vector3 position)

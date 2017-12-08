@@ -60,6 +60,20 @@ namespace Teleports.Utils
             return null;
         }
 
+        public static List<T> GetComponentsInObjects<T>(IList<GameObject> gameObjects) where T : Component
+        {
+            var result = new List<T>();
+            foreach(var gameObject in gameObjects)
+            {
+                T component = gameObject.GetComponent<T>();
+                if(component != null)
+                {
+                    result.Add(component);
+                }
+            }
+            return result;
+        }
+
         public static T GetComponentInChildrenNamed<T>(this GameObject gameObject, string name) where T : Component
         {
             Transform foundTransform = gameObject.transform.FindRecursive(name);
