@@ -11,7 +11,7 @@ public class InventoryMenu : SerializedMonoBehaviour {
     [SerializeField] InventoryItemSpawner itemSpawner;
     [SerializeField] CameraMeshTargeter cameraTargeter;
     [SerializeField] TextureAtlasFromModels inventoryAtlas;
-    InventorySlotSpawner inventorySlotSpawner;
+    [SerializeField] InventorySlotSpawner inventorySlotSpawner;
 
 
     void OnEnable()
@@ -37,9 +37,17 @@ public class InventoryMenu : SerializedMonoBehaviour {
         inventoryData.Add(MainData.CurrentGameData.GetItem("Warhammer"));
 
         InitItemSpawner();
-        itemSpawner.Spawn();
+        itemSpawner.Spawn();        
+    }
 
+    void Start()
+    {
         inventoryAtlas = new TextureAtlasFromModels(Utils.GetComponentsInObjects<MeshFilter>(itemSpawner.SpawnedItems).ToArray(), cameraTargeter);
+
+        inventorySlotSpawner.enabled = false;
+        inventorySlotSpawner.Atlas = inventoryAtlas.Atlas;
+        inventorySlotSpawner.Uvs = inventoryAtlas.Uvs;
+        inventorySlotSpawner.enabled = true;
     }
 
     void InitItemSpawner()

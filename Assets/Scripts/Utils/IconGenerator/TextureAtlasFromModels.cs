@@ -74,6 +74,11 @@ public class TextureAtlasFromModels {
         get { return atlas; }
     }
 
+    public Rect[] Uvs
+    {
+        get { return atlasUvs; }
+    }
+
     public int TextureCount
     {
         get { return textureCount; }
