@@ -14,7 +14,7 @@ public class InventorySlotSpawner : PrefabSpawner {
         Debug.Assert(parentMenu != null);
 
         InventorySlotUI inventorySlotUI = SpawnedInstance.GetComponent<InventorySlotUI>();
-        inventorySlotUI.Initialize(parentMenu, currentId);
+        inventorySlotUI.Initialize(parentMenu, new InventoryMenu.ItemSlotID(currentId));
     }
 
     public InventoryMenu ParentMenu

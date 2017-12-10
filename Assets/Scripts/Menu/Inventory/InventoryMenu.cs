@@ -16,6 +16,9 @@ public class InventoryMenu : SerializedMonoBehaviour {
     private bool isInitialized;
     private Dictionary<ItemData, int> internalItemIds;
 
+    private ItemSlotID selectedSlotId;
+
+    public static event System.Action OnSelectionChangedEvent;
 
     private void OnEnable()
     {
@@ -48,7 +51,7 @@ public class InventoryMenu : SerializedMonoBehaviour {
     private void Start()
     {
         inventoryAtlas = new TextureAtlasFromModels(Utils.GetComponentsInObjects<MeshFilter>(itemSpawner.SpawnedItems).ToArray(), cameraTargeter);
-
+        Select(selectedSlotId);
         isInitialized = true;
 
         inventorySlotSpawner.enabled = false;
@@ -56,9 +59,25 @@ public class InventoryMenu : SerializedMonoBehaviour {
         inventorySlotSpawner.enabled = true;
     }
 
+    public void Select(ItemSlotID itemSlotId)
+    {
+        //if (itemSlotId != selectedSlotId)
+        {
+            selectedSlotId = itemSlotId;
+            if (SelectedItem != null)
+                cameraTargeter.SetTarget(itemSpawner.GetItemMeshFilter(internalItemIds[SelectedItem]));
+            OnSelectionChangedEvent();
+        }
+    }
+
     public Rect GetItemIconUvRect(ItemData itemData)
     {
         return inventoryAtlas.GetUv(internalItemIds[itemData]);
+    }
+
+    public bool IsSelected(ItemSlotID itemSlotId)
+    {
+        return selectedSlotId == itemSlotId;
     }
 
     private void InitItemSpawner()
@@ -89,4 +108,74 @@ public class InventoryMenu : SerializedMonoBehaviour {
         get { return inventoryAtlas.Atlas; }
     }
 
+    public ItemData SelectedItem
+    {
+        get
+        {
+            if (!selectedSlotId.isEquipmentSlot)
+            {
+                return inventoryData.GetInventorySlotData(selectedSlotId.inventorySlotId).Item;
+            }
+            else
+            {
+                return inventoryData.EquipmentData.GetEquipmentSlot(selectedSlotId.equipmentSlotType).Item;
+            }
+        }
+    }
+
+    [System.Serializable]
+    public struct ItemSlotID
+    {
+        public bool isEquipmentSlot;
+        [ShowIf("isEquipmentSlot")] public EquipmentSlotType equipmentSlotType;
+        [HideIf("isEquipmentSlot")] public int inventorySlotId;
+
+        public ItemSlotID(int inventorySlotId)
+        {
+            isEquipmentSlot = false;
+            equipmentSlotType = EquipmentSlotType.None;
+            this.inventorySlotId = inventorySlotId;
+        }
+
+        public ItemSlotID(EquipmentSlotType equipmentSlotType)
+        {
+            isEquipmentSlot = true;
+            this.equipmentSlotType = equipmentSlotType;
+            inventorySlotId = 0;
+        }
+
+        public static bool operator ==(ItemSlotID x, ItemSlotID y)
+        {
+            if(x.isEquipmentSlot == y.isEquipmentSlot)
+            {
+                if (x.isEquipmentSlot)
+                    return x.equipmentSlotType == y.equipmentSlotType;
+                else
+                    return x.inventorySlotId == y.inventorySlotId;
+            }
+            else
+            {
+                return false;
+            }
+                
+        }
+
+        public static bool operator !=(ItemSlotID x, ItemSlotID y)
+        {
+            return !(x == y);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is ItemSlotID && this == (ItemSlotID)obj;
+        }
+
+        public override int GetHashCode()
+        {
+            if (isEquipmentSlot)
+                return equipmentSlotType.GetHashCode();
+            else
+                return inventorySlotId.GetHashCode();
+        }
+    }
 }

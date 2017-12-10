@@ -159,6 +159,11 @@ public class InventoryData {
         return result;
     }
 
+    public EquipmentData EquipmentData
+    {
+        get { return equipmentData; }
+    }
+
     private bool IsValidSlotId(int id)
     {
         return id >= 0 && id < invSlots.Count;

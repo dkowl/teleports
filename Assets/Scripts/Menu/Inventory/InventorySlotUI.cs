@@ -4,45 +4,73 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Text = TMPro.TextMeshProUGUI;
-using System;
+using SlotID = InventoryMenu.ItemSlotID;
 
 public class InventorySlotUI : LoadableBehaviour {
 
     private InventoryMenu parentMenu;
-    private int slotId;
+    private SlotID slotId;
     private bool isInitialized;
 
     [SerializeField] private RawImage itemIcon;
+    [SerializeField] private Image borderImage;
     [SerializeField] private Text countText;
+    [SerializeField] private Color selectedBorderColor;
+    [SerializeField] private Color deselectedBorderColor;
 
     protected override void LoadDataInternal()
     {
         if (!isInitialized) return;
 
         InventoryData inventoryData = parentMenu.InventoryData;
-        InventorySlotData inventorySlotData = inventoryData.GetInventorySlotData(slotId);
-
-        if (!inventorySlotData.Empty)
+        if (!slotId.isEquipmentSlot)
         {
-            itemIcon.enabled = true;
-            ItemData itemData = inventorySlotData.Item;
+            InventorySlotData inventorySlotData;
+            inventorySlotData = inventoryData.GetInventorySlotData(slotId.inventorySlotId);
 
-            itemIcon.texture = parentMenu.ItemIconAtlas;
-            itemIcon.uvRect = parentMenu.GetItemIconUvRect(itemData);
+            if (!inventorySlotData.Empty)
+            {
+                itemIcon.enabled = true;
+                ItemData itemData = inventorySlotData.Item;
+
+                itemIcon.texture = parentMenu.ItemIconAtlas;
+                itemIcon.uvRect = parentMenu.GetItemIconUvRect(itemData);
+            }
+            else
+            {
+                itemIcon.enabled = false;
+            }
+
+            int count = inventorySlotData.Count;
+            if (count > 1)
+                countText.text = count.ToString();
+            else
+                countText.text = "";
+        }
+
+        if (parentMenu.IsSelected(slotId))
+        {
+            borderImage.color = selectedBorderColor;
         }
         else
         {
-            itemIcon.enabled = false;
+            borderImage.color = deselectedBorderColor;
         }
-
-        int count = inventorySlotData.Count;
-        if (count > 1)
-            countText.text = count.ToString();
-        else
-            countText.text = "";
     }
 
-    public void Initialize(InventoryMenu parentMenu, int slotId)
+    protected override void SubscribeInternal()
+    {
+        base.SubscribeInternal();
+        InventoryMenu.OnSelectionChangedEvent += LoadData;
+    }
+
+    protected override void UnsubscribeInternal()
+    {
+        base.UnsubscribeInternal();
+        InventoryMenu.OnSelectionChangedEvent -= LoadData;
+    }
+
+    public void Initialize(InventoryMenu parentMenu, SlotID slotId)
     {
         if (!isInitialized)
         {
@@ -51,5 +79,10 @@ public class InventorySlotUI : LoadableBehaviour {
             isInitialized = true;
             LoadData();
         }
+    }
+    
+    public void Select()
+    {
+        parentMenu.Select(slotId);
     }
 }

@@ -37,6 +37,11 @@ public class InventoryItemSpawner  {
         }
     }
 
+    public MeshFilter GetItemMeshFilter(int internalItemId)
+    {
+        return spawnedItems[internalItemId].GetComponent<MeshFilter>();
+    }
+
     public IList<GameObject> SpawnedItems
     {
         get { return spawnedItems.AsReadOnly(); }
