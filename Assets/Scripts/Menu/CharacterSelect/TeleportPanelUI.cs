@@ -11,7 +11,7 @@ public class TeleportPanelUI : LoadableBehaviour {
     public Text tierText;
     public Text rankPointsText;
 
-    public override void LoadDataInternal()
+    override protected void LoadDataInternal()
     {
         IPlayerData playerData = MainData.CurrentPlayerData;
         if (playerData != null)

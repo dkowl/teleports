@@ -44,7 +44,7 @@ public class MenuBehaviour : LoadableBehaviour {
         Skip();
     }
 
-    public override void LoadDataInternal()
+    override protected void LoadDataInternal()
     {
         print("Adding Load Command");
         AddCommand(MenuBehaviourCommand.Type.Load);

@@ -17,7 +17,7 @@ public abstract class ModelSpawner : LoadableBehaviour {
 
     [SerializeField] protected List<ModelSpawnData> modelSpawnData;
 
-    public override void LoadDataInternal()
+    override protected void LoadDataInternal()
     {
         if (Application.isPlaying)
         {

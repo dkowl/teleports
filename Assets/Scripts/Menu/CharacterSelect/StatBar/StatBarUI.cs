@@ -11,7 +11,7 @@ public class StatBarUI : LoadableBehaviour {
     public Text statNameText, statValueText;
     public Slider slider;
 
-    public override void LoadDataInternal()
+    override protected void LoadDataInternal()
     {
         IServerData server = MainData.CurrentServerData;
 

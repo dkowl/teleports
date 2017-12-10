@@ -17,7 +17,7 @@ public class CharacterSelect_MiddleButton : LoadableBehaviour {
         button.onClick.AddListener(OnClick);
     }
 
-    public override void LoadDataInternal()
+    override protected void LoadDataInternal()
     {
         if (MainData.CurrentPlayerData == null)
         {

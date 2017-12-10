@@ -12,7 +12,7 @@ public class MenuSwitcherButtonUI : SelectorButtonUI {
 
     public Text buttonText;
 
-    public override void LoadDataInternal()
+    override protected void LoadDataInternal()
     {
         base.LoadDataInternal();
 

@@ -10,7 +10,7 @@ public class MenuStateControlledElement : LoadableBehaviour {
 
     public List<CharacterSelectMenu.State> activeStates;
 
-    public override void LoadDataInternal()
+    override protected void LoadDataInternal()
     {
         if (IsActive())
         {

@@ -13,7 +13,7 @@ public class CharacterThumbnailUI : SelectorButtonUI {
     private IPlayerData playerData = null;
     private CreateHeroConfirmDWSB createHeroConfirmDWSB;
 
-    public override void LoadDataInternal()
+    override protected void LoadDataInternal()
     {
         base.LoadDataInternal();
 

@@ -50,6 +50,8 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
     {
         base.Awake();
 
+        DetectChange();
+
         spawner = gameObject.GetComponent<ProgressBarSpawner>();
         if(spawner == null)
         {
@@ -57,12 +59,6 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         }
         spawner.Prefab = prefab;
         spawner.Spawn();
-    }
-
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        DetectChange();
     }
 
     protected override void OnDisable()

@@ -9,7 +9,7 @@ public class TextStyler : LoadableBehaviour {
     public Stylesheet.FontSize fontSize;
     public Stylesheet.TextColor textColor;
 
-	public override void LoadDataInternal()
+    override protected void LoadDataInternal()
     {
         Stylesheet stylesheet = MainData.CurrentStylesheet;
 

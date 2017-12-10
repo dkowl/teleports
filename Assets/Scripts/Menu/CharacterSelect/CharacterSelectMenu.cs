@@ -23,7 +23,7 @@ public class CharacterSelectMenu : LoadableBehaviour {
     public delegate void MenuStateSwitched();
     public event MenuStateSwitched MenuStateSwitchedEvent;
 
-    public override void LoadDataInternal()
+    override protected void LoadDataInternal()
     {
         Stylesheet stylesheet = MainData.CurrentStylesheet;
         IPlayerData playerData = MainData.CurrentPlayerData;

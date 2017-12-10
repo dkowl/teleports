@@ -11,13 +11,7 @@ public class ModelSpawnerTest : LoadableBehaviour {
     private GameObject character, teleport;
     private bool shouldRespawnModels = true;
 
-    protected override void OnDestroy()
-    {
-        base.OnDestroy();
-        SaveData.OnCharacterIDChangedEvent -= OnModelChanged;
-    }
-
-    public override void LoadDataInternal()
+    override protected void LoadDataInternal()
     {
         if (Application.isPlaying)
         {
@@ -50,6 +44,18 @@ public class ModelSpawnerTest : LoadableBehaviour {
 
             shouldRespawnModels = false;
         }
+    }
+
+    protected override void SubscribeInternal()
+    {
+        base.SubscribeInternal();
+        SaveData.OnCharacterIDChangedEvent += OnModelChanged;
+    }
+
+    protected override void UnsubscribeInternal()
+    {
+        base.UnsubscribeInternal();
+        SaveData.OnCharacterIDChangedEvent -= OnModelChanged;
     }
 
     public void OnModelChanged()

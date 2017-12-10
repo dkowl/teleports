@@ -8,7 +8,7 @@ public abstract class SelectorButtonUI : LoadableBehaviour
 
     public float inactiveScaleFactor = 0.8f;
 
-    public override void LoadDataInternal()
+    override protected void LoadDataInternal()
     {
         if (IsActive())
         {
