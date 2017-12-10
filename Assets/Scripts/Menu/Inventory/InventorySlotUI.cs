@@ -8,13 +8,14 @@ using System;
 
 public class InventorySlotUI : LoadableBehaviour {
 
-    InventorySlot slotData;
+    int id;
+    InventorySlotData slotData;
 
     RawImage itemIcon;
     Text counterText;
 
     protected override void LoadDataInternal()
     {
-        throw new NotImplementedException();
+        
     }
 }

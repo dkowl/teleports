@@ -4,19 +4,19 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 [System.Serializable]
-public class InventorySlot
+public class InventorySlotData
 {
     [SerializeField, HideIf("Empty")] private ItemData item;
     [SerializeField] private int count;
     [SerializeField, HideInInspector] private int maxCount;
 
-    public InventorySlot()
+    public InventorySlotData()
     {
         item = null;
         count = 0;
     }
 
-    public InventorySlot(int maxCount)
+    public InventorySlotData(int maxCount)
     {
         item = null;
         count = 0;

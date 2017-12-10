@@ -9,7 +9,7 @@ public class InventoryData {
     
     [SerializeField] private int maxSlots = 32;
     [SerializeField] private EquipmentData equipmentData;
-    [SerializeField, ListDrawerSettings(NumberOfItemsPerPage = 8)] private List<InventorySlot> invSlots;
+    [SerializeField, ListDrawerSettings(NumberOfItemsPerPage = 8)] private List<InventorySlotData> invSlots;
 
     public InventoryData()
     {
@@ -26,7 +26,7 @@ public class InventoryData {
     public void Add(ItemData item)
     {
         //stack on existing slot
-        foreach(InventorySlot slot in invSlots)
+        foreach(InventorySlotData slot in invSlots)
         {
             if(!slot.Empty && slot.Item == item)
             {
@@ -36,7 +36,7 @@ public class InventoryData {
         }
 
         //add to empty slot
-        foreach(InventorySlot slot in invSlots)
+        foreach(InventorySlotData slot in invSlots)
         {
             if (slot.Empty)
             {
@@ -48,7 +48,7 @@ public class InventoryData {
         //add extra slot if possible
         if(invSlots.Count < maxSlots)
         {
-            InventorySlot slot = new InventorySlot();
+            InventorySlotData slot = new InventorySlotData();
             slot.Add(item);
             invSlots.Add(slot);
         }
@@ -59,7 +59,7 @@ public class InventoryData {
 
     public bool Contains(ItemData item)
     {
-        foreach(InventorySlot slot in invSlots)
+        foreach(InventorySlotData slot in invSlots)
         {
             if (slot.Item == item) return true;
         }
@@ -68,7 +68,7 @@ public class InventoryData {
 
     public void Remove(ItemData item)
     {
-        foreach (InventorySlot slot in invSlots)
+        foreach (InventorySlotData slot in invSlots)
         {
             if (!slot.Empty && slot.Item == item)
             {
@@ -91,7 +91,7 @@ public class InventoryData {
     {
         if (IsValidSlotId(inventorySlotId))
         {
-            InventorySlot inventorySlot = invSlots[inventorySlotId];
+            InventorySlotData inventorySlot = invSlots[inventorySlotId];
             if (inventorySlot.Empty)
                 return;
 
