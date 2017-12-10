@@ -109,6 +109,14 @@ public class InventoryData {
         Add(unequippedItem);
     }*/
 
+    public InventorySlotData GetInventorySlotData(int inventorySlotId)
+    {
+        if (IsValidSlotId(inventorySlotId))
+            return invSlots[inventorySlotId];
+        else
+            return null;
+    }
+
     public IList<EquipmentData.EquippedItemInfo> GetEquippedItems()
     {
         return equipmentData.GetEquippedItems();

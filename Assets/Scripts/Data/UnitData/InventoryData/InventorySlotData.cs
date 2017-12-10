@@ -52,11 +52,6 @@ public class InventorySlotData
         }
     }
 
-    public bool Empty
-    {
-        get { return count == 0; }
-    }
-
     public ItemData Item
     {
         get
@@ -70,5 +65,15 @@ public class InventorySlotData
                 return null;
             }
         }
+    }
+
+    public int Count
+    {
+        get { return count; }
+    }
+
+    public bool Empty
+    {
+        get { return count == 0; }
     }
 }

@@ -5,34 +5,20 @@ using UnityEngine.UI;
 
 public class InventorySlotSpawner : PrefabSpawner {
 
-    Texture2D atlas;
-    Rect[] uvs;
+    [SerializeField] private InventoryMenu parentMenu;
 
     protected override void AfterSpawn()
     {
-        RawImage rawImage = SpawnedInstance.GetComponentInChildren<RawImage>();
+        if(parentMenu == null)
+            parentMenu = GetComponentInParent<InventoryMenu>();
+        Debug.Assert(parentMenu != null);
 
-        if (rawImage != null)
-        {
-            if (atlas != null && uvs != null && currentId < uvs.Length)
-            {
-                rawImage.texture = atlas;
-                rawImage.uvRect = uvs[currentId];
-            }
-            else
-            {
-                rawImage.color = Color.clear;
-            }
-        }
+        InventorySlotUI inventorySlotUI = SpawnedInstance.GetComponent<InventorySlotUI>();
+        inventorySlotUI.Initialize(parentMenu, currentId);
     }
 
-    public Texture2D Atlas
+    public InventoryMenu ParentMenu
     {
-        set { atlas = value; }
-    }
-
-    public Rect[] Uvs
-    {
-        set { uvs = value; }
+        set { parentMenu = value; }
     }
 }

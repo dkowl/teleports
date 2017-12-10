@@ -7,15 +7,20 @@ using Teleports.Utils;
 
 public class InventoryMenu : SerializedMonoBehaviour {
 
-    [OdinSerialize, System.NonSerialized] public InventoryData inventoryData;
+    [OdinSerialize, System.NonSerialized] InventoryData inventoryData;
     [SerializeField] InventoryItemSpawner itemSpawner;
     [SerializeField] CameraMeshTargeter cameraTargeter;
     [SerializeField] TextureAtlasFromModels inventoryAtlas;
     [SerializeField] InventorySlotSpawner inventorySlotSpawner;
 
+    private bool isInitialized;
+    private Dictionary<ItemData, int> internalItemIds;
 
-    void OnEnable()
+
+    private void OnEnable()
     {
+        internalItemIds = new Dictionary<ItemData, int>();
+
         inventoryData = new InventoryData();
         inventoryData.Add(MainData.CurrentGameData.GetItem("Greatsword"));
         inventoryData.Add(MainData.CurrentGameData.GetItem("Handaxe"));
@@ -40,24 +45,48 @@ public class InventoryMenu : SerializedMonoBehaviour {
         itemSpawner.Spawn();        
     }
 
-    void Start()
+    private void Start()
     {
         inventoryAtlas = new TextureAtlasFromModels(Utils.GetComponentsInObjects<MeshFilter>(itemSpawner.SpawnedItems).ToArray(), cameraTargeter);
 
+        isInitialized = true;
+
         inventorySlotSpawner.enabled = false;
-        inventorySlotSpawner.Atlas = inventoryAtlas.Atlas;
-        inventorySlotSpawner.Uvs = inventoryAtlas.Uvs;
+        inventorySlotSpawner.ParentMenu = this;
         inventorySlotSpawner.enabled = true;
     }
 
-    void InitItemSpawner()
+    public Rect GetItemIconUvRect(ItemData itemData)
+    {
+        return inventoryAtlas.GetUv(internalItemIds[itemData]);
+    }
+
+    private void InitItemSpawner()
     {
         var itemPrefabs = new List<GameObject>();
+        int internalItemId = 0;
         foreach(var item in inventoryData.GetAllItemsInInventory())
         {
             itemPrefabs.Add(item.Graphics.Prefab);
+            internalItemIds[item] = internalItemId;
+            internalItemId++;
         }
         itemSpawner = new InventoryItemSpawner(itemPrefabs);
+    }
+
+    public InventoryData InventoryData
+    {
+        get { return inventoryData; }
+    }
+
+    public bool IsInitialized
+    {
+        get { return isInitialized; }
+    }
+
+    public Texture2D ItemIconAtlas
+    {
+        get { return inventoryAtlas.Atlas; }
     }
 
 }

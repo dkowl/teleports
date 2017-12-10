@@ -8,14 +8,48 @@ using System;
 
 public class InventorySlotUI : LoadableBehaviour {
 
-    int id;
-    InventorySlotData slotData;
+    private InventoryMenu parentMenu;
+    private int slotId;
+    private bool isInitialized;
 
-    RawImage itemIcon;
-    Text counterText;
+    [SerializeField] private RawImage itemIcon;
+    [SerializeField] private Text countText;
 
     protected override void LoadDataInternal()
     {
-        
+        if (!isInitialized) return;
+
+        InventoryData inventoryData = parentMenu.InventoryData;
+        InventorySlotData inventorySlotData = inventoryData.GetInventorySlotData(slotId);
+
+        if (!inventorySlotData.Empty)
+        {
+            itemIcon.enabled = true;
+            ItemData itemData = inventorySlotData.Item;
+
+            itemIcon.texture = parentMenu.ItemIconAtlas;
+            itemIcon.uvRect = parentMenu.GetItemIconUvRect(itemData);
+        }
+        else
+        {
+            itemIcon.enabled = false;
+        }
+
+        int count = inventorySlotData.Count;
+        if (count > 1)
+            countText.text = count.ToString();
+        else
+            countText.text = "";
+    }
+
+    public void Initialize(InventoryMenu parentMenu, int slotId)
+    {
+        if (!isInitialized)
+        {
+            this.parentMenu = parentMenu;
+            this.slotId = slotId;
+            isInitialized = true;
+            LoadData();
+        }
     }
 }
