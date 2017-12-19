@@ -34,6 +34,11 @@ public class WeaponData {
         get { return (int)maxDamage.Value; }
     }
 
+    public float AverageDamage
+    {
+        get { return (float)(MinDamage + MaxDamage) / 2; }
+    }
+
     public float Reach
     {
         get { return reach.Value; }
@@ -47,6 +52,11 @@ public class WeaponData {
     public float AfterCastLockTime
     {
         get { return afterCastLockTime.Value; }
+    }
+
+    public float TotalAttackTime
+    {
+        get { return CastTime + AfterCastLockTime; }
     }
 
     public int StrRequired

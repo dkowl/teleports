@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class UnitWeaponCombiner {
 
-    private bool canUse;
-    private int bonusStr;
-    private int bonusDex;
-    private int bonusInt;
-    private DamageBonus damageBonus;
-    private SpeedBonus speedBonus;
-    private ReachBonus reachBonus;
-    private int minDamage;
-    private int maxDamage;
-    private float weaponReach;
-    private float totalReach;
-    private float castTime;
-    private float afterCastLockTime;
-    private float attackTime;
-    private float damagePerSecond;
+    [SerializeField] private bool canUse;
+    [SerializeField] private int bonusStr;
+    [SerializeField] private int bonusDex;
+    [SerializeField] private int bonusInt;
+    [SerializeField] private DamageBonus damageBonus;
+    [SerializeField] private SpeedBonus speedBonus;
+    [SerializeField] private ReachBonus reachBonus;
+    [SerializeField] private int minDamage;
+    [SerializeField] private int maxDamage;
+    [SerializeField] private float weaponReach;
+    [SerializeField] private float totalReach;
+    [SerializeField] private float castTime;
+    [SerializeField] private float afterCastLockTime;
+    [SerializeField] private float attackTime;
+    [SerializeField] private float damagePerSecond;
 
     public UnitWeaponCombiner(UnitData unit, WeaponData weapon)
     {
@@ -46,6 +47,41 @@ public class UnitWeaponCombiner {
         }
     }
 
+    public bool CanUse
+    {
+        get { return canUse; }
+    }
+
+    public DamageBonus DamageBonusData
+    {
+        get { return damageBonus; }
+    }
+
+    public SpeedBonus SpeedBonusData
+    {
+        get { return speedBonus; }
+    }
+
+    public ReachBonus ReachBonusData
+    {
+        get { return reachBonus; }
+    }
+
+    public int MinDamage
+    {
+        get { return minDamage; }
+    }
+
+    public int MaxDamage
+    {
+        get { return maxDamage; }
+    }
+
+    public float DamagePerSecond
+    {
+        get { return damagePerSecond; }
+    }
+
     public class AbilityStatBonus
     {
         protected float strComponent;
@@ -70,7 +106,7 @@ public class UnitWeaponCombiner {
 
         public float Value
         {
-            get { return (int)value; }
+            get { return value; }
         }
     }
 
@@ -94,26 +130,30 @@ public class UnitWeaponCombiner {
         public SpeedBonus(WeaponData weapon, int bonusStr, int bonusDex, int bonusInt, float attackTime)
         {
             value = 0;
+            multiplier = 1;
             int[] abilityBonuses = { bonusStr, bonusDex, bonusInt };
             float[] weaponBonuses = { weapon.StrSpeedBonus, weapon.DexSpeedBonus, weapon.IntSpeedBonus };
             float[] multipliers = new float[abilityBonuses.Length];
-            float[] deltas = new float[abilityBonuses.Length];
-            float multiplier = 1;
+            float[] absoluteDeltas = new float[abilityBonuses.Length];
+            float[] perSecondDeltas = new float[abilityBonuses.Length];
             for (int i = 0; i<abilityBonuses.Length; i++)
             {
                 multipliers[i] = Mathf.Sqrt(Mathf.Pow(1 - weaponBonuses[i], abilityBonuses[i]));
-                deltas[i] = multiplier - multiplier * multipliers[i] * (1 - maxMultiplier) * attackTime;
-                value += deltas[i];
+                absoluteDeltas[i] = (multiplier - multiplier * multipliers[i]) * (1 - maxMultiplier) * attackTime;
+                float currentAttackTime = attackTime * multiplier;
+                perSecondDeltas[i] = (1 / currentAttackTime * multipliers[i]) - (1 / currentAttackTime);
+                value += perSecondDeltas[i];
                 multiplier *= multipliers[i];
             }
-            strComponent = deltas[0];
-            dexComponent = deltas[1];
-            intComponent = deltas[2];
+            strComponent = perSecondDeltas[0];
+            dexComponent = perSecondDeltas[1];
+            intComponent = perSecondDeltas[2];
         }
 
         public float Multiplier
         {
-            get { return multiplier; }
+            get
+            { return multiplier; }
         }
     }
 
