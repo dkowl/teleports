@@ -9,9 +9,8 @@ public interface IPlayerData {
     int Xp { get; set; }
     int Level { get; }
     int RankPoints { get; }
-    UnitData BaseUnitData { get; }
+    UnitData UnitData { get; }
     TeleportData CurrentTeleportData { get; }
-    InventoryData InventoryData { get; }
     SkillID PrimarySkillId { get; }
 
     void AddXp(int xpToAdd);

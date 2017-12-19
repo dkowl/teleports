@@ -18,7 +18,7 @@ public class PlayerData : IPlayerData
     [SerializeField] private SkillTreeSlot[] skillTreeSlots;
     [SerializeField] private SkillID primarySkill;
     [SerializeField] private SkillID[] secondarySkills;
-    [SerializeField] private UnitData liveUnitData;
+    [SerializeField] private UnitData unitData;
     [SerializeField] private TeleportData teleportData;
     [SerializeField] private InventoryData inventoryData;
 
@@ -41,7 +41,7 @@ public class PlayerData : IPlayerData
         {
             secondarySkills[i] = new SkillID();
         }
-        liveUnitData = MainData.CurrentGameData.GetRace(raceName).BaseStats;
+        unitData = MainData.CurrentGameData.GetRace(raceName).BaseStats;
         teleportData = new TeleportData();
         inventoryData = new InventoryData();
         CorrectInvalidData();
@@ -132,27 +132,22 @@ public class PlayerData : IPlayerData
         }
     }
 
-    public UnitData LiveUnitData
+    public UnitData UnitData
     {
         get
         {
-            if(!liveUnitData.IsInitialized)
+            if(!unitData.IsInitialized)
             {
-                liveUnitData = MainData.CurrentGameData.GetRace(raceName).BaseStats;
+                unitData = MainData.CurrentGameData.GetRace(raceName).BaseStats;
             }
 
-            return liveUnitData;
+            return unitData;
         }
     }
 
     public TeleportData CurrentTeleportData
     {
         get { return teleportData; }
-    }
-
-    public InventoryData InventoryData
-    {
-        get { return inventoryData; }
     }
 
     public SkillID PrimarySkillId
@@ -207,21 +202,21 @@ public class PlayerData : IPlayerData
         switch (type)
         {
             case PlayerStats.Hp:
-                return LiveUnitData.GetAttribute(UnitAttributes.Type.Hp).Value;
+                return UnitData.GetAttribute(UnitAttributes.Type.Hp).Value;
             case PlayerStats.Armor:
-                return LiveUnitData.GetAttribute(UnitAttributes.Type.Armor).Value;
+                return UnitData.GetAttribute(UnitAttributes.Type.Armor).Value;
             case PlayerStats.ArmorIgnore:
                 return 0; //TODO
             case PlayerStats.Damage:
                 return 0; //TODO
             case PlayerStats.MoveSpeed:
-                return LiveUnitData.GetAttribute(UnitAttributes.Type.MoveSpeed).Value;
+                return UnitData.GetAttribute(UnitAttributes.Type.MoveSpeed).Value;
             case PlayerStats.Reach:
-                return LiveUnitData.GetAttribute(UnitAttributes.Type.Reach).Value;
+                return UnitData.GetAttribute(UnitAttributes.Type.Reach).Value;
             case PlayerStats.Regen:
-                return LiveUnitData.GetAttribute(UnitAttributes.Type.Regen).Value;
+                return UnitData.GetAttribute(UnitAttributes.Type.Regen).Value;
             case PlayerStats.ViewRange:
-                return LiveUnitData.GetAttribute(UnitAttributes.Type.ViewRange).Value;
+                return UnitData.GetAttribute(UnitAttributes.Type.ViewRange).Value;
             case PlayerStats.DamagePerSecond:
                 return 0; //TODO: Divide by attack speed
             case PlayerStats.TeleportPower:

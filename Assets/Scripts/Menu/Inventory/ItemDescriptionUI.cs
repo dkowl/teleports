@@ -8,8 +8,14 @@ using Text = TMPro.TextMeshProUGUI;
 public class ItemDescriptionUI : MonoBehaviour {
 
     [SerializeField] private Text text;
-
+    private InventoryMenu parentMenu;
     private ItemData itemData;
+
+    void Awake()
+    {
+        parentMenu = GetComponentInParent<InventoryMenu>();
+        Debug.Assert(parentMenu != null);
+    }
 
 
     public ItemData ItemData
@@ -36,8 +42,9 @@ public class ItemDescriptionUI : MonoBehaviour {
 
             if (itemData.IsType(ItemType.Weapon))
             {
-                Debug.Log("CO");
                 WeaponData weaponData = itemData.WeaponData;
+                UnitData unitData = parentMenu.UnitData;
+
                 text.text =
                     "Damage: " + weaponData.MinDamage.ToString() + " - " + weaponData.MaxDamage.ToString();
             }

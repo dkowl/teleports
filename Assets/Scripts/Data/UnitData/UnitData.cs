@@ -76,4 +76,9 @@ public class UnitData {
     {
         get { return mainAttack; }
     }
+
+    public InventoryData Inventory
+    {
+        get { return inventory; }
+    }
 }

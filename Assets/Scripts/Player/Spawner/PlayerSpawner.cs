@@ -31,7 +31,7 @@ public static class PlayerSpawner {
         {
             case PlayerSpawnerParams.SpawnType.UI:
 
-                foreach (var itemInfo in playerData.InventoryData.GetEquippedItems())
+                foreach (var itemInfo in playerData.UnitData.Inventory.GetEquippedItems())
                 {
                     ItemSpawner.Spawn(p.ParentObject, itemInfo.Item, itemInfo.PrimarySlot);
                 }
@@ -49,7 +49,7 @@ public static class PlayerSpawner {
                 {
                     unit = player.AddComponent<Unit>();
                 }
-                unit.UnitData = playerData.BaseUnitData;
+                unit.UnitData = playerData.UnitData;
                 unit.UnitData.Name = playerData.CharacterName;
 
                 if (controller == null)
@@ -75,7 +75,7 @@ public static class PlayerSpawner {
                 GameObject items = new GameObject("Items");   
                 items.transform.parent = player.transform;
 
-                foreach (var itemInfo in playerData.InventoryData.GetEquippedItems())
+                foreach (var itemInfo in playerData.UnitData.Inventory.GetEquippedItems())
                 {
                     ItemData itemData = itemInfo.Item;
                     GameObject itemObject = new GameObject(itemData.DisplayName);

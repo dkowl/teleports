@@ -7,6 +7,7 @@ using Teleports.Utils;
 
 public class InventoryMenu : SerializedMonoBehaviour {
 
+    [SerializeField] UnitData unitData;
     [OdinSerialize, System.NonSerialized] InventoryData inventoryData;
     [SerializeField] InventoryItemSpawner itemSpawner;
     [SerializeField] CameraMeshTargeter cameraTargeter;
@@ -91,6 +92,11 @@ public class InventoryMenu : SerializedMonoBehaviour {
             internalItemId++;
         }
         itemSpawner = new InventoryItemSpawner(itemPrefabs);
+    }
+
+    public UnitData UnitData
+    {
+        get { return unitData; }
     }
 
     public InventoryData InventoryData
