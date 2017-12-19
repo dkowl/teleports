@@ -10,6 +10,7 @@ public class CurrentItemUI : LoadableBehaviour {
 	[SerializeField] private InventoryMenu parentMenu;
     [SerializeField] private RawImage itemPreview;
     [SerializeField] private Text itemName;
+    [SerializeField] private ItemDescriptionUI itemDescription;
 
     protected override void LoadDataInternal()
     {
@@ -18,6 +19,7 @@ public class CurrentItemUI : LoadableBehaviour {
         Debug.Assert(parentMenu != null);
 
         ItemData currentItem = parentMenu.SelectedItem;
+        itemDescription.ItemData = currentItem;
 
         if (currentItem != null)
         {

@@ -32,6 +32,8 @@ public class ItemData {
     public ItemData(ItemData other)
     {
         displayName = other.displayName;
+        typeFlags = other.typeFlags;
+        weaponData = other.weaponData;
         skills = other.skills;
         perks = other.perks;
         slotCombinations = other.slotCombinations;
@@ -76,6 +78,11 @@ public class ItemData {
     public string DisplayName
     {
         get { return displayName; }
+    }
+
+    public WeaponData WeaponData
+    {
+        get { return weaponData; }
     }
 
     public List<Perk> Perks

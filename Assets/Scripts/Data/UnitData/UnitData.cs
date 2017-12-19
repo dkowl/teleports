@@ -57,6 +57,11 @@ public class UnitData {
         }
     }
 
+    public UnitAbilities Abilities
+    {
+        get { return abilities; }
+    }
+
     public Attribute GetAttribute(UnitAttributes.Type type)
     {
         return attributes.GetAttribute(type);
