@@ -28,25 +28,22 @@ public class UnitWeaponCombiner {
             unit.Abilities.Strength >= weapon.StrRequired &&
             unit.Abilities.Dexterity >= weapon.DexRequired &&
             unit.Abilities.Intelligence >= weapon.IntRequired;
-
-        if (canUse)
-        {
-            bonusStr = unit.Abilities.Strength - weapon.StrRequired;
-            bonusDex = unit.Abilities.Dexterity - weapon.DexRequired;
-            bonusInt = unit.Abilities.Intelligence - weapon.IntRequired;
-            damageBonus = new DamageBonus(weapon, bonusStr, bonusDex, bonusInt);
-            speedBonus = new SpeedBonus(weapon, bonusStr, bonusDex, bonusInt, weapon.CastTime + weapon.AfterCastLockTime);
-            reachBonus = new ReachBonus(weapon, bonusStr, bonusDex, bonusInt);
-            minDamage = weapon.MinDamage + (int)damageBonus.Value;
-            maxDamage = weapon.MaxDamage + (int)damageBonus.Value;
-            weaponReach = weapon.Reach + reachBonus.Value;
-            totalReach = weaponReach + MainData.CurrentGameData.GetSkill(unit.MainAttack).Reach;
-            castTime = weapon.CastTime * speedBonus.Multiplier;
-            afterCastLockTime = weapon.AfterCastLockTime * speedBonus.Multiplier;
-            attackTime = castTime + afterCastLockTime;
-            attacksPerSecond = 1 / attackTime;
-            damagePerSecond = ((float)(minDamage + maxDamage) / 2) / attackTime;
-        }
+        
+        bonusStr = Mathf.Max(0, unit.Abilities.Strength - weapon.StrRequired);
+        bonusDex = Mathf.Max(0, unit.Abilities.Dexterity - weapon.DexRequired);
+        bonusInt = Mathf.Max(0, unit.Abilities.Intelligence - weapon.IntRequired);
+        damageBonus = new DamageBonus(weapon, bonusStr, bonusDex, bonusInt);
+        speedBonus = new SpeedBonus(weapon, bonusStr, bonusDex, bonusInt, weapon.CastTime + weapon.AfterCastLockTime);
+        reachBonus = new ReachBonus(weapon, bonusStr, bonusDex, bonusInt);
+        minDamage = weapon.MinDamage + (int)damageBonus.Value;
+        maxDamage = weapon.MaxDamage + (int)damageBonus.Value;
+        weaponReach = weapon.Reach + reachBonus.Value;
+        totalReach = weaponReach + MainData.CurrentGameData.GetSkill(unit.MainAttack).Reach;
+        castTime = weapon.CastTime * speedBonus.Multiplier;
+        afterCastLockTime = weapon.AfterCastLockTime * speedBonus.Multiplier;
+        attackTime = castTime + afterCastLockTime;
+        attacksPerSecond = 1 / attackTime;
+        damagePerSecond = ((float)(minDamage + maxDamage) / 2) / attackTime;        
     }
 
     public bool CanUse

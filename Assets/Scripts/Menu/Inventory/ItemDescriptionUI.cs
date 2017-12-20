@@ -36,7 +36,7 @@ public class ItemDescriptionUI : MonoBehaviour {
             abilityStatDescriptors.enabled = true;
             abilityStatValues.enabled = true;
 
-            if (combiner.CanUse)
+            if (true)
             {
                 generalStatsText.text = string.Format(
                     "<size=+24>{0:F1}</size> damage / second\n" +
@@ -54,6 +54,10 @@ public class ItemDescriptionUI : MonoBehaviour {
                     ColorUtility.ToHtmlStringRGB(StatValueTextColor(weaponData, combiner.ReachBonusData)),
                     combiner.WeaponReach,
                     ReachBonusInfoString(weaponData, combiner.ReachBonusData)
+                    );
+
+                abilityStatValues.text = string.Format(
+                    ""
                     );
             }
             else
