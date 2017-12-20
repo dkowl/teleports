@@ -15,6 +15,7 @@ public class InventorySlotUI : LoadableBehaviour {
     [SerializeField] private RawImage itemIcon;
     [SerializeField] private Image borderImage;
     [SerializeField] private Text countText;
+    [SerializeField] private RawImage lockIcon;
     [SerializeField] private Color selectedBorderColor;
     [SerializeField] private Color deselectedBorderColor;
 
@@ -32,13 +33,21 @@ public class InventorySlotUI : LoadableBehaviour {
             {
                 itemIcon.enabled = true;
                 ItemData itemData = inventorySlotData.Item;
-
+                Debug.Assert(itemData != null);
+                bool locked = false;
+                if (itemData.IsType(ItemType.Weapon)) {
+                    UnitWeaponCombiner combiner = new UnitWeaponCombiner(parentMenu.UnitData, itemData.WeaponData);
+                    locked = !combiner.CanUse;
+                }
+            
                 itemIcon.texture = parentMenu.ItemIconAtlas;
                 itemIcon.uvRect = parentMenu.GetItemIconUvRect(itemData);
+                lockIcon.enabled = locked;
             }
             else
             {
                 itemIcon.enabled = false;
+                lockIcon.enabled = false;
             }
 
             int count = inventorySlotData.Count;
