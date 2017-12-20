@@ -57,7 +57,13 @@ public class ItemDescriptionUI : MonoBehaviour {
                     );
 
                 abilityStatValues.text = string.Format(
-                    ""
+                    "{0}\n{1}\n\n{2}\n{3}\n\n{4}\n{5}",
+                    weaponData.StrRequired,
+                    AbilityBonusValueString(weaponData.StrDamageBonus, weaponData.StrSpeedBonus, weaponData.StrReachBonus),
+                    weaponData.DexRequired,
+                    AbilityBonusValueString(weaponData.DexDamageBonus, weaponData.DexSpeedBonus, weaponData.DexReachBonus),
+                    weaponData.IntRequired,
+                    AbilityBonusValueString(weaponData.IntDamageBonus, weaponData.IntSpeedBonus, weaponData.IntReachBonus)
                     );
             }
             else
@@ -157,6 +163,43 @@ public class ItemDescriptionUI : MonoBehaviour {
             result += ")";
         }
         return result;
+    }
+
+    private string AbilityBonusValueString(float damageBonus, float speedBonus, float reachBonus)
+    {
+        float[] bonuses = { damageBonus, speedBonus, reachBonus };
+        if(Mathf.Max(bonuses) == 0)
+        {
+            return " - ";
+        }
+
+        var result = new System.Text.StringBuilder();
+        bool someTextBefore = false;
+        for(int i = 0; i<bonuses.Length; i++)
+        {
+            if (bonuses[i] > 0)
+            {
+                if (someTextBefore)
+                {
+                    result.Append(", ");
+                }
+                result.Append("+");
+                switch (i)
+                {
+                    case 0:
+                        result.AppendFormat("{0:F1} damage", bonuses[i]);
+                        break;
+                    case 1:
+                        result.AppendFormat("{0:P} speed", bonuses[i]);
+                        break;
+                    case 2:
+                        result.AppendFormat("{0:F2} reach", bonuses[i]);
+                        break;
+                }
+                someTextBefore = true;
+            }
+        }
+        return result.ToString();
     }
 
     public ItemData ItemData
