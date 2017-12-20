@@ -12,12 +12,6 @@ public class ItemDescriptionUI : MonoBehaviour {
     private ItemData itemData;
     [SerializeField] private UnitWeaponCombiner combiner;
 
-    void Awake()
-    {
-        parentMenu = GetComponentInParent<InventoryMenu>();
-        Debug.Assert(parentMenu != null);
-    }
-
     private Color StatValueTextColor(float baseValue, float strBonus, float dexBonus, float intBonus)
     {
         float total = baseValue + strBonus + dexBonus + intBonus;
@@ -46,6 +40,7 @@ public class ItemDescriptionUI : MonoBehaviour {
         {
             baseValue = weaponData.Reach;
         }
+        Debug.Log(bonus);
         return StatValueTextColor(baseValue, bonus.StrComponent, bonus.DexComponent, bonus.IntComponent);
     }
 
@@ -61,8 +56,22 @@ public class ItemDescriptionUI : MonoBehaviour {
             }
             result += ")";
         }
+        return result;        
+    }
+
+    private string SpeedBonusInfoString(WeaponData weaponData, UnitWeaponCombiner.SpeedBonus bonus)
+    {
+        string result = "";
+        if (bonus.Value > 0)
+        {
+            result += string.Format("({0:F2} ", weaponData.AttacksPerSecond);
+            if (bonus.DexComponent > 0)
+            {
+                result += string.Format("<color=green>+ {0:F2}</color>", bonus.DexComponent);
+            }
+            result += ")";
+        }
         return result;
-        
     }
 
     public ItemData ItemData
@@ -87,18 +96,22 @@ public class ItemDescriptionUI : MonoBehaviour {
             if (itemData.IsType(ItemType.Weapon))
             {
                 WeaponData weaponData = itemData.WeaponData;
-                UnitData unitData = parentMenu.UnitData;
+                UnitData unitData = ParentMenu.UnitData;
                 combiner = new UnitWeaponCombiner(unitData, weaponData);
                 if (combiner.CanUse)
                 {
                     text.text = string.Format(
                         "<size=+24>{0:F1}</size> damage / second\n" +
-                        "<size=+4><#{1}>{2} - {3}</color></size> damage {4}",
+                        "<size=+4><#{1}>{2} - {3}</color></size> damage {4}\n" +
+                        "<size=+4><#{5}>{6:F2}</color></size> attacks / second {7}",
                         combiner.DamagePerSecond,
                         ColorUtility.ToHtmlStringRGB(StatValueTextColor(weaponData, combiner.DamageBonusData)),
                         combiner.MinDamage,
                         combiner.MaxDamage,
-                        DamageBonusInfoString(weaponData, combiner.DamageBonusData)
+                        DamageBonusInfoString(weaponData, combiner.DamageBonusData),
+                        ColorUtility.ToHtmlStringRGB(StatValueTextColor(weaponData, combiner.SpeedBonusData)),
+                        combiner.AttacksPerSecond,
+                        SpeedBonusInfoString(weaponData, combiner.SpeedBonusData)
                         );
                 }
                 else
@@ -107,7 +120,19 @@ public class ItemDescriptionUI : MonoBehaviour {
                 }
                     
             }
+        }
+    }
 
+    private InventoryMenu ParentMenu
+    {
+        get
+        {
+            if (parentMenu == null)
+            {
+                parentMenu = GetComponentInParent<InventoryMenu>();
+            }
+            Debug.Assert(parentMenu != null);
+            return parentMenu;
         }
     }
 }

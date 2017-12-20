@@ -19,6 +19,7 @@ public class UnitWeaponCombiner {
     [SerializeField] private float castTime;
     [SerializeField] private float afterCastLockTime;
     [SerializeField] private float attackTime;
+    [SerializeField] private float attacksPerSecond;
     [SerializeField] private float damagePerSecond;
 
     public UnitWeaponCombiner(UnitData unit, WeaponData weapon)
@@ -43,6 +44,7 @@ public class UnitWeaponCombiner {
             castTime = weapon.CastTime * speedBonus.Multiplier;
             afterCastLockTime = weapon.AfterCastLockTime * speedBonus.Multiplier;
             attackTime = castTime + afterCastLockTime;
+            attacksPerSecond = 1 / attackTime;
             damagePerSecond = ((float)(minDamage + maxDamage) / 2) / attackTime;
         }
     }
@@ -77,6 +79,11 @@ public class UnitWeaponCombiner {
         get { return maxDamage; }
     }
 
+    public float AttacksPerSecond
+    {
+        get { return attacksPerSecond; }
+    }
+
     public float DamagePerSecond
     {
         get { return damagePerSecond; }
@@ -107,6 +114,18 @@ public class UnitWeaponCombiner {
         public float Value
         {
             get { return value; }
+        }
+
+        public override string ToString()
+        {
+            return string.Format(
+                "{0} - Str: {1}, Dex: {2}, Int: {3}, Total: {4}\n",
+                base.ToString(),
+                strComponent,
+                dexComponent,
+                intComponent,
+                value
+                );
         }
     }
 
@@ -141,7 +160,7 @@ public class UnitWeaponCombiner {
                 multipliers[i] = Mathf.Sqrt(Mathf.Pow(1 - weaponBonuses[i], abilityBonuses[i]));
                 absoluteDeltas[i] = (multiplier - multiplier * multipliers[i]) * (1 - maxMultiplier) * attackTime;
                 float currentAttackTime = attackTime * multiplier;
-                perSecondDeltas[i] = (1 / currentAttackTime * multipliers[i]) - (1 / currentAttackTime);
+                perSecondDeltas[i] = (1 / (currentAttackTime * multipliers[i])) - (1 / currentAttackTime);
                 value += perSecondDeltas[i];
                 multiplier *= multipliers[i];
             }

@@ -59,6 +59,11 @@ public class WeaponData {
         get { return CastTime + AfterCastLockTime; }
     }
 
+    public float AttacksPerSecond
+    {
+        get { return 1 / TotalAttackTime; }
+    }
+
     public int StrRequired
     {
         get { return (int)strRequired.Value; }
