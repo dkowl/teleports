@@ -9,6 +9,7 @@ public class CurrentItemUI : LoadableBehaviour {
 
 	[SerializeField] private InventoryMenu parentMenu;
     [SerializeField] private RawImage itemPreview;
+    [SerializeField] private RawImage itemPreviewLockImage;
     [SerializeField] private Text itemName;
     [SerializeField] private ItemDescriptionUI itemDescription;
 
@@ -23,12 +24,28 @@ public class CurrentItemUI : LoadableBehaviour {
 
         if (currentItem != null)
         {
+            bool locked = false;
+            if (currentItem.IsType(ItemType.Weapon))
+            {
+                UnitData unitData = parentMenu.UnitData;
+                UnitWeaponCombiner combiner = new UnitWeaponCombiner(unitData, currentItem.WeaponData);
+                locked = !combiner.CanUse;
+            }
             itemPreview.enabled = true;
+            if (locked)
+            {
+                itemPreviewLockImage.enabled = true;
+            }
+            else
+            {
+                itemPreviewLockImage.enabled = false;
+            }
             itemName.text = currentItem.DisplayName;
         }
         else
         {
             itemPreview.enabled = false;
+            itemPreviewLockImage.enabled = false;
             itemName.text = "";
         }
     }
