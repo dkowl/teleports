@@ -7,10 +7,61 @@ using Text = TMPro.TextMeshProUGUI;
 [ExecuteInEditMode]
 public class ItemDescriptionUI : MonoBehaviour {
 
-    [SerializeField] private Text text;
+    [SerializeField] private Text generalStatsText;
+    [SerializeField] private Text abilityNames;
+    [SerializeField] private Text abilityStatDescriptors;
+    [SerializeField] private Text abilityStatValues;
     private InventoryMenu parentMenu;
     private ItemData itemData;
     [SerializeField] private UnitWeaponCombiner combiner;
+
+    private void OnItemDataChange()
+    {
+        if (itemData == null)
+        {
+            generalStatsText.text = "";
+            abilityNames.enabled = false;
+            abilityStatDescriptors.enabled = false;
+            abilityStatValues.enabled = false;
+            return;
+        }
+
+        if (itemData.IsType(ItemType.Weapon))
+        {
+            WeaponData weaponData = itemData.WeaponData;
+            UnitData unitData = ParentMenu.UnitData;
+            combiner = new UnitWeaponCombiner(unitData, weaponData);
+
+            abilityNames.enabled = true;
+            abilityStatDescriptors.enabled = true;
+            abilityStatValues.enabled = true;
+
+            if (combiner.CanUse)
+            {
+                generalStatsText.text = string.Format(
+                    "<size=+24>{0:F1}</size> damage / second\n" +
+                    "<size=+4><#{1}><u>{2} - {3}</u></color></size> damage {4}\n" +
+                    "<size=+4><#{5}><u>{6:F2}</u></color></size> attacks / second {7}\n" +
+                    "<size=+4><#{8}><u>{9:F2}m</u></color></size> reach {10}",
+                    combiner.DamagePerSecond,
+                    ColorUtility.ToHtmlStringRGB(StatValueTextColor(weaponData, combiner.DamageBonusData)),
+                    combiner.MinDamage,
+                    combiner.MaxDamage,
+                    DamageBonusInfoString(weaponData, combiner.DamageBonusData),
+                    ColorUtility.ToHtmlStringRGB(StatValueTextColor(weaponData, combiner.SpeedBonusData)),
+                    combiner.AttacksPerSecond,
+                    SpeedBonusInfoString(weaponData, combiner.SpeedBonusData),
+                    ColorUtility.ToHtmlStringRGB(StatValueTextColor(weaponData, combiner.ReachBonusData)),
+                    combiner.WeaponReach,
+                    ReachBonusInfoString(weaponData, combiner.ReachBonusData)
+                    );
+            }
+            else
+            {
+                generalStatsText.text = "Locked";
+            }
+        }
+    }
 
     private Color StatValueTextColor(float baseValue, float strBonus, float dexBonus, float intBonus)
     {
@@ -18,11 +69,18 @@ public class ItemDescriptionUI : MonoBehaviour {
         float baseComponent = baseValue / total;
         float colorComponent = 1 - baseComponent;
         float maxBonus = Mathf.Max(strBonus, dexBonus, intBonus);
-        return new Color(
-            baseComponent + colorComponent * (strBonus / maxBonus),
-            baseComponent + colorComponent * (dexBonus / maxBonus),
-            baseComponent + colorComponent * (intBonus / maxBonus)
-            );
+        if (maxBonus == 0)
+        {
+            return Color.white;
+        }
+        else
+        {
+            return new Color(
+                baseComponent + colorComponent * (strBonus / maxBonus),
+                baseComponent + colorComponent * (dexBonus / maxBonus),
+                baseComponent + colorComponent * (intBonus / maxBonus)
+                );
+        }
     }
 
     private Color StatValueTextColor(WeaponData weaponData, UnitWeaponCombiner.AbilityStatBonus bonus)
@@ -52,7 +110,7 @@ public class ItemDescriptionUI : MonoBehaviour {
             result += string.Format("({0} - {1} ", weaponData.MinDamage, weaponData.MaxDamage);
             if(bonus.StrComponent > 0)
             {
-                result += string.Format("<color=red>+ {0:F0}</color>", bonus.StrComponent);
+                result += string.Format("<#FF4444>+ {0:F0}</color>", bonus.StrComponent);
             }
             result += ")";
         }
@@ -67,7 +125,30 @@ public class ItemDescriptionUI : MonoBehaviour {
             result += string.Format("({0:F2} ", weaponData.AttacksPerSecond);
             if (bonus.DexComponent > 0)
             {
-                result += string.Format("<color=green>+ {0:F2}</color>", bonus.DexComponent);
+                result += string.Format("<#44FF44>+ {0:F2}</color>", bonus.DexComponent);
+            }
+            result += ")";
+        }
+        return result;
+    }
+
+    private string ReachBonusInfoString(WeaponData weaponData, UnitWeaponCombiner.ReachBonus bonus)
+    {
+        string result = "";
+        if (bonus.Value > 0)
+        {
+            result += string.Format("({0:F2} ", weaponData.Reach);
+            if (bonus.StrComponent > 0)
+            {
+                result += string.Format("<#FF4444>+ {0:F2}</color>", bonus.StrComponent);
+            }
+            if (bonus.DexComponent > 0)
+            {
+                result += string.Format("<#44FF44>+ {0:F2}</color>", bonus.DexComponent);
+            }
+            if (bonus.IntComponent > 0)
+            {
+                result += string.Format("<#4444FF>+ {0:F2}</color>", bonus.IntComponent);
             }
             result += ")";
         }
@@ -81,44 +162,11 @@ public class ItemDescriptionUI : MonoBehaviour {
             if (value != itemData)
             {
                 itemData = value;
+                OnItemDataChange();
             }
             else
             {
                 return;
-            }
-
-            if(itemData == null)
-            {
-                text.text = "";
-                return;
-            }
-
-            if (itemData.IsType(ItemType.Weapon))
-            {
-                WeaponData weaponData = itemData.WeaponData;
-                UnitData unitData = ParentMenu.UnitData;
-                combiner = new UnitWeaponCombiner(unitData, weaponData);
-                if (combiner.CanUse)
-                {
-                    text.text = string.Format(
-                        "<size=+24>{0:F1}</size> damage / second\n" +
-                        "<size=+4><#{1}>{2} - {3}</color></size> damage {4}\n" +
-                        "<size=+4><#{5}>{6:F2}</color></size> attacks / second {7}",
-                        combiner.DamagePerSecond,
-                        ColorUtility.ToHtmlStringRGB(StatValueTextColor(weaponData, combiner.DamageBonusData)),
-                        combiner.MinDamage,
-                        combiner.MaxDamage,
-                        DamageBonusInfoString(weaponData, combiner.DamageBonusData),
-                        ColorUtility.ToHtmlStringRGB(StatValueTextColor(weaponData, combiner.SpeedBonusData)),
-                        combiner.AttacksPerSecond,
-                        SpeedBonusInfoString(weaponData, combiner.SpeedBonusData)
-                        );
-                }
-                else
-                {
-                    text.text = "Locked";
-                }
-                    
             }
         }
     }

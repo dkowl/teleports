@@ -79,6 +79,11 @@ public class UnitWeaponCombiner {
         get { return maxDamage; }
     }
 
+    public float WeaponReach
+    {
+        get { return weaponReach; }
+    }
+
     public float AttacksPerSecond
     {
         get { return attacksPerSecond; }
@@ -171,8 +176,7 @@ public class UnitWeaponCombiner {
 
         public float Multiplier
         {
-            get
-            { return multiplier; }
+            get { return multiplier; }
         }
     }
 
