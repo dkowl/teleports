@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEditor;
 
+[ExecuteInEditMode]
 public class TextureGenerator : MonoBehaviour {
 
     private static readonly ValueDropdownList<Vector2Int> textureSizeValues = new ValueDropdownList<Vector2Int>
@@ -12,7 +14,7 @@ public class TextureGenerator : MonoBehaviour {
 
     [SerializeField, ValueDropdown("textureSizeValues")] private Vector2Int textureSize;
 	[SerializeField] private int colorCount = 16;
-    [SerializeField] private Color[] colors;
+    [SerializeField, OnValueChanged("UpdateTexture", true)] private Color[] colors;
     [SerializeField, ReadOnly] private bool isInitialized = false;
     [SerializeField, ReadOnly] Texture2D texture;
 
@@ -22,6 +24,8 @@ public class TextureGenerator : MonoBehaviour {
         {
             InitializeColors();
         }
+        CreateTexture();
+        ApplyTexture();
     }
 
     [Button]
@@ -38,13 +42,13 @@ public class TextureGenerator : MonoBehaviour {
         texture.filterMode = FilterMode.Point;
 
         int colorIndex = 0;
-        for(int i = 0; i<textureSize.y; i++)
+        for(int i = textureSize.y - 1; i>=0; i--)
         {
-            for(int j = textureSize.x - 1; j>=0; j--)
+            for(int j = 0; j<textureSize.x; j++)
             {
                 Color color = Color.cyan;
                 if (colorIndex < colors.Length) color = colors[colorIndex];
-                texture.SetPixel(i, j, color);
+                texture.SetPixel(j, i, color);
                 colorIndex++;
             }
         }
@@ -57,8 +61,16 @@ public class TextureGenerator : MonoBehaviour {
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
         if(meshRenderer != null)
         {
-            meshRenderer.sharedMaterial.mainTexture = texture;
+            Material material = meshRenderer.sharedMaterial;
+            material.mainTexture = texture;
         }
+    }
+
+    [Button]
+    private void UpdateTexture()
+    {
+        CreateTexture();
+        ApplyTexture();
     }
 
 }
