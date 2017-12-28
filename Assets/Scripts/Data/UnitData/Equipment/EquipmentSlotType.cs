@@ -8,6 +8,7 @@ public enum EquipmentSlotType
     Head = 10,
     Torso = 20,
     Legs = 30,
+    Feet = 35,
     LeftArm = 40,
     RightArm = 50
 }

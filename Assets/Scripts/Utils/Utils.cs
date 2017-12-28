@@ -176,6 +176,19 @@ namespace Teleports.Utils
                 gObject.layer = layer;
             }
         }
+
+        public static void InitComponent<T>(this GameObject gameObject, ref T component) where T : Component
+        {
+            if(component == null)
+            {
+                component = gameObject.GetComponent<T>();
+            }
+
+            if(component == null)
+            {
+                component = gameObject.AddComponent<T>();
+            }
+        }
     }
 
     public static class RomanNumbers

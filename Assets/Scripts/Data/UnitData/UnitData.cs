@@ -10,6 +10,7 @@ public class UnitData {
     private const int labelWidth = 110;
 
     [SerializeField, PropertyOrder(-5), LabelWidth(labelWidth)] private string unitName;
+    [SerializeField, LabelWidth(labelWidth)] private string raceName;
     [SerializeField, PropertyOrder(-4), LabelWidth(labelWidth)] private int level;
     [SerializeField, InlineProperty, LabelWidth(labelWidth)] private UnitAbilities abilities;    
     [SerializeField, InlineProperty, LabelWidth(labelWidth)] private UnitAttributes attributes;
@@ -39,6 +40,11 @@ public class UnitData {
     {
         get { return unitName; }
         set { unitName = value; }
+    }
+
+    public string RaceName
+    {
+        get { return raceName; }
     }
 
     public int Level

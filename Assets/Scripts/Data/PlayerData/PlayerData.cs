@@ -10,7 +10,6 @@ public class PlayerData : IPlayerData
 
     //main attributes
     [SerializeField] private string characterName;
-    [SerializeField] private string raceName;
     [SerializeField] private int xp;
     [SerializeField] private int level = 1;
     [SerializeField] private int rankPoints;
@@ -20,12 +19,10 @@ public class PlayerData : IPlayerData
     [SerializeField] private SkillID[] secondarySkills;
     [SerializeField] private UnitData unitData;
     [SerializeField] private TeleportData teleportData;
-    [SerializeField] private InventoryData inventoryData;
 
     public PlayerData(string name, string raceName)
     {
         characterName = name;
-        this.raceName = raceName;
         xp = 0;
         level = 1;
         rankPoints = 0;
@@ -43,7 +40,6 @@ public class PlayerData : IPlayerData
         }
         unitData = MainData.CurrentGameData.GetRace(raceName).BaseStats;
         teleportData = new TeleportData();
-        inventoryData = new InventoryData();
         CorrectInvalidData();
     }
 
@@ -74,7 +70,6 @@ public class PlayerData : IPlayerData
             }
         }
         teleportData.CorrectInvalidData();
-        inventoryData.CorrectInvalidData();
     }
 
     #region interface implementation
@@ -89,7 +84,7 @@ public class PlayerData : IPlayerData
 
     public string RaceName
     {
-        get { return raceName; }
+        get { return unitData.RaceName; }
     }
 
     public int Xp
@@ -138,7 +133,7 @@ public class PlayerData : IPlayerData
         {
             if(!unitData.IsInitialized)
             {
-                unitData = MainData.CurrentGameData.GetRace(raceName).BaseStats;
+                unitData = MainData.CurrentGameData.GetRace(RaceName).BaseStats;
             }
 
             return unitData;

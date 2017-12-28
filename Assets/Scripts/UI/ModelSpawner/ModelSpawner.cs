@@ -5,16 +5,6 @@ using System;
 
 public abstract class ModelSpawner : LoadableBehaviour {
 
-    [Serializable]
-    public class ModelSpawnData
-    {
-        [SerializeField] public Vector3 localPositionOffset;
-        [SerializeField] public Vector3 localRotationOffset;
-
-        [NonSerialized] public GameObject spawnedObject;
-        [NonSerialized] public bool shouldRespawn;
-    }
-
     [SerializeField] protected List<ModelSpawnData> modelSpawnData;
 
     override protected void LoadDataInternal()
@@ -28,8 +18,7 @@ public abstract class ModelSpawner : LoadableBehaviour {
                 {
                     if (msData.shouldRespawn)
                     {
-                        Destroy(msData.spawnedObject);
-                        msData.spawnedObject.tag = "Untagged";
+                        Despawn(i);
                     }
                     else
                         continue;
@@ -53,6 +42,12 @@ public abstract class ModelSpawner : LoadableBehaviour {
 
     protected abstract GameObject GetModel(int id = 0);
 
+    private void Despawn(int id = 0)
+    {
+        Destroy(modelSpawnData[id].spawnedObject);
+        modelSpawnData[id].spawnedObject.tag = "Untagged";
+    }
+
     public void ShouldRespawn()
     {
         foreach(var i in modelSpawnData)
@@ -60,5 +55,23 @@ public abstract class ModelSpawner : LoadableBehaviour {
             i.shouldRespawn = true;
         }
         LoadDataInternal();
+    }
+
+    public void SetPositionOffset(Vector3 offset, int id = 0)
+    {
+        if(id < modelSpawnData.Count)
+        {
+            modelSpawnData[id].localPositionOffset = offset;
+        }
+    }
+
+    [Serializable]
+    public class ModelSpawnData
+    {
+        [SerializeField] public Vector3 localPositionOffset;
+        [SerializeField] public Vector3 localRotationOffset;
+
+        [NonSerialized] public GameObject spawnedObject;
+        [NonSerialized] public bool shouldRespawn;
     }
 }

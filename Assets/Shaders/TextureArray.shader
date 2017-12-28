@@ -1,4 +1,4 @@
-﻿Shader "Unlit/TextureArray"
+﻿/*Shader "Unlit/TextureArray"
 {
 	Properties
 	{

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEditor;
 
 [ExecuteInEditMode]
 public class TextureGenerator : MonoBehaviour {
@@ -59,9 +58,21 @@ public class TextureGenerator : MonoBehaviour {
     private void ApplyTexture()
     {
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        Material material = null;
         if(meshRenderer != null)
         {
-            Material material = meshRenderer.sharedMaterial;
+            material = meshRenderer.sharedMaterial;
+        }
+        else
+        {
+            SkinnedMeshRenderer skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
+            if(skinnedMeshRenderer != null)
+            {
+                material = skinnedMeshRenderer.sharedMaterial;
+            }
+        }
+        if (material != null)
+        {
             material.mainTexture = texture;
         }
     }

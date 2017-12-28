@@ -9,6 +9,7 @@ public class EquipmentData {
     [SerializeField, TabGroup("Head"), HideLabel] private EquipmentSlotData head;
     [SerializeField, TabGroup("Torso"), HideLabel] private EquipmentSlotData torso;
     [SerializeField, TabGroup("Legs"), HideLabel] private EquipmentSlotData legs;
+    [SerializeField, TabGroup("Feet"), HideLabel] private EquipmentSlotData feet;
     [SerializeField, TabGroup("Left Arm"), HideLabel] private EquipmentSlotData leftArm;
     [SerializeField, TabGroup("Right Arm"), HideLabel] private EquipmentSlotData rightArm;
 
@@ -17,6 +18,7 @@ public class EquipmentData {
         head = new EquipmentSlotData();
         torso = new EquipmentSlotData();
         legs = new EquipmentSlotData();
+        feet = new EquipmentSlotData();
         leftArm = new EquipmentSlotData();
         rightArm = new EquipmentSlotData();
     }
@@ -31,6 +33,8 @@ public class EquipmentData {
                 return leftArm;
             case EquipmentSlotType.Legs:
                 return legs;
+            case EquipmentSlotType.Feet:
+                return feet;
             case EquipmentSlotType.RightArm:
                 return rightArm;
             case EquipmentSlotType.Torso:
@@ -123,6 +127,7 @@ public class EquipmentData {
         var result = new List<EquippedItemInfo>();
         foreach(EquipmentSlotType slotType in System.Enum.GetValues(typeof(EquipmentSlotType)))
         {
+            if (slotType == EquipmentSlotType.None) continue;
             EquipmentSlotData slotData = GetEquipmentSlot(slotType);
             ItemData item = slotData.Item;
             if (item != null && slotData.Primary)

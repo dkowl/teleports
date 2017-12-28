@@ -5,14 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public partial class SaveData
 {
-    [SerializeField]
-    private string accountName;
-    [SerializeField]
-    private byte characterSlotLimit;
-    [SerializeField]
-    private byte currentPlayerDataID;
-    [SerializeField]
-    private PlayerData[] playerData;
+    [SerializeField] private string accountName;
+    [SerializeField] private byte characterSlotLimit;
+    [SerializeField] private byte currentPlayerDataID;
+    [SerializeField] private PlayerData[] playerData;
 
     public delegate void OnCharacterIDChanged();
     public static event OnCharacterIDChanged OnCharacterIDChangedEvent;
