@@ -108,7 +108,6 @@ public class ItemDescriptionUI : MonoBehaviour {
         {
             baseValue = weaponData.Reach;
         }
-        Debug.Log(bonus);
         return StatValueTextColor(baseValue, bonus.StrComponent, bonus.DexComponent, bonus.IntComponent);
     }
 

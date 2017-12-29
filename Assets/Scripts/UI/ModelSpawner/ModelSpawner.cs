@@ -5,7 +5,7 @@ using System;
 
 public abstract class ModelSpawner : LoadableBehaviour {
 
-    [SerializeField] protected List<ModelSpawnData> modelSpawnData;
+    [SerializeField] protected List<ModelSpawnData> modelSpawnData = new List<ModelSpawnData>();
 
     override protected void LoadDataInternal()
     {
@@ -57,11 +57,24 @@ public abstract class ModelSpawner : LoadableBehaviour {
         LoadDataInternal();
     }
 
+    public void AddSpawnData()
+    {
+        modelSpawnData.Add(new ModelSpawnData());
+    }
+
     public void SetPositionOffset(Vector3 offset, int id = 0)
     {
         if(id < modelSpawnData.Count)
         {
             modelSpawnData[id].localPositionOffset = offset;
+        }
+    }
+
+    public void SetRotationOffset(Vector3 offset, int id = 0)
+    {
+        if (id < modelSpawnData.Count)
+        {
+            modelSpawnData[id].localRotationOffset = offset;
         }
     }
 

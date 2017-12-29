@@ -22,4 +22,17 @@ public class UnitModelSpawner : ModelSpawner {
             ShouldRespawn();
         }
     }
+
+    public SkinnedMeshRenderer SkinnedMeshRenderer
+    {
+        get
+        {
+            if (Application.isPlaying)
+            {
+                return modelSpawnData[0].spawnedObject.GetComponentInChildren<SkinnedMeshRenderer>();
+            }
+            else
+                return null;
+        }
+    }
 }

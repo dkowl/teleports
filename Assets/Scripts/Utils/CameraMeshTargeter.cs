@@ -5,9 +5,11 @@ using Sirenix.OdinInspector;
 
 public class CameraMeshTargeter : MonoBehaviour {
 
+    [SerializeField] private MeshComponentType meshComponentType;
     [SerializeField, OnValueChanged("UpdateMesh")] MeshFilter meshFilter;
+    [SerializeField, OnValueChanged("UpdateMesh")] SkinnedMeshRenderer skinnedMeshRenderer;
     [SerializeField] Camera cam;
-    [SerializeField] float paddingPercentage = 0.1f;
+    [SerializeField] float paddingPercentage = 0.25f;
     [SerializeField] float distance = 10.0f;
 
     Mesh mesh;
@@ -15,7 +17,14 @@ public class CameraMeshTargeter : MonoBehaviour {
     void Awake()
     {
         cam = GetComponent<Camera>();
-        SetTarget(meshFilter);
+        if (meshFilter != null)
+        {
+            SetTarget(meshFilter);
+        }
+        else if(skinnedMeshRenderer != null)
+        {
+            SetTarget(skinnedMeshRenderer);
+        }
     }
 
     void Update()
@@ -25,14 +34,29 @@ public class CameraMeshTargeter : MonoBehaviour {
 
     public void SetTarget(MeshFilter newTarget)
     {
-        meshFilter = newTarget;
-        UpdateMesh();
-        Target();
+        if (newTarget != null)
+        {
+            meshComponentType = MeshComponentType.MeshFilter;
+            meshFilter = newTarget;
+            UpdateMesh();
+            Target();
+        }
+    }
+
+    public void SetTarget(SkinnedMeshRenderer newTarget)
+    {
+        if (newTarget != null)
+        {
+            meshComponentType = MeshComponentType.SkinnedMeshRenderer;
+            skinnedMeshRenderer = newTarget;
+            UpdateMesh();
+            Target();
+        }
     }
 
     void Target()
     {
-        List<Vector3> cornerPoints = GetAllCornerPoints(mesh.bounds, meshFilter.transform.position);
+        List<Vector3> cornerPoints = GetAllCornerPoints(mesh.bounds, MeshComponent.transform.position);
         Rect boundingViewportRect = GetBoundingViewportRect(cornerPoints, cam);
         CenterCameraOnViewportRect(cam, boundingViewportRect, paddingPercentage);
         SetDistanceFromPoint(cam, mesh.bounds.center, distance);
@@ -40,7 +64,15 @@ public class CameraMeshTargeter : MonoBehaviour {
 
     void UpdateMesh()
     {
-        mesh = meshFilter.sharedMesh;
+        switch (meshComponentType)
+        {
+            case MeshComponentType.MeshFilter:
+                mesh = meshFilter.sharedMesh;
+                break;
+            case MeshComponentType.SkinnedMeshRenderer:
+                mesh = skinnedMeshRenderer.sharedMesh;
+                break;
+        }
     }
 
     List<Vector3> GetAllCornerPoints(Bounds bounds, Vector3 position)
@@ -70,7 +102,6 @@ public class CameraMeshTargeter : MonoBehaviour {
                 );
             result.Add(position + bounds.min + vectorToAdd);
         }
-
         return result;
     }
 
@@ -138,5 +169,28 @@ public class CameraMeshTargeter : MonoBehaviour {
     public MeshFilter TargetMeshFilter
     {
         get { return meshFilter; }
+    }
+
+    private Component MeshComponent
+    {
+        get
+        {
+            switch (meshComponentType)
+            {
+                case MeshComponentType.MeshFilter:
+                    return meshFilter;
+                case MeshComponentType.SkinnedMeshRenderer:
+                    return skinnedMeshRenderer;
+                default:
+                    return null;
+            }
+        }
+    }
+
+    public enum MeshComponentType
+    {
+        None,
+        MeshFilter,
+        SkinnedMeshRenderer
     }
 }
