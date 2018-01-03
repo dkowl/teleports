@@ -4,24 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 using Teleports.Utils;
 
-public class PortraitUI : MonoBehaviour {
+public abstract class PortraitUI : MonoBehaviour {
 
     private RectTransform rectTransform;
     [SerializeField] private RenderTexture renderTexture;
     [SerializeField] private RawImage rawImage;
-    [SerializeField] private ObjectType objectType;
-    [SerializeField] private UnitModelSpawner unitModelSpawner;
     [SerializeField] private Camera cam;
     [SerializeField] private CameraMeshTargeter camMeshTargeter;
     [SerializeField] private GameObject camObject;
+    [SerializeField] private CameraMeshTargeter.MeshComponentType objectType;
+    [SerializeField] protected MeshFilter meshFilter;
+    [SerializeField] protected SkinnedMeshRenderer skinnedMeshRenderer;
 
+    protected abstract CameraMeshTargeter.MeshComponentType SpawnModel();
 
     private void OnEnable()
     {
         gameObject.InitComponent(ref rectTransform);
         InitRenderTexture();
         InitRawTexture();
-        SpawnModel();
+        objectType = SpawnModel();
         InitCamera();
     }
 
@@ -41,22 +43,6 @@ public class PortraitUI : MonoBehaviour {
     {
         gameObject.InitComponent(ref rawImage);
         rawImage.texture = renderTexture;
-    }
-
-    private void SpawnModel()
-    {
-        switch (objectType)
-        {
-            case ObjectType.InventoryCurrentUnit:
-                InventoryMenu parentMenu = GetComponentInParent<InventoryMenu>();
-                Debug.Assert(parentMenu != null);
-                gameObject.InitComponent(ref unitModelSpawner);
-                unitModelSpawner.AddSpawnData();
-                unitModelSpawner.SetPositionOffset(SpecialSpawnPlaces.InventoryPlayer);
-                unitModelSpawner.SetRotationOffset(new Vector3(0, 180, 0));
-                unitModelSpawner.UnitData = parentMenu.UnitData;
-                break;
-        }
     }
 
     private void InitCamera()
@@ -80,11 +66,21 @@ public class PortraitUI : MonoBehaviour {
         {
             camMeshTargeter = camObject.AddComponent<CameraMeshTargeter>();
         }
-        camMeshTargeter.SetTarget(unitModelSpawner.SkinnedMeshRenderer);
+        switch (objectType) {
+            case CameraMeshTargeter.MeshComponentType.SkinnedMeshRenderer:
+                camMeshTargeter.SetTarget(skinnedMeshRenderer);
+                break;
+            case CameraMeshTargeter.MeshComponentType.MeshFilter:
+                camMeshTargeter.SetTarget(meshFilter);
+                break;
+            default:
+                return;
+        }
     }
 
     public enum ObjectType
     {
-        InventoryCurrentUnit
+        MeshFilter,
+        SkinnedMeshRenderer
     }
 }
