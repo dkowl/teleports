@@ -78,6 +78,11 @@ public class InventoryData {
         }
     }
 
+    public void Equip(string itemName)
+    {
+        Equip(GetItemByName(itemName));
+    }
+
     public void Equip(ItemData item)
     {
         if (Contains(item))
@@ -135,14 +140,6 @@ public class InventoryData {
         return result;
     }
 
-    public void CorrectInvalidData()
-    {
-        if(maxSlots == 0)
-        {
-            Initialize();
-        }
-    }
-
     List<ItemData> GetItems(IEnumerable<ItemID> itemIds)
     {
         List<ItemData> result = new List<ItemData>();
@@ -157,6 +154,26 @@ public class InventoryData {
 
         }
         return result;
+    }
+
+    ItemData GetItemByName(string name)
+    {
+        foreach(var invSlot in invSlots)
+        {
+            if(!invSlot.Empty && invSlot.Item.UniqueName == name)
+            {
+                return invSlot.Item;
+            }
+        }
+        return null;
+    }
+
+    public void CorrectInvalidData()
+    {
+        if (maxSlots == 0)
+        {
+            Initialize();
+        }
     }
 
     public EquipmentData EquipmentData

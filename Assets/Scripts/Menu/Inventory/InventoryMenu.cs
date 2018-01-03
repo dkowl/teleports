@@ -8,7 +8,6 @@ using Teleports.Utils;
 public class InventoryMenu : SerializedMonoBehaviour {
 
     [SerializeField] UnitData unitData;
-    [OdinSerialize, System.NonSerialized] InventoryData inventoryData;
     [SerializeField] InventoryItemSpawner itemSpawner;
     [SerializeField] CameraMeshTargeter cameraTargeter;
     [SerializeField] TextureAtlasFromModels inventoryAtlas;
@@ -24,16 +23,17 @@ public class InventoryMenu : SerializedMonoBehaviour {
     private void OnEnable()
     {
         internalItemIds = new Dictionary<ItemData, int>();
+        
+        InventoryData.Add(MainData.CurrentGameData.GetItem("Greatsword"));
+        InventoryData.Add(MainData.CurrentGameData.GetItem("Handaxe"));
+        InventoryData.Add(MainData.CurrentGameData.GetItem("Warhammer"));
+        InventoryData.Add(MainData.CurrentGameData.GetItem("DoubleAxe"));
+        InventoryData.Add(MainData.CurrentGameData.GetItem("Greataxe"));
+        InventoryData.Add(MainData.CurrentGameData.GetItem("Longsword"));
+        InventoryData.Add(MainData.CurrentGameData.GetItem("Mace"));
+        InventoryData.Add(MainData.CurrentGameData.GetItem("ShortSword"));
 
-        inventoryData = new InventoryData();
-        inventoryData.Add(MainData.CurrentGameData.GetItem("Greatsword"));
-        inventoryData.Add(MainData.CurrentGameData.GetItem("Handaxe"));
-        inventoryData.Add(MainData.CurrentGameData.GetItem("Warhammer"));
-        inventoryData.Add(MainData.CurrentGameData.GetItem("DoubleAxe"));
-        inventoryData.Add(MainData.CurrentGameData.GetItem("Greataxe"));
-        inventoryData.Add(MainData.CurrentGameData.GetItem("Longsword"));
-        inventoryData.Add(MainData.CurrentGameData.GetItem("Mace"));
-        inventoryData.Add(MainData.CurrentGameData.GetItem("ShortSword"));
+        InventoryData.Equip("Mace");
 
         InitItemSpawner();
         itemSpawner.Spawn();        
@@ -75,7 +75,7 @@ public class InventoryMenu : SerializedMonoBehaviour {
     {
         var itemPrefabs = new List<GameObject>();
         int internalItemId = 0;
-        foreach(var item in inventoryData.GetAllItemsInInventory())
+        foreach(var item in InventoryData.GetAllItemsInInventory())
         {
             itemPrefabs.Add(item.Graphics.Prefab);
             internalItemIds[item] = internalItemId;
@@ -91,7 +91,7 @@ public class InventoryMenu : SerializedMonoBehaviour {
 
     public InventoryData InventoryData
     {
-        get { return inventoryData; }
+        get { return UnitData.Inventory; }
     }
 
     public bool IsInitialized
@@ -110,11 +110,11 @@ public class InventoryMenu : SerializedMonoBehaviour {
         {
             if (!selectedSlotId.isEquipmentSlot)
             {
-                return inventoryData.GetInventorySlotData(selectedSlotId.inventorySlotId).Item;
+                return InventoryData.GetInventorySlotData(selectedSlotId.inventorySlotId).Item;
             }
             else
             {
-                return inventoryData.EquipmentData.GetEquipmentSlot(selectedSlotId.equipmentSlotType).Item;
+                return InventoryData.EquipmentData.GetEquipmentSlot(selectedSlotId.equipmentSlotType).Item;
             }
         }
     }

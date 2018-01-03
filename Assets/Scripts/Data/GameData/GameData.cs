@@ -39,7 +39,7 @@ public class GameData : SerializedScriptableObject {
         }
         else
         {
-            //Debug.Log("Item " + itemName + " not found.");
+            Debug.Log("Item " + itemName + " not found.");
             return null;
         }
     }

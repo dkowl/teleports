@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 public class ItemData {
 
     [SerializeField] private string displayName;
-
+    [SerializeField] private string uniqueName;
     [SerializeField, FoldoutGroup("Details", false), EnumToggleButtons] private ItemType typeFlags;
     [SerializeField, FoldoutGroup("Details", false), ShowIf("IsWeapon")] private WeaponData weaponData;
     [SerializeField, FoldoutGroup("Details", false)] private List<Skill> skills;
@@ -18,26 +18,25 @@ public class ItemData {
     protected ItemData()
     {
         displayName = "New Item";
-    }
-
-    public ItemData(string displayName, List<Skill> skills, List<Perk> perks, EquipmentSlotCombination[] slotCombinations, ItemGraphics graphics)
-    {
-        this.displayName = displayName;
-        this.skills = skills;
-        this.perks = perks;
-        this.slotCombinations = slotCombinations;
-        this.graphics = graphics;
+        uniqueName = "New Item";
     }
 
     public ItemData(ItemData other)
     {
         displayName = other.displayName;
+        uniqueName = other.UniqueName;
         typeFlags = other.typeFlags;
         weaponData = other.weaponData;
         skills = other.skills;
         perks = other.perks;
         slotCombinations = other.slotCombinations;
         graphics = other.graphics;
+    }
+
+    public ItemData(ItemData other, string uniqueName) :
+        this(other)
+    {
+        this.uniqueName = uniqueName;
     }
 
     public static bool operator == (ItemData data1, ItemData data2)
@@ -59,14 +58,15 @@ public class ItemData {
             return false;
 
         ItemData other = (ItemData)obj;
-        return
-            displayName == other.displayName;
+        //Debug.Log("Comparing (displayName) " + displayName + " vs " + other.displayName);
+        //Debug.Log("Comparing (uniqueName) " + uniqueName + " vs " + other.uniqueName);
+        return uniqueName == other.uniqueName;
         //TODO: compare more accurately than just names            
     }
 
     public override int GetHashCode()
     {
-        return displayName.GetHashCode();
+        return uniqueName.GetHashCode();
         //TODO: calculate more accurately than just names     
     }
 
@@ -78,6 +78,11 @@ public class ItemData {
     public string DisplayName
     {
         get { return displayName; }
+    }
+
+    public string UniqueName
+    {
+        get { return uniqueName; }
     }
 
     public WeaponData WeaponData
