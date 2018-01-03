@@ -60,6 +60,51 @@ ModelImporter:
     100104: Reference
     100106: Spine01_Bind
     100108: Spine02_Bind
+    100110: Chest_FK
+    100112: Chest_IK
+    100114: Head_Aim
+    100116: Head_End 1
+    100118: Head_End 2
+    100120: Head_FK
+    100122: Hip_IK
+    100124: L_Ankle_FK
+    100126: L_Ankle_IK
+    100128: L_Arm_FK
+    100130: L_Arm_IK
+    100132: L_Ball_FK
+    100134: L_Ball_IK
+    100136: L_Forearm_FK
+    100138: L_Forearm_IK
+    100140: L_Hand_Slot
+    100142: L_Shin_FK
+    100144: L_Shin_IK
+    100146: L_Thigh_FK
+    100148: L_Thigh_IK
+    100150: L_Toe_FK_End
+    100152: L_Toe_IK_End
+    100154: L_Wrist_FK
+    100156: L_Wrist_IK
+    100158: R_Ankle_FK
+    100160: R_Ankle_IK
+    100162: R_Arm_FK
+    100164: R_Arm_IK
+    100166: R_Ball_FK
+    100168: R_Ball_IK
+    100170: R_Forearm_FK
+    100172: R_Forearm_IK
+    100174: R_Hand_Slot
+    100176: R_Shin_FK
+    100178: R_Shin_IK
+    100180: R_Thigh_FK
+    100182: R_Thigh_IK
+    100184: R_Toe_FK_End
+    100186: R_Toe_IK_End
+    100188: R_Wrist_FK
+    100190: R_Wrist_IK
+    100192: Reference_CTR
+    100194: Reference_GRP
+    100196: Spine01_FK
+    100198: Spine02_FK
     400000: Chest_Bind
     400002: Head_Bind
     400004: Head_End
@@ -115,6 +160,51 @@ ModelImporter:
     400104: Reference
     400106: Spine01_Bind
     400108: Spine02_Bind
+    400110: Chest_FK
+    400112: Chest_IK
+    400114: Head_Aim
+    400116: Head_End 1
+    400118: Head_End 2
+    400120: Head_FK
+    400122: Hip_IK
+    400124: L_Ankle_FK
+    400126: L_Ankle_IK
+    400128: L_Arm_FK
+    400130: L_Arm_IK
+    400132: L_Ball_FK
+    400134: L_Ball_IK
+    400136: L_Forearm_FK
+    400138: L_Forearm_IK
+    400140: L_Hand_Slot
+    400142: L_Shin_FK
+    400144: L_Shin_IK
+    400146: L_Thigh_FK
+    400148: L_Thigh_IK
+    400150: L_Toe_FK_End
+    400152: L_Toe_IK_End
+    400154: L_Wrist_FK
+    400156: L_Wrist_IK
+    400158: R_Ankle_FK
+    400160: R_Ankle_IK
+    400162: R_Arm_FK
+    400164: R_Arm_IK
+    400166: R_Ball_FK
+    400168: R_Ball_IK
+    400170: R_Forearm_FK
+    400172: R_Forearm_IK
+    400174: R_Hand_Slot
+    400176: R_Shin_FK
+    400178: R_Shin_IK
+    400180: R_Thigh_FK
+    400182: R_Thigh_IK
+    400184: R_Toe_FK_End
+    400186: R_Toe_IK_End
+    400188: R_Wrist_FK
+    400190: R_Wrist_IK
+    400192: Reference_CTR
+    400194: Reference_GRP
+    400196: Spine01_FK
+    400198: Spine02_FK
     4300000: Player_Male
     9500000: //RootNode
     13700000: Player_Male
