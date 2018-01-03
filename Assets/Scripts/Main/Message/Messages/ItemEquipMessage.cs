@@ -13,6 +13,16 @@ public class ItemEquipMessage : IMessage {
         this.item = item;
     }
 
+    public EventType Type
+    {
+        get { return eventType; }
+    }
+
+    public ItemData Item
+    {
+        get { return item; }
+    }
+
 	public enum EventType
     {
         Equip,

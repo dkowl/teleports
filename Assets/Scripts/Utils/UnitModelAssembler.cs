@@ -8,10 +8,11 @@ public static class UnitModelAssembler {
     {
         GameObject result;
 
-        result = MainData.CurrentGameData.GetRace(unitData.RaceName).Graphics.ModelObject;
+        result = Object.Instantiate(MainData.CurrentGameData.GetRace(unitData.RaceName).Graphics.ModelObject);
 
         foreach(var itemInfo in unitData.Inventory.EquipmentData.GetEquippedItems())
         {
+            Debug.Log("Spawning " + itemInfo.Item.DisplayName);
             ItemSpawner.Spawn(result, itemInfo.Item, itemInfo.PrimarySlot);
         }
 

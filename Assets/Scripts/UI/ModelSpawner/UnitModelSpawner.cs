@@ -11,7 +11,7 @@ public class UnitModelSpawner : ModelSpawner {
     {
         if (unitData == null) return null;
 
-        return Instantiate(UnitModelAssembler.GetModel(unitData));
+        return UnitModelAssembler.GetModel(unitData);
     }
 
     public UnitData UnitData
