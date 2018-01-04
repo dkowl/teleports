@@ -140,6 +140,18 @@ public class InventoryData {
         return result;
     }
 
+    public IList<ItemData> GetAllItems()
+    {
+        var result = GetAllItemsInInventory();
+        var result2 = new List<ItemData>();
+        foreach(var slotInfo in GetEquippedItems())
+        {
+            result2.Add(slotInfo.Item);
+        }
+        result.AddRange(result2);
+        return result.AsReadOnly();
+    }
+
     List<ItemData> GetItems(IEnumerable<ItemID> itemIds)
     {
         List<ItemData> result = new List<ItemData>();

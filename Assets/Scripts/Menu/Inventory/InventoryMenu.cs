@@ -75,7 +75,7 @@ public class InventoryMenu : SerializedMonoBehaviour {
     {
         var itemPrefabs = new List<GameObject>();
         int internalItemId = 0;
-        foreach(var item in InventoryData.GetAllItemsInInventory())
+        foreach(var item in InventoryData.GetAllItems())
         {
             itemPrefabs.Add(item.Graphics.Prefab);
             internalItemIds[item] = internalItemId;

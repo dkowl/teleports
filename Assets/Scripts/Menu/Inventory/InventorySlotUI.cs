@@ -9,7 +9,7 @@ using SlotID = InventoryMenu.ItemSlotID;
 public class InventorySlotUI : LoadableBehaviour {
 
     private InventoryMenu parentMenu;
-    private SlotID slotId;
+    [SerializeField] private SlotID slotId;
     private bool isInitialized;
 
     [SerializeField] private RawImage itemIcon;
@@ -21,41 +21,57 @@ public class InventorySlotUI : LoadableBehaviour {
 
     protected override void LoadDataInternal()
     {
-        if (!isInitialized) return;
+        if (!isInitialized)
+        {
+            return;
+        }
 
         InventoryData inventoryData = parentMenu.InventoryData;
+        ItemData itemData = null;
+        int count = 0;
+
         if (!slotId.isEquipmentSlot)
         {
-            InventorySlotData inventorySlotData;
-            inventorySlotData = inventoryData.GetInventorySlotData(slotId.inventorySlotId);
-
+            InventorySlotData inventorySlotData = inventoryData.GetInventorySlotData(slotId.inventorySlotId);
             if (!inventorySlotData.Empty)
             {
-                itemIcon.enabled = true;
-                ItemData itemData = inventorySlotData.Item;
-                Debug.Assert(itemData != null);
-                bool locked = false;
-                if (itemData.IsType(ItemType.Weapon)) {
-                    UnitWeaponCombiner combiner = new UnitWeaponCombiner(parentMenu.UnitData, itemData.WeaponData);
-                    locked = !combiner.CanUse;
-                }
-            
-                itemIcon.texture = parentMenu.ItemIconAtlas;
-                itemIcon.uvRect = parentMenu.GetItemIconUvRect(itemData);
-                lockIcon.enabled = locked;
+                itemData = inventorySlotData.Item;
             }
-            else
+            count = inventorySlotData.Count;
+        }
+        else if (slotId.isEquipmentSlot)
+        {
+            EquipmentSlotData eqSlotData = inventoryData.EquipmentData.GetEquipmentSlot(slotId.equipmentSlotType);
+            if (!eqSlotData.Empty)
             {
-                itemIcon.enabled = false;
-                lockIcon.enabled = false;
+                itemData = eqSlotData.Item;
+            }
+        }
+
+        if(itemData != null)
+        {
+            itemIcon.enabled = true;
+            bool locked = false;
+            if (itemData.IsType(ItemType.Weapon))
+            {
+                UnitWeaponCombiner combiner = new UnitWeaponCombiner(parentMenu.UnitData, itemData.WeaponData);
+                locked = !combiner.CanUse;
             }
 
-            int count = inventorySlotData.Count;
-            if (count > 1)
-                countText.text = count.ToString();
-            else
-                countText.text = "";
+            itemIcon.texture = parentMenu.ItemIconAtlas;
+            itemIcon.uvRect = parentMenu.GetItemIconUvRect(itemData);
+            lockIcon.enabled = locked;
         }
+        else
+        {
+            itemIcon.enabled = false;
+            lockIcon.enabled = false;
+        }
+
+        if (count > 1)
+            countText.text = count.ToString();
+        else
+            countText.text = "";
 
         if (parentMenu.IsSelected(slotId))
         {

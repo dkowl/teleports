@@ -113,7 +113,7 @@ ModelImporter:
     400102: Reference
     400104: Spine01_Bind
     400106: Spine02_Bind
-    7400000: Human_Idle001
+    7400000: Gowno_NieNakladajTego
     7400002: Human_LookAtChest
     7400004: Human_LookAtLegs
     7400006: Human_LookAtBoots
@@ -153,7 +153,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Human_Idle001
+      name: Gowno_NieNakladajTego
       takeName: Take 001
       firstFrame: 10
       lastFrame: 70
