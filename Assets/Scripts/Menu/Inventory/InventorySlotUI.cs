@@ -9,12 +9,14 @@ using SlotID = InventoryMenu.ItemSlotID;
 public class InventorySlotUI : LoadableBehaviour {
 
     private InventoryMenu parentMenu;
-    [SerializeField] private SlotID slotId;
+    private SlotID slotId;
+    private string eqSlotName;
     private bool isInitialized;
 
     [SerializeField] private RawImage itemIcon;
     [SerializeField] private Image borderImage;
     [SerializeField] private Text countText;
+    [SerializeField] private Text nameText;
     [SerializeField] private RawImage lockIcon;
     [SerializeField] private Color selectedBorderColor;
     [SerializeField] private Color deselectedBorderColor;
@@ -73,6 +75,8 @@ public class InventorySlotUI : LoadableBehaviour {
         else
             countText.text = "";
 
+        nameText.text = eqSlotName;
+
         if (parentMenu.IsSelected(slotId))
         {
             borderImage.color = selectedBorderColor;
@@ -95,12 +99,13 @@ public class InventorySlotUI : LoadableBehaviour {
         InventoryMenu.OnSelectionChangedEvent -= LoadData;
     }
 
-    public void Initialize(InventoryMenu parentMenu, SlotID slotId)
+    public void Initialize(InventoryMenu parentMenu, SlotID slotId, string eqSlotName = "")
     {
         if (!isInitialized)
         {
             this.parentMenu = parentMenu;
             this.slotId = slotId;
+            this.eqSlotName = eqSlotName;
             isInitialized = true;
             LoadData();
         }

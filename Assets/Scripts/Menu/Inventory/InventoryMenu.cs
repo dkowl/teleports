@@ -33,7 +33,7 @@ public class InventoryMenu : SerializedMonoBehaviour {
         InventoryData.Add(MainData.CurrentGameData.GetItem("Mace"));
         InventoryData.Add(MainData.CurrentGameData.GetItem("ShortSword"));
 
-        InventoryData.Equip("Mace");
+        InventoryData.Equip("Warhammer");
 
         InitItemSpawner();
         itemSpawner.Spawn();        
