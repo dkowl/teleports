@@ -31,6 +31,7 @@ public class InventorySlotUI : LoadableBehaviour {
         InventoryData inventoryData = parentMenu.InventoryData;
         ItemData itemData = null;
         int count = 0;
+        bool itemIconEnabled = false;
 
         if (!slotId.isEquipmentSlot)
         {
@@ -38,6 +39,7 @@ public class InventorySlotUI : LoadableBehaviour {
             if (!inventorySlotData.Empty)
             {
                 itemData = inventorySlotData.Item;
+                itemIconEnabled = true;
             }
             count = inventorySlotData.Count;
         }
@@ -47,12 +49,15 @@ public class InventorySlotUI : LoadableBehaviour {
             if (!eqSlotData.Empty)
             {
                 itemData = eqSlotData.Item;
+                if (eqSlotData.Primary)
+                {
+                    itemIconEnabled = true;
+                }
             }
         }
 
         if(itemData != null)
         {
-            itemIcon.enabled = true;
             bool locked = false;
             if (itemData.IsType(ItemType.Weapon))
             {
@@ -60,8 +65,12 @@ public class InventorySlotUI : LoadableBehaviour {
                 locked = !combiner.CanUse;
             }
 
-            itemIcon.texture = parentMenu.ItemIconAtlas;
-            itemIcon.uvRect = parentMenu.GetItemIconUvRect(itemData);
+            if (itemIconEnabled)
+            {
+                itemIcon.enabled = true;
+                itemIcon.texture = parentMenu.ItemIconAtlas;
+                itemIcon.uvRect = parentMenu.GetItemIconUvRect(itemData);
+            }
             lockIcon.enabled = locked;
         }
         else

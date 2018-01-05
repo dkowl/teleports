@@ -33,8 +33,6 @@ public class InventoryMenu : SerializedMonoBehaviour {
         InventoryData.Add(MainData.CurrentGameData.GetItem("Mace"));
         InventoryData.Add(MainData.CurrentGameData.GetItem("ShortSword"));
 
-        InventoryData.Equip("Warhammer");
-
         InitItemSpawner();
         itemSpawner.Spawn();        
     }
@@ -69,6 +67,11 @@ public class InventoryMenu : SerializedMonoBehaviour {
     public bool IsSelected(ItemSlotID itemSlotId)
     {
         return selectedSlotId == itemSlotId;
+    }
+
+    public void EquipSelected()
+    {
+        InventoryData.Equip(SelectedItem);
     }
 
     private void InitItemSpawner()

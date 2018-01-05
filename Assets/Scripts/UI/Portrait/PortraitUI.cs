@@ -60,7 +60,7 @@ public abstract class PortraitUI : MonoBehaviour {
         cam.targetTexture = renderTexture;
     }
 
-    private void InitCameraTargeter()
+    protected void InitCameraTargeter()
     {
         if (camMeshTargeter == null)
         {
