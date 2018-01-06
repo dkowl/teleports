@@ -143,6 +143,7 @@ public class EquipmentData {
         Yes,
         No_PrimaryConflict,
         No_SecondaryConflict,
+        No_RequirementsNotMet,
         No_Impossible
     }
 

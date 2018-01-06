@@ -2,10 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Text = TMPro.TextMeshProUGUI;
 
 public class InventoryEquipButton : LoadableBehaviour {
 
     InventoryMenu parentMenu;
+    Button button;
+    Text text;
+    bool isInventorySlotSelected;
 
     protected override void LoadDataInternal()
     {
@@ -15,31 +20,66 @@ public class InventoryEquipButton : LoadableBehaviour {
         }
         Debug.Assert(parentMenu != null);
 
-        bool isEquip = parentMenu.IsInventorySlotSelected;
+        if(button == null)
+        {
+            button = GetComponent<Button>();
+        }
+        Debug.Assert(button != null);
 
-    }
+        if(text == null)
+        {
+            text = GetComponentInChildren<Text>();
+        }
+        Debug.Assert(text != null);
 
-    public void OnClick()
-    {
-        var choices = new List<ButtonChoice>();
-        choices.Add(new ButtonChoice("1", DoNothing));
-        choices.Add(new ButtonChoice("2", DoNothing));
-        DialogWindowSpawner.Spawn("Test", choices);
-    }
+        isInventorySlotSelected = parentMenu.IsInventorySlotSelected;
 
-    public void DoNothing()
-    {
-
+        if (isInventorySlotSelected)
+        {
+            text.text = "EQUIP";
+        }
+        else
+        {
+            text.text = "UNEQUIP";
+        }
     }
 
     protected override void SubscribeInternal()
     {
         base.SubscribeInternal();
+        InventoryMenu.UpdateUiEvent += LoadData;
     }
 
     protected override void UnsubscribeInternal()
     {
         base.UnsubscribeInternal();
+        InventoryMenu.UpdateUiEvent -= LoadData;
     }
 
+    public void OnClick()
+    {
+        if (isInventorySlotSelected)
+        {
+            OnEquip();
+        }
+        else
+        {
+            OnUnequip();
+        }
+    }
+
+    public void DoNothing()
+    {
+        EquipmentData.CanEquipResult canEquipResult = parentMenu.InventoryData.EquipmentData.CanEquip(parentMenu.SelectedItem);
+    }
+
+    private void OnEquip()
+    {
+
+    }
+
+    private void OnUnequip()
+    {
+
+    }
 }
