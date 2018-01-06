@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using Teleports.Utils;
 
-public class InventoryMenu : SerializedMonoBehaviour {
+public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipMessage> {
 
     [SerializeField] UnitData unitData;
     [SerializeField] InventoryItemSpawner itemSpawner;
@@ -17,8 +17,8 @@ public class InventoryMenu : SerializedMonoBehaviour {
     private Dictionary<ItemData, int> internalItemIds;
 
     private ItemSlotID selectedSlotId;
-
-    public static event System.Action OnSelectionChangedEvent;
+    
+    public static event System.Action UpdateUiEvent;
 
     private void OnEnable()
     {
@@ -32,6 +32,8 @@ public class InventoryMenu : SerializedMonoBehaviour {
         InventoryData.Add(MainData.CurrentGameData.GetItem("Longsword"));
         InventoryData.Add(MainData.CurrentGameData.GetItem("Mace"));
         InventoryData.Add(MainData.CurrentGameData.GetItem("ShortSword"));
+
+        MainData.MessageBus.Subscribe(this);
 
         InitItemSpawner();
         itemSpawner.Spawn();        
@@ -55,7 +57,10 @@ public class InventoryMenu : SerializedMonoBehaviour {
             selectedSlotId = itemSlotId;
             if (SelectedItem != null)
                 cameraTargeter.SetTarget(itemSpawner.GetItemMeshFilter(internalItemIds[SelectedItem]));
-            OnSelectionChangedEvent();
+            if (UpdateUiEvent != null)
+            {
+                UpdateUiEvent();
+            }
         }
     }
 
@@ -72,6 +77,14 @@ public class InventoryMenu : SerializedMonoBehaviour {
     public void EquipSelected()
     {
         InventoryData.Equip(SelectedItem);
+    }
+
+    public void Handle(ItemEquipMessage message)
+    {
+        if (UpdateUiEvent != null)
+        {
+            UpdateUiEvent();
+        }
     }
 
     private void InitItemSpawner()

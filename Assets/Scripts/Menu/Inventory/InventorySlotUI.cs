@@ -99,13 +99,13 @@ public class InventorySlotUI : LoadableBehaviour {
     protected override void SubscribeInternal()
     {
         base.SubscribeInternal();
-        InventoryMenu.OnSelectionChangedEvent += LoadData;
+        InventoryMenu.UpdateUiEvent += LoadData;
     }
 
     protected override void UnsubscribeInternal()
     {
         base.UnsubscribeInternal();
-        InventoryMenu.OnSelectionChangedEvent -= LoadData;
+        InventoryMenu.UpdateUiEvent -= LoadData;
     }
 
     public void Initialize(InventoryMenu parentMenu, SlotID slotId, string eqSlotName = "")

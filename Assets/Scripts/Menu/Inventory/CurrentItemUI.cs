@@ -53,12 +53,12 @@ public class CurrentItemUI : LoadableBehaviour {
     protected override void SubscribeInternal()
     {
         base.SubscribeInternal();
-        InventoryMenu.OnSelectionChangedEvent += LoadData;
+        InventoryMenu.UpdateUiEvent += LoadData;
     }
 
     protected override void UnsubscribeInternal()
     {
         base.UnsubscribeInternal();
-        InventoryMenu.OnSelectionChangedEvent -= LoadData;
+        InventoryMenu.UpdateUiEvent -= LoadData;
     }
 }
