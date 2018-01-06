@@ -8,12 +8,12 @@ namespace Teleports.Utils
     {
         public static float baseAspect = 16f / 9f;
 
-        public static void makeVisible(this GameObject gameObject)
+        public static void MakeVisible(this GameObject gameObject)
         {
             gameObject.transform.localScale = Vector3.one;
         }
 
-        public static void makeInvisible(this GameObject gameObject)
+        public static void MakeInvisible(this GameObject gameObject)
         {
             gameObject.transform.localScale = Vector3.zero;
         }

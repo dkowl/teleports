@@ -85,6 +85,7 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
         {
             UpdateUiEvent();
         }
+        Select(new ItemSlotID(message.EqSlotType));
     }
 
     private void InitItemSpawner()

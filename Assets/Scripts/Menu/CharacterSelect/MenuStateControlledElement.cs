@@ -14,11 +14,11 @@ public class MenuStateControlledElement : LoadableBehaviour {
     {
         if (IsActive())
         {
-            gameObject.makeVisible();
+            gameObject.MakeVisible();
         }
         else
         {
-            gameObject.makeInvisible();
+            gameObject.MakeInvisible();
         }
     }
 

@@ -6,11 +6,13 @@ public class ItemEquipMessage : IMessage {
 
     EventType eventType;
     ItemData item;
+    EquipmentSlotType eqSlotType;
 
-    public ItemEquipMessage(EventType eventType, ItemData item)
+    public ItemEquipMessage(EventType eventType, ItemData item, EquipmentSlotType eqSlotType)
     {
         this.eventType = eventType;
         this.item = item;
+        this.eqSlotType = eqSlotType;
     }
 
     public EventType Type
@@ -21,6 +23,11 @@ public class ItemEquipMessage : IMessage {
     public ItemData Item
     {
         get { return item; }
+    }
+
+    public EquipmentSlotType EqSlotType
+    {
+        get { return eqSlotType; }
     }
 
 	public enum EventType

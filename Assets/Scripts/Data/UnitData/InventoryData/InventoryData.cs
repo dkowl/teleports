@@ -102,8 +102,8 @@ public class InventoryData {
             ItemData item = inventorySlot.Item;
             if(equipmentData.CanEquip(item).Status == EquipmentData.CanEquipStatus.Yes)
             {
-                equipmentData.Equip(item);
                 Remove(item);
+                equipmentData.Equip(item);
             }
         }
     }
@@ -201,14 +201,14 @@ public class InventoryData {
         return -1;
     }
 
-    public EquipmentData EquipmentData
-    {
-        get { return equipmentData; }
-    }
-
     private bool IsValidSlotId(int id)
     {
         return id >= 0 && id < invSlots.Count;
+    }
+
+    public EquipmentData EquipmentData
+    {
+        get { return equipmentData; }
     }
    
 }

@@ -40,11 +40,11 @@ public class TargetMarker : MonoBehaviour {
     {
         if (targetUnit != null && targetUnit.Alive) {
             transform.position = targetUnit.gameObject.transform.position;
-            gameObject.makeVisible();
+            gameObject.MakeVisible();
         }
         else
         {
-            gameObject.makeInvisible();
+            gameObject.MakeInvisible();
         }
     }
 

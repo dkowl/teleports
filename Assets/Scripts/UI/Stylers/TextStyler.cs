@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 [ExecuteInEditMode]
 public class TextStyler : LoadableBehaviour {
 
-    public Stylesheet.FontSize fontSize;
-    public Stylesheet.TextColor textColor;
+    [SerializeField] private Stylesheet.FontSize fontSize;
+    [SerializeField] private Stylesheet.TextColor textColor;
+    [SerializeField, Range(0, 1)] private float alphaMultiplier = 1f;
 
     override protected void LoadDataInternal()
     {
@@ -17,14 +19,32 @@ public class TextStyler : LoadableBehaviour {
         if (text != null)
         {
             text.fontSize = stylesheet.GetFontSize(fontSize);
-            text.color = stylesheet.GetTextColor(textColor);
+            text.color = GetTextColor();
         }
 
         TMPro.TextMeshProUGUI tmpText = gameObject.GetComponent<TMPro.TextMeshProUGUI>();
         if(tmpText != null)
         {
             tmpText.fontSize = stylesheet.GetFontSize(fontSize);
-            tmpText.color = stylesheet.GetTextColor(textColor);
+            tmpText.color = GetTextColor();
+        }
+    }
+
+    private Color GetTextColor()
+    {
+        Stylesheet stylesheet = MainData.CurrentStylesheet;
+        Color result = stylesheet.GetTextColor(textColor);
+        result.a *= alphaMultiplier;
+        return result;
+    }
+
+    public float AlphaMultiplier
+    {
+        get { return alphaMultiplier; }
+        set
+        {
+            alphaMultiplier = value;
+            LoadData();
         }
     }
 }

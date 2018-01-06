@@ -24,7 +24,7 @@ public class Healthbar : MonoBehaviour {
         slider.value = unit.HealthPercentage;
         if (!unit.Alive)
         {
-            healthbar.makeInvisible();
+            healthbar.MakeInvisible();
         }
 	}
 }

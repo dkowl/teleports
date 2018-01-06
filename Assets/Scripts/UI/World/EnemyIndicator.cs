@@ -61,11 +61,11 @@ public class EnemyIndicator : MonoBehaviour {
 
     void MakeInvisible()
     {
-        indicator.makeInvisible();
+        indicator.MakeInvisible();
     }
 
     void MakeVisible()
     {
-        indicator.makeVisible();
+        indicator.MakeVisible();
     }
 }

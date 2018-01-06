@@ -99,7 +99,7 @@ public class EquipmentData {
                     bool asPrimary = (slotType == slotCombination.PrimarySlot);
                     GetEquipmentSlot(slotType).Equip(item, asPrimary);
                 }
-                MainData.MessageBus.Publish(new ItemEquipMessage(ItemEquipMessage.EventType.Equip, item));
+                MainData.MessageBus.Publish(new ItemEquipMessage(ItemEquipMessage.EventType.Equip, item, slotCombination.PrimarySlot));
                 return;
             }
         }
@@ -143,7 +143,6 @@ public class EquipmentData {
         Yes,
         No_PrimaryConflict,
         No_SecondaryConflict,
-        No_RequirementsNotMet,
         No_Impossible
     }
 

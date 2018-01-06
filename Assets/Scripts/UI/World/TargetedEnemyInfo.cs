@@ -31,14 +31,14 @@ public class TargetedEnemyInfo : MonoBehaviour {
 
         if(targetUnit == null || targetUnit.DeadState.IsActive)
         {
-            gameObject.makeInvisible();
+            gameObject.MakeInvisible();
         }
         else
         {
             slider.value = targetUnit.HealthPercentage;
             nameText.text = targetUnit.UnitData.Name;
             hpText.text = targetUnit.CurrentHp.ToString() + " / " + targetUnit.Hp.ToString();
-            gameObject.makeVisible();
+            gameObject.MakeVisible();
         }
     }
 
