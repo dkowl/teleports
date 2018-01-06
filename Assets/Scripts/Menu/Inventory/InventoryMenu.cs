@@ -135,6 +135,14 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
         }
     }
 
+    public bool IsInventorySlotSelected
+    {
+        get
+        {
+            return !selectedSlotId.isEquipmentSlot;
+        }
+    }
+
     [System.Serializable]
     public struct ItemSlotID
     {
