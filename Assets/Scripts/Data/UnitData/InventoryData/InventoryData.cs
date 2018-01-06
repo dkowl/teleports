@@ -87,8 +87,7 @@ public class InventoryData {
     {
         if (Contains(item))
         {
-            Remove(item);
-            equipmentData.Equip(item);
+            Equip(InvSlotIdOf(item));
         }
     }
 
@@ -104,6 +103,7 @@ public class InventoryData {
             if(equipmentData.CanEquip(item).Status == EquipmentData.CanEquipStatus.Yes)
             {
                 equipmentData.Equip(item);
+                Remove(item);
             }
         }
     }
@@ -152,6 +152,14 @@ public class InventoryData {
         return result.AsReadOnly();
     }
 
+    public void CorrectInvalidData()
+    {
+        if (maxSlots == 0)
+        {
+            Initialize();
+        }
+    }
+
     List<ItemData> GetItems(IEnumerable<ItemID> itemIds)
     {
         List<ItemData> result = new List<ItemData>();
@@ -180,12 +188,17 @@ public class InventoryData {
         return null;
     }
 
-    public void CorrectInvalidData()
+    int InvSlotIdOf(ItemData item)
     {
-        if (maxSlots == 0)
+        Debug.Assert(Contains(item));
+        for(int i = 0; i<invSlots.Count; i++)
         {
-            Initialize();
+            if(invSlots[i].Item == item)
+            {
+                return i;
+            }
         }
+        return -1;
     }
 
     public EquipmentData EquipmentData
