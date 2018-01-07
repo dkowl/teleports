@@ -47,6 +47,9 @@ public class InventoryEquipButton : LoadableBehaviour {
             case State.Equip_Yes:
                 parentMenu.EquipSelected();
                 break;
+            case State.Equip_PrimaryConflict:
+                parentMenu.EquipSelected();
+                break;
             case State.Equip_Impossible:
                 DialogWindowSpawner.Spawn("Impossible", okChoices);
                 break;
@@ -56,6 +59,10 @@ public class InventoryEquipButton : LoadableBehaviour {
             case State.Unequip_Yes:
                 parentMenu.UnequipSelected();
                 break;
+            case State.Unequip_InventoryFull:
+                DialogWindowSpawner.Spawn("Inventory full", okChoices);
+                break;
+
         }
     }
 

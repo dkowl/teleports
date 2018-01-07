@@ -119,10 +119,20 @@ public class InventoryData {
                 return;
 
             ItemData item = inventorySlot.Item;
-            if(equipmentData.CanEquip(item).Status == EquipmentData.CanEquipStatus.Yes)
+            EquipmentData.CanEquipResult canEquipResult = equipmentData.CanEquip(item);
+            switch (canEquipResult.Status)
             {
-                Remove(item);
-                equipmentData.Equip(item);
+                case EquipmentData.CanEquipStatus.Yes:
+                    Remove(item);
+                    equipmentData.Equip(item);
+                    break;
+                case EquipmentData.CanEquipStatus.No_PrimaryConflict:
+                    Remove(item);
+                    ItemData unequippedItem = canEquipResult.ConflictingItems[0];
+                    Add(unequippedItem);
+                    equipmentData.Unequip(unequippedItem);
+                    equipmentData.Equip(item);
+                    break;
             }
         }
     }
