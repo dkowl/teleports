@@ -42,6 +42,20 @@ public class InventoryData {
         return false;
     }
 
+    public bool CanAdd(IList<ItemData> items)
+    {
+        int freeSlots = maxSlots - invSlots.Count;
+        int neededSlots = 0;
+        foreach(var item in items)
+        {
+            if (!Contains(item))
+            {
+                neededSlots++;
+            }
+        }
+        return neededSlots <= freeSlots;
+    }
+
     public void Add(ItemData item)
     {
         //stack on existing slot
@@ -127,10 +141,14 @@ public class InventoryData {
                     equipmentData.Equip(item);
                     break;
                 case EquipmentData.CanEquipStatus.No_PrimaryConflict:
+                case EquipmentData.CanEquipStatus.No_SecondaryConflict:
                     Remove(item);
-                    ItemData unequippedItem = canEquipResult.ConflictingItems[0];
-                    Add(unequippedItem);
-                    equipmentData.Unequip(unequippedItem);
+                    IList<ItemData> unequippedItems = canEquipResult.ConflictingItems;
+                    foreach(var unequippedItem in unequippedItems)
+                    {
+                        Add(unequippedItem);
+                        equipmentData.Unequip(unequippedItem);
+                    }
                     equipmentData.Equip(item);
                     break;
             }

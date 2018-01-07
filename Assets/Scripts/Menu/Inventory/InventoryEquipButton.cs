@@ -50,6 +50,9 @@ public class InventoryEquipButton : LoadableBehaviour {
             case State.Equip_PrimaryConflict:
                 parentMenu.EquipSelected();
                 break;
+            case State.Equip_SecondaryConflict:
+                parentMenu.EquipSelected();
+                break;
             case State.Equip_Impossible:
                 DialogWindowSpawner.Spawn("Impossible", okChoices);
                 break;
@@ -125,7 +128,14 @@ public class InventoryEquipButton : LoadableBehaviour {
                     case EquipmentData.CanEquipStatus.No_PrimaryConflict:
                         return State.Equip_PrimaryConflict;
                     case EquipmentData.CanEquipStatus.No_SecondaryConflict:
-                        return State.Equip_SecondaryConflict;
+                        if (parentMenu.InventoryData.CanAdd(canEquipResult.ConflictingItems))
+                        {
+                            return State.Equip_SecondaryConflict;
+                        }
+                        else
+                        {
+                            return State.Unequip_InventoryFull;
+                        }
                     case EquipmentData.CanEquipStatus.Yes:
                         return State.Equip_Yes;
                     default:
