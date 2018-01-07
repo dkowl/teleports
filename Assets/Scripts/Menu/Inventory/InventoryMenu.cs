@@ -90,6 +90,11 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
         {
             Select(new ItemSlotID(message.EqSlotType));
         }
+        else if(message.Type == ItemEquipMessage.EventType.Unequip)
+        {
+            Select(new ItemSlotID(InventoryData.InventorySlotIdOf(message.Item)));
+        }
+
         if (UpdateUiEvent != null)
         {
             UpdateUiEvent();

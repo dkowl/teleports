@@ -106,7 +106,7 @@ public class InventoryData {
     {
         if (Contains(item))
         {
-            Equip(InvSlotIdOf(item));
+            Equip(InventorySlotIdOf(item));
         }
     }
 
@@ -188,6 +188,19 @@ public class InventoryData {
         return result.AsReadOnly();
     }
 
+    public int InventorySlotIdOf(ItemData item)
+    {
+        Debug.Assert(Contains(item));
+        for (int i = 0; i < invSlots.Count; i++)
+        {
+            if (invSlots[i].Item == item)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public void CorrectInvalidData()
     {
         if (maxSlots == 0)
@@ -222,19 +235,6 @@ public class InventoryData {
             }
         }
         return null;
-    }
-
-    int InvSlotIdOf(ItemData item)
-    {
-        Debug.Assert(Contains(item));
-        for(int i = 0; i<invSlots.Count; i++)
-        {
-            if(invSlots[i].Item == item)
-            {
-                return i;
-            }
-        }
-        return -1;
     }
 
     private bool IsValidSlotId(int id)
