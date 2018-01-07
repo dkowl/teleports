@@ -105,7 +105,7 @@ public class EquipmentData {
         }
     }
 
-    /*public ItemData Unequip(EquipmentSlotType slotType)
+    public ItemData Unequip(EquipmentSlotType slotType)
     {
         EquipmentSlotData slot = GetEquipmentSlot(slotType);
         if (slot.Empty)
@@ -115,14 +115,46 @@ public class EquipmentData {
         }
         else
         {
-            ItemData unequippedItem = slot.UnequipAndReturn();
-            foreach (EquipmentSlotType itemSlotType in unequippedItem.Slots)
+            EquipmentSlotCombination slotCombination;
+            ItemData item = slot.Item;
+            if (slot.Primary)
+            {
+                slotCombination = item.GetSlotCombination(slotType);
+            }
+            else
+            {
+                slotCombination = item.GetSlotCombinationWithSecondarySlot(slotType);
+            }
+            return Unequip(slotCombination);
+        }
+    }
+
+    public void Unequip(ItemData item)
+    {
+        foreach(var slotType in GetValidSlotTypes())
+        {
+            EquipmentSlotData slot = GetEquipmentSlot(slotType);
+            if(slot.Item == item && slot.Primary)
+            {
+                Unequip(item.GetSlotCombination(slotType));
+                return;
+            }
+        }
+    }
+
+    private ItemData Unequip(EquipmentSlotCombination slotCombination)
+    {
+        foreach(var slotType in slotCombination.SlotsTaken)
+        {
+            if(slotType != slotCombination.PrimarySlot)
             {
                 GetEquipmentSlot(slotType).Unequip();
             }
-            return unequippedItem;
         }
-    }*/
+        ItemData result = GetEquipmentSlot(slotCombination.PrimarySlot).UnequipAndReturn();
+        MainData.MessageBus.Publish(new ItemEquipMessage(ItemEquipMessage.EventType.Unequip, result, slotCombination.PrimarySlot));
+        return result;
+    }
 
     public IList<EquippedItemInfo> GetEquippedItems()
     {
@@ -136,6 +168,32 @@ public class EquipmentData {
                 result.Add(new EquippedItemInfo(item, slotType));
         }
         return result.AsReadOnly();
+    }
+
+    public IList<EquipmentSlotData> GetEquipmentSlots()
+    {
+        var result = new List<EquipmentSlotData>();
+        foreach (EquipmentSlotType slotType in System.Enum.GetValues(typeof(EquipmentSlotType)))
+        {
+            if(slotType != EquipmentSlotType.None)
+            {
+                result.Add(GetEquipmentSlot(slotType));
+            }
+        }
+        return result;
+    }
+
+    public IList<EquipmentSlotType> GetValidSlotTypes()
+    {
+        var result = new List<EquipmentSlotType>();
+        foreach(EquipmentSlotType slotType in System.Enum.GetValues(typeof(EquipmentSlotType)))
+        {
+            if (slotType != EquipmentSlotType.None)
+            {
+                result.Add(slotType);
+            }
+        }
+        return result;
     }
 
     public enum CanEquipStatus

@@ -79,13 +79,21 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
         InventoryData.Equip(SelectedItem);
     }
 
+    public void UnequipSelected()
+    {
+        InventoryData.Unequip(selectedSlotId.equipmentSlotType);
+    }
+
     public void Handle(ItemEquipMessage message)
     {
+        if (message.Type == ItemEquipMessage.EventType.Equip)
+        {
+            Select(new ItemSlotID(message.EqSlotType));
+        }
         if (UpdateUiEvent != null)
         {
             UpdateUiEvent();
         }
-        Select(new ItemSlotID(message.EqSlotType));
     }
 
     private void InitItemSpawner()
@@ -134,6 +142,11 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
                 return InventoryData.EquipmentData.GetEquipmentSlot(selectedSlotId.equipmentSlotType).Item;
             }
         }
+    }
+
+    public ItemSlotID SelectedSlotId
+    {
+        get { return selectedSlotId; }
     }
 
     public bool IsInventorySlotSelected

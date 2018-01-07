@@ -53,6 +53,9 @@ public class InventoryEquipButton : LoadableBehaviour {
             case State.Equip_RequirementsNotMet:
                 DialogWindowSpawner.Spawn("Requirements not met", okChoices);
                 break;
+            case State.Unequip_Yes:
+                parentMenu.UnequipSelected();
+                break;
         }
     }
 
@@ -129,7 +132,16 @@ public class InventoryEquipButton : LoadableBehaviour {
         }
         else
         {
-            return State.Unequip;
+            InventoryData.CanUnequipStatus canUnequipStatus = parentMenu.InventoryData.CanUnequip(parentMenu.SelectedSlotId.equipmentSlotType);
+            switch (canUnequipStatus)
+            {
+                case InventoryData.CanUnequipStatus.Yes:
+                    return State.Unequip_Yes;
+                case InventoryData.CanUnequipStatus.No_InventoryFull:
+                    return State.Unequip_InventoryFull;
+                default:
+                    return State.NoItem;
+            }
         }
     }
 
@@ -200,7 +212,8 @@ public class InventoryEquipButton : LoadableBehaviour {
         Equip_SecondaryConflict,
         Equip_Impossible,
         Equip_RequirementsNotMet,
-        Unequip
+        Unequip_InventoryFull,
+        Unequip_Yes
     }
 
     static bool IsEquipState(State state)
@@ -217,6 +230,7 @@ public class InventoryEquipButton : LoadableBehaviour {
     {
         return
             state == State.Equip_Impossible ||
-            state == State.Equip_RequirementsNotMet;
+            state == State.Equip_RequirementsNotMet ||
+            state == State.Unequip_InventoryFull;
     }
 }

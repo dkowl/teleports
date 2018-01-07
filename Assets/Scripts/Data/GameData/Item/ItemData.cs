@@ -75,6 +75,30 @@ public class ItemData {
         return (type & typeFlags) == type;
     }
 
+    public EquipmentSlotCombination GetSlotCombination(EquipmentSlotType primarySlot)
+    {
+        foreach(var slotCombination in slotCombinations)
+        {
+            if(slotCombination.PrimarySlot == primarySlot)
+            {
+                return slotCombination;
+            }
+        }
+        return null;
+    }
+
+    public EquipmentSlotCombination GetSlotCombinationWithSecondarySlot(EquipmentSlotType secondarySlot)
+    {
+        foreach (var slotCombination in slotCombinations)
+        {
+            if (slotCombination.SecondarySlots.Contains(secondarySlot))
+            {
+                return slotCombination;
+            }
+        }
+        return null;
+    }
+
     public string DisplayName
     {
         get { return displayName; }

@@ -17,4 +17,20 @@ public class EquipmentSlotCombination {
     {
         get { return primarySlot; }
     }
+
+    public IList<EquipmentSlotType> SecondarySlots
+    {
+        get
+        {
+            var result = new List<EquipmentSlotType>();
+            foreach(var slotType in slotsTaken)
+            {
+                if(slotType != primarySlot)
+                {
+                    result.Add(slotType);
+                }
+            }
+            return result;
+        }
+    }
 }

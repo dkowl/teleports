@@ -23,6 +23,25 @@ public class InventoryData {
         Utils.InitWithNew(ref invSlots, maxSlots);
     }
 
+    public bool CanAdd(ItemData item)
+    {
+        if(invSlots.Count < maxSlots)
+        {
+            return true;
+        }
+        else
+        {
+            foreach(var slot in invSlots)
+            {
+                if(slot.Empty || (!slot.Empty && slot.Item == item))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public void Add(ItemData item)
     {
         //stack on existing slot
@@ -108,11 +127,28 @@ public class InventoryData {
         }
     }
 
-    /*public void Unequip(EquipmentSlotType slot)
+    public CanUnequipStatus CanUnequip(EquipmentSlotType slot)
     {
-        ItemData unequippedItem = equipmentData.Unequip(slot);
-        Add(unequippedItem);
-    }*/
+        ItemData unequippedItem = equipmentData.GetEquipmentSlot(slot).Item;
+        if (CanAdd(unequippedItem))
+        {
+            return CanUnequipStatus.Yes;
+        }
+        else
+        {
+            return CanUnequipStatus.No_InventoryFull;
+        }
+    }
+
+    public void Unequip(EquipmentSlotType slot)
+    {
+        if(CanUnequip(slot) == CanUnequipStatus.Yes)
+        {
+            ItemData unequippedItem = equipmentData.GetEquipmentSlot(slot).Item;
+            Add(unequippedItem);
+            equipmentData.Unequip(slot);
+        }
+    }
 
     public InventorySlotData GetInventorySlotData(int inventorySlotId)
     {
@@ -210,5 +246,10 @@ public class InventoryData {
     {
         get { return equipmentData; }
     }
-   
+
+    public enum CanUnequipStatus
+    {
+        Yes,
+        No_InventoryFull
+    }
 }
