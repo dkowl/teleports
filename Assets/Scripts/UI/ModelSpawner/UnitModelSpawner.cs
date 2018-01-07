@@ -35,4 +35,12 @@ public class UnitModelSpawner : ModelSpawner {
                 return null;
         }
     }
+
+    public Transform UnitTransform
+    {
+        get
+        {
+            return modelSpawnData[0].spawnedObject.transform;
+        }
+    }
 }

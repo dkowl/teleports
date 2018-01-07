@@ -7,6 +7,8 @@ public abstract class ModelSpawner : LoadableBehaviour {
 
     [SerializeField] protected List<ModelSpawnData> modelSpawnData = new List<ModelSpawnData>();
 
+    public event Action onSpawnEvent;
+
     override protected void LoadDataInternal()
     {
         if (Application.isPlaying)
@@ -36,6 +38,7 @@ public abstract class ModelSpawner : LoadableBehaviour {
                 msData.spawnedObject.transform.Rotate(msData.localRotationOffset, Space.Self);
 
                 msData.shouldRespawn = false;
+                if(onSpawnEvent != null) onSpawnEvent();
             }
         }
     }
