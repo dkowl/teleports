@@ -12,6 +12,6 @@ public class ItemAssetData : UniqueScriptableObject {
     public ItemData GenerateItem()
     {
         //Debug.Log("Generating Item: " + baseItemData.DisplayName);
-        return new ItemData(baseItemData, baseItemData.DisplayName);
+        return new ItemData(baseItemData, UniqueName);
     }
 }
