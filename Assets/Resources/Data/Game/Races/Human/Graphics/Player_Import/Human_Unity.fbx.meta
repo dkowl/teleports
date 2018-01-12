@@ -215,7 +215,7 @@ ModelImporter:
       name: lambert4
     second: {fileID: 2100000, guid: a6cbdac806d70e94bbc87e824f854eeb, type: 2}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 0
@@ -262,7 +262,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 20
+    normalSmoothAngle: 10
     normalImportMode: 1
     tangentImportMode: 3
     normalCalculationMode: 4
