@@ -1,0 +1,132 @@
+fileFormatVersion: 2
+guid: 3596ae5350849ae4690d4067685b534c
+timeCreated: 1515769580
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: GreekShield
+    100002: KiteShield
+    100004: RiotShield
+    100006: RomanShield
+    100008: //RootNode
+    100010: UmbrellaShield
+    100012: UmbrellaShield_Rare
+    100014: WoodenShield_Small
+    400000: GreekShield
+    400002: KiteShield
+    400004: RiotShield
+    400006: RomanShield
+    400008: //RootNode
+    400010: UmbrellaShield
+    400012: UmbrellaShield_Rare
+    400014: WoodenShield_Small
+    2300000: GreekShield
+    2300002: KiteShield
+    2300004: RiotShield
+    2300006: RomanShield
+    2300008: UmbrellaShield
+    2300010: UmbrellaShield_Rare
+    2300012: WoodenShield_Small
+    3300000: GreekShield
+    3300002: KiteShield
+    3300004: RiotShield
+    3300006: RomanShield
+    3300008: UmbrellaShield
+    3300010: UmbrellaShield_Rare
+    3300012: WoodenShield_Small
+    4300000: KiteShield
+    4300002: RiotShield
+    4300004: WoodenShield_Small
+    4300006: GreekShield
+    4300008: RomanShield
+    4300010: UmbrellaShield_Rare
+    4300012: UmbrellaShield
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RiotShield
+    second: {fileID: 2100000, guid: 5159686043587544d89008e95120f712, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert3
+    second: {fileID: 2100000, guid: 6050417cf0372fb439ee3d155c5f2779, type: 2}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
