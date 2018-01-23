@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "race", menuName = "Custom/Race", order = 4)]
+[CreateAssetMenu(menuName = "Data/Race/Data")]
 public class Race : UniqueScriptableObject {
 
     [FormerlySerializedAs("baseStats_")]
