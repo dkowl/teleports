@@ -61,6 +61,11 @@ public class GameData : SerializedScriptableObject {
         }
     }
 
+    public Race GetRace(RaceID raceId)
+    {
+        return GetRace(raceId.Name);
+    }
+
     public List<Race> GetPlayableRaces()
     {
         var result = new List<Race>();
@@ -129,5 +134,9 @@ public class GameData : SerializedScriptableObject {
     public IList<string> EnemyNames
     {
         get { return enemies.AllNames; }
+    }
+    public IList<string> RaceNames
+    {
+        get { return races.AllNames; }
     }
 }

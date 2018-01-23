@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "raceGraphics", menuName = "Data/Race/Graphics")]
-public class RaceGraphics : ScriptableObject {
+public class RaceGraphics : UniqueScriptableObject {
 
     [SerializeField] private GameObject modelObject;
 

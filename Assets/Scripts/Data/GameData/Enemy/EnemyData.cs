@@ -5,13 +5,11 @@ using UnityEngine;
 [System.Serializable]
 public class EnemyData {
 
-    [SerializeField] private string graphicsId;
-    [SerializeField] private UnitData stats;
+    [SerializeField] private RaceID raceId;
 
     public EnemyData(EnemyData other)
     {
-        graphicsId = other.graphicsId;
-        stats = other.stats;
+        raceId = other.raceId;
     }
 	
 }
