@@ -94,15 +94,7 @@ public class MainController : MonoBehaviour {
     {
         loadingGraphics.SetActive(true);
         sceneLoadTask = SceneManager.LoadSceneAsync(nextSceneName);
-
-        if(currentSceneName == "Main" && nextSceneName == "Home")
-        {
-            MainData.SaveDataSO.Load();
-        }
-        else if(currentSceneName == "World" && nextSceneName == "Home")
-        {
-            MainData.SaveDataSO.Save();
-        }
+        SceneTransitionHandler.HandleSceneTransition(currentSceneName, nextSceneName);
         sceneState = SceneState.Load;
     }
     
