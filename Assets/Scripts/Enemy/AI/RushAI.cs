@@ -7,13 +7,6 @@ public class RushAI : UnitController {
 
     GameObject[] targets; //all available targets
     
-    //Unity Event Functions
-	public override void Awake()
-    {
-        base.Awake();
-        mainAttack = gameObject.GetComponent<Attack>();
-    }
-
 	void Start () {
         FindTarget();
 	}

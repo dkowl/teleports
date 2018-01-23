@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Sirenix.OdinInspector;
 
 public class Attack : Skill {
 
     [FormerlySerializedAs("damageMultiplier_")]
-    [SerializeField]
-    private float damageMultiplier = 1;
+    [SerializeField] private float damageMultiplier = 1;
+    [SerializeField] private AttackDamageType damageType;
+    [SerializeField, ShowIf("ShowDamageRanges")] private int minDamage;
+    [SerializeField, ShowIf("ShowDamageRanges")] private int maxDamage;
+
 
     override public void CastInternal(Unit caster, List<CastTarget> targets)
     {
@@ -25,4 +29,32 @@ public class Attack : Skill {
             target.Unit.Rigidbody.AddForceAtPosition(forceVector, target.Unit.Rigidbody.position + randomOffset, ForceMode.Impulse);
         }
     }
+
+    protected AttackDamageType DamageType
+    {
+        get { return damageType; }
+    }
+
+    protected virtual float Damage(Unit caster)
+    {
+        switch (damageType)
+        {
+            case AttackDamageType.RawDamage:
+                return Random.Range(minDamage, maxDamage);
+            case AttackDamageType.Weapon:
+                return caster.Damage;
+        }
+        return 0;
+    }
+
+    private bool ShowDamageRanges()
+    {
+        return damageType == AttackDamageType.RawDamage;
+    }
+}
+
+public enum AttackDamageType
+{
+    Weapon,
+    RawDamage
 }
