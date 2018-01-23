@@ -9,14 +9,21 @@ using Sirenix.OdinInspector;
 public class GraphicsData : SerializedScriptableObject {
 
     [SerializeField] private MappedList<TeleportGraphics> teleportGraphics;
+    [SerializeField] private MappedList<EnemyGraphics> enemyGraphics;
 
     void OnEnable()
     {
-        //teleportGraphics.MakeDict();
+        teleportGraphics.MakeDict();
+        enemyGraphics.MakeDict();
     }
 
     public MappedList<TeleportGraphics> Teleport
     {
         get { return teleportGraphics; }
+    }
+
+    public IList<string> EnemyGraphicsNames
+    {
+        get { return enemyGraphics.AllNames; }
     }
 }

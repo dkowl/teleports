@@ -16,6 +16,7 @@ public class GameData : SerializedScriptableObject {
     [SerializeField] private MappedList<Perk> perks;
     [SerializeField] private MappedList<Skill> skills;
     [SerializeField] private MappedList<ItemAssetData> items;
+    [SerializeField] private MappedList<EnemyAssetData> enemies;
     [SerializeField] private SkillDatabase skillDatabase;
     [SerializeField] private GraphicsData graphicsData;
 
@@ -27,6 +28,7 @@ public class GameData : SerializedScriptableObject {
         perks.MakeDict();
         skills.MakeDict();
         items.MakeDict();
+        enemies.MakeDict();
     }
 
     public ItemData GetItem(string itemName)
@@ -86,6 +88,19 @@ public class GameData : SerializedScriptableObject {
         }
     }
 
+    public EnemyData GetEnemy(EnemyID enemyId)
+    {
+        EnemyAssetData result = enemies.TryGetValue(enemyId.Name);
+        if(result != null)
+        {
+            return result.GenerateBasic();
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public SkillDatabase CurrentSkillDatabase
     {
         get { return skillDatabase; }
@@ -109,5 +124,10 @@ public class GameData : SerializedScriptableObject {
     public IList<string> ItemNames
     {
         get { return items.AllNames; }
+    }
+
+    public IList<string> EnemyNames
+    {
+        get { return enemies.AllNames; }
     }
 }
