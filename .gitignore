@@ -91,6 +91,7 @@ artifacts/
 *.obj
 *.pch
 *.pdb
+*.pdb.meta
 *.pgc
 *.pgd
 *.rsp
