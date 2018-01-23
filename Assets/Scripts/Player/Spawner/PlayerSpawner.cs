@@ -18,7 +18,7 @@ public static class PlayerSpawner {
 
         //Common
         IPlayerData playerData = MainData.CurrentPlayerData;
-        if (playerData == null) return null;
+        Debug.Assert(playerData != null);
         RaceGraphics raceGraphics = MainData.CurrentGameData.GetRace(playerData.RaceName).Graphics;
 
         //Spawn model

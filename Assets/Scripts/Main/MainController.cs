@@ -8,12 +8,10 @@ using UnityEngine.SceneManagement;
 //Manages async Scene loading
 //Acts as loading screen
 public class MainController : MonoBehaviour {
-
-    //singleton instance
+    
     private static MainController mainController;
     
-    //private variables
-    private string currentSceneName = "Main";
+    private string currentSceneName = SceneNames.Main;
     private string nextSceneName;
     private AsyncOperation resourceUnloadTask;
     private AsyncOperation sceneLoadTask;
@@ -21,36 +19,18 @@ public class MainController : MonoBehaviour {
     private SceneState sceneState;
     private delegate void UpdateDelegate();
     private UpdateDelegate[] updateDelegates;
-
-    //inspector variables
-    public string startSceneName = "Start";
+    
+    public string startSceneName = SceneNames.Home;
     public LoadingGraphics loadingGraphics;
-
-    //public static methods
-    public static void SwitchScene(string nextSceneName)
-    {
-        if(mainController!= null)
-        {
-            if(mainController.currentSceneName != nextSceneName)
-            {
-                mainController.nextSceneName = nextSceneName;
-            }
-        }
-    }
-
-    //unity event methods
+    
     void Awake()
     {
-        //Preserve gameObject
         DontDestroyOnLoad(gameObject);
-
-        //Assign singleton instance
+        
         mainController = this;
-
-        //Setup deletate array
+        
         updateDelegates = new UpdateDelegate[(int)SceneState.Count];
-
-        //Populate delegate array
+        
         updateDelegates[(int)SceneState.Reset] = UpdateSceneReset;
         updateDelegates[(int)SceneState.Preload] = UpdateScenePreload;
         updateDelegates[(int)SceneState.Load] = UpdateSceneLoad;
@@ -62,23 +42,6 @@ public class MainController : MonoBehaviour {
         nextSceneName = startSceneName;
         sceneState = SceneState.Run;
     }
-
-    void OnDestroy()
-    {
-        if(updateDelegates != null)
-        {
-            for(int i = 0; i < updateDelegates.Length; i++)
-            {
-                updateDelegates[i] = null;
-            }
-            updateDelegates = null;
-        }
-        
-        if(mainController != null)
-        {
-            mainController = null;
-        }
-    }
     
     void Update()
     {
@@ -88,12 +51,39 @@ public class MainController : MonoBehaviour {
         }
     }
 
+    void OnDestroy()
+    {
+        if (updateDelegates != null)
+        {
+            for (int i = 0; i < updateDelegates.Length; i++)
+            {
+                updateDelegates[i] = null;
+            }
+            updateDelegates = null;
+        }
+
+        if (mainController != null)
+        {
+            mainController = null;
+        }
+    }
+
     void OnApplicationQuit()
     {
         MainData.SaveDataSO.Save();
     }
 
-    //private methods
+    public static void SwitchScene(string nextSceneName)
+    {
+        if (mainController != null)
+        {
+            if (mainController.currentSceneName != nextSceneName)
+            {
+                mainController.nextSceneName = nextSceneName;
+            }
+        }
+    }
+    
     private void UpdateSceneReset()
     {
         System.GC.Collect();
@@ -105,11 +95,11 @@ public class MainController : MonoBehaviour {
         loadingGraphics.SetActive(true);
         sceneLoadTask = SceneManager.LoadSceneAsync(nextSceneName);
 
-        if(currentSceneName == "Main" && nextSceneName == "Start")
+        if(currentSceneName == "Main" && nextSceneName == "Home")
         {
             MainData.SaveDataSO.Load();
         }
-        else if(currentSceneName == "World" && nextSceneName == "Start")
+        else if(currentSceneName == "World" && nextSceneName == "Home")
         {
             MainData.SaveDataSO.Save();
         }
