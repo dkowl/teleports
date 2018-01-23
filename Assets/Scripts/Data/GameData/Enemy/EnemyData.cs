@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyData {
 
     [SerializeField] private RaceID raceId;
+    [SerializeField] private AiParameters aiParams;
 
     public EnemyData(EnemyData other)
     {
