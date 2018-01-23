@@ -46,6 +46,11 @@ public class UnitWeaponCombiner {
         damagePerSecond = ((float)(minDamage + maxDamage) / 2) / attackTime;        
     }
 
+    public int DamageRoll
+    {
+        get { return Random.Range(minDamage, maxDamage); }
+    }
+
     public bool CanUse
     {
         get { return canUse; }

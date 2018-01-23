@@ -53,6 +53,7 @@ public class MappedList<T> where T : IUniqueName {
         get
         {
             var names = new List<string>();
+            names.Add("");
             foreach(var element in list)
             {
                 names.Add(element.UniqueName);

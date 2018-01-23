@@ -31,7 +31,14 @@ public partial class SaveData
     {
         if(CurrentPlayerData() == null)
         {
-            playerData[currentPlayerDataID] = new PlayerData(name, raceName);
+            if (MainData.CurrentGameData.GetRace(raceName) != null)
+            {
+                playerData[currentPlayerDataID] = new PlayerData(name, raceName);
+            }
+            else
+            {
+                Debug.Log(raceName + " race does not exist");
+            }
         }
         else
         {

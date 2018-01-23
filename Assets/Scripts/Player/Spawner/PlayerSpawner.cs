@@ -5,21 +5,20 @@ using UnityEngine;
 public static class PlayerSpawner {
 
 	public static GameObject Spawn(PlayerSpawnerParams p)
-    {
+    {     
+        //Common
+        IPlayerData playerData = MainData.CurrentPlayerData;
+        if (playerData == null) return null;
+        RaceGraphics raceGraphics = MainData.CurrentGameData.GetRace(playerData.RaceName).Graphics;
+
         GameObject player;
-        
+
         player = new GameObject("Player");
         player.transform.localPosition = Vector3.zero;
         player.transform.localEulerAngles = new Vector3(0, 180, 0);
         player.transform.parent = p.ParentObject.transform;
         player.tag = "Player";
         player.layer = 9;
-        
-
-        //Common
-        IPlayerData playerData = MainData.CurrentPlayerData;
-        Debug.Assert(playerData != null);
-        RaceGraphics raceGraphics = MainData.CurrentGameData.GetRace(playerData.RaceName).Graphics;
 
         //Spawn model
         GameObject playerModel = Object.Instantiate(raceGraphics.ModelObject, player.transform);

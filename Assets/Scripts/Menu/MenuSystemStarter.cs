@@ -6,6 +6,7 @@ public class MenuSystemStarter : MonoBehaviour {
 
     public void Start()
     {
+        DontDestroyOnLoad(gameObject);
         MenuController.Instance.FirstStart(transform);
     }
 }

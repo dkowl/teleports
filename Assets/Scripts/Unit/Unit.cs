@@ -7,6 +7,7 @@ public class Unit : MonoBehaviour
 
     [SerializeField]
     private UnitData unitData;
+    private UnitWeaponCombiner weaponCombiner;
 
     private List<ActionState> actionStates;
     private MovingState movingState;
@@ -187,7 +188,7 @@ public class Unit : MonoBehaviour
 
     public float Damage
     {
-        get { return 10; } //TODO
+        get { return weaponCombiner.DamageRoll; }
     }
 
     public float ArmorIgnore
@@ -233,7 +234,10 @@ public class Unit : MonoBehaviour
     public UnitData UnitData
     {
         get { return unitData; }
-        set { unitData = value; }
+        set {
+            unitData = value;
+            weaponCombiner = new UnitWeaponCombiner(unitData, WeaponData);
+        }
     }
 
     public MovingState MovingState
@@ -289,5 +293,16 @@ public class Unit : MonoBehaviour
     public Rigidbody Rigidbody
     {
         get { return rigidbody; }
+    }
+
+    private WeaponData WeaponData{
+        get
+        {
+            foreach(var itemInfo in UnitData.Inventory.EquipmentData.GetEquippedItems())
+            {
+                if (itemInfo.Item.IsType(ItemType.Weapon)) return itemInfo.Item.WeaponData;
+            }
+            return new WeaponData();
+        }
     }
 }

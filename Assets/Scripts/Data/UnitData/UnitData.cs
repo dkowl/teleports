@@ -30,6 +30,7 @@ public class UnitData {
     public void Initialize()
     {
         unitName = "New Unit";
+        raceName = "Human";
         level = 1;
         perks = new List<PerkID>();
         skills = new List<SkillID>();

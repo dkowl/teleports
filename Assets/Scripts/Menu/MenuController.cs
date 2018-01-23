@@ -21,8 +21,6 @@ public class MenuController : ScriptableObject
     [SerializeField] private MenuType startMenu;
     [SerializeField] private GameObject mainCanvasPrefab;
 
-
-    //unity event functions
     void Awake()
     {
         Initialize();
@@ -61,8 +59,7 @@ public class MenuController : ScriptableObject
         }
         commandQ.AddCommand(new MenuCommand(menu, type));
     }
-
-    //public functions
+    
     public void FirstStart(Transform newSpawnTransform)
     {
         spawnTransform = newSpawnTransform;

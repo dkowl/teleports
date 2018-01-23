@@ -20,7 +20,7 @@ public class PlayerData : IPlayerData
     [SerializeField] private UnitData unitData;
     [SerializeField] private TeleportData teleportData;
 
-    public PlayerData(string name, string raceName)
+    private void Init(string name, string raceName)
     {
         characterName = name;
         xp = 0;
@@ -40,7 +40,11 @@ public class PlayerData : IPlayerData
         }
         unitData = MainData.CurrentGameData.GetRace(raceName).BaseStats;
         teleportData = new TeleportData();
-        CorrectInvalidData();
+    }
+
+    public PlayerData(string name, string raceName)
+    {
+        Init(name, raceName);
     }
 
     public void CorrectInvalidData()
@@ -61,6 +65,10 @@ public class PlayerData : IPlayerData
                 skillTreeSlots[i] = new SkillTreeSlot();
             }
         }
+        if(secondarySkills == null)
+        {
+            secondarySkills = new SkillID[SkillSlotNo];
+        }
         if(secondarySkills.Length < SkillSlotNo)
         {
             secondarySkills = new SkillID[SkillSlotNo];
@@ -69,6 +77,11 @@ public class PlayerData : IPlayerData
                 secondarySkills[i] = new SkillID();
             }
         }
+        if(unitData == null)
+        {
+            unitData = MainData.CurrentGameData.GetRace("Human").BaseStats;
+        }
+        if (teleportData == null) teleportData = new TeleportData();
         teleportData.CorrectInvalidData();
     }
 

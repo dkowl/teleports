@@ -8,7 +8,7 @@ using Sirenix.Serialization;
 [CreateAssetMenu(fileName = "newSaveData", menuName = "Data/Save")]
 public class SaveDataSO : SerializedScriptableObject {
 
-    [System.NonSerialized, OdinSerialize] public SaveData saveData;
+    [SerializeField] public SaveData saveData;
 
     public delegate void OnSaveLoad();
     public static event OnSaveLoad LoadEvent;

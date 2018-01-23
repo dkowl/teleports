@@ -78,7 +78,7 @@ public class GameData : SerializedScriptableObject {
     {
         if (skillId.UsesString())
         {
-            return skills.TryGetValue(skillId.skillName);
+            return skills.TryGetValue(skillId.Name);
         }
         else
         {
@@ -99,6 +99,11 @@ public class GameData : SerializedScriptableObject {
     public IList<string> PerkNames
     {
         get { return perks.AllNames; }
+    }
+
+    public IList<string> SkillNames
+    {
+        get { return skills.AllNames; }
     }
 
     public IList<string> ItemNames
