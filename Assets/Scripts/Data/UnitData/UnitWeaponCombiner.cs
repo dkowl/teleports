@@ -24,6 +24,8 @@ public class UnitWeaponCombiner {
 
     public UnitWeaponCombiner(UnitData unit, WeaponData weapon)
     {
+        if (weapon == null || unit == null) return;
+
         canUse = 
             unit.Abilities.Strength >= weapon.StrRequired &&
             unit.Abilities.Dexterity >= weapon.DexRequired &&

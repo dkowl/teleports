@@ -6,27 +6,11 @@ public class EnemySpawner : MonoBehaviour {
 
     public static EnemySpawner instance;
 
-    public enum EnemyType
-    {
-        Red,
-        Pink,
-        Blue,
-        Teal,
-        Green,
-        Yellow,
-        White,
-        Black,
-        Count
-    };
-
     class Enemy
     {
         public GameObject gameObject, indicator;
-        public EnemyType type;
+        public EnemyData enemyData;
     }
-
-    const string enemyFolder = "Prefabs/Enemies/";
-    string[] enemyName = new string[(int)EnemyType.Count];
 
     GameObject player;
 
@@ -45,14 +29,6 @@ public class EnemySpawner : MonoBehaviour {
     }
     
     void Start () {
-        enemyName[(int)EnemyType.Red] = "Red";
-        enemyName[(int)EnemyType.Pink] = "Pink";
-        enemyName[(int)EnemyType.Blue] = "Blue";
-        enemyName[(int)EnemyType.Teal] = "Teal";
-        enemyName[(int)EnemyType.Green] = "Green";
-        enemyName[(int)EnemyType.Yellow] = "Yellow";
-        enemyName[(int)EnemyType.White] = "White";
-        enemyName[(int)EnemyType.Black] = "Black";
 
         player = GameMain.Instance.Player;
 
@@ -87,28 +63,34 @@ public class EnemySpawner : MonoBehaviour {
         }
     }
 
-    GameObject InstantiateEnemy(EnemyType type)
+    public void Spawn(EnemyData enemyData, Vector3 position)
     {
-        string path = enemyFolder + enemyName[(int)type];
-        return Instantiate(Resources.Load(path), gameObject.transform) as GameObject;
-    }
+        GameObject enemyObject = new GameObject(enemyData.Name);
+        enemyObject.transform.position = position;
 
-    public void Spawn(EnemyType type, Vector3 position)
-    {
-        GameObject newEnemy = InstantiateEnemy(type);
-        newEnemy.transform.position = position;
+        Race raceData = MainData.CurrentGameData.GetRace(enemyData.RaceId);
+        GameObject raceObject = Instantiate(raceData.Graphics.ModelObject, enemyObject.transform);
+
+        Unit unit = enemyObject.AddComponent<Unit>();
+        unit.UnitData = raceData.BaseStats;
+
+        switch (enemyData.AiParams.AiType)
+        {
+            case AiType.Rush:
+                enemyObject.AddComponent<RushAI>();
+                break;
+        }
 
         Enemy enemy = new Enemy();
-        enemy.gameObject = newEnemy;
-        enemy.type = type;
+        enemy.gameObject = enemyObject;
+        enemy.enemyData = enemyData;
         enemy.indicator = null;
         enemies.Add(enemy);
     }
 
     public void SpawnRandom(Vector3 position)
     {
-        int id = Random.Range(0, (int)EnemyType.Count);
-        Spawn((EnemyType)id, position);
+        Spawn(MainData.CurrentGameData.Enemies.RandomValue.GenerateBasic(), position);
     }
 	
 }

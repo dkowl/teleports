@@ -46,7 +46,7 @@ public class MenuBehaviour : LoadableBehaviour {
 
     override protected void LoadDataInternal()
     {
-        print("Adding Load Command");
+        //print("Adding Load Command");
         AddCommand(MenuBehaviourCommand.Type.Load);
     }
 
@@ -84,7 +84,7 @@ public class MenuBehaviour : LoadableBehaviour {
 
     public virtual void OnLoad()
     {
-        print("Calling OnLoad");
+        //print("Calling OnLoad");
         if (DetectChange())
         {
             CurrentState = State.Loading;
@@ -110,7 +110,7 @@ public class MenuBehaviour : LoadableBehaviour {
 
     public void LoadFinish()
     {
-        Debug.Log("Calling load finish");
+        //Debug.Log("Calling load finish");
         if(CurrentState == State.Loading) CurrentState = previousState;
         if (LoadFinishEvent != null) LoadFinishEvent();
     }
@@ -121,7 +121,7 @@ public class MenuBehaviour : LoadableBehaviour {
         {
             animator.SetTrigger("Skip");
         }
-        Debug.Log("CurrentState while skipping: " + CurrentState.ToString());
+        //Debug.Log("CurrentState while skipping: " + CurrentState.ToString());
         switch (CurrentState)
         {
             case State.Closing:
@@ -170,10 +170,10 @@ public class MenuBehaviour : LoadableBehaviour {
             if (state == value) return;
             previousState = state;
             state = value;
-            Debug.Log("Changing state of " + name + " (" + previousState.ToString() + " ===> " + state.ToString() + ")");
+            //Debug.Log("Changing state of " + name + " (" + previousState.ToString() + " ===> " + state.ToString() + ")");
             if (hasParameter[(int)state])
             {
-                Debug.Log("Triggering " + state.ToString());
+                //Debug.Log("Triggering " + state.ToString());
                 animator.SetTrigger(state.ToString());
             }
         }

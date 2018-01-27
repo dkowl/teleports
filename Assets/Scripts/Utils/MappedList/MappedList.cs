@@ -6,7 +6,7 @@ using Sirenix.Serialization;
 
 [System.Serializable]
 [ShowOdinSerializedPropertiesInInspector]
-public class MappedList<T> where T : IUniqueName {
+public class MappedList<T> : IMappedList<T> where T : IUniqueName {
 
     [SerializeField]
     protected List<T> list = new List<T>();
@@ -59,6 +59,15 @@ public class MappedList<T> where T : IUniqueName {
                 names.Add(element.UniqueName);
             }
             return names;
+        }
+    }
+
+    public T RandomValue
+    {
+        get
+        {
+            int id = Random.Range(0, list.Count);
+            return list[id];
         }
     }
 

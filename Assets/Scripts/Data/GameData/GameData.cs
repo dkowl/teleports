@@ -106,6 +106,41 @@ public class GameData : SerializedScriptableObject {
         }
     }
 
+    public IMappedList<Gem> Gems
+    {
+        get { return gems; }
+    }
+
+    public IMappedList<WorldData> Worlds
+    {
+        get { return worlds; }
+    }
+
+    public IMappedList<Race> Races
+    {
+        get { return races; }
+    }
+
+    public IMappedList<Perk> Perks
+    {
+        get { return perks; }
+    }
+
+    public IMappedList<Skill> Skills
+    {
+        get { return skills; }
+    }
+
+    public IMappedList<ItemAssetData> Items
+    {
+        get { return items; }
+    }
+
+    public IMappedList<EnemyAssetData> Enemies
+    {
+        get { return enemies; }
+    }
+
     public SkillDatabase CurrentSkillDatabase
     {
         get { return skillDatabase; }

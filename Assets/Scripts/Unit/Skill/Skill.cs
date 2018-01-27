@@ -11,6 +11,7 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     [FormerlySerializedAs("castTime_"), SerializeField] private Attribute castTime;
     [FormerlySerializedAs("cooldown_"), SerializeField] private Attribute cooldown;
     [SerializeField] private Attribute afterCastLockTime;
+    [SerializeField] private Attribute earlyBreakTime;
     [SerializeField] private SkillGraphics graphics;
 
     float currentCooldown;
@@ -105,6 +106,11 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         get { return afterCastLockTime.Value; }
     }
 
+    public float EarlyBreakTime
+    {
+        get { return earlyBreakTime.Value; }
+    }
+
     public float CurrentCooldown
     {
         get { return currentCooldown; }
@@ -159,6 +165,14 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
             this.targetType = targetType;
             this.targetUnit = targetUnit;
             this.targetPosition = targetPosition;
+        }
+
+        public TargetInfo(TargetInfo other)
+        {
+            this.caster = other.caster;
+            this.targetType = other.targetType;
+            this.targetUnit = other.targetUnit;
+            this.targetPosition = other.targetPosition;
         }
 
         public Unit Caster

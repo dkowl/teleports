@@ -17,9 +17,9 @@ public class Attack : Skill {
     {
         foreach (var target in targets)
         {
-            float damage = caster.Damage * damageMultiplier;
+            float damage = Damage(caster) * damageMultiplier;
 
-            target.Unit.ReceiveDamage(caster.Damage * damageMultiplier, caster);
+            target.Unit.ReceiveDamage(damage, caster);
 
             //physics pushback
             Vector3 directionVector = target.Unit.transform.position - caster.transform.position;

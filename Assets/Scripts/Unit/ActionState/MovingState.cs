@@ -41,10 +41,6 @@ public class MovingState : ActionState {
             //unit.Rigidbody.AddForce(CalculateForce(unit.Rigidbody.velocity, targetVelocity), ForceMode.Acceleration);
             //unit.Rigidbody.MovePosition(unit.Rigidbody.position + offset);
         }
-        else if(IsActive && IsBlocked)
-        {
-            Reset();
-        }
     }
 
     public override void Reset()

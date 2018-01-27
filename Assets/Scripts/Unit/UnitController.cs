@@ -29,6 +29,10 @@ public abstract class UnitController : MonoBehaviour {
         {
             mainAttack = MainData.CurrentGameData.GetSkill(unit.UnitData.MainAttack);
         }
+        if(unit.ActiveController == null)
+        {
+            unit.ActiveController = this;
+        }
     }
 
     void Update()

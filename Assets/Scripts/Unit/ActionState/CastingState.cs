@@ -78,11 +78,17 @@ public class CastingState : ActionState {
         {
             if (interrupt)
                 Reset();
+            else if ((skill != activeSkill || target != targetInfo) && state == State.BeforeCast && currentCastTime <= activeSkill.EarlyBreakTime)
+            {
+
+            }
             else
+            {
                 return;
+            }
         }
         activeSkill = skill;
-        targetInfo = target;
+        targetInfo = new Skill.TargetInfo(target);
         Start();
     }
 
@@ -102,6 +108,11 @@ public class CastingState : ActionState {
     Skill ActiveSkill
     {
         get { return activeSkill; }
+    }
+
+    public State Status
+    {
+        get { return state; }
     }
 
     public enum State

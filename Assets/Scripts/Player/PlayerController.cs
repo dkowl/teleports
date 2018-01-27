@@ -12,22 +12,15 @@ public class PlayerController : UnitController {
             RaycastHit hit;
             bool done = false;
 
-            int layerMask = (int)LayerMask.Enemy;
-            if (Input.GetButtonDown("PlayerMove") && Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+            int enemyMask = (int)LayerMask.Enemy;
+            int groundMask = (int)LayerMask.Ground;
+            if (Input.GetButtonDown("PlayerMove") && Physics.Raycast(ray, out hit, Mathf.Infinity, enemyMask))
             {
-                target.TargetUnit = hit.transform.gameObject.GetComponent<Unit>();
-                done = true;
+                OnEnemyClick(hit.transform.gameObject.GetComponent<Unit>());
             }
-
-            layerMask = (int)LayerMask.Ground;
-            if (!done && Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+            else if (!done && Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
             {
-                unit.MovingState.Start(hit.point);
-                if (Input.GetButtonDown("PlayerMove"))
-                {
-                    unit.CastingState.Reset();
-                    target.TargetUnit = null;
-                }
+                OnGroundPressed(hit.point);
             }
         }
 
@@ -36,5 +29,15 @@ public class PlayerController : UnitController {
             if (!target.TargetUnit.Alive || !unit.Alive) target.TargetUnit = null;
             else Chase();
         }
-	}    
+	}  
+    
+    void OnEnemyClick(Unit enemy)
+    {
+        target.TargetUnit = enemy;
+    }  
+
+    void OnGroundPressed(Vector3 point)
+    {
+        unit.MovingState.Start(point);
+    }
 }

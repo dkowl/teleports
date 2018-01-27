@@ -58,6 +58,7 @@ public class Unit : MonoBehaviour
         
         rotatingState.AddBlocker(stunnedState);
         rotatingState.AddBlocker(deadState);
+        rotatingState.AddBlocker(castingState);
 
         castingState.AddBlocker(stunnedState);
         castingState.AddBlocker(deadState);
@@ -302,7 +303,7 @@ public class Unit : MonoBehaviour
             {
                 if (itemInfo.Item.IsType(ItemType.Weapon)) return itemInfo.Item.WeaponData;
             }
-            return new WeaponData();
+            return null;
         }
     }
 }
