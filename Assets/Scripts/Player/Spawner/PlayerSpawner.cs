@@ -50,6 +50,7 @@ public static class PlayerSpawner {
                 }
                 unit.UnitData = playerData.UnitData;
                 unit.UnitData.Name = playerData.CharacterName;
+                unit.Graphics.RaceModel = playerModel;
 
                 if (controller == null)
                 {

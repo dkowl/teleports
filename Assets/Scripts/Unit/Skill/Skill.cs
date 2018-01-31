@@ -49,11 +49,6 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
             float casterYRot = caster.transform.rotation.eulerAngles.y;
             float targetYRot = Quaternion.LookRotation(targetInfo.Position - caster.transform.position).eulerAngles.y;
             bool canReachAngle = Mathf.Abs(Mathf.DeltaAngle(casterYRot, targetYRot)) <= 30f / 2f;
-            if (caster.name == "Player")
-            {
-                Debug.Log("CanReachAngle is " + canReachAngle.ToString() + " --- casterYRot = " + casterYRot.ToString() + ", targetYRot = " + targetYRot.ToString() + 
-                    ", DeltaAngle = " + Mathf.DeltaAngle(casterYRot, targetYRot));
-            }
 
             if (canReachAngle && canReachDistance) return CanReachTargetResult.Yes;
             else
