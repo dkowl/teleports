@@ -24,7 +24,7 @@ public class Attack : Skill {
             //physics pushback
             Vector3 directionVector = target.Unit.transform.position - caster.transform.position;
             directionVector.Normalize();
-            Vector3 forceVector = directionVector * damage * 100;
+            Vector3 forceVector = directionVector * damage;
             Vector3 randomOffset = Random.insideUnitSphere;
             target.Unit.Rigidbody.AddForceAtPosition(forceVector, target.Unit.Rigidbody.position + randomOffset, ForceMode.Impulse);
         }

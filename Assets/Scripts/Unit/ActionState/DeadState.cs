@@ -15,17 +15,18 @@ public class DeadState : ActionState {
 
     protected override void OnStart()
     {
-        if (lastAttacker != null)
+        if (!IsActive)
         {
-            XpComponent xp = lastAttacker.gameObject.GetComponent<XpComponent>();
-            if (xp != null)
+            if (lastAttacker != null)
             {
-                xp.ReceiveXp((1000 * Unit.UnitData.Level));
+                XpComponent xp = lastAttacker.gameObject.GetComponent<XpComponent>();
+                if (xp != null)
+                {
+                    xp.ReceiveXp((1000 * Unit.UnitData.Level));
+                }
             }
+            Unit.Graphics.SwitchToRagdoll();
         }
-        Unit.Rigidbody.constraints = 0;
-        Unit.Rigidbody.useGravity = true;
-        Unit.gameObject.SetLayerIncludingChildren(0);        
     }
 
     protected override void OnReset()

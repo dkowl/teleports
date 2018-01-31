@@ -34,8 +34,8 @@ public abstract class ActionState {
     {
         if (!IsBlocked)
         {
-            isActive = true;
             OnStart();
+            isActive = true;
         }
     }
     protected virtual void OnStart() { } 

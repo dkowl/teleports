@@ -95,7 +95,7 @@ public class Unit : MonoBehaviour
     {
         ApplyPerks();
 
-        rigidbody.mass = Mathf.Sqrt(unitData.Height * Size * Size) * 4 * 100;
+        rigidbody.mass = Mathf.Sqrt(unitData.Height * Size * Size) * 4 * 10;
 
         if (collider != null)
         {
@@ -294,6 +294,7 @@ public class Unit : MonoBehaviour
     public Rigidbody Rigidbody
     {
         get { return rigidbody; }
+        set { rigidbody = value; }
     }
 
     private WeaponData WeaponData{

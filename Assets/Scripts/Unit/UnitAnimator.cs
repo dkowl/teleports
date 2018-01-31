@@ -26,9 +26,7 @@ public class UnitAnimator : MonoBehaviour {
     }
     
 	void Start () {
-        unit.CastingState.startCastEvent += HandleCastStartEvent;
-        unit.CastingState.castEvent += HandleCastEvent;
-        unit.CastingState.resetCastEvent += HandleCastResetEvent;
+        Subscribe();
 	}
 	
 	void Update () {
@@ -49,5 +47,25 @@ public class UnitAnimator : MonoBehaviour {
     void HandleCastResetEvent(CastingState.CastEventArgs eventArgs)
     {
         animator.SetTrigger(castResetHash);
+    }
+
+    void OnDestroy()
+    {
+        Unsubscribe();
+    }
+
+    void Subscribe()
+    {
+        Unsubscribe();
+        unit.CastingState.startCastEvent += HandleCastStartEvent;
+        unit.CastingState.castEvent += HandleCastEvent;
+        unit.CastingState.resetCastEvent += HandleCastResetEvent;
+    }
+
+    void Unsubscribe()
+    {
+        unit.CastingState.startCastEvent -= HandleCastStartEvent;
+        unit.CastingState.castEvent -= HandleCastEvent;
+        unit.CastingState.resetCastEvent -= HandleCastResetEvent;
     }
 }

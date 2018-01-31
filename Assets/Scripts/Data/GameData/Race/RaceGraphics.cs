@@ -6,6 +6,7 @@ using UnityEngine;
 public class RaceGraphics : UniqueScriptableObject {
 
     [SerializeField] private GameObject modelObject;
+    [SerializeField] private GameObject ragdollObject;
 
     [SerializeField] private RuntimeAnimatorController uiAnimationController;
     [SerializeField] private RuntimeAnimatorController worldAnimationController;
@@ -14,6 +15,11 @@ public class RaceGraphics : UniqueScriptableObject {
     public GameObject ModelObject
     {
         get { return modelObject; }
+    }
+
+    public GameObject RagdollObject
+    {
+        get { return ragdollObject; }
     }
 
     public RuntimeAnimatorController UiAnimationController

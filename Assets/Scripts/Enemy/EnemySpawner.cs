@@ -73,6 +73,7 @@ public class EnemySpawner : MonoBehaviour {
 
         Unit unit = enemyObject.AddComponent<Unit>();
         unit.UnitData = raceData.BaseStats;
+        unit.Graphics.RaceModel = raceObject;
 
         switch (enemyData.AiParams.AiType)
         {
