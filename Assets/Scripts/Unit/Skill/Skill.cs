@@ -8,6 +8,7 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     [FormerlySerializedAs("name_"), SerializeField] new private string name;
     [FormerlySerializedAs("type_"), SerializeField] private TargetType type;
     [FormerlySerializedAs("reach_"), SerializeField] private Attribute reach;
+    [FormerlySerializedAs("reach_"), SerializeField] private Attribute reachAngle;
     [FormerlySerializedAs("cooldown_"), SerializeField] private Attribute cooldown;
     [FormerlySerializedAs("castTime_"), SerializeField] private Attribute castTime;
     [SerializeField] private Attribute totalCastTime;
@@ -35,7 +36,7 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         CastInternal(caster, Targeter.GetTargets(this, targetInfo));
     }
 
-    public bool CanReachTarget(TargetInfo targetInfo)
+    public CanReachTargetResult CanReachTarget(TargetInfo targetInfo)
     {
         Unit caster = targetInfo.Caster;
         if (caster != null)
@@ -43,14 +44,29 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
             float totalReach = caster.Reach + caster.Size + Reach;
             if (targetInfo.TargetUnit != null) totalReach += targetInfo.TargetUnit.Size;
 
-            return
-                (targetInfo.Position - caster.transform.position).magnitude
-                <=
-                totalReach;
+            bool canReachDistance = (targetInfo.Position - caster.transform.position).magnitude <= totalReach;
+
+            float casterYRot = caster.transform.rotation.eulerAngles.y;
+            float targetYRot = Quaternion.LookRotation(targetInfo.Position - caster.transform.position).eulerAngles.y;
+            bool canReachAngle = Mathf.Abs(Mathf.DeltaAngle(casterYRot, targetYRot)) <= 30f / 2f;
+            if (caster.name == "Player")
+            {
+                Debug.Log("CanReachAngle is " + canReachAngle.ToString() + " --- casterYRot = " + casterYRot.ToString() + ", targetYRot = " + targetYRot.ToString() + 
+                    ", DeltaAngle = " + Mathf.DeltaAngle(casterYRot, targetYRot));
+            }
+
+            if (canReachAngle && canReachDistance) return CanReachTargetResult.Yes;
+            else
+            {
+                CanReachTargetResult result = 0;
+                if (!canReachDistance) result += CanReachTargetResult.NoDistance;
+                if (!canReachAngle) result += CanReachTargetResult.NoAngle;
+                return result;
+            }
         }
         else
         {
-            return false;
+            return CanReachTargetResult.NoAngle + CanReachTargetResult.NoDistance;
         }
     }
 
@@ -91,6 +107,11 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     public float Reach
     {
         get { return reach.Value; }
+    }
+
+    public float ReachAngle
+    {
+        get { return reachAngle.Value; }
     }
 
     public float Cooldown
@@ -140,10 +161,48 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     public enum AttributeType
     {
         Reach,
+        ReachAngle,
         Cooldown,
         CastTime,
         TotalCastTime,
         EarlyBreakTime
+    }
+
+    public struct CanReachTargetResult
+    {
+        private int value;
+
+        public static readonly CanReachTargetResult Yes = 1;
+        public static readonly CanReachTargetResult NoDistance = 2;
+        public static readonly CanReachTargetResult NoAngle = 4;
+
+        private CanReachTargetResult(int value) { this.value = value; }
+
+        public static implicit operator bool(CanReachTargetResult a)
+        {
+            if (a == Yes) return true;
+            else return false;
+        }
+
+        public static implicit operator int (CanReachTargetResult a)
+        {
+            return a.value;
+        }
+
+        public static implicit operator CanReachTargetResult(int value)
+        {
+            return new CanReachTargetResult(value);
+        }
+
+        public static bool operator==(CanReachTargetResult a, CanReachTargetResult b)
+        {
+            return a.value == b.value;
+        }
+
+        public static bool operator !=(CanReachTargetResult a, CanReachTargetResult b)
+        {
+            return !(a == b);
+        }
     }
 
     [System.Serializable]
@@ -190,6 +249,15 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
                     targetUnit == other.targetUnit &&
                     targetPosition == other.targetPosition;
             }
+        }
+
+        public override int GetHashCode()
+        {
+            return
+                caster.GetHashCode() ^
+                targetType.GetHashCode() ^
+                targetUnit.GetHashCode() ^
+                targetPosition.GetHashCode();
         }
 
         public Unit Caster
