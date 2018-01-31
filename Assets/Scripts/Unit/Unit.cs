@@ -151,7 +151,7 @@ public class Unit : MonoBehaviour
         graphics.showDamage(actualDamage);
         if(damageReceived >= Hp)
         {
-            deadState.Start();
+            deadState.StartDeath();
         }
     }
 

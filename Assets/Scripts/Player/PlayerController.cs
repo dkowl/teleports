@@ -17,17 +17,23 @@ public class PlayerController : UnitController {
             if (Input.GetButtonDown("PlayerMove") && Physics.Raycast(ray, out hit, Mathf.Infinity, enemyMask))
             {
                 OnEnemyClick(hit.transform.gameObject.GetComponent<Unit>());
+                done = true;
             }
             else if (!done && Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
             {
-                OnGroundPressed(hit.point);
+                if (Input.GetButtonDown("PlayerMove")) OnGroundClicked(hit.point);
+                else OnGroundPressed(hit.point);
             }
         }
 
         if (target.TargetUnit != null)
         {
             if (!target.TargetUnit.Alive || !unit.Alive) target.TargetUnit = null;
-            else Chase();
+            else
+            {
+                //Debug.Log("Chasing");
+                Chase();
+            }
         }
 	}  
     
@@ -38,6 +44,14 @@ public class PlayerController : UnitController {
 
     void OnGroundPressed(Vector3 point)
     {
+        unit.MovingState.Start(point);
+    }
+
+    void OnGroundClicked(Vector3 point)
+    {
+        target.TargetUnit = null;
+        CastingState.TryStartResult tryStartResult = unit.CastingState.TryInterrupt();
+        Debug.Log("Ground Clicked - TryStartResult :" + tryStartResult.ToString());
         unit.MovingState.Start(point);
     }
 }

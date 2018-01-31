@@ -8,9 +8,9 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     [FormerlySerializedAs("name_"), SerializeField] new private string name;
     [FormerlySerializedAs("type_"), SerializeField] private TargetType type;
     [FormerlySerializedAs("reach_"), SerializeField] private Attribute reach;
-    [FormerlySerializedAs("castTime_"), SerializeField] private Attribute castTime;
     [FormerlySerializedAs("cooldown_"), SerializeField] private Attribute cooldown;
-    [SerializeField] private Attribute afterCastLockTime;
+    [FormerlySerializedAs("castTime_"), SerializeField] private Attribute castTime;
+    [SerializeField] private Attribute totalCastTime;
     [SerializeField] private Attribute earlyBreakTime;
     [SerializeField] private SkillGraphics graphics;
 
@@ -63,14 +63,16 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     {
         switch (type)
         {
-            case AttributeType.CastTime:
-                return castTime;
             case AttributeType.Cooldown:
                 return cooldown;
+            case AttributeType.CastTime:
+                return castTime;
+            case AttributeType.TotalCastTime:
+                return totalCastTime;
+            case AttributeType.EarlyBreakTime:
+                return earlyBreakTime;
             case AttributeType.Reach:
                 return reach;
-            case AttributeType.AfterCastLockTime:
-                return afterCastLockTime;
             default:
                 return null;
         }
@@ -91,19 +93,19 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         get { return reach.Value; }
     }
 
-    public float CastTime
-    {
-        get { return castTime.Value; }
-    }
-
     public float Cooldown
     {
         get { return cooldown.Value; }
     }
 
-    public float AfterCastLockTime
+    public float CastTime
     {
-        get { return afterCastLockTime.Value; }
+        get { return castTime.Value; }
+    }
+
+    public float TotalCastTime
+    {
+        get { return totalCastTime.Value; }
     }
 
     public float EarlyBreakTime
@@ -138,9 +140,10 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     public enum AttributeType
     {
         Reach,
-        CastTime,
         Cooldown,
-        AfterCastLockTime
+        CastTime,
+        TotalCastTime,
+        EarlyBreakTime
     }
 
     [System.Serializable]
@@ -173,6 +176,20 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
             this.targetType = other.targetType;
             this.targetUnit = other.targetUnit;
             this.targetPosition = other.targetPosition;
+        }
+
+        public override bool Equals(object obj)
+        {
+            TargetInfo other = (TargetInfo)obj;
+            if (obj == null) return false;
+            else
+            {
+                return
+                    caster == other.caster &&
+                    targetType == other.targetType &&
+                    targetUnit == other.targetUnit &&
+                    targetPosition == other.targetPosition;
+            }
         }
 
         public Unit Caster

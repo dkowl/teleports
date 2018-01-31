@@ -13,46 +13,40 @@ public class MovingState : ActionState {
         Reset();
     }
 
-    public override void Start()
+    protected override void OnStart()
     {
-        isActive = true;
-
-        unit.RotatingState.RotationTarget = Quaternion.LookRotation(moveDest - unit.transform.position);
+        Unit.RotatingState.RotationTarget = Quaternion.LookRotation(moveDest - Unit.transform.position);
     }
 
-    public override void Update(float dTime)
+    protected override void OnUpdate(float dTime)
     {
-        if (IsActive && !IsBlocked)
+        Vector3 offset = moveDest - Unit.Rigidbody.position;
+        Vector3 targetVelocity = offset.normalized * Unit.MoveSpeed;
+
+        if (Unit.MoveSpeed * dTime < offset.magnitude)
         {
-            Vector3 offset = moveDest - unit.Rigidbody.position;
-            Vector3 targetVelocity = offset.normalized * unit.MoveSpeed;
-
-            if (unit.MoveSpeed * dTime < offset.magnitude)
-            {
-                offset *= unit.MoveSpeed * dTime / offset.magnitude;
-            }
-            else
-            {
-                Reset();
-            }
-            
-            unit.Rigidbody.velocity = targetVelocity;
-            //unit.Rigidbody.velocity = CalculateVelocity(unit.Rigidbody.velocity, targetVelocity);
-            //unit.Rigidbody.AddForce(CalculateForce(unit.Rigidbody.velocity, targetVelocity), ForceMode.Acceleration);
-            //unit.Rigidbody.MovePosition(unit.Rigidbody.position + offset);
+            offset *= Unit.MoveSpeed * dTime / offset.magnitude;
         }
+        else
+        {
+            Reset();
+        }
+            
+        Unit.Rigidbody.velocity = targetVelocity;
+        //unit.Rigidbody.velocity = CalculateVelocity(unit.Rigidbody.velocity, targetVelocity);
+        //unit.Rigidbody.AddForce(CalculateForce(unit.Rigidbody.velocity, targetVelocity), ForceMode.Acceleration);
+        //unit.Rigidbody.MovePosition(unit.Rigidbody.position + offset);
     }
 
-    public override void Reset()
+    protected override void OnReset()
     {
-        isActive = false;
-        moveDest = unit.Rigidbody.position;
+        moveDest = Unit.Rigidbody.position;
         //unit.Rigidbody.velocity = Vector3.zero;
     }
 
     public void Start(Vector3 newMoveDest)
     {
-        if (newMoveDest != moveDest && !Utils.Approximately(newMoveDest, unit.transform.position))
+        if (!Utils.Approximately(newMoveDest, Unit.transform.position))
         {
             moveDest = newMoveDest;
             Start();

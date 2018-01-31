@@ -12,31 +12,26 @@ public class StunnedState : ActionState {
         Reset();
     }
 
-    public override void Start()
+    protected override void OnStart()
     {
         if(stunTime > 0)
         {
-            isActive = true;
-            unit.Graphics.showMessage("Stunned!");
+            Unit.Graphics.showMessage("Stunned!");
         }
     }
 
-    public override void Update(float dTime)
+    protected override void OnUpdate(float dTime)
     {
-        if(isActive && !IsBlocked)
+        stunTime -= dTime;
+        if(stunTime <= 0)
         {
-            stunTime -= dTime;
-            if(stunTime <= 0)
-            {
-                Reset();
-            }
+            Reset();
         }
     }
 
-    public override void Reset()
+    protected override void OnReset()
     {
         stunTime = 0;
-        isActive = false;
     }
 
     public float StunTime

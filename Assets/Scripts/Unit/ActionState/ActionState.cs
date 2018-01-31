@@ -4,26 +4,58 @@ using UnityEngine;
 
 public abstract class ActionState {
 
-    protected Unit unit;
-
-    protected bool isActive = false;
-
-    protected List<ActionState> blockers = new List<ActionState>();
+    private Unit unit;
+    private bool isActive;
+    private List<ActionState> blockers;
 
     public ActionState(Unit unit)
     {
         this.unit = unit;
+        isActive = false;
+        blockers = new List<ActionState>();
     }
-
-    public abstract void Start();
-    public abstract void Update(float dTime);
-    public abstract void Reset();
 
     public void AddBlocker(ActionState blocker)
     {
-        if(!blockers.Contains(blocker))
+        if (!blockers.Contains(blocker))
             blockers.Add(blocker);
     }
+
+    protected void Start()
+    {
+        if (!IsBlocked)
+        {
+            isActive = true;
+            OnStart();
+        }
+    }
+    protected virtual void OnStart() { } 
+
+    public void Update(float dTime)
+    {
+        if (IsActive)
+        {
+            if (!IsBlocked)
+            {
+                OnUpdate(dTime);
+            }
+            else
+            {
+                Reset();
+            }
+        }
+    }
+    protected virtual void OnUpdate(float dTime) { }
+
+    protected void Reset()
+    {
+        if (IsActive)
+        {
+            isActive = false;
+            OnReset();
+        }
+    }
+    protected virtual void OnReset() { }
 
     public bool IsActive
     {

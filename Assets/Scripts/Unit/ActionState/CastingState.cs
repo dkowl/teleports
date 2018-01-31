@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class CastingState : ActionState {
 
-    protected Skill.TargetInfo targetInfo;
-    protected Skill activeSkill;
-    protected float currentCastTime;
-    protected float currentLockTime;
-    protected State state;
+    private CastCommand currentCommand;
+    private CastCommand lastCommand;
+    private float currentCastTime;
+    private bool hasCasted;
+    private int comboCounter;
+
+    
 
     public event Action<CastEventArgs> startCastEvent, castEvent, resetCastEvent;
 
@@ -18,108 +20,130 @@ public class CastingState : ActionState {
         Reset();
     }
 
-    public override void Start()
+    protected override void OnStart()
     {
-        /*Debug.Log(
-            "castTarget: " + CastTarget.TargetUnit.name +
-            " ||| activeSkill: " + activeSkill.Name +
-            " ||| current cooldown: " + activeSkill.CurrentCooldown.ToString() +
-            " ||| can reach cast target?: " + CanReachCastTarget.ToString());*/
-        if(!IsActive && targetInfo != null && activeSkill != null && activeSkill.CurrentCooldown == 0 && CanReachTarget)
-        {
-            currentCastTime = 0;
-            isActive = true;
-            state = State.BeforeCast;
-            if (startCastEvent != null) startCastEvent(new CastEventArgs(this));
-        }
-    }
-
-    public override void Update(float dTime)
-    {
-        if (isActive && !IsBlocked)
-        {
-            if (state == State.BeforeCast)
-            {
-                currentCastTime += dTime;
-                if (currentCastTime >= activeSkill.CastTime)
-                {
-                    activeSkill.Cast(unit, targetInfo);
-                    if (castEvent != null) castEvent(new CastEventArgs(this));
-                    state = State.AfterCast;
-                }
-            }
-            else if(state == State.AfterCast)
-            {
-                currentLockTime += dTime;
-                if (currentLockTime >= activeSkill.AfterCastLockTime)
-                    Reset();
-            }
-        }
-        else if(isActive)
-        {
-            Reset();
-        }
-    }
-
-    public override void Reset()
-    { 
-        targetInfo = null;
-        activeSkill = null;
+        /*if(Unit.name == "Player") Debug.Log(
+            "castTarget: " + TargetInfo.TargetUnit.name +
+            " ||| activeSkill: " + ActiveSkill.UniqueName + 
+            " ||| combo: " + comboCounter.ToString());*/
+        Debug.Assert(currentCommand != null && currentCommand.IsValid());
+        if (lastCommand != null && lastCommand.Skill == currentCommand.Skill) comboCounter++;
+        lastCommand = currentCommand;
         currentCastTime = 0;
-        currentLockTime = 0;
-        isActive = false;
-        state = State.Ready;
-        if (resetCastEvent != null) resetCastEvent(new CastEventArgs(this));
+        hasCasted = false;
+        if (startCastEvent != null) startCastEvent(new CastEventArgs(this));
     }
 
-    public void Start(Skill skill, Skill.TargetInfo target, bool interrupt = false)
+    protected override void OnUpdate(float dTime)
     {
-        if (IsActive)
+        currentCastTime += dTime;
+        if (currentCastTime >= ActiveSkill.CastTime && !hasCasted)
         {
-            if (interrupt)
-                Reset();
-            else if ((skill != activeSkill || target != targetInfo) && state == State.BeforeCast && currentCastTime <= activeSkill.EarlyBreakTime)
+            ActiveSkill.Cast(Unit, TargetInfo);
+            if (castEvent != null) castEvent(new CastEventArgs(this));
+            hasCasted = true;
+        }
+        if(currentCastTime >= ActiveSkill.TotalCastTime)
+        {
+            currentCommand = null;
+            if (!lastCommand.IsInterrupt)
             {
-
+                Start(lastCommand);
             }
             else
             {
-                return;
+                Reset();
             }
         }
-        activeSkill = skill;
-        targetInfo = new Skill.TargetInfo(target);
-        Start();
     }
 
-    bool CanReachTarget
+    protected override void OnReset()
     {
-        get
+        currentCommand = null;
+        lastCommand = null;
+        currentCastTime = 0;
+        hasCasted = false;
+        comboCounter = 0;
+        if (resetCastEvent != null) resetCastEvent(new CastEventArgs(this));
+        if(Unit.name == "Player") Debug.Log("Resetting" + Unit.name);
+    }
+
+    public TryStartResult TryStart(CastCommand command)
+    {
+        if (command == null) return TryStartResult.None;
+        switch (GetState())
         {
-            return activeSkill.CanReachTarget(targetInfo);
+            case State.Interruptable:
+                return Start(command);
+            case State.NonInterruptable:
+                lastCommand = command;
+                return TryStartResult.Save;
+            default:
+                return TryStartResult.None;
         }
+    }
+
+    public TryStartResult TryStart(Skill skill, Skill.TargetInfo targetInfo)
+    {
+        return TryStart(new CastCommand(skill, targetInfo));
+    }
+
+    public TryStartResult TryInterrupt()
+    {
+        return TryStart(new CastCommand());
+    }
+
+    private TryStartResult Start(CastCommand command)
+    {
+        if (!command.Equals(currentCommand))
+        {
+            if (command.IsValid())
+            {
+                currentCommand = command;
+                Start();
+                return TryStartResult.Start;
+            }
+            else
+            {
+                Reset();
+                return TryStartResult.Reset;
+            }
+        }
+        return TryStartResult.None;
     }
 
     Skill.TargetInfo TargetInfo
     {
-        get { return targetInfo; }
+        get {
+            if (currentCommand != null) return currentCommand.TargetInfo;
+            else return null;
+        }
     }
 
     Skill ActiveSkill
     {
-        get { return activeSkill; }
+        get {
+            if (currentCommand != null) return currentCommand.Skill;
+            else return null;
+        }
     }
 
-    public State Status
+    public State GetState()
     {
-        get { return state; }
+        if(ActiveSkill == null || currentCastTime < ActiveSkill.EarlyBreakTime)
+        {
+            return State.Interruptable;
+        }
+        else
+        {
+            return State.NonInterruptable;
+        }
     }
 
     public enum State
     {
-        BeforeCast,
-        AfterCast,
-        Ready
+        Interruptable,
+        NonInterruptable
     }
 
     public class CastEventArgs
@@ -149,5 +173,82 @@ public class CastingState : ActionState {
             get { return targetInfo; }
         }
     }
+
+    public class CastCommand
+    {
+        Type type;
+        Skill skill;
+        Skill.TargetInfo targetInfo;
+
+        public CastCommand(Skill skill, Skill.TargetInfo targetInfo)
+        {
+            type = Type.Cast;
+            this.skill = skill;
+            this.targetInfo = new Skill.TargetInfo(targetInfo);
+        }
+
+        public CastCommand()
+        {
+            type = Type.Interrupt;
+            skill = null;
+            targetInfo = null;
+        }
+
+        public bool IsValid()
+        {
+            if (type == Type.Interrupt) return false;
+            else if (skill == null || targetInfo == null) return false;
+            else if (!skill.CanReachTarget(targetInfo)) return false;
+            else return true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            CastCommand other = (CastCommand)obj;
+            if (other == null) return false;
+            else
+            {
+                return
+                    type == other.type &&
+                    skill == other.skill &&
+                    targetInfo.Equals(other.targetInfo);
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return type.GetHashCode() ^ skill.GetHashCode() ^ targetInfo.GetHashCode();
+        }
+
+        public bool IsInterrupt
+        {
+            get { return type == Type.Interrupt; }
+        }
+
+        public Skill Skill
+        {
+            get { return skill; }
+        }
+
+        public Skill.TargetInfo TargetInfo
+        {
+            get { return targetInfo; }
+        }
+
+        public enum Type
+        {
+            Cast,
+            Interrupt
+        }
+    }
+
+    public enum TryStartResult
+    {
+        None,
+        Reset,
+        Start,
+        Save
+    }
+
 
 }

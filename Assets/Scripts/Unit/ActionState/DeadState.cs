@@ -6,41 +6,36 @@ using Teleports.Utils;
 
 public class DeadState : ActionState {
 
-    protected Unit lastAttacker = null;
+    protected Unit lastAttacker;
 
 	public DeadState(Unit unit) : base(unit)
     {
         Reset();
     }
 
-    public override void Start()
+    protected override void OnStart()
     {
-        if (!IsActive)
+        if (lastAttacker != null)
         {
-            isActive = true;
-            if (lastAttacker != null)
+            XpComponent xp = lastAttacker.gameObject.GetComponent<XpComponent>();
+            if (xp != null)
             {
-                XpComponent xp = lastAttacker.gameObject.GetComponent<XpComponent>();
-                if (xp != null)
-                {
-                    xp.ReceiveXp((1000 * unit.UnitData.Level));
-                }
+                xp.ReceiveXp((1000 * Unit.UnitData.Level));
             }
-            unit.Rigidbody.constraints = 0;
-            unit.Rigidbody.useGravity = true;
-            unit.gameObject.SetLayerIncludingChildren(0);
         }
+        Unit.Rigidbody.constraints = 0;
+        Unit.Rigidbody.useGravity = true;
+        Unit.gameObject.SetLayerIncludingChildren(0);        
     }
 
-    public override void Update(float dTime)
-    {
-        
-    }
-
-    public override void Reset()
+    protected override void OnReset()
     {
         lastAttacker = null;
-        isActive = false;
+    }
+
+    public void StartDeath()
+    {
+        Start();
     }
 
     public Unit LastAttacker

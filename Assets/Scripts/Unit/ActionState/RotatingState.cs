@@ -8,31 +8,16 @@ public class RotatingState : ActionState {
     protected Quaternion rotationTarget;
 
     public RotatingState(Unit unit) : base(unit)
-    {
-        Reset();
+    {        
     }
 
-    public override void Start()
+    protected override void OnUpdate(float dTime)
     {
-        isActive = true;
-    }
-
-    public override void Update(float dTime)
-    {
-        if (IsActive && !IsBlocked)
+        Unit.transform.rotation = Quaternion.RotateTowards(Unit.transform.rotation, rotationTarget, dTime * Unit.RotationSpeed * 360);
+        if (Unit.transform.rotation == rotationTarget)
         {
-            unit.transform.rotation = Quaternion.RotateTowards(unit.transform.rotation, rotationTarget, dTime * unit.RotationSpeed * 360);
-            if (unit.transform.rotation == rotationTarget)
-            {
-                Reset();
-            }
-        }
-    }
-
-    public override void Reset()
-    {
-        isActive = false;
-        rotationTarget = unit.transform.rotation;
+            Reset();
+        }        
     }
 
     public Quaternion RotationTarget
@@ -40,7 +25,7 @@ public class RotatingState : ActionState {
         get { return rotationTarget; }
         set
         {
-            if(value != rotationTarget && value != unit.transform.rotation)
+            if(value != rotationTarget && value != Unit.transform.rotation)
             {
                 rotationTarget = value;
                 rotationTarget = Quaternion.Euler(0, rotationTarget.eulerAngles.y, 0);

@@ -47,7 +47,7 @@ public abstract class UnitController : MonoBehaviour {
     {
         if (mainAttack.CanReachTarget(target))
         {
-            unit.CastingState.Start(mainAttack, target);
+            unit.CastingState.TryStart(mainAttack, target);
         }
         else
         {
