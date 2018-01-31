@@ -27,6 +27,7 @@ public class SaveDataSO : SerializedScriptableObject {
         if (!File.Exists(SavePath))
         {
             Debug.Log("Save file not found!");
+            saveData = new SaveData();
             return;
         }
         string jsonString = File.ReadAllText(SavePath);
