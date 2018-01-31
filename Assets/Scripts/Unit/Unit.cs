@@ -52,13 +52,13 @@ public class Unit : MonoBehaviour
         stunnedState = new StunnedState(this);
         deadState = new DeadState(this);
 
-        movingState.AddBlocker(castingState);
-        movingState.AddBlocker(stunnedState);
+        movingState.AddPauser(castingState);
+        movingState.AddPauser(stunnedState);
         movingState.AddBlocker(deadState);
-        
-        rotatingState.AddBlocker(stunnedState);
+
+        rotatingState.AddPauser(castingState);
+        rotatingState.AddPauser(stunnedState);
         rotatingState.AddBlocker(deadState);
-        rotatingState.AddBlocker(castingState);
 
         castingState.AddBlocker(stunnedState);
         castingState.AddBlocker(deadState);
