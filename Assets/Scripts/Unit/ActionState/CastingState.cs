@@ -199,6 +199,7 @@ public class CastingState : ActionState {
             if (type == Type.Interrupt) return false;
             else if (skill == null || targetInfo == null) return false;
             else if (!skill.CanReachTarget(targetInfo)) return false;
+            else if (!targetInfo.TargetUnit.Alive) return false;
             else return true;
         }
 

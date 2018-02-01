@@ -58,6 +58,7 @@ public class GameMain : MonoBehaviour {
 
         if (gameTime >= teleportTime)
         {
+            player.GetComponent<Unit>().Kill();
             EndScreen("Time's up!");
         }
 

@@ -166,6 +166,11 @@ public class Unit : MonoBehaviour
         stunnedState.StunTime = time;
     }
 
+    public void Kill()
+    {
+        deadState.StartDeath();
+    }
+
     #region attribute properties
     public float Size
     {
