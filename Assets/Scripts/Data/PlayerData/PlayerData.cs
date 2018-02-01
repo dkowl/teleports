@@ -20,6 +20,11 @@ public class PlayerData : IPlayerData
     [SerializeField] private UnitData unitData;
     [SerializeField] private TeleportData teleportData;
 
+    public PlayerData(string name, string raceName)
+    {
+        Init(name, raceName);
+    }
+
     private void Init(string name, string raceName)
     {
         characterName = name;
@@ -42,23 +47,21 @@ public class PlayerData : IPlayerData
         teleportData = new TeleportData();
     }
 
-    public PlayerData(string name, string raceName)
-    {
-        Init(name, raceName);
-    }
-
     public void CorrectInvalidData()
     {
         if (PlayerDataValidator.ValidateName(characterName) != PlayerDataValidator.NameValidationResult.OK)
         {
-            characterName = "";
+            Debug.LogWarning("Invalid player name: " + characterName + ". Changing to 'New Player'");
+            characterName = "New Player";
         }
         if(level < 1)
         {
+            Debug.LogWarning("Invalid player level: " + level.ToString() + ". Changing to '1'");
             level = 1;
         }
         if(skillTreeSlots.Length < SkillTreeSlotNo)
         {
+            Debug.LogWarning("Not enough skill tree slots");
             skillTreeSlots = new SkillTreeSlot[SkillTreeSlotNo];
             for(int i = 0; i<skillTreeSlots.Length; i++)
             {
@@ -67,10 +70,12 @@ public class PlayerData : IPlayerData
         }
         if(secondarySkills == null)
         {
+            Debug.LogWarning("Secondary skill not found, initializing...");
             secondarySkills = new SkillID[SkillSlotNo];
         }
         if(secondarySkills.Length < SkillSlotNo)
         {
+            Debug.LogWarning("Not enough secondary skill slots");
             secondarySkills = new SkillID[SkillSlotNo];
             for(int i = 0; i<secondarySkills.Length; i++)
             {
@@ -79,9 +84,14 @@ public class PlayerData : IPlayerData
         }
         if(unitData == null)
         {
+            Debug.LogWarning("Unit data not found, substituting with Human base data");
             unitData = MainData.CurrentGameData.GetRace("Human").BaseStats;
         }
-        if (teleportData == null) teleportData = new TeleportData();
+        if (teleportData == null)
+        {
+            Debug.LogWarning("Teleport data not found");
+            teleportData = new TeleportData();
+        }
         teleportData.CorrectInvalidData();
     }
 
