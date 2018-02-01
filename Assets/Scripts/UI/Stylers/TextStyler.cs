@@ -13,7 +13,7 @@ public class TextStyler : LoadableBehaviour {
 
     override protected void LoadDataInternal()
     {
-        Stylesheet stylesheet = MainData.CurrentStylesheet;
+        Stylesheet stylesheet = MainData.Stylesheet;
 
         Text text = gameObject.GetComponent<Text>();
         if (text != null)
@@ -32,7 +32,7 @@ public class TextStyler : LoadableBehaviour {
 
     private Color GetTextColor()
     {
-        Stylesheet stylesheet = MainData.CurrentStylesheet;
+        Stylesheet stylesheet = MainData.Stylesheet;
         Color result = stylesheet.GetTextColor(textColor);
         result.a *= alphaMultiplier;
         return result;

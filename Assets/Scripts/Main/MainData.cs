@@ -47,7 +47,7 @@ public partial class MainData : ScriptableObject {
         if (!isInitialized || instance == null)
         {
             instance = this;
-            CurrentSaveData.CorrectInvalidData();
+            Save.CorrectInvalidData();
             messageBus = new MessageBus();
 
             isInitialized = true;
@@ -75,22 +75,22 @@ public partial class MainData : ScriptableObject {
         }
     }
 
-    public static SaveData CurrentSaveData
+    public static SaveData Save
     {
         get { return Instance.saveData.saveData; }
     }
 
-    public static SaveDataSO SaveDataSO
+    public static SaveDataSO SaveSO
     {
         get { return Instance.saveData; }
     }
 
     public static IPlayerData CurrentPlayerData
     {
-        get { return CurrentSaveData.CurrentPlayerData(); }
+        get { return Save.CurrentPlayerData(); }
     }
 
-    public static GameData CurrentGameData
+    public static GameData Game
     {
         get { return Instance.gameData; }
     }
@@ -100,7 +100,7 @@ public partial class MainData : ScriptableObject {
         get { return Instance.serverData; }
     }
 
-    public static Stylesheet CurrentStylesheet
+    public static Stylesheet Stylesheet
     {
         get { return Instance.stylesheet; }
     }
@@ -108,6 +108,11 @@ public partial class MainData : ScriptableObject {
     public static DataDefaults Defaults
     {
         get { return Instance.defaults; }
+    }
+
+    public static IMessageBus MessageBus
+    {
+        get { return Instance.messageBus; }
     }
 
     public static string PlayerName
@@ -123,11 +128,6 @@ public partial class MainData : ScriptableObject {
     public static int Xp
     {
         get { return CurrentPlayerData.Xp; }
-    }
-
-    public static IMessageBus MessageBus
-    {
-        get { return Instance.messageBus; }
     }
     #endregion
 }

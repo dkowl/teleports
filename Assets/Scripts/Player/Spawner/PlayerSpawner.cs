@@ -9,7 +9,7 @@ public static class PlayerSpawner {
         //Common
         IPlayerData playerData = MainData.CurrentPlayerData;
         if (playerData == null) return null;
-        RaceGraphics raceGraphics = MainData.CurrentGameData.GetRace(playerData.RaceName).Graphics;
+        RaceGraphics raceGraphics = MainData.Game.GetRace(playerData.RaceName).Graphics;
 
         GameObject player;
 
@@ -67,7 +67,7 @@ public static class PlayerSpawner {
                 GameObject skills = new GameObject("Skills");
                 skills.transform.parent = player.transform;
 
-                GameObject primarySkill = Object.Instantiate(MainData.CurrentGameData.GetSkill(playerData.PrimarySkillId).gameObject, skills.transform);
+                GameObject primarySkill = Object.Instantiate(MainData.Game.GetSkill(playerData.PrimarySkillId).gameObject, skills.transform);
                 controller.MainAttack = primarySkill.GetComponent<Skill>();
                 unit.ActiveController = controller;
 

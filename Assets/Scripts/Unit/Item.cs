@@ -31,7 +31,7 @@ public class Item : MonoBehaviour {
 
             foreach(PerkID perkId in data.Perks)
             {
-                unit.AddPerk(MainData.CurrentGameData.GetPerk(perkId));
+                unit.AddPerk(MainData.Game.GetPerk(perkId));
             }
 
             isEquipped = true;
@@ -46,7 +46,7 @@ public class Item : MonoBehaviour {
             slotComponent.Unequip();
             foreach(PerkID perkId in data.Perks)
             {
-                ownerUnit.RemovePerk(MainData.CurrentGameData.GetPerk(perkId));
+                ownerUnit.RemovePerk(MainData.Game.GetPerk(perkId));
             }
         }
     }

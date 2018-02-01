@@ -58,7 +58,7 @@ public class UnitGraphics : MonoBehaviour {
 
     public void SwitchToRagdoll()
     {
-        GameObject ragdoll = MainData.CurrentGameData.GetRace(unit.UnitData.RaceName).Graphics.RagdollObject;
+        GameObject ragdoll = MainData.Game.GetRace(unit.UnitData.RaceName).Graphics.RagdollObject;
         if (ragdoll != null)
         {
             ragdoll = GameObject.Instantiate(ragdoll, unit.transform);

@@ -246,7 +246,7 @@ public class InventoryData {
 
         foreach (ItemID id in itemIds)
         {
-            ItemData itemData = MainData.CurrentGameData.GetItem(id);
+            ItemData itemData = MainData.Game.GetItem(id);
             if (itemData != null)
             {
                 result.Add(itemData);

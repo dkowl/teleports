@@ -43,7 +43,7 @@ public class CreateCharacterMenu : MonoBehaviour {
 
     public void CreateCharacter()
     {
-        MainData.CurrentSaveData.CreateNewPlayer(Name, Race.UniqueName);
+        MainData.Save.CreateNewPlayer(Name, Race.UniqueName);
         Return();
     }
     
@@ -67,7 +67,7 @@ public class CreateCharacterMenu : MonoBehaviour {
         {
             if(races == null)
             {
-                races = MainData.CurrentGameData.GetPlayableRaces();
+                races = MainData.Game.GetPlayableRaces();
             }
             return races;
         }

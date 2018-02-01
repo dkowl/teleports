@@ -9,7 +9,7 @@ public class ItemID : MappedListID {
 
     protected override IList<string> DropdownValues()
     {
-        return MainData.CurrentGameData.ItemNames;
+        return MainData.Game.ItemNames;
     }
 
 

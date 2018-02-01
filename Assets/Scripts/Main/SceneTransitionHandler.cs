@@ -8,11 +8,11 @@ public static class SceneTransitionHandler  {
     {
         if(fromName == SceneNames.Main && toName == SceneNames.Home)
         {
-            MainData.SaveDataSO.Load();
+            MainData.SaveSO.Load();
         }
         else if (fromName == SceneNames.World && toName == SceneNames.Main)
         {
-            MainData.SaveDataSO.Save();
+            MainData.SaveSO.Save();
         }
     }
 }

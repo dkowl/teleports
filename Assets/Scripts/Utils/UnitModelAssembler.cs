@@ -8,7 +8,7 @@ public static class UnitModelAssembler {
     {
         GameObject result;
 
-        result = Object.Instantiate(MainData.CurrentGameData.GetRace(unitData.RaceName).Graphics.ModelObject);
+        result = Object.Instantiate(MainData.Game.GetRace(unitData.RaceName).Graphics.ModelObject);
 
         foreach(var itemInfo in unitData.Inventory.EquipmentData.GetEquippedItems())
         {

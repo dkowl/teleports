@@ -69,7 +69,7 @@ public class TeleportData {
 
     public TeleportGraphics Graphics
     {
-        get { return MainData.CurrentGameData.GraphicsData.Teleport.TryGetValue(graphicsId); }
+        get { return MainData.Game.GraphicsData.Teleport.TryGetValue(graphicsId); }
     }
 
 }

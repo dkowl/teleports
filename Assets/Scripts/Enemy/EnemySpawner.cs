@@ -68,7 +68,7 @@ public class EnemySpawner : MonoBehaviour {
         GameObject enemyObject = new GameObject(enemyData.Name);
         enemyObject.transform.position = position;
 
-        Race raceData = MainData.CurrentGameData.GetRace(enemyData.RaceId);
+        Race raceData = MainData.Game.GetRace(enemyData.RaceId);
         GameObject raceObject = Instantiate(raceData.Graphics.ModelObject, enemyObject.transform);
 
         Unit unit = enemyObject.AddComponent<Unit>();
@@ -91,7 +91,7 @@ public class EnemySpawner : MonoBehaviour {
 
     public void SpawnRandom(Vector3 position)
     {
-        Spawn(MainData.CurrentGameData.Enemies.RandomValue.GenerateBasic(), position);
+        Spawn(MainData.Game.Enemies.RandomValue.GenerateBasic(), position);
     }
 	
 }

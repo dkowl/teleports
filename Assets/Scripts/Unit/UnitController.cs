@@ -27,7 +27,7 @@ public abstract class UnitController : MonoBehaviour {
         target = new Skill.TargetInfo(unit, null);
         if(mainAttack == null)
         {
-            mainAttack = MainData.CurrentGameData.GetSkill(unit.UnitData.MainAttack);
+            mainAttack = MainData.Game.GetSkill(unit.UnitData.MainAttack);
         }
         if(unit.ActiveController == null)
         {

@@ -25,7 +25,7 @@ public class DeleteHeroButton : DialogWindowStarterButton {
 
     public void Yes()
     {
-        MainData.CurrentSaveData.DeleteCurrentPlayer();
+        MainData.Save.DeleteCurrentPlayer();
     }
 
     public void No()

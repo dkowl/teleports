@@ -70,7 +70,7 @@ public class MainController : MonoBehaviour {
 
     void OnApplicationQuit()
     {
-        MainData.SaveDataSO.Save();
+        MainData.SaveSO.Save();
     }
 
     public static void SwitchScene(string nextSceneName)

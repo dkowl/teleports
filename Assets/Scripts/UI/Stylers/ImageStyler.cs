@@ -11,6 +11,6 @@ public class ImageStyler : LoadableBehaviour {
     override protected void LoadDataInternal()
     {
         Image image = gameObject.GetComponent<Image>();
-        image.color = MainData.CurrentStylesheet.GetColorPreset(color);
+        image.color = MainData.Stylesheet.GetColorPreset(color);
     }
 }

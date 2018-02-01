@@ -24,14 +24,14 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
     {
         internalItemIds = new Dictionary<ItemData, int>();
         
-        InventoryData.Add(MainData.CurrentGameData.GetItem("Greatsword"));
-        InventoryData.Add(MainData.CurrentGameData.GetItem("Handaxe"));
-        InventoryData.Add(MainData.CurrentGameData.GetItem("Warhammer"));
-        InventoryData.Add(MainData.CurrentGameData.GetItem("DoubleAxe"));
-        InventoryData.Add(MainData.CurrentGameData.GetItem("Greataxe"));
-        InventoryData.Add(MainData.CurrentGameData.GetItem("Longsword"));
-        InventoryData.Add(MainData.CurrentGameData.GetItem("Mace"));
-        InventoryData.Add(MainData.CurrentGameData.GetItem("ShortSword"));
+        InventoryData.Add(MainData.Game.GetItem("Greatsword"));
+        InventoryData.Add(MainData.Game.GetItem("Handaxe"));
+        InventoryData.Add(MainData.Game.GetItem("Warhammer"));
+        InventoryData.Add(MainData.Game.GetItem("DoubleAxe"));
+        InventoryData.Add(MainData.Game.GetItem("Greataxe"));
+        InventoryData.Add(MainData.Game.GetItem("Longsword"));
+        InventoryData.Add(MainData.Game.GetItem("Mace"));
+        InventoryData.Add(MainData.Game.GetItem("ShortSword"));
 
         MainData.MessageBus.Subscribe(this);
 

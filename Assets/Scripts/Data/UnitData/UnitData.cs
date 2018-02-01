@@ -48,12 +48,12 @@ public class UnitData {
             Debug.LogWarning("Unit name not found, changing to " + DataDefaults.unitName);
             unitName = DataDefaults.unitName;
         }
-        if(raceName == null || !MainData.CurrentGameData.Races.ContainsName(raceName))
+        if(raceName == null || !MainData.Game.Races.ContainsName(raceName))
         {
             Debug.LogWarning("Invalid race name, changing to " + DataDefaults.raceName);
             raceName = DataDefaults.raceName;
         }
-        if(mainAttack == null || !MainData.CurrentGameData.Skills.ContainsName(mainAttack.Name))
+        if(mainAttack == null || !MainData.Game.Skills.ContainsName(mainAttack.Name))
         {
             Debug.LogWarning("Invalid main attack, changing to " + DataDefaults.skillName);
             mainAttack = new SkillID();

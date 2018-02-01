@@ -22,12 +22,12 @@ public class CreateHeroConfirmDWSB : DialogWindowStarterButton {
 
     protected override bool IsActive()
     {
-        return MainData.CurrentSaveData.GetPlayerData(characterSlotId) == null;
+        return MainData.Save.GetPlayerData(characterSlotId) == null;
     }
 
     void Yes()
     {
-        MainData.CurrentSaveData.CurrentSlotID = characterSlotId;
+        MainData.Save.CurrentSlotID = characterSlotId;
         MenuController.Instance.OpenMenu(MenuController.MenuType.CreateCharacter);
     }
 

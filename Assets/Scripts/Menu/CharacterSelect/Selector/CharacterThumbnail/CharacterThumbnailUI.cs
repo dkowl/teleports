@@ -17,7 +17,7 @@ public class CharacterThumbnailUI : SelectorButtonUI {
     {
         base.LoadDataInternal();
 
-        playerData = MainData.CurrentSaveData.GetPlayerData(characterSlotID);
+        playerData = MainData.Save.GetPlayerData(characterSlotID);
         if (createHeroConfirmDWSB == null)
         {
             createHeroConfirmDWSB = gameObject.AddComponent<CreateHeroConfirmDWSB>();
@@ -48,13 +48,13 @@ public class CharacterThumbnailUI : SelectorButtonUI {
 
     protected override bool IsActive()
     {
-        return characterSlotID == MainData.CurrentSaveData.CurrentSlotID;
+        return characterSlotID == MainData.Save.CurrentSlotID;
     }
 
     protected override void OnActivate()
     {
-        if(MainData.CurrentSaveData.GetPlayerData(characterSlotID) != null) 
-            MainData.CurrentSaveData.CurrentSlotID = characterSlotID;
+        if(MainData.Save.GetPlayerData(characterSlotID) != null) 
+            MainData.Save.CurrentSlotID = characterSlotID;
     }
 
     protected override void OnDeactivate()

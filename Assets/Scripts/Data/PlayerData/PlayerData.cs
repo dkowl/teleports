@@ -36,13 +36,13 @@ public class PlayerData : IPlayerData
         {
             skillTreeSlots[i] = new SkillTreeSlot();
         }
-        primarySkill = MainData.CurrentGameData.GetRace(raceName).BaseStats.MainAttack;
+        primarySkill = MainData.Game.GetRace(raceName).BaseStats.MainAttack;
         secondarySkills = new SkillID[SkillSlotNo];
         for (int i = 0; i < secondarySkills.Length; i++)
         {
             secondarySkills[i] = new SkillID();
         }
-        unitData = MainData.CurrentGameData.GetRace(raceName).BaseStats;
+        unitData = MainData.Game.GetRace(raceName).BaseStats;
         teleportData = new TeleportData();
     }
 
@@ -89,7 +89,7 @@ public class PlayerData : IPlayerData
         if(unitData == null)
         {
             Debug.LogWarning("Unit data not found, substituting with Human base data");
-            unitData = MainData.CurrentGameData.GetRace("Human").BaseStats;
+            unitData = MainData.Game.GetRace("Human").BaseStats;
         }
         unitData.CorrectInvalidData();
         if (teleportData == null)
@@ -151,7 +151,7 @@ public class PlayerData : IPlayerData
     {
         get
         {
-            return MainData.CurrentGameData.GetRace(RaceName).BaseStats;
+            return MainData.Game.GetRace(RaceName).BaseStats;
         }
     }
 
@@ -161,7 +161,7 @@ public class PlayerData : IPlayerData
         {
             if(!unitData.IsInitialized)
             {
-                unitData = MainData.CurrentGameData.GetRace(RaceName).BaseStats;
+                unitData = MainData.Game.GetRace(RaceName).BaseStats;
             }
 
             return unitData;
