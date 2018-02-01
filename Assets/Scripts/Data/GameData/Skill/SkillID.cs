@@ -14,6 +14,9 @@ public class SkillID : MappedListID
         branchID,
         elementID;
 
+    public SkillID() : base(DataDefaults.skillName) { }
+
+    public SkillID(string name) : base(name) { }
 
     public bool UsesString()
     {

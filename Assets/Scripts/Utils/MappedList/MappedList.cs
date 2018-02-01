@@ -43,6 +43,11 @@ public class MappedList<T> : IMappedList<T> where T : IUniqueName {
         }
     }
 
+    public bool ContainsName(string name)
+    {
+        return dict.ContainsKey(name);
+    }
+
     public IList<T> AllValues
     {
         get { return list.AsReadOnly(); }

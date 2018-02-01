@@ -13,6 +13,7 @@ public class SaveDataSO : SerializedScriptableObject {
     public delegate void OnSaveLoad();
     public static event OnSaveLoad LoadEvent;
 
+    [Button]
     public void Save()
     {
         Debug.Log("Saving...");
@@ -21,6 +22,7 @@ public class SaveDataSO : SerializedScriptableObject {
         File.WriteAllText(SavePath, jsonString);
     }
 
+    [Button]
     public void Load()
     {
         Debug.Log("Loading save...");

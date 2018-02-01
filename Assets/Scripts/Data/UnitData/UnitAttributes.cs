@@ -35,8 +35,11 @@ public class UnitAttributes{
         size = new UnitAttribute(0.5f);
         height = new UnitAttribute(1.8f);
         healthPoints = new UnitAttribute(100);
+        armor = new UnitAttribute(0);
+        regeneration = new UnitAttribute(0);
         movementSpeed = new UnitAttribute(10);
         rotationSpeed = new UnitAttribute(2);
+        reach = new UnitAttribute(0);
         viewRange = new UnitAttribute(30);
     }
 
