@@ -27,13 +27,8 @@ public class MappedList<T> : IMappedList<T> where T : IUniqueName {
 
     public T TryGetValue(string name)
     {
-        if(dict == null)
-        {
-            MakeDict();
-        }
-
         T result;
-        if(name != null && dict.TryGetValue(name, out result))
+        if(name != null && Dict.TryGetValue(name, out result))
         {
             return result;
         }
@@ -45,7 +40,7 @@ public class MappedList<T> : IMappedList<T> where T : IUniqueName {
 
     public bool ContainsName(string name)
     {
-        return dict.ContainsKey(name);
+        return Dict.ContainsKey(name);
     }
 
     public IList<T> AllValues
@@ -73,6 +68,15 @@ public class MappedList<T> : IMappedList<T> where T : IUniqueName {
         {
             int id = Random.Range(0, list.Count);
             return list[id];
+        }
+    }
+
+    private Dictionary<string, T> Dict
+    {
+        get
+        {
+            if (dict == null) MakeDict();
+            return dict;
         }
     }
 

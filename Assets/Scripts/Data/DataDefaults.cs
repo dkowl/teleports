@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class DataDefaults {
+[System.Serializable]
+public class DataDefaults {
 
 	public static readonly string raceName = "Human";
     public static readonly string unitName = "New Unit";
     public static readonly string skillName = "Attack_Default";
-    public static readonly SkillID skillId = new SkillID(skillName);
+    public static readonly string itemName = "Default Item";
+    [SerializeField] public ItemData itemData;
+    [SerializeField] public ItemGraphics itemGraphics;
+
 
 }

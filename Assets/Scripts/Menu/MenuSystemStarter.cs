@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class MenuSystemStarter : MonoBehaviour {
 
+    private bool started = false;
+
     public void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        MenuController.Instance.FirstStart(transform);
+        if (!started)
+        {
+            DontDestroyOnLoad(gameObject);
+            MenuController.Instance.FirstStart(transform);
+        }
     }
 }

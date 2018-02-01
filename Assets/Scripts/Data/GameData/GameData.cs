@@ -93,6 +93,11 @@ public class GameData : SerializedScriptableObject {
         }
     }
 
+    public Perk GetPerk(PerkID perkId)
+    {
+        return perks.TryGetValue(perkId.Name);
+    }
+
     public EnemyData GetEnemy(EnemyID enemyId)
     {
         EnemyAssetData result = enemies.TryGetValue(enemyId.Name);

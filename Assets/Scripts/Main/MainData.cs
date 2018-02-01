@@ -16,6 +16,7 @@ public partial class MainData : ScriptableObject {
     [SerializeField] private GameData gameData;
     [SerializeField] private ServerData serverData;
     [SerializeField] private Stylesheet stylesheet;
+    [SerializeField] private DataDefaults defaults;
 
     IMessageBus messageBus;
 
@@ -102,6 +103,11 @@ public partial class MainData : ScriptableObject {
     public static Stylesheet CurrentStylesheet
     {
         get { return Instance.stylesheet; }
+    }
+
+    public static DataDefaults Defaults
+    {
+        get { return Instance.defaults; }
     }
 
     public static string PlayerName

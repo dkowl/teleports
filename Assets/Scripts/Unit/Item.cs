@@ -29,9 +29,9 @@ public class Item : MonoBehaviour {
         {
             slotComponent = ItemSpawner.Spawn(unit.gameObject, data, primarySlot);
 
-            foreach(Perk perk in data.Perks)
+            foreach(PerkID perkId in data.Perks)
             {
-                unit.AddPerk(perk);
+                unit.AddPerk(MainData.CurrentGameData.GetPerk(perkId));
             }
 
             isEquipped = true;
@@ -44,9 +44,9 @@ public class Item : MonoBehaviour {
         if (isEquipped && ownerUnit != null)
         {
             slotComponent.Unequip();
-            foreach(Perk perk in data.Perks)
+            foreach(PerkID perkId in data.Perks)
             {
-                ownerUnit.RemovePerk(perk);
+                ownerUnit.RemovePerk(MainData.CurrentGameData.GetPerk(perkId));
             }
         }
     }

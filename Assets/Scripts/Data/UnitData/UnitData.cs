@@ -34,7 +34,7 @@ public class UnitData {
         level = 1;
         abilities = new UnitAbilities();
         attributes = new UnitAttributes();
-        mainAttack = DataDefaults.skillId;
+        mainAttack = new SkillID();
         perks = new List<PerkID>();
         skills = new List<SkillID>();
         inventory = new InventoryData();
@@ -53,11 +53,12 @@ public class UnitData {
             Debug.LogWarning("Invalid race name, changing to " + DataDefaults.raceName);
             raceName = DataDefaults.raceName;
         }
-        if(mainAttack == null || MainData.CurrentGameData.Skills.ContainsName(mainAttack.Name))
+        if(mainAttack == null || !MainData.CurrentGameData.Skills.ContainsName(mainAttack.Name))
         {
             Debug.LogWarning("Invalid main attack, changing to " + DataDefaults.skillName);
+            mainAttack = new SkillID();
         }
-        //Inventory.CorrectInvalidData();
+        Inventory.CorrectInvalidData();
     }
 
     public Attribute GetAttribute(UnitAttributes.Type type) {

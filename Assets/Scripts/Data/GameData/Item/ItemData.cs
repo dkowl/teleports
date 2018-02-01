@@ -10,15 +10,19 @@ public class ItemData {
     [SerializeField] private string uniqueName;
     [SerializeField, FoldoutGroup("Details", false), EnumToggleButtons] private ItemType typeFlags;
     [SerializeField, FoldoutGroup("Details", false), ShowIf("IsWeapon")] private WeaponData weaponData;
-    [SerializeField, FoldoutGroup("Details", false)] private List<Skill> skills;
-    [SerializeField, FoldoutGroup("Details", false)] private List<Perk> perks;
+    [SerializeField, FoldoutGroup("Details", false)] private List<SkillID> skills;
+    [SerializeField, FoldoutGroup("Details", false)] private List<PerkID> perks;
     [SerializeField, FoldoutGroup("Details", false)] private EquipmentSlotCombination[] slotCombinations;
     [SerializeField, FoldoutGroup("Details", false)] private ItemGraphics graphics;
 
     protected ItemData()
     {
-        displayName = "New Item";
-        uniqueName = "New Item";
+        displayName = DataDefaults.itemName;
+        uniqueName = DataDefaults.itemName;
+        typeFlags = ItemType.None;
+        weaponData = new WeaponData();
+        skills = new List<SkillID>();
+        perks = new List<PerkID>();
     }
 
     public ItemData(ItemData other)
@@ -31,6 +35,15 @@ public class ItemData {
         perks = other.perks;
         slotCombinations = other.slotCombinations;
         graphics = other.graphics;
+    }
+
+    public void CorrectInvalidData()
+    {
+        if(graphics == null)
+        {
+            Debug.LogWarning("Item graphics not found, loading defaults...");
+            graphics = MainData.Defaults.itemGraphics;
+        }
     }
 
     public ItemData(ItemData other, string uniqueName) :
@@ -114,7 +127,7 @@ public class ItemData {
         get { return weaponData; }
     }
 
-    public List<Perk> Perks
+    public List<PerkID> Perks
     {
         get { return perks; }
     }

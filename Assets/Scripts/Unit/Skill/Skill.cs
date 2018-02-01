@@ -8,7 +8,7 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     [FormerlySerializedAs("name_"), SerializeField] new private string name;
     [FormerlySerializedAs("type_"), SerializeField] private TargetType type;
     [FormerlySerializedAs("reach_"), SerializeField] private Attribute reach;
-    [FormerlySerializedAs("reach_"), SerializeField] private Attribute reachAngle;
+    [FormerlySerializedAs("reach_"), SerializeField] private Attribute reachAngle = new Attribute(30);
     [FormerlySerializedAs("cooldown_"), SerializeField] private Attribute cooldown;
     [FormerlySerializedAs("castTime_"), SerializeField] private Attribute castTime;
     [SerializeField] private Attribute totalCastTime;

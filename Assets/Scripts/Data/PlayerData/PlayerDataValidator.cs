@@ -8,7 +8,8 @@ public class PlayerDataValidator : MonoBehaviour {
     {
         OK,
         TooShort,
-        TooLong
+        TooLong,
+        IsNull
     }
 
     public static readonly int MinNameLength = 3;
@@ -16,7 +17,12 @@ public class PlayerDataValidator : MonoBehaviour {
 
 	public static NameValidationResult ValidateName(string name)
     {
-        if(name.Length < MinNameLength)
+        if(name == null)
+        {
+            Debug.LogWarning("Validated name is null");
+            return NameValidationResult.IsNull;
+        }
+        else if(name.Length < MinNameLength)
         {
             return NameValidationResult.TooShort;
         }

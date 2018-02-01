@@ -23,6 +23,14 @@ public class EquipmentData {
         rightArm = new EquipmentSlotData();
     }
 
+    public void CorrectInvalidData()
+    {
+        foreach(EquipmentSlotData eqSlotData in GetEquipmentSlots())
+        {
+            eqSlotData.CorrectInvalidData();
+        }
+    }
+
     public EquipmentSlotData GetEquipmentSlot(EquipmentSlotType type)
     {
         switch (type)

@@ -19,6 +19,22 @@ public class EquipmentSlotData {
         empty = true;
     }
 
+    public void CorrectInvalidData()
+    {
+        if (!Empty)
+        {
+            if(item == null)
+            {
+                Debug.LogWarning("No item in non-empty slot, adding default item");
+                item = MainData.Defaults.itemData;
+            }
+            else
+            {
+                item.CorrectInvalidData();
+            }
+        }
+    }
+
     public void Equip(ItemData item, bool asPrimary)
     {
         if (!Locked)
@@ -73,7 +89,7 @@ public class EquipmentSlotData {
 
     public bool Empty
     {
-        get { return item == null || Locked || empty; }
+        get { return empty; }
     }
 
     public bool Locked

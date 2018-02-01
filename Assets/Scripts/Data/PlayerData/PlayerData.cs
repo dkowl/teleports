@@ -32,7 +32,6 @@ public class PlayerData : IPlayerData
         level = 1;
         rankPoints = 0;
         skills = new List<SkillID>();
-        skillTreeSlots = new SkillTreeSlot[SkillTreeSlotNo];
         for (int i = 0; i < skillTreeSlots.Length; i++)
         {
             skillTreeSlots[i] = new SkillTreeSlot();
@@ -58,6 +57,11 @@ public class PlayerData : IPlayerData
         {
             Debug.LogWarning("Invalid player level: " + level.ToString() + ". Changing to '1'");
             level = 1;
+        }
+        if(skillTreeSlots == null)
+        {
+            Debug.LogWarning("Skill tree slots not found, initializing...");
+            skillTreeSlots = new SkillTreeSlot[SkillTreeSlotNo];
         }
         if(skillTreeSlots.Length < SkillTreeSlotNo)
         {
@@ -87,6 +91,7 @@ public class PlayerData : IPlayerData
             Debug.LogWarning("Unit data not found, substituting with Human base data");
             unitData = MainData.CurrentGameData.GetRace("Human").BaseStats;
         }
+        unitData.CorrectInvalidData();
         if (teleportData == null)
         {
             Debug.LogWarning("Teleport data not found");

@@ -19,19 +19,6 @@ public abstract class MappedListID {
         this.name = name;
     }
 
-    public static bool operator == (MappedListID id1, MappedListID id2)
-    {
-        if (id1 == null)
-            return id2 == null;
-
-        else return id1.name == id2.name;
-    }
-
-    public static bool operator !=(MappedListID id1, MappedListID id2)
-    {
-        return !(id1 == id2);
-    }
-
     public override bool Equals(object obj)
     {
         if (obj == null || GetType() != obj.GetType())

@@ -23,6 +23,17 @@ public class InventoryData {
         Utils.InitWithNew(ref invSlots, maxSlots);
     }
 
+    public void CorrectInvalidData()
+    {
+        if (maxSlots == 0) Initialize();
+        equipmentData.CorrectInvalidData();
+        if(invSlots.Count != maxSlots)
+        {
+            Debug.LogWarning("Invalid inventory size '" + invSlots.Count.ToString() + "', changing to '" + maxSlots + "'");
+            Utils.InitWithNew(ref invSlots, maxSlots);
+        }
+    }
+
     public bool CanAdd(ItemData item)
     {
         if(invSlots.Count < maxSlots)
@@ -227,14 +238,6 @@ public class InventoryData {
             }
         }
         return -1;
-    }
-
-    public void CorrectInvalidData()
-    {
-        if (maxSlots == 0)
-        {
-            Initialize();
-        }
     }
 
     List<ItemData> GetItems(IEnumerable<ItemID> itemIds)
