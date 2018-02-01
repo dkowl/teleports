@@ -53,7 +53,7 @@ public partial class SaveData
 
     public IPlayerData GetPlayerData(int id)
     {
-        if(id < playerData.Length && playerData[id] != null && playerData[id].CharacterName != "" && playerData[id].CharacterName != null) 
+        if(id < playerData.Length) 
         {
             return playerData[id];
         }
