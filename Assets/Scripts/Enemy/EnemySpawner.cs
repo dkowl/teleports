@@ -67,6 +67,7 @@ public class EnemySpawner : MonoBehaviour {
     {
         GameObject enemyObject = new GameObject(enemyData.Name);
         enemyObject.transform.position = position;
+        enemyObject.layer = LayerMask.NameToLayer("Enemy");
 
         Race raceData = MainData.Game.GetRace(enemyData.RaceId);
         GameObject raceObject = Instantiate(raceData.Graphics.ModelObject, enemyObject.transform);
@@ -81,6 +82,7 @@ public class EnemySpawner : MonoBehaviour {
             unit.UnitData.Inventory.Equip(item);
         }
         unit.SpawnItems();
+        unit.SpawnAnimator();
 
         switch (enemyData.AiParams.AiType)
         {

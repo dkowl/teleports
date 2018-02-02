@@ -12,8 +12,8 @@ public class PlayerController : UnitController {
             RaycastHit hit;
             bool done = false;
 
-            int enemyMask = (int)LayerMask.Enemy;
-            int groundMask = (int)LayerMask.Ground;
+            int enemyMask = (int)MyLayerMask.Enemy;
+            int groundMask = (int)MyLayerMask.Ground;
             if (Input.GetButtonDown("PlayerMove") && Physics.Raycast(ray, out hit, Mathf.Infinity, enemyMask))
             {
                 OnEnemyClick(hit.transform.gameObject.GetComponent<Unit>());

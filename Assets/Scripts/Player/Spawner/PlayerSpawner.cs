@@ -71,19 +71,6 @@ public static class PlayerSpawner {
                 controller.MainAttack = primarySkill.GetComponent<Skill>();
                 unit.ActiveController = controller;
 
-                //Instantiating items
-                /*GameObject items = new GameObject("Items");   
-                items.transform.parent = player.transform;
-
-                foreach (var itemInfo in playerData.UnitData.Inventory.GetEquippedItems())
-                {
-                    ItemData itemData = itemInfo.Item;
-                    GameObject itemObject = new GameObject(itemData.DisplayName);
-                    itemObject.transform.parent = items.transform;
-                    Item item = itemObject.AddComponent<Item>();
-                    item.Data = itemData;
-                    item.PrimarySlot = itemInfo.PrimarySlot;
-                }*/
                 unit.SpawnItems();
 
                 //Set up Animator

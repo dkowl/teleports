@@ -100,7 +100,8 @@ public class Unit : MonoBehaviour
         if (collider != null)
         {
             collider.radius = Size;
-            collider.height = unitData.Height - 2 * Size;
+            collider.height = unitData.Height;
+            collider.center = new Vector3(0, unitData.Height / 2, 0);
         }
     }
 	

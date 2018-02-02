@@ -20,4 +20,19 @@ public static class UnitSpawner  {
             item.PrimarySlot = itemInfo.PrimarySlot;
         }
     }
+
+    public static void SpawnAnimator(this Unit unit)
+    {
+        RaceGraphics raceGraphics = MainData.Game.GetRace(unit.UnitData.RaceName).Graphics;
+        Animator animator = unit.Graphics.RaceModel.GetComponentInChildren<Animator>();
+        if (animator != null)
+        {
+            animator.runtimeAnimatorController = raceGraphics.WorldAnimationController;
+            animator.gameObject.AddComponent<UnitAnimator>();
+        }
+        else
+        {
+            Debug.LogWarning("No animator found");
+        }
+    }
 }
