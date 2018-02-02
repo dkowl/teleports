@@ -303,6 +303,11 @@ public class Unit : MonoBehaviour
         set { rigidbody = value; }
     }
 
+    public Collider Collider
+    {
+        get { return collider; }
+    }
+
     private WeaponData WeaponData{
         get
         {

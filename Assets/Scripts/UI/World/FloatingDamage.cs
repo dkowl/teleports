@@ -13,6 +13,13 @@ public class FloatingDamage : MonoBehaviour {
     {
         text = gameObject.transform.GetComponentInChildren<TextMeshProUGUI>();
     }
+
+    void Start()
+    {
+        Vector3 randomOffset = Random.insideUnitSphere / 8;
+        randomOffset.y = 0;
+        transform.position = transform.position + randomOffset;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -37,5 +44,10 @@ public class FloatingDamage : MonoBehaviour {
     public void setText(string text)
     {
         this.text.text = text;
+    }
+
+    public void SetFontScale(float x)
+    {
+        text.fontSize = 0.5f * x;
     }
 }

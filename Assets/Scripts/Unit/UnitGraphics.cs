@@ -33,8 +33,10 @@ public class UnitGraphics : MonoBehaviour {
     public void showDamage(float damage)
     {
         GameObject obj = Instantiate(Resources.Load("Prefabs/Unit/FloatingDamage"), gameObject.transform) as GameObject;
-        obj.GetComponent<FloatingDamage>().setText(damage.ToString());
-        obj.GetComponent<FloatingDamage>().setColor(Color.red);
+        FloatingDamage floatingDamage = obj.GetComponent<FloatingDamage>();
+        floatingDamage.setText(damage.ToString());
+        floatingDamage.setColor(Color.red);
+        floatingDamage.SetFontScale(DamageTextScalingFactor(damage));
         obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().UnitData.Height, 0);
     }
 
@@ -63,6 +65,7 @@ public class UnitGraphics : MonoBehaviour {
         {
             ragdoll = GameObject.Instantiate(ragdoll, unit.transform);
             Destroy(raceModel);
+            Destroy(unit.Collider);
             unit.Rigidbody = ragdoll.GetComponentInChildren<Rigidbody>();
         }
         else
@@ -71,6 +74,11 @@ public class UnitGraphics : MonoBehaviour {
             unit.Rigidbody.useGravity = true;
         }
         unit.gameObject.SetLayerIncludingChildren(0);
+    }
+
+    private float DamageTextScalingFactor(float dmg)
+    {
+        return Mathf.Max(0f, Mathf.Log10(dmg + 32) - 1);
     }
 
     public GameObject RaceModel

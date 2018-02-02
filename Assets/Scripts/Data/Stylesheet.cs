@@ -12,7 +12,8 @@ public class Stylesheet : ScriptableObject
         MediumBig,
         Medium,
         MediumSmall,
-        Small
+        Small,
+        WorldFloating
     }
 
     public enum TextColor
@@ -37,12 +38,13 @@ public class Stylesheet : ScriptableObject
         Background
     }
 
-    public int titleFontSize;
-    public int bigFontSize;
-    public int mediumBigFontSize;
-    public int mediumFontSize;
-    public int mediumSmallFontSize;
-    public int smallFontSize;
+    public float titleFontSize;
+    public float bigFontSize;
+    public float mediumBigFontSize;
+    public float mediumFontSize;
+    public float mediumSmallFontSize;
+    public float smallFontSize;
+    public float worldFloatingFontSize;
 
     public Color defaultTextColor;
     public Color worldUiTextColor;
@@ -58,7 +60,7 @@ public class Stylesheet : ScriptableObject
 
     public Sprite lockSprite;
 
-    public int GetFontSize(FontSize fontSize)
+    public float GetFontSize(FontSize fontSize)
     {
         switch (fontSize)
         {
@@ -74,6 +76,8 @@ public class Stylesheet : ScriptableObject
                 return mediumSmallFontSize;
             case FontSize.Small:
                 return smallFontSize;
+            case FontSize.WorldFloating:
+                return worldFloatingFontSize;
             default:
                 return titleFontSize;
         }
