@@ -75,6 +75,13 @@ public class EnemySpawner : MonoBehaviour {
         unit.UnitData = raceData.BaseStats;
         unit.Graphics.RaceModel = raceObject;
 
+        foreach(var item in enemyData.Items)
+        {
+            Debug.Log("Equipping " + item.DisplayName);
+            unit.UnitData.Inventory.Equip(item);
+        }
+        unit.SpawnItems();
+
         switch (enemyData.AiParams.AiType)
         {
             case AiType.Rush:

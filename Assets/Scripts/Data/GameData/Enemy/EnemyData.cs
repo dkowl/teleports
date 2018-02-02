@@ -8,12 +8,19 @@ public class EnemyData {
     [SerializeField] private string name;
     [SerializeField] private RaceID raceId;
     [SerializeField] private AiParameters aiParams;
+    [SerializeField] private List<ItemData> items;
 
     public EnemyData(EnemyData other)
     {
-        raceId = other.raceId;
-        aiParams = other.aiParams;
         name = other.name;
+        raceId = new RaceID(other.raceId);
+        aiParams = new AiParameters(other.aiParams);
+        items = new List<ItemData>(other.items);
+    }
+
+    public string Name
+    {
+        get { return name; }
     }
 
     public RaceID RaceId
@@ -26,9 +33,12 @@ public class EnemyData {
         get { return aiParams; }
     }
 
-    public string Name
+    public List<ItemData> Items
     {
-        get { return name; }
+        get {
+            if (items == null) items = new List<ItemData>();
+            return items;
+        }
     }
 	
 }

@@ -72,7 +72,7 @@ public static class PlayerSpawner {
                 unit.ActiveController = controller;
 
                 //Instantiating items
-                GameObject items = new GameObject("Items");   
+                /*GameObject items = new GameObject("Items");   
                 items.transform.parent = player.transform;
 
                 foreach (var itemInfo in playerData.UnitData.Inventory.GetEquippedItems())
@@ -83,7 +83,8 @@ public static class PlayerSpawner {
                     Item item = itemObject.AddComponent<Item>();
                     item.Data = itemData;
                     item.PrimarySlot = itemInfo.PrimarySlot;
-                }
+                }*/
+                unit.SpawnItems();
 
                 //Set up Animator
                 animator.runtimeAnimatorController = raceGraphics.WorldAnimationController;

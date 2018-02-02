@@ -11,6 +11,4 @@ public class ItemID : MappedListID {
     {
         return MainData.Game.ItemNames;
     }
-
-
 }

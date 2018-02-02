@@ -7,6 +7,11 @@ public class AiParameters {
 
 	[SerializeField] AiType aiType;
 
+    public AiParameters(AiParameters other)
+    {
+        aiType = other.aiType;
+    }
+
     public AiType AiType
     {
         get { return aiType; }

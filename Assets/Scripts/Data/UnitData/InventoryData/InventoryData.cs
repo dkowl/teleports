@@ -129,10 +129,12 @@ public class InventoryData {
 
     public void Equip(ItemData item)
     {
-        if (Contains(item))
+        if (!Contains(item))
         {
-            Equip(InventorySlotIdOf(item));
+            if (CanAdd(item)) Add(item);
+            else return;
         }
+        Equip(InventorySlotIdOf(item));
     }
 
     public void Equip(int inventorySlotId)
