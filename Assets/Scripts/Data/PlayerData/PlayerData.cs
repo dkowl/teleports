@@ -32,6 +32,7 @@ public class PlayerData : IPlayerData
         level = 1;
         rankPoints = 0;
         skills = new List<SkillID>();
+        skillTreeSlots = new SkillTreeSlot[SkillTreeSlotNo];
         for (int i = 0; i < skillTreeSlots.Length; i++)
         {
             skillTreeSlots[i] = new SkillTreeSlot();
