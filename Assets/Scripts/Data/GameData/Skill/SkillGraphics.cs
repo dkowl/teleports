@@ -8,7 +8,10 @@ using UnityEngine.Serialization;
 public class SkillGraphics : ScriptableObject {
 
     [FormerlySerializedAs("uiIcon_")]
-    public Sprite uiIcon;
+    [SerializeField] private Sprite uiIcon;
+    [SerializeField] private AnimationClip castAnimation;
 
-    public AnimationClip castAnimation;
+    public Sprite UiIcon { get { return uiIcon; } }
+    public AnimationClip CastAnimation { get { return castAnimation; } }
+
 }

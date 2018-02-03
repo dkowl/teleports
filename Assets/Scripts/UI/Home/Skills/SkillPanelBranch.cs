@@ -16,7 +16,7 @@ public class SkillPanelBranch : MonoBehaviour {
 
         image_ = GetComponent<Image>();
 
-        image_.sprite = branch_.rootSkill_.Graphics.uiIcon;
+        image_.sprite = branch_.rootSkill_.Graphics.UiIcon;
 
     }
 }
