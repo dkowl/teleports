@@ -13,6 +13,7 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     [FormerlySerializedAs("castTime_"), SerializeField] private Attribute castTime;
     [SerializeField] private Attribute totalCastTime;
     [SerializeField] private Attribute earlyBreakTime;
+    [SerializeField] private int maxCombo;
     [SerializeField] private SkillGraphics graphics;
 
     float currentCooldown;
@@ -132,6 +133,11 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     public float EarlyBreakTime
     {
         get { return earlyBreakTime.Value; }
+    }
+
+    public int MaxCombo
+    {
+        get { return maxCombo; }
     }
 
     public float CurrentCooldown

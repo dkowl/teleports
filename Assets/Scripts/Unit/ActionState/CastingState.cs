@@ -45,9 +45,9 @@ public class CastingState : ActionState {
         }
         if(currentCastTime >= ActiveSkill.TotalCastTime)
         {
-            currentCommand = null;
-            if (!lastCommand.IsInterrupt)
+            if (!lastCommand.IsInterrupt && comboCounter < ActiveSkill.MaxCombo)
             {
+                currentCommand = null;
                 Start(lastCommand);
             }
             else
@@ -65,7 +65,7 @@ public class CastingState : ActionState {
         hasCasted = false;
         comboCounter = 0;
         if (resetCastEvent != null) resetCastEvent(new CastEventArgs(this));
-        if(Unit.name == "Player") Debug.Log("Resetting" + Unit.name);
+        Debug.Log("Resetting" + Unit.name);
     }
 
     public TryStartResult TryStart(CastCommand command)
