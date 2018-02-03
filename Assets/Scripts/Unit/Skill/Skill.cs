@@ -41,14 +41,14 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         Unit caster = targetInfo.Caster;
         if (caster != null)
         {
-            float totalReach = caster.Reach + caster.Size + Reach;
+            float totalReach = GetReach(caster);
             if (targetInfo.TargetUnit != null) totalReach += targetInfo.TargetUnit.Size;
 
             bool canReachDistance = (targetInfo.Position - caster.transform.position).magnitude <= totalReach;
 
             float casterYRot = caster.transform.rotation.eulerAngles.y;
             float targetYRot = Quaternion.LookRotation(targetInfo.Position - caster.transform.position).eulerAngles.y;
-            bool canReachAngle = Mathf.Abs(Mathf.DeltaAngle(casterYRot, targetYRot)) <= 30f / 2f;
+            bool canReachAngle = Mathf.Abs(Mathf.DeltaAngle(casterYRot, targetYRot)) <= ReachAngle / 2f;
 
             if (canReachAngle && canReachDistance) return CanReachTargetResult.Yes;
             else
@@ -87,6 +87,11 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
             default:
                 return null;
         }
+    }
+
+    public virtual float GetReach(Unit caster)
+    {
+        return caster.Reach + caster.Size + Reach;
     }
 
     public string UniqueName

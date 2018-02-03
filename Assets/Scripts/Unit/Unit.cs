@@ -100,7 +100,7 @@ public class Unit : MonoBehaviour
         if (collider != null)
         {
             collider.radius = Size;
-            collider.height = unitData.Height;
+            collider.height = unitData.Height + Size;
             collider.center = new Vector3(0, unitData.Height / 2, 0);
         }
     }
@@ -245,6 +245,11 @@ public class Unit : MonoBehaviour
             unitData = value;
             weaponCombiner = new UnitWeaponCombiner(unitData, WeaponData);
         }
+    }
+
+    public UnitWeaponCombiner WeaponCombiner
+    {
+        get { return weaponCombiner; }
     }
 
     public MovingState MovingState

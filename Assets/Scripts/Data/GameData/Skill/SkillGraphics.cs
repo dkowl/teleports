@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "skillGraphics", menuName = "Custom/Skill/Graphics", order = 3)]
+[CreateAssetMenu(fileName = "skillGraphics", menuName = "Data/Skill/Graphics")]
 public class SkillGraphics : ScriptableObject {
 
     [FormerlySerializedAs("uiIcon_")]

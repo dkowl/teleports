@@ -87,7 +87,9 @@ public class EnemySpawner : MonoBehaviour {
         switch (enemyData.AiParams.AiType)
         {
             case AiType.Rush:
-                enemyObject.AddComponent<RushAI>();
+                RushAI rushAI = enemyObject.AddComponent<RushAI>();
+                Debug.Log("assigning attacks..." + enemyData.AiParams.AttackIds.ToString());
+                rushAI.Attacks = MainData.Game.Skills.GetValues(enemyData.AiParams.AttackIds);
                 break;
         }
 

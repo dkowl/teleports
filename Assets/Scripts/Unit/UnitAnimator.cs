@@ -36,6 +36,12 @@ public class UnitAnimator : MonoBehaviour {
 
     void HandleCastStartEvent(CastingState.CastEventArgs eventArgs)
     {
+        if (eventArgs.Skill.Graphics != null)
+        {
+            AnimatorOverrideController overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
+            overrideController["Cast"] = eventArgs.Skill.Graphics.CastAnimation;
+            //animator.runtimeAnimatorController = overrideController;
+        }
         animator.SetTrigger(castStartHash);
     }
 

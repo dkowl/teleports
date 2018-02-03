@@ -5,6 +5,7 @@ using UnityEngine;
 public interface IMappedList<T> where T : IUniqueName {
 
     bool ContainsName(string name);
+    List<T> GetValues(List<MappedListID> ids);
 
     IList<T> AllValues { get; }
     IList<string> AllNames { get; }

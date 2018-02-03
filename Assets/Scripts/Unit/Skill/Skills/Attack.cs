@@ -30,6 +30,16 @@ public class Attack : Skill {
         }
     }
 
+    public override float GetReach(Unit caster)
+    {
+        float result = base.GetReach(caster);
+        if(damageType == AttackDamageType.Weapon)
+        {
+            result += caster.WeaponCombiner.WeaponReach;
+        }
+        return result;
+    }
+
     protected AttackDamageType DamageType
     {
         get { return damageType; }

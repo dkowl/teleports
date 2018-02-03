@@ -33,7 +33,7 @@ public class MessageBus : IMessageBus {
     {
         if(!subscribers.ContainsKey(typeof(T)) || subscribers[typeof(T)].Count == 0)
         {
-            Debug.LogWarning("Message " + typeof(T).FullName + "has no subscribers");
+            //Debug.LogWarning("Message " + typeof(T).FullName + "has no subscribers");
             return;
         }
 

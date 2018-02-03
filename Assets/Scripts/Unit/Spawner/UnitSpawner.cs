@@ -27,7 +27,7 @@ public static class UnitSpawner  {
         Animator animator = unit.Graphics.RaceModel.GetComponentInChildren<Animator>();
         if (animator != null)
         {
-            animator.runtimeAnimatorController = raceGraphics.WorldAnimationController;
+            animator.runtimeAnimatorController = Object.Instantiate(raceGraphics.WorldAnimationController);
             animator.gameObject.AddComponent<UnitAnimator>();
         }
         else
