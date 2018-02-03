@@ -12,7 +12,10 @@ public class UnitGraphics : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        gameObject.AddComponent<Healthbar>();
+        if (gameObject.tag != "Player")
+        {
+            gameObject.AddComponent<Healthbar>();
+        }
         unit = GetComponent<Unit>();
     }
 
