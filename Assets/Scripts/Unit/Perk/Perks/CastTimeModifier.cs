@@ -13,7 +13,7 @@ public class CastTimeModifier : Perk {
         {
             if(skill.name == skillToModify.name)
             {
-                skill.ModifyAttribute(Skill.AttributeType.CastTime, 0, castTimeModifier);
+                skill.ModifyAttribute(SkillData.AttributeType.CastTime, 0, castTimeModifier);
             }
         }
     }
@@ -24,7 +24,7 @@ public class CastTimeModifier : Perk {
         {
             if (skill.name == skillToModify.name)
             {
-                skill.ModifyAttribute(Skill.AttributeType.CastTime, 0, 1/castTimeModifier);
+                skill.ModifyAttribute(SkillData.AttributeType.CastTime, 0, 1/castTimeModifier);
             }
         }
     }

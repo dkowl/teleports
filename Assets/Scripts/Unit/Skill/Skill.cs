@@ -16,6 +16,8 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     [SerializeField] private int maxCombo;
     [SerializeField] private SkillGraphics graphics;
 
+    [SerializeField] private SkillData data;
+
     float currentCooldown;
 
     virtual public void Update()
@@ -66,28 +68,14 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         }
     }
 
-    public void ModifyAttribute(AttributeType type, float bonus, float multiplier)
+    public void ModifyAttribute(SkillData.AttributeType type, float bonus, float multiplier)
     {
-        GetAttribute(type).Modify(bonus, multiplier);
+        Data.GetAttribute(type).Modify(bonus, multiplier);
     }
 
-    Attribute GetAttribute(AttributeType type)
+    Attribute GetAttribute(SkillData.AttributeType type)
     {
-        switch (type)
-        {
-            case AttributeType.Cooldown:
-                return cooldown;
-            case AttributeType.CastTime:
-                return castTime;
-            case AttributeType.TotalCastTime:
-                return totalCastTime;
-            case AttributeType.EarlyBreakTime:
-                return earlyBreakTime;
-            case AttributeType.Reach:
-                return reach;
-            default:
-                return null;
-        }
+        return Data.GetAttribute(type);
     }
 
     public virtual float GetReach(Unit caster)
@@ -150,6 +138,8 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         get { return graphics; }
     }
 
+    public SkillData Data { get { return data; } }
+
     private SkillTargeter Targeter
     {
         get
@@ -163,16 +153,6 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         Unit,
         Position
     };
-
-    public enum AttributeType
-    {
-        Reach,
-        ReachAngle,
-        Cooldown,
-        CastTime,
-        TotalCastTime,
-        EarlyBreakTime
-    }
 
     public struct CanReachTargetResult
     {
