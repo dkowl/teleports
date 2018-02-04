@@ -1,0 +1,129 @@
+<#@ template language="C#" #><#@ output extension = ".cs" #><# 
+	const string dataType = "Skill"; 
+	Field[] fields = {
+		new Field("string", "uniqueName", false),
+		new Field("Skill.TargetType", "targetType", false), 
+	    new Field("Attribute", "reach", true), 
+	    new Field("Attribute", "reachAngle", true), 
+	    new Field("Attribute", "cooldown", true), 
+	    new Field("Attribute", "castTime", true), 
+	    new Field("Attribute", "totalCastTime", true), 
+	    new Field("Attribute", "earlyBreakTime", true), 
+	    new Field("int", "maxCombo", false), 
+	    new Field("SkillGraphics", "graphics", false), 
+	};
+    bool hasAttributes = false;
+    foreach (var field in fields)
+    {
+        if (field.type == "Attribute") hasAttributes = true;
+    }
+	
+#>using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Teleports.Utils;
+
+[System.Serializable]
+public class <#= dataType #>Data : IUniqueName {
+	
+	<# 
+	//Fields
+    foreach (var field in fields)
+    {
+		#>[SerializeField] private <#=field.type#> <#=field.name#>;
+	<#}
+
+	//Copy constructor
+	#>
+	public <#= dataType #>Data(<#= dataType #>Data other){
+	<# foreach (var field in fields)
+	{
+		if (!field.deepCopy)
+		{#>
+		<#=field.name#> = other.<#= field.name #>;<#
+		}
+		else
+		{#>
+		<#=field.name#> = new <#= field.type #>(other.<#= field.name #>);<#
+		}
+	}#>
+	}
+	<#
+
+    if (hasAttributes)
+    {#>
+    public Attribute GetAttribute(AttributeType type)
+    {
+        switch (type)
+        {<#
+			foreach (var field in fields)
+			{
+			    if (field.type == "Attribute")
+			    {#>
+			case AttributeType.<#=field.UpperCase#>:
+				return <#=field.name#>;<#
+				}
+			}#>
+
+			default:
+                return null;
+        }
+    }	
+
+    public void ModifyAttribute(AttributeType type, float bonus, float multiplier)
+    {
+        GetAttribute(type).Modify(bonus, multiplier);
+    }
+    <#}
+
+	//Properties
+    foreach (var field in fields)
+    {#>
+	public <#=field.PropertyReturnType#> <#=field.UpperCase#> { get { return <#=field.PropertyReturnValue#>; } }<#
+    }#>
+	<#
+
+    //AttributeType enum
+    if(hasAttributes){#>
+	public enum AttributeType {
+	<#
+	foreach (var field in fields)
+	{
+		if(field.type == "Attribute")
+		{#>
+		<#=field.UpperCase#>,<#
+		}
+	}#>
+	}
+	<#}#>
+
+}
+
+<#+
+    private struct Field{
+        public string type;
+        public string name;
+        public bool deepCopy;
+
+		public Field(string type, string name, bool deepCopy){
+			this.type = type;
+			this.name = name;
+		    this.deepCopy = deepCopy;
+		}
+
+        public string UpperCase
+        {
+            get { return char.ToUpper(name[0]) + name.Remove(0, 1); }
+        }
+
+        public string PropertyReturnType
+        {
+            get { return type != "Attribute" ? type : "float"; }
+        }
+
+        public string PropertyReturnValue
+        {
+            get { return type != "Attribute" ? name : name + ".Value"; }
+        }
+	}
+#>

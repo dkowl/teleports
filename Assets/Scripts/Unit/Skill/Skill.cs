@@ -20,13 +20,13 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
 
     float currentCooldown;
 
-    virtual public void Update()
+    public virtual void Update()
     {
         currentCooldown -= Time.deltaTime;
         if (currentCooldown < 0) currentCooldown = 0;
     }
     
-    abstract public void CastInternal(Unit caster, List<CastTarget> targets);
+    public abstract void CastInternal(Unit caster, List<CastTarget> targets);
 
     protected virtual SkillTargeter GetTargeter()
     {
