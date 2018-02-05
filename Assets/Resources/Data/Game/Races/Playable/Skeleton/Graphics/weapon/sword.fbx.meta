@@ -3,7 +3,7 @@ guid: 5910f74f078aae14e9c9a7ee2300953f
 timeCreated: 1500653098
 licenseType: Free
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: Sword
     100002: //RootNode
@@ -13,10 +13,17 @@ ModelImporter:
     3300000: Sword
     4300000: Sword
     9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material3
+    second: {fileID: 2100000, guid: a886ab7eadb1c4d41986aebb09c3df8c, type: 2}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -29,6 +36,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5

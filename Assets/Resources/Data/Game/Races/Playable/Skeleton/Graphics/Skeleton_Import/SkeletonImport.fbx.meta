@@ -3,7 +3,7 @@ guid: b48fb3ece1c0a8b46a9ea3214c1639df
 timeCreated: 1500651162
 licenseType: Free
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: Chest
     100002: Head
@@ -199,10 +199,17 @@ ModelImporter:
     7400008: Idle02
     9500000: //RootNode
     13700000: Skeleton
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material1
+    second: {fileID: 2100000, guid: d9d10da3256036145be43f5bce8b5b39, type: 2}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 2
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -215,6 +222,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
     animationCompression: 1
     animationRotationError: 0
     animationPositionError: 0
