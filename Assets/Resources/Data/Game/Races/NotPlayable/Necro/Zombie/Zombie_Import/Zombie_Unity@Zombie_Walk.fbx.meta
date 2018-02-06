@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 3bc06af9e2e4d2847bb4fb75d5ea1e9a
-timeCreated: 1517846759
+guid: e48e5a26a72685e4d891a2b246cb7028
+timeCreated: 1517918582
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -95,7 +95,7 @@ ModelImporter:
     400084: Tongue03
     400086: Tongue_END
     400088: //RootNode
-    7400000: Zombie_Idle01
+    7400000: Zombie_Walk
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -125,10 +125,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Zombie_Idle01
+      name: Zombie_Walk
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 45
+      lastFrame: 44
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

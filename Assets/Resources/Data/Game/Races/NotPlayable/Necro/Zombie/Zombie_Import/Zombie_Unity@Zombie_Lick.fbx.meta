@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 3bc06af9e2e4d2847bb4fb75d5ea1e9a
-timeCreated: 1517846759
+guid: 85e4944a8b5e6ae43aa0775c500dce76
+timeCreated: 1517918582
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -95,7 +95,7 @@ ModelImporter:
     400084: Tongue03
     400086: Tongue_END
     400088: //RootNode
-    7400000: Zombie_Idle01
+    7400000: Take 001
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -123,35 +123,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Zombie_Idle01
-      takeName: Take 001
-      firstFrame: 1
-      lastFrame: 45
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
