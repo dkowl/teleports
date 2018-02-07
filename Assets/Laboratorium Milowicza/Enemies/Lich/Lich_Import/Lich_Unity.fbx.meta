@@ -161,6 +161,7 @@ ModelImporter:
     100306: Reference
     100308: Spine01
     100310: Spine02
+    100312: wand
     400000: B_Cloth01
     400002: B_Cloth02
     400004: B_Cloth03
@@ -317,9 +318,12 @@ ModelImporter:
     400306: Reference
     400308: Spine01
     400310: Spine02
+    400312: wand
     4300000: Merged_Skull
+    4300002: wand
     9500000: //RootNode
     13700000: Merged_Skull
+    13700002: wand
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -349,8 +353,7 @@ ModelImporter:
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
-    extraExposedTransformPaths:
-    - Reference/Hips/Spine01/Spine02/Chest/R_Clavical/R_Arm/R_Foreamr/R_Wrist
+    extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
     isReadable: 1
