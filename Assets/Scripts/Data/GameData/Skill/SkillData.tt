@@ -64,7 +64,7 @@ public class <#= dataType #>Data : IUniqueName {
 				return <#=field.name#>;<#
 				}
 			}#>
-
+			
 			default:
                 return null;
         }

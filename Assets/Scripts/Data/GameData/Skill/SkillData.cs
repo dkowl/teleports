@@ -46,7 +46,7 @@ public class SkillData : IUniqueName {
 			case AttributeType.TotalCastTime:
 				return totalCastTime;
 			case AttributeType.EarlyBreakTime:
-				return earlyBreakTime;
+				return earlyBreakTime;			
 			default:
                 return null;
         }
