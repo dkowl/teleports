@@ -5,7 +5,8 @@ using UnityEngine;
 using Teleports.Utils;
 
 [System.Serializable]
-public partial class SkillData : IUniqueName {
+public partial class SkillData  : IUniqueName {
+
 	[SerializeField] private string uniqueName;
 	[SerializeField] private Skill.TargetType targetType;
 	[SerializeField] private Attribute reach;

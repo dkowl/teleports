@@ -37,16 +37,28 @@
         public string dataType;
         public Field[] fields;
         public bool hasAttributes;
+        public bool implementsUniqueName;
 
         public DataClass(string dataType, Field[] fields)
         {
             this.dataType = dataType;
             this.fields = fields;
             hasAttributes = false;
+            implementsUniqueName = false;
             foreach (var field in fields)
             {
                 if (field.type == "Attribute") hasAttributes = true;
+                if (field.name == "uniqueName" && field.type == "string") implementsUniqueName = true;
             }
+        }
+
+        public string Header()
+        {
+            var sb = new StringBuilder();
+            sb.AppendFormat("public partial class {0}Data ", dataType);
+            if (implementsUniqueName) sb.Append(": IUniqueName ");
+            sb.Append("{\n");
+            return sb.ToString();
         }
 
         public string Fields()
@@ -149,7 +161,7 @@ using UnityEngine;
 using Teleports.Utils;
 
 [System.Serializable]
-public partial class <#= dataClass.dataType #>Data : IUniqueName {
+<#=dataClass.Header()#>
 <#=dataClass.Fields()#>
 <#=dataClass.CopyConstructor()#>
 <#=dataClass.GetAttributeMethod()#>
