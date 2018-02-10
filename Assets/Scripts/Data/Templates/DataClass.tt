@@ -8,12 +8,14 @@
     public class Field{
         public string type;
         public string name;
+        public List<string> attributes;
         public bool deepCopy;
 
-		public Field(string type, string name, bool deepCopy){
+		public Field(string type, string name, bool deepCopy, List<string> attributes = null){
 			this.type = type;
 			this.name = name;
 		    this.deepCopy = deepCopy;
+		    this.attributes = attributes ?? new List<string>();
 		}
 
         public string UpperCase
@@ -66,6 +68,7 @@
             StringBuilder stringBuilder = new StringBuilder();
 			foreach (var field in fields)
 			{
+				//todo : add custom attributes
 				stringBuilder.AppendFormat("	[SerializeField] private {0} {1};\n", field.type, field.name);
 			}
             return stringBuilder.ToString();

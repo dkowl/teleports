@@ -2,15 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class AttackData : MonoBehaviour {
+public partial class AttackData {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 using Teleports.Utils;
 
 [System.Serializable]
-public partial class SkillData  : IUniqueName {
+public partial class SkillData : IUniqueName {
 
 	[SerializeField] private string uniqueName;
 	[SerializeField] private Skill.TargetType targetType;
@@ -17,6 +17,7 @@ public partial class SkillData  : IUniqueName {
 	[SerializeField] private Attribute earlyBreakTime;
 	[SerializeField] private int maxCombo;
 	[SerializeField] private SkillType skillType;
+	[SerializeField] private AttackData attackData;
 	[SerializeField] private SkillGraphics graphics;
 
 	public SkillData(SkillData other){
@@ -30,6 +31,7 @@ public partial class SkillData  : IUniqueName {
 		earlyBreakTime = new Attribute(other.earlyBreakTime);
 		maxCombo = other.maxCombo;
 		skillType = other.skillType;
+		attackData = new AttackData(other.attackData);
 		graphics = other.graphics;
 	}
 
@@ -69,6 +71,7 @@ public partial class SkillData  : IUniqueName {
 	public float EarlyBreakTime { get { return earlyBreakTime.Value; } }
 	public int MaxCombo { get { return maxCombo; } }
 	public SkillType SkillType { get { return skillType; } }
+	public AttackData AttackData { get { return attackData; } }
 	public SkillGraphics Graphics { get { return graphics; } }
 
 	public enum AttributeType {
