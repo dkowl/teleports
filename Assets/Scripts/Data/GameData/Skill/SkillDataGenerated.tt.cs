@@ -14,7 +14,7 @@ public partial class SkillData : IUniqueName {
 	[SerializeField] private Attribute castTime;
 	[SerializeField] private Attribute totalCastTime;
 	[SerializeField] private Attribute earlyBreakTime;
-	[SerializeField] private int maxComboer;
+	[SerializeField] private int maxCombo;
 	[SerializeField] private SkillGraphics graphics;
 
 	public SkillData(SkillData other){
@@ -26,7 +26,7 @@ public partial class SkillData : IUniqueName {
 		castTime = new Attribute(other.castTime);
 		totalCastTime = new Attribute(other.totalCastTime);
 		earlyBreakTime = new Attribute(other.earlyBreakTime);
-		maxComboer = other.maxComboer;
+		maxCombo = other.maxCombo;
 		graphics = other.graphics;
 	}
 
@@ -64,7 +64,7 @@ public partial class SkillData : IUniqueName {
 	public float CastTime { get { return castTime.Value; } }
 	public float TotalCastTime { get { return totalCastTime.Value; } }
 	public float EarlyBreakTime { get { return earlyBreakTime.Value; } }
-	public int MaxComboer { get { return maxComboer; } }
+	public int MaxCombo { get { return maxCombo; } }
 	public SkillGraphics Graphics { get { return graphics; } }
 
 	public enum AttributeType {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Sirenix.OdinInspector;
 
 public abstract class Skill : MonoBehaviour, IUniqueName {
        
@@ -19,6 +20,18 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
     [SerializeField] private SkillData data;
 
     float currentCooldown;
+
+    void OnEnable()
+    {
+        Debug.Log("OnEnable called");
+    }
+
+    //temporary method to refactor assets
+    [Button]
+    public void PopulateSkillData()
+    {
+        data.PopulateFromSkill(this);
+    }
 
     public virtual void Update()
     {
