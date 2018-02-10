@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class SkillData {
+public partial class SkillData
+{
 
     public void PopulateFromSkill(Skill skill)
     {
@@ -18,3 +19,4 @@ public partial class SkillData {
         graphics = skill.Graphics;
     }
 }
+

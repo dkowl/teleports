@@ -1,7 +1,7 @@
 <#@ template language="C#" hostspecific="true" #>
 <#@ import namespace="System.IO" #>
 <#+
-  void MultiOutput(string outputFileName)
+  public void MultiOutput(string outputFileName)
   {
       string templateDirectory = Path.GetDirectoryName(Host.TemplateFile);
       string outputFilePath = Path.Combine(templateDirectory, outputFileName);

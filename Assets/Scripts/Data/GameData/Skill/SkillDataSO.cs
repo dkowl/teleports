@@ -2,9 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillDataSO : UniqueScriptableObject {
+[CreateAssetMenu(menuName = "Data/Skill/AssetData")]
+public class SkillAssetData : UniqueScriptableObject{
 
-	[SerializeField] private SkillData data;
+    public Skill skill; //temporary
+    [SerializeField] private SkillData data;
 
+    private void OnValidate()
+    {
+        data.PopulateFromSkill(skill);
+    }
 
+    public SkillData Data
+    {
+        get { return data; }
+    }
 }
