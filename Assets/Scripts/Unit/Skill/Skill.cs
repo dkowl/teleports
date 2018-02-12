@@ -151,7 +151,11 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         get { return graphics; }
     }
 
-    public SkillData Data { get { return data; } }
+    public SkillData Data
+    {
+        get { return data; }
+        set { data = new SkillData(value); }
+    }
 
     private SkillTargeter Targeter
     {

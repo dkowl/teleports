@@ -287,14 +287,19 @@ public class Unit : MonoBehaviour
         get { return Hp - damageReceived; }
     }
 
-    public IList<Perk> Perks
+    public List<Perk> Perks
     {
-        get { return perks.AsReadOnly(); }
+        get { return perks; }
     }
 
-    public IList<Skill> Skills
+    public List<Skill> Skills
     {
-        get { return skills.AsReadOnly(); }
+        get { return skills; }
+    }
+
+    public Skill PrimarySkill
+    {
+        get { return skills.Count > 0 ? skills[0] : null; }
     }
 
     public UnitGraphics Graphics

@@ -75,6 +75,8 @@ public class UnitData {
     public float Height { get { return GetAttribute(UnitAttributes.Type.Height).Value; } }
     public UnitAbilities Abilities { get { return abilities; } }
     public SkillID MainAttack { get { return mainAttack; } }
+    public List<MappedListID> SkillIds { get { return perks.ConvertAll(x => (MappedListID)x); } }
+    public List<MappedListID> PerkIds { get { return perks.ConvertAll(x => (MappedListID)x); } }
     public bool IsInitialized { get { return isInitialized; } }
     public InventoryData Inventory { get { return inventory; } }
 }

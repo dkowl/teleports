@@ -40,11 +40,6 @@ public class Attack : Skill {
         return result;
     }
 
-    protected AttackDamageType DamageType
-    {
-        get { return damageType; }
-    }
-
     protected virtual float Damage(Unit caster)
     {
         switch (damageType)
@@ -60,6 +55,15 @@ public class Attack : Skill {
     private bool ShowDamageRanges()
     {
         return damageType == AttackDamageType.RawDamage;
+    }
+
+    public float DamageMultiplier { get { return damageMultiplier; } }
+    public int MinDamage { get { return minDamage;} }
+    public int MaxDamage { get { return maxDamage;} }
+
+    public AttackDamageType DamageType
+    {
+        get { return damageType; }
     }
 }
 

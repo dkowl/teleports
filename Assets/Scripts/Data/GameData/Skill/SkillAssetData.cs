@@ -10,6 +10,7 @@ public class SkillAssetData : UniqueScriptableObject{
 
     private void OnValidate()
     {
+        UniqueName = skill.UniqueName;
         data.PopulateFromSkill(skill);
     }
 

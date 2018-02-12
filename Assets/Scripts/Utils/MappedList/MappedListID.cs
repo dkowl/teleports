@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 [System.Serializable]
-public abstract class MappedListID {
+public class MappedListID {
 
     //TODO: make this a generic class for all IDs like ItemID, SkillID, PerkID, implement == operators
     [ValueDropdown("DropdownValues"), SerializeField] private string name;
@@ -38,7 +38,15 @@ public abstract class MappedListID {
         return id.name;
     }
 
-    protected abstract IList<string> DropdownValues();
+    public static implicit operator MappedListID (string str)
+    {
+        return new MappedListID(str);
+    }
+
+    protected virtual IList<string> DropdownValues()
+    {
+        return null;
+    }
 
     public string Name
     {

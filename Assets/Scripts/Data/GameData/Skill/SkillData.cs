@@ -17,6 +17,12 @@ public partial class SkillData
         earlyBreakTime = new Attribute(skill.EarlyBreakTime);
         maxCombo = skill.MaxCombo;
         graphics = skill.Graphics;
+        var attack = skill as Attack;
+        if (attack != null)
+        {
+            skillType = SkillType.Attack;
+            attackData.PopulateFromAttack(attack);
+        }
     }
 }
 

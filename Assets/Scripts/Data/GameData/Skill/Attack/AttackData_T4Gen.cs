@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 using Teleports.Utils;
 
 [System.Serializable]
@@ -9,8 +10,8 @@ public partial class AttackData {
 
 	[SerializeField] private float damageMultiplier;
 	[SerializeField] private AttackDamageType damageType;
-	[SerializeField] private int minDamage;
-	[SerializeField] private int maxDamage;
+	[SerializeField, ShowIf("ShowDamageRanges")] private int minDamage;
+	[SerializeField, ShowIf("ShowDamageRanges")] private int maxDamage;
 
 	public AttackData(AttackData other){
 		damageMultiplier = other.damageMultiplier;

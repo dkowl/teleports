@@ -68,8 +68,12 @@
             StringBuilder stringBuilder = new StringBuilder();
 			foreach (var field in fields)
 			{
-				//todo : add custom attributes
-				stringBuilder.AppendFormat("	[SerializeField] private {0} {1};\n", field.type, field.name);
+			    stringBuilder.Append("	[SerializeField");
+			    foreach (var attribute in field.attributes)
+			    {
+			        stringBuilder.AppendFormat(", {0}", attribute);
+			    }
+				stringBuilder.AppendFormat("] private {0} {1};\n", field.type, field.name);
 			}
             return stringBuilder.ToString();
         }
@@ -161,6 +165,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 using Teleports.Utils;
 
 [System.Serializable]

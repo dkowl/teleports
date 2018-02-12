@@ -14,10 +14,9 @@ public class GameData : SerializedScriptableObject {
     [SerializeField] private MappedList<WorldData> worlds;
     [SerializeField] private MappedList<Race> races;
     [SerializeField] private MappedList<Perk> perks;
-    [SerializeField] private MappedList<Skill> skills;
+    [SerializeField] private MappedList<SkillAssetData> skills;
     [SerializeField] private MappedList<ItemAssetData> items;
     [SerializeField] private MappedList<EnemyAssetData> enemies;
-    [SerializeField] private SkillDatabase skillDatabase;
     [SerializeField] private GraphicsData graphicsData;
 
     public void OnEnable()
@@ -81,16 +80,9 @@ public class GameData : SerializedScriptableObject {
         return result;
     }
 
-    public Skill GetSkill(SkillID skillId)
+    public SkillData GetSkill(SkillID skillId)
     {
-        if (skillId.UsesString())
-        {
-            return skills.TryGetValue(skillId.Name);
-        }
-        else
-        {
-            return skillDatabase.GetSkill(skillId);
-        }
+        return skillId.UsesString() ? skills.TryGetValue(skillId.Name).Data : null;
     }
 
     public Perk GetPerk(PerkID perkId)
@@ -101,14 +93,7 @@ public class GameData : SerializedScriptableObject {
     public EnemyData GetEnemy(EnemyID enemyId)
     {
         EnemyAssetData result = enemies.TryGetValue(enemyId.Name);
-        if(result != null)
-        {
-            return result.GenerateBasic();
-        }
-        else
-        {
-            return null;
-        }
+        return result != null ? result.GenerateBasic() : null;
     }
 
     public IMappedList<Gem> Gems
@@ -131,7 +116,7 @@ public class GameData : SerializedScriptableObject {
         get { return perks; }
     }
 
-    public IMappedList<Skill> Skills
+    public IMappedList<SkillAssetData> Skills
     {
         get { return skills; }
     }
@@ -144,11 +129,6 @@ public class GameData : SerializedScriptableObject {
     public IMappedList<EnemyAssetData> Enemies
     {
         get { return enemies; }
-    }
-
-    public SkillDatabase CurrentSkillDatabase
-    {
-        get { return skillDatabase; }
     }
 
     public GraphicsData GraphicsData

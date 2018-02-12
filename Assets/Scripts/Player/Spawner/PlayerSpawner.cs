@@ -64,11 +64,9 @@ public static class PlayerSpawner {
                 xp.Xp = playerData.Xp;
 
                 //Instantiating skills
-                GameObject skills = new GameObject("Skills");
-                skills.transform.parent = player.transform;
+                unit.SpawnSkills();
 
-                GameObject primarySkill = Object.Instantiate(MainData.Game.GetSkill(playerData.PrimarySkillId).gameObject, skills.transform);
-                controller.MainAttack = primarySkill.GetComponent<Skill>();
+                controller.MainAttack = unit.Skills[0];
                 unit.ActiveController = controller;
 
                 unit.SpawnItems();

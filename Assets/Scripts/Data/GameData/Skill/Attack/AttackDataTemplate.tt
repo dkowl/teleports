@@ -4,8 +4,8 @@
 	Field[] fields = {
 		new Field("float", "damageMultiplier", false), 
 	    new Field("AttackDamageType", "damageType", false), 
-	    new Field("int", "minDamage", false), 
-	    new Field("int", "maxDamage", false), 
+	    new Field("int", "minDamage", false, new List<string>{"ShowIf(\"ShowDamageRanges\")"}), 
+	    new Field("int", "maxDamage", false, new List<string>{"ShowIf(\"ShowDamageRanges\")"}), 
 	};
     var dataClass = new DataClass(dataType, fields);
     Generate(dataClass);
