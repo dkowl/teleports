@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 13078cb90accb5044b82ca817ca600a4
-timeCreated: 1518099699
+guid: dadf8d68773d37c4a9ea72632978f34b
+timeCreated: 1518620501
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -267,7 +267,7 @@ ModelImporter:
     400256: Reference
     400258: Spine01
     400260: Spine02
-    7400000: Lich_Idle02
+    7400000: Take 001
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -295,35 +295,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Lich_Idle02
-      takeName: Take 001
-      firstFrame: 219
-      lastFrame: 294
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
