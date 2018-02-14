@@ -1,0 +1,261 @@
+fileFormatVersion: 2
+guid: 6320eb643f84d95459f203dc31ae9761
+timeCreated: 1518624844
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: B_Cloth01
+    100002: B_Cloth02
+    100004: B_Cloth03
+    100006: B_L_Cloth01
+    100008: B_L_Cloth_End
+    100010: B_R_Cloth01
+    100012: B_R_Cloth_End
+    100014: Chest
+    100016: Head
+    100018: Head_End
+    100020: Hips
+    100022: L_Arm
+    100024: L_B_Cloth003
+    100026: L_B_Cloth01
+    100028: L_B_Cloth02
+    100030: L_B_Cloth_End
+    100032: L_Clavical
+    100034: L_Cloth01
+    100036: L_F_Cloth01
+    100038: L_F_Cloth02
+    100040: L_F_Cloth03
+    100042: L_F_Cloth_End
+    100044: L_Fingers01
+    100046: L_Fingers02
+    100048: L_Fingers03
+    100050: L_Fingers_End
+    100052: L_Forearm
+    100054: L_Index01
+    100056: L_Index02
+    100058: L_Index03
+    100060: L_Index_End
+    100062: L_Sleeve01
+    100064: L_Sleeve02
+    100066: L_Sleeve03
+    100068: L_Thumb01
+    100070: L_Thumb02
+    100072: L_Thumb03
+    100074: L_Thumb_End
+    100076: L_Wrist
+    100078: Neck
+    100080: R_Arm
+    100082: R_B_Cloth01
+    100084: R_B_Cloth02
+    100086: R_B_Cloth_End
+    100088: R_Clavical
+    100090: R_Cloth01
+    100092: R_Cloth02
+    100094: R_F_Cloth01
+    100096: R_F_Cloth02
+    100098: R_F_Cloth03
+    100100: R_F_Cloth_End
+    100102: R_Fingers01
+    100104: R_Fingers02
+    100106: R_Fingers03
+    100108: R_Fingers_End
+    100110: R_Forearm
+    100112: R_Hand_Slot
+    100114: R_Index01
+    100116: R_Index02
+    100118: R_Index03
+    100120: R_Index_End
+    100122: R_Sleeve01
+    100124: R_Sleeve02
+    100126: R_Sleeve03
+    100128: R_Thumb01
+    100130: R_Thumb02
+    100132: R_Thumb03
+    100134: R_Thumb_End
+    100136: R_Wrist
+    100138: //RootNode
+    100140: Reference
+    100142: Spine01
+    100144: Spine02
+    400000: B_Cloth01
+    400002: B_Cloth02
+    400004: B_Cloth03
+    400006: B_L_Cloth01
+    400008: B_L_Cloth_End
+    400010: B_R_Cloth01
+    400012: B_R_Cloth_End
+    400014: Chest
+    400016: Head
+    400018: Head_End
+    400020: Hips
+    400022: L_Arm
+    400024: L_B_Cloth003
+    400026: L_B_Cloth01
+    400028: L_B_Cloth02
+    400030: L_B_Cloth_End
+    400032: L_Clavical
+    400034: L_Cloth01
+    400036: L_F_Cloth01
+    400038: L_F_Cloth02
+    400040: L_F_Cloth03
+    400042: L_F_Cloth_End
+    400044: L_Fingers01
+    400046: L_Fingers02
+    400048: L_Fingers03
+    400050: L_Fingers_End
+    400052: L_Forearm
+    400054: L_Index01
+    400056: L_Index02
+    400058: L_Index03
+    400060: L_Index_End
+    400062: L_Sleeve01
+    400064: L_Sleeve02
+    400066: L_Sleeve03
+    400068: L_Thumb01
+    400070: L_Thumb02
+    400072: L_Thumb03
+    400074: L_Thumb_End
+    400076: L_Wrist
+    400078: Neck
+    400080: R_Arm
+    400082: R_B_Cloth01
+    400084: R_B_Cloth02
+    400086: R_B_Cloth_End
+    400088: R_Clavical
+    400090: R_Cloth01
+    400092: R_Cloth02
+    400094: R_F_Cloth01
+    400096: R_F_Cloth02
+    400098: R_F_Cloth03
+    400100: R_F_Cloth_End
+    400102: R_Fingers01
+    400104: R_Fingers02
+    400106: R_Fingers03
+    400108: R_Fingers_End
+    400110: R_Forearm
+    400112: R_Hand_Slot
+    400114: R_Index01
+    400116: R_Index02
+    400118: R_Index03
+    400120: R_Index_End
+    400122: R_Sleeve01
+    400124: R_Sleeve02
+    400126: R_Sleeve03
+    400128: R_Thumb01
+    400130: R_Thumb02
+    400132: R_Thumb03
+    400134: R_Thumb_End
+    400136: R_Wrist
+    400138: //RootNode
+    400140: Reference
+    400142: Spine01
+    400144: Spine02
+    7400000: Reaper_Idle01
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Reaper_Idle01
+      takeName: Take 001
+      firstFrame: 13
+      lastFrame: 163
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 6
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
