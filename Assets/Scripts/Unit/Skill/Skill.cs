@@ -5,17 +5,6 @@ using UnityEngine.Serialization;
 using Sirenix.OdinInspector;
 
 public abstract class Skill : MonoBehaviour, IUniqueName {
-       
-    [FormerlySerializedAs("name_"), SerializeField] new private string name;
-    [FormerlySerializedAs("type_"), SerializeField] private TargetType type;
-    [FormerlySerializedAs("reach_"), SerializeField] private Attribute reach;
-    [FormerlySerializedAs("reach_"), SerializeField] private Attribute reachAngle = new Attribute(30);
-    [FormerlySerializedAs("cooldown_"), SerializeField] private Attribute cooldown;
-    [FormerlySerializedAs("castTime_"), SerializeField] private Attribute castTime;
-    [SerializeField] private Attribute totalCastTime;
-    [SerializeField] private Attribute earlyBreakTime;
-    [SerializeField] private int maxCombo;
-    [SerializeField] private SkillGraphics graphics;
 
     [SerializeField] private SkillData data;
 
@@ -48,7 +37,7 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
 
     public void Cast(Unit caster, TargetInfo targetInfo)
     {
-        currentCooldown = cooldown.Value;
+        currentCooldown = Cooldown;
         CastInternal(caster, Targeter.GetTargets(this, targetInfo));
     }
 
@@ -103,42 +92,42 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
 
     public TargetType Type
     {
-        get { return type; }
+        get { return data.TargetType; }
     }
 
     public float Reach
     {
-        get { return reach.Value; }
+        get { return data.Reach; }
     }
 
     public float ReachAngle
     {
-        get { return reachAngle.Value; }
+        get { return data.ReachAngle; }
     }
 
     public float Cooldown
     {
-        get { return cooldown.Value; }
+        get { return data.Cooldown; }
     }
 
     public float CastTime
     {
-        get { return castTime.Value; }
+        get { return data.CastTime; }
     }
 
     public float TotalCastTime
     {
-        get { return totalCastTime.Value; }
+        get { return data.TotalCastTime; }
     }
 
     public float EarlyBreakTime
     {
-        get { return earlyBreakTime.Value; }
+        get { return data.EarlyBreakTime; }
     }
 
     public int MaxCombo
     {
-        get { return maxCombo; }
+        get { return data.MaxCombo; }
     }
 
     public float CurrentCooldown
@@ -148,7 +137,7 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
 
     public SkillGraphics Graphics
     {
-        get { return graphics; }
+        get { return data.Graphics; }
     }
 
     public SkillData Data
