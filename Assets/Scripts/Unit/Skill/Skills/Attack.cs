@@ -6,18 +6,11 @@ using Sirenix.OdinInspector;
 
 public class Attack : Skill {
 
-    [FormerlySerializedAs("damageMultiplier_")]
-    [SerializeField] private float damageMultiplier = 1;
-    [SerializeField] private AttackDamageType damageType;
-    [SerializeField, ShowIf("ShowDamageRanges")] private int minDamage;
-    [SerializeField, ShowIf("ShowDamageRanges")] private int maxDamage;
-
-
-    override public void CastInternal(Unit caster, List<CastTarget> targets)
+    public override void CastInternal(Unit caster, List<CastTarget> targets)
     {
         foreach (var target in targets)
         {
-            float damage = Damage(caster) * damageMultiplier;
+            float damage = Damage(caster) * DamageMultiplier;
 
             target.Unit.ReceiveDamage(damage, caster);
 
@@ -33,7 +26,7 @@ public class Attack : Skill {
     public override float GetReach(Unit caster)
     {
         float result = base.GetReach(caster);
-        if(damageType == AttackDamageType.Weapon)
+        if(DamageType == AttackDamageType.Weapon)
         {
             result += caster.WeaponCombiner.WeaponReach;
         }
@@ -42,10 +35,10 @@ public class Attack : Skill {
 
     protected virtual float Damage(Unit caster)
     {
-        switch (damageType)
+        switch (DamageType)
         {
             case AttackDamageType.RawDamage:
-                return Random.Range(minDamage, maxDamage);
+                return Random.Range(MinDamage, MaxDamage);
             case AttackDamageType.Weapon:
                 return caster.Damage;
         }
@@ -54,16 +47,16 @@ public class Attack : Skill {
 
     private bool ShowDamageRanges()
     {
-        return damageType == AttackDamageType.RawDamage;
+        return DamageType == AttackDamageType.RawDamage;
     }
 
-    public float DamageMultiplier { get { return damageMultiplier; } }
-    public int MinDamage { get { return minDamage;} }
-    public int MaxDamage { get { return maxDamage;} }
+    public float DamageMultiplier { get { return Data.AttackData.DamageMultiplier; } }
+    public int MinDamage { get { return Data.AttackData.MinDamage;} }
+    public int MaxDamage { get { return Data.AttackData.MaxDamage;} }
 
     public AttackDamageType DamageType
     {
-        get { return damageType; }
+        get { return Data.AttackData.DamageType; }
     }
 }
 
