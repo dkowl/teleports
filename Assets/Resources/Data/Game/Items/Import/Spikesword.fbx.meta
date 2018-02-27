@@ -10,6 +10,7 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: PM3D_Cube3D1
+    4300002: SpikeSword
   externalObjects:
   - first:
       type: UnityEngine:Material
