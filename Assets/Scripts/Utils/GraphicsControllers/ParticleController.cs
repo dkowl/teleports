@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class ParticleController : MonoBehaviour
 {
-    [SerializeField]
-    private ParticleSystem[] particleSystems;
+    [SerializeField] private ParticleSystem[] particleSystems;
 
-    public void Play(string name)
+    public void Play(string psName)
     {
-        GetParticleSystemByName(name)?.Play();
+        GetParticleSystemByName(psName)?.Play();
     }
 
-    public void Stop()
+    public void Stop(string psName)
     {
-
+        GetParticleSystemByName(psName)?.Stop();
     }
 
     private ParticleSystem GetParticleSystemByName(string particleSystemName)
