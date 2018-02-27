@@ -13,14 +13,20 @@ public class SoundController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void Play(int id)
+    public void PlayClip(AudioClip clip)
     {
-        if (id >= clips.Length)
+        audioSource.clip = clip;
+        audioSource.Play();
+    }
+
+    public void Play(string clipName)
+    {
+        foreach (var clip in clips)
         {
-            Debug.LogWarning("Trying to play sound clip with invalid id");
+            if (clip.name != clipName) continue;
+            PlayClip(clip);
             return;
         }
-        audioSource.clip = clips[id];
-        audioSource.Play();
+        Debug.LogWarning("Trying to play a sound clip with an invalid name");
     }
 }
