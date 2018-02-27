@@ -7,18 +7,26 @@ public class ParticleController : MonoBehaviour
     [SerializeField]
     private ParticleSystem[] particleSystems;
 
-    public void Play(int id)
+    public void Play(string name)
     {
-        if (id >= particleSystems.Length)
-        {
-            Debug.LogWarning("Trying to play sound clip with invalid id");
-            return;
-        }
-        particleSystems[id].Play();
+        GetParticleSystemByName(name)?.Play();
     }
 
     public void Stop()
     {
 
+    }
+
+    private ParticleSystem GetParticleSystemByName(string particleSystemName)
+    {
+        foreach (var currentParticleSystem in particleSystems)
+        {
+            if (particleSystemName == currentParticleSystem.name)
+            {
+                return currentParticleSystem;
+            }
+        }
+        Debug.LogWarningFormat("Particle system named {0} not found", particleSystemName);
+        return null;
     }
 }
