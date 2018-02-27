@@ -42,4 +42,10 @@ public class Race : UniqueScriptableObject {
             return graphics;
         }
     }
+
+    //temporary
+    public void OnValidate()
+    {
+        baseStats.RefactorMainAttack();
+    }
 }
