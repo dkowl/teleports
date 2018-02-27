@@ -15,6 +15,13 @@ public class Attribute
     {
     }
 
+    public Attribute(Attribute other)
+    {
+        raw = other.raw;
+        bonus = other.bonus;
+        multiplier = other.multiplier;
+    }
+
     public Attribute(float raw)
     {
         this.raw = raw;

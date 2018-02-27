@@ -2,29 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Sirenix.OdinInspector;
 
 public abstract class Skill : MonoBehaviour, IUniqueName {
-       
-    [FormerlySerializedAs("name_"), SerializeField] new private string name;
-    [FormerlySerializedAs("type_"), SerializeField] private TargetType type;
-    [FormerlySerializedAs("reach_"), SerializeField] private Attribute reach;
-    [FormerlySerializedAs("reach_"), SerializeField] private Attribute reachAngle = new Attribute(30);
-    [FormerlySerializedAs("cooldown_"), SerializeField] private Attribute cooldown;
-    [FormerlySerializedAs("castTime_"), SerializeField] private Attribute castTime;
-    [SerializeField] private Attribute totalCastTime;
-    [SerializeField] private Attribute earlyBreakTime;
-    [SerializeField] private int maxCombo;
-    [SerializeField] private SkillGraphics graphics;
+
+    [SerializeField] private SkillData data;
 
     float currentCooldown;
 
-    virtual public void Update()
+    void OnEnable()
+    {
+        Debug.Log("OnEnable called");
+    }
+
+    //temporary method to refactor assets
+    [Button]
+    public void PopulateSkillData()
+    {
+        data.PopulateFromSkill(this);
+    }
+
+    public virtual void Update()
     {
         currentCooldown -= Time.deltaTime;
         if (currentCooldown < 0) currentCooldown = 0;
     }
     
-    abstract public void CastInternal(Unit caster, List<CastTarget> targets);
+    public abstract void CastInternal(Unit caster, List<CastTarget> targets);
 
     protected virtual SkillTargeter GetTargeter()
     {
@@ -33,7 +37,7 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
 
     public void Cast(Unit caster, TargetInfo targetInfo)
     {
-        currentCooldown = cooldown.Value;
+        currentCooldown = Cooldown;
         CastInternal(caster, Targeter.GetTargets(this, targetInfo));
     }
 
@@ -66,28 +70,14 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         }
     }
 
-    public void ModifyAttribute(AttributeType type, float bonus, float multiplier)
+    public void ModifyAttribute(SkillData.AttributeType type, float bonus, float multiplier)
     {
-        GetAttribute(type).Modify(bonus, multiplier);
+        Data.GetAttribute(type).Modify(bonus, multiplier);
     }
 
-    Attribute GetAttribute(AttributeType type)
+    Attribute GetAttribute(SkillData.AttributeType type)
     {
-        switch (type)
-        {
-            case AttributeType.Cooldown:
-                return cooldown;
-            case AttributeType.CastTime:
-                return castTime;
-            case AttributeType.TotalCastTime:
-                return totalCastTime;
-            case AttributeType.EarlyBreakTime:
-                return earlyBreakTime;
-            case AttributeType.Reach:
-                return reach;
-            default:
-                return null;
-        }
+        return Data.GetAttribute(type);
     }
 
     public virtual float GetReach(Unit caster)
@@ -102,42 +92,42 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
 
     public TargetType Type
     {
-        get { return type; }
+        get { return data.TargetType; }
     }
 
     public float Reach
     {
-        get { return reach.Value; }
+        get { return data.Reach; }
     }
 
     public float ReachAngle
     {
-        get { return reachAngle.Value; }
+        get { return data.ReachAngle; }
     }
 
     public float Cooldown
     {
-        get { return cooldown.Value; }
+        get { return data.Cooldown; }
     }
 
     public float CastTime
     {
-        get { return castTime.Value; }
+        get { return data.CastTime; }
     }
 
     public float TotalCastTime
     {
-        get { return totalCastTime.Value; }
+        get { return data.TotalCastTime; }
     }
 
     public float EarlyBreakTime
     {
-        get { return earlyBreakTime.Value; }
+        get { return data.EarlyBreakTime; }
     }
 
     public int MaxCombo
     {
-        get { return maxCombo; }
+        get { return data.MaxCombo; }
     }
 
     public float CurrentCooldown
@@ -147,7 +137,13 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
 
     public SkillGraphics Graphics
     {
-        get { return graphics; }
+        get { return data.Graphics; }
+    }
+
+    public SkillData Data
+    {
+        get { return data; }
+        set { data = new SkillData(value); }
     }
 
     private SkillTargeter Targeter
@@ -163,16 +159,6 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         Unit,
         Position
     };
-
-    public enum AttributeType
-    {
-        Reach,
-        ReachAngle,
-        Cooldown,
-        CastTime,
-        TotalCastTime,
-        EarlyBreakTime
-    }
 
     public struct CanReachTargetResult
     {

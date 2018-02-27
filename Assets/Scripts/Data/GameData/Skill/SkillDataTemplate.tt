@@ -1,0 +1,20 @@
+<#@ include file = "..\..\Templates\DataClass.tt"
+#><#@ output extension = "/" #><# 
+	const string dataType = "Skill"; 
+	Field[] fields = {
+		new Field("string", "uniqueName", false),
+		new Field("Skill.TargetType", "targetType", false), 
+	    new Field("Attribute", "reach", true), 
+	    new Field("Attribute", "reachAngle", true), 
+	    new Field("Attribute", "cooldown", true), 
+	    new Field("Attribute", "castTime", true), 
+	    new Field("Attribute", "totalCastTime", true), 
+	    new Field("Attribute", "earlyBreakTime", true), 
+	    new Field("int", "maxCombo", false), 
+		new Field("SkillType", "skillType", false), 
+		new Field("AttackData", "attackData", true),
+	    new Field("SkillGraphics", "graphics", false), 
+	};
+    var dataClass = new DataClass(dataType, fields);
+    Generate(dataClass);
+#>

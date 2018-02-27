@@ -83,20 +83,23 @@ public class EnemySpawner : MonoBehaviour {
         }
         unit.SpawnItems();
         unit.SpawnAnimator();
+        unit.SpawnSkills();
 
         switch (enemyData.AiParams.AiType)
         {
             case AiType.Rush:
                 RushAI rushAI = enemyObject.AddComponent<RushAI>();
                 Debug.Log("assigning attacks..." + enemyData.AiParams.AttackIds.ToString());
-                rushAI.Attacks = MainData.Game.Skills.GetValues(enemyData.AiParams.AttackIds);
+                rushAI.Attacks = unit.Skills;
                 break;
         }
 
-        Enemy enemy = new Enemy();
-        enemy.gameObject = enemyObject;
-        enemy.enemyData = enemyData;
-        enemy.indicator = null;
+        Enemy enemy = new Enemy
+        {
+            gameObject = enemyObject,
+            enemyData = enemyData,
+            indicator = null
+        };
         enemies.Add(enemy);
     }
 

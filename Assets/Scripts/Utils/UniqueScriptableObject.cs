@@ -10,5 +10,6 @@ public class UniqueScriptableObject : ScriptableObject, IUniqueName {
     public string UniqueName
     {
         get { return uniqueName; }
+        protected set { uniqueName = value; }
     }
 }

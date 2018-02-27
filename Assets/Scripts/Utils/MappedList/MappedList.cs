@@ -43,16 +43,19 @@ public class MappedList<T> : IMappedList<T> where T : IUniqueName {
         return Dict.ContainsKey(name);
     }
 
+    public T GetValue(MappedListID id)
+    {
+        return TryGetValue(id.Name);
+    }
+
     public List<T> GetValues(List<MappedListID> ids)
     {
-        List<T> result = new List<T>();
-        if (ids != null)
+        var result = new List<T>();
+        if (ids == null) return result;
+        foreach (var id in ids)
         {
-            foreach (var id in ids)
-            {
-                T value = TryGetValue(id.Name);
-                if (value != null) result.Add(value);
-            }
+            T value = TryGetValue(id.Name);
+            if (value != null) result.Add(value);
         }
         return result;
     }

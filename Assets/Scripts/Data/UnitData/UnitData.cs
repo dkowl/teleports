@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 
 [System.Serializable]
 [ShowOdinSerializedPropertiesInInspector]
@@ -43,7 +44,7 @@ public class UnitData {
 
     public void CorrectInvalidData()
     {
-        if(unitName == null || unitName == "")
+        if(string.IsNullOrEmpty(unitName))
         {
             Debug.LogWarning("Unit name not found, changing to " + DataDefaults.unitName);
             unitName = DataDefaults.unitName;
@@ -75,6 +76,29 @@ public class UnitData {
     public float Height { get { return GetAttribute(UnitAttributes.Type.Height).Value; } }
     public UnitAbilities Abilities { get { return abilities; } }
     public SkillID MainAttack { get { return mainAttack; } }
+    public List<MappedListID> SkillIds { get { return skills.ConvertAll(x => (MappedListID)x); } }
+    public List<MappedListID> PerkIds { get { return perks.ConvertAll(x => (MappedListID)x); } }
     public bool IsInitialized { get { return isInitialized; } }
     public InventoryData Inventory { get { return inventory; } }
+
+    //temporary
+    public void RefactorMainAttack()
+    {
+        /*if (mainAttack != null)
+        {
+            if (!skills.Contains(mainAttack))
+            {
+                skills.Add(mainAttack);
+            }
+        }
+        else
+        {
+            if (!skills.IsNullOrEmpty())
+            {
+                mainAttack = skills[0];
+            }
+        }*/
+        skills.Clear();
+        skills.Add(new SkillID(mainAttack));
+    }
 }

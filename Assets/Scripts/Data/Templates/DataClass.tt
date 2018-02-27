@@ -1,0 +1,188 @@
+﻿<##><#@ assembly name="System.Core"
+#><#@ import namespace="System.Linq"
+#><#@ import namespace="System.Text"
+#><#@ import namespace="System.Collections.Generic"
+#><#@ import namespace="System.Diagnostics.Eventing"
+#><#@ include file = "MultiOutput.tt"
+#><#+
+    public class Field{
+        public string type;
+        public string name;
+        public List<string> attributes;
+        public bool deepCopy;
+
+		public Field(string type, string name, bool deepCopy, List<string> attributes = null){
+			this.type = type;
+			this.name = name;
+		    this.deepCopy = deepCopy;
+		    this.attributes = attributes ?? new List<string>();
+		}
+
+        public string UpperCase
+        {
+            get { return char.ToUpper(name[0]) + name.Remove(0, 1); }
+        }
+
+        public string PropertyReturnType
+        {
+            get { return type != "Attribute" ? type : "float"; }
+        }
+
+        public string PropertyReturnValue
+        {
+            get { return type != "Attribute" ? name : name + ".Value"; }
+        }
+	}
+
+    public class DataClass
+    {
+        public string dataType;
+        public Field[] fields;
+        public bool hasAttributes;
+        public bool implementsUniqueName;
+
+        public DataClass(string dataType, Field[] fields)
+        {
+            this.dataType = dataType;
+            this.fields = fields;
+            hasAttributes = false;
+            implementsUniqueName = false;
+            foreach (var field in fields)
+            {
+                if (field.type == "Attribute") hasAttributes = true;
+                if (field.name == "uniqueName" && field.type == "string") implementsUniqueName = true;
+            }
+        }
+
+        public string Header()
+        {
+            var sb = new StringBuilder();
+            sb.AppendFormat("public partial class {0}Data ", dataType);
+            if (implementsUniqueName) sb.Append(": IUniqueName ");
+            sb.Append("{\n");
+            return sb.ToString();
+        }
+
+        public string Fields()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+			foreach (var field in fields)
+			{
+			    stringBuilder.Append("	[SerializeField");
+			    foreach (var attribute in field.attributes)
+			    {
+			        stringBuilder.AppendFormat(", {0}", attribute);
+			    }
+				stringBuilder.AppendFormat("] private {0} {1};\n", field.type, field.name);
+			}
+            return stringBuilder.ToString();
+        }
+
+        public string CopyConstructor()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("	public {0}Data({0}Data other){{\n", dataType);
+            foreach (var field in fields)
+            {
+                if (!field.deepCopy)
+                {
+                    sb.AppendFormat("		{0} = other.{0};\n", field.name);
+                }
+                else
+                {
+                    sb.AppendFormat("		{0} = new {1}(other.{0});\n", field.name, field.type);
+                }
+            }
+            sb.AppendFormat("	}}\n");
+            return sb.ToString();
+        }
+
+        public string Properties()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var field in fields)
+            {
+                sb.AppendFormat("	public {0} {1} {{ get {{ return {2}; }} }}\n", field.PropertyReturnType,
+                    field.UpperCase, field.PropertyReturnValue);
+            }
+            return sb.ToString();
+        }
+
+        public string AttributeEnum()
+        {
+            if (!hasAttributes) return "";
+            StringBuilder sb = new StringBuilder();
+            sb.Append("	public enum AttributeType {\n");
+            foreach (var field in Attributes)
+            {
+                sb.AppendFormat("		{0},\n", field.UpperCase);
+            }
+            sb.Append("	}\n");
+            return sb.ToString();
+        }
+
+        public string GetAttributeMethod()
+        {
+            if (!hasAttributes) return "";
+            var sb = new StringBuilder();
+            sb.Append("	public Attribute GetAttribute(AttributeType type)\n	{\n		switch(type)\n		{\n");
+            foreach (var field in Attributes)
+            {
+                sb.AppendFormat("			case AttributeType.{0}:\n", field.UpperCase);
+                sb.AppendFormat("				return {0};\n", field.name);
+            }
+            sb.Append("			default:\n				return null;\n		}\n	}\n");
+            return sb.ToString();
+        }
+
+        public string ModifyAttributeMethod()
+        {
+            if (!hasAttributes) return "";
+            var sb = new StringBuilder();
+            sb.Append("    public void ModifyAttribute(AttributeType type, float bonus, float multiplier)\n");
+            sb.Append("	{\n		GetAttribute(type).Modify(bonus, multiplier);\n	}\n");
+            return sb.ToString();
+        }
+
+        public List<Field> Attributes
+        {
+            get
+            {
+                return fields.Where(field => field.type == "Attribute").ToList();
+            }
+        }
+
+        public string DataClassFilename
+        {
+            get { return dataType + "Data_T4Gen.cs"; }
+        }
+	}
+
+    public void GenerateDataClass(DataClass dataClass)
+    {
+	#>
+//DO NOT EDIT - Autogenerated file
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Sirenix.OdinInspector;
+using Teleports.Utils;
+
+[System.Serializable]
+<#=dataClass.Header()#>
+<#=dataClass.Fields()#>
+<#=dataClass.CopyConstructor()#>
+<#=dataClass.GetAttributeMethod()#>
+<#=dataClass.ModifyAttributeMethod()#>
+<#=dataClass.Properties()#>
+<#=dataClass.AttributeEnum()#>
+}
+	<#+
+    }
+
+    public void Generate(DataClass dataClass)
+    {
+		GenerateDataClass(dataClass);
+		MultiOutput(dataClass.DataClassFilename);
+    }
+#>
