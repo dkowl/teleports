@@ -1,0 +1,18 @@
+<#@ include file = "..\Templates\DataClass.tt"
+#><#@ output extension = "/" #><# 
+	const string dataType = "Unit"; 
+	Field[] fields = {
+		new Field("string", "unitName", false),
+		new Field("string", "raceName", false), 
+	    new Field("int", "level", false), 
+	    new Field("UnitAbilities", "abilities", true), 
+	    new Field("UnitAttributes", "attributes", true), 
+	    new Field("SkillID", "mainAttack", true), 
+	    new Field("List<PerkID>", "perks", true), 
+	    new Field("List<SkillID>", "skills", true), 
+	    new Field("InventoryData", "inventory", true), 
+		new Field("bool", "isInitialized", false), 
+	};
+    var dataClass = new DataClass(dataType, fields);
+    Generate(dataClass);
+#>

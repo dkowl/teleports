@@ -4,13 +4,12 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 
-[System.Serializable]
 [ShowOdinSerializedPropertiesInInspector]
-public class UnitData {
+public partial class UnitData {
     
     private const int labelWidth = 110;
 
-    [SerializeField, PropertyOrder(-5), LabelWidth(labelWidth)] private string unitName;
+    /*[SerializeField, PropertyOrder(-5), LabelWidth(labelWidth)] private string unitName;
     [SerializeField, LabelWidth(labelWidth)] private string raceName;
     [SerializeField, PropertyOrder(-4), LabelWidth(labelWidth)] private int level;
     [SerializeField, InlineProperty, LabelWidth(labelWidth)] private UnitAbilities abilities;    
@@ -19,7 +18,7 @@ public class UnitData {
     [SerializeField, LabelWidth(labelWidth)] private List<PerkID> perks;
     [SerializeField, LabelWidth(labelWidth)] private List<SkillID> skills;
     [SerializeField, LabelWidth(labelWidth)] private InventoryData inventory;
-    [SerializeField, HideInInspector] private bool isInitialized;
+    [SerializeField, HideInInspector] private bool isInitialized;*/
 
     public UnitData()
     {
@@ -71,34 +70,7 @@ public class UnitData {
         get { return unitName; }
         set { unitName = value; }
     }
-    public string RaceName { get { return raceName; } }
-    public int Level { get { return level; } }
-    public float Height { get { return GetAttribute(UnitAttributes.Type.Height).Value; } }
-    public UnitAbilities Abilities { get { return abilities; } }
-    public SkillID MainAttack { get { return mainAttack; } }
+    public float Height => GetAttribute(UnitAttributes.Type.Height).Value;
     public List<MappedListID> SkillIds { get { return skills.ConvertAll(x => (MappedListID)x); } }
     public List<MappedListID> PerkIds { get { return perks.ConvertAll(x => (MappedListID)x); } }
-    public bool IsInitialized { get { return isInitialized; } }
-    public InventoryData Inventory { get { return inventory; } }
-
-    //temporary
-    public void RefactorMainAttack()
-    {
-        /*if (mainAttack != null)
-        {
-            if (!skills.Contains(mainAttack))
-            {
-                skills.Add(mainAttack);
-            }
-        }
-        else
-        {
-            if (!skills.IsNullOrEmpty())
-            {
-                mainAttack = skills[0];
-            }
-        }*/
-        skills.Clear();
-        skills.Add(new SkillID(mainAttack));
-    }
 }

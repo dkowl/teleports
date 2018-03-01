@@ -25,6 +25,13 @@ public class UnitAbilities{
         intelligence = 10;
     }
 
+    public UnitAbilities(UnitAbilities other)
+    {
+        strength = other.strength;
+        dexterity = other.dexterity;
+        intelligence = other.intelligence;
+    }
+
     public UnitAbility GetAbility(Type type)
     {
         switch (type)
@@ -40,19 +47,7 @@ public class UnitAbilities{
         }
     }
 
-    public UnitAbility Strength
-    {
-        get { return strength; }
-    }
-
-    public UnitAbility Dexterity
-    {
-        get { return dexterity; }
-    }
-
-    public UnitAbility Intelligence
-    {
-        get { return intelligence; }
-    }
-
+    public UnitAbility Strength => strength;
+    public UnitAbility Dexterity => dexterity;
+    public UnitAbility Intelligence => intelligence;
 }
