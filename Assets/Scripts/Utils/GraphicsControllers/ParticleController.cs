@@ -6,6 +6,14 @@ public class ParticleController : MonoBehaviour
 {
     [SerializeField] private ParticleSystem[] particleSystems;
 
+    private void OnValidate()
+    {
+        foreach (var ps in particleSystems)
+        {
+            Debug.Assert(ps != null, "Null particle system not allowed");
+        }
+    }
+
     public void Play(string psName)
     {
         GetParticleSystemByName(psName)?.Play();
