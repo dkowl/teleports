@@ -5,16 +5,15 @@ using Teleports.Utils;
 
 public class RushAI : UnitController {
 
+    private GameObject[] targets; //all available targets
+    private List<Skill> attacks;
 
-    GameObject[] targets; //all available targets
-    List<Skill> attacks;
-    
-	void Start () {
+    private void Start () {
         FindTarget();
         Subscribe();
 	}
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         Unsubscribe();
     }
@@ -23,7 +22,7 @@ public class RushAI : UnitController {
         if (target.TargetUnit == null) FindTarget();
         else
         {
-            if (target.TargetUnit.Alive)
+            if (target.TargetUnit.Alive && IsWithinReach(target.TargetUnit.gameObject))
             {
                 Chase();
             }
@@ -33,17 +32,38 @@ public class RushAI : UnitController {
             }
         }
 	}
-    
-    void FindTarget()
-    {
-        TargetInfo bestTarget = BestTarget;
 
-        if (bestTarget != null && bestTarget.Distance < unit.ViewRange)
+    private void FindTarget()
+    {
+        int bestTargetId = FindBestTargetId();
+
+        if (IsWithinReach(targets[bestTargetId]))
         {
-            target.TargetUnit = targets[bestTarget.Id].GetComponent<Unit>();
+            target.TargetUnit = targets[bestTargetId].GetComponent<Unit>();
             RandomizeAttack();
         }
         else target.TargetUnit = null;
+    }
+
+    protected int FindBestTargetId()
+    {
+        targets = GameObject.FindGameObjectsWithTag("Player");
+
+        //select closest player
+        float minDist = float.MaxValue;
+        int? bestArg = null;
+        for (int i = 0; i < targets.Length; i++)
+        {
+            if (targets[i].GetComponent<Unit>() != null && !targets[i].GetComponent<Unit>().Alive) continue;
+
+            float dist = DistanceToTarget(targets[i]);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                bestArg = i;
+            }
+        }
+        return bestArg ?? 0;
     }
 
     protected void RandomizeAttack()
@@ -61,6 +81,16 @@ public class RushAI : UnitController {
         RandomizeAttack();
     }
 
+    private bool IsWithinReach(GameObject targetObject)
+    {
+        return DistanceToTarget(targetObject) < unit.ViewRange;
+    }
+
+    private float DistanceToTarget(GameObject targetObject)
+    {
+        return Vector3.Distance(targetObject.transform.position, transform.position);
+    }
+
     private void Subscribe()
     {
         Unsubscribe();
@@ -75,47 +105,5 @@ public class RushAI : UnitController {
     public List<Skill> Attacks
     {
         set { attacks = value; }
-    }
-
-    protected TargetInfo BestTarget
-    {
-        get
-        {
-            targets = GameObject.FindGameObjectsWithTag("Player");
-            //select closest player
-            float minDist = float.MaxValue;
-
-            int bestArg = 0;
-            bool found = false;
-            for (int i = 0; i < targets.Length; i++)
-            {
-                if (targets[i].GetComponent<Unit>() != null && !targets[i].GetComponent<Unit>().Alive) continue;
-
-                float dist = Vector3.Distance(targets[i].transform.position, transform.position);
-                if (dist < minDist)
-                {
-                    minDist = dist;
-                    bestArg = i;
-                    found = true;
-                }
-            }
-            if (found) return new TargetInfo(minDist, bestArg);
-            else return null;
-        }
-    }
-
-    public class TargetInfo
-    {
-        private float distance;
-        private int id;
-
-        public TargetInfo(float distance, int id)
-        {
-            this.distance = distance;
-            this.id = id;
-        }
-
-        public float Distance { get { return distance; } }
-        public int Id { get { return id; } }
     }
 }

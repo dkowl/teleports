@@ -4,31 +4,18 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Sirenix.OdinInspector;
 
-public abstract class Skill : MonoBehaviour, IUniqueName {
+public abstract partial class Skill : MonoBehaviour, IUniqueName {
 
     [SerializeField] private SkillData data;
+    private float currentCooldown;
 
-    float currentCooldown;
-
-    void OnEnable()
-    {
-        Debug.Log("OnEnable called");
-    }
-
-    //temporary method to refactor assets
-    [Button]
-    public void PopulateSkillData()
-    {
-        data.PopulateFromSkill(this);
-    }
-
-    public virtual void Update()
+    protected virtual void Update()
     {
         currentCooldown -= Time.deltaTime;
         if (currentCooldown < 0) currentCooldown = 0;
     }
     
-    public abstract void CastInternal(Unit caster, List<CastTarget> targets);
+    protected abstract void CastInternal(Unit caster, List<CastTarget> targets);
 
     protected virtual SkillTargeter GetTargeter()
     {
@@ -75,69 +62,9 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         Data.GetAttribute(type).Modify(bonus, multiplier);
     }
 
-    Attribute GetAttribute(SkillData.AttributeType type)
-    {
-        return Data.GetAttribute(type);
-    }
-
     public virtual float GetReach(Unit caster)
     {
         return caster.Reach + caster.Size + Reach;
-    }
-
-    public string UniqueName
-    {
-        get { return name; }
-    }
-
-    public TargetType Type
-    {
-        get { return data.TargetType; }
-    }
-
-    public float Reach
-    {
-        get { return data.Reach; }
-    }
-
-    public float ReachAngle
-    {
-        get { return data.ReachAngle; }
-    }
-
-    public float Cooldown
-    {
-        get { return data.Cooldown; }
-    }
-
-    public float CastTime
-    {
-        get { return data.CastTime; }
-    }
-
-    public float TotalCastTime
-    {
-        get { return data.TotalCastTime; }
-    }
-
-    public float EarlyBreakTime
-    {
-        get { return data.EarlyBreakTime; }
-    }
-
-    public int MaxCombo
-    {
-        get { return data.MaxCombo; }
-    }
-
-    public float CurrentCooldown
-    {
-        get { return currentCooldown; }
-    }
-
-    public SkillGraphics Graphics
-    {
-        get { return data.Graphics; }
     }
 
     public SkillData Data
@@ -145,14 +72,18 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         get { return data; }
         set { data = new SkillData(value); }
     }
-
-    private SkillTargeter Targeter
-    {
-        get
-        {
-            return GetTargeter();
-        }
-    }
+    public string UniqueName => name;
+    public TargetType Type => data.TargetType;
+    public float Reach => data.Reach;
+    public float ReachAngle => data.ReachAngle;
+    public float Cooldown => data.Cooldown;
+    public float CastTime => data.CastTime;
+    public float TotalCastTime => data.TotalCastTime;
+    public float EarlyBreakTime => data.EarlyBreakTime;
+    public int MaxCombo => data.MaxCombo;
+    public float CurrentCooldown => currentCooldown;
+    public SkillGraphics Graphics => data.Graphics;
+    private SkillTargeter Targeter => GetTargeter();
 
     public enum TargetType
     {
@@ -172,8 +103,7 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
 
         public static implicit operator bool(CanReachTargetResult a)
         {
-            if (a == Yes) return true;
-            else return false;
+            return a == Yes;
         }
 
         public static implicit operator int (CanReachTargetResult a)
@@ -194,90 +124,6 @@ public abstract class Skill : MonoBehaviour, IUniqueName {
         public static bool operator !=(CanReachTargetResult a, CanReachTargetResult b)
         {
             return !(a == b);
-        }
-    }
-
-    [System.Serializable]
-    public class TargetInfo
-    {
-        Unit caster;
-        TargetType targetType;
-        Unit targetUnit;
-        Vector3 targetPosition;
-
-        public TargetInfo(Unit caster, Unit targetUnit)
-            : this(caster, TargetType.Unit, targetUnit, Vector3.zero)
-        { }
-
-        public TargetInfo(Unit caster, Vector3 targetPosition)
-            : this(caster, TargetType.Position, null, targetPosition)
-        { }
-
-        TargetInfo(Unit caster, TargetType targetType, Unit targetUnit, Vector3 targetPosition)
-        {
-            this.caster = caster;
-            this.targetType = targetType;
-            this.targetUnit = targetUnit;
-            this.targetPosition = targetPosition;
-        }
-
-        public TargetInfo(TargetInfo other)
-        {
-            this.caster = other.caster;
-            this.targetType = other.targetType;
-            this.targetUnit = other.targetUnit;
-            this.targetPosition = other.targetPosition;
-        }
-
-        public override bool Equals(object obj)
-        {
-            TargetInfo other = (TargetInfo)obj;
-            if (obj == null) return false;
-            else
-            {
-                return
-                    caster == other.caster &&
-                    targetType == other.targetType &&
-                    targetUnit == other.targetUnit &&
-                    targetPosition == other.targetPosition;
-            }
-        }
-
-        public override int GetHashCode()
-        {
-            return
-                caster.GetHashCode() ^
-                targetType.GetHashCode() ^
-                targetUnit.GetHashCode() ^
-                targetPosition.GetHashCode();
-        }
-
-        public Unit Caster
-        {
-            get { return caster; }
-        }
-
-        public TargetType TargetType
-        {
-            get { return targetType; }
-        }
-
-        public Unit TargetUnit
-        {
-            get { return targetUnit; }
-            set { targetUnit = value; }
-        }
-
-        public Vector3 Position
-        {
-            get
-            {
-                if (targetUnit != null)
-                {
-                    return TargetUnit.transform.position;
-                }
-                else return targetPosition;
-            }
         }
     }
 }

@@ -6,20 +6,7 @@ public abstract class UnitController : MonoBehaviour {
 
     protected Unit unit;
     protected Skill.TargetInfo target;
-    [SerializeField]
-    protected Skill mainAttack;
-
-    public Skill.TargetInfo Target
-    {
-        get { return target; }
-        set { target = value; }
-    }
-
-    public Skill MainAttack
-    {
-        get { return mainAttack; }
-        set { mainAttack = value; }
-    }
+    [SerializeField] protected Skill mainAttack;
 
     public virtual void Awake()
     {
@@ -35,13 +22,15 @@ public abstract class UnitController : MonoBehaviour {
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (IsActive)
         {
             Control();
         }
     }
+
+    public abstract void Control();
 
     protected void Chase()
     {
@@ -55,10 +44,20 @@ public abstract class UnitController : MonoBehaviour {
         }
     }
 
-    public abstract void Control();
-
-    bool IsActive
+    private bool IsActive
     {
         get { return this == unit.ActiveController; }
+    }
+
+    public Skill.TargetInfo Target
+    {
+        get { return target; }
+        set { target = value; }
+    }
+
+    public Skill MainAttack
+    {
+        get { return mainAttack; }
+        set { mainAttack = value; }
     }
 }
