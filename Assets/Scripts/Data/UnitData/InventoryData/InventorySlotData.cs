@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 [System.Serializable]
-public class InventorySlotData
+public class InventorySlotData : IDeepCopyable
 {
     [SerializeField, HideIf("Empty")] private ItemData item;
     [SerializeField] private int count;
@@ -14,6 +14,14 @@ public class InventorySlotData
     {
         item = null;
         count = 0;
+        maxCount = 99;
+    }
+
+    public InventorySlotData(InventorySlotData other)
+    {
+        item = other.item;
+        count = other.count;
+        maxCount = other.maxCount;
     }
 
     public InventorySlotData(int maxCount)
@@ -21,6 +29,11 @@ public class InventorySlotData
         item = null;
         count = 0;
         this.maxCount = maxCount;
+    }
+
+    public object DeepCopy()
+    {
+        return new InventorySlotData(this);
     }
 
     public void Add(ItemData item)
