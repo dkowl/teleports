@@ -19,6 +19,14 @@ public class EquipmentSlotData {
         empty = true;
     }
 
+    public EquipmentSlotData(EquipmentSlotData other)
+    {
+        item = other.item;
+        primary = other.primary;
+        locked = other.locked;
+        empty = other.empty;
+    }
+
     public void CorrectInvalidData()
     {
         if (!Empty)

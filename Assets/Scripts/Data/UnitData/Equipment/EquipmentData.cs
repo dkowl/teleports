@@ -23,6 +23,16 @@ public class EquipmentData {
         rightArm = new EquipmentSlotData();
     }
 
+    public EquipmentData(EquipmentData other)
+    {
+        head = new EquipmentSlotData(other.head);
+        torso = new EquipmentSlotData(other.torso);
+        legs = new EquipmentSlotData(other.legs);
+        feet = new EquipmentSlotData(other.feet);
+        leftArm = new EquipmentSlotData(other.leftArm);
+        rightArm = new EquipmentSlotData(other.rightArm);
+    }
+
     public void CorrectInvalidData()
     {
         foreach(EquipmentSlotData eqSlotData in GetEquipmentSlots())
