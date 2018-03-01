@@ -14,7 +14,7 @@ public class PlayerAndTeleportMS : ModelSpawner {
         {
             if (MainData.CurrentPlayerData != null)
             {
-                return Instantiate(MainData.CurrentPlayerData.CurrentTeleportData.Graphics.modelObject, transform);
+                return Instantiate(MainData.CurrentPlayerData.TeleportData.Graphics.modelObject, transform);
             }
             else
                 return null;

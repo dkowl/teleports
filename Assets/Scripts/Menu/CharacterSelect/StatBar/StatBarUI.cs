@@ -16,7 +16,7 @@ public class StatBarUI : LoadableBehaviour {
         IServerData server = MainData.CurrentServerData;
 
         UnitAttributeStats stats = server.GetAttributeStats(statType);
-        IPlayerData playerData = MainData.CurrentPlayerData;
+        PlayerData playerData = MainData.CurrentPlayerData;
 
         statNameText.text = statName;
         

@@ -5,11 +5,11 @@ using UnityEngine;
 [ExecuteInEditMode]
 //singleton managing all the static data
 [CreateAssetMenu(fileName = "mainData", menuName = "Data/Main")]
-public partial class MainData : ScriptableObject {
+public class MainData : ScriptableObject {
 
     //singleton instance
     public static MainData instance;
-    static bool isInitialized = false;
+    private static bool isInitialized;
 
     //inspector fields
     [SerializeField] private SaveDataSO saveData;
@@ -61,7 +61,7 @@ public partial class MainData : ScriptableObject {
 
     public static void SavePlayer(GameObject player)
     {
-        CurrentPlayerData.Xp = player.GetComponent<XpComponent>().Xp;
+        CurrentPlayerData.SetXp(player.GetComponent<XpComponent>().Xp);
     }
 
     #region properties
@@ -85,7 +85,7 @@ public partial class MainData : ScriptableObject {
         get { return Instance.saveData; }
     }
 
-    public static IPlayerData CurrentPlayerData
+    public static PlayerData CurrentPlayerData
     {
         get { return Save.CurrentPlayerData(); }
     }

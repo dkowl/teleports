@@ -7,7 +7,7 @@ public static class PlayerSpawner {
 	public static GameObject Spawn(PlayerSpawnerParams p)
     {     
         //Common
-        IPlayerData playerData = MainData.CurrentPlayerData;
+        PlayerData playerData = MainData.CurrentPlayerData;
         if (playerData == null) return null;
         RaceGraphics raceGraphics = MainData.Game.GetRace(playerData.RaceName).Graphics;
 

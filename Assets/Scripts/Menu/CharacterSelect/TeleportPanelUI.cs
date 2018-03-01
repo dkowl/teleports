@@ -13,11 +13,11 @@ public class TeleportPanelUI : LoadableBehaviour {
 
     override protected void LoadDataInternal()
     {
-        IPlayerData playerData = MainData.CurrentPlayerData;
+        PlayerData playerData = MainData.CurrentPlayerData;
         if (playerData != null)
         {
             ownerNameText.text = playerData.CharacterName + "'s";
-            tierText.text = "Tier " + RomanNumbers.RomanNumber(playerData.CurrentTeleportData.Tier);
+            tierText.text = "Tier " + RomanNumbers.RomanNumber(playerData.TeleportData.Tier);
             rankPointsText.text = playerData.RankPoints.ToString();
         }
         else

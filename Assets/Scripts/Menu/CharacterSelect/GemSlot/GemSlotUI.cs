@@ -14,7 +14,7 @@ public class GemSlotUI : UnlockableSlotUI {
     {
         if(MainData.CurrentPlayerData != null)
         {
-            gemSlot = MainData.CurrentPlayerData.CurrentTeleportData.GetGemSlot(gemSlotID);
+            gemSlot = MainData.CurrentPlayerData.TeleportData.GetGemSlot(gemSlotID);
             return gemSlot;
         }
         else

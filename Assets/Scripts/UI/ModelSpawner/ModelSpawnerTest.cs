@@ -38,7 +38,7 @@ public class ModelSpawnerTest : LoadableBehaviour {
             character.transform.Rotate(characterLocalRotationOffset, Space.Self);
 
             
-            teleport = Instantiate(CurrentPlayerData.CurrentTeleportData.Graphics.modelObject, transform);
+            teleport = Instantiate(CurrentPlayerData.TeleportData.Graphics.modelObject, transform);
             teleport.transform.localPosition += teleportLocalPositionOffset;
             teleport.transform.Rotate(teleportLocalRotationOffset, Space.Self);
 
@@ -64,11 +64,5 @@ public class ModelSpawnerTest : LoadableBehaviour {
         LoadDataInternal();
     }
 
-    public IPlayerData CurrentPlayerData
-    {
-        get
-        {
-            return MainData.CurrentPlayerData;
-        }
-    }
+    public PlayerData CurrentPlayerData => MainData.CurrentPlayerData;
 }

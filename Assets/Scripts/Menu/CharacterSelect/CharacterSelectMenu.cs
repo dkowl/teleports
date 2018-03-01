@@ -26,7 +26,7 @@ public class CharacterSelectMenu : LoadableBehaviour {
     override protected void LoadDataInternal()
     {
         Stylesheet stylesheet = MainData.Stylesheet;
-        IPlayerData playerData = MainData.CurrentPlayerData;
+        PlayerData playerData = MainData.CurrentPlayerData;
 
         string titleString = "";
         switch (state)

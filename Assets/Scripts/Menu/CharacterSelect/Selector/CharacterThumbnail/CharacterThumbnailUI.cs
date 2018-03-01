@@ -9,8 +9,8 @@ public class CharacterThumbnailUI : SelectorButtonUI {
     public Image playerIcon, teleportIcon, newHeroIcon;
     public Text characterName, characterLvl;
 
-    private int characterSlotID = 0;
-    private IPlayerData playerData = null;
+    private int characterSlotID;
+    private PlayerData playerData;
     private CreateHeroConfirmDWSB createHeroConfirmDWSB;
 
     override protected void LoadDataInternal()

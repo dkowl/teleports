@@ -1,25 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Sirenix.Utilities;
 using UnityEngine;
+using Teleports.Utils;
 
-[Serializable]
-public class PlayerData : IPlayerData
+public partial class PlayerData
 {
     private static readonly int SkillTreeSlotNo = 3;
     private static readonly int SkillSlotNo = 4;
-
-    //main attributes
-    [SerializeField] private string characterName;
-    [SerializeField] private int xp;
-    [SerializeField] private int level = 1;
-    [SerializeField] private int rankPoints;
-    [SerializeField] private List<SkillID> skills;
-    [SerializeField] private SkillTreeSlot[] skillTreeSlots;
-    [SerializeField] private SkillID primarySkill;
-    [SerializeField] private SkillID[] secondarySkills;
-    [SerializeField] private UnitData unitData;
-    [SerializeField] private TeleportData teleportData;
-
+    
     public PlayerData(string name, string raceName)
     {
         Init(name, raceName);
@@ -32,19 +20,19 @@ public class PlayerData : IPlayerData
         level = 1;
         rankPoints = 0;
         skills = new List<SkillID>();
-        skillTreeSlots = new SkillTreeSlot[SkillTreeSlotNo];
-        for (int i = 0; i < skillTreeSlots.Length; i++)
-        {
-            skillTreeSlots[i] = new SkillTreeSlot();
-        }
+        Utils.InitWithNew(ref skillTreeSlots, SkillTreeSlotNo);
         primarySkill = MainData.Game.GetRace(raceName).BaseStats.MainAttack;
-        secondarySkills = new SkillID[SkillSlotNo];
-        for (int i = 0; i < secondarySkills.Length; i++)
-        {
-            secondarySkills[i] = new SkillID();
-        }
+        Utils.InitWithNew(ref secondarySkills, SkillSlotNo);
         unitData = MainData.Game.GetRace(raceName).BaseStats;
         teleportData = new TeleportData();
+    }
+
+    public void SetXp(int value)
+    {
+        if (value >= xp)
+        {
+            AddXp(value - xp);
+        }
     }
 
     public void CorrectInvalidData()
@@ -59,33 +47,15 @@ public class PlayerData : IPlayerData
             Debug.LogWarning("Invalid player level: " + level.ToString() + ". Changing to '1'");
             level = 1;
         }
-        if(skillTreeSlots == null)
+        if(skillTreeSlots == null || skillTreeSlots.Count < SkillTreeSlotNo)
         {
             Debug.LogWarning("Skill tree slots not found, initializing...");
-            skillTreeSlots = new SkillTreeSlot[SkillTreeSlotNo];
+            Utils.InitWithNew(ref skillTreeSlots, SkillTreeSlotNo);
         }
-        if(skillTreeSlots.Length < SkillTreeSlotNo)
-        {
-            Debug.LogWarning("Not enough skill tree slots");
-            skillTreeSlots = new SkillTreeSlot[SkillTreeSlotNo];
-            for(int i = 0; i<skillTreeSlots.Length; i++)
-            {
-                skillTreeSlots[i] = new SkillTreeSlot();
-            }
-        }
-        if(secondarySkills == null)
+        if(secondarySkills == null || secondarySkills.Count < SkillSlotNo)
         {
             Debug.LogWarning("Secondary skill not found, initializing...");
-            secondarySkills = new SkillID[SkillSlotNo];
-        }
-        if(secondarySkills.Length < SkillSlotNo)
-        {
-            Debug.LogWarning("Not enough secondary skill slots");
-            secondarySkills = new SkillID[SkillSlotNo];
-            for(int i = 0; i<secondarySkills.Length; i++)
-            {
-                secondarySkills[i] = new SkillID();
-            }
+            Utils.InitWithNew(ref secondarySkills, SkillSlotNo);
         }
         if(unitData == null)
         {
@@ -101,112 +71,19 @@ public class PlayerData : IPlayerData
         teleportData.CorrectInvalidData();
     }
 
-    #region interface implementation
-    #region properties
-    public string CharacterName
-    {
-        get
-        {
-            return characterName;  
-        }
-    }
+    public string RaceName => unitData.RaceName;
+    public UnitData BaseUnitData => MainData.Game.GetRace(RaceName).BaseStats;
 
-    public string RaceName
-    {
-        get { return unitData.RaceName; }
-    }
-
-    public int Xp
-    {
-        get
-        {
-            return xp;
-        }
-        set
-        {
-            if(value >= xp)
-            {
-                AddXp(value - xp);
-            }
-        }
-    }
-
-    public int Level
-    {
-        get
-        {
-            level = Levels.xp.Level(xp);
-            return level;
-        }
-    }
-
-    public int RankPoints
-    {
-        get
-        {
-            return rankPoints;
-        }
-    }
-
-    public UnitData BaseUnitData
-    {
-        get
-        {
-            return MainData.Game.GetRace(RaceName).BaseStats;
-        }
-    }
-
-    public UnitData UnitData
-    {
-        get
-        {
-            if(!unitData.IsInitialized)
-            {
-                unitData = MainData.Game.GetRace(RaceName).BaseStats;
-            }
-
-            return unitData;
-        }
-    }
-
-    public TeleportData CurrentTeleportData
-    {
-        get { return teleportData; }
-    }
-
-    public SkillID PrimarySkillId
-    {
-        get { return primarySkill; }
-    }
-    #endregion
-
-    #region methods
-    /// <summary>
-    /// While adding XP this method handles leveling up and updates rank points.
-    /// </summary>
-    /// <param name="xpToAdd"></param>
     public void AddXp(int xpToAdd)
     {
+        xp += xpToAdd;
+        UpdateLevel();
         UpdateRankPoints(xpToAdd);
-        /*while(xpToAdd >= RequiredXp)
-        {
-            xp += RequiredXp;
-            xpToAdd -= RequiredXp;
-            LevelUp();
-        }*/
-        xp += xpToAdd;                
     }
 
     public SkillTreeSlot GetSkillTreeSlot(int id)
     {
-        if(id < SkillTreeSlotNo)
-        {
-            return skillTreeSlots[id];
-        }
-        else
-        {
-            return null;
-        }
+        return id < SkillTreeSlotNo ? skillTreeSlots[id] : null;
     }
 
     public int GetSkillTreeSlotLevel(int id)
@@ -244,36 +121,18 @@ public class PlayerData : IPlayerData
             case PlayerStats.DamagePerSecond:
                 return 0; //TODO: Divide by attack speed
             case PlayerStats.TeleportPower:
-                return CurrentTeleportData.Power;
+                return TeleportData.Power;
             case PlayerStats.TeleportTime:
-                return CurrentTeleportData.Time;
+                return TeleportData.Time;
             default:
                 return 0.0f;
         }
     }
-    #endregion
-    #endregion
-
-    private int CurrentXp
-    {
-        get
-        {
-            return Levels.xp.Current(xp);
-        }
-    }
-
-    private int RequiredXp
-    {
-        get
-        {
-            return Levels.xp.Required(xp);
-        }
-    }
 
     //called by AddXp
-    private void LevelUp()
+    private void UpdateLevel()
     {
-        level++;
+        level = Levels.xp.Level(xp);
     }
 
     //called by AddXp

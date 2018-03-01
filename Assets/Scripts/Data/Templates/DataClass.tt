@@ -102,7 +102,7 @@
             StringBuilder sb = new StringBuilder();
             foreach (var field in fields)
             {
-                sb.AppendFormat("	public {0} {1} {{ get {{ return {2}; }} }}\n", field.PropertyReturnType,
+                sb.AppendFormat("	public {0} {1} => {2};\n", field.PropertyReturnType,
                     field.UpperCase, field.PropertyReturnValue);
             }
             return sb.ToString();

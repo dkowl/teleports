@@ -7,7 +7,7 @@ using Sirenix.Utilities;
 [System.Serializable]
 [ShowOdinSerializedPropertiesInInspector]
 public class UnitData {
-
+    
     private const int labelWidth = 110;
 
     [SerializeField, PropertyOrder(-5), LabelWidth(labelWidth)] private string unitName;

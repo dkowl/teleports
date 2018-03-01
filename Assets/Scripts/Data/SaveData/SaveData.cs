@@ -46,12 +46,12 @@ public partial class SaveData
         }
     }
 
-    public IPlayerData CurrentPlayerData()
+    public PlayerData CurrentPlayerData()
     {
         return GetPlayerData(currentPlayerDataID);
     }
 
-    public IPlayerData GetPlayerData(int id)
+    public PlayerData GetPlayerData(int id)
     {
         if(id < playerData.Length) 
         {
