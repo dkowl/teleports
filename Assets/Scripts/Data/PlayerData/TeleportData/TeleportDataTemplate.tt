@@ -1,0 +1,13 @@
+<#@ include file = "..\..\Templates\DataClass.tt"
+#><#@ output extension = "/" #><# 
+	const string dataType = "Teleport"; 
+	Field[] fields = {
+		new Field("int", "tier", false),
+		new Field("Attribute", "power", true), 
+	    new Field("Attribute", "time", true), 
+	    new Field("List<GemSlot>", "gemSlots", false), 
+	    new Field("string", "graphicsId", false), 
+	};
+    var dataClass = new DataClass(dataType, fields);
+    Generate(dataClass);
+#>
