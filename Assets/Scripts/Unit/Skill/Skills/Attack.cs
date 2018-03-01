@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 
 public class Attack : Skill {
 
-    public override void CastInternal(Unit caster, List<CastTarget> targets)
+    protected override void CastInternal(Unit caster, List<CastTarget> targets)
     {
         foreach (var target in targets)
         {

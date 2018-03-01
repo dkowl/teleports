@@ -12,7 +12,7 @@ public class Charge : Skill {
     UnitController oldController;
     ChargeController chargeController;
 
-    public override void CastInternal(Unit caster, List<CastTarget> targets)
+    protected override void CastInternal(Unit caster, List<CastTarget> targets)
     {
         CastTarget target = targets[0];
         oldController = caster.ActiveController;
