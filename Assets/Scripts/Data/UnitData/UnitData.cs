@@ -33,7 +33,7 @@ public partial class UnitData {
         raceName = DataDefaults.raceName;
         level = 1;
         abilities = new UnitAbilities();
-        attributes = new UnitAttributes();
+        attributes = new UnitAttributesData();
         mainAttack = new SkillID();
         perks = new List<PerkID>();
         skills = new List<SkillID>();
@@ -61,7 +61,7 @@ public partial class UnitData {
         Inventory.CorrectInvalidData();
     }
 
-    public Attribute GetAttribute(UnitAttributes.Type type) {
+    public Attribute GetAttribute(UnitAttributesData.AttributeType type) {
         return attributes.GetAttribute(type);
     }
 
@@ -70,7 +70,7 @@ public partial class UnitData {
         get { return unitName; }
         set { unitName = value; }
     }
-    public float Height => GetAttribute(UnitAttributes.Type.Height).Value;
+    public float Height => GetAttribute(UnitAttributesData.AttributeType.Height).Value;
     public List<MappedListID> SkillIds { get { return skills.ConvertAll(x => (MappedListID)x); } }
     public List<MappedListID> PerkIds { get { return perks.ConvertAll(x => (MappedListID)x); } }
 }

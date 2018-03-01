@@ -7,7 +7,7 @@ public class AttributeModifier : Perk {
 	[System.Serializable]
     public class AttributeModificationSettings
     {
-        [FormerlySerializedAs("type_")] public UnitAttributes.Type type;
+        [FormerlySerializedAs("type_")] public UnitAttributesData.AttributeType type;
         [FormerlySerializedAs("bonus_")] public float bonus = 0;
         [FormerlySerializedAs("multiplier_")] public float multiplier = 1;
     }

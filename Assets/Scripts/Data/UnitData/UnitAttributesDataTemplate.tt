@@ -1,0 +1,17 @@
+<#@ include file = "..\Templates\DataClass.tt"
+#><#@ output extension = "/" #><# 
+	const string dataType = "UnitAttributes"; 
+	Field[] fields = {
+		new Field("Attribute", "size", true),
+	    new Field("Attribute", "height", true),
+	    new Field("Attribute", "healthPoints", true),
+	    new Field("Attribute", "armor", true),
+	    new Field("Attribute", "regeneration", true),
+	    new Field("Attribute", "movementSpeed", true),
+	    new Field("Attribute", "rotationSpeed", true),
+	    new Field("Attribute", "reach", true),
+	    new Field("Attribute", "viewRange", true),
+	};
+    var dataClass = new DataClass(dataType, fields);
+    Generate(dataClass); 
+#>

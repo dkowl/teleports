@@ -12,7 +12,7 @@ public partial class UnitData {
 	[SerializeField] private string raceName;
 	[SerializeField] private int level;
 	[SerializeField] private UnitAbilities abilities;
-	[SerializeField] private UnitAttributes attributes;
+	[SerializeField] private UnitAttributesData attributes;
 	[SerializeField] private SkillID mainAttack;
 	[SerializeField] private List<PerkID> perks;
 	[SerializeField] private List<SkillID> skills;
@@ -24,7 +24,7 @@ public partial class UnitData {
 		raceName = other.raceName;
 		level = other.level;
 		abilities = new UnitAbilities(other.abilities);
-		attributes = new UnitAttributes(other.attributes);
+		attributes = new UnitAttributesData(other.attributes);
 		mainAttack = new SkillID(other.mainAttack);
 		perks = new List<PerkID>(other.perks);
 		skills = new List<SkillID>(other.skills);
@@ -38,7 +38,7 @@ public partial class UnitData {
 	public string RaceName => raceName;
 	public int Level => level;
 	public UnitAbilities Abilities => abilities;
-	public UnitAttributes Attributes => attributes;
+	public UnitAttributesData Attributes => attributes;
 	public SkillID MainAttack => mainAttack;
 	public List<PerkID> Perks => perks;
 	public List<SkillID> Skills => skills;

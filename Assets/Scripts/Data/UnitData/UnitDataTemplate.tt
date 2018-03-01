@@ -6,7 +6,7 @@
 		new Field("string", "raceName", false), 
 	    new Field("int", "level", false), 
 	    new Field("UnitAbilities", "abilities", true), 
-	    new Field("UnitAttributes", "attributes", true), 
+	    new Field("UnitAttributesData", "attributes", true), 
 	    new Field("SkillID", "mainAttack", true), 
 	    new Field("List<PerkID>", "perks", true), 
 	    new Field("List<SkillID>", "skills", true), 

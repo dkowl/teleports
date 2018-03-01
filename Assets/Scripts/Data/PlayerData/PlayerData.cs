@@ -103,21 +103,21 @@ public partial class PlayerData
         switch (type)
         {
             case PlayerStats.Hp:
-                return UnitData.GetAttribute(UnitAttributes.Type.Hp).Value;
+                return UnitData.GetAttribute(UnitAttributesData.AttributeType.HealthPoints).Value;
             case PlayerStats.Armor:
-                return UnitData.GetAttribute(UnitAttributes.Type.Armor).Value;
+                return UnitData.GetAttribute(UnitAttributesData.AttributeType.Armor).Value;
             case PlayerStats.ArmorIgnore:
                 return 0; //TODO
             case PlayerStats.Damage:
                 return 0; //TODO
             case PlayerStats.MoveSpeed:
-                return UnitData.GetAttribute(UnitAttributes.Type.MoveSpeed).Value;
+                return UnitData.GetAttribute(UnitAttributesData.AttributeType.MovementSpeed).Value;
             case PlayerStats.Reach:
-                return UnitData.GetAttribute(UnitAttributes.Type.Reach).Value;
+                return UnitData.GetAttribute(UnitAttributesData.AttributeType.Reach).Value;
             case PlayerStats.Regen:
-                return UnitData.GetAttribute(UnitAttributes.Type.Regen).Value;
+                return UnitData.GetAttribute(UnitAttributesData.AttributeType.Regeneration).Value;
             case PlayerStats.ViewRange:
-                return UnitData.GetAttribute(UnitAttributes.Type.ViewRange).Value;
+                return UnitData.GetAttribute(UnitAttributesData.AttributeType.ViewRange).Value;
             case PlayerStats.DamagePerSecond:
                 return 0; //TODO: Divide by attack speed
             case PlayerStats.TeleportPower:

@@ -171,64 +171,19 @@ public class Unit : MonoBehaviour
     {
         deadState.StartDeath();
     }
-
-    #region attribute properties
-    public float Size
-    {
-        get { return unitData.GetAttribute(UnitAttributes.Type.Size).Value / 2f; }
-    }
-
-    public float Hp
-    {
-        get { return unitData.GetAttribute(UnitAttributes.Type.Hp).Value; }
-    }
-
-    public float Armor
-    {
-        get { return unitData.GetAttribute(UnitAttributes.Type.Armor).Value; }
-    }
-
-    public float Regen
-    {
-        get { return unitData.GetAttribute(UnitAttributes.Type.Regen).Value; }
-    }
-
-    public float Damage
-    {
-        get { return weaponCombiner.DamageRoll; }
-    }
-
-    public float ArmorIgnore
-    {
-        get { return 0; } //TODO
-    }
-
-    public float Reach
-    {
-        get { return unitData.GetAttribute(UnitAttributes.Type.Reach).Value; }
-    }
-
-    public float MoveSpeed
-    {
-        get { return unitData.GetAttribute(UnitAttributes.Type.MoveSpeed).Value; }
-    }
-
-    public float RotationSpeed
-    {
-        get { return unitData.GetAttribute(UnitAttributes.Type.RotationSpeed).Value; }
-    }
-
-    public float ViewRange
-    {
-        get { return unitData.GetAttribute(UnitAttributes.Type.ViewRange).Value; }
-    }
-    #endregion
     
-    public bool IsMoving
-    {
-        get { return movingState.IsActive; }
-    }
-
+    public float Size => unitData.GetAttribute(UnitAttributesData.AttributeType.Size).Value / 2f;
+    public float Hp => unitData.GetAttribute(UnitAttributesData.AttributeType.HealthPoints).Value;
+    public float Armor => unitData.GetAttribute(UnitAttributesData.AttributeType.Armor).Value;
+    public float Regen => unitData.GetAttribute(UnitAttributesData.AttributeType.Regeneration).Value;
+    public float Damage => weaponCombiner.DamageRoll;
+    public float ArmorIgnore => 0;
+    public float Reach => unitData.GetAttribute(UnitAttributesData.AttributeType.Reach).Value;
+    public float MoveSpeed => unitData.GetAttribute(UnitAttributesData.AttributeType.MovementSpeed).Value;
+    public float RotationSpeed => unitData.GetAttribute(UnitAttributesData.AttributeType.RotationSpeed).Value;
+    public float ViewRange => unitData.GetAttribute(UnitAttributesData.AttributeType.ViewRange).Value;
+    
+    public bool IsMoving => movingState.IsActive;
     public UnitController ActiveController
     {
         get { return activeController; }
@@ -237,7 +192,6 @@ public class Unit : MonoBehaviour
             activeController = value;
         }
     }
-
     public UnitData UnitData
     {
         get { return unitData; }
@@ -246,78 +200,24 @@ public class Unit : MonoBehaviour
             weaponCombiner = new UnitWeaponCombiner(unitData, WeaponData);
         }
     }
-
-    public UnitWeaponCombiner WeaponCombiner
-    {
-        get { return weaponCombiner; }
-    }
-
-    public MovingState MovingState
-    {
-        get { return movingState; }
-    }
-
-    public RotatingState RotatingState
-    {
-        get { return rotatingState; }
-    }
-
-    public CastingState CastingState
-    {
-        get { return castingState; }
-    }
-
-    public DeadState DeadState
-    {
-        get { return deadState; }
-    }
-
-    public bool Alive
-    {
-        get { return !deadState.IsActive; }
-    }
-
-    public float HealthPercentage
-    {
-        get { return 1f - (damageReceived / Hp); }
-    }
-
-    public float CurrentHp
-    {
-        get { return Hp - damageReceived; }
-    }
-
-    public List<Perk> Perks
-    {
-        get { return perks; }
-    }
-
-    public List<Skill> Skills
-    {
-        get { return skills; }
-    }
-
-    public Skill PrimarySkill
-    {
-        get { return skills.Count > 0 ? skills[0] : null; }
-    }
-
-    public UnitGraphics Graphics
-    {
-        get { return graphics; }
-    }
-
+    public UnitWeaponCombiner WeaponCombiner => weaponCombiner;
+    public MovingState MovingState => movingState;
+    public RotatingState RotatingState => rotatingState;
+    public CastingState CastingState => castingState;
+    public DeadState DeadState => deadState;
+    public bool Alive => !deadState.IsActive;
+    public float HealthPercentage => 1f - damageReceived / Hp;
+    public float CurrentHp => Hp - damageReceived;
+    public List<Perk> Perks => perks;
+    public List<Skill> Skills => skills;
+    public Skill PrimarySkill => skills.Count > 0 ? skills[0] : null;
+    public UnitGraphics Graphics => graphics;
     public Rigidbody Rigidbody
     {
         get { return rigidbody; }
         set { rigidbody = value; }
     }
-
-    public Collider Collider
-    {
-        get { return collider; }
-    }
-
+    public Collider Collider => collider;
     private WeaponData WeaponData{
         get
         {
