@@ -1,15 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Teleports.Utils;
 
-[System.Serializable]
-public class InventoryData {
-    
-    [SerializeField] private int maxSlots = 32;
-    [SerializeField] private EquipmentData equipmentData;
-    [SerializeField, ListDrawerSettings(NumberOfItemsPerPage = 8)] private List<InventorySlotData> invSlots;
+public partial class InventoryData {
 
     public InventoryData()
     {
@@ -56,14 +52,7 @@ public class InventoryData {
     public bool CanAdd(IList<ItemData> items)
     {
         int freeSlots = maxSlots - invSlots.Count;
-        int neededSlots = 0;
-        foreach(var item in items)
-        {
-            if (!Contains(item))
-            {
-                neededSlots++;
-            }
-        }
+        int neededSlots = items.Count(item => !Contains(item));
         return neededSlots <= freeSlots;
     }
 
@@ -98,7 +87,6 @@ public class InventoryData {
         }
 
         Debug.Log("Inventory is full!");
-        return;
     }
 
     public bool Contains(ItemData item)
@@ -139,64 +127,51 @@ public class InventoryData {
 
     public void Equip(int inventorySlotId)
     {
-        if (IsValidSlotId(inventorySlotId))
-        {
-            InventorySlotData inventorySlot = invSlots[inventorySlotId];
-            if (inventorySlot.Empty)
-                return;
+        if (!IsValidSlotId(inventorySlotId)) return;
 
-            ItemData item = inventorySlot.Item;
-            EquipmentData.CanEquipResult canEquipResult = equipmentData.CanEquip(item);
-            switch (canEquipResult.Status)
-            {
-                case EquipmentData.CanEquipStatus.Yes:
-                    Remove(item);
-                    equipmentData.Equip(item);
-                    break;
-                case EquipmentData.CanEquipStatus.No_PrimaryConflict:
-                case EquipmentData.CanEquipStatus.No_SecondaryConflict:
-                    Remove(item);
-                    IList<ItemData> unequippedItems = canEquipResult.ConflictingItems;
-                    foreach(var unequippedItem in unequippedItems)
-                    {
-                        Add(unequippedItem);
-                        equipmentData.Unequip(unequippedItem);
-                    }
-                    equipmentData.Equip(item);
-                    break;
-            }
+        InventorySlotData inventorySlot = invSlots[inventorySlotId];
+        if (inventorySlot.Empty)
+            return;
+
+        ItemData item = inventorySlot.Item;
+        EquipmentData.CanEquipResult canEquipResult = equipmentData.CanEquip(item);
+        switch (canEquipResult.Status)
+        {
+            case EquipmentData.CanEquipStatus.Yes:
+                Remove(item);
+                equipmentData.Equip(item);
+                break;
+            case EquipmentData.CanEquipStatus.No_PrimaryConflict:
+            case EquipmentData.CanEquipStatus.No_SecondaryConflict:
+                Remove(item);
+                IList<ItemData> unequippedItems = canEquipResult.ConflictingItems;
+                foreach(var unequippedItem in unequippedItems)
+                {
+                    Add(unequippedItem);
+                    equipmentData.Unequip(unequippedItem);
+                }
+                equipmentData.Equip(item);
+                break;
         }
     }
 
     public CanUnequipStatus CanUnequip(EquipmentSlotType slot)
     {
         ItemData unequippedItem = equipmentData.GetEquipmentSlot(slot).Item;
-        if (CanAdd(unequippedItem))
-        {
-            return CanUnequipStatus.Yes;
-        }
-        else
-        {
-            return CanUnequipStatus.No_InventoryFull;
-        }
+        return CanAdd(unequippedItem) ? CanUnequipStatus.Yes : CanUnequipStatus.No_InventoryFull;
     }
 
     public void Unequip(EquipmentSlotType slot)
     {
-        if(CanUnequip(slot) == CanUnequipStatus.Yes)
-        {
-            ItemData unequippedItem = equipmentData.GetEquipmentSlot(slot).Item;
-            Add(unequippedItem);
-            equipmentData.Unequip(slot);
-        }
+        if (CanUnequip(slot) != CanUnequipStatus.Yes) return;
+        ItemData unequippedItem = equipmentData.GetEquipmentSlot(slot).Item;
+        Add(unequippedItem);
+        equipmentData.Unequip(slot);
     }
 
     public InventorySlotData GetInventorySlotData(int inventorySlotId)
     {
-        if (IsValidSlotId(inventorySlotId))
-            return invSlots[inventorySlotId];
-        else
-            return null;
+        return IsValidSlotId(inventorySlotId) ? invSlots[inventorySlotId] : null;
     }
 
     public IList<EquipmentData.EquippedItemInfo> GetEquippedItems()
@@ -206,7 +181,7 @@ public class InventoryData {
 
     public List<ItemData> GetAllItemsInInventory()
     {
-        List<ItemData> result = new List<ItemData>();
+        var result = new List<ItemData>();
         foreach(var slot in invSlots)
         {
             if(!slot.Empty)
@@ -220,11 +195,7 @@ public class InventoryData {
     public IList<ItemData> GetAllItems()
     {
         var result = GetAllItemsInInventory();
-        var result2 = new List<ItemData>();
-        foreach(var slotInfo in GetEquippedItems())
-        {
-            result2.Add(slotInfo.Item);
-        }
+        var result2 = GetEquippedItems().Select(slotInfo => slotInfo.Item).ToList();
         result.AddRange(result2);
         return result.AsReadOnly();
     }
@@ -242,23 +213,12 @@ public class InventoryData {
         return -1;
     }
 
-    List<ItemData> GetItems(IEnumerable<ItemID> itemIds)
+    private List<ItemData> GetItems(IEnumerable<ItemID> itemIds)
     {
-        List<ItemData> result = new List<ItemData>();
-
-        foreach (ItemID id in itemIds)
-        {
-            ItemData itemData = MainData.Game.GetItem(id);
-            if (itemData != null)
-            {
-                result.Add(itemData);
-            }
-
-        }
-        return result;
+        return itemIds.Select(id => MainData.Game.GetItem(id)).Where(itemData => itemData != null).ToList();
     }
 
-    ItemData GetItemByName(string name)
+    private ItemData GetItemByName(string name)
     {
         foreach(var invSlot in invSlots)
         {
@@ -273,11 +233,6 @@ public class InventoryData {
     private bool IsValidSlotId(int id)
     {
         return id >= 0 && id < invSlots.Count;
-    }
-
-    public EquipmentData EquipmentData
-    {
-        get { return equipmentData; }
     }
 
     public enum CanUnequipStatus

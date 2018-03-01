@@ -58,7 +58,7 @@
         {
             var sb = new StringBuilder();
             sb.AppendFormat("public partial class {0}Data ", dataType);
-            if (implementsUniqueName) sb.Append(": IUniqueName ");
+            if (implementsUniqueName) sb.Append(": IUniqueName, IDeepCopyable ");
             sb.Append("{\n");
             return sb.ToString();
         }
@@ -86,14 +86,30 @@
             {
                 if (!field.deepCopy)
                 {
+                    if (field.type.StartsWith("List<"))
+                    {
+                        sb.AppendFormat("		{0} = new {1}(other.{0});\n", field.name, field.type);
+                    }
                     sb.AppendFormat("		{0} = other.{0};\n", field.name);
                 }
                 else
                 {
-                    sb.AppendFormat("		{0} = new {1}(other.{0});\n", field.name, field.type);
+                    if (field.type.StartsWith("List<"))
+                    {
+                        sb.AppendFormat("		{0} = other.{0}.DeepCopy();\n", field.name);
+                    }
+                    else sb.AppendFormat("		{0} = new {1}(other.{0});\n", field.name, field.type);
                 }
             }
             sb.AppendFormat("	}}\n");
+            return sb.ToString();
+        }
+
+        public string DeepCopyMethod()
+        {
+			var sb = new StringBuilder();
+            sb.Append("	public object DeepCopy(){\n");
+            sb.AppendFormat("		return new {0}Data(this);\n	}}\n", dataType);
             return sb.ToString();
         }
 
@@ -172,6 +188,7 @@ using Teleports.Utils;
 <#=dataClass.Header()#>
 <#=dataClass.Fields()#>
 <#=dataClass.CopyConstructor()#>
+<#=dataClass.DeepCopyMethod()#>
 <#=dataClass.GetAttributeMethod()#>
 <#=dataClass.ModifyAttributeMethod()#>
 <#=dataClass.Properties()#>

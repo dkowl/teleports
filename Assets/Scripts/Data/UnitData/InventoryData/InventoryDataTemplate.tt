@@ -1,0 +1,11 @@
+<#@ include file = "..\..\Templates\DataClass.tt"
+#><#@ output extension = "/" #><# 
+	const string dataType = "Inventory"; 
+	Field[] fields = {
+		new Field("int", "maxSlots", false),
+		new Field("EquipmentData", "equipmentData", true), 
+	    new Field("List<InventorySlotData>", "invSlots", true), 
+	};
+    var dataClass = new DataClass(dataType, fields);
+    Generate(dataClass); 
+#>

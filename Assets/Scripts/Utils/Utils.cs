@@ -196,6 +196,19 @@ namespace Teleports.Utils
         }
     }
 
+    public static class ListUtils
+    {
+        public static List<T> DeepCopy<T>(this List<T> from) where T : class, IDeepCopyable
+        {
+            var to = new List<T>(from.Count);
+            foreach (var elem in from)
+            {
+                to.Add(elem.DeepCopy() as T);
+            }
+            return to;
+        }
+    }
+
     public static class RomanNumbers
     {
         private static string result;
