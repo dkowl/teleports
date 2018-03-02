@@ -61,24 +61,6 @@ public class UnitGraphics : MonoBehaviour {
         obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().UnitData.Height, 0);
     }
 
-    public void SwitchToRagdoll()
-    {
-        GameObject ragdoll = MainData.Game.GetRace(unit.UnitData.RaceName).Graphics.RagdollObject;
-        if (ragdoll != null)
-        {
-            ragdoll = GameObject.Instantiate(ragdoll, unit.transform);
-            Destroy(raceModel);
-            Destroy(unit.Collider);
-            unit.Rigidbody = ragdoll.GetComponentInChildren<Rigidbody>();
-        }
-        else
-        {
-            unit.Rigidbody.constraints = 0;
-            unit.Rigidbody.useGravity = true;
-        }
-        unit.gameObject.SetLayerIncludingChildren(0);
-    }
-
     private float DamageTextScalingFactor(float dmg)
     {
         return Mathf.Max(0f, Mathf.Log10(dmg + 32) - 1);

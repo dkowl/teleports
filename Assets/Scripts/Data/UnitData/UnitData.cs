@@ -4,7 +4,6 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 
-[ShowOdinSerializedPropertiesInInspector]
 public partial class UnitData {
     
     private const int labelWidth = 110;

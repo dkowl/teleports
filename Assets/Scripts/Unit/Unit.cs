@@ -22,29 +22,11 @@ public class Unit : MonoBehaviour
     private List<Perk> perks;
     
     private UnitGraphics graphics;
-    
     private UnitController activeController;
-
-    private new CapsuleCollider collider;
-    private new Rigidbody rigidbody;
+    private UnitPhysics physics;
 
     void Awake () {
         damageReceived = 0;
-        
-        //Add some physics
-        //collider = gameObject.AddComponent<CapsuleCollider>();
-        rigidbody = gameObject.AddComponent<Rigidbody>();
-        rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
-        rigidbody.drag = 10;
-        rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
-        //rigidbody.maxDepenetrationVelocity = 20;
-        rigidbody.useGravity = false;
-        rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-
-        if (GetComponentInChildren<Collider>() == null)
-        {
-            collider = gameObject.AddComponent<CapsuleCollider>();
-        }
 
         movingState = new MovingState(this);
         rotatingState = new RotatingState(this);
@@ -94,15 +76,7 @@ public class Unit : MonoBehaviour
     void Start()
     {
         ApplyPerks();
-
-        rigidbody.mass = Mathf.Sqrt(unitData.Height * Size * Size) * 4 * 10;
-
-        if (collider != null)
-        {
-            collider.radius = Size;
-            collider.height = unitData.Height + Size;
-            collider.center = new Vector3(0, unitData.Height / 2, 0);
-        }
+        physics = gameObject.AddComponent<UnitPhysics>();
     }
 	
 	void Update () {
@@ -212,12 +186,7 @@ public class Unit : MonoBehaviour
     public List<Skill> Skills => skills;
     public Skill PrimarySkill => skills.Count > 0 ? skills[0] : null;
     public UnitGraphics Graphics => graphics;
-    public Rigidbody Rigidbody
-    {
-        get { return rigidbody; }
-        set { rigidbody = value; }
-    }
-    public Collider Collider => collider;
+    public UnitPhysics Physics => physics;
     private WeaponData WeaponData{
         get
         {

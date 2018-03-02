@@ -25,7 +25,7 @@ public class DeadState : ActionState {
                     xp.ReceiveXp((1000 * Unit.UnitData.Level));
                 }
             }
-            Unit.Graphics.SwitchToRagdoll();
+            Unit.Physics.SwitchToRagdoll();
         }
     }
 

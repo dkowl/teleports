@@ -6,12 +6,12 @@ using Sirenix.OdinInspector;
 [System.Serializable]
 public class EquipmentData {
 
-    [SerializeField, TabGroup("Head"), HideLabel] private EquipmentSlotData head;
-    [SerializeField, TabGroup("Torso"), HideLabel] private EquipmentSlotData torso;
-    [SerializeField, TabGroup("Legs"), HideLabel] private EquipmentSlotData legs;
-    [SerializeField, TabGroup("Feet"), HideLabel] private EquipmentSlotData feet;
-    [SerializeField, TabGroup("Left Arm"), HideLabel] private EquipmentSlotData leftArm;
-    [SerializeField, TabGroup("Right Arm"), HideLabel] private EquipmentSlotData rightArm;
+    [SerializeField] private EquipmentSlotData head;
+    [SerializeField] private EquipmentSlotData torso;
+    [SerializeField] private EquipmentSlotData legs;
+    [SerializeField] private EquipmentSlotData feet;
+    [SerializeField] private EquipmentSlotData leftArm;
+    [SerializeField] private EquipmentSlotData rightArm;
 
     public EquipmentData()
     {

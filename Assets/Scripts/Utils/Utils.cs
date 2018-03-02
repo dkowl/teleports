@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Xsl.Runtime;
 using UnityEngine;
 
 namespace Teleports.Utils
@@ -206,6 +207,32 @@ namespace Teleports.Utils
                 to.Add(elem.DeepCopy() as T);
             }
             return to;
+        }
+    }
+
+    public static class GameObjectUtils
+    {
+        public static List<T> GetComponentsInSiblings<T>(this Component component)
+        {
+            var result = new List<T>();
+            foreach (var sibling in component.transform.GetSiblings())
+            {
+                T foundComponent = sibling.gameObject.GetComponent<T>();
+                if(foundComponent != null) result.Add(foundComponent);
+            }
+            return result;
+        }
+
+        public static List<Transform> GetSiblings(this Transform transform)
+        {
+            var result = new List<Transform>();
+            if (transform.parent == null) return result;
+            for (int i = 0; i < transform.parent.childCount; i++)
+            {
+                if (i == transform.GetSiblingIndex()) continue;
+                result.Add(transform.parent.GetChild(i));
+            }
+            return result;
         }
     }
 

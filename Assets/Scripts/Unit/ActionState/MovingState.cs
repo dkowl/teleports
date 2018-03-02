@@ -20,7 +20,7 @@ public class MovingState : ActionState {
 
     protected override void OnUpdate(float dTime)
     {
-        Vector3 offset = moveDest - Unit.Rigidbody.position;
+        Vector3 offset = moveDest - Unit.Physics.Rigidbody.position;
         Vector3 targetVelocity = offset.normalized * Unit.MoveSpeed;
 
         if (Unit.MoveSpeed * dTime < offset.magnitude)
@@ -32,7 +32,7 @@ public class MovingState : ActionState {
             Reset();
         }
             
-        Unit.Rigidbody.velocity = targetVelocity;
+        Unit.Physics.Rigidbody.velocity = targetVelocity;
         //unit.Rigidbody.velocity = CalculateVelocity(unit.Rigidbody.velocity, targetVelocity);
         //unit.Rigidbody.AddForce(CalculateForce(unit.Rigidbody.velocity, targetVelocity), ForceMode.Acceleration);
         //unit.Rigidbody.MovePosition(unit.Rigidbody.position + offset);
@@ -40,7 +40,7 @@ public class MovingState : ActionState {
 
     protected override void OnReset()
     {
-        moveDest = Unit.Rigidbody.position;
+        moveDest = Unit.Physics.Rigidbody.position;
         //unit.Rigidbody.velocity = Vector3.zero;
     }
 
