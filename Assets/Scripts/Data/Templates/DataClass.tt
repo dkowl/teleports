@@ -58,7 +58,8 @@
         {
             var sb = new StringBuilder();
             sb.AppendFormat("public partial class {0}Data ", dataType);
-            if (implementsUniqueName) sb.Append(": IUniqueName, IDeepCopyable ");
+            sb.Append(": IDeepCopyable ");
+            if (implementsUniqueName) sb.Append(", IUniqueName ");
             sb.Append("{\n");
             return sb.ToString();
         }
@@ -90,7 +91,7 @@
                     {
                         sb.AppendFormat("		{0} = new {1}(other.{0});\n", field.name, field.type);
                     }
-                    sb.AppendFormat("		{0} = other.{0};\n", field.name);
+                    else sb.AppendFormat("		{0} = other.{0};\n", field.name);
                 }
                 else
                 {

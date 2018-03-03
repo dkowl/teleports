@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 using Teleports.Utils;
 
 [System.Serializable]
-public partial class UnitData {
+public partial class UnitData : IDeepCopyable {
 
 	[SerializeField] private string unitName;
 	[SerializeField] private string raceName;
@@ -17,6 +17,7 @@ public partial class UnitData {
 	[SerializeField] private List<PerkID> perks;
 	[SerializeField] private List<SkillID> skills;
 	[SerializeField] private InventoryData inventory;
+	[SerializeField] private bool usesRootMotion;
 	[SerializeField] private bool isInitialized;
 
 	public UnitData(UnitData other){
@@ -29,7 +30,12 @@ public partial class UnitData {
 		perks = new List<PerkID>(other.perks);
 		skills = new List<SkillID>(other.skills);
 		inventory = new InventoryData(other.inventory);
+		usesRootMotion = other.usesRootMotion;
 		isInitialized = other.isInitialized;
+	}
+
+	public object DeepCopy(){
+		return new UnitData(this);
 	}
 
 
@@ -43,6 +49,7 @@ public partial class UnitData {
 	public List<PerkID> Perks => perks;
 	public List<SkillID> Skills => skills;
 	public InventoryData Inventory => inventory;
+	public bool UsesRootMotion => usesRootMotion;
 	public bool IsInitialized => isInitialized;
 
 

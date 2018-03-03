@@ -8,9 +8,10 @@
 	    new Field("UnitAbilities", "abilities", true), 
 	    new Field("UnitAttributesData", "attributes", true), 
 	    new Field("SkillID", "mainAttack", true), 
-	    new Field("List<PerkID>", "perks", true), 
-	    new Field("List<SkillID>", "skills", true), 
+	    new Field("List<PerkID>", "perks", false), 
+	    new Field("List<SkillID>", "skills", false), 
 	    new Field("InventoryData", "inventory", true), 
+		new Field("bool", "usesRootMotion", false), 
 		new Field("bool", "isInitialized", false), 
 	};
     var dataClass = new DataClass(dataType, fields);

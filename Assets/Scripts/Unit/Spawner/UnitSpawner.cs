@@ -6,6 +6,22 @@ using Object = UnityEngine.Object;
 
 public static class UnitSpawner  {
 
+    public static Unit SpawnUnit(GameObject gameObject, UnitData unitData)
+    {
+        Race raceData = MainData.Game.GetRace(unitData.RaceName);
+        GameObject raceObject = Object.Instantiate(raceData.Graphics.ModelObject, gameObject.transform);
+
+        Unit unit = gameObject.AddComponent<Unit>();
+        unit.UnitData = new UnitData(unitData);
+        unit.Graphics.RaceModel = raceObject;
+
+        unit.SpawnItems();
+        unit.SpawnSkills();
+        unit.SpawnAnimator();
+
+        return unit;
+    }
+
 	public static void SpawnItems(this Unit unit)
     {
         GameObject items = new GameObject("Items");

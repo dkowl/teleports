@@ -20,22 +20,29 @@ public class MovingState : ActionState {
 
     protected override void OnUpdate(float dTime)
     {
-        Vector3 offset = moveDest - Unit.Physics.Rigidbody.position;
-        Vector3 targetVelocity = offset.normalized * Unit.MoveSpeed;
-
-        if (Unit.MoveSpeed * dTime < offset.magnitude)
+        if (!Unit.UsesRootMotion)
         {
-            offset *= Unit.MoveSpeed * dTime / offset.magnitude;
+            Vector3 offset = moveDest - Unit.Physics.Rigidbody.position;
+            Vector3 targetVelocity = offset.normalized * Unit.MoveSpeed;
+
+            if (Unit.MoveSpeed * dTime < offset.magnitude)
+            {
+                offset *= Unit.MoveSpeed * dTime / offset.magnitude;
+            }
+            else
+            {
+                Reset();
+            }
+
+            Unit.Physics.Rigidbody.velocity = targetVelocity;
+            //unit.Rigidbody.velocity = CalculateVelocity(unit.Rigidbody.velocity, targetVelocity);
+            //unit.Rigidbody.AddForce(CalculateForce(unit.Rigidbody.velocity, targetVelocity), ForceMode.Acceleration);
+            //unit.Rigidbody.MovePosition(unit.Rigidbody.position + offset);
         }
         else
         {
-            Reset();
+            Unit.transform.position = Unit.Graphics.RaceModel.transform.position;
         }
-            
-        Unit.Physics.Rigidbody.velocity = targetVelocity;
-        //unit.Rigidbody.velocity = CalculateVelocity(unit.Rigidbody.velocity, targetVelocity);
-        //unit.Rigidbody.AddForce(CalculateForce(unit.Rigidbody.velocity, targetVelocity), ForceMode.Acceleration);
-        //unit.Rigidbody.MovePosition(unit.Rigidbody.position + offset);
     }
 
     protected override void OnReset()

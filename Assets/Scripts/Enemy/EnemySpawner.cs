@@ -69,6 +69,16 @@ public class EnemySpawner : MonoBehaviour {
         enemyObject.transform.position = position;
         enemyObject.layer = LayerMask.NameToLayer("Enemy");
 
+        UnitData unitData = new UnitData(MainData.Game.GetRace(enemyData.RaceId).BaseStats);
+        foreach (var item in enemyData.Items)
+        {
+            Debug.Log("Equipping " + item.DisplayName);
+            unitData.Inventory.Equip(item);
+        }
+
+        Unit unit = UnitSpawner.SpawnUnit(enemyObject, unitData);
+
+        /*
         Race raceData = MainData.Game.GetRace(enemyData.RaceId);
         GameObject raceObject = Instantiate(raceData.Graphics.ModelObject, enemyObject.transform);
 
@@ -83,7 +93,7 @@ public class EnemySpawner : MonoBehaviour {
         }
         unit.SpawnItems();
         unit.SpawnAnimator();
-        unit.SpawnSkills();
+        unit.SpawnSkills();*/
 
         switch (enemyData.AiParams.AiType)
         {
