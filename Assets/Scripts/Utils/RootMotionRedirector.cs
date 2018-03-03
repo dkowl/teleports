@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class RootMotionRedirector : MonoBehaviour
 {
-
     [SerializeField] private Transform targetTransform;
     private Animator animator;
 
     public void Awake()
     {
         animator = GetComponent<Animator>();
+        targetTransform = GetComponentInParent<Unit>().transform;
     }
 
     private void OnAnimatorMove()

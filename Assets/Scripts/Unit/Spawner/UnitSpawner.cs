@@ -47,6 +47,15 @@ public static class UnitSpawner  {
         {
             animator.runtimeAnimatorController = Object.Instantiate(raceGraphics.WorldAnimationController);
             animator.gameObject.AddComponent<UnitAnimator>();
+            if (unit.UnitData.UsesRootMotion)
+            {
+                animator.applyRootMotion = true;
+                animator.gameObject.AddComponent<RootMotionRedirector>();
+            }
+            else
+            {
+                animator.applyRootMotion = false;
+            }
         }
         else
         {
