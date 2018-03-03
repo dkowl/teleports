@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Sirenix.Utilities;
 using UnityEngine;
 
 public class PlayerController : UnitController {
@@ -25,6 +26,10 @@ public class PlayerController : UnitController {
                 else OnGroundPressed(hit.point);
             }
         }
+	    if (Input.GetButtonDown("PlayerAutotarget"))
+	    {
+            TargetNearest();
+	    }
 
         if (target.TargetUnit != null)
         {
@@ -35,8 +40,29 @@ public class PlayerController : UnitController {
                 Chase();
             }
         }
-	}  
-    
+    }
+
+    protected void TargetNearest()
+    {
+        Collider[] enemyColliders =
+            Physics.OverlapSphere(unit.transform.position, unit.ViewRange, (int) MyLayerMask.Enemy);
+        if (enemyColliders.IsNullOrEmpty()) return;
+
+        Collider closestCollider = enemyColliders[0];
+        float minDistance = Mathf.Infinity;
+        foreach (var collider in enemyColliders)
+        {
+            float distance = (collider.transform.position - unit.transform.position).magnitude;
+            if (distance < minDistance)
+            {
+                closestCollider = collider;
+                minDistance = distance;
+            }
+        }
+
+        target.TargetUnit = closestCollider.gameObject.GetComponent<Unit>();
+    }
+
     void OnEnemyClick(Unit enemy)
     {
         target.TargetUnit = enemy;
