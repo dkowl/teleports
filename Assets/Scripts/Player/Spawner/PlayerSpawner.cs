@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 
 public static class PlayerSpawner {
@@ -8,27 +9,24 @@ public static class PlayerSpawner {
     {     
         //Common
         PlayerData playerData = MainData.CurrentPlayerData;
-        if (playerData == null) return null;
+        Debug.Assert(playerData != null);
         RaceGraphics raceGraphics = MainData.Game.GetRace(playerData.RaceName).Graphics;
 
-        GameObject player;
-
-        player = new GameObject("Player");
-        player.transform.localPosition = Vector3.zero;
-        player.transform.localEulerAngles = new Vector3(0, 180, 0);
-        player.transform.parent = p.ParentObject.transform;
-        player.tag = "Player";
-        player.layer = 9;
-
-        //Spawn model
-        GameObject playerModel = Object.Instantiate(raceGraphics.ModelObject, player.transform);
-        playerModel.transform.localEulerAngles = Vector3.zero;
-
-        Animator animator = playerModel.GetComponentInChildren<Animator>();
+        var playerObject = new GameObject("Player");
+        playerObject.transform.localPosition = Vector3.zero;
+        playerObject.transform.localEulerAngles = new Vector3(0, 180, 0);
+        playerObject.transform.parent = p.ParentObject.transform;
+        playerObject.tag = "Player";
+        playerObject.layer = 9;
 
         switch (p.Type)
         {
             case PlayerSpawnerParams.SpawnType.UI:
+
+                //Spawn model
+                GameObject playerModel = Object.Instantiate(raceGraphics.ModelObject, playerObject.transform);
+                playerModel.transform.localEulerAngles = Vector3.zero;
+                Animator animator = playerModel.GetComponentInChildren<Animator>();
 
                 foreach (var itemInfo in playerData.UnitData.Inventory.GetEquippedItems())
                 {
@@ -39,47 +37,30 @@ public static class PlayerSpawner {
 
             case PlayerSpawnerParams.SpawnType.World:
 
-                //Components to be initialized
-                Unit unit = player.GetComponent<Unit>();
-                PlayerController controller = player.GetComponent<PlayerController>();
-                XpComponent xp = player.GetComponent<XpComponent>();
+                Unit unit = UnitSpawner.SpawnUnit(playerObject, playerData.UnitData);
 
-                if (unit == null)
-                {
-                    unit = player.AddComponent<Unit>();
-                }
-                unit.UnitData = playerData.UnitData;
-                unit.UnitData.Name = playerData.CharacterName;
-                unit.Graphics.RaceModel = playerModel;
+                //Components to be initialized
+                PlayerController controller = playerObject.GetComponent<PlayerController>();
+                XpComponent xp = playerObject.GetComponent<XpComponent>();
 
                 if (controller == null)
                 {
-                    controller = player.AddComponent<PlayerController>();
+                    controller = playerObject.AddComponent<PlayerController>();
                 }
-
-                if (xp == null)
-                {
-                    xp = player.AddComponent<XpComponent>();
-                }
-                xp.Xp = playerData.Xp;
-
-                //Instantiating skills
-                unit.SpawnSkills();
-
                 controller.MainAttack = unit.Skills[0];
                 unit.ActiveController = controller;
 
-                unit.SpawnItems();
+                if (xp == null)
+                {
+                    xp = playerObject.AddComponent<XpComponent>();
+                }
+                xp.Xp = playerData.Xp;
 
-                //Set up Animator
-                animator.runtimeAnimatorController = raceGraphics.WorldAnimationController;
-                animator.gameObject.AddComponent<UnitAnimator>();
-
-                player.AddComponent<PlayerWorldUI>();
+                playerObject.AddComponent<PlayerWorldUI>();
                 break;
         }
 
-        return player;
+        return playerObject;
         
     }
 }

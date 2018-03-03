@@ -78,23 +78,6 @@ public class EnemySpawner : MonoBehaviour {
 
         Unit unit = UnitSpawner.SpawnUnit(enemyObject, unitData);
 
-        /*
-        Race raceData = MainData.Game.GetRace(enemyData.RaceId);
-        GameObject raceObject = Instantiate(raceData.Graphics.ModelObject, enemyObject.transform);
-
-        Unit unit = enemyObject.AddComponent<Unit>();
-        unit.UnitData = raceData.BaseStats;
-        unit.Graphics.RaceModel = raceObject;
-
-        foreach(var item in enemyData.Items)
-        {
-            Debug.Log("Equipping " + item.DisplayName);
-            unit.UnitData.Inventory.Equip(item);
-        }
-        unit.SpawnItems();
-        unit.SpawnAnimator();
-        unit.SpawnSkills();*/
-
         switch (enemyData.AiParams.AiType)
         {
             case AiType.Rush:
