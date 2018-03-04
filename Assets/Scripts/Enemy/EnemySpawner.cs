@@ -72,7 +72,7 @@ public class EnemySpawner : MonoBehaviour {
         UnitData unitData = new UnitData(MainData.Game.GetRace(enemyData.RaceId).BaseStats);
         foreach (var item in enemyData.Items)
         {
-            Debug.Log("Equipping " + item.DisplayName);
+            //Debug.Log("Equipping " + item.DisplayName);
             unitData.Inventory.Equip(item);
         }
 
@@ -82,7 +82,7 @@ public class EnemySpawner : MonoBehaviour {
         {
             case AiType.Rush:
                 RushAI rushAI = enemyObject.AddComponent<RushAI>();
-                Debug.Log("assigning attacks..." + enemyData.AiParams.AttackIds.ToString());
+                //Debug.Log("assigning attacks..." + enemyData.AiParams.AttackIds.ToString());
                 rushAI.Attacks = unit.Skills;
                 break;
         }

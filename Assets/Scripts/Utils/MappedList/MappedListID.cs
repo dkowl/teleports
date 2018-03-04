@@ -30,7 +30,7 @@ public class MappedListID {
 
     public override int GetHashCode()
     {
-        return name.GetHashCode();
+        return name != null ? name.GetHashCode() : 0;
     }
 
     public static implicit operator string(MappedListID id)

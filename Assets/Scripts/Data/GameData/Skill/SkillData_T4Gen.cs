@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 using Teleports.Utils;
 
 [System.Serializable]
-public partial class SkillData : IUniqueName {
+public partial class SkillData : IDeepCopyable , IUniqueName {
 
 	[SerializeField] private string uniqueName;
 	[SerializeField] private Skill.TargetType targetType;
@@ -15,9 +16,9 @@ public partial class SkillData : IUniqueName {
 	[SerializeField] private Attribute castTime;
 	[SerializeField] private Attribute totalCastTime;
 	[SerializeField] private Attribute earlyBreakTime;
-	[SerializeField] private int maxCombo;
 	[SerializeField] private SkillType skillType;
 	[SerializeField] private AttackData attackData;
+	[SerializeField] private ComboID comboId;
 	[SerializeField] private SkillGraphics graphics;
 
 	public SkillData(SkillData other){
@@ -29,10 +30,14 @@ public partial class SkillData : IUniqueName {
 		castTime = new Attribute(other.castTime);
 		totalCastTime = new Attribute(other.totalCastTime);
 		earlyBreakTime = new Attribute(other.earlyBreakTime);
-		maxCombo = other.maxCombo;
 		skillType = other.skillType;
 		attackData = new AttackData(other.attackData);
+		comboId = new ComboID(other.comboId);
 		graphics = other.graphics;
+	}
+
+	public object DeepCopy(){
+		return new SkillData(this);
 	}
 
 	public Attribute GetAttribute(AttributeType type)
@@ -61,18 +66,18 @@ public partial class SkillData : IUniqueName {
 		GetAttribute(type).Modify(bonus, multiplier);
 	}
 
-	public string UniqueName { get { return uniqueName; } }
-	public Skill.TargetType TargetType { get { return targetType; } }
-	public float Reach { get { return reach.Value; } }
-	public float ReachAngle { get { return reachAngle.Value; } }
-	public float Cooldown { get { return cooldown.Value; } }
-	public float CastTime { get { return castTime.Value; } }
-	public float TotalCastTime { get { return totalCastTime.Value; } }
-	public float EarlyBreakTime { get { return earlyBreakTime.Value; } }
-	public int MaxCombo { get { return maxCombo; } }
-	public SkillType SkillType { get { return skillType; } }
-	public AttackData AttackData { get { return attackData; } }
-	public SkillGraphics Graphics { get { return graphics; } }
+	public string UniqueName => uniqueName;
+	public Skill.TargetType TargetType => targetType;
+	public float Reach => reach.Value;
+	public float ReachAngle => reachAngle.Value;
+	public float Cooldown => cooldown.Value;
+	public float CastTime => castTime.Value;
+	public float TotalCastTime => totalCastTime.Value;
+	public float EarlyBreakTime => earlyBreakTime.Value;
+	public SkillType SkillType => skillType;
+	public AttackData AttackData => attackData;
+	public ComboID ComboId => comboId;
+	public SkillGraphics Graphics => graphics;
 
 	public enum AttributeType {
 		Reach,

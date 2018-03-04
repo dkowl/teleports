@@ -15,6 +15,7 @@ public class GameData : SerializedScriptableObject {
     [SerializeField] private MappedList<Race> races;
     [SerializeField] private MappedList<Perk> perks;
     [SerializeField] private MappedList<SkillAssetData> skills;
+    [SerializeField] private MappedList<ComboAssetData> combos;
     [SerializeField] private MappedList<ItemAssetData> items;
     [SerializeField] private MappedList<EnemyAssetData> enemies;
     [SerializeField] private GraphicsData graphicsData;
@@ -26,6 +27,7 @@ public class GameData : SerializedScriptableObject {
         races.MakeDict();
         perks.MakeDict();
         skills.MakeDict();
+        combos.MakeDict();
         items.MakeDict();
         enemies.MakeDict();
     }
@@ -96,67 +98,18 @@ public class GameData : SerializedScriptableObject {
         return result != null ? result.GenerateBasic() : null;
     }
 
-    public IMappedList<Gem> Gems
-    {
-        get { return gems; }
-    }
-
-    public IMappedList<WorldData> Worlds
-    {
-        get { return worlds; }
-    }
-
-    public IMappedList<Race> Races
-    {
-        get { return races; }
-    }
-
-    public IMappedList<Perk> Perks
-    {
-        get { return perks; }
-    }
-
-    public IMappedList<SkillAssetData> Skills
-    {
-        get { return skills; }
-    }
-
-    public IMappedList<ItemAssetData> Items
-    {
-        get { return items; }
-    }
-
-    public IMappedList<EnemyAssetData> Enemies
-    {
-        get { return enemies; }
-    }
-
-    public GraphicsData GraphicsData
-    {
-        get { return graphicsData; }
-    }
-
-    public IList<string> PerkNames
-    {
-        get { return perks.AllNames; }
-    }
-
-    public IList<string> SkillNames
-    {
-        get { return skills.AllNames; }
-    }
-
-    public IList<string> ItemNames
-    {
-        get { return items.AllNames; }
-    }
-
-    public IList<string> EnemyNames
-    {
-        get { return enemies.AllNames; }
-    }
-    public IList<string> RaceNames
-    {
-        get { return races.AllNames; }
-    }
+    public IMappedList<Gem> Gems => gems;
+    public IMappedList<WorldData> Worlds => worlds;
+    public IMappedList<Race> Races => races;
+    public IMappedList<Perk> Perks => perks;
+    public IMappedList<SkillAssetData> Skills => skills;
+    public IMappedList<ComboAssetData> Combos => combos;
+    public IMappedList<ItemAssetData> Items => items;
+    public IMappedList<EnemyAssetData> Enemies => enemies;
+    public GraphicsData GraphicsData => graphicsData;
+    public IList<string> PerkNames => perks.AllNames;
+    public IList<string> SkillNames => skills.AllNames;
+    public IList<string> ItemNames => items.AllNames;
+    public IList<string> EnemyNames => enemies.AllNames;
+    public IList<string> RaceNames => races.AllNames;
 }

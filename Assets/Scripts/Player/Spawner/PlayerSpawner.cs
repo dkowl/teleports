@@ -9,7 +9,7 @@ public static class PlayerSpawner {
     {     
         //Common
         PlayerData playerData = MainData.CurrentPlayerData;
-        Debug.Assert(playerData != null);
+        if (playerData == null) return null;
         RaceGraphics raceGraphics = MainData.Game.GetRace(playerData.RaceName).Graphics;
 
         var playerObject = new GameObject("Player");
@@ -37,7 +37,10 @@ public static class PlayerSpawner {
 
             case PlayerSpawnerParams.SpawnType.World:
 
-                Unit unit = UnitSpawner.SpawnUnit(playerObject, playerData.UnitData);
+                UnitData unitData = new UnitData(playerData.UnitData);
+                unitData.Inventory.Add(MainData.Game.GetItem("Dagger"));
+                unitData.Inventory.Equip("Dagger");
+                Unit unit = UnitSpawner.SpawnUnit(playerObject, unitData);
 
                 //Components to be initialized
                 PlayerController controller = playerObject.GetComponent<PlayerController>();

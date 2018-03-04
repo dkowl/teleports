@@ -6,8 +6,9 @@ using Sirenix.OdinInspector;
 
 public abstract partial class Skill : MonoBehaviour, IUniqueName {
 
-    [SerializeField] private SkillData data;
+    [SerializeField] protected SkillData data;
     private float currentCooldown;
+    private int comboCounter;
 
     protected virtual void Update()
     {
@@ -22,18 +23,37 @@ public abstract partial class Skill : MonoBehaviour, IUniqueName {
         return new SkillTargeter_Point();
     }
 
-    public void Cast(Unit caster, TargetInfo targetInfo)
+    public void Initialize(SkillData skillData)
     {
-        currentCooldown = Cooldown;
-        CastInternal(caster, Targeter.GetTargets(this, targetInfo));
+        data = new SkillData(skillData);
+        OnInitialize();
     }
 
-    public CanReachTargetResult CanReachTarget(TargetInfo targetInfo)
+    protected virtual void OnInitialize() { }
+
+    public void Cast(Unit caster, TargetInfo targetInfo)
     {
+        Cast(caster, Targeter.GetTargets(this, targetInfo));
+    }
+
+    public void Cast(Unit caster, List<CastTarget> targets)
+    {
+        currentCooldown = Cooldown;
+        CastInternal(caster, targets);
+    }
+
+    public virtual CanReachTargetResult CanReachTarget(TargetInfo targetInfo)
+    {
+        //debug
+        //bool isPlayer = targetInfo.Caster.name == "Player";
+        //if(isPlayer) Debug.Log("I am player");
+
         Unit caster = targetInfo.Caster;
         if (caster != null)
         {
             float totalReach = GetReach(caster);
+            //if (isPlayer) Debug.LogFormat("My total reach is {0}", totalReach);
+
             if (targetInfo.TargetUnit != null) totalReach += targetInfo.TargetUnit.Size;
 
             bool canReachDistance = (targetInfo.Position - caster.transform.position).magnitude <= totalReach;
@@ -57,6 +77,12 @@ public abstract partial class Skill : MonoBehaviour, IUniqueName {
         }
     }
 
+    public virtual void RegisterCombo(int counter)
+    {
+        comboCounter = counter;
+        if(MaxCombo > 0) comboCounter %= MaxCombo;
+    }
+
     public void ModifyAttribute(SkillData.AttributeType type, float bonus, float multiplier)
     {
         Data.GetAttribute(type).Modify(bonus, multiplier);
@@ -64,25 +90,24 @@ public abstract partial class Skill : MonoBehaviour, IUniqueName {
 
     public virtual float GetReach(Unit caster)
     {
+        //Debug.LogFormat("Calling Skill.GetReach() - caster.Reach: {0}, caster.Size: {1}, Reach: {2}", caster.Reach, caster.Size, Reach);
         return caster.Reach + caster.Size + Reach;
     }
 
-    public SkillData Data
-    {
-        get { return data; }
-        set { data = new SkillData(value); }
-    }
-    public string UniqueName => name;
-    public TargetType Type => data.TargetType;
-    public float Reach => data.Reach;
-    public float ReachAngle => data.ReachAngle;
-    public float Cooldown => data.Cooldown;
-    public float CastTime => data.CastTime;
-    public float TotalCastTime => data.TotalCastTime;
-    public float EarlyBreakTime => data.EarlyBreakTime;
-    public int MaxCombo => data.MaxCombo;
+    public bool HasNextCombo => comboCounter < MaxCombo;
+    public virtual int MaxCombo => 0;
+    public SkillData Data => data;
     public float CurrentCooldown => currentCooldown;
-    public SkillGraphics Graphics => data.Graphics;
+    public int ComboCounter => comboCounter;
+    public string UniqueName => name;
+    public TargetType Type => Data.TargetType;
+    public float Reach => Data.Reach;
+    public float ReachAngle => Data.ReachAngle;
+    public float Cooldown => Data.Cooldown;
+    public float CastTime => Data.CastTime;
+    public float TotalCastTime => Data.TotalCastTime;
+    public float EarlyBreakTime => Data.EarlyBreakTime;
+    public SkillGraphics Graphics => Data.Graphics;
     private SkillTargeter Targeter => GetTargeter();
 
     public enum TargetType

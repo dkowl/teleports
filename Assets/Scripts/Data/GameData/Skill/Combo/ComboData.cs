@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SkillType {
-	Attack = 1,
-    Combo = 10
+public partial class ComboData {
+
 }

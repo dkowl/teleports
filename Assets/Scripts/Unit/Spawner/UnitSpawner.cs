@@ -29,7 +29,7 @@ public static class UnitSpawner  {
 
         foreach (var itemInfo in unit.UnitData.Inventory.GetEquippedItems())
         {
-            Debug.Log("Spawning " + itemInfo.Item.DisplayName);
+            //Debug.Log("Spawning " + itemInfo.Item.DisplayName);
             ItemData itemData = itemInfo.Item;
             GameObject itemObject = new GameObject(itemData.DisplayName);
             itemObject.transform.parent = items.transform;
@@ -77,25 +77,7 @@ public static class UnitSpawner  {
 
         foreach (var skillAsset in skills)
         {
-            var skillData = skillAsset.Data;
-            GameObject skillGameObject = new GameObject(skillData.UniqueName);
-            skillGameObject.transform.parent = skillsObject.transform;
-            Skill skillComponent;
-            switch (skillData.SkillType)
-            {
-                case SkillType.Attack:
-                    skillComponent = skillGameObject.AddComponent<Attack>();
-                    break;
-                default:
-                    skillComponent = null;
-                    break;
-            }
-
-            if (skillComponent != null)
-            {
-                skillComponent.Data = skillData;
-                unit.Skills.Add(skillComponent);
-            }
+            unit.Skills.Add(SkillSpawner.SpawnSkill(skillsObject, skillAsset.Data));
         }
     }
 }

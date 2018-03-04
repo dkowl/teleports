@@ -63,6 +63,9 @@ public class UnitAnimator : MonoBehaviour {
         }
         cast02Flag = !cast02Flag;
 
+        Debug.LogFormat("Combo counter: {0}", eventArgs.Skill.ComboCounter);
+        if (eventArgs.Skill.ComboCounter > 0) return;
+
         if (eventArgs.Skill.Graphics != null)
         {
             AnimatorOverrideController overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;   

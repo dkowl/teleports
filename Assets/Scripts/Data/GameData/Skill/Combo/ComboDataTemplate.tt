@@ -1,0 +1,10 @@
+<#@ include file = "..\..\..\Templates\DataClass.tt"
+#><#@ output extension = "/" #><# 
+	const string dataType = "Combo"; 
+	Field[] fields = {
+		new Field("List<SkillData>", "skillDatas", true), 
+	    new Field("List<int>", "dataIds", false), 
+	};
+    var dataClass = new DataClass(dataType, fields);
+    Generate(dataClass);
+#>

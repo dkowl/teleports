@@ -77,7 +77,7 @@ public class PlayerController : UnitController {
     {
         target.TargetUnit = null;
         CastingState.TryStartResult tryStartResult = unit.CastingState.TryInterrupt();
-        Debug.Log("Ground Clicked - TryStartResult :" + tryStartResult.ToString());
+        //Debug.Log("Ground Clicked - TryStartResult :" + tryStartResult.ToString());
         unit.MovingState.Start(point);
     }
 }

@@ -10,9 +10,9 @@
 	    new Field("Attribute", "castTime", true), 
 	    new Field("Attribute", "totalCastTime", true), 
 	    new Field("Attribute", "earlyBreakTime", true), 
-	    new Field("int", "maxCombo", false), 
 		new Field("SkillType", "skillType", false), 
 		new Field("AttackData", "attackData", true),
+		new Field("ComboID", "comboId", true), 
 	    new Field("SkillGraphics", "graphics", false), 
 	};
     var dataClass = new DataClass(dataType, fields);

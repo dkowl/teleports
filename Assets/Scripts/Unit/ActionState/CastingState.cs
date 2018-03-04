@@ -11,8 +11,6 @@ public class CastingState : ActionState {
     private bool hasCasted;
     private int comboCounter;
 
-    
-
     public event Action<CastEventArgs> startCastEvent, castEvent, resetCastEvent;
 
     public CastingState(Unit unit) : base(unit)
@@ -22,12 +20,13 @@ public class CastingState : ActionState {
 
     protected override void OnStart()
     {
-        /*if(Unit.name == "Player") Debug.Log(
+        if(Unit.name == "Player") Debug.Log(
             "castTarget: " + TargetInfo.TargetUnit.name +
             " ||| activeSkill: " + ActiveSkill.UniqueName + 
-            " ||| combo: " + comboCounter.ToString());*/
+            " ||| combo: " + comboCounter.ToString());
         Debug.Assert(currentCommand != null && currentCommand.IsValid());
         if (lastCommand != null && lastCommand.Skill == currentCommand.Skill) comboCounter++;
+        currentCommand.Skill.RegisterCombo(comboCounter);
         lastCommand = currentCommand;
         currentCastTime = 0;
         hasCasted = false;
@@ -45,7 +44,7 @@ public class CastingState : ActionState {
         }
         if(currentCastTime >= ActiveSkill.TotalCastTime)
         {
-            if (!lastCommand.IsInterrupt && comboCounter < ActiveSkill.MaxCombo)
+            if (!lastCommand.IsInterrupt && ActiveSkill.HasNextCombo)
             {
                 currentCommand = null;
                 Start(lastCommand);
@@ -62,8 +61,8 @@ public class CastingState : ActionState {
         currentCommand = null;
         lastCommand = null;
         currentCastTime = 0;
-        hasCasted = false;
         comboCounter = 0;
+        hasCasted = false;
         if (resetCastEvent != null) resetCastEvent(new CastEventArgs(this));
         Debug.Log("Resetting" + Unit.name);
     }

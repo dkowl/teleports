@@ -20,7 +20,7 @@ public class MovingState : ActionState {
 
     protected override void OnUpdate(float dTime)
     {
-        if (!Unit.UsesRootMotion)
+        if (Unit.MoveSpeed > 0)
         {
             Vector3 offset = moveDest - Unit.Physics.Rigidbody.position;
             Vector3 targetVelocity = offset.normalized * Unit.MoveSpeed;

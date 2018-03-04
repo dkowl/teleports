@@ -24,8 +24,7 @@ public class Unit : MonoBehaviour
     private UnitGraphics graphics;
     private UnitController activeController;
     private UnitPhysics physics;
-
-    [SerializeField] private bool usesRootMotion;
+    
 
     void Awake () {
         damageReceived = 0;
@@ -189,7 +188,6 @@ public class Unit : MonoBehaviour
     public Skill PrimarySkill => skills.Count > 0 ? skills[0] : null;
     public UnitGraphics Graphics => graphics;
     public UnitPhysics Physics => physics;
-    public bool UsesRootMotion => usesRootMotion;
     private WeaponData WeaponData{
         get
         {

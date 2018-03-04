@@ -9,7 +9,7 @@ public class Attribute
 {
     [FormerlySerializedAs("raw_"), SerializeField, HideLabel, LabelWidth(15), HorizontalGroup("1")] private float raw;
     [FormerlySerializedAs("bonus_"), SerializeField, LabelWidth(15), LabelText("+"), HorizontalGroup("1")] private float bonus;
-    [FormerlySerializedAs("multiplier_"), SerializeField, LabelWidth(15), LabelText("*"), HorizontalGroup("1")] private float multiplier;
+    [FormerlySerializedAs("multiplier_"), SerializeField, LabelWidth(15), LabelText("*"), HorizontalGroup("1")] private float multiplier = 1;
 
     public Attribute() : this(0)
     {

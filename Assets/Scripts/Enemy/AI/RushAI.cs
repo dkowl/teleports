@@ -68,11 +68,11 @@ public class RushAI : UnitController {
 
     protected void RandomizeAttack()
     {
-        Debug.Log("Randomizing attacks");
+        //Debug.Log("Randomizing attacks");
         if (attacks.Count > 0)
         {
             mainAttack = attacks.RandomElement();
-            Debug.Log("Attack randomized to " + mainAttack.name);
+            //Debug.Log("Attack randomized to " + mainAttack.name);
         }
     }
 

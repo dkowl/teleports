@@ -21,6 +21,7 @@ public class Attack : Skill {
 
     public override float GetReach(Unit caster)
     {
+        //Debug.Log("Calling Attack.GetReach()");
         float result = base.GetReach(caster);
         if(DamageType == AttackDamageType.Weapon)
         {
