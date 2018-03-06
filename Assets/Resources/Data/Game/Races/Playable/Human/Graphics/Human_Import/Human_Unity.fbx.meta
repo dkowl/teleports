@@ -1,210 +1,208 @@
 fileFormatVersion: 2
-guid: 2e835f52cc147ac4b99eca6e9ee51e6a
-timeCreated: 1511362716
+guid: b186ed8cd5e73044788fd17c01b2296b
+timeCreated: 1520340602
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: Chest_Bind
-    100002: Head_Bind
-    100004: Head_End
-    100006: Hip_Bind
-    100008: Hip_Fk
-    100010: //RootNode
-    100012: L_Ankle_Bind
-    100014: L_Arm_Bind
-    100016: L_Ball_Bind
-    100018: L_Clavical_Bind
-    100020: L_Finger01_Bind
-    100022: L_Finger02_Bind
-    100024: L_Finger03_Bind
-    100026: L_Finger_End
-    100028: L_Forearm_Bind
-    100030: L_Index01_Bind
-    100032: L_Index02_Bind
-    100034: L_Index03_Bind
-    100036: L_Index_End
-    100038: L_Shin_Bind
-    100040: L_Thigh_Bind
-    100042: L_Thumb01_Bind
-    100044: L_Thumb02_Bind
-    100046: L_Thumb03_Bind
-    100048: L_Thumb_End
-    100050: L_Toe_End
-    100052: L_Wrist_Bind
-    100054: L_Wrist_Twist_Bind
-    100056: Neck_Bind
-    100058: Player_Male
-    100060: R_Ankle_Bind
-    100062: R_Arm_Bind
-    100064: R_Ball_Bind
-    100066: R_Clavical_Bind
-    100068: R_Finger01_Bind
-    100070: R_Finger02_Bind
-    100072: R_Finger03_Bind
-    100074: R_Finger_End
-    100076: R_Forearm_Bind
-    100078: R_Index01_Bind
-    100080: R_Index02_Bind
-    100082: R_Index03_Bind
-    100084: R_Index_End
-    100086: R_Shin_Bind
-    100088: R_Thigh_Bind
-    100090: R_Thumb01_Bind
-    100092: R_Thumb02_Bind
-    100094: R_Thumb03_Bind
-    100096: R_Thumb_End
-    100098: R_Toe_End
-    100100: R_Wrist_Bind
-    100102: R_Wrist_Twist_Bind
-    100104: Reference
-    100106: Spine01_Bind
-    100108: Spine02_Bind
-    100110: Chest_FK
-    100112: Chest_IK
-    100114: Head_Aim
-    100116: Head_End 1
-    100118: Head_End 2
-    100120: Head_FK
-    100122: Hip_IK
-    100124: L_Ankle_FK
-    100126: L_Ankle_IK
-    100128: L_Arm_FK
-    100130: L_Arm_IK
-    100132: L_Ball_FK
-    100134: L_Ball_IK
-    100136: L_Forearm_FK
-    100138: L_Forearm_IK
-    100140: L_Hand_Slot
-    100142: L_Shin_FK
-    100144: L_Shin_IK
-    100146: L_Thigh_FK
-    100148: L_Thigh_IK
-    100150: L_Toe_FK_End
-    100152: L_Toe_IK_End
-    100154: L_Wrist_FK
-    100156: L_Wrist_IK
-    100158: R_Ankle_FK
-    100160: R_Ankle_IK
-    100162: R_Arm_FK
-    100164: R_Arm_IK
-    100166: R_Ball_FK
-    100168: R_Ball_IK
-    100170: R_Forearm_FK
-    100172: R_Forearm_IK
-    100174: R_Hand_Slot
-    100176: R_Shin_FK
-    100178: R_Shin_IK
-    100180: R_Thigh_FK
-    100182: R_Thigh_IK
-    100184: R_Toe_FK_End
-    100186: R_Toe_IK_End
-    100188: R_Wrist_FK
-    100190: R_Wrist_IK
-    100192: Reference_CTR
-    100194: Reference_GRP
-    100196: Spine01_FK
-    100198: Spine02_FK
+    100002: Chest_FK
+    100004: Chest_IK
+    100006: group1
+    100008: Head_Aim
+    100010: Head_Bind
+    100012: Head_End
+    100014: Head_End 1
+    100016: Head_End 2
+    100018: Head_FK
+    100020: Hip_Bind
+    100022: Hip_Fk
+    100024: Hip_IK
+    100026: //RootNode
+    100028: L_Ankle_Bind
+    100030: L_Ankle_FK
+    100032: L_Ankle_IK
+    100034: L_Arm_Bind
+    100036: L_Arm_FK
+    100038: L_Arm_IK
+    100040: L_Ball_Bind
+    100042: L_Ball_FK
+    100044: L_Ball_IK
+    100046: L_Clavical_Bind
+    100048: L_Finger01_Bind
+    100050: L_Finger02_Bind
+    100052: L_Finger03_Bind
+    100054: L_Finger_End
+    100056: L_Forearm_Bind
+    100058: L_Forearm_FK
+    100060: L_Forearm_IK
+    100062: L_Hand_Slot
+    100064: L_Index01_Bind
+    100066: L_Index02_Bind
+    100068: L_Index03_Bind
+    100070: L_Index_End
+    100072: L_Shin_Bind
+    100074: L_Shin_FK
+    100076: L_Shin_IK
+    100078: L_Thigh_Bind
+    100080: L_Thigh_FK
+    100082: L_Thigh_IK
+    100084: L_Thumb01_Bind
+    100086: L_Thumb02_Bind
+    100088: L_Thumb03_Bind
+    100090: L_Thumb_End
+    100092: L_Toe_End
+    100094: L_Toe_FK_End
+    100096: L_Toe_IK_End
+    100098: L_Wrist_Bind
+    100100: L_Wrist_FK
+    100102: L_Wrist_IK
+    100104: L_Wrist_Twist_Bind
+    100106: Neck_Bind
+    100108: Player_Male
+    100110: R_Ankle_Bind
+    100112: R_Ankle_FK
+    100114: R_Ankle_IK
+    100116: R_Arm_Bind
+    100118: R_Arm_FK
+    100120: R_Arm_IK
+    100122: R_Ball_Bind
+    100124: R_Ball_FK
+    100126: R_Ball_IK
+    100128: R_Clavical_Bind
+    100130: R_Finger01_Bind
+    100132: R_Finger02_Bind
+    100134: R_Finger03_Bind
+    100136: R_Finger_End
+    100138: R_Forearm_Bind
+    100140: R_Forearm_FK
+    100142: R_Forearm_IK
+    100144: R_Hand_Slot
+    100146: R_Index01_Bind
+    100148: R_Index02_Bind
+    100150: R_Index03_Bind
+    100152: R_Index_End
+    100154: R_Shin_Bind
+    100156: R_Shin_FK
+    100158: R_Shin_IK
+    100160: R_Thigh_Bind
+    100162: R_Thigh_FK
+    100164: R_Thigh_IK
+    100166: R_Thumb01_Bind
+    100168: R_Thumb02_Bind
+    100170: R_Thumb03_Bind
+    100172: R_Thumb_End
+    100174: R_Toe_End
+    100176: R_Toe_FK_End
+    100178: R_Toe_IK_End
+    100180: R_Wrist_Bind
+    100182: R_Wrist_FK
+    100184: R_Wrist_IK
+    100186: R_Wrist_Twist_Bind
+    100188: Reference
+    100190: Spine01_Bind
+    100192: Spine01_FK
+    100194: Spine02_Bind
+    100196: Spine02_FK
     400000: Chest_Bind
-    400002: Head_Bind
-    400004: Head_End
-    400006: Hip_Bind
-    400008: Hip_Fk
-    400010: //RootNode
-    400012: L_Ankle_Bind
-    400014: L_Arm_Bind
-    400016: L_Ball_Bind
-    400018: L_Clavical_Bind
-    400020: L_Finger01_Bind
-    400022: L_Finger02_Bind
-    400024: L_Finger03_Bind
-    400026: L_Finger_End
-    400028: L_Forearm_Bind
-    400030: L_Index01_Bind
-    400032: L_Index02_Bind
-    400034: L_Index03_Bind
-    400036: L_Index_End
-    400038: L_Shin_Bind
-    400040: L_Thigh_Bind
-    400042: L_Thumb01_Bind
-    400044: L_Thumb02_Bind
-    400046: L_Thumb03_Bind
-    400048: L_Thumb_End
-    400050: L_Toe_End
-    400052: L_Wrist_Bind
-    400054: L_Wrist_Twist_Bind
-    400056: Neck_Bind
-    400058: Player_Male
-    400060: R_Ankle_Bind
-    400062: R_Arm_Bind
-    400064: R_Ball_Bind
-    400066: R_Clavical_Bind
-    400068: R_Finger01_Bind
-    400070: R_Finger02_Bind
-    400072: R_Finger03_Bind
-    400074: R_Finger_End
-    400076: R_Forearm_Bind
-    400078: R_Index01_Bind
-    400080: R_Index02_Bind
-    400082: R_Index03_Bind
-    400084: R_Index_End
-    400086: R_Shin_Bind
-    400088: R_Thigh_Bind
-    400090: R_Thumb01_Bind
-    400092: R_Thumb02_Bind
-    400094: R_Thumb03_Bind
-    400096: R_Thumb_End
-    400098: R_Toe_End
-    400100: R_Wrist_Bind
-    400102: R_Wrist_Twist_Bind
-    400104: Reference
-    400106: Spine01_Bind
-    400108: Spine02_Bind
-    400110: Chest_FK
-    400112: Chest_IK
-    400114: Head_Aim
-    400116: Head_End 1
-    400118: Head_End 2
-    400120: Head_FK
-    400122: Hip_IK
-    400124: L_Ankle_FK
-    400126: L_Ankle_IK
-    400128: L_Arm_FK
-    400130: L_Arm_IK
-    400132: L_Ball_FK
-    400134: L_Ball_IK
-    400136: L_Forearm_FK
-    400138: L_Forearm_IK
-    400140: L_Hand_Slot
-    400142: L_Shin_FK
-    400144: L_Shin_IK
-    400146: L_Thigh_FK
-    400148: L_Thigh_IK
-    400150: L_Toe_FK_End
-    400152: L_Toe_IK_End
-    400154: L_Wrist_FK
-    400156: L_Wrist_IK
-    400158: R_Ankle_FK
-    400160: R_Ankle_IK
-    400162: R_Arm_FK
-    400164: R_Arm_IK
-    400166: R_Ball_FK
-    400168: R_Ball_IK
-    400170: R_Forearm_FK
-    400172: R_Forearm_IK
-    400174: R_Hand_Slot
-    400176: R_Shin_FK
-    400178: R_Shin_IK
-    400180: R_Thigh_FK
-    400182: R_Thigh_IK
-    400184: R_Toe_FK_End
-    400186: R_Toe_IK_End
-    400188: R_Wrist_FK
-    400190: R_Wrist_IK
-    400192: Reference_CTR
-    400194: Reference_GRP
-    400196: Spine01_FK
-    400198: Spine02_FK
+    400002: Chest_FK
+    400004: Chest_IK
+    400006: group1
+    400008: Head_Aim
+    400010: Head_Bind
+    400012: Head_End
+    400014: Head_End 1
+    400016: Head_End 2
+    400018: Head_FK
+    400020: Hip_Bind
+    400022: Hip_Fk
+    400024: Hip_IK
+    400026: //RootNode
+    400028: L_Ankle_Bind
+    400030: L_Ankle_FK
+    400032: L_Ankle_IK
+    400034: L_Arm_Bind
+    400036: L_Arm_FK
+    400038: L_Arm_IK
+    400040: L_Ball_Bind
+    400042: L_Ball_FK
+    400044: L_Ball_IK
+    400046: L_Clavical_Bind
+    400048: L_Finger01_Bind
+    400050: L_Finger02_Bind
+    400052: L_Finger03_Bind
+    400054: L_Finger_End
+    400056: L_Forearm_Bind
+    400058: L_Forearm_FK
+    400060: L_Forearm_IK
+    400062: L_Hand_Slot
+    400064: L_Index01_Bind
+    400066: L_Index02_Bind
+    400068: L_Index03_Bind
+    400070: L_Index_End
+    400072: L_Shin_Bind
+    400074: L_Shin_FK
+    400076: L_Shin_IK
+    400078: L_Thigh_Bind
+    400080: L_Thigh_FK
+    400082: L_Thigh_IK
+    400084: L_Thumb01_Bind
+    400086: L_Thumb02_Bind
+    400088: L_Thumb03_Bind
+    400090: L_Thumb_End
+    400092: L_Toe_End
+    400094: L_Toe_FK_End
+    400096: L_Toe_IK_End
+    400098: L_Wrist_Bind
+    400100: L_Wrist_FK
+    400102: L_Wrist_IK
+    400104: L_Wrist_Twist_Bind
+    400106: Neck_Bind
+    400108: Player_Male
+    400110: R_Ankle_Bind
+    400112: R_Ankle_FK
+    400114: R_Ankle_IK
+    400116: R_Arm_Bind
+    400118: R_Arm_FK
+    400120: R_Arm_IK
+    400122: R_Ball_Bind
+    400124: R_Ball_FK
+    400126: R_Ball_IK
+    400128: R_Clavical_Bind
+    400130: R_Finger01_Bind
+    400132: R_Finger02_Bind
+    400134: R_Finger03_Bind
+    400136: R_Finger_End
+    400138: R_Forearm_Bind
+    400140: R_Forearm_FK
+    400142: R_Forearm_IK
+    400144: R_Hand_Slot
+    400146: R_Index01_Bind
+    400148: R_Index02_Bind
+    400150: R_Index03_Bind
+    400152: R_Index_End
+    400154: R_Shin_Bind
+    400156: R_Shin_FK
+    400158: R_Shin_IK
+    400160: R_Thigh_Bind
+    400162: R_Thigh_FK
+    400164: R_Thigh_IK
+    400166: R_Thumb01_Bind
+    400168: R_Thumb02_Bind
+    400170: R_Thumb03_Bind
+    400172: R_Thumb_End
+    400174: R_Toe_End
+    400176: R_Toe_FK_End
+    400178: R_Toe_IK_End
+    400180: R_Wrist_Bind
+    400182: R_Wrist_FK
+    400184: R_Wrist_IK
+    400186: R_Wrist_Twist_Bind
+    400188: Reference
+    400190: Spine01_Bind
+    400192: Spine01_FK
+    400194: Spine02_Bind
+    400196: Spine02_FK
     4300000: Player_Male
     9500000: //RootNode
     13700000: Player_Male
@@ -213,7 +211,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: lambert4
-    second: {fileID: 2100000, guid: a6cbdac806d70e94bbc87e824f854eeb, type: 2}
+    second: {fileID: 2100000, guid: 4eac6d56d7e60a4419b3378979aaccca, type: 2}
   materials:
     importMaterials: 0
     materialName: 0
@@ -262,8 +260,8 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 10
-    normalImportMode: 1
+    normalSmoothAngle: 60
+    normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
@@ -279,7 +277,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    rootMotionBoneName: 
+    rootMotionBoneName: Reference
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
