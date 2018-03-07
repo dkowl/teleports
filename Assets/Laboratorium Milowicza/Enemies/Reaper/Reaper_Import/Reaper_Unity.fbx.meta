@@ -102,6 +102,7 @@ ModelImporter:
     100188: Reference
     100190: Spine01
     100192: Spine02
+    100194: R_Hand_Slot
     400000: B_Cloth01
     400002: B_Cloth02
     400004: B_Cloth03
@@ -199,6 +200,7 @@ ModelImporter:
     400188: Reference
     400190: Spine01
     400192: Spine02
+    400194: R_Hand_Slot
     4300000: Reaper
     9500000: //RootNode
     13700000: Reaper
@@ -217,7 +219,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
-    optimizeGameObjects: 1
+    optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 

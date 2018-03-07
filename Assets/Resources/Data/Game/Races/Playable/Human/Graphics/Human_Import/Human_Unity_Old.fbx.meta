@@ -1,0 +1,293 @@
+fileFormatVersion: 2
+guid: 2e835f52cc147ac4b99eca6e9ee51e6a
+timeCreated: 1511362716
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Chest_Bind
+    100002: Head_Bind
+    100004: Head_End
+    100006: Hip_Bind
+    100008: Hip_Fk
+    100010: //RootNode
+    100012: L_Ankle_Bind
+    100014: L_Arm_Bind
+    100016: L_Ball_Bind
+    100018: L_Clavical_Bind
+    100020: L_Finger01_Bind
+    100022: L_Finger02_Bind
+    100024: L_Finger03_Bind
+    100026: L_Finger_End
+    100028: L_Forearm_Bind
+    100030: L_Index01_Bind
+    100032: L_Index02_Bind
+    100034: L_Index03_Bind
+    100036: L_Index_End
+    100038: L_Shin_Bind
+    100040: L_Thigh_Bind
+    100042: L_Thumb01_Bind
+    100044: L_Thumb02_Bind
+    100046: L_Thumb03_Bind
+    100048: L_Thumb_End
+    100050: L_Toe_End
+    100052: L_Wrist_Bind
+    100054: L_Wrist_Twist_Bind
+    100056: Neck_Bind
+    100058: Player_Male
+    100060: R_Ankle_Bind
+    100062: R_Arm_Bind
+    100064: R_Ball_Bind
+    100066: R_Clavical_Bind
+    100068: R_Finger01_Bind
+    100070: R_Finger02_Bind
+    100072: R_Finger03_Bind
+    100074: R_Finger_End
+    100076: R_Forearm_Bind
+    100078: R_Index01_Bind
+    100080: R_Index02_Bind
+    100082: R_Index03_Bind
+    100084: R_Index_End
+    100086: R_Shin_Bind
+    100088: R_Thigh_Bind
+    100090: R_Thumb01_Bind
+    100092: R_Thumb02_Bind
+    100094: R_Thumb03_Bind
+    100096: R_Thumb_End
+    100098: R_Toe_End
+    100100: R_Wrist_Bind
+    100102: R_Wrist_Twist_Bind
+    100104: Reference
+    100106: Spine01_Bind
+    100108: Spine02_Bind
+    100110: Chest_FK
+    100112: Chest_IK
+    100114: Head_Aim
+    100116: Head_End 1
+    100118: Head_End 2
+    100120: Head_FK
+    100122: Hip_IK
+    100124: L_Ankle_FK
+    100126: L_Ankle_IK
+    100128: L_Arm_FK
+    100130: L_Arm_IK
+    100132: L_Ball_FK
+    100134: L_Ball_IK
+    100136: L_Forearm_FK
+    100138: L_Forearm_IK
+    100140: L_Hand_Slot
+    100142: L_Shin_FK
+    100144: L_Shin_IK
+    100146: L_Thigh_FK
+    100148: L_Thigh_IK
+    100150: L_Toe_FK_End
+    100152: L_Toe_IK_End
+    100154: L_Wrist_FK
+    100156: L_Wrist_IK
+    100158: R_Ankle_FK
+    100160: R_Ankle_IK
+    100162: R_Arm_FK
+    100164: R_Arm_IK
+    100166: R_Ball_FK
+    100168: R_Ball_IK
+    100170: R_Forearm_FK
+    100172: R_Forearm_IK
+    100174: R_Hand_Slot
+    100176: R_Shin_FK
+    100178: R_Shin_IK
+    100180: R_Thigh_FK
+    100182: R_Thigh_IK
+    100184: R_Toe_FK_End
+    100186: R_Toe_IK_End
+    100188: R_Wrist_FK
+    100190: R_Wrist_IK
+    100192: Reference_CTR
+    100194: Reference_GRP
+    100196: Spine01_FK
+    100198: Spine02_FK
+    400000: Chest_Bind
+    400002: Head_Bind
+    400004: Head_End
+    400006: Hip_Bind
+    400008: Hip_Fk
+    400010: //RootNode
+    400012: L_Ankle_Bind
+    400014: L_Arm_Bind
+    400016: L_Ball_Bind
+    400018: L_Clavical_Bind
+    400020: L_Finger01_Bind
+    400022: L_Finger02_Bind
+    400024: L_Finger03_Bind
+    400026: L_Finger_End
+    400028: L_Forearm_Bind
+    400030: L_Index01_Bind
+    400032: L_Index02_Bind
+    400034: L_Index03_Bind
+    400036: L_Index_End
+    400038: L_Shin_Bind
+    400040: L_Thigh_Bind
+    400042: L_Thumb01_Bind
+    400044: L_Thumb02_Bind
+    400046: L_Thumb03_Bind
+    400048: L_Thumb_End
+    400050: L_Toe_End
+    400052: L_Wrist_Bind
+    400054: L_Wrist_Twist_Bind
+    400056: Neck_Bind
+    400058: Player_Male
+    400060: R_Ankle_Bind
+    400062: R_Arm_Bind
+    400064: R_Ball_Bind
+    400066: R_Clavical_Bind
+    400068: R_Finger01_Bind
+    400070: R_Finger02_Bind
+    400072: R_Finger03_Bind
+    400074: R_Finger_End
+    400076: R_Forearm_Bind
+    400078: R_Index01_Bind
+    400080: R_Index02_Bind
+    400082: R_Index03_Bind
+    400084: R_Index_End
+    400086: R_Shin_Bind
+    400088: R_Thigh_Bind
+    400090: R_Thumb01_Bind
+    400092: R_Thumb02_Bind
+    400094: R_Thumb03_Bind
+    400096: R_Thumb_End
+    400098: R_Toe_End
+    400100: R_Wrist_Bind
+    400102: R_Wrist_Twist_Bind
+    400104: Reference
+    400106: Spine01_Bind
+    400108: Spine02_Bind
+    400110: Chest_FK
+    400112: Chest_IK
+    400114: Head_Aim
+    400116: Head_End 1
+    400118: Head_End 2
+    400120: Head_FK
+    400122: Hip_IK
+    400124: L_Ankle_FK
+    400126: L_Ankle_IK
+    400128: L_Arm_FK
+    400130: L_Arm_IK
+    400132: L_Ball_FK
+    400134: L_Ball_IK
+    400136: L_Forearm_FK
+    400138: L_Forearm_IK
+    400140: L_Hand_Slot
+    400142: L_Shin_FK
+    400144: L_Shin_IK
+    400146: L_Thigh_FK
+    400148: L_Thigh_IK
+    400150: L_Toe_FK_End
+    400152: L_Toe_IK_End
+    400154: L_Wrist_FK
+    400156: L_Wrist_IK
+    400158: R_Ankle_FK
+    400160: R_Ankle_IK
+    400162: R_Arm_FK
+    400164: R_Arm_IK
+    400166: R_Ball_FK
+    400168: R_Ball_IK
+    400170: R_Forearm_FK
+    400172: R_Forearm_IK
+    400174: R_Hand_Slot
+    400176: R_Shin_FK
+    400178: R_Shin_IK
+    400180: R_Thigh_FK
+    400182: R_Thigh_IK
+    400184: R_Toe_FK_End
+    400186: R_Toe_IK_End
+    400188: R_Wrist_FK
+    400190: R_Wrist_IK
+    400192: Reference_CTR
+    400194: Reference_GRP
+    400196: Spine01_FK
+    400198: Spine02_FK
+    4300000: Player_Male
+    9500000: //RootNode
+    13700000: Player_Male
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert4
+    second: {fileID: 2100000, guid: a6cbdac806d70e94bbc87e824f854eeb, type: 2}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 10
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: Reference
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
