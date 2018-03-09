@@ -8,14 +8,16 @@
     public class Field{
         public string type;
         public string name;
+        public string defaultValue;
         public List<string> attributes;
         public bool deepCopy;
 
-		public Field(string type, string name, bool deepCopy, List<string> attributes = null){
+		public Field(string type, string name, bool deepCopy, List<string> attributes = null, string defaultValue = null){
 			this.type = type;
 			this.name = name;
 		    this.deepCopy = deepCopy;
 		    this.attributes = attributes ?? new List<string>();
+		    this.defaultValue = defaultValue;
 		}
 
         public string UpperCase
@@ -40,6 +42,7 @@
         public Field[] fields;
         public bool hasAttributes;
         public bool implementsUniqueName;
+        public bool hasDefaultValues;
 
         public DataClass(string dataType, Field[] fields)
         {
@@ -51,6 +54,7 @@
             {
                 if (field.type == "Attribute") hasAttributes = true;
                 if (field.name == "uniqueName" && field.type == "string") implementsUniqueName = true;
+                if (field.defaultValue != null) hasDefaultValues = true;
             }
         }
 
@@ -61,6 +65,19 @@
             sb.Append(": IDeepCopyable ");
             if (implementsUniqueName) sb.Append(", IUniqueName ");
             sb.Append("{\n");
+            return sb.ToString();
+        }
+
+        public string Constructor()
+        {
+            if (!hasDefaultValues) return "";
+            var sb = new StringBuilder();
+            sb.AppendFormat("	public {0}Data() {{\n", dataType);
+            foreach (var field in FieldsWithDefaultValues)
+            {
+                sb.AppendFormat("		{0} = {1};\n", field.name, field.defaultValue);
+            }
+            sb.Append("	}\n");
             return sb.ToString();
         }
 
@@ -169,6 +186,11 @@
             }
         }
 
+        public List<Field> FieldsWithDefaultValues
+        {
+            get { return fields.Where(field => field.defaultValue != null).ToList(); }
+        }
+
         public string DataClassFilename
         {
             get { return dataType + "Data_T4Gen.cs"; }
@@ -188,6 +210,7 @@ using Teleports.Utils;
 [System.Serializable]
 <#=dataClass.Header()#>
 <#=dataClass.Fields()#>
+<#=dataClass.Constructor()#>
 <#=dataClass.CopyConstructor()#>
 <#=dataClass.DeepCopyMethod()#>
 <#=dataClass.GetAttributeMethod()#>
