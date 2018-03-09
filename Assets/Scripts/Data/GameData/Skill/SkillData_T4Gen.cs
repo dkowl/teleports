@@ -19,7 +19,12 @@ public partial class SkillData : IDeepCopyable , IUniqueName {
 	[SerializeField] private SkillType skillType;
 	[SerializeField] private AttackData attackData;
 	[SerializeField] private ComboID comboId;
+	[SerializeField] private bool blockRotation;
 	[SerializeField] private SkillGraphics graphics;
+
+	public SkillData() {
+		blockRotation = true;
+	}
 
 	public SkillData(SkillData other){
 		uniqueName = other.uniqueName;
@@ -33,6 +38,7 @@ public partial class SkillData : IDeepCopyable , IUniqueName {
 		skillType = other.skillType;
 		attackData = new AttackData(other.attackData);
 		comboId = new ComboID(other.comboId);
+		blockRotation = other.blockRotation;
 		graphics = other.graphics;
 	}
 
@@ -77,6 +83,7 @@ public partial class SkillData : IDeepCopyable , IUniqueName {
 	public SkillType SkillType => skillType;
 	public AttackData AttackData => attackData;
 	public ComboID ComboId => comboId;
+	public bool BlockRotation => blockRotation;
 	public SkillGraphics Graphics => graphics;
 
 	public enum AttributeType {

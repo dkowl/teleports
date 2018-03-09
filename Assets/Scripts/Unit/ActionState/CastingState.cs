@@ -20,13 +20,24 @@ public class CastingState : ActionState {
 
     protected override void OnStart()
     {
-        if(Unit.name == "Player") Debug.Log(
+        /*if(Unit.name == "Player") Debug.Log(
             "castTarget: " + TargetInfo.TargetUnit.name +
             " ||| activeSkill: " + ActiveSkill.UniqueName + 
-            " ||| combo: " + comboCounter.ToString());
+            " ||| combo: " + comboCounter.ToString());*/
         Debug.Assert(currentCommand != null && currentCommand.IsValid());
+
         if (lastCommand != null && lastCommand.Skill == currentCommand.Skill) comboCounter++;
         currentCommand.Skill.RegisterCombo(comboCounter);
+
+        if (currentCommand.Skill.Data.BlockRotation)
+        {
+            Unit.RotatingState.AddPauser(Unit.CastingState);
+        }
+        else
+        {
+            Unit.RotatingState.RemovePauser(Unit.CastingState);
+        }
+
         lastCommand = currentCommand;
         currentCastTime = 0;
         hasCasted = false;

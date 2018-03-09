@@ -13,6 +13,7 @@
 		new Field("SkillType", "skillType", false), 
 		new Field("AttackData", "attackData", true),
 		new Field("ComboID", "comboId", true), 
+	    new Field("bool", "blockRotation", false, null, "true"), 
 	    new Field("SkillGraphics", "graphics", false), 
 	};
     var dataClass = new DataClass(dataType, fields);
