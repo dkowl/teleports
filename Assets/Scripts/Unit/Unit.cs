@@ -146,7 +146,7 @@ public class Unit : MonoBehaviour
         deadState.StartDeath();
     }
     
-    public float Size => unitData.GetAttribute(UnitAttributesData.AttributeType.Size).Value / 2f;
+    public float Size => unitData.GetAttribute(UnitAttributesData.AttributeType.Size).Value;
     public float Hp => unitData.GetAttribute(UnitAttributesData.AttributeType.HealthPoints).Value;
     public float Armor => unitData.GetAttribute(UnitAttributesData.AttributeType.Armor).Value;
     public float Regen => unitData.GetAttribute(UnitAttributesData.AttributeType.Regeneration).Value;

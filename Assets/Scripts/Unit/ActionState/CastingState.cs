@@ -47,6 +47,7 @@ public class CastingState : ActionState {
     protected override void OnUpdate(float dTime)
     {
         currentCastTime += dTime;
+        if (currentCastTime >= ActiveSkill.EarlyBreakTime) Unit.RotatingState.AddPauser(Unit.CastingState);
         if (currentCastTime >= ActiveSkill.CastTime && !hasCasted)
         {
             ActiveSkill.Cast(Unit, TargetInfo);
