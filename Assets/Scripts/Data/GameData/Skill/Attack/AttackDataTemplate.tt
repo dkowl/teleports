@@ -6,6 +6,7 @@
 	    new Field("AttackDamageType", "damageType", false), 
 	    new Field("int", "minDamage", false, new List<string>{"ShowIf(\"ShowDamageRanges\")"}), 
 	    new Field("int", "maxDamage", false, new List<string>{"ShowIf(\"ShowDamageRanges\")"}), 
+	    new Field("Attribute", "pushbackFactor", true, null, "new Attribute(1)") 
 	};
     var dataClass = new DataClass(dataType, fields);
     Generate(dataClass);

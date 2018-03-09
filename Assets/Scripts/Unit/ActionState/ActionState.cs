@@ -30,6 +30,18 @@ public abstract class ActionState {
             pausers.Add(pauser);
     }
 
+    public void RemoveBlocker(ActionState blocker)
+    {
+        if (blockers.Contains(blocker))
+            blockers.Remove(blocker);
+    }
+
+    public void RemovePauser(ActionState pauser)
+    {
+        if (pausers.Contains(pauser))
+            pausers.Remove(pauser);
+    }
+
     protected void Start()
     {
         if (!IsBlocked)

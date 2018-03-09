@@ -38,8 +38,7 @@ public class Unit : MonoBehaviour
         movingState.AddPauser(castingState);
         movingState.AddPauser(stunnedState);
         movingState.AddBlocker(deadState);
-
-        rotatingState.AddPauser(castingState);
+        
         rotatingState.AddPauser(stunnedState);
         rotatingState.AddBlocker(deadState);
 

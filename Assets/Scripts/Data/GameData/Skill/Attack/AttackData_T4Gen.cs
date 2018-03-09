@@ -6,27 +6,55 @@ using Sirenix.OdinInspector;
 using Teleports.Utils;
 
 [System.Serializable]
-public partial class AttackData {
+public partial class AttackData : IDeepCopyable {
 
 	[SerializeField] private float damageMultiplier;
 	[SerializeField] private AttackDamageType damageType;
 	[SerializeField, ShowIf("ShowDamageRanges")] private int minDamage;
 	[SerializeField, ShowIf("ShowDamageRanges")] private int maxDamage;
+	[SerializeField] private Attribute pushbackFactor;
+
+	public AttackData() {
+		pushbackFactor = new Attribute(1);
+	}
 
 	public AttackData(AttackData other){
 		damageMultiplier = other.damageMultiplier;
 		damageType = other.damageType;
 		minDamage = other.minDamage;
 		maxDamage = other.maxDamage;
+		pushbackFactor = new Attribute(other.pushbackFactor);
 	}
 
+	public object DeepCopy(){
+		return new AttackData(this);
+	}
 
+	public Attribute GetAttribute(AttributeType type)
+	{
+		switch(type)
+		{
+			case AttributeType.PushbackFactor:
+				return pushbackFactor;
+			default:
+				return null;
+		}
+	}
 
-	public float DamageMultiplier { get { return damageMultiplier; } }
-	public AttackDamageType DamageType { get { return damageType; } }
-	public int MinDamage { get { return minDamage; } }
-	public int MaxDamage { get { return maxDamage; } }
+    public void ModifyAttribute(AttributeType type, float bonus, float multiplier)
+	{
+		GetAttribute(type).Modify(bonus, multiplier);
+	}
 
+	public float DamageMultiplier => damageMultiplier;
+	public AttackDamageType DamageType => damageType;
+	public int MinDamage => minDamage;
+	public int MaxDamage => maxDamage;
+	public float PushbackFactor => pushbackFactor.Value;
+
+	public enum AttributeType {
+		PushbackFactor,
+	}
 
 }
 	

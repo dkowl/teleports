@@ -15,7 +15,7 @@ public class Attack : Skill {
             target.Unit.ReceiveDamage(damage, caster);
 
             //physics pushback
-            target.Unit.Physics.ApplyForce(caster.transform, damage);
+            target.Unit.Physics.ApplyForce(caster.transform, damage * Data.AttackData.PushbackFactor);
         }
     }
 
