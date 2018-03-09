@@ -100,6 +100,7 @@ ModelImporter:
     100184: Spine01_FK
     100186: Spine02_Bind
     100188: Spine02_FK
+    100190: group1
     400000: Chest_Bind
     400002: Chest_FK
     400004: Chest_IK
@@ -195,6 +196,7 @@ ModelImporter:
     400184: Spine01_FK
     400186: Spine02_Bind
     400188: Spine02_FK
+    400190: group1
     7400000: Human_Punch01
     9500000: //RootNode
   externalObjects: {}
@@ -235,7 +237,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -251,7 +253,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 1
     isReadable: 1
   meshes:
     lODScreenPercentages: []
