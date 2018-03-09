@@ -197,7 +197,7 @@ ModelImporter:
     400186: Spine01_FK
     400188: Spine02_Bind
     400190: Spine02_FK
-    7400000: Human_DaggerComboRM
+    7400000: Human_DaggerCombo
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -227,7 +227,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Human_DaggerComboRM
+      name: Human_DaggerCombo
       takeName: Take 001
       firstFrame: 1
       lastFrame: 78

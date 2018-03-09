@@ -59,6 +59,7 @@ ModelImporter:
     100102: Reference
     100104: Spine01_Bind
     100106: Spine02_Bind
+    100108: group1
     400000: Chest_Bind
     400002: Head_Bind
     400004: Head_End
@@ -113,6 +114,7 @@ ModelImporter:
     400102: Reference
     400104: Spine01_Bind
     400106: Spine02_Bind
+    400108: group1
     7400000: Human_Idle01
     9500000: //RootNode
   externalObjects: {}
