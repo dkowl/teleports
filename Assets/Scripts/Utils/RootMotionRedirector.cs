@@ -15,7 +15,7 @@ public class RootMotionRedirector : MonoBehaviour
 
     private void OnAnimatorMove()
     {
-        if(animator.deltaPosition.magnitude > 0) Debug.LogFormat("OnAnimator move {0:F5} {1:F5} {2:F5}", animator.deltaPosition.x, animator.deltaPosition.y, animator.deltaPosition.z);
+        //if(animator.deltaPosition.magnitude > 0) Debug.LogFormat("OnAnimator move {0:F5} {1:F5} {2:F5}", animator.deltaPosition.x, animator.deltaPosition.y, animator.deltaPosition.z);
         targetTransform.position += animator.deltaPosition;
     }
 }
