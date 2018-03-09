@@ -13,9 +13,11 @@ public partial class AttackData : IDeepCopyable {
 	[SerializeField, ShowIf("ShowDamageRanges")] private int minDamage;
 	[SerializeField, ShowIf("ShowDamageRanges")] private int maxDamage;
 	[SerializeField] private Attribute pushbackFactor;
+	[SerializeField] private Attribute basePushabck;
 
 	public AttackData() {
 		pushbackFactor = new Attribute(1);
+		basePushabck = new Attribute(50);
 	}
 
 	public AttackData(AttackData other){
@@ -24,6 +26,7 @@ public partial class AttackData : IDeepCopyable {
 		minDamage = other.minDamage;
 		maxDamage = other.maxDamage;
 		pushbackFactor = new Attribute(other.pushbackFactor);
+		basePushabck = new Attribute(other.basePushabck);
 	}
 
 	public object DeepCopy(){
@@ -36,6 +39,8 @@ public partial class AttackData : IDeepCopyable {
 		{
 			case AttributeType.PushbackFactor:
 				return pushbackFactor;
+			case AttributeType.BasePushabck:
+				return basePushabck;
 			default:
 				return null;
 		}
@@ -51,9 +56,11 @@ public partial class AttackData : IDeepCopyable {
 	public int MinDamage => minDamage;
 	public int MaxDamage => maxDamage;
 	public float PushbackFactor => pushbackFactor.Value;
+	public float BasePushabck => basePushabck.Value;
 
 	public enum AttributeType {
 		PushbackFactor,
+		BasePushabck,
 	}
 
 }
