@@ -50,6 +50,7 @@ public class GameMain : MonoBehaviour {
     void Start () {
         UnpauseGame();
         teleportTime = MainData.CurrentPlayerData.TeleportData.Time;
+        Debug.LogFormat("Teleport.Time is {0}", teleportTime);
     }
 	
 	void Update () {

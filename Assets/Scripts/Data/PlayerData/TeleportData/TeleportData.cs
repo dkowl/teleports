@@ -25,7 +25,19 @@ public partial class TeleportData {
         {
             tier = 1;
         }
-        if(gemSlots == null || gemSlots.Count < GemSlotNo)
+
+        if (power.Value == 0)
+        {
+            power = new Attribute(100);
+            Debug.LogWarning("Invalid teleport power");
+        }
+
+        if (time.Value == 0)
+        {
+            time = new Attribute(60);
+            Debug.LogWarning("Invalid teleport time");
+        }
+        if (gemSlots == null || gemSlots.Count < GemSlotNo)
         {
             Debug.LogWarning("Gem slots not found, initializing...");
             Utils.InitWithNew(ref gemSlots, GemSlotNo);
