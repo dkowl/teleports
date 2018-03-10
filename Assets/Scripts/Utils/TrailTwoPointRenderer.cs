@@ -10,8 +10,7 @@ public class TrailTwoPointRenderer : MonoBehaviour
     [SerializeField] private Transform pointB;
     [SerializeField, MinValue(0)] private float trailTime;
     [SerializeField] private Material material;
-    [SerializeField] private Color beginColor;
-    [SerializeField] private Color endColor;
+    [SerializeField] private Gradient gradient;
     [SerializeField] private float minimalVelocity;
 
     private List<Snapshot> snapshots;
@@ -95,7 +94,7 @@ public class TrailTwoPointRenderer : MonoBehaviour
 
             float distanceRatio = 1.0f - (float)iRelative / validSnapshotCount;
 
-            Color color = Color.Lerp(beginColor, endColor, distanceRatio);
+            Color color = gradient.Evaluate(distanceRatio);
             colors[iVert] = color;
             colors[iVert + 1] = color;
 

@@ -26,13 +26,13 @@ public partial class TeleportData {
             tier = 1;
         }
 
-        if (power.Value == 0)
+        if (power == null || power.Value == 0)
         {
             power = new Attribute(100);
             Debug.LogWarning("Invalid teleport power");
         }
 
-        if (time.Value == 0)
+        if (time == null || time.Value == 0)
         {
             time = new Attribute(60);
             Debug.LogWarning("Invalid teleport time");
