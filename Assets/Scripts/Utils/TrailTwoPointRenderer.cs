@@ -10,6 +10,9 @@ public class TrailTwoPointRenderer : MonoBehaviour
     [SerializeField] private Transform pointB;
     [SerializeField, MinValue(0)] private float trailTime;
     [SerializeField] private Material material;
+    [SerializeField] private Color beginColor;
+    [SerializeField] private Color endColor;
+    [SerializeField] private float minimalVelocity;
 
     private List<Snapshot> snapshots;
     private float startTime;
@@ -17,6 +20,8 @@ public class TrailTwoPointRenderer : MonoBehaviour
     private GameObject trailObject;
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
+
+    private float lastHighVelocityTime;
 
     private struct Snapshot
     {
@@ -30,6 +35,8 @@ public class TrailTwoPointRenderer : MonoBehaviour
             this.bPos = bPos;
             this.time = time;
         }
+
+        public Vector3 MidPoint => Vector3.Lerp(aPos, bPos, 0.5f);
     }
 
     private void Awake()
@@ -51,7 +58,14 @@ public class TrailTwoPointRenderer : MonoBehaviour
     private void Update()
     {
         snapshots.Add(new Snapshot(pointA.position, pointB.position, Time.time - startTime));
-        meshFilter.mesh = GenerateMesh();
+        UpdateVelocity();
+        meshFilter.mesh = IsHighVelocity() ? GenerateMesh() : null;
+    }
+
+    private void UpdateVelocity()
+    {
+        Debug.Log(CurrentVelocity());
+        if (CurrentVelocity() > minimalVelocity) lastHighVelocityTime = Time.time - startTime;
     }
 
     private Mesh GenerateMesh()
@@ -66,6 +80,8 @@ public class TrailTwoPointRenderer : MonoBehaviour
         int vertCount = validSnapshotCount * 2;
         int triCount = (vertCount - 2) * 6;
         var vertices = new Vector3[vertCount];
+        var colors = new Color[vertCount];
+        var uvs = new Vector2[vertCount];
         var triangles = new int[triCount];
         for (int i = beginIndex; i < snapshots.Count; i++)
         {
@@ -76,6 +92,15 @@ public class TrailTwoPointRenderer : MonoBehaviour
 
             vertices[iVert] = curSnapshot.aPos;
             vertices[iVert + 1] = curSnapshot.bPos;
+
+            float distanceRatio = 1.0f - (float)iRelative / validSnapshotCount;
+
+            Color color = Color.Lerp(beginColor, endColor, distanceRatio);
+            colors[iVert] = color;
+            colors[iVert + 1] = color;
+
+            uvs[iVert] = new Vector2(distanceRatio, 0);
+            uvs[iVert] = new Vector2(distanceRatio, 1);
 
             if (iTri >= 0)
             {
@@ -92,6 +117,8 @@ public class TrailTwoPointRenderer : MonoBehaviour
         Mesh mesh = meshFilter.mesh;
         mesh.Clear();
         mesh.vertices = vertices;
+        mesh.colors = colors;
+        mesh.uv = uvs;
         mesh.triangles = triangles;
         return mesh;
     }
@@ -99,5 +126,21 @@ public class TrailTwoPointRenderer : MonoBehaviour
     private bool IsValid()
     {
         return pointA != null && pointB != null;
+    }
+
+    private float Velocity(Snapshot x, Snapshot y, float t)
+    {
+        float distance = (y.MidPoint - x.MidPoint).magnitude;
+        return distance / t;
+    }
+
+    private float CurrentVelocity()
+    {
+        return snapshots.Count >= 2 ? Velocity(snapshots[snapshots.Count - 1], snapshots[snapshots.Count - 2], Time.deltaTime) : 0;
+    }
+
+    private bool IsHighVelocity()
+    {
+        return Time.time - lastHighVelocityTime - startTime < trailTime;
     }
 }
