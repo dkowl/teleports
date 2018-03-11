@@ -42,12 +42,25 @@ public abstract class ModelSpawner : LoadableBehaviour {
         }
     }
 
+    protected override void UnloadDataInternal()
+    {
+        DespawnAll();
+    }
+
     protected abstract GameObject GetModel(int id = 0);
 
     private void Despawn(int id = 0)
     {
         Destroy(modelSpawnData[id].spawnedObject);
         modelSpawnData[id].spawnedObject.tag = "Untagged";
+    }
+
+    private void DespawnAll()
+    {
+        for (int i = 0; i < modelSpawnData.Count; i++)
+        {
+            Despawn(i);
+        }
     }
 
     public void ShouldRespawn()

@@ -14,10 +14,11 @@ public abstract class LoadableBehaviour : MonoBehaviour {
 
     private void OnDestroy()
     {
-        Unsubscribe();
+        UnloadData();
     }
 
     protected abstract void LoadDataInternal();
+    protected virtual void UnloadDataInternal() { }
 
     protected virtual void SubscribeInternal()
     {
@@ -41,6 +42,12 @@ public abstract class LoadableBehaviour : MonoBehaviour {
 
         Subscribe();
         LoadDataInternal();
+    }
+
+    public void UnloadData()
+    {
+        Unsubscribe();
+        UnloadDataInternal();
     }
 
     private void Subscribe()

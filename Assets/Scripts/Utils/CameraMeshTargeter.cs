@@ -6,15 +6,15 @@ using Sirenix.OdinInspector;
 public class CameraMeshTargeter : MonoBehaviour {
 
     [SerializeField] private MeshComponentType meshComponentType;
-    [SerializeField, OnValueChanged("UpdateMesh")] MeshFilter meshFilter;
-    [SerializeField, OnValueChanged("UpdateMesh")] SkinnedMeshRenderer skinnedMeshRenderer;
-    [SerializeField] Camera cam;
-    [SerializeField] float paddingPercentage = 0.25f;
-    [SerializeField] float distance = 10.0f;
+    [SerializeField, OnValueChanged("UpdateMesh")] private MeshFilter meshFilter;
+    [SerializeField, OnValueChanged("UpdateMesh")] private SkinnedMeshRenderer skinnedMeshRenderer;
+    [SerializeField] private Camera cam;
+    [SerializeField] private float paddingPercentage = 0.25f;
+    [SerializeField] private float distance = 10.0f;
 
-    Mesh mesh;
+    private Mesh mesh;
 
-    void Awake()
+    private void Awake()
     {
         cam = GetComponent<Camera>();
         if (meshFilter != null)
@@ -27,34 +27,30 @@ public class CameraMeshTargeter : MonoBehaviour {
         }
     }
 
-    void Update()
+    private void Update()
     {
-        Target();
+        if(MeshComponent != null) Target();
     }
 
     public void SetTarget(MeshFilter newTarget)
     {
-        if (newTarget != null)
-        {
-            meshComponentType = MeshComponentType.MeshFilter;
-            meshFilter = newTarget;
-            UpdateMesh();
-            Target();
-        }
+        if (newTarget == null) return;
+        meshComponentType = MeshComponentType.MeshFilter;
+        meshFilter = newTarget;
+        UpdateMesh();
+        Target();
     }
 
     public void SetTarget(SkinnedMeshRenderer newTarget)
     {
-        if (newTarget != null)
-        {
-            meshComponentType = MeshComponentType.SkinnedMeshRenderer;
-            skinnedMeshRenderer = newTarget;
-            UpdateMesh();
-            Target();
-        }
+        if (newTarget == null) return;
+        meshComponentType = MeshComponentType.SkinnedMeshRenderer;
+        skinnedMeshRenderer = newTarget;
+        UpdateMesh();
+        Target();
     }
 
-    void Target()
+    private void Target()
     {
         List<Vector3> cornerPoints = GetAllCornerPoints(mesh.bounds, MeshComponent.transform.position);
         Rect boundingViewportRect = GetBoundingViewportRect(cornerPoints, cam);
@@ -62,7 +58,7 @@ public class CameraMeshTargeter : MonoBehaviour {
         SetDistanceFromPoint(cam, mesh.bounds.center, distance);
     }
 
-    void UpdateMesh()
+    private void UpdateMesh()
     {
         switch (meshComponentType)
         {
@@ -75,12 +71,12 @@ public class CameraMeshTargeter : MonoBehaviour {
         }
     }
 
-    List<Vector3> GetAllCornerPoints(Bounds bounds, Vector3 position)
+    private static List<Vector3> GetAllCornerPoints(Bounds bounds, Vector3 position)
     {
 
-        List<Vector3> result = new List<Vector3>();
+        var result = new List<Vector3>();
 
-        byte[,] axisMultiplierValues = new byte[8, 3]
+        var axisMultiplierValues = new byte[8, 3]
         {
             {0, 0, 0 },
             {0, 0, 1 },
@@ -105,7 +101,7 @@ public class CameraMeshTargeter : MonoBehaviour {
         return result;
     }
 
-    Rect GetBoundingViewportRect(List<Vector3> points, Camera camera)
+    private static Rect GetBoundingViewportRect(List<Vector3> points, Camera camera)
     {
         float 
             minX = Mathf.Infinity,
@@ -128,7 +124,7 @@ public class CameraMeshTargeter : MonoBehaviour {
         return new Rect(position, size);
     }
 
-    void CenterCameraOnViewportPoint(Camera camera, Vector2 targetPoint)
+    private static void CenterCameraOnViewportPoint(Camera camera, Vector2 targetPoint)
     {
         Vector3 rightOffset = camera.transform.right;
         rightOffset *= camera.orthographicSize * 2 * camera.aspect;
@@ -141,36 +137,28 @@ public class CameraMeshTargeter : MonoBehaviour {
         camera.transform.localPosition += rightOffset + upOffset;
     }
 
-    void CenterCameraOnViewportRect(Camera camera, Rect rect, float paddingPercentage)
+    private static void CenterCameraOnViewportRect(Camera camera, Rect rect, float paddingPercentage)
     {
         CenterCameraOnViewportPoint(camera, rect.center);
         camera.orthographicSize *= Mathf.Max(rect.height, rect.width);
         camera.orthographicSize *= 1 / (1 - paddingPercentage);
     }
 
-    float DistanceFromPointToPlane(Vector3 point, Vector3 planeNormal, Vector3 planePoint)
+    private static float DistanceFromPointToPlane(Vector3 point, Vector3 planeNormal, Vector3 planePoint)
     {
         planeNormal.Normalize();
         return Vector3.Dot(planeNormal, point - planePoint);
     }
 
-    void SetDistanceFromPoint(Camera camera, Vector3 point, float targetDistance)
+    private static void SetDistanceFromPoint(Camera camera, Vector3 point, float targetDistance)
     {
         Vector3 planeNormal = -camera.transform.forward;
         float currentDistance = DistanceFromPointToPlane(camera.transform.position, planeNormal, point);
         camera.transform.localPosition += (targetDistance - currentDistance) * planeNormal;
     }
 
-    public Camera Camera
-    {
-        get { return cam; }
-    }
-
-    public MeshFilter TargetMeshFilter
-    {
-        get { return meshFilter; }
-    }
-
+    public Camera Camera => cam;
+    public MeshFilter TargetMeshFilter => meshFilter;
     private Component MeshComponent
     {
         get
