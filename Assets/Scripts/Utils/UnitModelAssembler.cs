@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class UnitModelAssembler {
 
-	public static GameObject GetModel(UnitData unitData, bool withItems = true)
+	public static GameObject GetModel(UnitData unitData, bool withItems = true, bool withUiAnimationController = false)
     {
         var result = Object.Instantiate(MainData.Game.GetRace(unitData.RaceName).Graphics.ModelObject);
 
@@ -15,6 +15,7 @@ public static class UnitModelAssembler {
                 ItemSpawner.Spawn(result, itemInfo.Item, itemInfo.PrimarySlot);
             }
         }
+        if(withUiAnimationController) AddUiAnimationController(result, unitData);
 
         return result;
     }

@@ -14,8 +14,7 @@ public class UnitModelSpawner : ModelSpawner {
             Debug.LogWarning("UnitData is null");
             return null;
         }
-        var result = UnitModelAssembler.GetModel(unitData);
-        UnitModelAssembler.AddUiAnimationController(result, unitData);
+        var result = UnitModelAssembler.GetModel(unitData, true, true);
         return result;
     }
 

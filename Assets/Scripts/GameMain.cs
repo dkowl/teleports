@@ -98,7 +98,7 @@ public class GameMain : MonoBehaviour {
         //try finding player object, if not found, spawn new one
         if(player != null) { return; }
 
-        player = PlayerSpawner.Spawn(new PlayerSpawnerParams(gameObject, PlayerSpawnerParams.SpawnType.World));
+        player = PlayerSpawner.Spawn(gameObject);
        
     }
 

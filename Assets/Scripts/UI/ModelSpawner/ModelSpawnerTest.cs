@@ -31,7 +31,8 @@ public class ModelSpawnerTest : LoadableBehaviour {
             {
                 Destroy(teleport);
             }
-            character = PlayerSpawner.Spawn(new PlayerSpawnerParams(gameObject, PlayerSpawnerParams.SpawnType.UI));
+
+            character = UnitModelAssembler.GetModel(MainData.CurrentPlayerData.UnitData, true, true);
             if (character == null)
                 return;
             character.transform.localPosition += characterLocalPositionOffset;

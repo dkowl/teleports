@@ -8,7 +8,7 @@ public class PlayerAndTeleportMS : ModelSpawner {
     {
         if(id%2 == 0)
         {
-            return PlayerSpawner.Spawn(new PlayerSpawnerParams(gameObject, PlayerSpawnerParams.SpawnType.UI));
+            return UnitModelAssembler.GetModel(MainData.CurrentPlayerData.UnitData, true, true);
         }
         else
         {
