@@ -32,9 +32,5 @@ public class InventoryUnitPortrait : PortraitUI, IMessageHandler<ItemEquipMessag
         Debug.Log("Message handled LOL!");
     }
 
-    public UnitModelSpawner UnitModelSpawner
-    {
-        get { return unitModelSpawner; }
-    }
-
+    public UnitModelSpawner UnitModelSpawner => unitModelSpawner;
 }

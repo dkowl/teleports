@@ -9,37 +9,36 @@ public abstract class ModelSpawner : LoadableBehaviour {
 
     public event Action onSpawnEvent;
 
-    override protected void LoadDataInternal()
+    protected override void LoadDataInternal()
     {
-        if (Application.isPlaying)
+        if (!Application.isPlaying) return;
+
+        for(int i = 0; i<modelSpawnData.Count; i++)
         {
-            for(int i = 0; i<modelSpawnData.Count; i++)
+            ModelSpawnData msData = modelSpawnData[i];
+            if (msData.spawnedObject != null)
             {
-                ModelSpawnData msData = modelSpawnData[i];
-                if (msData.spawnedObject != null)
+                if (msData.shouldRespawn)
                 {
-                    if (msData.shouldRespawn)
-                    {
-                        Despawn(i);
-                    }
-                    else
-                        continue;
+                    Despawn(i);
                 }
-
-                GameObject modelObject = GetModel(i);
-
-                if(modelObject == null)
-                {
+                else
                     continue;
-                }
-
-                msData.spawnedObject = modelObject;
-                msData.spawnedObject.transform.localPosition += msData.localPositionOffset;
-                msData.spawnedObject.transform.Rotate(msData.localRotationOffset, Space.Self);
-
-                msData.shouldRespawn = false;
-                if(onSpawnEvent != null) onSpawnEvent();
             }
+
+            GameObject modelObject = GetModel(i);
+
+            if(modelObject == null)
+            {
+                continue;
+            }
+
+            msData.spawnedObject = modelObject;
+            msData.spawnedObject.transform.localPosition += msData.localPositionOffset;
+            msData.spawnedObject.transform.Rotate(msData.localRotationOffset, Space.Self);
+
+            msData.shouldRespawn = false;
+            onSpawnEvent?.Invoke();
         }
     }
 

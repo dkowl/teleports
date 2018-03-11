@@ -7,11 +7,11 @@ using Teleports.Utils;
 
 public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipMessage> {
 
-    [SerializeField] UnitData unitData;
-    [SerializeField] InventoryItemSpawner itemSpawner;
-    [SerializeField] CameraMeshTargeter cameraTargeter;
-    [SerializeField] TextureAtlasFromModels inventoryAtlas;
-    [SerializeField] InventorySlotSpawner inventorySlotSpawner;
+    [SerializeField] private UnitData unitData;
+    [SerializeField] private InventoryItemSpawner itemSpawner;
+    [SerializeField] private CameraMeshTargeter cameraTargeter;
+    [SerializeField] private TextureAtlasFromModels inventoryAtlas;
+    [SerializeField] private InventorySlotSpawner inventorySlotSpawner;
 
     private bool isInitialized;
     private Dictionary<ItemData, int> internalItemIds;
@@ -22,16 +22,18 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
 
     private void OnEnable()
     {
+        unitData = MainData.CurrentPlayerData.UnitData;
+
         internalItemIds = new Dictionary<ItemData, int>();
         
-        InventoryData.Add(MainData.Game.GetItem("Greatsword"));
+        /*InventoryData.Add(MainData.Game.GetItem("Greatsword"));
         InventoryData.Add(MainData.Game.GetItem("Handaxe"));
         InventoryData.Add(MainData.Game.GetItem("Warhammer"));
         InventoryData.Add(MainData.Game.GetItem("DoubleAxe"));
         InventoryData.Add(MainData.Game.GetItem("Greataxe"));
         InventoryData.Add(MainData.Game.GetItem("Longsword"));
         InventoryData.Add(MainData.Game.GetItem("Mace"));
-        InventoryData.Add(MainData.Game.GetItem("ShortSword"));
+        InventoryData.Add(MainData.Game.GetItem("ShortSword"));*/
 
         MainData.MessageBus.Subscribe(this);
 
@@ -95,10 +97,7 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
             Select(new ItemSlotID(InventoryData.InventorySlotIdOf(message.Item)));
         }
 
-        if (UpdateUiEvent != null)
-        {
-            UpdateUiEvent();
-        }
+        UpdateUiEvent?.Invoke();
     }
 
     private void InitItemSpawner()
@@ -114,26 +113,12 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
         itemSpawner = new InventoryItemSpawner(itemPrefabs);
     }
 
-    public UnitData UnitData
-    {
-        get { return unitData; }
-    }
-
-    public InventoryData InventoryData
-    {
-        get { return UnitData.Inventory; }
-    }
-
-    public bool IsInitialized
-    {
-        get { return isInitialized; }
-    }
-
-    public Texture2D ItemIconAtlas
-    {
-        get { return inventoryAtlas.Atlas; }
-    }
-
+    public UnitData UnitData => unitData;
+    public InventoryData InventoryData => UnitData.Inventory;
+    public bool IsInitialized => isInitialized;
+    public Texture2D ItemIconAtlas => inventoryAtlas.Atlas;
+    public ItemSlotID SelectedSlotId => selectedSlotId;
+    public bool IsInventorySlotSelected => !selectedSlotId.isEquipmentSlot;
     public ItemData SelectedItem
     {
         get
@@ -149,18 +134,6 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
         }
     }
 
-    public ItemSlotID SelectedSlotId
-    {
-        get { return selectedSlotId; }
-    }
-
-    public bool IsInventorySlotSelected
-    {
-        get
-        {
-            return !selectedSlotId.isEquipmentSlot;
-        }
-    }
 
     [System.Serializable]
     public struct ItemSlotID

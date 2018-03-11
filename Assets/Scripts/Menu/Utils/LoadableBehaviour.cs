@@ -17,9 +17,9 @@ public abstract class LoadableBehaviour : MonoBehaviour {
         Unsubscribe();
     }
 
-    abstract protected void LoadDataInternal();
+    protected abstract void LoadDataInternal();
 
-    virtual protected void SubscribeInternal()
+    protected virtual void SubscribeInternal()
     {
         MainData.OnInitializedEvent += LoadData;
         SaveData.OnCharacterIDChangedEvent += LoadData;
@@ -27,7 +27,7 @@ public abstract class LoadableBehaviour : MonoBehaviour {
         Menu.OnHideEvent += LoadData;
     }
 
-    virtual protected void UnsubscribeInternal()
+    protected virtual void UnsubscribeInternal()
     {
         MainData.OnInitializedEvent -= LoadData;
         SaveData.OnCharacterIDChangedEvent -= LoadData;
@@ -37,29 +37,26 @@ public abstract class LoadableBehaviour : MonoBehaviour {
 
     public void LoadData()
     {
-        if (gameObject.activeSelf)
-        {
-            Subscribe();
-            LoadDataInternal();
-        }
+        if (!gameObject.activeSelf) return;
+
+        Subscribe();
+        LoadDataInternal();
     }
 
     private void Subscribe()
     {
-        if (!isSubscribed)
-        {
-            Unsubscribe();
-            SubscribeInternal();
-            isSubscribed = true;
-        }
+        if (isSubscribed) return;
+
+        Unsubscribe();
+        SubscribeInternal();
+        isSubscribed = true;
     }
 
     private void Unsubscribe()
     {
-        if (isSubscribed)
-        {
-            UnsubscribeInternal();
-            isSubscribed = false;
-        }
+        if (!isSubscribed) return;
+
+        UnsubscribeInternal();
+        isSubscribed = false;
     }
 }

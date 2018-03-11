@@ -9,9 +9,14 @@ public class UnitModelSpawner : ModelSpawner {
 
     protected override GameObject GetModel(int id = 0)
     {
-        if (unitData == null) return null;
-
-        return UnitModelAssembler.GetModel(unitData);
+        if (unitData == null)
+        {
+            Debug.LogWarning("UnitData is null");
+            return null;
+        }
+        var result = UnitModelAssembler.GetModel(unitData);
+        UnitModelAssembler.AddUiAnimationController(result, unitData);
+        return result;
     }
 
     public UnitData UnitData
@@ -36,11 +41,5 @@ public class UnitModelSpawner : ModelSpawner {
         }
     }
 
-    public Transform UnitTransform
-    {
-        get
-        {
-            return modelSpawnData[0].spawnedObject.transform;
-        }
-    }
+    public Transform UnitTransform => modelSpawnData[0].spawnedObject.transform;
 }

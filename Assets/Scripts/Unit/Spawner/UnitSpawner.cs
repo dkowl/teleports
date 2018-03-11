@@ -8,8 +8,8 @@ public static class UnitSpawner  {
 
     public static Unit SpawnUnit(GameObject gameObject, UnitData unitData)
     {
-        Race raceData = MainData.Game.GetRace(unitData.RaceName);
-        GameObject raceObject = Object.Instantiate(raceData.Graphics.ModelObject, gameObject.transform);
+        GameObject raceObject = UnitModelAssembler.GetModel(unitData);
+        raceObject.transform.parent = gameObject.transform;
 
         Unit unit = gameObject.AddComponent<Unit>();
         unit.UnitData = new UnitData(unitData);
