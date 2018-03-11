@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class InventoryItemSpawner  {
 
-    List<GameObject> itemPrefabs;
-    List<GameObject> spawnedItems;
+    [SerializeField] List<GameObject> itemPrefabs;
+    [SerializeField] List<GameObject> spawnedItems;
 
     public InventoryItemSpawner(List<GameObject> itemPrefabs)
     {
@@ -42,8 +43,5 @@ public class InventoryItemSpawner  {
         return spawnedItems[internalItemId].GetComponent<MeshFilter>();
     }
 
-    public IList<GameObject> SpawnedItems
-    {
-        get { return spawnedItems.AsReadOnly(); }
-    }
+    public IList<GameObject> SpawnedItems => spawnedItems.AsReadOnly();
 }

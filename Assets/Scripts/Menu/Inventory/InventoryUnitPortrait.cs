@@ -8,6 +8,11 @@ public class InventoryUnitPortrait : PortraitUI, IMessageHandler<ItemEquipMessag
 
     [SerializeField] UnitModelSpawner unitModelSpawner;
 
+    private void OnDestroy()
+    {
+        MainData.MessageBus.Unsubscribe(this);
+    }
+
     protected override CameraMeshTargeter.MeshComponentType SpawnModel()
     {
         InventoryMenu parentMenu = GetComponentInParent<InventoryMenu>();

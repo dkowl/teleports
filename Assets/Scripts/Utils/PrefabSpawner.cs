@@ -52,20 +52,18 @@ public class PrefabSpawner : MonoBehaviour {
     public void Spawn()
     {
         Initialize();
-        if (prefab != null)
+        if (prefab == null) return;
+        for (currentId = 0; currentId < spawnAmount; currentId++)
         {
-            for (currentId = 0; currentId < spawnAmount; currentId++)
+            if (!isSpawned[currentId] || spawnedInstances[currentId] == null)
             {
-                if (!isSpawned[currentId] || spawnedInstances[currentId] == null)
-                {
-                    BeforeSpawn();
-                    spawnedInstances[currentId] = Instantiate(prefab, transform);
-                    spawnedInstances[currentId].hideFlags = HideFlags.DontSave;
-                    AfterSpawn();
-                }
-                isSpawned[currentId] = true;
-
+                BeforeSpawn();
+                spawnedInstances[currentId] = Instantiate(prefab, transform);
+                spawnedInstances[currentId].hideFlags = HideFlags.DontSave;
+                AfterSpawn();
             }
+            isSpawned[currentId] = true;
+
         }
     }
 
@@ -87,10 +85,7 @@ public class PrefabSpawner : MonoBehaviour {
         Spawn();
     }
 
-    public GameObject SpawnedInstance
-    {
-        get { return spawnedInstances[currentId]; }
-    }
+    public GameObject SpawnedInstance => spawnedInstances[currentId];
 
     public GameObject Prefab
     {

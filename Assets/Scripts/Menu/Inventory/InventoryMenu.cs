@@ -41,6 +41,12 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
         itemSpawner.Spawn();        
     }
 
+    private void OnDestroy()
+    {
+        itemSpawner.Despawn();
+        MainData.MessageBus.Unsubscribe(this);
+    }
+
     private void Start()
     {
         inventoryAtlas = new TextureAtlasFromModels(Utils.GetComponentsInObjects<MeshFilter>(itemSpawner.SpawnedItems).ToArray(), cameraTargeter);

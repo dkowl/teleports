@@ -17,14 +17,14 @@ public class InventorySlotSpawner : PrefabSpawner {
             parentMenu = GetComponentInParent<InventoryMenu>();
         Debug.Assert(parentMenu != null);
 
-        InventorySlotUI inventorySlotUI = SpawnedInstance.GetComponent<InventorySlotUI>();
+        InventorySlotUI inventorySlotUi = SpawnedInstance.GetComponent<InventorySlotUI>();
         switch (slotType)
         {
             case SpawnedSlotType.Inventory:
-                inventorySlotUI.Initialize(parentMenu, new InventoryMenu.ItemSlotID(currentId));
+                inventorySlotUi.Initialize(parentMenu, new InventoryMenu.ItemSlotID(currentId));
                 break;
             case SpawnedSlotType.Equipment:
-                inventorySlotUI.Initialize(parentMenu, new InventoryMenu.ItemSlotID(eqSlotOrder[currentId]), eqSlotNames[currentId]);
+                inventorySlotUi.Initialize(parentMenu, new InventoryMenu.ItemSlotID(eqSlotOrder[currentId]), eqSlotNames[currentId]);
                 break;
         }
     }
@@ -38,10 +38,5 @@ public class InventorySlotSpawner : PrefabSpawner {
     {
         Inventory,
         Equipment
-    }
-
-    private bool IsEq
-    {
-        get { return slotType == SpawnedSlotType.Equipment; }
     }
 }
