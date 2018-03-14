@@ -69,7 +69,7 @@ public abstract class ModelSpawner : LoadableBehaviour {
         {
             i.shouldRespawn = true;
         }
-        LoadDataInternal();
+        //LoadDataInternal();
     }
 
     public void AddSpawnData()

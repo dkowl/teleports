@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAndTeleportMS : ModelSpawner {
+public class PlayerAndTeleportMS : ModelSpawner, IMessageHandler<ItemEquipMessage> {
 
     protected override GameObject GetModel(int id)
     {
         if(id%2 == 0)
         {
-            return UnitModelAssembler.GetModel(MainData.CurrentPlayerData.UnitData, true, true);
+            var result = UnitModelAssembler.GetModel(MainData.CurrentPlayerData.UnitData, true, true);
+            result.transform.parent = transform;
+            return result;
         }
         else
         {
@@ -25,11 +27,18 @@ public class PlayerAndTeleportMS : ModelSpawner {
     {
         base.SubscribeInternal();
         SaveData.OnCharacterIDChangedEvent += ShouldRespawn;
+        MainData.MessageBus.Subscribe(this);
     }
 
     protected override void UnsubscribeInternal()
     {
         base.UnsubscribeInternal();
         SaveData.OnCharacterIDChangedEvent -= ShouldRespawn;
+        MainData.MessageBus.Unsubscribe(this);
+    }
+
+    public void Handle(ItemEquipMessage message)
+    {
+        ShouldRespawn();
     }
 }

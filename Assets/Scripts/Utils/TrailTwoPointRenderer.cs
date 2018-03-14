@@ -63,7 +63,6 @@ public class TrailTwoPointRenderer : MonoBehaviour
 
     private void UpdateVelocity()
     {
-        Debug.Log(CurrentVelocity());
         if (CurrentVelocity() > minimalVelocity) lastHighVelocityTime = Time.time - startTime;
     }
 
@@ -92,14 +91,15 @@ public class TrailTwoPointRenderer : MonoBehaviour
             vertices[iVert] = curSnapshot.aPos;
             vertices[iVert + 1] = curSnapshot.bPos;
 
-            float distanceRatio = 1.0f - (float)iRelative / validSnapshotCount;
+            float distanceRatio = 1.0f - (float)iRelative / (validSnapshotCount - 1);
+            Debug.LogFormat("distanceRatio: {0}, iRelative: {1}, validSnapshotCount: {2}", distanceRatio, iRelative, validSnapshotCount);
 
             Color color = gradient.Evaluate(distanceRatio);
             colors[iVert] = color;
             colors[iVert + 1] = color;
 
             uvs[iVert] = new Vector2(distanceRatio, 0);
-            uvs[iVert] = new Vector2(distanceRatio, 1);
+            uvs[iVert + 1] = new Vector2(distanceRatio, 1);
 
             if (iTri >= 0)
             {

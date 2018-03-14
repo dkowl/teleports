@@ -25,6 +25,11 @@ public class MessageBus : IMessageBus {
     {
         foreach(Type type in GetHandledMessageTypes(subscriber))
         {
+            if (!subscribers.ContainsKey(type))
+            {
+                Debug.LogWarning("Unsubscribing from a message you are not subscribed to");
+                continue;
+            }
             subscribers[type].Remove(subscriber);
         }
     }

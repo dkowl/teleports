@@ -10,6 +10,7 @@ public static class UnitSpawner  {
     {
         GameObject raceObject = UnitModelAssembler.GetModel(unitData);
         raceObject.transform.parent = gameObject.transform;
+        raceObject.transform.localPosition = Vector3.zero;
 
         Unit unit = gameObject.AddComponent<Unit>();
         unit.UnitData = new UnitData(unitData);
