@@ -45,7 +45,7 @@ public class TrailTwoPointRenderer : MonoBehaviour
         snapshots = new List<Snapshot>();
         startTime = Time.time;
 
-        if(trailContainerObject == null) trailContainerObject = new GameObject("Trails");
+        if(trailContainerObject == null)  SpawnContainerObject();
         trailObject = new GameObject(name + "_Trail");
         trailObject.transform.parent = trailContainerObject.transform;
         meshFilter = trailObject.AddComponent<MeshFilter>();
@@ -58,11 +58,32 @@ public class TrailTwoPointRenderer : MonoBehaviour
         Debug.Assert(IsValid(), "Transforms not set");
     }
 
+    private void OnEnable()
+    {
+        trailObject.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        trailObject.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(trailObject);
+    }
+
     private void Update()
     {
         snapshots.Add(new Snapshot(pointA.position, pointB.position, Time.time - startTime));
         UpdateVelocity();
         meshFilter.mesh = IsHighVelocity() ? GenerateMesh() : null;
+    }
+
+    private static void SpawnContainerObject()
+    {
+        trailContainerObject = trailContainerObject = new GameObject("Trails");
+        DontDestroyOnLoad(trailContainerObject);
     }
 
     private void UpdateVelocity()
