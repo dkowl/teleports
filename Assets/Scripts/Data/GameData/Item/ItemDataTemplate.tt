@@ -1,0 +1,22 @@
+<#@ include file = "..\..\Templates\DataClass.tt"
+#><#@ output extension = "/" #><# 
+	const string dataType = "Item"; 
+	Field[] fields = {
+		new Field("string", "displayName", false),
+		new Field("string", "uniqueName", false), 
+	    new Field("ItemType", "typeFlags", false, 
+	        new List<string>{"FoldoutGroup(\"Details\", false)", "EnumToggleButtons"}), 
+	    new Field("WeaponData", "weaponData", true,
+			new List<string>{"FoldoutGroup(\"Details\", false)", "ShowIf(\"IsWeapon\")"}),
+	    new Field("List<SkillID>", "skills", false,
+	        new List<string>{"FoldoutGroup(\"Details\", false)"}),
+	    new Field("List<PerkID>", "perks", false,
+	        new List<string>{"FoldoutGroup(\"Details\", false)"}), 
+	    new Field("EquipmentSlotCombination[]", "slotCombinations", false,
+	        new List<string>{"FoldoutGroup(\"Details\", false)"}),
+	    new Field("ItemGraphics", "graphics", false,
+	        new List<string>{"FoldoutGroup(\"Details\", false)"}),
+	};
+    var dataClass = new DataClass(dataType, fields);
+    Generate(dataClass);
+#>

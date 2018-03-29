@@ -7,10 +7,6 @@ using UnityEngine.UI;
 public class ItemGraphics : ScriptableObject {
 
     [SerializeField] private GameObject prefab;
-    [SerializeField] private Sprite icon;
 
-    public GameObject Prefab
-    {
-        get { return prefab; }
-    }
+    public GameObject Prefab => prefab;
 }

@@ -3,18 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-[System.Serializable]
-public class ItemData {
-
-    [SerializeField] private string displayName;
-    [SerializeField] private string uniqueName;
-    [SerializeField, FoldoutGroup("Details", false), EnumToggleButtons] private ItemType typeFlags;
-    [SerializeField, FoldoutGroup("Details", false), ShowIf("IsWeapon")] private WeaponData weaponData;
-    [SerializeField, FoldoutGroup("Details", false)] private List<SkillID> skills;
-    [SerializeField, FoldoutGroup("Details", false)] private List<PerkID> perks;
-    [SerializeField, FoldoutGroup("Details", false)] private EquipmentSlotCombination[] slotCombinations;
-    [SerializeField, FoldoutGroup("Details", false)] private ItemGraphics graphics;
-
+public partial class ItemData {
+    
     protected ItemData()
     {
         displayName = DataDefaults.itemName;
@@ -23,18 +13,6 @@ public class ItemData {
         weaponData = new WeaponData();
         skills = new List<SkillID>();
         perks = new List<PerkID>();
-    }
-
-    public ItemData(ItemData other)
-    {
-        displayName = other.displayName;
-        uniqueName = other.UniqueName;
-        typeFlags = other.typeFlags;
-        weaponData = other.weaponData;
-        skills = other.skills;
-        perks = other.perks;
-        slotCombinations = other.slotCombinations;
-        graphics = other.graphics;
     }
 
     public void CorrectInvalidData()
@@ -112,40 +90,6 @@ public class ItemData {
         return null;
     }
 
-    public string DisplayName
-    {
-        get { return displayName; }
-    }
-
-    public string UniqueName
-    {
-        get { return uniqueName; }
-    }
-
-    public WeaponData WeaponData
-    {
-        get { return weaponData; }
-    }
-
-    public List<PerkID> Perks
-    {
-        get { return perks; }
-    }
-
-    public IList<EquipmentSlotCombination> SlotCombinations
-    {
-        get { return System.Array.AsReadOnly(slotCombinations); }
-    }
-
-    public ItemGraphics Graphics
-    {
-        get { return graphics; }
-    }
-
     //properties for [ShowIf] Odin Attribute
-    bool IsWeapon
-    {
-        get { return IsType(ItemType.Weapon); }
-    }
-
+    bool IsWeapon => IsType(ItemType.Weapon);
 }
