@@ -3,19 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class UnlockableSlot {
+public class UnlockableSlot : IDeepCopyable {
 
     [SerializeField] protected bool isEmpty = true;
     [SerializeField] protected bool isLocked = true;
 
-    public bool IsEmpty
+    public UnlockableSlot()
     {
-        get { return isEmpty; }
+        isEmpty = true;
+        isLocked = true;
     }
 
-    public bool IsLocked
+    public UnlockableSlot(UnlockableSlot other)
     {
-        get { return isLocked; }
+        isEmpty = other.IsEmpty;
+        isLocked = other.IsLocked;
+    }
+
+    public virtual object DeepCopy()
+    {
+        return new UnlockableSlot(this);
     }
 
     public void Unlock()
@@ -25,7 +32,7 @@ public class UnlockableSlot {
 
     //returns false when filling fails
     //otherwise fills and returns true
-    public bool Fill()
+    public bool TryFill()
     {
         if (!isLocked)
         {
@@ -37,4 +44,7 @@ public class UnlockableSlot {
             return false;
         }
     }
+
+    public bool IsEmpty => isEmpty;
+    public bool IsLocked => isLocked;
 }

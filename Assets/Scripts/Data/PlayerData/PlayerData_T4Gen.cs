@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 using Teleports.Utils;
 
 [System.Serializable]
-public partial class PlayerData {
+public partial class PlayerData : IDeepCopyable {
 
 	[SerializeField] private string characterName;
 	[SerializeField] private int xp;
@@ -19,17 +19,22 @@ public partial class PlayerData {
 	[SerializeField] private UnitData unitData;
 	[SerializeField] private TeleportData teleportData;
 
+
 	public PlayerData(PlayerData other){
 		characterName = other.characterName;
 		xp = other.xp;
 		level = other.level;
 		rankPoints = other.rankPoints;
-		skillTreeSlots = new List<SkillTreeSlot>(other.skillTreeSlots);
-		skills = new List<SkillID>(other.skills);
+		skillTreeSlots = other.skillTreeSlots.DeepCopy();
+		skills = other.skills.DeepCopy();
 		primarySkill = new SkillID(other.primarySkill);
-		secondarySkills = new List<SkillID>(other.secondarySkills);
+		secondarySkills = other.secondarySkills.DeepCopy();
 		unitData = new UnitData(other.unitData);
 		teleportData = new TeleportData(other.teleportData);
+	}
+
+	public object DeepCopy(){
+		return new PlayerData(this);
 	}
 
 

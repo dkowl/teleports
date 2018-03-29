@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 
 [System.Serializable]
-public class MappedListID {
+public class MappedListID : IDeepCopyable {
 
     //TODO: make this a generic class for all IDs like ItemID, SkillID, PerkID, implement == operators
     [ValueDropdown("DropdownValues"), SerializeField] private string name;
@@ -17,6 +17,11 @@ public class MappedListID {
     public MappedListID(string name)
     {
         this.name = name;
+    }
+
+    public object DeepCopy()
+    {
+        return new MappedListID(this);
     }
 
     public override bool Equals(object obj)
@@ -48,8 +53,5 @@ public class MappedListID {
         return null;
     }
 
-    public string Name
-    {
-        get { return name; }
-    }
+    public string Name => name;
 }

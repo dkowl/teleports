@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 using Teleports.Utils;
 
 [System.Serializable]
-public partial class UnitAttributesData {
+public partial class UnitAttributesData : IDeepCopyable {
 
 	[SerializeField] private Attribute size;
 	[SerializeField] private Attribute height;
@@ -18,6 +18,7 @@ public partial class UnitAttributesData {
 	[SerializeField] private Attribute reach;
 	[SerializeField] private Attribute viewRange;
 
+
 	public UnitAttributesData(UnitAttributesData other){
 		size = new Attribute(other.size);
 		height = new Attribute(other.height);
@@ -28,6 +29,10 @@ public partial class UnitAttributesData {
 		rotationSpeed = new Attribute(other.rotationSpeed);
 		reach = new Attribute(other.reach);
 		viewRange = new Attribute(other.viewRange);
+	}
+
+	public object DeepCopy(){
+		return new UnitAttributesData(this);
 	}
 
 	public Attribute GetAttribute(AttributeType type)

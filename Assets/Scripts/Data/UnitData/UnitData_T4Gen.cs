@@ -20,6 +20,7 @@ public partial class UnitData : IDeepCopyable {
 	[SerializeField] private bool usesRootMotion;
 	[SerializeField] private bool isInitialized;
 
+
 	public UnitData(UnitData other){
 		unitName = other.unitName;
 		raceName = other.raceName;

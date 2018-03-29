@@ -11,6 +11,7 @@ public partial class ComboData : IDeepCopyable {
 	[SerializeField] private List<SkillData> skillDatas;
 	[SerializeField] private List<int> dataIds;
 
+
 	public ComboData(ComboData other){
 		skillDatas = other.skillDatas.DeepCopy();
 		dataIds = new List<int>(other.dataIds);

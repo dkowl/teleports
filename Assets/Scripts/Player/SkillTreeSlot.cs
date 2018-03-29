@@ -7,17 +7,26 @@ public class SkillTreeSlot : UnlockableSlot {
 
     [SerializeField] private int skillTreeId = 0;
 
-    public int SkillTreeId
+    public SkillTreeSlot()
     {
-        get
-        {
-            return skillTreeId;
-        }
+        skillTreeId = 0;
     }
 
-    public void setTree(int id)
+    public SkillTreeSlot(SkillTreeSlot other) : base(other)
     {
-        if(Fill())
+        skillTreeId = other.skillTreeId;
+    }
+
+    public override object DeepCopy()
+    {
+        return new SkillTreeSlot(this);
+    }
+
+    public int SkillTreeId => skillTreeId;
+
+    public void SetTree(int id)
+    {
+        if(TryFill())
         {
             skillTreeId = id;
         }

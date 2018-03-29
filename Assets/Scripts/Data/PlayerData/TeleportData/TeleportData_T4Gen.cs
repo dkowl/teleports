@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 using Teleports.Utils;
 
 [System.Serializable]
-public partial class TeleportData {
+public partial class TeleportData : IDeepCopyable {
 
 	[SerializeField] private int tier;
 	[SerializeField] private Attribute power;
@@ -14,12 +14,12 @@ public partial class TeleportData {
 	[SerializeField] private List<GemSlot> gemSlots;
 	[SerializeField] private string graphicsId;
 
+
 	public TeleportData(TeleportData other){
 		tier = other.tier;
 		power = new Attribute(other.power);
 		time = new Attribute(other.time);
 		gemSlots = new List<GemSlot>(other.gemSlots);
-		gemSlots = other.gemSlots;
 		graphicsId = other.graphicsId;
 	}
 

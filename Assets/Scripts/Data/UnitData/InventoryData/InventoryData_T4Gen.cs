@@ -6,11 +6,12 @@ using Sirenix.OdinInspector;
 using Teleports.Utils;
 
 [System.Serializable]
-public partial class InventoryData {
+public partial class InventoryData : IDeepCopyable {
 
 	[SerializeField] private int maxSlots;
 	[SerializeField] private EquipmentData equipmentData;
 	[SerializeField] private List<InventorySlotData> invSlots;
+
 
 	public InventoryData(InventoryData other){
 		maxSlots = other.maxSlots;
