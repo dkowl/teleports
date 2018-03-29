@@ -22,6 +22,7 @@ public class InventoryUnitPortrait : PortraitUI, IMessageHandler<ItemEquipMessag
         unitModelSpawner.SetPositionOffset(SpecialSpawnPlaces.InventoryPlayer);
         unitModelSpawner.SetRotationOffset(new Vector3(0, 180, 0));
         unitModelSpawner.UnitData = parentMenu.UnitData;
+        unitModelSpawner.SpawnAll();
 
         MainData.MessageBus.Subscribe(this);
 

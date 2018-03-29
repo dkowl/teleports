@@ -13,33 +13,7 @@ public abstract class ModelSpawner : LoadableBehaviour {
     {
         if (!Application.isPlaying) return;
 
-        for(int i = 0; i<modelSpawnData.Count; i++)
-        {
-            ModelSpawnData msData = modelSpawnData[i];
-            if (msData.spawnedObject != null)
-            {
-                if (msData.shouldRespawn)
-                {
-                    Despawn(i);
-                }
-                else
-                    continue;
-            }
-
-            GameObject modelObject = GetModel(i);
-
-            if(modelObject == null)
-            {
-                continue;
-            }
-
-            msData.spawnedObject = modelObject;
-            msData.spawnedObject.transform.localPosition += msData.localPositionOffset;
-            msData.spawnedObject.transform.Rotate(msData.localRotationOffset, Space.Self);
-
-            msData.shouldRespawn = false;
-            onSpawnEvent?.Invoke();
-        }
+        SpawnAll();
     }
 
     protected override void UnloadDataInternal()
@@ -48,6 +22,42 @@ public abstract class ModelSpawner : LoadableBehaviour {
     }
 
     protected abstract GameObject GetModel(int id = 0);
+
+    public void SpawnAll()
+    {
+        for (int i = 0; i < modelSpawnData.Count; i++)
+        {
+            Spawn(i);
+        }
+    }
+
+    private void Spawn(int modelId)
+    {
+
+        ModelSpawnData msData = modelSpawnData[modelId];
+        if (msData.spawnedObject != null)
+        {
+            if (msData.shouldRespawn)
+            {
+                Despawn(modelId);
+            }
+            else
+                return;
+        }
+
+        GameObject modelObject = GetModel(modelId);
+        if (modelObject == null)
+        {
+            return;
+        }
+
+        msData.spawnedObject = modelObject;
+        msData.spawnedObject.transform.localPosition += msData.localPositionOffset;
+        msData.spawnedObject.transform.Rotate(msData.localRotationOffset, Space.Self);
+
+        msData.shouldRespawn = false;
+        onSpawnEvent?.Invoke();
+    }
 
     private void Despawn(int id = 0)
     {
