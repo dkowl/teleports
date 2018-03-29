@@ -65,7 +65,7 @@ public class TrailTwoPointRenderer : MonoBehaviour
 
     private void OnDisable()
     {
-        trailObject.SetActive(false);
+        trailObject?.SetActive(false);
     }
 
     private void OnDestroy()
