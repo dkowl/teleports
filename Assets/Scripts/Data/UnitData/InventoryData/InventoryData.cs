@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Configuration;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Teleports.Utils;
@@ -27,6 +28,11 @@ public partial class InventoryData {
         {
             Debug.LogWarning("Invalid inventory size '" + invSlots.Count.ToString() + "', changing to '" + maxSlots + "'");
             Utils.InitWithNew(ref invSlots, maxSlots);
+        }
+
+        foreach (var slot in invSlots)
+        {
+            slot.CorrectInvalidData();
         }
     }
 

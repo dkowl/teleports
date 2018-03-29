@@ -36,6 +36,15 @@ public class InventorySlotData : IDeepCopyable
         return new InventorySlotData(this);
     }
 
+    public void CorrectInvalidData()
+    {
+        if (Empty)
+        {
+            item = null;
+        }
+        item?.CorrectInvalidData();
+    }
+
     public void Add(ItemData item)
     {
         if (this.item == item)
@@ -54,14 +63,6 @@ public class InventorySlotData : IDeepCopyable
         if (!Empty)
         {
             count--;
-        }
-    }
-
-    public void CorrectInvalidData()
-    {
-        if (Empty)
-        {
-            item = null;
         }
     }
 
