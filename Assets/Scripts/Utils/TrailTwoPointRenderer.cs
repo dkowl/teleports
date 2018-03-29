@@ -13,6 +13,8 @@ public class TrailTwoPointRenderer : MonoBehaviour
     [SerializeField] private Gradient gradient;
     [SerializeField] private float minimalVelocity;
 
+    private static GameObject trailContainerObject;
+
     private List<Snapshot> snapshots;
     private float startTime;
 
@@ -43,7 +45,9 @@ public class TrailTwoPointRenderer : MonoBehaviour
         snapshots = new List<Snapshot>();
         startTime = Time.time;
 
+        if(trailContainerObject == null) trailContainerObject = new GameObject("Trails");
         trailObject = new GameObject(name + "_Trail");
+        trailObject.transform.parent = trailContainerObject.transform;
         meshFilter = trailObject.AddComponent<MeshFilter>();
         meshRenderer = trailObject.AddComponent<MeshRenderer>();
         if (material != null)

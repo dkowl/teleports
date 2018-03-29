@@ -13,7 +13,6 @@ public static class PlayerSpawner {
 
         var playerObject = new GameObject("Player");
         playerObject.transform.localPosition = Vector3.zero;
-        playerObject.transform.localEulerAngles = new Vector3(0, 180, 0);
         playerObject.transform.parent = parentObject.transform;
         playerObject.tag = "Player";
         playerObject.layer = 9;          
