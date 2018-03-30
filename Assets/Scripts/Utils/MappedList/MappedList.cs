@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
@@ -17,7 +18,8 @@ public class MappedList<T> : IMappedList<T> where T : IUniqueName {
     {
         dict = new Dictionary<string, T>();
 
-        foreach (T item in list)
+        list = list?.Distinct().ToList();
+        foreach (var item in list)
         {
             dict.Add(item.UniqueName, item);
         }
@@ -87,6 +89,12 @@ public class MappedList<T> : IMappedList<T> where T : IUniqueName {
             int id = Random.Range(0, list.Count);
             return list[id];
         }
+    }
+
+    public void AddItems(List<T> items)
+    {
+        list.AddRange(items);
+        MakeDict();
     }
 
     private Dictionary<string, T> Dict

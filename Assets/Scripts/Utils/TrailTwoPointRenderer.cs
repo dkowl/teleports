@@ -117,7 +117,7 @@ public class TrailTwoPointRenderer : MonoBehaviour
             vertices[iVert + 1] = curSnapshot.bPos;
 
             float distanceRatio = 1.0f - (float)iRelative / (validSnapshotCount - 1);
-            Debug.LogFormat("distanceRatio: {0}, iRelative: {1}, validSnapshotCount: {2}", distanceRatio, iRelative, validSnapshotCount);
+            //Debug.LogFormat("distanceRatio: {0}, iRelative: {1}, validSnapshotCount: {2}", distanceRatio, iRelative, validSnapshotCount);
 
             Color color = gradient.Evaluate(distanceRatio);
             colors[iVert] = color;

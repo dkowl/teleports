@@ -9,7 +9,7 @@ public class RaceAnimationData {
 	[SerializeField] private AnimationClip idle01;
 	[SerializeField] private AnimationClip idle02;
 
-    public AnimationClip Move { get { return move; } }
-    public AnimationClip Idle01 { get { return idle02; } }
-    public AnimationClip Idle02 { get { return idle02; } }
+    public AnimationClip Move => move;
+    public AnimationClip Idle01 => idle02;
+    public AnimationClip Idle02 => idle02;
 }

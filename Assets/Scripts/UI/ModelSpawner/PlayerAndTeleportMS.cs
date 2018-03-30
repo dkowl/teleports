@@ -6,6 +6,7 @@ public class PlayerAndTeleportMS : ModelSpawner, IMessageHandler<ItemEquipMessag
 
     protected override GameObject GetModel(int id)
     {
+        if (MainData.CurrentPlayerData == null) return null;
         if(id%2 == 0)
         {
             var result = UnitModelAssembler.GetModel(MainData.CurrentPlayerData.UnitData, true, true);

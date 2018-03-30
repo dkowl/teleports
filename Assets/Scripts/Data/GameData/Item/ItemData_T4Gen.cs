@@ -16,6 +16,7 @@ public partial class ItemData : IDeepCopyable , IUniqueName {
 	[SerializeField, FoldoutGroup("Details", false)] private List<PerkID> perks;
 	[SerializeField, FoldoutGroup("Details", false)] private EquipmentSlotCombination[] slotCombinations;
 	[SerializeField, FoldoutGroup("Details", false)] private ItemGraphics graphics;
+	[SerializeField, FoldoutGroup("Details", false)] private ItemGraphicsID graphicsId;
 
 
 	public ItemData(ItemData other){
@@ -27,6 +28,7 @@ public partial class ItemData : IDeepCopyable , IUniqueName {
 		perks = new List<PerkID>(other.perks);
 		slotCombinations = other.slotCombinations;
 		graphics = other.graphics;
+		graphicsId = other.graphicsId;
 	}
 
 	public object DeepCopy(){
@@ -43,6 +45,7 @@ public partial class ItemData : IDeepCopyable , IUniqueName {
 	public List<PerkID> Perks => perks;
 	public EquipmentSlotCombination[] SlotCombinations => slotCombinations;
 	public ItemGraphics Graphics => graphics;
+	public ItemGraphicsID GraphicsId => graphicsId;
 
 
 }

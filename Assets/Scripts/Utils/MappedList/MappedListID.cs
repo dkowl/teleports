@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 public class MappedListID : IDeepCopyable {
 
     //TODO: make this a generic class for all IDs like ItemID, SkillID, PerkID, implement == operators
-    [ValueDropdown("DropdownValues"), SerializeField] private string name;
+    [ValueDropdown("DropdownValues"), SerializeField] protected string name;
 
     public MappedListID()
     {
@@ -46,6 +46,11 @@ public class MappedListID : IDeepCopyable {
     public static implicit operator MappedListID (string str)
     {
         return new MappedListID(str);
+    }
+
+    public override string ToString()
+    {
+        return name;
     }
 
     protected virtual IList<string> DropdownValues()

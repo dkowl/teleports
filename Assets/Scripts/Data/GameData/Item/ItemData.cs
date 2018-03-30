@@ -22,6 +22,8 @@ public partial class ItemData {
             Debug.LogWarning("Item graphics not found, loading defaults...");
             graphics = MainData.Defaults.itemGraphics;
         }
+
+        graphicsId = new ItemGraphicsID(graphics.UniqueName);
     }
 
     public ItemData(ItemData other, string uniqueName) :

@@ -79,7 +79,9 @@ public abstract class ModelSpawner : LoadableBehaviour {
         {
             i.shouldRespawn = true;
         }
-        //LoadDataInternal();
+        Debug.Log("I SHOULD RESPWAN");
+        Debug.Log(MainData.Save.CurrentSlotID);
+        LoadDataInternal();
     }
 
     public void AddSpawnData()

@@ -12,34 +12,10 @@ public class Race : UniqueScriptableObject {
     [SerializeField] private List<EquipmentSlotType> availableEqSlots = new List<EquipmentSlotType>();
     [SerializeField] private TextAsset description;
     [SerializeField] private RaceGraphics graphics;
-    
-    public UnitData BaseStats
-    {
-        get {
-            return baseStats;
-        }
-    }
 
-    public bool IsPlayable
-    {
-        get { return isPlayable; }
-    }
-
-    public List<EquipmentSlotType> AvailableEqSlots
-    {
-        get { return availableEqSlots; }
-    }
-
-    public string Description
-    {
-        get { return description.text; }
-    }
-
-    public RaceGraphics Graphics
-    {
-        get
-        {
-            return graphics;
-        }
-    }
+    public UnitData BaseStats => baseStats;
+    public bool IsPlayable => isPlayable;
+    public List<EquipmentSlotType> AvailableEqSlots => availableEqSlots;
+    public string Description => description.text;
+    public RaceGraphics Graphics => graphics;
 }
