@@ -13,6 +13,7 @@ public class AssetEditor : MonoBehaviour
 
     public void Awake()
     {
+        if(instance != null && instance != this) Destroy(instance);
         instance = this;
     }
 
