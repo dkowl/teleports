@@ -42,6 +42,8 @@ public abstract class UnitController : MonoBehaviour {
         {
             unit.MovingState.Start(target.Position);
         }
+
+        unit.RotatingState.RotationTarget = Quaternion.LookRotation(target.Position - unit.transform.position);
     }
 
     private bool IsActive

@@ -53,13 +53,15 @@ public partial class ItemData {
         ItemData other = (ItemData)obj;
         //Debug.Log("Comparing (displayName) " + displayName + " vs " + other.displayName);
         //Debug.Log("Comparing (uniqueName) " + uniqueName + " vs " + other.uniqueName);
-        return uniqueName == other.uniqueName;
+        return 
+            uniqueName == other.uniqueName &&
+            graphicsId == other.graphicsId;
         //TODO: compare more accurately than just names            
     }
 
     public override int GetHashCode()
     {
-        return uniqueName.GetHashCode();
+        return uniqueName.GetHashCode() ^ graphicsId.GetHashCode();
         //TODO: calculate more accurately than just names     
     }
 
