@@ -18,8 +18,8 @@ public static class PlayerSpawner {
         playerObject.layer = 9;          
 
         UnitData unitData = new UnitData(playerData.UnitData);
-        unitData.Inventory.Add(MainData.Game.GetItem("Dagger"));
-        unitData.Inventory.Equip("Dagger");
+        //unitData.Inventory.Add(MainData.Game.GetItem("Dagger"));
+        //unitData.Inventory.Equip("Dagger");
         Unit unit = UnitSpawner.SpawnUnit(playerObject, unitData);
 
         //Components to be initialized
