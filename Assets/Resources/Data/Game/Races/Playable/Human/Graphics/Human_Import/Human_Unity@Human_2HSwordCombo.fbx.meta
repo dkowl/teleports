@@ -61,6 +61,7 @@ ModelImporter:
     100106: Reference
     100108: Spine01_Bind
     100110: Spine02_Bind
+    100112: group1
     400000: Chest_Bind
     400002: Head_Bind
     400004: Head_End
@@ -117,6 +118,7 @@ ModelImporter:
     400106: Reference
     400108: Spine01_Bind
     400110: Spine02_Bind
+    400112: group1
     7400000: Take 001
     9500000: //RootNode
   externalObjects: {}
@@ -130,7 +132,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    motionNodeName: 
+    motionNodeName: Reference
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 

@@ -61,6 +61,8 @@ ModelImporter:
     100106: Reference
     100108: Spine01_Bind
     100110: Spine02_Bind
+    100112: group1
+    100114: Player_Male
     400000: Chest_Bind
     400002: Head_Bind
     400004: Head_End
@@ -117,9 +119,18 @@ ModelImporter:
     400106: Reference
     400108: Spine01_Bind
     400110: Spine02_Bind
+    400112: group1
+    400114: Player_Male
+    4300000: Player_Male
     7400000: Take 001
     9500000: //RootNode
-  externalObjects: {}
+    13700000: Player_Male
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert4
+    second: {fileID: 2100000, guid: 8384e6df2fee1114292fa86704f75695, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -130,7 +141,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    motionNodeName: 
+    motionNodeName: Reference
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
