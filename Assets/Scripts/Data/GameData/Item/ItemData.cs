@@ -24,6 +24,8 @@ public partial class ItemData {
         }
 
         graphicsId = new ItemGraphicsID(graphics.UniqueName);
+
+        WeaponData.CorrectInvalidData();
     }
 
     public ItemData(ItemData other, string uniqueName) :

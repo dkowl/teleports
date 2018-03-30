@@ -2,9 +2,9 @@
 #><#@ output extension = "/" #><# 
 	const string dataType = "Weapon"; 
 	Field[] fields = {
-		new Field("Attribute", "minDamage", true,
-		    new List<string>{"InlineProperty", "GUIColor(1, 0.5f, 0.5f)"}),
-	    new Field("Attribute", "maxDamage", true,
+	    new Field("Attribute", "damage", true,
+	        new List<string>{"InlineProperty", "GUIColor(1, 0.5f, 0.5f)"}),
+	    new Field("Attribute", "damageSpread", true,
 	        new List<string>{"InlineProperty", "GUIColor(1, 0.5f, 0.5f)"}),
 	    new Field("Attribute", "reach", true,
 	        new List<string>{"InlineProperty", "GUIColor(0.5f, 0.5f, 1)"}),

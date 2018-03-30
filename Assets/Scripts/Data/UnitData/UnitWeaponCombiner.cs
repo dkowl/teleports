@@ -37,8 +37,8 @@ public class UnitWeaponCombiner {
         damageBonus = new DamageBonus(weapon, bonusStr, bonusDex, bonusInt);
         speedBonus = new SpeedBonus(weapon, bonusStr, bonusDex, bonusInt, weapon.CastTime + weapon.AfterCastLockTime);
         reachBonus = new ReachBonus(weapon, bonusStr, bonusDex, bonusInt);
-        minDamage = (int)weapon.MinDamage + (int)damageBonus.Value;
-        maxDamage = (int)weapon.MaxDamage + (int)damageBonus.Value;
+        minDamage = (int)weapon.MinDamage;
+        maxDamage = (int)weapon.MaxDamage;
         weaponReach = weapon.Reach + reachBonus.Value;
         totalReach = weaponReach + MainData.Game.GetSkill(unit.MainAttack).Reach;
         castTime = weapon.CastTime * speedBonus.Multiplier;

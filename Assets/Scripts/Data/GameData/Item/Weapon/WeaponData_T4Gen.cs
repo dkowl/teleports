@@ -8,8 +8,8 @@ using Teleports.Utils;
 [System.Serializable]
 public partial class WeaponData : IDeepCopyable {
 
-	[SerializeField, InlineProperty, GUIColor(1, 0.5f, 0.5f)] private Attribute minDamage;
-	[SerializeField, InlineProperty, GUIColor(1, 0.5f, 0.5f)] private Attribute maxDamage;
+	[SerializeField, InlineProperty, GUIColor(1, 0.5f, 0.5f)] private Attribute damage;
+	[SerializeField, InlineProperty, GUIColor(1, 0.5f, 0.5f)] private Attribute damageSpread;
 	[SerializeField, InlineProperty, GUIColor(0.5f, 0.5f, 1)] private Attribute reach;
 	[SerializeField, InlineProperty, GUIColor(0.5f, 1, 0.5f)] private Attribute castTime;
 	[SerializeField, InlineProperty, GUIColor(0.5f, 1, 0.5f)] private Attribute afterCastLockTime;
@@ -28,8 +28,8 @@ public partial class WeaponData : IDeepCopyable {
 
 
 	public WeaponData(WeaponData other){
-		minDamage = new Attribute(other.minDamage);
-		maxDamage = new Attribute(other.maxDamage);
+		damage = new Attribute(other.damage);
+		damageSpread = new Attribute(other.damageSpread);
 		reach = new Attribute(other.reach);
 		castTime = new Attribute(other.castTime);
 		afterCastLockTime = new Attribute(other.afterCastLockTime);
@@ -55,10 +55,10 @@ public partial class WeaponData : IDeepCopyable {
 	{
 		switch(type)
 		{
-			case AttributeType.MinDamage:
-				return minDamage;
-			case AttributeType.MaxDamage:
-				return maxDamage;
+			case AttributeType.Damage:
+				return damage;
+			case AttributeType.DamageSpread:
+				return damageSpread;
 			case AttributeType.Reach:
 				return reach;
 			case AttributeType.CastTime:
@@ -99,8 +99,8 @@ public partial class WeaponData : IDeepCopyable {
 		GetAttribute(type).Modify(bonus, multiplier);
 	}
 
-	public float MinDamage => minDamage.Value;
-	public float MaxDamage => maxDamage.Value;
+	public float Damage => damage.Value;
+	public float DamageSpread => damageSpread.Value;
 	public float Reach => reach.Value;
 	public float CastTime => castTime.Value;
 	public float AfterCastLockTime => afterCastLockTime.Value;
@@ -118,8 +118,8 @@ public partial class WeaponData : IDeepCopyable {
 	public float IntReachBonus => intReachBonus.Value;
 
 	public enum AttributeType {
-		MinDamage,
-		MaxDamage,
+		Damage,
+		DamageSpread,
 		Reach,
 		CastTime,
 		AfterCastLockTime,
