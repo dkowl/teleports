@@ -10,6 +10,7 @@
 	    new Field("Attribute", "castTime", true), 
 	    new Field("Attribute", "totalCastTime", true), 
 	    new Field("Attribute", "earlyBreakTime", true), 
+	    new Field("float", "naturalSpeedModifier", false, null, "1.0f"), 
 		new Field("SkillType", "skillType", false), 
 		new Field("AttackData", "attackData", true),
 		new Field("ComboID", "comboId", true), 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class SkillSpawner  {
 
-    public static Skill SpawnSkill(GameObject gameObject, SkillData skillData)
+    public static Skill SpawnSkill(GameObject gameObject, SkillData skillData, Unit unit)
     {
         GameObject skillGameObject = new GameObject(skillData.UniqueName);
         skillGameObject.transform.parent = gameObject.transform;
@@ -24,7 +24,7 @@ public static class SkillSpawner  {
 
         if (skillComponent != null)
         {
-            skillComponent.Initialize(skillData);
+            skillComponent.Initialize(skillData, unit);
         }
         return skillComponent;
     }

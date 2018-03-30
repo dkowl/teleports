@@ -6,10 +6,6 @@ using Sirenix.OdinInspector.Editor.Drawers;
 
 public partial class WeaponData {
 
-    public WeaponData()
-    {
-    }
-
     //temporary
     public void CorrectInvalidData()
     {

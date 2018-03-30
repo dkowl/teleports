@@ -7,8 +7,10 @@ using Sirenix.OdinInspector;
 public abstract partial class Skill : MonoBehaviour, IUniqueName {
 
     [SerializeField] protected SkillData data;
+    protected Unit unit;
     private float currentCooldown;
     private int comboCounter;
+    private float speedModifier;
 
     protected virtual void Update()
     {
@@ -23,10 +25,12 @@ public abstract partial class Skill : MonoBehaviour, IUniqueName {
         return new SkillTargeter_Point();
     }
 
-    public void Initialize(SkillData skillData)
+    public void Initialize(SkillData skillData, Unit unit)
     {
         data = new SkillData(skillData);
+        this.unit = unit;
         OnInitialize();
+        speedModifier = GetSpeedModifier(unit);
     }
 
     protected virtual void OnInitialize() { }
@@ -94,6 +98,11 @@ public abstract partial class Skill : MonoBehaviour, IUniqueName {
         return caster.Reach + caster.Size + Reach;
     }
 
+    public virtual float GetSpeedModifier(Unit unit)
+    {
+        return Data.NaturalSpeedModifier;
+    }
+
     public bool HasNextCombo => comboCounter < MaxCombo;
     public virtual int MaxCombo => 0;
     public SkillData Data => data;
@@ -104,9 +113,9 @@ public abstract partial class Skill : MonoBehaviour, IUniqueName {
     public float Reach => Data.Reach;
     public float ReachAngle => Data.ReachAngle;
     public float Cooldown => Data.Cooldown;
-    public float CastTime => Data.CastTime;
-    public float TotalCastTime => Data.TotalCastTime;
-    public float EarlyBreakTime => Data.EarlyBreakTime;
+    public float CastTime => Data.CastTime / speedModifier;
+    public float TotalCastTime => Data.TotalCastTime / speedModifier;
+    public float EarlyBreakTime => Data.EarlyBreakTime / speedModifier;
     public SkillGraphics Graphics => Data.Graphics;
     private SkillTargeter Targeter => GetTargeter();
 

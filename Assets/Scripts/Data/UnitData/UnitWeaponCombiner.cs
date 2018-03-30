@@ -16,6 +16,7 @@ public class UnitWeaponCombiner {
     [SerializeField] private int maxDamage;
     [SerializeField] private float weaponReach;
     [SerializeField] private float totalReach;
+    [SerializeField] private float attackSpeedModifier;
     [SerializeField] private float castTime;
     [SerializeField] private float afterCastLockTime;
     [SerializeField] private float attackTime;
@@ -41,6 +42,7 @@ public class UnitWeaponCombiner {
         maxDamage = (int)weapon.MaxDamage;
         weaponReach = weapon.Reach + reachBonus.Value;
         totalReach = weaponReach + MainData.Game.GetSkill(unit.MainAttack).Reach;
+        attackSpeedModifier = weapon.SpeedModifier * speedBonus.Multiplier;
         castTime = weapon.CastTime * speedBonus.Multiplier;
         afterCastLockTime = weapon.AfterCastLockTime * speedBonus.Multiplier;
         attackTime = castTime + afterCastLockTime;
@@ -48,55 +50,17 @@ public class UnitWeaponCombiner {
         damagePerSecond = ((float)(minDamage + maxDamage) / 2) / attackTime;        
     }
 
-    public int DamageRoll
-    {
-        get { return Random.Range(minDamage, maxDamage); }
-    }
-
-    public bool CanUse
-    {
-        get { return canUse; }
-    }
-
-    public DamageBonus DamageBonusData
-    {
-        get { return damageBonus; }
-    }
-
-    public SpeedBonus SpeedBonusData
-    {
-        get { return speedBonus; }
-    }
-
-    public ReachBonus ReachBonusData
-    {
-        get { return reachBonus; }
-    }
-
-    public int MinDamage
-    {
-        get { return minDamage; }
-    }
-
-    public int MaxDamage
-    {
-        get { return maxDamage; }
-    }
-
-    public float WeaponReach
-    {
-        get { return weaponReach; }
-    }
-
-    public float AttacksPerSecond
-    {
-        get { return attacksPerSecond; }
-    }
-
-    public float DamagePerSecond
-    {
-        get { return damagePerSecond; }
-    }
+    public int DamageRoll => Random.Range(minDamage, maxDamage);
+    public bool CanUse => canUse;
+    public DamageBonus DamageBonusData => damageBonus;
+    public SpeedBonus SpeedBonusData => speedBonus;
+    public ReachBonus ReachBonusData => reachBonus;
+    public int MinDamage => minDamage;
+    public int MaxDamage => maxDamage;
+    public float WeaponReach => weaponReach;
+    public float AttackSpeedModifier => attackSpeedModifier;
+    public float AttacksPerSecond => attacksPerSecond;
+    public float DamagePerSecond => damagePerSecond;
 
     public class AbilityStatBonus
     {
@@ -105,25 +69,10 @@ public class UnitWeaponCombiner {
         protected float intComponent;
         protected float value;
 
-        public float StrComponent
-        {
-            get { return strComponent; }
-        }
-
-        public float DexComponent
-        {
-            get { return dexComponent; }
-        }
-
-        public float IntComponent
-        {
-            get { return intComponent; }
-        }
-
-        public float Value
-        {
-            get { return value; }
-        }
+        public float StrComponent => strComponent;
+        public float DexComponent => dexComponent;
+        public float IntComponent => intComponent;
+        public float Value => value;
 
         public override string ToString()
         {
@@ -178,10 +127,7 @@ public class UnitWeaponCombiner {
             intComponent = perSecondDeltas[2];
         }
 
-        public float Multiplier
-        {
-            get { return multiplier; }
-        }
+        public float Multiplier => multiplier;
     }
 
     public class ReachBonus : AbilityStatBonus

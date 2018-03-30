@@ -30,6 +30,17 @@ public class Attack : Skill {
         return result;
     }
 
+    public override float GetSpeedModifier(Unit unit)
+    {
+        float result = base.GetSpeedModifier(unit);
+        if (DamageType == AttackDamageType.Weapon)
+        {
+            result *= unit.WeaponCombiner.AttackSpeedModifier;
+        }
+        Debug.LogFormat("The speed modifier is: {0}", result);
+        return result;
+    }
+
     protected virtual float Damage(Unit caster)
     {
         switch (DamageType)

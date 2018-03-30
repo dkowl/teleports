@@ -187,6 +187,7 @@ public class Unit : MonoBehaviour
     public Skill PrimarySkill => skills.Count > 0 ? skills[0] : null;
     public UnitGraphics Graphics => graphics;
     public UnitPhysics Physics => physics;
+
     private WeaponData WeaponData{
         get
         {

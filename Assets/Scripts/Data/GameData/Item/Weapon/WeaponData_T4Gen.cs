@@ -11,6 +11,7 @@ public partial class WeaponData : IDeepCopyable {
 	[SerializeField, InlineProperty, GUIColor(1, 0.5f, 0.5f)] private Attribute damage;
 	[SerializeField, InlineProperty, GUIColor(1, 0.5f, 0.5f)] private Attribute damageSpread;
 	[SerializeField, InlineProperty, GUIColor(0.5f, 0.5f, 1)] private Attribute reach;
+	[SerializeField, InlineProperty, GUIColor(0.5f, 0.5f, 1)] private Attribute speedModifier;
 	[SerializeField, InlineProperty, GUIColor(0.5f, 1, 0.5f)] private Attribute castTime;
 	[SerializeField, InlineProperty, GUIColor(0.5f, 1, 0.5f)] private Attribute afterCastLockTime;
 	[SerializeField, InlineProperty, GUIColor(1, 0.5f, 0.5f)] private Attribute strRequired;
@@ -25,12 +26,17 @@ public partial class WeaponData : IDeepCopyable {
 	[SerializeField, InlineProperty, GUIColor(0.5f, 0.5f, 1)] private Attribute intDamageBonus;
 	[SerializeField, InlineProperty, GUIColor(0.5f, 0.5f, 1)] private Attribute intSpeedBonus;
 	[SerializeField, InlineProperty, GUIColor(0.5f, 0.5f, 1)] private Attribute intReachBonus;
+	[SerializeField, InlineProperty] private SkillID basicSkillId;
 
+	public WeaponData() {
+		speedModifier = new Attribute(1.0f);
+	}
 
 	public WeaponData(WeaponData other){
 		damage = new Attribute(other.damage);
 		damageSpread = new Attribute(other.damageSpread);
 		reach = new Attribute(other.reach);
+		speedModifier = new Attribute(other.speedModifier);
 		castTime = new Attribute(other.castTime);
 		afterCastLockTime = new Attribute(other.afterCastLockTime);
 		strRequired = new Attribute(other.strRequired);
@@ -45,6 +51,7 @@ public partial class WeaponData : IDeepCopyable {
 		intDamageBonus = new Attribute(other.intDamageBonus);
 		intSpeedBonus = new Attribute(other.intSpeedBonus);
 		intReachBonus = new Attribute(other.intReachBonus);
+		basicSkillId = new SkillID(other.basicSkillId);
 	}
 
 	public object DeepCopy(){
@@ -61,6 +68,8 @@ public partial class WeaponData : IDeepCopyable {
 				return damageSpread;
 			case AttributeType.Reach:
 				return reach;
+			case AttributeType.SpeedModifier:
+				return speedModifier;
 			case AttributeType.CastTime:
 				return castTime;
 			case AttributeType.AfterCastLockTime:
@@ -102,6 +111,7 @@ public partial class WeaponData : IDeepCopyable {
 	public float Damage => damage.Value;
 	public float DamageSpread => damageSpread.Value;
 	public float Reach => reach.Value;
+	public float SpeedModifier => speedModifier.Value;
 	public float CastTime => castTime.Value;
 	public float AfterCastLockTime => afterCastLockTime.Value;
 	public float StrRequired => strRequired.Value;
@@ -116,11 +126,13 @@ public partial class WeaponData : IDeepCopyable {
 	public float IntDamageBonus => intDamageBonus.Value;
 	public float IntSpeedBonus => intSpeedBonus.Value;
 	public float IntReachBonus => intReachBonus.Value;
+	public SkillID BasicSkillId => basicSkillId;
 
 	public enum AttributeType {
 		Damage,
 		DamageSpread,
 		Reach,
+		SpeedModifier,
 		CastTime,
 		AfterCastLockTime,
 		StrRequired,

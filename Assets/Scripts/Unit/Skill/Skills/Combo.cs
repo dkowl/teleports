@@ -13,7 +13,7 @@ public class Combo : Skill
         skills = new List<Skill>();
         foreach (SkillData skillData in comboData.SkillDatas)
         {
-            skills.Add(SkillSpawner.SpawnSkill(gameObject, skillData));
+            skills.Add(SkillSpawner.SpawnSkill(gameObject, skillData, unit));
         }
         data = comboData.SkillDatas[comboData.DataIds[0]];
     }
@@ -41,6 +41,11 @@ public class Combo : Skill
     {
         //Debug.Log("Calling Combo.GetReach()");
         return CurrentSkill.GetReach(caster);
+    }
+
+    public override float GetSpeedModifier(Unit caster)
+    {
+        return CurrentSkill.GetSpeedModifier(caster);
     }
 
     protected Skill CurrentSkill => skills[comboData.DataIds[ComboCounter]];

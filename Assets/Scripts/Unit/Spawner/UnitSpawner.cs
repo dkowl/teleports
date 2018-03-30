@@ -78,7 +78,7 @@ public static class UnitSpawner  {
 
         foreach (var skillAsset in skills)
         {
-            unit.Skills.Add(SkillSpawner.SpawnSkill(skillsObject, skillAsset.Data));
+            unit.Skills.Add(SkillSpawner.SpawnSkill(skillsObject, skillAsset.Data, unit));
         }
     }
 }

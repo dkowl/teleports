@@ -25,7 +25,8 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
         unitData = MainData.CurrentPlayerData.UnitData;
 
         internalItemIds = new Dictionary<ItemData, int>();
-        
+
+        //InventoryData.Add(MainData.Game.GetItem("Dagger"));
         /*InventoryData.Add(MainData.Game.GetItem("Greatsword"));
         InventoryData.Add(MainData.Game.GetItem("Handaxe"));
         InventoryData.Add(MainData.Game.GetItem("Warhammer"));

@@ -8,6 +8,8 @@
 	        new List<string>{"InlineProperty", "GUIColor(1, 0.5f, 0.5f)"}),
 	    new Field("Attribute", "reach", true,
 	        new List<string>{"InlineProperty", "GUIColor(0.5f, 0.5f, 1)"}),
+	    new Field("Attribute", "speedModifier", true,
+	        new List<string>{"InlineProperty", "GUIColor(0.5f, 0.5f, 1)"}, "new Attribute(1.0f)"),
 	    new Field("Attribute", "castTime", true,
 	        new List<string>{"InlineProperty", "GUIColor(0.5f, 1, 0.5f)"}),
 	    new Field("Attribute", "afterCastLockTime", true,
@@ -36,6 +38,8 @@
 	        new List<string>{"InlineProperty", "GUIColor(0.5f, 0.5f, 1)"}),
 	    new Field("Attribute", "intReachBonus", true,
 	        new List<string>{"InlineProperty", "GUIColor(0.5f, 0.5f, 1)"}),
+	    new Field("SkillID", "basicSkillId", true,
+	        new List<string>{"InlineProperty"}),
 	};
     var dataClass = new DataClass(dataType, fields);
     Generate(dataClass);

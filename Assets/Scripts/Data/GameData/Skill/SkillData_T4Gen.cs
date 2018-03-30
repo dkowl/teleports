@@ -16,6 +16,7 @@ public partial class SkillData : IDeepCopyable , IUniqueName {
 	[SerializeField] private Attribute castTime;
 	[SerializeField] private Attribute totalCastTime;
 	[SerializeField] private Attribute earlyBreakTime;
+	[SerializeField] private float naturalSpeedModifier;
 	[SerializeField] private SkillType skillType;
 	[SerializeField] private AttackData attackData;
 	[SerializeField] private ComboID comboId;
@@ -23,6 +24,7 @@ public partial class SkillData : IDeepCopyable , IUniqueName {
 	[SerializeField] private SkillGraphics graphics;
 
 	public SkillData() {
+		naturalSpeedModifier = 1.0f;
 		blockRotation = true;
 	}
 
@@ -35,6 +37,7 @@ public partial class SkillData : IDeepCopyable , IUniqueName {
 		castTime = new Attribute(other.castTime);
 		totalCastTime = new Attribute(other.totalCastTime);
 		earlyBreakTime = new Attribute(other.earlyBreakTime);
+		naturalSpeedModifier = other.naturalSpeedModifier;
 		skillType = other.skillType;
 		attackData = new AttackData(other.attackData);
 		comboId = new ComboID(other.comboId);
@@ -80,6 +83,7 @@ public partial class SkillData : IDeepCopyable , IUniqueName {
 	public float CastTime => castTime.Value;
 	public float TotalCastTime => totalCastTime.Value;
 	public float EarlyBreakTime => earlyBreakTime.Value;
+	public float NaturalSpeedModifier => naturalSpeedModifier;
 	public SkillType SkillType => skillType;
 	public AttackData AttackData => attackData;
 	public ComboID ComboId => comboId;
