@@ -6,17 +6,18 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class UnitAnimator : MonoBehaviour {
 
-    Unit unit;
-    Animator animator;
+    private Unit unit;
+    private Animator animator;
 
-    int moveSpeedHash;
-    int isMovingHash;
-    int castHash, castResetHash;
-    int castStartHash01, castStartHash02; //there are two of these to handle transitioning from one skill casted immediately after another, so both clips can exist in the state machine simultaneously
-    bool cast02Flag;
-    List<int> triggers;
+    private int moveSpeedHash;
+    private int isMovingHash;
+    private int castHash, castResetHash;
+    private int castStartHash01, castStartHash02; //there are two of these to handle transitioning from one skill casted immediately after another, so both clips can exist in the state machine simultaneously
+    private int castSpeedHash;
+    private bool cast02Flag;
+    private List<int> triggers;
 
-    void Awake()
+    private void Awake()
     {
         unit = GetComponentInParent<Unit>();
         animator = GetComponent<Animator>();
@@ -27,25 +28,26 @@ public class UnitAnimator : MonoBehaviour {
         castStartHash01 = Animator.StringToHash("castStart01");
         castStartHash02 = Animator.StringToHash("castStart02");
         castResetHash = Animator.StringToHash("castReset");
+        castSpeedHash = Animator.StringToHash("castSpeed");
 
         triggers = new List<int> { castHash, castResetHash, castStartHash01, castStartHash02 };
     }
-    
-	void Start () {
+
+    private void Start () {
         Subscribe();
 	}
-	
-	void Update () {
+
+    private void Update () {
         animator.SetFloat(moveSpeedHash, unit.MoveSpeed);
         animator.SetBool(isMovingHash, unit.IsMoving);
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         Unsubscribe();
     }
 
-    void HandleCastStartEvent(CastingState.CastEventArgs eventArgs)
+    private void HandleCastStartEvent(CastingState.CastEventArgs eventArgs)
     {
         Debug.Log("Triggering castStart");
 
@@ -72,30 +74,29 @@ public class UnitAnimator : MonoBehaviour {
             overrideController[clipName] = eventArgs.Skill.Graphics.CastAnimation;
             //animator.runtimeAnimatorController = overrideController;
         }
+        animator.SetFloat(castSpeedHash, eventArgs.Skill.GetSpeedModifier(unit));
         SetTrigger(castStartHash);
     }
 
-    void HandleCastEvent(CastingState.CastEventArgs eventArgs)
+    private void HandleCastEvent(CastingState.CastEventArgs eventArgs)
     {
         SetTrigger(castHash);
     }
 
-    void HandleCastResetEvent(CastingState.CastEventArgs eventArgs)
+    private void HandleCastResetEvent(CastingState.CastEventArgs eventArgs)
     {
         Debug.Log("Triggering castReset");
         SetTrigger(castResetHash);
     }
 
-    void SetTrigger(int trigger)
+    private void SetTrigger(int trigger)
     {
-        foreach(int t in triggers)
-        {
+        foreach(var t in triggers)
             if (t != trigger) animator.ResetTrigger(t);
-        }
         animator.SetTrigger(trigger);
     }
 
-    void Subscribe()
+    private void Subscribe()
     {
         Unsubscribe();
         unit.CastingState.startCastEvent += HandleCastStartEvent;
@@ -103,7 +104,7 @@ public class UnitAnimator : MonoBehaviour {
         unit.CastingState.resetCastEvent += HandleCastResetEvent;
     }
 
-    void Unsubscribe()
+    private void Unsubscribe()
     {
         unit.CastingState.startCastEvent -= HandleCastStartEvent;
         unit.CastingState.castEvent -= HandleCastEvent;
