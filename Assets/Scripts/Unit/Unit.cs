@@ -121,6 +121,7 @@ public class Unit : MonoBehaviour
     public void ReceiveDamage(float damage, Unit attacker)
     {
         float actualDamage = Mathf.Max(damage - Mathf.Max(Armor - attacker.ArmorIgnore, 0), 0);
+        actualDamage = Mathf.Round(actualDamage);
         damageReceived += actualDamage;
         if(actualDamage > 0) deadState.LastAttacker = attacker;
         graphics.showDamage(actualDamage);
