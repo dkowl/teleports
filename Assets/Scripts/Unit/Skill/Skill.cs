@@ -100,7 +100,7 @@ public abstract partial class Skill : MonoBehaviour, IUniqueName {
 
     public virtual float GetSpeedModifier(Unit unit)
     {
-        return Data.NaturalSpeedModifier;
+        return 1 / Data.NaturalSpeedModifier;
     }
 
     public bool HasNextCombo => comboCounter < MaxCombo;
