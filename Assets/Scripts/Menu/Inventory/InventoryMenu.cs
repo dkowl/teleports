@@ -32,9 +32,9 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
         //InventoryData.Add(MainData.Game.GetItem("Warhammer"));
         //InventoryData.Add(MainData.Game.GetItem("DoubleAxe"));
         //InventoryData.Add(MainData.Game.GetItem("Greataxe"));
-        InventoryData.Add(MainData.Game.GetItem("Longsword"));
+        //InventoryData.Add(MainData.Game.GetItem("Longsword"));
         //InventoryData.Add(MainData.Game.GetItem("Mace"));
-        InventoryData.Add(MainData.Game.GetItem("ShortSword"));
+        //InventoryData.Add(MainData.Game.GetItem("ShortSword"));
 
         MainData.MessageBus.Subscribe(this);
 
