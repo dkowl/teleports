@@ -38,6 +38,8 @@ public class CastingState : ActionState {
             Unit.RotatingState.RemovePauser(Unit.CastingState);
         }
 
+        Unit.MovingState.ResetTarget();
+
         lastCommand = currentCommand;
         currentCastTime = 0;
         hasCasted = false;

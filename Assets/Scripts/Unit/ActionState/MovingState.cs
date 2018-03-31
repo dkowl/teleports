@@ -42,6 +42,11 @@ public class MovingState : ActionState {
         //unit.Rigidbody.velocity = Vector3.zero;
     }
 
+    public void ResetTarget()
+    {
+        Reset();
+    }
+
     public void Start(Vector3 newMoveDest)
     {
         if (!Utils.Approximately(newMoveDest, Unit.transform.position))
