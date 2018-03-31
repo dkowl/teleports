@@ -28,6 +28,7 @@ public class GraphicsData : SerializedScriptableObject {
     [Button]
     private void AddItemGraphics()
     {
+        itemGraphics.ClearList();
         itemGraphics.AddItems(AssetEditor.Instance.GetAllAssetsOfType<ItemGraphics>());
         AssetDatabase.SaveAssets();
     }

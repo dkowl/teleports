@@ -97,6 +97,11 @@ public class MappedList<T> : IMappedList<T> where T : IUniqueName {
         MakeDict();
     }
 
+    public void ClearList()
+    {
+        list.Clear();
+    }
+
     private Dictionary<string, T> Dict
     {
         get

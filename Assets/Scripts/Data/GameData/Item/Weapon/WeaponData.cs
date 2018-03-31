@@ -17,7 +17,7 @@ public partial class WeaponData {
     public float MaxDamage => Damage * 1.0f + DamageSpread;
     public float AverageDamage => (float)(MinDamage + MaxDamage) / 2;
 
-    public float TotalAttackTime => CastTime + AfterCastLockTime;
+    public float TotalAttackTime => 1;
 
     public float AttacksPerSecond => 1 / TotalAttackTime;
 }

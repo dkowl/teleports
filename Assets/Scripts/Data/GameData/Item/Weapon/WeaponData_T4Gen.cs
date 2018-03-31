@@ -12,8 +12,6 @@ public partial class WeaponData : IDeepCopyable {
 	[SerializeField, InlineProperty, GUIColor(1, 0.5f, 0.5f)] private Attribute damageSpread;
 	[SerializeField, InlineProperty, GUIColor(0.5f, 0.5f, 1)] private Attribute reach;
 	[SerializeField, InlineProperty, GUIColor(0.5f, 0.5f, 1)] private Attribute speedModifier;
-	[SerializeField, InlineProperty, GUIColor(0.5f, 1, 0.5f)] private Attribute castTime;
-	[SerializeField, InlineProperty, GUIColor(0.5f, 1, 0.5f)] private Attribute afterCastLockTime;
 	[SerializeField, InlineProperty, GUIColor(1, 0.5f, 0.5f)] private Attribute strRequired;
 	[SerializeField, InlineProperty, GUIColor(1, 0.5f, 0.5f)] private Attribute strDamageBonus;
 	[SerializeField, InlineProperty, GUIColor(1, 0.5f, 0.5f)] private Attribute strSpeedBonus;
@@ -37,8 +35,6 @@ public partial class WeaponData : IDeepCopyable {
 		damageSpread = new Attribute(other.damageSpread);
 		reach = new Attribute(other.reach);
 		speedModifier = new Attribute(other.speedModifier);
-		castTime = new Attribute(other.castTime);
-		afterCastLockTime = new Attribute(other.afterCastLockTime);
 		strRequired = new Attribute(other.strRequired);
 		strDamageBonus = new Attribute(other.strDamageBonus);
 		strSpeedBonus = new Attribute(other.strSpeedBonus);
@@ -70,10 +66,6 @@ public partial class WeaponData : IDeepCopyable {
 				return reach;
 			case AttributeType.SpeedModifier:
 				return speedModifier;
-			case AttributeType.CastTime:
-				return castTime;
-			case AttributeType.AfterCastLockTime:
-				return afterCastLockTime;
 			case AttributeType.StrRequired:
 				return strRequired;
 			case AttributeType.StrDamageBonus:
@@ -112,8 +104,6 @@ public partial class WeaponData : IDeepCopyable {
 	public float DamageSpread => damageSpread.Value;
 	public float Reach => reach.Value;
 	public float SpeedModifier => speedModifier.Value;
-	public float CastTime => castTime.Value;
-	public float AfterCastLockTime => afterCastLockTime.Value;
 	public float StrRequired => strRequired.Value;
 	public float StrDamageBonus => strDamageBonus.Value;
 	public float StrSpeedBonus => strSpeedBonus.Value;
@@ -133,8 +123,6 @@ public partial class WeaponData : IDeepCopyable {
 		DamageSpread,
 		Reach,
 		SpeedModifier,
-		CastTime,
-		AfterCastLockTime,
 		StrRequired,
 		StrDamageBonus,
 		StrSpeedBonus,

@@ -17,11 +17,8 @@ public class UnitWeaponCombiner {
     [SerializeField] private float weaponReach;
     [SerializeField] private float totalReach;
     [SerializeField] private float attackSpeedModifier;
-    [SerializeField] private float castTime;
-    [SerializeField] private float afterCastLockTime;
-    [SerializeField] private float attackTime;
-    [SerializeField] private float attacksPerSecond;
-    [SerializeField] private float damagePerSecond;
+    //[SerializeField] private float attacksPerSecond;
+    //[SerializeField] private float damagePerSecond;
 
     public UnitWeaponCombiner(UnitData unit, WeaponData weapon)
     {
@@ -36,18 +33,13 @@ public class UnitWeaponCombiner {
         bonusDex = (int)Mathf.Max(0, unit.Abilities.Dexterity - weapon.DexRequired);
         bonusInt = (int)Mathf.Max(0, unit.Abilities.Intelligence - weapon.IntRequired);
         damageBonus = new DamageBonus(weapon, bonusStr, bonusDex, bonusInt);
-        speedBonus = new SpeedBonus(weapon, bonusStr, bonusDex, bonusInt, weapon.CastTime + weapon.AfterCastLockTime);
+        speedBonus = new SpeedBonus(weapon, bonusStr, bonusDex, bonusInt, 1);
         reachBonus = new ReachBonus(weapon, bonusStr, bonusDex, bonusInt);
         minDamage = (int)weapon.MinDamage;
         maxDamage = (int)weapon.MaxDamage;
         weaponReach = weapon.Reach + reachBonus.Value;
         totalReach = weaponReach + MainData.Game.GetSkill(unit.MainAttack).Reach;
-        attackSpeedModifier = weapon.SpeedModifier * speedBonus.Multiplier;
-        castTime = weapon.CastTime * speedBonus.Multiplier;
-        afterCastLockTime = weapon.AfterCastLockTime * speedBonus.Multiplier;
-        attackTime = castTime + afterCastLockTime;
-        attacksPerSecond = 1 / attackTime;
-        damagePerSecond = ((float)(minDamage + maxDamage) / 2) / attackTime;        
+        attackSpeedModifier = weapon.SpeedModifier / speedBonus.Multiplier;     
     }
 
     public int DamageRoll => Random.Range(minDamage, maxDamage);
@@ -59,8 +51,8 @@ public class UnitWeaponCombiner {
     public int MaxDamage => maxDamage;
     public float WeaponReach => weaponReach;
     public float AttackSpeedModifier => attackSpeedModifier;
-    public float AttacksPerSecond => attacksPerSecond;
-    public float DamagePerSecond => damagePerSecond;
+    public float AttacksPerSecond => 1;
+    public float DamagePerSecond => 1;
 
     public class AbilityStatBonus
     {
