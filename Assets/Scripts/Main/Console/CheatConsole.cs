@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Text = TMPro.TextMeshProUGUI;
 
-public class CheatConsole : MonoBehaviour
+public class CheatConsole : Singleton<CheatConsole>
 {
 
     [SerializeField] private GameObject consoleObject;
@@ -13,6 +13,7 @@ public class CheatConsole : MonoBehaviour
     [SerializeField] private Text outputText;
     private bool isEnabled;
     private string outputString;
+    private List<CheatCommand> commands;
 
 
     private void Awake()
@@ -21,6 +22,11 @@ public class CheatConsole : MonoBehaviour
         outputString = "";
         inputField.onFocusSelectAll = false;
         UpdateOutputText();
+
+        commands = new List<CheatCommand>
+        {
+            new CheatCommand("AddItem", CheatActions.AddItem)
+        };
     }
 
     private void Update()
@@ -38,6 +44,13 @@ public class CheatConsole : MonoBehaviour
         }
     }
 
+    public void Output(string text)
+    {
+        text += "\n";
+        outputString += text;
+        UpdateOutputText();
+    }
+
     private void Enable()
     {
         isEnabled = true;
@@ -53,16 +66,11 @@ public class CheatConsole : MonoBehaviour
 
     private void Submit()
     {
-        Output(">> " + inputField.text);
+        string input = inputField.text;
+        Output(">> " + input);
+        ProcessInput(input);
         inputField.text = "";
         inputField.ActivateInputField();
-    }
-
-    private void Output(string text)
-    {
-        text += "\n";
-        outputString += text;
-        UpdateOutputText();
     }
 
     private void UpdateOutputText()
@@ -70,4 +78,13 @@ public class CheatConsole : MonoBehaviour
         outputText.text = outputString;
     }
 
+    private void ProcessInput(string input)
+    {
+        foreach (var command in commands)
+        {
+            if (command.ProcessInput(input)) return;
+        }
+
+        Output($"command \"{input}\" not found");
+    }
 }

@@ -23,7 +23,7 @@ public partial class PlayerData
         Utils.InitWithNew(ref skillTreeSlots, SkillTreeSlotNo);
         primarySkill = MainData.Game.GetRace(raceName).BaseStats.MainAttack;
         Utils.InitWithNew(ref secondarySkills, SkillSlotNo);
-        unitData = MainData.Game.GetRace(raceName).BaseStats;
+        unitData = new UnitData(MainData.Game.GetRace(raceName).BaseStats);
         teleportData = new TeleportData();
     }
 

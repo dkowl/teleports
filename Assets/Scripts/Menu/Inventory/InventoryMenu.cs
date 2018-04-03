@@ -26,16 +26,6 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
 
         internalItemIds = new Dictionary<ItemData, int>();
 
-        //InventoryData.Add(MainData.Game.GetItem("Dagger"));
-        //InventoryData.Add(MainData.Game.GetItem("Greatsword"));
-        //InventoryData.Add(MainData.Game.GetItem("Handaxe"));
-        InventoryData.Add(MainData.Game.GetItem("HammerMassive"));
-        //InventoryData.Add(MainData.Game.GetItem("DoubleAxe"));
-        //InventoryData.Add(MainData.Game.GetItem("Greataxe"));
-        //InventoryData.Add(MainData.Game.GetItem("Longsword"));
-        //InventoryData.Add(MainData.Game.GetItem("Mace"));
-        //InventoryData.Add(MainData.Game.GetItem("ShortSword"));
-
         MainData.MessageBus.Subscribe(this);
 
         InitItemSpawner();
