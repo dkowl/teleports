@@ -30,6 +30,7 @@ public class GraphicsData : SerializedScriptableObject {
     {
         itemGraphics.ClearList();
         itemGraphics.AddItems(AssetEditor.Instance.GetAllAssetsOfType<ItemGraphics>());
+        EditorUtility.SetDirty(this);
         AssetDatabase.SaveAssets();
     }
 #endif
