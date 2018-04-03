@@ -8,7 +8,7 @@ public class LoadingGraphics : MonoBehaviour {
     public Canvas canvas;
     public Slider slider;
 
-    void Awake()
+    private void Awake()
     {
         slider.value = 0;
     }
