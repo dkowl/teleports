@@ -11,7 +11,6 @@ public partial class UnitData : IDeepCopyable {
 	[SerializeField] private string unitName;
 	[SerializeField] private string raceName;
 	[SerializeField] private int level;
-	[SerializeField] private UnitAbilities abilities;
 	[SerializeField] private UnitAttributesData attributes;
 	[SerializeField] private SkillID mainAttack;
 	[SerializeField] private List<PerkID> perks;
@@ -25,7 +24,6 @@ public partial class UnitData : IDeepCopyable {
 		unitName = other.unitName;
 		raceName = other.raceName;
 		level = other.level;
-		abilities = new UnitAbilities(other.abilities);
 		attributes = new UnitAttributesData(other.attributes);
 		mainAttack = new SkillID(other.mainAttack);
 		perks = new List<PerkID>(other.perks);
@@ -44,7 +42,6 @@ public partial class UnitData : IDeepCopyable {
 	public string UnitName => unitName;
 	public string RaceName => raceName;
 	public int Level => level;
-	public UnitAbilities Abilities => abilities;
 	public UnitAttributesData Attributes => attributes;
 	public SkillID MainAttack => mainAttack;
 	public List<PerkID> Perks => perks;

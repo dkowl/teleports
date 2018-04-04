@@ -31,7 +31,6 @@ public partial class UnitData {
         unitName = DataDefaults.unitName;
         raceName = DataDefaults.raceName;
         level = 1;
-        abilities = new UnitAbilities();
         attributes = new UnitAttributesData();
         mainAttack = new SkillID();
         perks = new List<PerkID>();
@@ -61,9 +60,6 @@ public partial class UnitData {
         Inventory.CorrectInvalidData();
 
         Attributes.CorrectInvalidData();
-        GetAttribute(UnitAttributesData.AttributeType.Strength).Reset(Abilities.Strength);
-        GetAttribute(UnitAttributesData.AttributeType.Dexterity).Reset(Abilities.Dexterity);
-        GetAttribute(UnitAttributesData.AttributeType.Intelligence).Reset(Abilities.Intelligence);
     }
 
     public Attribute GetAttribute(UnitAttributesData.AttributeType type) {

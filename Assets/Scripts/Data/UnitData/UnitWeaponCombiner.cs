@@ -25,13 +25,13 @@ public class UnitWeaponCombiner {
         if (weapon == null || unit == null) return;
 
         canUse = 
-            unit.Abilities.Strength >= weapon.StrRequired &&
-            unit.Abilities.Dexterity >= weapon.DexRequired &&
-            unit.Abilities.Intelligence >= weapon.IntRequired;
+            unit.Attributes.Strength >= weapon.StrRequired &&
+            unit.Attributes.Dexterity >= weapon.DexRequired &&
+            unit.Attributes.Intelligence >= weapon.IntRequired;
         
-        bonusStr = (int)Mathf.Max(0, unit.Abilities.Strength - weapon.StrRequired);
-        bonusDex = (int)Mathf.Max(0, unit.Abilities.Dexterity - weapon.DexRequired);
-        bonusInt = (int)Mathf.Max(0, unit.Abilities.Intelligence - weapon.IntRequired);
+        bonusStr = (int)Mathf.Max(0, unit.Attributes.Strength - weapon.StrRequired);
+        bonusDex = (int)Mathf.Max(0, unit.Attributes.Dexterity - weapon.DexRequired);
+        bonusInt = (int)Mathf.Max(0, unit.Attributes.Intelligence - weapon.IntRequired);
         damageBonus = new DamageBonus(weapon, bonusStr, bonusDex, bonusInt);
         speedBonus = new SpeedBonus(weapon, bonusStr, bonusDex, bonusInt, 1);
         reachBonus = new ReachBonus(weapon, bonusStr, bonusDex, bonusInt);

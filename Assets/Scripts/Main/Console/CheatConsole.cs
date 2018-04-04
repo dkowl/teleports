@@ -25,7 +25,8 @@ public class CheatConsole : Singleton<CheatConsole>
 
         commands = new List<CheatCommand>
         {
-            new CheatCommand("AddItem", CheatActions.AddItem)
+            new CheatCommand("AddItem", CheatActions.AddItem),
+            new CheatCommand("SetAttribute", CheatActions.SetAttribute)
         };
     }
 
