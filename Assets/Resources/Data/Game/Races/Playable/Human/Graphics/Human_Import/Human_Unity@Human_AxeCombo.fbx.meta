@@ -119,7 +119,7 @@ ModelImporter:
     400108: Spine01_Bind
     400110: Spine02_Bind
     400112: group1
-    7400000: Take 001
+    7400000: Human_AxeCombo
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -147,7 +147,59 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Human_AxeCombo
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 90
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.17539267
+        functionName: Play
+        data: ScytheSwipe
+        objectReferenceParameter: {fileID: 11500000, guid: e50419209ad8b024ea3cbe3dabe0bedc,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.44502616
+        functionName: Play
+        data: ScytheSwipe
+        objectReferenceParameter: {fileID: 11500000, guid: e50419209ad8b024ea3cbe3dabe0bedc,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.7120419
+        functionName: Play
+        data: ScytheSwipe
+        objectReferenceParameter: {fileID: 11500000, guid: e50419209ad8b024ea3cbe3dabe0bedc,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
