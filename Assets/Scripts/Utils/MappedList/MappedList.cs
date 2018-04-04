@@ -76,7 +76,6 @@ public class MappedList<T> : IMappedList<T> where T : IUniqueName {
             names.Add("");
             foreach(var element in list)
             {
-                Debug.Log(element.UniqueName);
                 names.Add(element.UniqueName);
             }
             return names;

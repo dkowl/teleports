@@ -40,6 +40,7 @@ public partial class UnitData {
         isInitialized = true;
     }
 
+    [Button]
     public void CorrectInvalidData()
     {
         if(string.IsNullOrEmpty(unitName))
@@ -58,6 +59,11 @@ public partial class UnitData {
             mainAttack = new SkillID();
         }
         Inventory.CorrectInvalidData();
+
+        Attributes.CorrectInvalidData();
+        GetAttribute(UnitAttributesData.AttributeType.Strength).Reset(Abilities.Strength);
+        GetAttribute(UnitAttributesData.AttributeType.Dexterity).Reset(Abilities.Dexterity);
+        GetAttribute(UnitAttributesData.AttributeType.Intelligence).Reset(Abilities.Intelligence);
     }
 
     public Attribute GetAttribute(UnitAttributesData.AttributeType type) {

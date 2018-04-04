@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [CreateAssetMenu(menuName = "Data/Race/Data")]
 public class Race : UniqueScriptableObject {
@@ -12,6 +15,16 @@ public class Race : UniqueScriptableObject {
     [SerializeField] private List<EquipmentSlotType> availableEqSlots = new List<EquipmentSlotType>();
     [SerializeField] private TextAsset description;
     [SerializeField] private RaceGraphics graphics;
+
+    private void OnValidate()
+    {
+        //baseStats.CorrectInvalidData();
+#if UNITY_EDITOR
+        //EditorUtility.SetDirty(this);
+        //AssetDatabase.SaveAssets();
+        //Debug.LogFormat("Validated {0}", UniqueName);
+#endif
+    }
 
     public UnitData BaseStats => baseStats;
     public bool IsPlayable => isPlayable;

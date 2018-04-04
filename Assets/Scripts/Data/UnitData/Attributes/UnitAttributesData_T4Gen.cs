@@ -8,6 +8,9 @@ using Teleports.Utils;
 [System.Serializable]
 public partial class UnitAttributesData : IDeepCopyable {
 
+	[SerializeField] private Attribute strength;
+	[SerializeField] private Attribute dexterity;
+	[SerializeField] private Attribute intelligence;
 	[SerializeField] private Attribute size;
 	[SerializeField] private Attribute height;
 	[SerializeField] private Attribute healthPoints;
@@ -20,6 +23,9 @@ public partial class UnitAttributesData : IDeepCopyable {
 
 
 	public UnitAttributesData(UnitAttributesData other){
+		strength = new Attribute(other.strength);
+		dexterity = new Attribute(other.dexterity);
+		intelligence = new Attribute(other.intelligence);
 		size = new Attribute(other.size);
 		height = new Attribute(other.height);
 		healthPoints = new Attribute(other.healthPoints);
@@ -39,6 +45,12 @@ public partial class UnitAttributesData : IDeepCopyable {
 	{
 		switch(type)
 		{
+			case AttributeType.Strength:
+				return strength;
+			case AttributeType.Dexterity:
+				return dexterity;
+			case AttributeType.Intelligence:
+				return intelligence;
 			case AttributeType.Size:
 				return size;
 			case AttributeType.Height:
@@ -67,6 +79,9 @@ public partial class UnitAttributesData : IDeepCopyable {
 		GetAttribute(type).Modify(bonus, multiplier);
 	}
 
+	public float Strength => strength.Value;
+	public float Dexterity => dexterity.Value;
+	public float Intelligence => intelligence.Value;
 	public float Size => size.Value;
 	public float Height => height.Value;
 	public float HealthPoints => healthPoints.Value;
@@ -78,6 +93,9 @@ public partial class UnitAttributesData : IDeepCopyable {
 	public float ViewRange => viewRange.Value;
 
 	public enum AttributeType {
+		Strength,
+		Dexterity,
+		Intelligence,
 		Size,
 		Height,
 		HealthPoints,

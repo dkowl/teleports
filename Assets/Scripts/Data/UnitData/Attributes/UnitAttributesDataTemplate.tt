@@ -2,6 +2,9 @@
 #><#@ output extension = "/" #><# 
 	const string dataType = "UnitAttributes"; 
 	Field[] fields = {
+	    new Field("Attribute", "strength", true),
+	    new Field("Attribute", "dexterity", true),
+	    new Field("Attribute", "intelligence", true),
 		new Field("Attribute", "size", true),
 	    new Field("Attribute", "height", true),
 	    new Field("Attribute", "healthPoints", true),

@@ -24,9 +24,7 @@ public class Attribute
 
     public Attribute(float raw)
     {
-        this.raw = raw;
-        bonus = 0;
-        multiplier = 1;
+        Reset(raw);
     }
 
     public void AddBonus(float bonus)
@@ -43,6 +41,13 @@ public class Attribute
     {
         AddBonus(bonus);
         AddMultiplier(multiplier);
+    }
+
+    public void Reset(float raw)
+    {
+        this.raw = raw;
+        bonus = 0;
+        multiplier = 1;
     }
 
     [ShowInInspector, HideLabel, LabelWidth(15), HorizontalGroup("1")]

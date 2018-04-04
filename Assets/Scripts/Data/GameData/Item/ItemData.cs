@@ -63,7 +63,7 @@ public partial class ItemData {
 
     public override int GetHashCode()
     {
-        return uniqueName.GetHashCode() ^ graphicsId.GetHashCode();
+        return uniqueName.GetHashCode() ^ (graphicsId != null ? graphicsId.GetHashCode() : 0);
         //TODO: calculate more accurately than just names     
     }
 
