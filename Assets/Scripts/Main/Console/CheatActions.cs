@@ -25,6 +25,15 @@ public static class CheatActions  {
         }
     }
 
+    private static void SetAbility(UnitAbilities.Type type, int value)
+    {
+
+        PlayerData playerData = CurrentPlayerData;
+        if (playerData == null) return;
+
+        playerData.UnitData.Abilities.GetAbility(type);
+    }
+
     private static PlayerData CurrentPlayerData
     {
         get

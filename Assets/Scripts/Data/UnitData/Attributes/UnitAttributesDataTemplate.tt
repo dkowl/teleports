@@ -1,4 +1,4 @@
-<#@ include file = "..\Templates\DataClass.tt"
+<#@ include file = "..\..\Templates\DataClass.tt"
 #><#@ output extension = "/" #><# 
 	const string dataType = "UnitAttributes"; 
 	Field[] fields = {
