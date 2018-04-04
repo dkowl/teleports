@@ -11,6 +11,7 @@ public class SoundController : MonoBehaviour
     public void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        ValidateClips();
     }
 
     public void PlayClip(AudioClip clip)
@@ -28,5 +29,16 @@ public class SoundController : MonoBehaviour
             return;
         }
         Debug.LogWarning("Trying to play a sound clip with an invalid name");
+    }
+
+    public void ValidateClips()
+    {
+        foreach (var clip in clips)
+        {
+            if (clip == null)
+            {
+                Debug.LogError("Something went wrong, there is a null audio clip");
+            }
+        }
     }
 }
