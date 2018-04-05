@@ -15,6 +15,7 @@ public class GraphicsData : SerializedScriptableObject {
     [SerializeField] private MappedList<EnemyGraphics> enemyGraphics;
     [SerializeField] private MappedList<RaceGraphics> raceGraphics;
     [SerializeField] private MappedList<ItemGraphics> itemGraphics;
+    [SerializeField] private MappedList<SkillGraphics> skillGraphics;
     [SerializeField] private MappedList<AnimationClipData> animationClips;
 
     private void OnEnable()
@@ -23,6 +24,7 @@ public class GraphicsData : SerializedScriptableObject {
         enemyGraphics.MakeDict();
         raceGraphics.MakeDict();
         itemGraphics.MakeDict();
+        skillGraphics.MakeDict();
         animationClips.MakeDict();
     }
 
@@ -37,6 +39,12 @@ public class GraphicsData : SerializedScriptableObject {
     private void AddRaceGraphics()
     {
         AddAssets(raceGraphics);
+    }
+
+    [Button]
+    private void AddSkillGraphics()
+    {
+        AddAssets(skillGraphics);
     }
 
     [Button]
@@ -58,5 +66,6 @@ public class GraphicsData : SerializedScriptableObject {
     public IList<string> EnemyGraphicsNames => enemyGraphics.AllNames;
     public IList<string> RaceGraphicsNames => raceGraphics.AllNames;
     public MappedList<ItemGraphics> ItemGraphics => itemGraphics;
+    public MappedList<SkillGraphics> SkillGraphics => skillGraphics;
     public MappedList<AnimationClipData> AnimationClips => animationClips;
 }

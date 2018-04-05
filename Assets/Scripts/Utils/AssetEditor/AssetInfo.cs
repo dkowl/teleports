@@ -20,7 +20,7 @@ public class AssetInfo <T> where T : Object
         name = System.IO.Path.GetFileNameWithoutExtension(path);
     }
 
-    public void SetUniqueNameToFilename(bool overrideFlag = false)
+    public void SetUniqueNameToFilename(bool overrideFlag = false, bool autosave = true)
     {
         SerializedObject so = new SerializedObject(assetObject);
         SerializedProperty sp = so.FindProperty("uniqueName");
@@ -45,7 +45,7 @@ public class AssetInfo <T> where T : Object
         sp.stringValue = name;
         Debug.Log($"Setting uniqueName of {path} to {name}");
         so.ApplyModifiedProperties();
-        AssetDatabase.SaveAssets();
+        if(autosave) AssetDatabase.SaveAssets();
     }
 
     public T AssetObject => assetObject;

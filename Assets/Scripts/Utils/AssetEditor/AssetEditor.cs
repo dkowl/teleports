@@ -45,13 +45,20 @@ public class AssetEditor : MonoBehaviour
         NameUniqueAssets<AnimationClipData>();
     }
 
+    [Button]
+    private void NameSkillGraphics()
+    {
+        NameUniqueAssets<SkillGraphics>();
+    }
+
     private void NameUniqueAssets<T>() where T : Object, IUniqueName
     {
         var assetInfos = GetAllAssetInfosOfType<T>();
         foreach (var assetInfo in assetInfos)
         {
-            assetInfo.SetUniqueNameToFilename();
+            assetInfo.SetUniqueNameToFilename(false, false);
         }
+        AssetDatabase.SaveAssets();
     }
 
     public List<AssetInfo<T>> GetAllAssetInfosOfType<T>() where T : Object

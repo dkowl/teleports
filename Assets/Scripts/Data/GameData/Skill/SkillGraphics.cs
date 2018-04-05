@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "skillGraphics", menuName = "Data/Skill/Graphics")]
-public class SkillGraphics : ScriptableObject {
+public class SkillGraphics : UniqueScriptableObject {
 
     [FormerlySerializedAs("uiIcon_")]
     [SerializeField] private Sprite uiIcon;
