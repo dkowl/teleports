@@ -15,6 +15,7 @@ public class GraphicsData : SerializedScriptableObject {
     [SerializeField] private MappedList<EnemyGraphics> enemyGraphics;
     [SerializeField] private MappedList<RaceGraphics> raceGraphics;
     [SerializeField] private MappedList<ItemGraphics> itemGraphics;
+    [SerializeField] private MappedList<AnimationClipData> animationClips;
 
     private void OnEnable()
     {
@@ -22,6 +23,7 @@ public class GraphicsData : SerializedScriptableObject {
         enemyGraphics.MakeDict();
         raceGraphics.MakeDict();
         itemGraphics.MakeDict();
+        animationClips.MakeDict();
     }
 
 #if UNITY_EDITOR
@@ -50,4 +52,5 @@ public class GraphicsData : SerializedScriptableObject {
     public IList<string> EnemyGraphicsNames => enemyGraphics.AllNames;
     public IList<string> RaceGraphicsNames => raceGraphics.AllNames;
     public MappedList<ItemGraphics> ItemGraphics => itemGraphics;
+    public MappedList<AnimationClipData> AnimationClips => animationClips;
 }

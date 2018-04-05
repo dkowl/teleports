@@ -20,7 +20,7 @@ public class AssetInfo <T> where T : Object
         name = System.IO.Path.GetFileNameWithoutExtension(path);
     }
 
-    public void SetUniqueNameToFilename()
+    public void SetUniqueNameToFilename(bool overrideFlag = false)
     {
         SerializedObject so = new SerializedObject(assetObject);
         SerializedProperty sp = so.FindProperty("uniqueName");
@@ -32,8 +32,15 @@ public class AssetInfo <T> where T : Object
 
         if (!sp.stringValue.IsNullOrWhitespace())
         {
-            Debug.LogWarning($"uniqueName of {path} already set to {sp.stringValue}, not overriding");
-            return;
+            if (!overrideFlag)
+            {
+                Debug.LogWarning($"uniqueName of {path} already set to {sp.stringValue}, not overriding");
+                return;
+            }
+            else
+            {
+                Debug.LogWarning($"Overriding {sp.stringValue} with {name}");
+            }
         }
         sp.stringValue = name;
         Debug.Log($"Setting uniqueName of {path} to {name}");

@@ -39,7 +39,7 @@ public class AssetEditor : MonoBehaviour
         var raceGraphicsInfos = GetAllAssetInfosOfType<RaceGraphics>();
         foreach (var assetInfo in raceGraphicsInfos)
         {
-            assetInfo.SetUniqueNameToFilename();
+            assetInfo.SetUniqueNameToFilename(true);
         }
     }
 
