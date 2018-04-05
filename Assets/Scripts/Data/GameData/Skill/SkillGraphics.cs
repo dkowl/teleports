@@ -11,7 +11,6 @@ public class SkillGraphics : ScriptableObject {
     [SerializeField] private Sprite uiIcon;
     [SerializeField] private AnimationClip castAnimation;
 
-    public Sprite UiIcon { get { return uiIcon; } }
-    public AnimationClip CastAnimation { get { return castAnimation; } }
-
+    public Sprite UiIcon => uiIcon;
+    public AnimationClip CastAnimation => castAnimation;
 }

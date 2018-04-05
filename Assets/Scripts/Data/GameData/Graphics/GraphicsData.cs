@@ -28,8 +28,19 @@ public class GraphicsData : SerializedScriptableObject {
     [Button]
     private void AddItemGraphics()
     {
-        itemGraphics.ClearList();
-        itemGraphics.AddItems(AssetEditor.Instance.GetAllAssetsOfType<ItemGraphics>());
+        AddAssets(itemGraphics);
+    }
+
+    [Button]
+    private void AddRaceGraphics()
+    {
+        AddAssets(raceGraphics);
+    }
+
+    private void AddAssets<T>(MappedList<T> graphicsList) where T : Object, IUniqueName
+    {
+        graphicsList.ClearList();
+        graphicsList.AddItems(AssetEditor.Instance.GetAllAssetsOfType<T>());
         EditorUtility.SetDirty(this);
         AssetDatabase.SaveAssets();
     }

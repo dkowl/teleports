@@ -34,46 +34,6 @@ public class AssetEditor : MonoBehaviour
 
     }
 
-    [Button]
-    private void AddItemGraphicsToGraphicsData()
-    {
-        var graphicsDataAssetInfo = GetAllAssetInfosOfType<GraphicsData>()[0];
-        var itemGraphics = GetAllAssetInfosOfType<ItemGraphics>();
-
-        GraphicsData graphicsData = graphicsDataAssetInfo.AssetObject;
-
-        /*print(graphicsDataAssetInfo.Path);
-        var graphicsDataPt = new PropertyTree<MappedList<ItemGraphics>>(new MappedList<ItemGraphics>[]{ graphicsDataAssetInfo.AssetObject.ItemGraphics});
-        print(graphicsDataPt.RootPropertyCount);
-        foreach(var target in graphicsDataPt.Targets) print(target);
-        for (int i = 0; i < graphicsDataPt.RootPropertyCount; i++)
-        {
-            print(graphicsDataPt.GetRootProperty(i));
-        }
-        foreach (var property in graphicsDataPt.EnumerateTree(true))
-        {
-            print(property.Name);
-        }
-        var sp = graphicsDataPt.GetPropertyAtPath("list");
-        print(sp == null);*/
-        /*print(sp.isArray);
-        sp.arraySize = itemGraphics.Count;
-        for (int i = 0; i < itemGraphics.Count; i++)
-        {
-            sp.InsertArrayElementAtIndex(i);
-            var element = sp.GetArrayElementAtIndex(i);
-            element.objectReferenceValue = graphicsDataAssetInfo.AssetObject;
-        }*/
-        //graphicsDataSo.ApplyModifiedProperties();
-        //AssetDatabase.SaveAssets();
-    }
-
-    [Button]
-    private void Test()
-    {
-        print(typeof(ItemGraphics).ToString());
-    }
-
     public List<AssetInfo<T>> GetAllAssetInfosOfType<T>() where T : Object
     {
         string type = typeof(T).ToString();
