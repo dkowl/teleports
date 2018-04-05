@@ -82,7 +82,7 @@ public class TrailTwoPointRenderer : MonoBehaviour
 
     private static void SpawnContainerObject()
     {
-        trailContainerObject = trailContainerObject = new GameObject("Trails");
+        trailContainerObject = new GameObject("Trails");
         DontDestroyOnLoad(trailContainerObject);
     }
 

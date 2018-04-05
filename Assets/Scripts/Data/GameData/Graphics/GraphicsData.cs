@@ -39,6 +39,12 @@ public class GraphicsData : SerializedScriptableObject {
         AddAssets(raceGraphics);
     }
 
+    [Button]
+    private void AddAnimationClips()
+    {
+        AddAssets(animationClips);
+    }
+
     private void AddAssets<T>(MappedList<T> graphicsList) where T : Object, IUniqueName
     {
         graphicsList.ClearList();

@@ -36,10 +36,21 @@ public class AssetEditor : MonoBehaviour
     [Button]
     private void NameRaceGraphics()
     {
-        var raceGraphicsInfos = GetAllAssetInfosOfType<RaceGraphics>();
-        foreach (var assetInfo in raceGraphicsInfos)
+        NameUniqueAssets<RaceGraphics>();
+    }
+
+    [Button]
+    private void NameAnimationClipDatas()
+    {
+        NameUniqueAssets<AnimationClipData>();
+    }
+
+    private void NameUniqueAssets<T>() where T : Object, IUniqueName
+    {
+        var assetInfos = GetAllAssetInfosOfType<T>();
+        foreach (var assetInfo in assetInfos)
         {
-            assetInfo.SetUniqueNameToFilename(true);
+            assetInfo.SetUniqueNameToFilename();
         }
     }
 
