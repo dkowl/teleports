@@ -31,7 +31,16 @@ public class AssetEditor : MonoBehaviour
             so.ApplyModifiedProperties();
         }
         AssetDatabase.SaveAssets();
+    }
 
+    [Button]
+    private void NameRaceGraphics()
+    {
+        var raceGraphicsInfos = GetAllAssetInfosOfType<RaceGraphics>();
+        foreach (var assetInfo in raceGraphicsInfos)
+        {
+            assetInfo.SetUniqueNameToFilename();
+        }
     }
 
     public List<AssetInfo<T>> GetAllAssetInfosOfType<T>() where T : Object
