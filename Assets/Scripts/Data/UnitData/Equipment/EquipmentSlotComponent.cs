@@ -7,18 +7,14 @@ public class EquipmentSlotComponent : MonoBehaviour {
     [SerializeField]
     private EquipmentSlotType slotType;
 
-    private GameObject itemObject = null;
+    private GameObject itemObject;
     private bool isEmpty = true;
-
-    public EquipmentSlotType SlotType{
-        get { return slotType; }
-    }
 
     public void Equip(ItemData itemData)
     {
         Unequip();
 
-        itemObject = Instantiate(itemData.Graphics.Prefab, transform);
+        itemObject = Instantiate(MainData.Game.GraphicsData.ItemGraphics.GetValue(itemData.GraphicsId).Prefab, transform);
         isEmpty = false;
     }
 
@@ -31,8 +27,6 @@ public class EquipmentSlotComponent : MonoBehaviour {
         isEmpty = true;
     }
 
-    public bool IsEmpty
-    {
-        get { return isEmpty; }
-    }
+    public EquipmentSlotType SlotType => slotType;
+    public bool IsEmpty => isEmpty;
 }

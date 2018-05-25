@@ -103,7 +103,7 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
         int internalItemId = 0;
         foreach(var item in InventoryData.GetAllItems())
         {
-            itemPrefabs.Add(item.Graphics.Prefab);
+            itemPrefabs.Add(MainData.Game.GraphicsData.ItemGraphics.GetValue(item.GraphicsId).Prefab);
             internalItemIds[item] = internalItemId;
             internalItemId++;
         }

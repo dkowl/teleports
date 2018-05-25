@@ -6,9 +6,9 @@ using Sirenix.Utilities;
 
 public partial class UnitData {
     
-    private const int labelWidth = 110;
+    /*private const int labelWidth = 110;
 
-    /*[SerializeField, PropertyOrder(-5), LabelWidth(labelWidth)] private string unitName;
+    [SerializeField, PropertyOrder(-5), LabelWidth(labelWidth)] private string unitName;
     [SerializeField, LabelWidth(labelWidth)] private string raceName;
     [SerializeField, PropertyOrder(-4), LabelWidth(labelWidth)] private int level;
     [SerializeField, InlineProperty, LabelWidth(labelWidth)] private UnitAbilities abilities;    

@@ -3,20 +3,14 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using Sirenix.OdinInspector;
+#if UNITY_EDITOR
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
+#endif
 
-public class AssetEditor : MonoBehaviour
+public class AssetEditor : Singleton<AssetEditor>
 {
-
-    private static AssetEditor instance;
-
-    public void Awake()
-    {
-        if(instance != null && instance != this) Destroy(instance);
-        instance = this;
-    }
-
+#if UNITY_EDITOR
     [Button]
     private void AddItemGraphicsNames()
     {
@@ -84,18 +78,5 @@ public class AssetEditor : MonoBehaviour
         }
         return result;
     }
-
-    public static AssetEditor Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                var go = new GameObject("AssetEditor");
-                instance = go.AddComponent<AssetEditor>();
-            }
-            return instance;
-        }
-    }
-	
+#endif
 }

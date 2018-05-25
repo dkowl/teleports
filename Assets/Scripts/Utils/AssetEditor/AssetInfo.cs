@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using Sirenix.Utilities;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
-
+#endif
 public class AssetInfo <T> where T : Object
 {
-
+#if UNITY_EDITOR
     private T assetObject;
     private string guid;
     private string path;
@@ -51,4 +52,5 @@ public class AssetInfo <T> where T : Object
     public T AssetObject => assetObject;
     public string Path => path;
     public string Name => name;
+#endif
 }
