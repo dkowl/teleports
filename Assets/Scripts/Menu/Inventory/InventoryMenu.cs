@@ -5,7 +5,10 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using Teleports.Utils;
 
-public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipMessage> {
+public class InventoryMenu : SerializedMonoBehaviour, 
+    IMessageHandler<ItemEquipMessage>,
+    IMessageHandler<ItemAddMessage>
+{
 
     [SerializeField] private UnitData unitData;
     [SerializeField] private InventoryItemSpawner itemSpawner;
@@ -28,8 +31,7 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
 
         MainData.MessageBus.Subscribe(this);
 
-        InitItemSpawner();
-        itemSpawner.Spawn();        
+        InitItemSpawner();       
     }
 
     private void OnDestroy()
@@ -40,13 +42,18 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
 
     private void Start()
     {
-        inventoryAtlas = new TextureAtlasFromModels(Utils.GetComponentsInObjects<MeshFilter>(itemSpawner.SpawnedItems).ToArray(), cameraTargeter);
+        BuildTextureAtlas();
         Select(selectedSlotId);
         isInitialized = true;
 
         inventorySlotSpawner.enabled = false;
         inventorySlotSpawner.ParentMenu = this;
         inventorySlotSpawner.enabled = true;
+    }
+
+    private void BuildTextureAtlas()
+    {
+        inventoryAtlas = new TextureAtlasFromModels(Utils.GetComponentsInObjects<MeshFilter>(itemSpawner.SpawnedItems).ToArray(), cameraTargeter);
     }
 
     public void Select(ItemSlotID itemSlotId)
@@ -97,6 +104,16 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
         UpdateUiEvent?.Invoke();
     }
 
+    public void Handle(ItemAddMessage message)
+    {
+        if (message.FirstItemOfThatTypeInInventory)
+        {
+            InitItemSpawner();
+            BuildTextureAtlas();
+        }
+        UpdateUiEvent?.Invoke();
+    }
+
     private void InitItemSpawner()
     {
         var itemPrefabs = new List<GameObject>();
@@ -107,7 +124,9 @@ public class InventoryMenu : SerializedMonoBehaviour, IMessageHandler<ItemEquipM
             internalItemIds[item] = internalItemId;
             internalItemId++;
         }
+        itemSpawner.Despawn();
         itemSpawner = new InventoryItemSpawner(itemPrefabs);
+        itemSpawner.Spawn();
     }
 
     public UnitData UnitData => unitData;

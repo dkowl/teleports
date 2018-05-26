@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ItemEquipMessage : IMessage {
 
-    EventType eventType;
-    ItemData item;
-    EquipmentSlotType eqSlotType;
+    private EventType eventType;
+    private ItemData item;
+    private EquipmentSlotType eqSlotType;
 
     public ItemEquipMessage(EventType eventType, ItemData item, EquipmentSlotType eqSlotType)
     {
@@ -15,22 +15,11 @@ public class ItemEquipMessage : IMessage {
         this.eqSlotType = eqSlotType;
     }
 
-    public EventType Type
-    {
-        get { return eventType; }
-    }
+    public EventType Type => eventType;
+    public ItemData Item => item;
+    public EquipmentSlotType EqSlotType => eqSlotType;
 
-    public ItemData Item
-    {
-        get { return item; }
-    }
-
-    public EquipmentSlotType EqSlotType
-    {
-        get { return eqSlotType; }
-    }
-
-	public enum EventType
+    public enum EventType
     {
         Equip,
         Unequip

@@ -88,8 +88,8 @@ public partial class InventoryData {
         if(invSlots.Count < maxSlots)
         {
             InventorySlotData slot = new InventorySlotData();
-            slot.Add(item);
             invSlots.Add(slot);
+            slot.Add(item);
         }
 
         Debug.Log("Inventory is full!");

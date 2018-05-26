@@ -50,11 +50,13 @@ public class InventorySlotData : IDeepCopyable
         if (this.item == item)
         {
             count++;
+            MainData.MessageBus.Publish(new ItemAddMessage(item, false));
         }
         else
         {
             this.item = item;
             count = 1;
+            MainData.MessageBus.Publish(new ItemAddMessage(item, true));
         }
     }
 
