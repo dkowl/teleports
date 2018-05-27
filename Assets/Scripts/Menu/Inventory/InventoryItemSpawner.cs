@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class InventoryItemSpawner  {
+public class InventoryItemSpawner
+{
+    private static GameObject spawnedItemsContainer;
 
     [SerializeField] List<GameObject> itemPrefabs;
     [SerializeField] List<GameObject> spawnedItems;
@@ -24,6 +26,7 @@ public class InventoryItemSpawner  {
         {
             GameObject spawnedItem = GameObject.Instantiate(itemPrefab) as GameObject;
             spawnedItem.transform.position = spawnPlace.CurrentPosition;
+            spawnedItem.transform.parent = SpawnedItemsContainer.transform;
             spawnedItems.Add(spawnedItem);
             spawnPlace.GoToNextPosition();
         }
@@ -44,4 +47,16 @@ public class InventoryItemSpawner  {
     }
 
     public IList<GameObject> SpawnedItems => spawnedItems.AsReadOnly();
+
+    private GameObject SpawnedItemsContainer
+    {
+        get
+        {
+            if (spawnedItemsContainer == null)
+            {
+                spawnedItemsContainer = new GameObject("Inventory - SpawnedItems");
+            }
+            return spawnedItemsContainer;
+        }
+    }
 }
