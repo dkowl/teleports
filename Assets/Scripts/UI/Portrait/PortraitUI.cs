@@ -43,6 +43,7 @@ public abstract class PortraitUI : MonoBehaviour {
     {
         gameObject.InitComponent(ref rawImage);
         rawImage.texture = renderTexture;
+        rawImage.raycastTarget = false;
     }
 
     private void InitCamera()
@@ -60,7 +61,7 @@ public abstract class PortraitUI : MonoBehaviour {
         cam.targetTexture = renderTexture;
     }
 
-    protected void InitCameraTargeter()
+    protected virtual void InitCameraTargeter()
     {
         if (camMeshTargeter == null)
         {
@@ -77,6 +78,8 @@ public abstract class PortraitUI : MonoBehaviour {
                 return;
         }
     }
+
+    public CameraMeshTargeter CamMeshTargeter => camMeshTargeter;
 
     public enum ObjectType
     {

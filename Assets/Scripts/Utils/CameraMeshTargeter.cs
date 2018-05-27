@@ -55,7 +55,7 @@ public class CameraMeshTargeter : MonoBehaviour {
         List<Vector3> cornerPoints = GetAllCornerPoints(mesh.bounds, MeshComponent.transform.position);
         Rect boundingViewportRect = GetBoundingViewportRect(cornerPoints, cam);
         CenterCameraOnViewportRect(cam, boundingViewportRect, paddingPercentage);
-        SetDistanceFromPoint(cam, mesh.bounds.center, distance);
+        SetDistanceFromPoint(cam, mesh.bounds.center + MeshComponent.transform.position, distance);
     }
 
     private void UpdateMesh()
@@ -69,6 +69,11 @@ public class CameraMeshTargeter : MonoBehaviour {
                 mesh = skinnedMeshRenderer.sharedMesh;
                 break;
         }
+    }
+
+    public void SetPaddingPercentage(float paddingPercentage)
+    {
+        this.paddingPercentage = paddingPercentage;
     }
 
     private static List<Vector3> GetAllCornerPoints(Bounds bounds, Vector3 position)

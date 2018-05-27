@@ -30,6 +30,12 @@ public class InventoryUnitPortrait : PortraitUI, IMessageHandler<ItemEquipMessag
         return CameraMeshTargeter.MeshComponentType.SkinnedMeshRenderer;
     }
 
+    protected override void InitCameraTargeter()
+    {
+        base.InitCameraTargeter();
+        CamMeshTargeter.SetPaddingPercentage(0.5f);
+    }
+
     public void Handle(ItemEquipMessage message)
     {
         unitModelSpawner.ShouldRespawn();

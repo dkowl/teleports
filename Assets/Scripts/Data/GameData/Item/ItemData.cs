@@ -64,7 +64,7 @@ public partial class ItemData {
     public override int GetHashCode()
     {
         int result = uniqueName.GetHashCode() ^ (graphicsId != null ? graphicsId.GetHashCode() : 0);
-        Debug.LogFormat("Hashcode of {0}: {1}", uniqueName, result);
+        //Debug.LogFormat("Hashcode of {0}: {1}", uniqueName, result);
         return result;
         //TODO: calculate more accurately than just names     
     }
