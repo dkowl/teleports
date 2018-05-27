@@ -57,13 +57,15 @@ public partial class ItemData {
         //Debug.Log("Comparing (uniqueName) " + uniqueName + " vs " + other.uniqueName);
         return 
             uniqueName == other.uniqueName &&
-            graphicsId == other.graphicsId;
+            graphicsId.Equals(other.graphicsId);
         //TODO: compare more accurately than just names            
     }
 
     public override int GetHashCode()
     {
-        return uniqueName.GetHashCode() ^ (graphicsId != null ? graphicsId.GetHashCode() : 0);
+        int result = uniqueName.GetHashCode() ^ (graphicsId != null ? graphicsId.GetHashCode() : 0);
+        Debug.LogFormat("Hashcode of {0}: {1}", uniqueName, result);
+        return result;
         //TODO: calculate more accurately than just names     
     }
 

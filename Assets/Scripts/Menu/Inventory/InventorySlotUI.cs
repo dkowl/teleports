@@ -32,6 +32,7 @@ public class InventorySlotUI : LoadableBehaviour {
         ItemData itemData = null;
         int count = 0;
         bool itemIconEnabled = false;
+        bool locked = false;
 
         if (!slotId.isEquipmentSlot)
         {
@@ -53,31 +54,37 @@ public class InventorySlotUI : LoadableBehaviour {
                 {
                     itemIconEnabled = true;
                 }
+                else
+                {
+                    locked = true;
+                }
             }
         }
 
         if(itemData != null)
         {
-            bool locked = false;
             if (itemData.IsType(ItemType.Weapon))
             {
                 UnitWeaponCombiner combiner = new UnitWeaponCombiner(parentMenu.UnitData, itemData.WeaponData);
-                locked = !combiner.CanUse;
+                if (!combiner.CanUse)
+                {
+                    locked = true;
+                }
             }
+        }
 
-            if (itemIconEnabled)
-            {
-                itemIcon.enabled = true;
-                itemIcon.texture = parentMenu.ItemIconAtlas;
-                itemIcon.uvRect = parentMenu.GetItemIconUvRect(itemData);
-            }
-            lockIcon.enabled = locked;
+        if (itemIconEnabled)
+        {
+            itemIcon.enabled = true;
+            itemIcon.texture = parentMenu.ItemIconAtlas;
+            itemIcon.uvRect = parentMenu.GetItemIconUvRect(itemData);
         }
         else
         {
             itemIcon.enabled = false;
-            lockIcon.enabled = false;
         }
+
+        lockIcon.enabled = locked;
 
         if (count > 1)
             countText.text = count.ToString();

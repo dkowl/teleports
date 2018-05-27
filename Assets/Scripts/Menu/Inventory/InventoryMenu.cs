@@ -63,10 +63,7 @@ public class InventoryMenu : SerializedMonoBehaviour,
             selectedSlotId = itemSlotId;
             if (SelectedItem != null)
                 cameraTargeter.SetTarget(itemSpawner.GetItemMeshFilter(internalItemIds[SelectedItem]));
-            if (UpdateUiEvent != null)
-            {
-                UpdateUiEvent();
-            }
+            UpdateUiEvent?.Invoke();
         }
     }
 
