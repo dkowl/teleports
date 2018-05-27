@@ -61,6 +61,7 @@ public abstract class ModelSpawner : LoadableBehaviour {
 
     private void Despawn(int id = 0)
     {
+        if (modelSpawnData[id].spawnedObject == null) return;
         Destroy(modelSpawnData[id].spawnedObject);
         modelSpawnData[id].spawnedObject.tag = "Untagged";
     }
