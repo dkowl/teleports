@@ -88,14 +88,8 @@ public class Menu : ScriptableObject
     {
         isActive = true;
 
-        if (OnShowEvent != null)
-        {
-            OnShowEvent();
-        }
-        if(ShowFinishEvent != null)
-        {
-            ShowFinishEvent();
-        }
+        OnShowEvent?.Invoke();
+        ShowFinishEvent?.Invoke();
     }
 
     public void Close()
@@ -133,15 +127,8 @@ public class Menu : ScriptableObject
 
         isActive = false;
 
-        if (OnHideEvent != null)
-        {
-            OnHideEvent();
-        }
-
-        if(HideFinishEvent != null)
-        {
-            HideFinishEvent();
-        }
+        OnHideEvent?.Invoke();
+        HideFinishEvent?.Invoke();
     }
 
     //properties
@@ -153,10 +140,7 @@ public class Menu : ScriptableObject
             isOpen = value;
         }
     }
-    public bool IsActive
-    {
-        get { return isActive; }
-    }
+    public bool IsActive => isActive;
 
     public bool IsClosing
     {
@@ -173,23 +157,8 @@ public class Menu : ScriptableObject
         }
     }
 
-    public MenuController.MenuType MenuType
-    {
-        get { return menuType; }
-    }
-
-    public bool DisableMenusUnder
-    {
-        get { return disableMenusUnder; }
-    }
-
-    public bool UseMainCanvas
-    {
-        get { return useMainCanvas; }
-    }
-
-    public GameObject InstantiatedObject
-    {
-        get { return instantiatedObject; }
-    }
+    public MenuController.MenuType MenuType => menuType;
+    public bool DisableMenusUnder => disableMenusUnder;
+    public bool UseMainCanvas => useMainCanvas;
+    public GameObject InstantiatedObject => instantiatedObject;
 }

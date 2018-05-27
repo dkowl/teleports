@@ -8,8 +8,9 @@ public class InventoryUnitPortrait : PortraitUI, IMessageHandler<ItemEquipMessag
 
     [SerializeField] UnitModelSpawner unitModelSpawner;
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         MainData.MessageBus.Unsubscribe(this);
     }
 

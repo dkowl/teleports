@@ -32,6 +32,11 @@ public abstract class PortraitUI : MonoBehaviour {
         InitCameraTargeter();
     }
 
+    protected virtual void OnDestroy()
+    {
+        Destroy(camObject);
+    }
+
     private void InitRenderTexture()
     {
         int width = Mathf.NextPowerOfTwo((int)rectTransform.rect.width);
