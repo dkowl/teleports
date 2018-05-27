@@ -2,6 +2,7 @@
 #><#@ output extension = "/" #><# 
 	const string dataType = "Player"; 
 	Field[] fields = {
+		new Field("bool", "isEmpty", false, null, "true"), 
 		new Field("string", "characterName", false),
 		new Field("int", "xp", false), 
 	    new Field("int", "level", false), 

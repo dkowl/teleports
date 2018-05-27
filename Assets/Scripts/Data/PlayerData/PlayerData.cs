@@ -15,6 +15,7 @@ public partial class PlayerData
 
     private void Init(string name, string raceName)
     {
+        isEmpty = false;
         characterName = name;
         xp = 0;
         level = 1;
@@ -37,6 +38,11 @@ public partial class PlayerData
 
     public void CorrectInvalidData()
     {
+        if (isEmpty)
+        {
+            return;
+        }
+
         if (PlayerDataValidator.ValidateName(characterName) != PlayerDataValidator.NameValidationResult.OK)
         {
             Debug.LogWarning("Invalid player name: " + characterName + ". Changing to 'New Player'");

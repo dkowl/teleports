@@ -8,6 +8,7 @@ using Teleports.Utils;
 [System.Serializable]
 public partial class PlayerData : IDeepCopyable {
 
+	[SerializeField] private bool isEmpty;
 	[SerializeField] private string characterName;
 	[SerializeField] private int xp;
 	[SerializeField] private int level;
@@ -19,8 +20,12 @@ public partial class PlayerData : IDeepCopyable {
 	[SerializeField] private UnitData unitData;
 	[SerializeField] private TeleportData teleportData;
 
+	public PlayerData() {
+		isEmpty = true;
+	}
 
 	public PlayerData(PlayerData other){
+		isEmpty = other.isEmpty;
 		characterName = other.characterName;
 		xp = other.xp;
 		level = other.level;
@@ -39,6 +44,7 @@ public partial class PlayerData : IDeepCopyable {
 
 
 
+	public bool IsEmpty => isEmpty;
 	public string CharacterName => characterName;
 	public int Xp => xp;
 	public int Level => level;

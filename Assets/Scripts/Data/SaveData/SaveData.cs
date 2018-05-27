@@ -53,7 +53,7 @@ public partial class SaveData
 
     public PlayerData GetPlayerData(int id)
     {
-        if(id < playerData.Length) 
+        if(id < playerData.Length && !playerData[id].IsEmpty) 
         {
             return playerData[id];
         }
