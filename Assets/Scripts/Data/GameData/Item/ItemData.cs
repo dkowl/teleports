@@ -17,13 +17,13 @@ public partial class ItemData {
 
     public void CorrectInvalidData()
     {
-        if(graphics == null)
+        if(graphicsId == null)
         {
             Debug.LogWarning("Item graphics not found, loading defaults...");
             graphics = MainData.Defaults.itemGraphics;
-        }
 
-        graphicsId = new ItemGraphicsID(graphics.UniqueName);
+            graphicsId = new ItemGraphicsID(graphics.UniqueName);
+        }
 
         WeaponData.CorrectInvalidData();
     }
