@@ -69,11 +69,15 @@ public static class UnitSpawner  {
         GameObject skillsObject = new GameObject("Skills");
         skillsObject.transform.parent = unit.transform;
 
-        List<SkillAssetData> skills = MainData.Game.Skills.GetValues(unit.UnitData.SkillIds);
+        var skillIds = new List<MappedListID>();
+        if(unit.UnitData.CurrentWeaponMainSkillId != null) skillIds.Add(unit.UnitData.CurrentWeaponMainSkillId);
+        skillIds.AddRange(unit.UnitData.SkillIds);
+
+        var skills = MainData.Game.Skills.GetValues(skillIds);
         if (skills == null || skills.Count == 0)
         {
             Debug.LogWarning("Unit has no skills, adding default skill");
-            skills.Add(MainData.Game.Skills.GetValue(DataDefaults.skillName));
+            skills = new List<SkillAssetData> {MainData.Game.Skills.GetValue(DataDefaults.skillName)};
         }
 
         foreach (var skillAsset in skills)

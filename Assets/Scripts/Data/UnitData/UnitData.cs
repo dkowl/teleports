@@ -66,6 +66,21 @@ public partial class UnitData {
         return attributes.GetAttribute(type);
     }
 
+    public SkillID CurrentWeaponMainSkillId
+    {
+        get
+        {
+            foreach (var itemInfo in Inventory.EquipmentData.GetEquippedItems())
+            {
+                if (itemInfo.Item.IsType(ItemType.Weapon))
+                {
+                    return itemInfo.Item.Skills.Count > 0 ? itemInfo.Item.Skills?[0] : null;
+                }
+            }
+            return null;
+        }
+    }
+
     public string Name
     {
         get { return unitName; }

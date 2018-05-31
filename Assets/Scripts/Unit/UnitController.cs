@@ -46,10 +46,7 @@ public abstract class UnitController : MonoBehaviour {
         unit.RotatingState.RotationTarget = Quaternion.LookRotation(target.Position - unit.transform.position);
     }
 
-    private bool IsActive
-    {
-        get { return this == unit.ActiveController; }
-    }
+    private bool IsActive => this == unit.ActiveController;
 
     public Skill.TargetInfo Target
     {
