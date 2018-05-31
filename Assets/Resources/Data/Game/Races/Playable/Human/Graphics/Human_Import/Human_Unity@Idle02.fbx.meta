@@ -119,7 +119,7 @@ ModelImporter:
     400108: Reference
     400110: Spine01_Bind
     400112: Spine02_Bind
-    7400000: Idle02
+    7400000: Human_Idle02
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -149,7 +149,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle02
+      name: Human_Idle02
       takeName: Take 001
       firstFrame: 1
       lastFrame: 50
