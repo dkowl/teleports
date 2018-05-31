@@ -17,7 +17,7 @@ public class UnitWeaponCombiner {
     [SerializeField] private float weaponReach;
     [SerializeField] private float totalReach;
     [SerializeField] private float attackSpeedModifier;
-    //[SerializeField] private float attacksPerSecond;
+    [SerializeField] private float attacksPerSecond;
     //[SerializeField] private float damagePerSecond;
 
     public UnitWeaponCombiner(UnitData unit, WeaponData weapon)
@@ -33,13 +33,14 @@ public class UnitWeaponCombiner {
         bonusDex = (int)Mathf.Max(0, unit.Attributes.Dexterity - weapon.DexRequired);
         bonusInt = (int)Mathf.Max(0, unit.Attributes.Intelligence - weapon.IntRequired);
         damageBonus = new DamageBonus(weapon, bonusStr, bonusDex, bonusInt);
-        speedBonus = new SpeedBonus(weapon, bonusStr, bonusDex, bonusInt, 1);
+        speedBonus = new SpeedBonus(weapon, bonusStr, bonusDex, bonusInt, weapon.TotalAttackTime);
         reachBonus = new ReachBonus(weapon, bonusStr, bonusDex, bonusInt);
         minDamage = (int)weapon.MinDamage;
         maxDamage = (int)weapon.MaxDamage;
         weaponReach = weapon.Reach + reachBonus.Value;
         totalReach = weaponReach + MainData.Game.GetSkill(unit.MainAttack).Reach;
-        attackSpeedModifier = weapon.SpeedModifier / speedBonus.Multiplier;     
+        attackSpeedModifier = weapon.SpeedModifier / speedBonus.Multiplier;
+        attacksPerSecond = weapon.AttacksPerSecond / speedBonus.Multiplier;
     }
 
     public int DamageRoll => Random.Range(minDamage, maxDamage);
@@ -51,7 +52,7 @@ public class UnitWeaponCombiner {
     public int MaxDamage => maxDamage;
     public float WeaponReach => weaponReach;
     public float AttackSpeedModifier => attackSpeedModifier;
-    public float AttacksPerSecond => 1;
+    public float AttacksPerSecond => attacksPerSecond;
     public float DamagePerSecond => 1;
 
     public class AbilityStatBonus
