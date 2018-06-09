@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 //Singleton
 //Manages async Scene loading
 //Acts as loading screen
-public class MainController : MonoBehaviour {
+public class SceneController : MonoBehaviour {
     
-    private static MainController mainController;
+    private static SceneController sceneController;
     
     private string currentSceneName = SceneNames.Main;
     private string nextSceneName;
@@ -27,7 +27,7 @@ public class MainController : MonoBehaviour {
     {
         DontDestroyOnLoad(gameObject);
         
-        mainController = this;
+        sceneController = this;
         
         updateDelegates = new UpdateDelegate[(int)SceneState.Count];
         
@@ -62,9 +62,9 @@ public class MainController : MonoBehaviour {
             updateDelegates = null;
         }
 
-        if (mainController != null)
+        if (sceneController != null)
         {
-            mainController = null;
+            sceneController = null;
         }
     }
 
@@ -75,11 +75,11 @@ public class MainController : MonoBehaviour {
 
     public static void SwitchScene(string nextSceneName)
     {
-        if (mainController != null)
+        if (sceneController != null)
         {
-            if (mainController.currentSceneName != nextSceneName)
+            if (sceneController.currentSceneName != nextSceneName)
             {
-                mainController.nextSceneName = nextSceneName;
+                sceneController.nextSceneName = nextSceneName;
             }
         }
     }

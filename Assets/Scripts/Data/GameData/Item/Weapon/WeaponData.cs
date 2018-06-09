@@ -11,7 +11,7 @@ public partial class WeaponData {
 
     }
 
-
+   
     public float MinDamage => Damage * (1.0f - DamageSpread);
     public float MaxDamage => Damage * (1.0f + DamageSpread);
     public float AverageDamage => (float)(MinDamage + MaxDamage) / 2;

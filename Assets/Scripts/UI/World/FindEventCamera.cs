@@ -7,6 +7,6 @@ public class FindEventCamera : MonoBehaviour {
     void Start()
     {
         Canvas canvas = GetComponent<Canvas>();
-        canvas.worldCamera = GameMain.Instance.uiCamera;
+        canvas.worldCamera = GameplayMain.Instance.uiCamera;
     }
 }

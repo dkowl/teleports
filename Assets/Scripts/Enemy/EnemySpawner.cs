@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour {
     
     void Start () {
 
-        player = GameMain.Instance.Player;
+        player = GameplayMain.Instance.Player;
 
         enemies = new List<Enemy>();
     }

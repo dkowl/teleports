@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameMain : MonoBehaviour {
+public class GameplayMain : MonoBehaviour {
 
-    private static GameMain instance;
+    private static GameplayMain instance;
 
     public Camera uiCamera;
 
@@ -107,10 +107,10 @@ public class GameMain : MonoBehaviour {
         MainData.SavePlayer(player);
         MainData.MessageBus.Publish(new RunFinishedMessage(Score));
         MenuController.Instance.OpenMenu(MenuController.MenuType.Home);
-        MainController.SwitchScene(SceneNames.Home);
+        SceneController.SwitchScene(SceneNames.Home);
     }
 
-    public static GameMain Instance
+    public static GameplayMain Instance
     {
         get { return instance; }
     }

@@ -19,7 +19,7 @@ public class TargetedEnemyInfo : MonoBehaviour {
 
     void Start()
     {
-        playerController = GameMain.Instance.Player.GetComponent<PlayerController>();
+        playerController = GameplayMain.Instance.Player.GetComponent<PlayerController>();
     }
 
     void Update()
