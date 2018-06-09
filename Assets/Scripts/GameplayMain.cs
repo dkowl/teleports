@@ -107,7 +107,7 @@ public class GameplayMain : MonoBehaviour {
         MainData.SavePlayer(player);
         MainData.MessageBus.Publish(new RunFinishedMessage(Score));
         MenuController.Instance.OpenMenu(MenuController.MenuType.Home);
-        SceneController.SwitchScene(SceneNames.Home);
+        Main.SceneController.SwitchScene(SceneNames.Home);
     }
 
     public static GameplayMain Instance
