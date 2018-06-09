@@ -62,11 +62,19 @@ public class MappedList<T> : IMappedList<T> where T : IUniqueName {
         return result;
     }
 
-
-    public IList<T> AllValues
+    public void AddItems(List<T> items)
     {
-        get { return list.AsReadOnly(); }
+        list.AddRange(items);
+        MakeDict();
     }
+
+    public void ClearList()
+    {
+        list.Clear();
+    }
+
+
+    public IList<T> AllValues => list.AsReadOnly();
 
     public IList<string> AllNames
     {
@@ -89,17 +97,6 @@ public class MappedList<T> : IMappedList<T> where T : IUniqueName {
             int id = Random.Range(0, list.Count);
             return list[id];
         }
-    }
-
-    public void AddItems(List<T> items)
-    {
-        list.AddRange(items);
-        MakeDict();
-    }
-
-    public void ClearList()
-    {
-        list.Clear();
     }
 
     private Dictionary<string, T> Dict

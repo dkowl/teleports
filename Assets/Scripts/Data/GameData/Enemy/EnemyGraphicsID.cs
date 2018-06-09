@@ -7,6 +7,6 @@ public class EnemyGraphicsID : MappedListID {
 
     protected override IList<string> DropdownValues()
     {
-        return MainData.Game.GraphicsData.EnemyGraphicsNames;
+        return Main.StaticData.Graphics.EnemyGraphics.AllNames;
     }
 }

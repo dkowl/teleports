@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IGameData : MonoBehaviour {
+public interface IGameData  {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    IMappedList<Gem> Gems { get; }
+    IMappedList<WorldData> Worlds { get; }
+    IMappedList<Race> Races { get; }
+    IMappedList<Perk> Perks { get; }
+    IMappedList<SkillAssetData> Skills { get; }
+    IMappedList<ComboAssetData> Combos { get; }
+    IMappedList<ItemAssetData> Items { get; }
+    IMappedList<EnemyAssetData> Enemies { get; }
 }
