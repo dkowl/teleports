@@ -17,14 +17,26 @@ public class Main : Singleton<Main>
 
     private void Awake()
     {
+#if UNITY_EDITOR
+        InitializeInEditMode();
+#else
+        InitializeInPlayMode();
+#endif
+    }
+
+    private void InitializeInEditMode()
+    {
+        persistence = persistenceConcrete;
+
+        staticData = persistence.GetStaticData();
+    }
+
+    private void InitializeInPlayMode()
+    {
         messageBus = new MessageBus();
 
         InitializeInterfaceWithComponent<SceneController, ISceneController>(out sceneController);
         loadingGraphics = loadingGraphicsConcrete;
-
-        persistence = persistenceConcrete;
-
-        staticData = persistence.GetStaticData();
     }
 
     private void InitializeInterfaceWithComponent<T, I>(out I i) where T : Component, I

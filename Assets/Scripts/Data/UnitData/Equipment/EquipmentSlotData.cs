@@ -34,7 +34,7 @@ public class EquipmentSlotData {
             if(item == null)
             {
                 Debug.LogWarning("No item in non-empty slot, adding default item");
-                item = MainData.Defaults.itemData;
+                item = Main.StaticData.Game.Items.GetValue(Main.StaticData.Defaults.itemId).GenerateItem();
             }
             else
             {

@@ -4,29 +4,26 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "gameData", menuName = "Data/Game")]
-[ShowOdinSerializedPropertiesInInspector]
-public class GameDataSO : SerializedScriptableObject{
-
-    [SerializeField] private GameData gameData;
+public class GameDataSO : ScriptableObjectDataWrapper<GameData> {
 
 #if UNITY_EDITOR
 
     [Button]
     private void AddAllAssets()
     {
-        if (gameData == null)
+        if (data == null)
         {
-            gameData = new GameData();
+            data = new GameData();
         }
 
-        AddAssets(gameData.GemsConcrete);
-        AddAssets(gameData.WorldsConcrete);
-        AddAssets(gameData.RacesConcrete);
-        AddAssets(gameData.PerksConcrete);
-        AddAssets(gameData.SkillsConcrete);
-        AddAssets(gameData.CombosConcrete);
-        AddAssets(gameData.ItemsConcrete);
-        AddAssets(gameData.EnemiesConcrete);
+        AddAssets(data.GemsConcrete);
+        AddAssets(data.WorldsConcrete);
+        AddAssets(data.RacesConcrete);
+        AddAssets(data.PerksConcrete);
+        AddAssets(data.SkillsConcrete);
+        AddAssets(data.CombosConcrete);
+        AddAssets(data.ItemsConcrete);
+        AddAssets(data.EnemiesConcrete);
     }
 
     private void AddAssets<T>(MappedList<T> mappedList) where T : Object, IUniqueName
@@ -34,6 +31,4 @@ public class GameDataSO : SerializedScriptableObject{
         AssetEditor.AddAssetsOfType(this, mappedList);
     }
 #endif
-
-    public GameData GameData => gameData;
 }

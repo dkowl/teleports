@@ -4,6 +4,5 @@ using UnityEngine;
 
 public interface IPersistence
 {
-
-    StaticData GetStaticData();
+    IStaticData GetStaticData();
 }

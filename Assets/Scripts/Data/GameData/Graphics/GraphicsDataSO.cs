@@ -6,49 +6,48 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "GraphicsData", menuName = "Data/Graphics/Data")]
 [ShowOdinSerializedPropertiesInInspector]
-public class GraphicsDataSO : SerializedScriptableObject
+public class GraphicsDataSO : ScriptableObjectDataWrapper<GraphicsData>
 {
-    [SerializeField] private GraphicsData graphicsData;
 
 #if UNITY_EDITOR
     [Button]
     private void AddItemGraphics()
     {
-        AddAssets(graphicsData.ItemGraphicsConcrete);
+        AddAssets(data.ItemGraphicsConcrete);
     }
 
     [Button]
     private void AddRaceGraphics()
     {
-        AddAssets(graphicsData.RaceGraphicsConcrete);
+        AddAssets(data.RaceGraphicsConcrete);
     }
 
     [Button]
     private void AddSkillGraphics()
     {
-        AddAssets(graphicsData.SkillGraphicsConcrete);
+        AddAssets(data.SkillGraphicsConcrete);
     }
 
     [Button]
     private void AddAnimationClips()
     {
-        AddAssets(graphicsData.AnimationClipsConcrete);
+        AddAssets(data.AnimationClipsConcrete);
     }
 
     [Button]
     private void AddAllAssets()
     {
-        if (graphicsData == null)
+        if (data == null)
         {
-            graphicsData = new GraphicsData();
+            data = new GraphicsData();
         }
 
         AddItemGraphics();
         AddRaceGraphics();
         AddSkillGraphics();
         AddAnimationClips();
-        AddAssets(graphicsData.EnemyGraphicsConcrete);
-        AddAssets(graphicsData.TeleportGraphicsConcrete);
+        AddAssets(data.EnemyGraphicsConcrete);
+        AddAssets(data.TeleportGraphicsConcrete);
     }
 
     private void AddAssets<T>(MappedList<T> mappedList) where T : Object, IUniqueName
@@ -56,7 +55,4 @@ public class GraphicsDataSO : SerializedScriptableObject
         AssetEditor.AddAssetsOfType(this, mappedList);
     }
 #endif
-
-    public GraphicsData GraphicsData => graphicsData;
-
 }

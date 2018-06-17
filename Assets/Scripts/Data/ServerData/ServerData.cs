@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "serverData", menuName = "Custom/ServerData", order = 8)]
-public class ServerData : ScriptableObject, IServerData {    
+public class ServerData : IServerData {    
 
     [SerializeField]
     private UnitAttributeStats[] unitAttributeStats;

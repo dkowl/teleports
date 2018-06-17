@@ -8,10 +8,13 @@ public class Persistence : MonoBehaviour, IPersistence
 
     [SerializeField] private GameDataSO gameDataSo;
     [SerializeField] private GraphicsDataSO graphicsDataSo;
+    [SerializeField] private ServerDataSO serverDataSo;
+    [SerializeField] private Stylesheet stylesheet;
+    [SerializeField] private DataDefaults defaults;
 
-    public StaticData GetStaticData()
+    public IStaticData GetStaticData()
     {
-        StaticData result = new StaticData(gameDataSo.GameData, graphicsDataSo.GraphicsData);
+        StaticData result = new StaticData(gameDataSo.Data, graphicsDataSo.Data, serverDataSo.Data, stylesheet, defaults);
         return result;
     }
 }
