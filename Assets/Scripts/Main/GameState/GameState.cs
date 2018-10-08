@@ -1,25 +1,25 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Sirenix.Serialization;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Teleports.Utils;
 
-[System.Serializable]
 public class GameState : IGameState
 {
     private const int StartingHeroSlotCount = 3;
 
-    private HeroData[] heroes;
-    private int currentHeroId;
-    private int heroSlotCount;
+    [SerializeField] private string accountName;
+    [SerializeField] private List<HeroData> heroes;
+    [SerializeField] private int currentHeroId;
 
     public static event System.Action HeroChangedEvent;
 
-    public GameState()
+    public GameState(string accountName)
     {
+        this.accountName = accountName;
         currentHeroId = 0;
-        heroSlotCount = StartingHeroSlotCount;
-        heroes = new HeroData[heroSlotCount];
+        Utils.InitWithValues(ref heroes, StartingHeroSlotCount, null);
     }
 
     public void CreateNewHero(string name, RaceID raceId)
@@ -61,10 +61,10 @@ public class GameState : IGameState
 
     public HeroData CurrentHeroData => GetHeroData(currentHeroId);
     public int CurrentHeroId => currentHeroId;
-    public int HeroSlotCount => heroSlotCount;
+    public int HeroSlotCount => heroes.Count;
 
     private void AssertValidHeroId(int id)
     {
-        Debug.Assert(id >= 0 && id < heroSlotCount, "Invalid hero id");
+        Debug.Assert(id >= 0 && id < heroes.Count, "Invalid hero id");
     }
 }

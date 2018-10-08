@@ -5,6 +5,8 @@ using UnityEngine;
 public interface IPersistence
 {
     IStaticData GetStaticData();
-    IGameState LoadGameState();
     IServerData GetServerData();
+    void LoadGameState();
+    void SaveGameState();
+    IGameState GetGameState();
 }

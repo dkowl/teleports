@@ -1,16 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using FullSerializer;
 
 
 public class Persistence : MonoBehaviour, IPersistence
 {
-
     [SerializeField] private GameDataSO gameDataSo;
     [SerializeField] private GraphicsDataSO graphicsDataSo;
-    [SerializeField] private ServerDataSO serverDataSo;
     [SerializeField] private Stylesheet stylesheet;
     [SerializeField] private DataDefaults defaults;
+
+    [SerializeField] private ServerDataSO serverDataSo;
+
+    private GameState gameState;
+    private IPersistor<GameState> gameStatePersistor = new JsonGameStatePersistor();
+
+    public static event System.Action LoadFinishEvent;
+    public static event System.Action SaveFinishEvent;
 
     public IStaticData GetStaticData()
     {
@@ -23,9 +32,28 @@ public class Persistence : MonoBehaviour, IPersistence
         return result;
     }
 
-    public IGameState LoadGameState()
+    [Button]
+    public void LoadGameState()
     {
-        return new GameState();
+        gameState = gameStatePersistor.Load();
+        LoadFinishEvent?.Invoke();
+    }
+
+    [Button]
+    public void SaveGameState()
+    {
+        gameStatePersistor.Save(gameState);
+        SaveFinishEvent?.Invoke();
+    }
+
+    public IGameState GetGameState()
+    {
+        if (gameState == null)
+        {
+            LoadGameState();
+        }
+
+        return gameState;
     }
 
     public IServerData GetServerData()

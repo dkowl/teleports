@@ -8,13 +8,11 @@ public static class SceneTransitionHandler  {
     {
         if(fromName == SceneNames.Main && toName == SceneNames.Home)
         {
-            //MainData.SaveSO.Load();
-            Debug.LogWarning("saving/loading GameState not implemented");
+            //Main.LoadGameState();
         }
         else if (fromName == SceneNames.World && toName == SceneNames.Main)
         {
-            //MainData.SaveSO.Save();
-            Debug.LogWarning("saving/loading GameState not implemented");
+            Main.SaveGameState();
         }
     }
 }

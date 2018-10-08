@@ -28,6 +28,7 @@ public class Main : Singleton<Main>, ISingletonInstance
 
     private void OnApplicationQuit()
     {
+        persistence.SaveGameState();
         DestroyAllButThis();
         Debug.Log("Game quit!");
     }
@@ -57,7 +58,7 @@ public class Main : Singleton<Main>, ISingletonInstance
         persistence = persistenceConcrete;
 
         staticData = persistence.GetStaticData();
-        gameState = persistence.LoadGameState();
+        gameState = persistence.GetGameState();
         serverData = persistence.GetServerData();
     }
 
@@ -93,4 +94,14 @@ public class Main : Singleton<Main>, ISingletonInstance
     public static IStaticData StaticData => Instance.staticData;
     public static IGameState GameState => Instance.gameState;
     public static IServerData ServerData => Instance.serverData;
+
+    public static void LoadGameState()
+    {
+        Instance.persistence.LoadGameState();
+    }
+
+    public static void SaveGameState()
+    {
+        Instance.persistence.SaveGameState();
+    }
 }

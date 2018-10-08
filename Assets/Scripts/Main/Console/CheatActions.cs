@@ -13,10 +13,10 @@ public static class CheatActions  {
     {
         if (Main.StaticData.Game.Items.ContainsName(name))
         {
-            PlayerData playerData = CurrentPlayerData;
-            if (playerData == null) return;
+            HeroData heroData = CurrentHeroData;
+            if (heroData == null) return;
 
-            playerData.UnitData?.Inventory?.Add(Main.StaticData.Game.Items.GetValue(name).GenerateItem());
+            heroData.UnitData?.Inventory?.Add(Main.StaticData.Game.Items.GetValue(name).GenerateItem());
             CheatConsole.Instance.Output(name + " added to inventory");
         }
         else
@@ -52,16 +52,16 @@ public static class CheatActions  {
     private static void SetAttribute(UnitAttributesData.AttributeType type, float value)
     {
 
-        PlayerData playerData = CurrentPlayerData;
-        Print($"{type} set from {playerData?.UnitData.Attributes.GetAttribute(type).Value} to {value}");
-        playerData?.UnitData.Attributes.GetAttribute(type).Reset(value);
+        HeroData heroData = CurrentHeroData;
+        Print($"{type} set from {heroData?.UnitData.Attributes.GetAttribute(type).Value} to {value}");
+        heroData?.UnitData.Attributes.GetAttribute(type).Reset(value);
     }
 
-    private static PlayerData CurrentPlayerData
+    private static HeroData CurrentHeroData
     {
         get
         {
-            PlayerData result = null; //MainData.CurrentPlayerData; //TODO: Main.GameState
+            HeroData result = Main.GameState.CurrentHeroData;
             if (result == null)
             {
                 CheatConsole.Instance.Output("current player is null");
