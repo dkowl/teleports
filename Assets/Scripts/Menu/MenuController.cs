@@ -64,7 +64,7 @@ public class MenuController : ScriptableObject
     {
         spawnTransform = newSpawnTransform;
 
-        if (MainData.CurrentPlayerData != null)
+        if (Main.GameState.CurrentHeroData != null)
             OpenMenu(startMenu);
         else
             OpenMenu(MenuType.ChooseCharacter);
@@ -197,16 +197,6 @@ public class MenuController : ScriptableObject
         }
     }
 
-    public static Transform SpawnTransform
-    {
-        get
-        {
-            return Instance.spawnTransform;
-        }
-    }
-
-    public static GameObject MainCanvasPrefab
-    {
-        get { return Instance.mainCanvasPrefab; }
-    }
+    public static Transform SpawnTransform => Instance.spawnTransform;
+    public static GameObject MainCanvasPrefab => Instance.mainCanvasPrefab;
 }

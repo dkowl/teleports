@@ -8,9 +8,9 @@ public class ImageStyler : LoadableBehaviour {
 
     public Stylesheet.ColorPreset color;
 
-    override protected void LoadDataInternal()
+    protected override void LoadDataInternal()
     {
         Image image = gameObject.GetComponent<Image>();
-        image.color = MainData.Stylesheet.GetColorPreset(color);
+        image.color = Main.StaticData.Stylesheet.GetColorPreset(color);
     }
 }

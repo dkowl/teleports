@@ -9,17 +9,17 @@ using System;
 public class CreateCharacterMenu : MonoBehaviour {
 
     //Data
-    List<Race> races;
-    int raceId = 0;
+    private List<Race> races;
+    private int raceId;
 
     //UI elements
-    [SerializeField] Text raceText;
-    [SerializeField] Text raceDescriptionText;
-    [SerializeField] InputField nameInputField;
+    [SerializeField] private Text raceText;
+    [SerializeField] private Text raceDescriptionText;
+    [SerializeField] private InputField nameInputField;
 
     public event Action RaceIdChangedEvent;
 
-    void Awake()
+    private void Awake()
     {
         raceId = 0;
         OnRaceIdChanged();
@@ -43,7 +43,7 @@ public class CreateCharacterMenu : MonoBehaviour {
 
     public void CreateCharacter()
     {
-        MainData.Save.CreateNewPlayer(Name, Race.UniqueName);
+        Main.GameState.CreateNewHero(Name, new RaceID(Race.UniqueName));
         Return();
     }
     
@@ -52,32 +52,16 @@ public class CreateCharacterMenu : MonoBehaviour {
         MenuController.Instance.OpenMenu(MenuController.MenuType.ChooseCharacter);
     }
 
-    public string Name
-    {
-        get { return nameInputField.text; }
-    }
+    public string Name => nameInputField.text;
 
-    public Race Race
-    {
-        get { return Races[raceId]; }
-    }
+    public Race Race => Races[raceId];
 
-    List<Race> Races{
-        get
-        {
-            if(races == null)
-            {
-                races = MainData.Game.GetPlayableRaces();
-            }
-            return races;
-        }
-    }
+    private List<Race> Races => races ?? (races = Main.StaticData.Game.GetPlayableRaces());
 
-    void OnRaceIdChanged()
+    private void OnRaceIdChanged()
     {
         raceText.text = Race.UniqueName;
         raceDescriptionText.text = Race.Description;
-        if(RaceIdChangedEvent != null)
-            RaceIdChangedEvent();
+        RaceIdChangedEvent?.Invoke();
     }
 }

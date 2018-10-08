@@ -12,9 +12,10 @@ public class GemSlotUI : UnlockableSlotUI {
 
     protected override UnlockableSlot GetSlot()
     {
-        if(MainData.CurrentPlayerData != null)
+        var heroData = Main.GameState.CurrentHeroData;
+        if(heroData != null)
         {
-            gemSlot = MainData.CurrentPlayerData.TeleportData.GetGemSlot(gemSlotID);
+            gemSlot = heroData.TeleportData.GetGemSlot(gemSlotID);
             return gemSlot;
         }
         else

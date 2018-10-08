@@ -117,7 +117,7 @@ public class EquipmentData {
                     bool asPrimary = (slotType == slotCombination.PrimarySlot);
                     GetEquipmentSlot(slotType).Equip(item, asPrimary);
                 }
-                MainData.MessageBus.Publish(new ItemEquipMessage(ItemEquipMessage.EventType.Equip, item, slotCombination.PrimarySlot));
+                Main.MessageBus.Publish(new ItemEquipMessage(ItemEquipMessage.EventType.Equip, item, slotCombination.PrimarySlot));
                 return;
             }
         }
@@ -170,7 +170,7 @@ public class EquipmentData {
             }
         }
         ItemData result = GetEquipmentSlot(slotCombination.PrimarySlot).UnequipAndReturn();
-        MainData.MessageBus.Publish(new ItemEquipMessage(ItemEquipMessage.EventType.Unequip, result, slotCombination.PrimarySlot));
+        Main.MessageBus.Publish(new ItemEquipMessage(ItemEquipMessage.EventType.Unequip, result, slotCombination.PrimarySlot));
         return result;
     }
 

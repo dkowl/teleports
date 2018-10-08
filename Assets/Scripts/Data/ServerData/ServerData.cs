@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ServerData : IServerData {    
 
-    [SerializeField]
-    private UnitAttributeStats[] unitAttributeStats;
+    [SerializeField] private UnitAttributeStats[] unitAttributeStats;
 
     public UnitAttributeStats GetAttributeStats(PlayerStats type)
     {

@@ -67,7 +67,7 @@ public class SceneController : MonoBehaviour, ISceneController {
 
     private void OnApplicationQuit()
     {
-        MainData.SaveSO.Save();
+        //MainData.SaveSO.Save(); //TODO: Main.GameState
     }
     
     private void UpdateSceneReset()

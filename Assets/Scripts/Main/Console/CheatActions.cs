@@ -11,12 +11,12 @@ public static class CheatActions  {
 
     private static void AddItem(string name)
     {
-        if (MainData.Game.Items.ContainsName(name))
+        if (Main.StaticData.Game.Items.ContainsName(name))
         {
             PlayerData playerData = CurrentPlayerData;
             if (playerData == null) return;
 
-            playerData.UnitData?.Inventory?.Add(MainData.Game.Items.GetValue(name).GenerateItem());
+            playerData.UnitData?.Inventory?.Add(Main.StaticData.Game.Items.GetValue(name).GenerateItem());
             CheatConsole.Instance.Output(name + " added to inventory");
         }
         else
@@ -61,7 +61,7 @@ public static class CheatActions  {
     {
         get
         {
-            PlayerData result = MainData.CurrentPlayerData;
+            PlayerData result = null; //MainData.CurrentPlayerData; //TODO: Main.GameState
             if (result == null)
             {
                 CheatConsole.Instance.Output("current player is null");

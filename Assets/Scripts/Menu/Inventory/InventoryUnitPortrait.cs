@@ -11,7 +11,7 @@ public class InventoryUnitPortrait : PortraitUI, IMessageHandler<ItemEquipMessag
     protected override void OnDestroy()
     {
         base.OnDestroy();
-        MainData.MessageBus.Unsubscribe(this);
+        Main.MessageBus.Unsubscribe(this);
     }
 
     protected override CameraMeshTargeter.MeshComponentType SpawnModel()
@@ -25,7 +25,7 @@ public class InventoryUnitPortrait : PortraitUI, IMessageHandler<ItemEquipMessag
         unitModelSpawner.UnitData = parentMenu.UnitData;
         unitModelSpawner.SpawnAll();
 
-        MainData.MessageBus.Subscribe(this);
+        Main.MessageBus.Subscribe(this);
 
         skinnedMeshRenderer = unitModelSpawner.SkinnedMeshRenderer;
         return CameraMeshTargeter.MeshComponentType.SkinnedMeshRenderer;

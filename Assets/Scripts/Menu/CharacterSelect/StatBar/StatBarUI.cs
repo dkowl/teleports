@@ -11,19 +11,19 @@ public class StatBarUI : LoadableBehaviour {
     public Text statNameText, statValueText;
     public Slider slider;
 
-    override protected void LoadDataInternal()
+    protected override void LoadDataInternal()
     {
-        IServerData server = MainData.CurrentServerData;
+        IServerData server = Main.ServerData;
 
         UnitAttributeStats stats = server.GetAttributeStats(statType);
-        PlayerData playerData = MainData.CurrentPlayerData;
+        HeroData heroData = Main.GameState.CurrentHeroData;
 
         statNameText.text = statName;
         
-        if (playerData != null)
+        if (heroData != null && stats != null)
         {
-            float statValue = playerData.GetStat(statType);
-            slider.value = stats.GetSliderValue(playerData.Level, statValue);
+            float statValue = heroData.GetStat(statType);
+            slider.value = stats.GetSliderValue(heroData.Level, statValue);
             statValueText.text = statValue.ToString();
         }
         else

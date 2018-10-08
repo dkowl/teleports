@@ -6,36 +6,34 @@ public class PlayerAndTeleportMS : ModelSpawner, IMessageHandler<ItemEquipMessag
 
     protected override GameObject GetModel(int id)
     {
-        if (MainData.CurrentPlayerData == null) return null;
+        HeroData heroData = Main.GameState.CurrentHeroData;
+
+        if (heroData == null) return null;
+
         if(id%2 == 0)
         {
-            var result = UnitModelAssembler.GetModel(MainData.CurrentPlayerData.UnitData, true, true);
+            var result = UnitModelAssembler.GetModel(heroData.UnitData, true, true);
             result.transform.parent = transform;
             return result;
         }
         else
         {
-            if (MainData.CurrentPlayerData != null)
-            {
-                return Instantiate(MainData.CurrentPlayerData.TeleportData.Graphics.modelObject, transform);
-            }
-            else
-                return null;
+            return Instantiate(heroData.TeleportData.Graphics.modelObject, transform);
         }
     }
 
     protected override void SubscribeInternal()
     {
         base.SubscribeInternal();
-        SaveData.OnCharacterIDChangedEvent += ShouldRespawn;
-        MainData.MessageBus.Subscribe(this);
+        GameState.HeroChangedEvent += ShouldRespawn;
+        Main.MessageBus.Subscribe(this);
     }
 
     protected override void UnsubscribeInternal()
     {
         base.UnsubscribeInternal();
-        SaveData.OnCharacterIDChangedEvent -= ShouldRespawn;
-        MainData.MessageBus.Unsubscribe(this);
+        GameState.HeroChangedEvent -= ShouldRespawn;
+        Main.MessageBus.Unsubscribe(this);
     }
 
     public void Handle(ItemEquipMessage message)

@@ -31,7 +31,7 @@ public partial class SaveData
     {
         if(CurrentPlayerData() == null)
         {
-            if (MainData.Game.GetRace(raceName) != null)
+            if (Main.StaticData.Game.Races.GetValue(raceName) != null)
             {
                 playerData[currentPlayerDataID] = new PlayerData(name, raceName);
             }

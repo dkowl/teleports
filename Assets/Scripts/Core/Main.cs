@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Teleports.Utils;
 
-public class Main : Singleton<Main>
+public class Main : Singleton<Main>, ISingletonInstance
 {
     [SerializeField] private LoadingGraphics loadingGraphicsConcrete;
     [SerializeField] private Persistence persistenceConcrete;
@@ -13,15 +13,43 @@ public class Main : Singleton<Main>
     private ILoadingGraphics loadingGraphics;
     private IPersistence persistence;
 
+    //cached persistence properties
     private IStaticData staticData;
+    private IGameState gameState;
+    private IServerData serverData;
+
+    public static event System.Action AfterInitializationEvent;
 
     private void Awake()
     {
-#if UNITY_EDITOR
-        InitializeInEditMode();
-#else
-        InitializeInPlayMode();
-#endif
+        //calling to trigger initialization
+        Main main = Instance;
+    }
+
+    private void OnApplicationQuit()
+    {
+        DestroyAllButThis();
+        Debug.Log("Game quit!");
+    }
+
+    public void OnFirstAccess()
+    {
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        if (!Application.isPlaying)
+        {
+            InitializeInEditMode();
+        }
+        else
+        {
+            InitializeInEditMode();
+            InitializeInPlayMode();
+        }
+        AfterInitializationEvent?.Invoke();
+        Debug.Log("Main initialized!");
     }
 
     private void InitializeInEditMode()
@@ -29,6 +57,8 @@ public class Main : Singleton<Main>
         persistence = persistenceConcrete;
 
         staticData = persistence.GetStaticData();
+        gameState = persistence.LoadGameState();
+        serverData = persistence.GetServerData();
     }
 
     private void InitializeInPlayMode()
@@ -37,6 +67,7 @@ public class Main : Singleton<Main>
 
         InitializeInterfaceWithComponent<SceneController, ISceneController>(out sceneController);
         loadingGraphics = loadingGraphicsConcrete;
+        DontDestroyOnLoad(this);
     }
 
     private void InitializeInterfaceWithComponent<T, I>(out I i) where T : Component, I
@@ -46,9 +77,20 @@ public class Main : Singleton<Main>
         i = temp;
     }
 
+    private void DestroyAllButThis()
+    {
+        foreach (var gameObject in FindObjectsOfType<GameObject>())
+        {
+            if (this.gameObject.GetInstanceID() == gameObject.GetInstanceID()) continue;
+
+            Destroy(gameObject);
+        }
+    }
+
     public static IMessageBus MessageBus => Instance.messageBus;
     public static ISceneController SceneController => Instance.sceneController;
     public static ILoadingGraphics LoadingGraphics => Instance.loadingGraphics;
     public static IStaticData StaticData => Instance.staticData;
-
+    public static IGameState GameState => Instance.gameState;
+    public static IServerData ServerData => Instance.serverData;
 }

@@ -9,4 +9,5 @@ public class ScriptableObjectDataWrapper<T> : SerializedScriptableObject
     [SerializeField] protected T data;
 
     public T Data => data;
+    public bool Empty => data == null;
 }

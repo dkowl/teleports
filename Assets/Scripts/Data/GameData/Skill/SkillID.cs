@@ -25,6 +25,6 @@ public class SkillID : MappedListID
 
     protected override IList<string> DropdownValues()
     {
-        return MainData.Game.SkillNames;
+        return Main.StaticData.Game.Skills.AllNames;
     }
 }

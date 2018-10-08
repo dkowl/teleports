@@ -22,9 +22,9 @@ public partial class PlayerData
         rankPoints = 0;
         skills = new List<SkillID>();
         Utils.InitWithNew(ref skillTreeSlots, SkillTreeSlotNo);
-        primarySkill = MainData.Game.GetRace(raceName).BaseStats.MainAttack;
+        primarySkill = Main.StaticData.Game.Races.GetValue(raceName).BaseStats.MainAttack;
         Utils.InitWithNew(ref secondarySkills, SkillSlotNo);
-        unitData = new UnitData(MainData.Game.GetRace(raceName).BaseStats);
+        unitData = new UnitData(Main.StaticData.Game.Races.GetValue(raceName).BaseStats);
         teleportData = new TeleportData();
     }
 
@@ -66,7 +66,7 @@ public partial class PlayerData
         if(unitData == null)
         {
             Debug.LogWarning("Unit data not found, substituting with Human base data");
-            unitData = MainData.Game.GetRace("Human").BaseStats;
+            unitData = Main.StaticData.Game.Races.GetValue(DataDefaults.raceName).BaseStats;
         }
         unitData.CorrectInvalidData();
         if (teleportData == null)
@@ -78,7 +78,7 @@ public partial class PlayerData
     }
 
     public string RaceName => unitData.RaceName;
-    public UnitData BaseUnitData => MainData.Game.GetRace(RaceName).BaseStats;
+    public UnitData BaseUnitData => Main.StaticData.Game.Races.GetValue(RaceName).BaseStats;
 
     public void AddXp(int xpToAdd)
     {

@@ -69,7 +69,7 @@ public class EnemySpawner : MonoBehaviour {
         enemyObject.transform.position = position;
         enemyObject.layer = LayerMask.NameToLayer("Enemy");
 
-        UnitData unitData = new UnitData(MainData.Game.GetRace(enemyData.RaceId).BaseStats);
+        UnitData unitData = new UnitData(Main.StaticData.Game.Races.GetValue(enemyData.RaceId).BaseStats);
         foreach (var item in enemyData.Items)
         {
             //Debug.Log("Equipping " + item.DisplayName);
@@ -98,7 +98,7 @@ public class EnemySpawner : MonoBehaviour {
 
     public void SpawnRandom(Vector3 position)
     {
-        Spawn(MainData.Game.Enemies.RandomValue.GenerateBasic(), position);
+        Spawn(Main.StaticData.Game.Enemies.RandomValue.GenerateBasic(), position);
     }
 	
 }

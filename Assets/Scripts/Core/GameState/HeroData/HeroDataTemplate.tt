@@ -1,0 +1,20 @@
+<#@ include file = "C:\Users\Dominik\Desktop\Teleports\teleports\Assets\Scripts\Data\Templates\DataClass.tt"
+#><#@ output extension = "/" #><# 
+	const string dataType = "Hero"; 
+	Field[] fields = {
+		new Field("bool", "isEmpty", false, null, "true"), 
+		new Field("string", "characterName", false),
+		new Field("RaceId", "raceId", false), 
+		new Field("int", "xp", false), 
+	    new Field("int", "level", false), 
+	    new Field("int", "rankPoints", false), 
+	    new Field("List<SkillTreeSlot>", "skillTreeSlots", true), 
+	    new Field("List<SkillID>", "skills", true), 
+	    new Field("SkillID", "primarySkill", true), 
+	    new Field("List<SkillID>", "secondarySkills", true), 
+	    new Field("UnitData", "unitData", true), 
+		new Field("TeleportData", "teleportData", true), 
+	};
+    var dataClass = new DataClass(dataType, fields);
+    Generate(dataClass);
+#>

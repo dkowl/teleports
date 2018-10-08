@@ -6,7 +6,7 @@ using UnityEngine;
 //singleton managing all the static data
 [CreateAssetMenu(fileName = "mainData", menuName = "Data/Main")]
 public class MainData : ScriptableObject {
-
+    /*
     //singleton instance
     public static MainData instance;
     private static bool isInitialized;
@@ -130,4 +130,5 @@ public class MainData : ScriptableObject {
         get { return CurrentPlayerData.Xp; }
     }
     #endregion
+    */
 }

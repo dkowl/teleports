@@ -18,5 +18,5 @@ public partial class WeaponData {
 
     public float TotalAttackTime => 1 / AttacksPerSecond;
 
-    public float AttacksPerSecond => MainData.Game.Skills.GetValue(BasicSkillId).Data.AttacksPerSecond * SpeedModifier;
+    public float AttacksPerSecond => Main.StaticData.Game.Skills.GetValue(BasicSkillId).Data.AttacksPerSecond * SpeedModifier;
 }

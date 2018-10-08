@@ -12,4 +12,6 @@ public interface IGameData  {
     IMappedList<ComboAssetData> Combos { get; }
     IMappedList<ItemAssetData> Items { get; }
     IMappedList<EnemyAssetData> Enemies { get; }
+
+    List<Race> GetPlayableRaces();
 }

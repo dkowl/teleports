@@ -49,7 +49,7 @@ public class GameplayMain : MonoBehaviour {
     
     void Start () {
         UnpauseGame();
-        teleportTime = MainData.CurrentPlayerData.TeleportData.Time;
+        teleportTime = 60; //TODO: Main.GameState
         Debug.LogFormat("Teleport.Time is {0}", teleportTime);
     }
 	
@@ -104,8 +104,8 @@ public class GameplayMain : MonoBehaviour {
 
     public void BackToHome()
     {
-        MainData.SavePlayer(player);
-        MainData.MessageBus.Publish(new RunFinishedMessage(Score));
+        //MainData.SavePlayer(player); //TODO: Main.GameState
+        Main.MessageBus.Publish(new RunFinishedMessage(Score));
         MenuController.Instance.OpenMenu(MenuController.MenuType.Home);
         Main.SceneController.SwitchScene(SceneNames.Home);
     }

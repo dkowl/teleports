@@ -16,9 +16,9 @@ public abstract class UnlockableSlotUI : LoadableBehaviour {
     protected Stylesheet stylesheet;
     protected UnlockableSlot slot;
 
-    override protected void LoadDataInternal()
+    protected override void LoadDataInternal()
     {
-        stylesheet = MainData.Stylesheet;
+        stylesheet = Main.StaticData.Stylesheet;
         slot = GetSlot();
 
         if (slot.IsLocked)

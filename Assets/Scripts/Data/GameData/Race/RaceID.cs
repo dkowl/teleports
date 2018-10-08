@@ -11,6 +11,6 @@ public class RaceID : MappedListID
 
     protected override IList<string> DropdownValues()
     {
-        return MainData.Game.RaceNames;
+        return Main.StaticData.Game.Races.AllNames;
     }
 }

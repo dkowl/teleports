@@ -11,6 +11,6 @@ public class ComboID : MappedListID
 
     protected override IList<string> DropdownValues()
     {
-        return MainData.Game.Combos.AllNames;
+        return Main.StaticData.Game.Combos.AllNames;
     }
 }

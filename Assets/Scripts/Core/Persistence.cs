@@ -14,7 +14,24 @@ public class Persistence : MonoBehaviour, IPersistence
 
     public IStaticData GetStaticData()
     {
-        StaticData result = new StaticData(gameDataSo.Data, graphicsDataSo.Data, serverDataSo.Data, stylesheet, defaults);
+        Debug.Assert(!gameDataSo.Empty, "GameData not found");
+        Debug.Assert(!graphicsDataSo.Empty, "GraphicsData not found");
+        Debug.Assert(stylesheet != null, "Stylesheet not found");
+        Debug.Assert(defaults != null, "DataDefaults not found");
+
+        StaticData result = new StaticData(gameDataSo.Data, graphicsDataSo.Data, stylesheet, defaults);
         return result;
+    }
+
+    public IGameState LoadGameState()
+    {
+        return new GameState();
+    }
+
+    public IServerData GetServerData()
+    {
+        Debug.Assert(!serverDataSo.Empty, "ServerData not found");
+
+        return serverDataSo.Data;
     }
 }
