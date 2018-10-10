@@ -15,7 +15,6 @@ public partial class ItemData : IDeepCopyable , IUniqueName {
 	[SerializeField, FoldoutGroup("Details", false)] private List<SkillID> skills;
 	[SerializeField, FoldoutGroup("Details", false)] private List<PerkID> perks;
 	[SerializeField, FoldoutGroup("Details", false)] private EquipmentSlotCombination[] slotCombinations;
-	[SerializeField, FoldoutGroup("Details", false)] private ItemGraphics graphics;
 	[SerializeField, FoldoutGroup("Details", false)] private ItemGraphicsID graphicsId;
 
 
@@ -27,7 +26,6 @@ public partial class ItemData : IDeepCopyable , IUniqueName {
 		skills = new List<SkillID>(other.skills);
 		perks = new List<PerkID>(other.perks);
 		slotCombinations = other.slotCombinations;
-		graphics = other.graphics;
 		graphicsId = other.graphicsId;
 	}
 
@@ -44,7 +42,6 @@ public partial class ItemData : IDeepCopyable , IUniqueName {
 	public List<SkillID> Skills => skills;
 	public List<PerkID> Perks => perks;
 	public EquipmentSlotCombination[] SlotCombinations => slotCombinations;
-	public ItemGraphics Graphics => graphics;
 	public ItemGraphicsID GraphicsId => graphicsId;
 
 

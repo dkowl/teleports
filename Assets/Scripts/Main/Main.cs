@@ -84,7 +84,7 @@ public class Main : Singleton<Main>, ISingletonInstance
         {
             if (this.gameObject.GetInstanceID() == gameObject.GetInstanceID()) continue;
 
-            Destroy(gameObject);
+            DestroyImmediate(gameObject);
         }
     }
 

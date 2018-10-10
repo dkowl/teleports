@@ -4,7 +4,6 @@ using UnityEngine;
 
 public interface ILoadingGraphics
 {
-
     void SetActive(bool active);
     void UpdateProgress(float progress);
 }

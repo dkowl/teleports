@@ -14,8 +14,6 @@
 	        new List<string>{"FoldoutGroup(\"Details\", false)"}), 
 	    new Field("EquipmentSlotCombination[]", "slotCombinations", false,
 	        new List<string>{"FoldoutGroup(\"Details\", false)"}),
-	    new Field("ItemGraphics", "graphics", false,
-	        new List<string>{"FoldoutGroup(\"Details\", false)"}),
 	    new Field("ItemGraphicsID", "graphicsId", false,
 	        new List<string>{"FoldoutGroup(\"Details\", false)"}),
 	};
