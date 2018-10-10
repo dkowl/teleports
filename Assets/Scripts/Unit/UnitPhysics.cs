@@ -50,9 +50,14 @@ public class UnitPhysics : MonoBehaviour
 
     public void SwitchToRagdoll()
     {
-        var ragdollObject = Instantiate(Main.StaticData.Game.Races.GetValue(unit.UnitData.RaceName).Graphics.RagdollObject, transform);
-        if (ragdollObject == null) return;
-        
+        var ragdollObject = Main.StaticData.Game.Races.GetValue(unit.UnitData.RaceName).Graphics.RagdollObject;
+        if (ragdollObject == null)
+        {
+            Debug.LogWarning("No ragdoll object for " + name);
+            return;
+        }
+
+        Instantiate(ragdollObject, transform);
         ragdoll = ragdollObject.GetComponent<UnitRagdoll>();
         Debug.Assert(ragdoll != null, "No UnitRagdoll found in ragdoll object");
         Destroy(unit.Graphics.RaceModel);
