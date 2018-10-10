@@ -45,6 +45,15 @@ public class AssetEditor : Singleton<AssetEditor>
         NameUniqueAssets<SkillGraphics>();
     }
 
+    public static void AddAssetsOfType<T>(Object o, MappedList<T> graphicsList) where T : Object, IUniqueName
+    {
+        graphicsList.ClearList();
+        graphicsList.AddItems(Instance.GetAllAssetsOfType<T>());
+        graphicsList.MakeDict();
+        EditorUtility.SetDirty(o);
+        AssetDatabase.SaveAssets();
+    }
+
     private void NameUniqueAssets<T>() where T : Object, IUniqueName
     {
         var assetInfos = GetAllAssetInfosOfType<T>();

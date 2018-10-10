@@ -25,8 +25,8 @@ public class XpProgress : MonoBehaviour {
     }
     
     void Start () {
-        xp_ = MainData.Xp;
-        targetXp_ = MainData.Xp;
+        xp_ = Main.GameState.CurrentHeroData.Xp;
+        targetXp_ = xp_;
         updateUI();
     }
 	

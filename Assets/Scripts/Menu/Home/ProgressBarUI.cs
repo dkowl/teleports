@@ -19,13 +19,12 @@ public class ProgressBarUI : BaseProgressBarUI, IMessageHandler<RunFinishedMessa
     protected override void Awake()
     {
         base.Awake();
-        MainData.MessageBus.Subscribe(this);
+        Main.MessageBus.Subscribe(this);
     }
 
     protected override bool DetectChange()
     {
-        if (MainData.CurrentPlayerData == null) return false;
-        return base.DetectChange();
+        return Main.GameState.CurrentHeroData != null && base.DetectChange();
     }
 
     protected override void OnChangeDetected()
@@ -91,9 +90,9 @@ public class ProgressBarUI : BaseProgressBarUI, IMessageHandler<RunFinishedMessa
         switch (valueType)
         {
             case ValueType.XP:
-                return MainData.CurrentPlayerData.Xp;
+                return Main.GameState.CurrentHeroData.Xp;
             case ValueType.RP:
-                return MainData.CurrentPlayerData.RankPoints;
+                return Main.GameState.CurrentHeroData.RankPoints;
             default:
                 return 0;
         }

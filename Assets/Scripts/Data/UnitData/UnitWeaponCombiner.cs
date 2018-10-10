@@ -38,7 +38,7 @@ public class UnitWeaponCombiner {
         minDamage = (int)weapon.MinDamage;
         maxDamage = (int)weapon.MaxDamage;
         weaponReach = weapon.Reach + reachBonus.Value;
-        totalReach = weaponReach + MainData.Game.GetSkill(unit.MainAttack).Reach;
+        totalReach = weaponReach + Main.StaticData.Game.Skills.GetValue(unit.MainAttack).Data.Reach;
         attackSpeedModifier = weapon.SpeedModifier / speedBonus.Multiplier;
         attacksPerSecond = weapon.AttacksPerSecond / speedBonus.Multiplier;
     }

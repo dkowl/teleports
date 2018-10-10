@@ -49,5 +49,5 @@ public partial class TeleportData {
         return gemSlots[id];
     }
 
-    public TeleportGraphics Graphics => MainData.Game.GraphicsData.Teleport.TryGetValue(graphicsId);
+    public TeleportGraphics Graphics => Main.StaticData.Graphics.TeleportGraphics.GetValue(graphicsId);
 }

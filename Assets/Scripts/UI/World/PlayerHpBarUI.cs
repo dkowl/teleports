@@ -9,7 +9,7 @@ public class PlayerHpBarUI : BaseProgressBarUI {
 
     void Start()
     {
-        playerUnit = GameMain.Instance.Player.GetComponent<Unit>();
+        playerUnit = GameplayMain.Instance.Player.GetComponent<Unit>();
         DetectChange();
         SkipAnimation();
     }

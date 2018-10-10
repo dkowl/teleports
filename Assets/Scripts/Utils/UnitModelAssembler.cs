@@ -6,7 +6,7 @@ public static class UnitModelAssembler {
 
 	public static GameObject GetModel(UnitData unitData, bool withItems = true, bool withUiAnimationController = false)
     {
-        var result = Object.Instantiate(MainData.Game.GetRace(unitData.RaceName).Graphics.ModelObject);
+        var result = Object.Instantiate(Main.StaticData.Game.Races.GetValue(unitData.RaceName).Graphics.ModelObject);
 
         if (withItems)
         {
@@ -28,7 +28,7 @@ public static class UnitModelAssembler {
             Debug.LogWarning("Animator not found");
             return;
         }
-        RaceGraphics raceGraphics = MainData.Game.GetRace(unitData.RaceName).Graphics;
+        RaceGraphics raceGraphics = Main.StaticData.Game.Races.GetValue(unitData.RaceName).Graphics;
         if (raceGraphics.UiAnimationController == null)
         {
             Debug.LogWarning("UiAnimationController not found");

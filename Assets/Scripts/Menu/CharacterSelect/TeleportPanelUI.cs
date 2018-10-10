@@ -11,14 +11,14 @@ public class TeleportPanelUI : LoadableBehaviour {
     public Text tierText;
     public Text rankPointsText;
 
-    override protected void LoadDataInternal()
+    protected override void LoadDataInternal()
     {
-        PlayerData playerData = MainData.CurrentPlayerData;
-        if (playerData != null)
+        HeroData heroData = Main.GameState.CurrentHeroData;
+        if (heroData != null)
         {
-            ownerNameText.text = playerData.CharacterName + "'s";
-            tierText.text = "Tier " + RomanNumbers.RomanNumber(playerData.TeleportData.Tier);
-            rankPointsText.text = playerData.RankPoints.ToString();
+            ownerNameText.text = heroData.CharacterName + "'s";
+            tierText.text = "Tier " + RomanNumbers.RomanNumber(heroData.TeleportData.Tier);
+            rankPointsText.text = heroData.RankPoints.ToString();
         }
         else
         {

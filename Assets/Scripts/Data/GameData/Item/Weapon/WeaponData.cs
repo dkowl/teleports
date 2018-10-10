@@ -11,12 +11,12 @@ public partial class WeaponData {
 
     }
 
-
+   
     public float MinDamage => Damage * (1.0f - DamageSpread);
     public float MaxDamage => Damage * (1.0f + DamageSpread);
     public float AverageDamage => (float)(MinDamage + MaxDamage) / 2;
 
     public float TotalAttackTime => 1 / AttacksPerSecond;
 
-    public float AttacksPerSecond => MainData.Game.Skills.GetValue(BasicSkillId).Data.AttacksPerSecond * SpeedModifier;
+    public float AttacksPerSecond => Main.StaticData.Game.Skills.GetValue(BasicSkillId).Data.AttacksPerSecond * SpeedModifier;
 }

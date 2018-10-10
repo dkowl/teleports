@@ -25,11 +25,11 @@ public class InventoryMenu : SerializedMonoBehaviour,
 
     private void OnEnable()
     {
-        unitData = MainData.CurrentPlayerData.UnitData;
+        unitData = Main.GameState.CurrentHeroData.UnitData;
 
         internalItemIds = new Dictionary<ItemData, int>();
 
-        MainData.MessageBus.Subscribe(this);
+        Main.MessageBus.Subscribe(this);
 
         InitItemSpawner();       
     }
@@ -37,7 +37,7 @@ public class InventoryMenu : SerializedMonoBehaviour,
     private void OnDestroy()
     {
         itemSpawner.Despawn();
-        MainData.MessageBus.Unsubscribe(this);
+        Main.MessageBus.Unsubscribe(this);
     }
 
     private void Start()
@@ -117,7 +117,7 @@ public class InventoryMenu : SerializedMonoBehaviour,
         int internalItemId = 0;
         foreach(var item in InventoryData.GetAllItems())
         {
-            itemPrefabs.Add(MainData.Game.GraphicsData.ItemGraphics.GetValue(item.GraphicsId).Prefab);
+            itemPrefabs.Add(Main.StaticData.Graphics.ItemGraphics.GetValue(item.GraphicsId).Prefab);
             internalItemIds[item] = internalItemId;
             internalItemId++;
         }

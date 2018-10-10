@@ -15,17 +15,17 @@ public class DeleteHeroButton : DialogWindowStarterButton {
 
     protected override string TextString()
     {
-        return "Are you sure you want to delete " + MainData.CurrentPlayerData.CharacterName + "?";
+        return "Are you sure you want to delete " + Main.GameState.CurrentHeroData.CharacterName + "?";
     }
 
     protected override bool IsActive()
     {
-        return MainData.CurrentPlayerData != null;
+        return Main.GameState.CurrentHeroData != null;
     }
 
     public void Yes()
     {
-        MainData.Save.DeleteCurrentPlayer();
+        Main.GameState.DeleteCurrentHero();
     }
 
     public void No()

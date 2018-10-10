@@ -9,7 +9,7 @@ public class PerkID : MappedListID {
 
     protected override IList<string> DropdownValues()
     {
-        return MainData.Game.PerkNames;
+        return Main.StaticData.Game.Perks.AllNames;
     }
 
 }

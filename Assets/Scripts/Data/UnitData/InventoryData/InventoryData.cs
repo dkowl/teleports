@@ -219,11 +219,6 @@ public partial class InventoryData {
         return -1;
     }
 
-    private List<ItemData> GetItems(IEnumerable<ItemID> itemIds)
-    {
-        return itemIds.Select(id => MainData.Game.GetItem(id)).Where(itemData => itemData != null).ToList();
-    }
-
     private ItemData GetItemByName(string name)
     {
         foreach(var invSlot in invSlots)

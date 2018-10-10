@@ -9,7 +9,7 @@ public class Combo : Skill
 
     protected override void OnInitialize()
     {
-        comboData = new ComboData(MainData.Game.Combos.GetValue(Data.ComboId).Data);
+        comboData = new ComboData(Main.StaticData.Game.Combos.GetValue(Data.ComboId).Data);
         skills = new List<Skill>();
         foreach (SkillData skillData in comboData.SkillDatas)
         {

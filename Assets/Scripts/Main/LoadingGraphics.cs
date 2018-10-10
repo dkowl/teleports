@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoadingGraphics : MonoBehaviour {
+public class LoadingGraphics : MonoBehaviour, ILoadingGraphics {
 
     public Camera loadingCamera;
     public Canvas canvas;

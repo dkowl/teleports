@@ -4,8 +4,8 @@ using UnityEngine;
 
 public partial class SkillData
 {
-    public int MaxCombo => MainData.Game.Combos.GetValue(ComboId).Data.DataIds.Count - 1;
-    public ComboData ComboData => ComboId != null ? MainData.Game.Combos.GetValue(ComboId).Data : null;
+    public int MaxCombo => Main.StaticData.Game.Combos.GetValue(ComboId).Data.DataIds.Count - 1;
+    public ComboData ComboData => ComboId != null ? Main.StaticData.Game.Combos.GetValue(ComboId).Data : null;
 
 
     public float AttacksPerSecond

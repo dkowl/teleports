@@ -6,9 +6,7 @@ using System.Linq;
 
 public class MessageBus : IMessageBus {
 
-    MessageBus instance;
-
-    IDictionary<Type, List<object>> subscribers = new Dictionary<Type, List<object>>();
+    private IDictionary<Type, List<object>> subscribers = new Dictionary<Type, List<object>>();
 
     public void Subscribe(object subscriber)
     {
@@ -48,7 +46,7 @@ public class MessageBus : IMessageBus {
         }
     }
 
-    List<Type> GetHandledMessageTypes(object subscriber)
+    private static IEnumerable<Type> GetHandledMessageTypes(object subscriber)
     {
         return subscriber.GetType()
             .GetInterfaces()

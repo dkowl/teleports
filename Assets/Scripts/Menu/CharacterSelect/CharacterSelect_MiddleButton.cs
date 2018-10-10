@@ -17,9 +17,9 @@ public class CharacterSelect_MiddleButton : LoadableBehaviour {
         button.onClick.AddListener(OnClick);
     }
 
-    override protected void LoadDataInternal()
+    protected override void LoadDataInternal()
     {
-        if (MainData.CurrentPlayerData == null)
+        if (Main.GameState.CurrentHeroData == null)
         {
             text.text = "New Hero";
         }
@@ -30,7 +30,7 @@ public class CharacterSelect_MiddleButton : LoadableBehaviour {
 
     public void OnClick()
     {
-        if (MainData.CurrentPlayerData == null)
+        if (Main.GameState.CurrentHeroData == null)
         {
             MenuController.Instance.OpenMenu(MenuController.MenuType.CreateCharacter);
         }

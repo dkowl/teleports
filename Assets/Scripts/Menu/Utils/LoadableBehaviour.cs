@@ -22,16 +22,16 @@ public abstract class LoadableBehaviour : MonoBehaviour {
 
     protected virtual void SubscribeInternal()
     {
-        MainData.OnInitializedEvent += LoadData;
-        SaveData.OnCharacterIDChangedEvent += LoadData;
+        Main.AfterInitializationEvent += LoadData;
+        GameState.HeroChangedEvent += LoadData;
         Menu.OnShowEvent += LoadData;
         Menu.OnHideEvent += LoadData;
     }
 
     protected virtual void UnsubscribeInternal()
     {
-        MainData.OnInitializedEvent -= LoadData;
-        SaveData.OnCharacterIDChangedEvent -= LoadData;
+        Main.AfterInitializationEvent -= LoadData;
+        GameState.HeroChangedEvent -= LoadData;
         Menu.OnShowEvent -= LoadData;
         Menu.OnHideEvent -= LoadData;
     }
