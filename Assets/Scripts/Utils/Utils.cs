@@ -9,16 +9,6 @@ namespace Teleports.Utils
     {
         public static float baseAspect = 16f / 9f;
 
-        public static void MakeVisible(this GameObject gameObject)
-        {
-            gameObject.transform.localScale = Vector3.one;
-        }
-
-        public static void MakeInvisible(this GameObject gameObject)
-        {
-            gameObject.transform.localScale = Vector3.zero;
-        }
-
         public static bool Approximately(Vector3 a, Vector3 b)
         {
             return
@@ -73,16 +63,6 @@ namespace Teleports.Utils
                 }
             }
             return result;
-        }
-
-        public static T GetComponentInChildrenNamed<T>(this GameObject gameObject, string name) where T : Component
-        {
-            Transform foundTransform = gameObject.transform.FindRecursive(name);
-            if (foundTransform != null)
-            {
-                return foundTransform.gameObject.GetComponent<T>();
-            }
-            else return null;
         }
 
         public static T GetComponentInChildrenNamed<T>(this Component component, string name) where T : Component
@@ -150,44 +130,6 @@ namespace Teleports.Utils
             for (int i = 0; i < targetCount; i++)
             {
                 list.Add(new T());
-            }
-        }
-
-        public static List<GameObject> GetChildren(this GameObject gameObject)
-        {
-            Queue<Transform> queue = new Queue<Transform>();
-            queue.Enqueue(gameObject.transform);
-            var result = new List<GameObject>();
-            while(queue.Count > 0)
-            {
-                Transform currentTransform = queue.Dequeue();
-                for(int i = 0; i<currentTransform.childCount; i++)
-                {
-                    queue.Enqueue(currentTransform.GetChild(i));
-                }
-                result.Add(currentTransform.gameObject);
-            }
-            return result;
-        }
-
-        public static void SetLayerIncludingChildren(this GameObject gameObject, int layer)
-        {
-            foreach(var gObject in gameObject.GetChildren())
-            {
-                gObject.layer = layer;
-            }
-        }
-
-        public static void InitComponent<T>(this GameObject gameObject, ref T component) where T : Component
-        {
-            if(component == null)
-            {
-                component = gameObject.GetComponent<T>();
-            }
-
-            if(component == null)
-            {
-                component = gameObject.AddComponent<T>();
             }
         }
 

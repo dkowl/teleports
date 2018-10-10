@@ -9,7 +9,7 @@ public class UnitPhysics : MonoBehaviour
 {
     private Unit unit;
     private new Rigidbody rigidbody;
-    private new CapsuleCollider collider;
+    private new Collider collider;
     private UnitRagdoll ragdoll;
     private bool isRagdoll;
 
@@ -21,7 +21,7 @@ public class UnitPhysics : MonoBehaviour
     private void Start()
     {
         SpawnRigidbody();
-        SpawnCollider();
+        collider = SpawnCollider();
     }
 
     private void SpawnRigidbody()
@@ -36,24 +36,53 @@ public class UnitPhysics : MonoBehaviour
         rigidbody.mass = Mathf.Sqrt(unit.UnitData.Height * unit.Size * unit.Size) * 4 * 10;
     }
 
-    private void SpawnCollider()
+    private Collider FindExistingCollider()
     {
-        if (GetComponentInChildren<Collider>() == null)
+        Collider result = null;
+
+        result = unit.GetComponent<Collider>();
+        if(result != null) return result;
+
+        RaceID raceId = new RaceID(unit.UnitData.RaceName);
+        result = Main.StaticData.Game.Races.GetValue(raceId).Graphics.Collider;
+        if (result != null) return gameObject.AddCopyOfComponent(result);
+
+        //the collider must be in the same gameObject as the rigidbody, so if we find one in a child object, we move it up
+        Collider childCollider = unit.GetComponentInChildren<Collider>();
+        if (childCollider is BoxCollider) result = gameObject.AddCopyOfComponent(childCollider as BoxCollider);
+        if (childCollider is SphereCollider) result = gameObject.AddCopyOfComponent(childCollider as SphereCollider);
+        if (childCollider is CapsuleCollider) result = gameObject.AddCopyOfComponent(childCollider as CapsuleCollider);
+        if (childCollider is MeshCollider) result = gameObject.AddCopyOfComponent(childCollider as MeshCollider);
+
+        Destroy(childCollider);
+        return result;
+    }
+
+    private Collider SpawnCollider()
+    {
+        var foundCollider = FindExistingCollider();
+        if (foundCollider != null)
         {
-            collider = gameObject.AddComponent<CapsuleCollider>();
+            return foundCollider;
         }
-        if (collider == null) return;
-        collider.radius = unit.Size;
-        collider.height = unit.UnitData.Height + unit.Size;
-        collider.center = new Vector3(0, unit.UnitData.Height / 2, 0);
+
+        CapsuleCollider result = gameObject.AddComponent<CapsuleCollider>();
+        result.radius = unit.Size;
+        result.height = unit.UnitData.Height + unit.Size;
+        result.center = new Vector3(0, unit.UnitData.Height / 2, 0);
+        return result;
     }
 
     public void SwitchToRagdoll()
     {
+        unit.gameObject.SetLayerIncludingChildren(0);
+
         var ragdollObject = Main.StaticData.Game.Races.GetValue(unit.UnitData.RaceName).Graphics.RagdollObject;
         if (ragdollObject == null)
         {
             Debug.LogWarning("No ragdoll object for " + name);
+            rigidbody.constraints = RigidbodyConstraints.None;
+            rigidbody.useGravity = true;
             return;
         }
 
@@ -62,8 +91,8 @@ public class UnitPhysics : MonoBehaviour
         Debug.Assert(ragdoll != null, "No UnitRagdoll found in ragdoll object");
         Destroy(unit.Graphics.RaceModel);
         Destroy(collider);
+        Destroy(rigidbody);
         rigidbody = ragdoll.GetComponentInChildren<Rigidbody>();
-        unit.gameObject.SetLayerIncludingChildren(0);
 
         isRagdoll = true;
     }
