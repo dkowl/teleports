@@ -4,7 +4,6 @@ using UnityEngine;
 using System;
 
 //singleton controlling menu stack
-[ExecuteInEditMode]
 [CreateAssetMenu(fileName = "menuController", menuName = "Menu/Controller")]
 public class MenuController : ScriptableObject
 {
