@@ -66,8 +66,8 @@ public class Main : Singleton<Main>, ISingletonInstance
     {
         messageBus = new MessageBus();
 
-        InitializeInterfaceWithComponent<SceneController, ISceneController>(out sceneController);
         loadingGraphics = loadingGraphicsConcrete;
+        InitializeInterfaceWithComponent<SceneController, ISceneController>(out sceneController);
         DontDestroyOnLoad(this);
     }
 
