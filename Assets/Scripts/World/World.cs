@@ -2,56 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class World : MonoBehaviour {
+public class World : IWorld {
 
     
-    public const int WORLD_RADIUS = 128; //radius in chunks
-    const int WORLD_SIZE = WORLD_RADIUS * 2 + 1;
-    const int VIEW_DISTANCE = 1; //in chunks (example: 1 means a 3x3 grid will be kept loaded)
-    public int seed_;
-    Chunk[,] chunks_ = new Chunk[WORLD_SIZE, WORLD_SIZE];
-    HashSet<Vector2> loadedList_ = new HashSet<Vector2>();
-    HashSet<Vector2> toRemove_ = new HashSet<Vector2>();
-    
-    void Start()
+    public const int WorldRadius = 128; //radius in chunks
+    private const int WorldSize = WorldRadius * 2 + 1;
+    private const int ViewRangeInChunks = 1; //(example: 1 means a 3x3 grid will be kept loaded)
+
+    private int seed;
+    private Chunk[,] chunks = new Chunk[WorldSize, WorldSize];
+    private HashSet<Vector2> loadedChunkCoords = new HashSet<Vector2>();
+    private HashSet<Vector2> toUnloadChunkCoords = new HashSet<Vector2>();
+
+    public void Spawn(WorldCreationParams creationParams)
     {
-        for(int i = 0; i<WORLD_SIZE; i++)
+        seed = creationParams.seed;
+
+        const float chunkSize = Chunk.ChunkSize * Chunk.TileSize;
+        for (int i = 0; i < WorldSize; i++)
         {
-            for(int j = 0; j<WORLD_SIZE; j++)
+            for (int j = 0; j < WorldSize; j++)
             {
-                float chunkSize = Chunk.CHUNK_SIZE * Chunk.TILE_SIZE;
-                chunks_[i, j] = new Chunk(seed_, ((j - WORLD_RADIUS)-0.5f) * chunkSize, ((i - WORLD_RADIUS)-0.5f) * chunkSize);
+                chunks[i, j] = new Chunk(seed, ((j - WorldRadius) - 0.5f) * chunkSize, ((i - WorldRadius) - 0.5f) * chunkSize);
             }
         }
     }
 
-    void Update()
+    public void Update(Vector3 playerPos)
     {
-        Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
-        int chunkX = (int) System.Math.Floor((playerPos.x + Chunk.size() * (WORLD_RADIUS + 0.5f)) / Chunk.size());
-        int chunkY = (int) System.Math.Floor((playerPos.z + Chunk.size() * (WORLD_RADIUS + 0.5f)) / Chunk.size());
+        int chunkX = (int)System.Math.Floor((playerPos.x + Chunk.Size() * (WorldRadius + 0.5f)) / Chunk.Size());
+        int chunkY = (int)System.Math.Floor((playerPos.z + Chunk.Size() * (WorldRadius + 0.5f)) / Chunk.Size());
 
-        foreach(Vector2 c in loadedList_)
+        foreach (Vector2 c in loadedChunkCoords)
         {
-            if(System.Math.Max(System.Math.Abs(chunkX - (int)c.y), System.Math.Abs(chunkY - (int)c.x)) > VIEW_DISTANCE)
+            if (System.Math.Max(System.Math.Abs(chunkX - (int)c.y), System.Math.Abs(chunkY - (int)c.x)) > ViewRangeInChunks)
             {
-                chunks_[(int)c.x, (int)c.y].unload();
-                toRemove_.Add(c);
+                chunks[(int)c.x, (int)c.y].Unload();
+                toUnloadChunkCoords.Add(c);
             }
         }
 
-        foreach(Vector2 c in toRemove_)
+        foreach (Vector2 c in toUnloadChunkCoords)
         {
-            loadedList_.Remove(c);
+            loadedChunkCoords.Remove(c);
         }
-        toRemove_.Clear();
+        toUnloadChunkCoords.Clear();
 
-        for(int i = -VIEW_DISTANCE; i<= VIEW_DISTANCE; i++)
+        for (int i = -ViewRangeInChunks; i <= ViewRangeInChunks; i++)
         {
-            for(int j = -VIEW_DISTANCE; j<= VIEW_DISTANCE; j++)
+            for (int j = -ViewRangeInChunks; j <= ViewRangeInChunks; j++)
             {
-                chunks_[chunkY + i, chunkX + j].load();
-                loadedList_.Add(new Vector2(chunkY + i, chunkX + j));
+                chunks[chunkY + i, chunkX + j].Load();
+                loadedChunkCoords.Add(new Vector2(chunkY + i, chunkX + j));
             }
         }
     }

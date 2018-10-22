@@ -54,6 +54,23 @@ public class AssetEditor : Singleton<AssetEditor>
         AssetDatabase.SaveAssets();
     }
 
+    public static void AddScriptableObjectWrappedDataOfType<T, TWrapper>(Object o, MappedList<T> dataList)
+        where T : IUniqueName
+        where TWrapper : ScriptableObjectDataWrapper<T>
+    {
+        dataList.ClearList();
+        var dataWrappers = Instance.GetAllAssetsOfType<TWrapper>();
+        var data = new List<T>();
+        foreach (var dataWrapper in dataWrappers)
+        {
+            data.Add(dataWrapper.Data);
+        }
+        dataList.AddItems(data);
+        dataList.MakeDict();
+        EditorUtility.SetDirty(o);
+        AssetDatabase.SaveAssets();
+    }
+
     private void NameUniqueAssets<T>() where T : Object, IUniqueName
     {
         var assetInfos = GetAllAssetInfosOfType<T>();

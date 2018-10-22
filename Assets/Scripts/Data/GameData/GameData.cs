@@ -1,9 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Sirenix.Serialization;
-using Sirenix.OdinInspector;
 
 public class GameData : IGameData {
 
@@ -77,17 +74,17 @@ public class GameData : IGameData {
 
         return result;
     }
-
+    //deprecated
     public SkillData GetSkill(SkillID skillId)
     {
         return skillId.UsesString() ? skills.TryGetValue(skillId.Name).Data : null;
     }
-
+    //deprecated
     public Perk GetPerk(PerkID perkId)
     {
         return perks.TryGetValue(perkId.Name);
     }
-
+    //deprecated
     public EnemyData GetEnemy(EnemyID enemyId)
     {
         EnemyAssetData result = enemies.TryGetValue(enemyId.Name);
@@ -102,6 +99,8 @@ public class GameData : IGameData {
     public IMappedList<ComboAssetData> Combos => combos;
     public IMappedList<ItemAssetData> Items => items;
     public IMappedList<EnemyAssetData> Enemies => enemies;
+
+    //deprecated
     public IList<string> PerkNames => perks.AllNames;
     public IList<string> SkillNames => skills.AllNames;
     public IList<string> ItemNames => items.AllNames;

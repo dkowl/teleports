@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TileMapGraphics : MonoBehaviour {
 
-    [SerializeField] Material material;
-    int sizeX, sizeY;
+    [SerializeField] private Material material;
+    private int sizeX, sizeY;
 
     public void GenerateMesh(TileMap tileMap, Vector3 offset, float tileSize)
     {

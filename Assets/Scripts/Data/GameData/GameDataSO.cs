@@ -17,7 +17,7 @@ public class GameDataSO : ScriptableObjectDataWrapper<GameData> {
         }
 
         AddAssets(data.GemsConcrete);
-        AddAssets(data.WorldsConcrete);
+        AddScriptableObjectWrappedData<WorldData, WorldDataSO>(data.WorldsConcrete);
         AddAssets(data.RacesConcrete);
         AddAssets(data.PerksConcrete);
         AddAssets(data.SkillsConcrete);
@@ -29,6 +29,13 @@ public class GameDataSO : ScriptableObjectDataWrapper<GameData> {
     private void AddAssets<T>(MappedList<T> mappedList) where T : Object, IUniqueName
     {
         AssetEditor.AddAssetsOfType(this, mappedList);
+    }
+
+    private void AddScriptableObjectWrappedData<T, TWrapper>(MappedList<T> mappedList) 
+        where T : IUniqueName
+        where TWrapper : ScriptableObjectDataWrapper<T>
+    {
+        AssetEditor.AddScriptableObjectWrappedDataOfType<T, TWrapper>(this, mappedList);
     }
 #endif
 }

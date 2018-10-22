@@ -5,45 +5,43 @@ using UnityEngine;
 
 public class TileMap {
 
-    int seed_;
-    int sizeX_, sizeY_;
-    int posX_, posY_;
-    Tile[,] tiles_;
+    private int seed;
+    private int sizeX, sizeY;
+    private int posX, posY;
+    private Tile[,] tiles;
 
     public TileMap(int sizeX, int sizeY, int seed, int posX, int posY)
     {
-        sizeX_ = sizeX;
-        sizeY_ = sizeY;
-        seed_ = seed;
-        posX_ = posX;
-        posY_ = posY;
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
+        this.seed = seed;
+        this.posX = posX;
+        this.posY = posY;
 
-
-        generate();
+        Generate();
     }
 
-    private void generate()
+    private void Generate()
     {
-        tiles_ = new Tile[sizeX_, sizeY_];
+        tiles = new Tile[sizeX, sizeY];
 
-        Perlin perlin = new Perlin();
-        perlin.Seed = seed_;
+        Perlin perlin = new Perlin {Seed = seed};
 
         ModuleBase module = perlin;
 
-        Noise2D noise = new Noise2D(sizeX_ * 2 + 1, sizeY_ * 2 + 1, module);
+        Noise2D noise = new Noise2D(sizeX * 2 + 1, sizeY * 2 + 1, module);
         
-        noise.GeneratePlanar(posX_, posX_ + 1.0, posY_, posY_ + 1.0, false);
+        noise.GeneratePlanar(posX, posX + 1.0, posY, posY + 1.0, false);
 
-        for(int x = 0; x < sizeX_; x++)
+        for(int x = 0; x < sizeX; x++)
         {
-            for(int y = 0; y < sizeY_; y++)
+            for(int y = 0; y < sizeY; y++)
             {
                 int
                     iX = x * 2 + 1,
                     iY = y * 2 + 1;
 
-                tiles_[x, y] = new Tile(noise[iX, iY]);
+                tiles[x, y] = new Tile(noise[iX, iY]);
                 Vector2[] offsets = new Vector2[4]
                 {
                     new Vector2(-1, -1),
@@ -56,26 +54,26 @@ public class TileMap {
                 {
                     v[i] = Mathf.Max(noise[iX + (int)offsets[i].x, iY + (int)offsets[i].y], 0) * 0;
                 }
-                tiles_[x, y].HeightPoints = v;                    
+                tiles[x, y].HeightPoints = v;                    
             }
         }
     }
 
     public float getHeight(int x, int y)
     {
-        return tiles_[x, y].Height;
+        return tiles[x, y].Height;
     }
 
     public Vector4 getHeightPoints(int x, int y)
     {
-        return tiles_[x, y].HeightPoints;
+        return tiles[x, y].HeightPoints;
     }
 
     public Tile.TerrainType getType(int x, int y)
     {
-        return tiles_[x, y].Type;
+        return tiles[x, y].Type;
     }
 
-    public int getSizeX() { return sizeX_; }
-    public int getSizeY() { return sizeY_; }
+    public int getSizeX() { return sizeX; }
+    public int getSizeY() { return sizeY; }
 }
