@@ -74,7 +74,7 @@ public class TileMapGraphics : MonoBehaviour {
         meshCollider.sharedMesh = mesh;
     }
 
-    void TypeToUvs(Tile.TerrainType type, ref float l, ref float r, ref float b, ref float t)
+    private void TypeToUvs(Tile.TerrainType type, ref float l, ref float r, ref float b, ref float t)
     {
         float padding = 0.03f;
         if(type == Tile.TerrainType.GRASS)
@@ -91,5 +91,10 @@ public class TileMapGraphics : MonoBehaviour {
         r -= padding;
         b += padding;
         t -= padding;
+    }
+
+    public Material Material
+    {
+        set { material = value; }
     }
 }

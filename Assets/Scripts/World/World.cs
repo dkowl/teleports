@@ -9,21 +9,28 @@ public class World : IWorld {
     private const int WorldSize = WorldRadius * 2 + 1;
     private const int ViewRangeInChunks = 1; //(example: 1 means a 3x3 grid will be kept loaded)
 
-    private int seed;
+    private IWorldCreationParams creationParams;
+    private GameObject worldGameObject;
     private Chunk[,] chunks = new Chunk[WorldSize, WorldSize];
     private HashSet<Vector2> loadedChunkCoords = new HashSet<Vector2>();
     private HashSet<Vector2> toUnloadChunkCoords = new HashSet<Vector2>();
 
-    public void Spawn(WorldCreationParams creationParams)
+    public void Spawn(IWorldCreationParams creationParams)
     {
-        seed = creationParams.seed;
+        this.creationParams = creationParams;
+
+        worldGameObject = new GameObject("World");
 
         const float chunkSize = Chunk.ChunkSize * Chunk.TileSize;
         for (int i = 0; i < WorldSize; i++)
         {
             for (int j = 0; j < WorldSize; j++)
             {
-                chunks[i, j] = new Chunk(seed, ((j - WorldRadius) - 0.5f) * chunkSize, ((i - WorldRadius) - 0.5f) * chunkSize);
+                chunks[i, j] = new Chunk(
+                    worldGameObject, 
+                    this.creationParams, 
+                    ((j - WorldRadius) - 0.5f) * chunkSize, 
+                    ((i - WorldRadius) - 0.5f) * chunkSize);
             }
         }
     }

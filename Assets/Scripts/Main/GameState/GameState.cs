@@ -14,6 +14,7 @@ public class GameState : IGameState
     [SerializeField] private int currentHeroId;
 
     public static event System.Action HeroChangedEvent;
+    public static event System.Action GameStateUpdatedEvent; 
 
     public GameState(string accountName)
     {
@@ -53,6 +54,13 @@ public class GameState : IGameState
         HeroChangedEvent?.Invoke();
     }
 
+    public void Update(IGameSessionResult sessionResult)
+    {
+        CurrentHeroData.AddXp(sessionResult.XpEarned);
+        Main.MessageBus.Publish(new RunFinishedMessage(sessionResult.XpEarned));
+        GameStateUpdatedEvent?.Invoke();
+    }
+
     public HeroData GetHeroData(int id)
     {
         AssertValidHeroId(id);
@@ -66,5 +74,13 @@ public class GameState : IGameState
     private void AssertValidHeroId(int id)
     {
         Debug.Assert(id >= 0 && id < heroes.Count, "Invalid hero id");
+    }
+
+    public void CorrectInvalidData()
+    {
+        foreach (var hero in heroes)
+        {
+            hero?.CorrectInvalidData();
+        }
     }
 }

@@ -18,7 +18,26 @@ public class Main : Singleton<Main>, ISingletonInstance
     private IGameState gameState;
     private IServerData serverData;
 
+    private IGameSession currentGameSession;
+
     public static event System.Action AfterInitializationEvent;
+
+    public void StartGameSession()
+    {
+        currentGameSession = new GameSession();
+        currentGameSession.Start(gameState);
+    }
+
+    public void EndGameSession()
+    {
+        currentGameSession.End(OnGameSessionEnd);
+    }
+
+    private void OnGameSessionEnd()
+    {
+        gameState.Update(currentGameSession.GetResult());
+        currentGameSession = null;
+    }
 
     private void Awake()
     {
@@ -94,6 +113,7 @@ public class Main : Singleton<Main>, ISingletonInstance
     public static IStaticData StaticData => Instance.staticData;
     public static IGameState GameState => Instance.gameState;
     public static IServerData ServerData => Instance.serverData;
+    public static IGameSession CurrentGameSession => Instance.currentGameSession;
 
     public static void LoadGameState()
     {

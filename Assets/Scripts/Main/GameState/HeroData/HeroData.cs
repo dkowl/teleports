@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Teleports.Utils;
 
@@ -17,6 +18,7 @@ public partial class HeroData
     {
         isEmpty = false;
         characterName = name;
+        this.raceId = raceId;
         xp = 0;
         level = 1;
         rankPoints = 0;
@@ -61,6 +63,29 @@ public partial class HeroData
         }
     }
 
-    //temporary before T4 template regeneration
-    public RaceID RaceId => new RaceID("Human");
+    public void AddXp(int xpToAdd)
+    {
+        xp += xpToAdd;
+        UpdateLevel();
+        UpdateRankPoints(xpToAdd);
+    }
+
+    private void UpdateLevel()
+    {
+        level = Levels.xp.Level(xp);
+    }
+    
+    private void UpdateRankPoints(int score)
+    {
+        rankPoints = RankPointUpdater.UpdateRankPoints(rankPoints, score);
+    }
+
+    public void CorrectInvalidData()
+    {
+        if (raceId == null)
+        {
+            Debug.LogWarning("Race ID is null, changing to \"Human\"");
+            raceId = new RaceID("Human");
+        }
+    }
 }

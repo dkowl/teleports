@@ -6,4 +6,6 @@ public interface ISceneController
 {
 
     void SwitchScene(string sceneName);
+    void SwitchSceneThenInvoke(string sceneName, System.Action postloadAction);
+    string CurrentSceneName { get; }
 }

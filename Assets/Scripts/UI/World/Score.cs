@@ -13,6 +13,6 @@ public class Score : MonoBehaviour {
 	}
 	
 	void Update () {
-        text.text = GameplayMain.Instance.Score.ToString();
+        text.text = Main.CurrentGameSession.GetResult().XpEarned.ToString();
 	}
 }

@@ -36,7 +36,6 @@ public static class PlayerSpawner {
         {
             xp = playerObject.AddComponent<XpComponent>();
         }
-        xp.Xp = heroData.Xp;
 
         playerObject.AddComponent<PlayerWorldUI>();
 

@@ -49,7 +49,7 @@ public class UnitAnimator : MonoBehaviour {
 
     private void HandleCastStartEvent(CastingState.CastEventArgs eventArgs)
     {
-        Debug.Log("Triggering castStart");
+        //Debug.Log("Triggering castStart");
 
         string clipName;
         int castStartHash;
@@ -65,7 +65,7 @@ public class UnitAnimator : MonoBehaviour {
         }
         cast02Flag = !cast02Flag;
 
-        Debug.LogFormat("Combo counter: {0}", eventArgs.Skill.ComboCounter);
+        //Debug.LogFormat("Combo counter: {0}", eventArgs.Skill.ComboCounter);
         if (eventArgs.Skill.ComboCounter > 0) return;
 
         if (eventArgs.Skill.Graphics != null)
@@ -85,7 +85,7 @@ public class UnitAnimator : MonoBehaviour {
 
     private void HandleCastResetEvent(CastingState.CastEventArgs eventArgs)
     {
-        Debug.Log("Triggering castReset");
+        //Debug.Log("Triggering castReset");
         SetTrigger(castResetHash);
     }
 

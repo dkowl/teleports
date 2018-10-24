@@ -4,7 +4,7 @@
 	Field[] fields = {
 		new Field("bool", "isEmpty", false, null, "true"), 
 		new Field("string", "characterName", false),
-		new Field("RaceId", "raceId", false), 
+		new Field("RaceID", "raceId", false), 
 		new Field("int", "xp", false), 
 	    new Field("int", "level", false), 
 	    new Field("int", "rankPoints", false), 

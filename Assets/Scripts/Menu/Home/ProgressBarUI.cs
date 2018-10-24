@@ -27,9 +27,9 @@ public class ProgressBarUI : BaseProgressBarUI, IMessageHandler<RunFinishedMessa
         return Main.GameState.CurrentHeroData != null && base.DetectChange();
     }
 
-    protected override void OnChangeDetected()
+    private void UpdateDelta()
     {
-        delta = currentValue - DisplayValue;
+        delta = CurrentValue() - DisplayValue;
     }
 
     protected override string NameTextString()
@@ -132,6 +132,8 @@ public class ProgressBarUI : BaseProgressBarUI, IMessageHandler<RunFinishedMessa
     public void Handle(RunFinishedMessage message)
     {
         AnimateNextChange();
+        UpdateDelta();
+        animator.SetTrigger("Loading");
     }
 
     protected string DeltaString

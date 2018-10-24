@@ -46,6 +46,12 @@ public class Persistence : MonoBehaviour, IPersistence
         SaveFinishEvent?.Invoke();
     }
 
+    [Button]
+    public void CorrectInvalidData()
+    {
+        gameState.CorrectInvalidData();
+    }
+
     public IGameState GetGameState()
     {
         if (gameState == null)

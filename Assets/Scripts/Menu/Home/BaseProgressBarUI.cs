@@ -66,7 +66,7 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         SkipAnimation();
     }
 
-    void Update()
+    private void Update()
     {
         if (detectChangeInUpdate)
             DetectChange();
@@ -79,6 +79,11 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
                     currentFreezeTime -= Time.deltaTime;
                 else if (DisplayValue != currentValue)
                     Animate(DisplayValue, currentValue, animationType);
+
+                if (!IsAnimating)
+                {
+                    animateNextChange = false;
+                }
             }
             else
             {
@@ -86,16 +91,16 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
             }
             UpdateUiElements();
         }
-        else if (CurrentState != State.Loading)
-                animateNextChange = false;
     }
 
     protected override void SubscribeInternal()
     {
+        GameState.GameStateUpdatedEvent += LoadData;
     }
 
     protected override void UnsubscribeInternal()
     {
+        GameState.GameStateUpdatedEvent -= LoadData;
     }
 
     protected override bool DetectChange()
@@ -115,11 +120,11 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         }
         if (result)
         {
-            //Debug.Log("Change detected! New currentValue: " + currentValue.ToString() + " New maxValue: " + maxValue.ToString());
+            Debug.Log("Change detected! New currentValue: " + currentValue.ToString() + " New maxValue: " + maxValue.ToString());
             Freeze();
             OnChangeDetected();
         }
-        return result;
+        return IsAnimating;
     }
 
     protected override void OnOpenInternal()
@@ -226,12 +231,13 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
 
     public void AnimateNextChange()
     {
+        DetectChange();
         animateNextChange = true;
     }
 
     public void SkipAnimation()
     {
-        //Debug.Log("Skipping animation!");
+        Debug.Log("Skipping animation!");
         animateNextChange = false;
         Skip();
         if (DisplayValue == currentValue) return;
@@ -262,13 +268,7 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         slider.value = SliderValue();
     }
 
-    public bool IsAnimating
-    {
-        get
-        {
-            return currentValue != DisplayValue;
-        }
-    }
+    public bool IsAnimating => currentValue != DisplayValue;
 
     protected float DisplayValue
     {

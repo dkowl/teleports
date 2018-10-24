@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IWorld
 {
 
-    void Spawn(WorldCreationParams creationParams);
+    void Spawn(IWorldCreationParams creationParams);
     void Update(Vector3 playerPosition);
 
 }

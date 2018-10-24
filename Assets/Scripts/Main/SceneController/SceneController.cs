@@ -16,7 +16,8 @@ public class SceneController : MonoBehaviour, ISceneController {
     private delegate void UpdateDelegate();
     private UpdateDelegate[] updateDelegates;
     private ILoadingGraphics loadingGraphics;
-    
+    private System.Action postloadAction;
+
     [SerializeField] private string startSceneName = SceneNames.Home;
 
     public void SwitchScene(string sceneName)
@@ -25,7 +26,14 @@ public class SceneController : MonoBehaviour, ISceneController {
         {
             nextSceneName = sceneName;
         }
+    }
 
+    public void SwitchSceneThenInvoke(string sceneName, System.Action postloadAction)
+    {
+        if (currentSceneName == sceneName) return;
+
+        nextSceneName = sceneName;
+        this.postloadAction = postloadAction;
     }
 
     private void Awake()
@@ -109,6 +117,11 @@ public class SceneController : MonoBehaviour, ISceneController {
     
     private void UpdateScenePostload()
     {
+        if (postloadAction != null)
+        {
+            postloadAction.Invoke();
+            postloadAction = null;
+        }
         loadingGraphics?.SetActive(false);
         currentSceneName = nextSceneName;
         sceneState = SceneState.Ready;
@@ -126,5 +139,7 @@ public class SceneController : MonoBehaviour, ISceneController {
             sceneState = SceneState.Reset;
         }
     }
+
+    public string CurrentSceneName => currentSceneName;
 
 }

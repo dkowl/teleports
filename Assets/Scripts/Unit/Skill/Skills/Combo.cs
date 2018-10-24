@@ -20,14 +20,14 @@ public class Combo : Skill
 
     protected override void CastInternal(Unit caster, List<CastTarget> targets)
     {
-        Debug.Log("Casting my sexy combo");
+        //Debug.Log("Casting my sexy combo");
         CurrentSkill.Cast(caster, targets);
     }
 
     public override void RegisterCombo(int counter)
     {
         base.RegisterCombo(counter);
-        Debug.LogFormat("Registering my sexy combo, ComboCounter is: {0}", ComboCounter);
+        //Debug.LogFormat("Registering my sexy combo, ComboCounter is: {0}", ComboCounter);
         data = comboData.SkillDatas[comboData.DataIds[ComboCounter]];
     }
 

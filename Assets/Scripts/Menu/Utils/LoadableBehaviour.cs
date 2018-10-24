@@ -24,6 +24,7 @@ public abstract class LoadableBehaviour : MonoBehaviour {
     {
         Main.AfterInitializationEvent += LoadData;
         GameState.HeroChangedEvent += LoadData;
+        GameState.GameStateUpdatedEvent += LoadData;
         Menu.OnShowEvent += LoadData;
         Menu.OnHideEvent += LoadData;
     }
@@ -32,6 +33,7 @@ public abstract class LoadableBehaviour : MonoBehaviour {
     {
         Main.AfterInitializationEvent -= LoadData;
         GameState.HeroChangedEvent -= LoadData;
+        GameState.GameStateUpdatedEvent -= LoadData;
         Menu.OnShowEvent -= LoadData;
         Menu.OnHideEvent -= LoadData;
     }

@@ -78,7 +78,7 @@ public class CastingState : ActionState {
         comboCounter = 0;
         hasCasted = false;
         if (resetCastEvent != null) resetCastEvent(new CastEventArgs(this));
-        Debug.Log("Resetting" + Unit.name);
+        //Debug.Log("Resetting" + Unit.name);
     }
 
     public TryStartResult TryStart(CastCommand command)

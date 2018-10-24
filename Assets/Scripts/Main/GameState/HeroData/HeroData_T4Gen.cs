@@ -10,6 +10,7 @@ public partial class HeroData : IDeepCopyable {
 
 	[SerializeField] private bool isEmpty;
 	[SerializeField] private string characterName;
+	[SerializeField] private RaceID raceId;
 	[SerializeField] private int xp;
 	[SerializeField] private int level;
 	[SerializeField] private int rankPoints;
@@ -27,6 +28,7 @@ public partial class HeroData : IDeepCopyable {
 	public HeroData(HeroData other){
 		isEmpty = other.isEmpty;
 		characterName = other.characterName;
+		raceId = other.raceId;
 		xp = other.xp;
 		level = other.level;
 		rankPoints = other.rankPoints;
@@ -46,6 +48,7 @@ public partial class HeroData : IDeepCopyable {
 
 	public bool IsEmpty => isEmpty;
 	public string CharacterName => characterName;
+	public RaceID RaceId => raceId;
 	public int Xp => xp;
 	public int Level => level;
 	public int RankPoints => rankPoints;

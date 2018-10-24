@@ -11,22 +11,24 @@ public class Chunk {
     public const int ChunkSize = 16;
     public const float TileSize = 2f;
 
+    private IWorldCreationParams worldCreationParams;
     private bool isLoaded;
     private bool spawnDone; //true if enemies for this chunk were already spawned
-    private int seed;
     private float posX, posZ; //position in world coordinates
     private int idX, idZ; //chunk number
 
     private TileMap tileMap;
     private TileMapGraphics tileMapGraphics;
 
+    private GameObject parentObject;
     private GameObject gameObject;
 
-    public Chunk(int seed, float posX, float posZ)
+    public Chunk(GameObject parentObject, IWorldCreationParams worldCreationParams, float posX, float posZ)
     {
         isLoaded = false;
         spawnDone = false;
-        this.seed = seed;
+        this.parentObject = parentObject;
+        this.worldCreationParams = worldCreationParams;
         this.posX = posX;
         this.posZ = posZ;
         idX = (int)((this.posX + Size() / 2) / Size());
@@ -38,10 +40,12 @@ public class Chunk {
         if (isLoaded) return;
 
         gameObject = new GameObject(GameObjectName);
-        gameObject.transform.parent = GameObject.Find("WorldObject").transform;
+        gameObject.transform.parent = parentObject.transform;
+        gameObject.layer = LayerMask.NameToLayer("Ground");
 
         tileMapGraphics = gameObject.AddComponent<TileMapGraphics>();
-        tileMap = new TileMap(ChunkSize, ChunkSize, seed, idX, idZ);
+        tileMapGraphics.Material = worldCreationParams.WorldData.TerrainMaterial;
+        tileMap = new TileMap(ChunkSize, ChunkSize, worldCreationParams.Seed, idX, idZ);
         tileMapGraphics.GenerateMesh(tileMap, new Vector3(posX, 0, posZ), TileSize);
 
         //spawn one random enemy at random position

@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour {
         public EnemyData enemyData;
     }
 
-    GameObject player;
+    private GameObject playerGameObject;
 
     List<Enemy> enemies;
 
@@ -29,9 +29,6 @@ public class EnemySpawner : MonoBehaviour {
     }
     
     void Start () {
-
-        player = GameplayMain.Instance.Player;
-
         enemies = new List<Enemy>();
     }
     
@@ -40,9 +37,9 @@ public class EnemySpawner : MonoBehaviour {
         foreach (Enemy enemy in enemies)
         {
             bool isInViewRange =
-                Vector3.Distance(enemy.gameObject.transform.position, player.transform.position)
+                Vector3.Distance(enemy.gameObject.transform.position, playerGameObject.transform.position)
                 <=
-                player.GetComponent<Unit>().ViewRange;
+                playerGameObject.GetComponent<Unit>().ViewRange;
 
             if (enemy.indicator == null)
             {
@@ -99,6 +96,11 @@ public class EnemySpawner : MonoBehaviour {
     public void SpawnRandom(Vector3 position)
     {
         Spawn(Main.StaticData.Game.Enemies.RandomValue.GenerateBasic(), position);
+    }
+
+    public GameObject PlayerGameObject
+    {
+        set { playerGameObject = value; }
     }
 	
 }
