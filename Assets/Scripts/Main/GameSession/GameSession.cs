@@ -43,6 +43,8 @@ public class GameSession : IGameSession
 
         hud = new HUD();
         hud.Spawn(mainGameObject);
+
+        world.Update(playerGameObject.transform.position);
     }
 
     public IGameSessionResult GetResult()

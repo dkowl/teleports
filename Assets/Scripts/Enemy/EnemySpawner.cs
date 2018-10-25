@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour {
 
     public static EnemySpawner instance;
 
-    class Enemy
+    private class Enemy
     {
         public GameObject gameObject, indicator;
         public EnemyData enemyData;
@@ -14,9 +14,9 @@ public class EnemySpawner : MonoBehaviour {
 
     private GameObject playerGameObject;
 
-    List<Enemy> enemies;
+    private List<Enemy> enemies;
 
-    void Awake()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -26,13 +26,11 @@ public class EnemySpawner : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-    }
-    
-    void Start () {
+
         enemies = new List<Enemy>();
     }
     
-    void Update()
+    private void Update()
     {
         foreach (Enemy enemy in enemies)
         {
