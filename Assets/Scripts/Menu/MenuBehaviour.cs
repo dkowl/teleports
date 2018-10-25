@@ -46,7 +46,7 @@ public class MenuBehaviour : LoadableBehaviour {
 
     protected override void LoadDataInternal()
     {
-        print("Adding Load Command");
+        //print("Adding Load Command");
         AddCommand(MenuBehaviourCommand.Type.Load);
     }
 
@@ -84,7 +84,7 @@ public class MenuBehaviour : LoadableBehaviour {
 
     public virtual void OnLoad()
     {
-        print("Calling OnLoad");
+        //print("Calling OnLoad");
         if (DetectChange())
         {
             CurrentState = State.Loading;
@@ -110,7 +110,7 @@ public class MenuBehaviour : LoadableBehaviour {
 
     public void LoadFinish()
     {
-        Debug.Log("Calling load finish");
+        //Debug.Log("Calling load finish");
         if(CurrentState == State.Loading) CurrentState = previousState;
         if (LoadFinishEvent != null) LoadFinishEvent();
     }
@@ -170,7 +170,7 @@ public class MenuBehaviour : LoadableBehaviour {
             if (state == value) return;
             previousState = state;
             state = value;
-            Debug.Log("Changing state of " + name + " (" + previousState.ToString() + " ===> " + state.ToString() + ")");
+            //Debug.Log("Changing state of " + name + " (" + previousState.ToString() + " ===> " + state.ToString() + ")");
             if (hasParameter[(int)state])
             {
                 //Debug.Log("Triggering " + state.ToString());
