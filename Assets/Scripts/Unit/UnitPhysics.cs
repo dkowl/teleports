@@ -13,6 +13,8 @@ public class UnitPhysics : MonoBehaviour
     private UnitRagdoll ragdoll;
     private bool isRagdoll;
 
+    [SerializeField] private float defaultForce = 1000;
+
     private void Awake()
     {
         unit = GetComponent<Unit>();
@@ -77,8 +79,8 @@ public class UnitPhysics : MonoBehaviour
     {
         unit.gameObject.SetLayerIncludingChildren(0);
 
-        var ragdollObject = Main.StaticData.Game.Races.GetValue(unit.UnitData.RaceName).Graphics.RagdollObject;
-        if (ragdollObject == null)
+        var ragdollPrefab = Main.StaticData.Game.Races.GetValue(unit.UnitData.RaceName).Graphics.RagdollObject;
+        if (ragdollPrefab == null)
         {
             Debug.LogWarning("No ragdoll object for " + name);
             rigidbody.constraints = RigidbodyConstraints.None;
@@ -86,7 +88,7 @@ public class UnitPhysics : MonoBehaviour
             return;
         }
 
-        Instantiate(ragdollObject, transform);
+        GameObject ragdollObject = Instantiate(ragdollPrefab, transform);
         ragdoll = ragdollObject.GetComponent<UnitRagdoll>();
         Debug.Assert(ragdoll != null, "No UnitRagdoll found in ragdoll object");
         Destroy(unit.Graphics.RaceModel);
@@ -97,8 +99,9 @@ public class UnitPhysics : MonoBehaviour
         isRagdoll = true;
     }
 
-    public void ApplyForce(Transform origin, float power)
+    public void ApplyForce(Vector3 origin, float power)
     {
+        Debug.Log($"Applying force of {power} to {gameObject.name}");
         if (isRagdoll)
         {
             Ragdoll.ApplyForce(origin, power);
@@ -109,9 +112,15 @@ public class UnitPhysics : MonoBehaviour
         }
     }
 
-    public static void ApplyForce(Rigidbody rigidbody, Transform origin, float power)
+    [Button]
+    private void ApplyDefaultForce()
     {
-        Vector3 directionVector = rigidbody.transform.position - origin.position;
+        ApplyForce(Vector3.zero, defaultForce);
+    }
+
+    public static void ApplyForce(Rigidbody rigidbody, Vector3 origin, float power)
+    {
+        Vector3 directionVector = rigidbody.transform.position - origin;
         directionVector.Normalize();
         Vector3 forceVector = directionVector * power;
         Vector3 randomOffset = Random.insideUnitSphere / 2;
