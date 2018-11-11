@@ -8,6 +8,7 @@ public partial class HeroData
 {
     private const int StartingSkillSlotsCount = 3;
     private const int StartingSecondarySkillsCount = 2;
+    public const int AttributePointsPerLevel = 3;
 
     public HeroData(string name, RaceID raceId)
     {
@@ -72,7 +73,20 @@ public partial class HeroData
 
     private void UpdateLevel()
     {
-        level = Levels.xp.Level(xp);
+        int currentLevel = level;
+        int newLevel = Levels.xp.Level(xp);
+
+        for (int i = currentLevel + 1; i <= newLevel; i++)
+        {
+            LevelUp(i);
+        }
+    }
+
+    private void LevelUp(int newLevel)
+    {
+        level = newLevel;
+
+        totalAttributePoints += AttributePointsPerLevel;
     }
     
     private void UpdateRankPoints(int score)

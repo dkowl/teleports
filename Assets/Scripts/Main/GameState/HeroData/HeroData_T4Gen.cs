@@ -14,6 +14,8 @@ public partial class HeroData : IDeepCopyable {
 	[SerializeField] private int xp;
 	[SerializeField] private int level;
 	[SerializeField] private int rankPoints;
+	[SerializeField] private int totalAttributePoints;
+	[SerializeField] private int spentAttributePoints;
 	[SerializeField] private List<SkillTreeSlot> skillTreeSlots;
 	[SerializeField] private List<SkillID> skills;
 	[SerializeField] private SkillID primarySkill;
@@ -32,6 +34,8 @@ public partial class HeroData : IDeepCopyable {
 		xp = other.xp;
 		level = other.level;
 		rankPoints = other.rankPoints;
+		totalAttributePoints = other.totalAttributePoints;
+		spentAttributePoints = other.spentAttributePoints;
 		skillTreeSlots = other.skillTreeSlots.DeepCopy();
 		skills = other.skills.DeepCopy();
 		primarySkill = new SkillID(other.primarySkill);
@@ -52,6 +56,8 @@ public partial class HeroData : IDeepCopyable {
 	public int Xp => xp;
 	public int Level => level;
 	public int RankPoints => rankPoints;
+	public int TotalAttributePoints => totalAttributePoints;
+	public int SpentAttributePoints => spentAttributePoints;
 	public List<SkillTreeSlot> SkillTreeSlots => skillTreeSlots;
 	public List<SkillID> Skills => skills;
 	public SkillID PrimarySkill => primarySkill;
