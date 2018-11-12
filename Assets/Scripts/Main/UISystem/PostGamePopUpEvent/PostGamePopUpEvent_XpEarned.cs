@@ -16,6 +16,7 @@ public class PostGamePopUpEvent_XpEarned : PostGamePopUpEvent
 
     public PostGamePopUpEvent_XpEarned(Data data)
     {
+        type = PostGamePopUpEventType.XpEarned;
         this.data = data;
     }
 

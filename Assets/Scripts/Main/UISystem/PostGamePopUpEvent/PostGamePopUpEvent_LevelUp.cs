@@ -14,4 +14,7 @@ public class PostGamePopUpEvent_LevelUp : PostGamePopUpEvent
         this.newLevel = newLevel;
         this.attributePointsAdded = attributePointsAdded;
     }
+
+    public int NewLevel => newLevel;
+    public int AttributePointsAdded => attributePointsAdded;
 }

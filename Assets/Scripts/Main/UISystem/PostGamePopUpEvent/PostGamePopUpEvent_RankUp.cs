@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PostGamePopUpEvent_RankUp : MonoBehaviour {
+public class PostGamePopUpEvent_RankUp : PostGamePopUpEvent
+{
+    private int newRank;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public PostGamePopUpEvent_RankUp(int newRank)
+    {
+        type = PostGamePopUpEventType.RankUp;
+        this.newRank = newRank;
+    }
+
+    public int NewRank => newRank;
 }

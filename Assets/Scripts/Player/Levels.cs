@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -89,6 +90,11 @@ public class Levels {
         else return 1;
     }
 
+    public int RemainingToNextLevel(int x)
+    {
+        return Required(x) - Current(x);
+    }
+
     public int Owned(int x)
     {
         return levels[Level(x) - 1];
@@ -102,18 +108,32 @@ public class Levels {
             return (float)Current(x) / Required(x);
     }
 
-    public int MaxLevel
+    public List<Tuple<int, int>> GetSliderProgressionIntervals(int oldValue, int newValue)
     {
-        get
+        Debug.Assert(oldValue <= newValue);
+        var result = new List<Tuple<int, int>>();
+        int oldLevel = Level(oldValue);
+        int newLevel = Level(newValue);
+        while (true)
         {
-            return levels.Length;
+            if (oldLevel == newLevel)
+            {
+                result.Add(new Tuple<int, int>(oldValue, newValue));
+                break;
+            }
+            else
+            {
+                int remainingToNextLevel = RemainingToNextLevel(oldValue);
+                result.Add(new Tuple<int, int>(oldValue, oldValue + remainingToNextLevel));
+                oldLevel++;
+                oldValue += remainingToNextLevel;
+            }
         }
+
+        return result;
     }
 
-    public int MaxValue
-    {
-        get { return levels[MaxLevel-1]; }
-    }
+    public int MaxLevel => levels.Length;
 
-
+    public int MaxValue => levels[MaxLevel-1];
 }

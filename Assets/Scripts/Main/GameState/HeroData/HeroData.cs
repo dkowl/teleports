@@ -64,9 +64,11 @@ public partial class HeroData
         }
     }
 
-    public void AddXp(int xpToAdd)
+    public void AddXp(int xpToAdd, List<PostGamePopUpEvent> postGamePopUpEvents)
     {
-        xp += xpToAdd;
+        int oldXp = xp;
+        int newXp = xp + xpToAdd;
+        xp = newXp;
         UpdateLevel();
         UpdateRankPoints(xpToAdd);
     }

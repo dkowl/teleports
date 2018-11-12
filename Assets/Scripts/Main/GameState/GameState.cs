@@ -56,7 +56,8 @@ public class GameState : IGameState
 
     public void Update(IGameSessionResult sessionResult)
     {
-        CurrentHeroData.AddXp(sessionResult.XpEarned);
+        var postGamePopUpEvents = new List<PostGamePopUpEvent>();
+        CurrentHeroData.AddXp(sessionResult.XpEarned, postGamePopUpEvents);
         Main.MessageBus.Publish(new RunFinishedMessage(sessionResult.XpEarned));
         GameStateUpdatedEvent?.Invoke();
     }
