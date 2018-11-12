@@ -32,7 +32,8 @@ public class TestFramework : Singleton<TestFramework>, ISingletonInstance
     {
         tests = new List<ITest>
         {
-            new Test_Levels()
+            new Test_Levels(),
+            new Test_GeneratePostGamePopUpEvents()
         };
     }
 

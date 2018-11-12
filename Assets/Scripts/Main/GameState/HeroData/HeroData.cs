@@ -64,13 +64,16 @@ public partial class HeroData
         }
     }
 
-    public void AddXp(int xpToAdd, List<PostGamePopUpEvent> postGamePopUpEvents)
+    public void AddXp(int xpToAdd, out List<PostGamePopUpEvent> postGamePopUpEvents)
     {
         int oldXp = xp;
-        int newXp = xp + xpToAdd;
-        xp = newXp;
+        int oldRp = rankPoints;
+        xp = xp + xpToAdd;
         UpdateLevel();
         UpdateRankPoints(xpToAdd);
+        int newXp = xp;
+        int newRp = rankPoints;
+        postGamePopUpEvents = GeneratePostGamePopUpEvents(oldXp, newXp, oldRp, newRp);
     }
 
     private void UpdateLevel()
@@ -94,6 +97,47 @@ public partial class HeroData
     private void UpdateRankPoints(int score)
     {
         rankPoints = RankPointUpdater.UpdateRankPoints(rankPoints, score);
+    }
+
+    private static List<PostGamePopUpEvent> GeneratePostGamePopUpEvents(int oldXp, int newXp, int oldRp, int newRp)
+    {
+        var result = new List<PostGamePopUpEvent>();
+        var xpIntervals = Levels.xp.GetSliderProgressionIntervals(oldXp, newXp);
+        var rpIntervals = Levels.rp.GetSliderProgressionIntervals(oldRp, newRp);
+        for (int i = 0; i < xpIntervals.Count; i++)
+        {
+            var data = new PostGamePopUpEvent_XpEarned.Data
+            {
+                isStartingASequence = i == 0,
+                isEndingASequence = i == xpIntervals.Count - 1,
+                oldXp = xpIntervals[i].Item1,
+                newXp = xpIntervals[i].Item2
+            };
+            result.Add(new PostGamePopUpEvent_XpEarned(data));
+            if (i >= xpIntervals.Count - 1) continue;
+
+            int newLevel = Levels.xp.Level(data.newXp);
+            result.Add(new PostGamePopUpEvent_LevelUp(newLevel, AttributePointsPerLevel));
+        }
+
+        for (int i = 0; i < rpIntervals.Count; i++)
+        {
+            var data = new PostGamePopUpEvent_RpEarned.Data()
+            {
+                isStartingASequence = i == 0,
+                isEndingASequence = i == rpIntervals.Count - 1,
+                oldRp = rpIntervals[i].Item1,
+                newRp = rpIntervals[i].Item2
+            };
+            result.Add(new PostGamePopUpEvent_RpEarned(data));
+            if (i >= rpIntervals.Count - 1) continue;
+
+            int oldRank = Levels.rp.Level(data.oldRp);
+            int newRank = Levels.rp.Level(data.newRp);
+            result.Add(new PostGamePopUpEvent_RankChange(oldRank, newRank));
+        }
+
+        return result;
     }
 
     public void CorrectInvalidData()

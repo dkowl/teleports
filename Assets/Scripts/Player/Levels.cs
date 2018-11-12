@@ -110,7 +110,8 @@ public class Levels {
 
     public List<Tuple<int, int>> GetSliderProgressionIntervals(int oldValue, int newValue)
     {
-        Debug.Assert(oldValue <= newValue);
+        int direction = oldValue <= newValue ? 1 : -1;
+
         var result = new List<Tuple<int, int>>();
         int oldLevel = Level(oldValue);
         int newLevel = Level(newValue);
@@ -121,13 +122,20 @@ public class Levels {
                 result.Add(new Tuple<int, int>(oldValue, newValue));
                 break;
             }
+
+            int oldValueChange;
+            if (direction == 1)
+            {
+                oldValueChange = RemainingToNextLevel(oldValue);
+            }
             else
             {
-                int remainingToNextLevel = RemainingToNextLevel(oldValue);
-                result.Add(new Tuple<int, int>(oldValue, oldValue + remainingToNextLevel));
-                oldLevel++;
-                oldValue += remainingToNextLevel;
+                oldValueChange = (Current(oldValue) + 1) * -1;
             }
+
+            result.Add(new Tuple<int, int>(oldValue, oldValue + oldValueChange));
+            oldLevel += direction;
+            oldValue += oldValueChange;
         }
 
         return result;

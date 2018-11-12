@@ -7,7 +7,7 @@ public enum PostGamePopUpEventType
     XpEarned,
     RpEarned,
     LevelUp,
-    RankUp
+    RankChange
 }
 
 public class PostGamePopUpEvent {
