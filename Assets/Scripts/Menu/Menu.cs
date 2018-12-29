@@ -42,25 +42,23 @@ public class Menu : ScriptableObject
 
     public void Open()
     {
-        if (!IsOpen)
+        if (IsOpen) return;
+        if (instantiatedObject == null)
         {
-            if (instantiatedObject == null)
+            if (useMainCanvas)
             {
-                if (useMainCanvas)
-                {
-                    instantiatedObject = Instantiate(MenuController.MainCanvasPrefab, MenuController.SpawnTransform) as GameObject;
-                    Instantiate(prefab, instantiatedObject.transform);
-                }
-                else
-                {
-                    instantiatedObject = Instantiate(prefab, MenuController.SpawnTransform) as GameObject;
-                }
+                instantiatedObject = Main.UISystem.SpawnCanvas(name);
+                Instantiate(prefab, instantiatedObject.transform);
             }
-
-            menuBehaviours = instantiatedObject.GetComponentsInChildren<MenuBehaviour>();
-            IsOpen = true;
-            AddCommand(MenuCommand.Type.Show);
+            else
+            {
+                instantiatedObject = Main.UISystem.SpawnPrefab(prefab);
+            }
         }
+
+        menuBehaviours = instantiatedObject.GetComponentsInChildren<MenuBehaviour>();
+        IsOpen = true;
+        AddCommand(MenuCommand.Type.Show);
     }
 
     public void Show()

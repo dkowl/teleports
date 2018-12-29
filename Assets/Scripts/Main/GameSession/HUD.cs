@@ -12,8 +12,13 @@ public class HUD {
 
     public void Spawn(GameObject parentObject)
     {
-        mainCanvas = Object.Instantiate(Resources.Load("Prefabs/UI/MainCanvas"), parentObject.transform) as GameObject;
+        mainCanvas = Main.UISystem.SpawnCanvas("HUD");
         hudGameObject = Object.Instantiate(Resources.Load("UI/World/HUD"), mainCanvas.transform) as GameObject;
+    }
+
+    public void Despawn()
+    {
+        Object.Destroy(mainCanvas);
     }
 
     public void EndScreen(string text)

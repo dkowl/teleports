@@ -65,6 +65,7 @@ public class GameSession : IGameSession
 
     public void End(System.Action onEndAction)
     {
+        hud.Despawn();
         this.onEndAction = onEndAction;
         Main.SceneController.SwitchSceneThenInvoke(enteringSceneName, EndAfterSceneLoad);
     }

@@ -25,12 +25,10 @@ public class MenuController : ScriptableObject
 
     [NonSerialized] private Menu[] menus = new Menu[(int)MenuType.Count];
     [NonSerialized] private Stack<Menu> menuStack;
-    [NonSerialized] private Transform spawnTransform;
     [NonSerialized] private CommandQueue commandQ = new CommandQueue();
 
     [SerializeField] private Menu[] menuInspectorLinks;
     [SerializeField] private MenuType startMenu;
-    [SerializeField] private GameObject mainCanvasPrefab;
 
     void Awake()
     {
@@ -71,10 +69,8 @@ public class MenuController : ScriptableObject
         commandQ.AddCommand(new MenuCommand(menu, type));
     }
     
-    public void FirstStart(Transform newSpawnTransform)
+    public void FirstStart()
     {
-        spawnTransform = newSpawnTransform;
-
         if (Main.GameState.CurrentHeroData != null)
             OpenMenu(startMenu);
         else
@@ -207,7 +203,4 @@ public class MenuController : ScriptableObject
             return instance;
         }
     }
-
-    public static Transform SpawnTransform => Instance.spawnTransform;
-    public static GameObject MainCanvasPrefab => Instance.mainCanvasPrefab;
 }

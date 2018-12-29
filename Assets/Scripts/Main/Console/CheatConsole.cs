@@ -11,6 +11,7 @@ public class CheatConsole : Singleton<CheatConsole>
     [SerializeField] private GameObject consoleObject;
     [SerializeField] private TMPro.TMP_InputField inputField;
     [SerializeField] private Text outputText;
+    private GameObject canvas;
     private bool isEnabled;
     private string outputString;
     private List<CheatCommand> commands;
@@ -38,7 +39,6 @@ public class CheatConsole : Singleton<CheatConsole>
             else Enable();
         }
 
-
         if (Input.GetKeyDown("return"))
         {
             Submit();
@@ -54,6 +54,12 @@ public class CheatConsole : Singleton<CheatConsole>
 
     private void Enable()
     {
+        if (canvas == null)
+        {
+            canvas = Main.UISystem.SpawnCanvas("CheatConsole", CanvasSortOrder.CheatConsole);
+        }
+        consoleObject.transform.SetParent(canvas.transform, false);
+
         isEnabled = true;
         consoleObject.SetActive(true);
         inputField.ActivateInputField();

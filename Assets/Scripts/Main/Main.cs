@@ -12,6 +12,7 @@ public class Main : Singleton<Main>, ISingletonInstance
     private ISceneController sceneController;
     private ILoadingGraphics loadingGraphics;
     private IPersistence persistence;
+    private IUISystem uiSystem;
 
     //cached persistence properties
     private IStaticData staticData;
@@ -21,6 +22,19 @@ public class Main : Singleton<Main>, ISingletonInstance
     private IGameSession currentGameSession;
 
     public static event System.Action AfterInitializationEvent;
+
+    private void Awake()
+    {
+        //calling to trigger initialization
+        Main main = Instance;
+    }
+
+    private void OnApplicationQuit()
+    {
+        persistence.SaveGameState();
+        DestroyAllButThis();
+        Debug.Log("Game quit!");
+    }
 
     public void StartGameSession()
     {
@@ -37,19 +51,6 @@ public class Main : Singleton<Main>, ISingletonInstance
     {
         gameState.Update(currentGameSession.GetResult());
         currentGameSession = null;
-    }
-
-    private void Awake()
-    {
-        //calling to trigger initialization
-        Main main = Instance;
-    }
-
-    private void OnApplicationQuit()
-    {
-        persistence.SaveGameState();
-        DestroyAllButThis();
-        Debug.Log("Game quit!");
     }
 
     public void OnFirstAccess()
@@ -85,9 +86,12 @@ public class Main : Singleton<Main>, ISingletonInstance
     {
         messageBus = new MessageBus();
 
+        uiSystem = new UISystem();
         loadingGraphics = loadingGraphicsConcrete;
         InitializeInterfaceWithComponent<SceneController, ISceneController>(out sceneController);
         DontDestroyOnLoad(this);
+
+        uiSystem.Start();
     }
 
     private void InitializeInterfaceWithComponent<T, I>(out I i) where T : Component, I
@@ -114,6 +118,8 @@ public class Main : Singleton<Main>, ISingletonInstance
     public static IGameState GameState => Instance.gameState;
     public static IServerData ServerData => Instance.serverData;
     public static IGameSession CurrentGameSession => Instance.currentGameSession;
+    public static IUISystem UISystem => Instance.uiSystem;
+    public static GameObject MainGameObject => Instance.gameObject;
 
     public static void LoadGameState()
     {

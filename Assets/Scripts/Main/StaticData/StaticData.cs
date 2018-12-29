@@ -7,23 +7,24 @@ public class StaticData : IStaticData {
 
     private GameData gameData;
     private GraphicsData graphicsData;
-    private Stylesheet stylesheet;
+    private UIData uiData;
     private DataDefaults defaults;
 
     public StaticData(
         GameData gameData, 
         GraphicsData graphicsData, 
-        Stylesheet stylesheet, 
+        UIData uiData, 
         DataDefaults defaults)
     {
         this.gameData = gameData;
         this.graphicsData = graphicsData;
-        this.stylesheet = stylesheet;
+        this.uiData = uiData;
         this.defaults = defaults;
     }
 
     public IGameData Game => gameData;
     public IGraphicsData Graphics => graphicsData;
-    public Stylesheet Stylesheet => stylesheet;
+    public UIData UI => uiData;
+    public Stylesheet Stylesheet => uiData.Stylesheet;
     public DataDefaults Defaults => defaults;
 }

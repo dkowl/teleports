@@ -2,15 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UISystem : MonoBehaviour {
+public class UISystem : IUISystem
+{
+    private List<GameObject> canvases;
+    private GameObject gameObject;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void Start()
+    {
+        Debug.Assert(gameObject == null && canvases == null, "Starting an already started UISystem");
+
+        InitGameObject();
+        canvases = new List<GameObject>();
+        MenuController.Instance.FirstStart();
+    }
+
+    public void InitGameObject()
+    {
+        gameObject = new GameObject("UI System");
+        gameObject.transform.parent = Main.MainGameObject.transform;
+    }
+
+    public GameObject SpawnCanvas(string name, CanvasSortOrder sortOrder = CanvasSortOrder.Normal)
+    {
+        Debug.Assert(gameObject != null && canvases != null);
+
+        GameObject newCanvasObject = Object.Instantiate(MainCanvasPrefab, gameObject.transform);
+        newCanvasObject.name = name;
+
+        Canvas newCanvas = newCanvasObject.GetComponent<Canvas>();
+        newCanvas.sortingOrder = (int) sortOrder;
+
+        canvases.Add(newCanvasObject);
+        return newCanvasObject;
+    }
+
+    public GameObject SpawnPrefab(GameObject prefab)
+    {
+        Debug.Assert(gameObject != null);
+        GameObject newObject = Object.Instantiate(prefab);
+        newObject.transform.parent = gameObject.transform;
+        return newObject;
+    }
+
+    public void HandlePostGamePopUpEvents(IEnumerable<PostGamePopUpEvent> popUpEvents)
+    {
+        Debug.LogWarning("Not implemented");
+    }
+
+    public GameObject GameObject => gameObject;
+
+    private GameObject MainCanvasPrefab => Main.StaticData.UI.MainCanvasPrefab;
 }

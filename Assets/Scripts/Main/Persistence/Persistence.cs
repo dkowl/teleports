@@ -10,7 +10,7 @@ public class Persistence : MonoBehaviour, IPersistence
 {
     [SerializeField] private GameDataSO gameDataSo;
     [SerializeField] private GraphicsDataSO graphicsDataSo;
-    [SerializeField] private Stylesheet stylesheet;
+    [SerializeField] private UIData uiData;
     [SerializeField] private DataDefaults defaults;
 
     [SerializeField] private ServerDataSO serverDataSo;
@@ -25,10 +25,10 @@ public class Persistence : MonoBehaviour, IPersistence
     {
         Debug.Assert(!gameDataSo.Empty, "GameData not found");
         Debug.Assert(!graphicsDataSo.Empty, "GraphicsData not found");
-        Debug.Assert(stylesheet != null, "Stylesheet not found");
+        Debug.Assert(uiData != null, "Stylesheet not found");
         Debug.Assert(defaults != null, "DataDefaults not found");
 
-        StaticData result = new StaticData(gameDataSo.Data, graphicsDataSo.Data, stylesheet, defaults);
+        StaticData result = new StaticData(gameDataSo.Data, graphicsDataSo.Data, uiData, defaults);
         return result;
     }
 
