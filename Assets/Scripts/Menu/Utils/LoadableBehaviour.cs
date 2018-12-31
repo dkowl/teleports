@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public abstract class LoadableBehaviour : MonoBehaviour {
 
     private bool isSubscribed = false;

@@ -71,26 +71,24 @@ public abstract class BaseProgressBarUI : MenuBehaviour {
         if (detectChangeInUpdate)
             DetectChange();
 
-        if (IsAnimating)
+        if (!IsAnimating) return;
+        if (animateByDefault || animateNextChange)
         {
-            if (animateByDefault || animateNextChange)
-            {
-                if (currentFreezeTime > 0)
-                    currentFreezeTime -= Time.deltaTime;
-                else if (DisplayValue != currentValue)
-                    Animate(DisplayValue, currentValue, animationType);
+            if (currentFreezeTime > 0)
+                currentFreezeTime -= Time.deltaTime;
+            else if (DisplayValue != currentValue)
+                Animate(DisplayValue, currentValue, animationType);
 
-                if (!IsAnimating)
-                {
-                    animateNextChange = false;
-                }
-            }
-            else
+            if (!IsAnimating)
             {
-                SkipAnimation();
+                animateNextChange = false;
             }
-            UpdateUiElements();
         }
+        else
+        {
+            SkipAnimation();
+        }
+        UpdateUiElements();
     }
 
     protected override void SubscribeInternal()

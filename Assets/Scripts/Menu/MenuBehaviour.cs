@@ -30,12 +30,11 @@ public class MenuBehaviour : LoadableBehaviour {
 
         hasParameter = new bool[Utils.EnumCount(typeof(State))];
         string[] enumNames = Enum.GetNames(typeof(State));
-        if (animator != null)
+
+        if (animator == null) return;
+        for (int i = 0; i < enumNames.Length; i++)
         {
-            for (int i = 0; i < enumNames.Length; i++)
-            {
-                hasParameter[i] = animator.HasParameter(enumNames[i]);
-            }
+            hasParameter[i] = animator.HasParameter(enumNames[i]);
         }
     }
 
@@ -99,20 +98,20 @@ public class MenuBehaviour : LoadableBehaviour {
     public void OpenFinish()
     {
         CurrentState = State.Open;
-        if (OpenFinishEvent != null) OpenFinishEvent();
+        OpenFinishEvent?.Invoke();
     }
 
     public void CloseFinish()
     {
         CurrentState = State.Closed;
-        if (CloseFinishEvent != null) CloseFinishEvent();
+        CloseFinishEvent?.Invoke();
     }
 
     public void LoadFinish()
     {
         //Debug.Log("Calling load finish");
         if(CurrentState == State.Loading) CurrentState = previousState;
-        if (LoadFinishEvent != null) LoadFinishEvent();
+        LoadFinishEvent?.Invoke();
     }
 
     public void Skip()
@@ -180,7 +179,7 @@ public class MenuBehaviour : LoadableBehaviour {
     }
 
     //Debug methods
-    void DisplayCommandQueue()
+    private void DisplayCommandQueue()
     {
         commandQ.DebugPrintQueue();
     }

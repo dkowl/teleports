@@ -16,16 +16,15 @@ public abstract class Command
 
     public void Finish()
     {
-        if (state == CommandState.InProgress)
+        if (state != CommandState.InProgress) return;
+
+        FinishInternal();
+        state = CommandState.Finished;
+        foreach(var finishCallback in finishCallbacks)
         {
-            FinishInternal();
-            state = CommandState.Finished;
-            foreach(var finishCallback in finishCallbacks)
-            {
-                finishCallback();
-            }
-            finishCallbacks.Clear();
+            finishCallback();
         }
+        finishCallbacks.Clear();
     }
 
     public void RegisterFinishCallback(FinishCallback callback)

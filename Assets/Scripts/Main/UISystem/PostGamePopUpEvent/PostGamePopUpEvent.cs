@@ -13,6 +13,8 @@ public enum PostGamePopUpEventType
 public class PostGamePopUpEvent {
 
     protected PostGamePopUpEventType type;
+    protected Command uiCommand;
 
     public PostGamePopUpEventType Type => type;
+    public Command UiCommand => uiCommand;
 }
