@@ -14,6 +14,7 @@ public class PrefabSpawner : MonoBehaviour {
     protected int currentId;
 
     private bool isInitialized = false;
+    private System.Action afterSpawnAction;
 
     private void OnEnable()
     {
@@ -33,8 +34,11 @@ public class PrefabSpawner : MonoBehaviour {
     protected virtual void OnInitialize() { }
 
     protected virtual void BeforeSpawn() { }
-    
-    protected virtual void AfterSpawn() { }
+
+    protected virtual void AfterSpawn()
+    {
+        afterSpawnAction?.Invoke();
+    }
 
     public void Initialize()
     {
@@ -101,5 +105,10 @@ public class PrefabSpawner : MonoBehaviour {
             Initialize();
             Spawn();
         }
+    }
+
+    public System.Action AfterSpawnAction
+    {
+        set { afterSpawnAction = value; }
     }
 }

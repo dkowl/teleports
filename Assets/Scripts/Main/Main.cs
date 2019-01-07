@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Teleports.Utils;
 
@@ -58,6 +59,7 @@ public class Main : Singleton<Main>, ISingletonInstance
         Initialize();
     }
 
+    [Button]
     private void Initialize()
     {
         if (!Application.isPlaying)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PopupMenuUI : MenuBehaviour {
 
-    public MenuController.MenuType menuType;
+    public MenuID menuId;
 
     protected override void OnOpenInternal()
     {
@@ -14,6 +14,6 @@ public class PopupMenuUI : MenuBehaviour {
 
     public void Close()
     {
-        MenuController.Instance.CloseMenu(menuType);
+        MenuController.Instance.CloseMenu(menuId);
     }
 }

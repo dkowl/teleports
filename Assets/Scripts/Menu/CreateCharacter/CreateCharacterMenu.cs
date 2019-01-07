@@ -49,7 +49,7 @@ public class CreateCharacterMenu : MonoBehaviour {
     
     public void Return()
     {
-        MenuController.Instance.OpenMenu(MenuController.MenuType.ChooseCharacter);
+        MenuController.Instance.OpenMenu(MenuController.MenuIdSelectHero);
     }
 
     public string Name => nameInputField.text;

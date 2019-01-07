@@ -1,24 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
-[CreateAssetMenu(fileName = "New Menu", menuName = "Menu/Menu")]
-public class Menu : ScriptableObject
+public class Menu
 {
-    //private variables
-    [NonSerialized] private GameObject instantiatedObject = null;
-    [NonSerialized] private bool isOpen = false, isActive = false;
-    [NonSerialized] private MenuBehaviour[] menuBehaviours;
-    [NonSerialized] private CommandQueue commandQ = new CommandQueue();
-
-    //inspector variables
-    [SerializeField] private GameObject prefab;
-    [SerializeField] private MenuController.MenuType menuType;
-    [SerializeField] private bool disableMenusUnder;
-    [Tooltip("will parent the menu to the MainCanvas prefab")]
-    [SerializeField] private bool useMainCanvas;
-
+    private GameObject instantiatedObject;
+    private bool isOpen; 
+    private bool isActive;
+    private MenuBehaviour[] menuBehaviours;
+    private CommandQueue commandQ = new CommandQueue();
+    private readonly MenuData data;
+    private readonly MenuID id;
+    
     //static events for LoadableBehaviours
     public delegate void OnShow();
     public static event OnShow OnShowEvent;
@@ -31,6 +24,12 @@ public class Menu : ScriptableObject
     public event CommandFinish ShowFinishEvent, HideFinishEvent;
 
     //public functions
+    public Menu(MenuID id)
+    {
+        this.id = id;
+        this.data = Main.StaticData.UI.Menus.GetValue(id);
+    }
+
     public void AddCommand(MenuCommand.Type type)
     {
         if(type == MenuCommand.Type.Close)
@@ -45,14 +44,14 @@ public class Menu : ScriptableObject
         if (IsOpen) return;
         if (instantiatedObject == null)
         {
-            if (useMainCanvas)
+            if (UseMainCanvas)
             {
-                instantiatedObject = Main.UISystem.SpawnCanvas(name);
-                Instantiate(prefab, instantiatedObject.transform);
+                instantiatedObject = Main.UISystem.SpawnCanvas(id);
+                Object.Instantiate(Prefab, instantiatedObject.transform);
             }
             else
             {
-                instantiatedObject = Main.UISystem.SpawnPrefab(prefab);
+                instantiatedObject = Main.UISystem.SpawnPrefab(Prefab);
             }
         }
 
@@ -94,7 +93,7 @@ public class Menu : ScriptableObject
     {
         if (IsOpen && instantiatedObject != null)
         {            
-            Destroy(instantiatedObject);
+            Object.Destroy(instantiatedObject);
             instantiatedObject = null;
             IsOpen = false;            
         }
@@ -154,9 +153,11 @@ public class Menu : ScriptableObject
             return false;
         }
     }
-
-    public MenuController.MenuType MenuType => menuType;
-    public bool DisableMenusUnder => disableMenusUnder;
-    public bool UseMainCanvas => useMainCanvas;
+    
+    public bool DisableMenusUnder => data.DisableMenusUnder;
+    public bool UseMainCanvas => data.UseMainCanvas;
     public GameObject InstantiatedObject => instantiatedObject;
+    public MenuID MenuId => id;
+
+    private GameObject Prefab => data.Prefab;
 }

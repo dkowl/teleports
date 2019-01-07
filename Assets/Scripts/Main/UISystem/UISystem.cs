@@ -6,6 +6,7 @@ public class UISystem : IUISystem
 {
     private List<GameObject> canvases;
     private GameObject gameObject;
+    private MenuController menuController;
 
     public void Start()
     {
@@ -13,7 +14,8 @@ public class UISystem : IUISystem
 
         InitGameObject();
         canvases = new List<GameObject>();
-        MenuController.Instance.FirstStart();
+        menuController = new MenuController();
+        menuController.FirstStart();
     }
 
     public void InitGameObject()
@@ -50,6 +52,16 @@ public class UISystem : IUISystem
     }
 
     public GameObject GameObject => gameObject;
+
+    public MenuController MenuController
+    {
+        get
+        {
+            Debug.Assert(menuController != null);
+            return menuController;
+        }
+    }
+
 
     private GameObject MainCanvasPrefab => Main.StaticData.UI.MainCanvasPrefab;
 }

@@ -58,6 +58,7 @@ public class AssetEditor : Singleton<AssetEditor>
         where T : IUniqueName
         where TWrapper : ScriptableObjectDataWrapper<T>
     {
+        Debug.Assert(dataList != null);
         dataList.ClearList();
         var dataWrappers = Instance.GetAllAssetsOfType<TWrapper>();
         var data = new List<T>();

@@ -30,12 +30,5 @@ public class GameDataSO : ScriptableObjectDataWrapper<GameData> {
     {
         AssetEditor.AddAssetsOfType(this, mappedList);
     }
-
-    private void AddScriptableObjectWrappedData<T, TWrapper>(MappedList<T> mappedList) 
-        where T : IUniqueName
-        where TWrapper : ScriptableObjectDataWrapper<T>
-    {
-        AssetEditor.AddScriptableObjectWrappedDataOfType<T, TWrapper>(this, mappedList);
-    }
 #endif
 }

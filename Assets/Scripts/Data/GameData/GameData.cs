@@ -107,6 +107,7 @@ public class GameData : IGameData {
     public IList<string> EnemyNames => enemies.AllNames;
     public IList<string> RaceNames => races.AllNames;
 
+#if UNITY_EDITOR
     public MappedList<Gem> GemsConcrete => gems;
     public MappedList<WorldData> WorldsConcrete => worlds;
     public MappedList<Race> RacesConcrete => races;
@@ -115,4 +116,5 @@ public class GameData : IGameData {
     public MappedList<ComboAssetData> CombosConcrete => combos;
     public MappedList<ItemAssetData> ItemsConcrete => items;
     public MappedList<EnemyAssetData> EnemiesConcrete => enemies;
+#endif
 }

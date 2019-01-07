@@ -56,8 +56,8 @@ public class BasicProgressBar : MonoBehaviour {
     {
         prefabSpawner = gameObject.GetOrAddComponent<PrefabSpawner>();
         prefabSpawner.Prefab = prefab;
-        prefabSpawner.Spawn();
-        ChildrenSetup();
+        prefabSpawner.AfterSpawnAction = ChildrenSetup;
+        prefabSpawner.Respawn();
     }
 
     [Button]

@@ -72,7 +72,7 @@ public class GameSession : IGameSession
 
     public void EndAfterSceneLoad()
     {
-        MenuController.Instance.OpenMenu(MenuController.MenuType.Home);
+        MenuController.Instance.OpenMenu(MenuController.MenuIdHome);
         onEndAction?.Invoke();
     }
 

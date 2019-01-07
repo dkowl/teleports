@@ -32,11 +32,11 @@ public class CharacterSelect_MiddleButton : LoadableBehaviour {
     {
         if (Main.GameState.CurrentHeroData == null)
         {
-            MenuController.Instance.OpenMenu(MenuController.MenuType.CreateCharacter);
+            MenuController.Instance.OpenMenu(MenuController.MenuIdCreateHero);
         }
         else
         {
-            MenuController.Instance.OpenMenu(MenuController.MenuType.Home);
+            MenuController.Instance.OpenMenu(MenuController.MenuIdHome);
         }
     }
 }

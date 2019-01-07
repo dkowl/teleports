@@ -16,4 +16,6 @@ public interface IUISystem
     GameObject SpawnCanvas(string name, CanvasSortOrder sortOrder = CanvasSortOrder.Normal);
     GameObject SpawnPrefab(GameObject prefab);
     void HandlePostGamePopUpEvents(IEnumerable<PostGamePopUpEvent> popUpEvents);
+
+    MenuController MenuController { get; }
 }

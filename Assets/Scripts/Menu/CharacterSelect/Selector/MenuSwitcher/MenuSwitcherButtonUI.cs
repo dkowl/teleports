@@ -7,12 +7,12 @@ using Text = TMPro.TextMeshProUGUI;
 
 public class MenuSwitcherButtonUI : SelectorButtonUI {
 
-    private MenuController.MenuType menuType;
-    private string buttonString;
+    [SerializeField] private MenuID menuId;
+    [SerializeField] private string buttonString;
 
     public Text buttonText;
 
-    override protected void LoadDataInternal()
+    protected override void LoadDataInternal()
     {
         base.LoadDataInternal();
 
@@ -21,23 +21,23 @@ public class MenuSwitcherButtonUI : SelectorButtonUI {
 
     protected override bool IsActive()
     {
-        return MenuController.Instance.IsActive(menuType);
+        return MenuController.Instance.IsActive(menuId);
     }
 
     protected override void OnActivate()
     {
-        MenuController.Instance.OpenMenu(menuType);
+        MenuController.Instance.OpenMenu(menuId);
     }
 
     protected override void OnDeactivate()
     {
-        MenuController.Instance.CloseMenu(menuType);
+        MenuController.Instance.CloseMenu(menuId);
     }
 
-    public MenuController.MenuType MenuType
+    public MenuID MenuId
     {
-        get { return menuType; }
-        set { menuType = value; }
+        get { return menuId; }
+        set { menuId = value; }
     }
 
     public string ButtonString

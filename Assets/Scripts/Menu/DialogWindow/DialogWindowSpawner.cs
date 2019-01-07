@@ -6,8 +6,8 @@ public static class DialogWindowSpawner {
 
 	public static void Spawn(string text, List<ButtonChoice> choices)
     {
-        MenuController.Instance.OpenMenu(MenuController.MenuType.DialogWindow);
-        Menu windowMenu = MenuController.Instance.GetMenu(MenuController.MenuType.DialogWindow);
+        MenuController.Instance.OpenMenu(MenuController.MenuIdDialogWindow);
+        Menu windowMenu = MenuController.Instance.GetMenu(MenuController.MenuIdDialogWindow);
         if (windowMenu.InstantiatedObject != null)
         {
             DialogWindow window = windowMenu.InstantiatedObject.GetComponent<DialogWindow>();

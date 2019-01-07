@@ -28,7 +28,7 @@ public class CreateHeroConfirmDWSB : DialogWindowStarterButton {
     void Yes()
     {
         Main.GameState.SelectHero(characterSlotId);
-        MenuController.Instance.OpenMenu(MenuController.MenuType.CreateCharacter);
+        MenuController.Instance.OpenMenu(MenuController.MenuIdCreateHero);
     }
 
     public int CharacterSlotId

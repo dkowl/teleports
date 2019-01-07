@@ -106,43 +106,29 @@ public class GameplayMain : MonoBehaviour {
     {
         //MainData.SavePlayer(player); //TODO: Main.GameState
         Main.MessageBus.Publish(new RunFinishedMessage(Score));
-        MenuController.Instance.OpenMenu(MenuController.MenuType.Home);
+        MenuController.Instance.OpenMenu(MenuController.MenuIdHome);
         Main.SceneController.SwitchScene(SceneNames.Home);
     }
 
-    public static GameplayMain Instance
-    {
-        get { return instance; }
-    }
+    public static GameplayMain Instance => instance;
 
     public GameObject Player
     {
         get
         {
+            if (player != null) return player;
+            player = GameObject.FindGameObjectWithTag("Player");
             if(player == null)
             {
-                player = GameObject.FindGameObjectWithTag("Player");
-                if(player == null)
-                {
-                    SpawnPlayer();
-                }
+                SpawnPlayer();
             }
             return player;
         }
     }
 
-    public bool IsPaused
-    {
-        get { return isPaused; }
-    }
+    public bool IsPaused => isPaused;
 
-    static public float TimeLeft
-    {
-        get { return instance.teleportTime - instance.gameTime; }
-    }
+    public static float TimeLeft => instance.teleportTime - instance.gameTime;
 
-    public int Score
-    {
-        get { return score; }
-    }
+    public int Score => score;
 }
