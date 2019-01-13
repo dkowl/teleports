@@ -55,6 +55,25 @@ public class UISystem : IUISystem
         return newObject;
     }
 
+    public GameObject SpawnMenu(MenuData menuData)
+    {
+        GameObject containerObject = new GameObject(menuData.UniqueName);
+        containerObject.transform.parent = gameObject.transform;
+
+        GameObject canvasObject = Object.Instantiate(MainCanvasPrefab, containerObject.transform);
+        Canvas canvas = canvasObject.GetComponent<Canvas>();
+        canvas.sortingOrder = menuData.SortOrder;
+
+        Debug.Assert(menuData.Prefab != null);
+        Object.Instantiate(menuData.Prefab, canvasObject.transform);
+        if (menuData.NonCanvasPrefab != null)
+        {
+            Object.Instantiate(menuData.NonCanvasPrefab, containerObject.transform);
+        }
+
+        return containerObject;
+    }
+
     public void HandlePostGamePopUpEvents(IEnumerable<PostGamePopUpEvent> popUpEvents)
     {
         Debug.LogWarning("Not implemented");

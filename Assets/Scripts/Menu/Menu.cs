@@ -46,8 +46,7 @@ public class Menu
         {
             if (UseMainCanvas)
             {
-                instantiatedObject = Main.UISystem.SpawnCanvas(id);
-                Object.Instantiate(Prefab, instantiatedObject.transform);
+                instantiatedObject = Main.UISystem.SpawnMenu(data);
             }
             else
             {

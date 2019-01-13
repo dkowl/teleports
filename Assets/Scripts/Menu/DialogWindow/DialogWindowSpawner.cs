@@ -8,7 +8,7 @@ public static class DialogWindowSpawner {
     {
         MenuController.Instance.OpenMenu(MenuController.MenuIdDialogWindow);
         Menu windowMenu = MenuController.Instance.GetMenu(MenuController.MenuIdDialogWindow);
-        if (windowMenu.InstantiatedObject != null)
+        if (windowMenu?.InstantiatedObject != null)
         {
             DialogWindow window = windowMenu.InstantiatedObject.GetComponent<DialogWindow>();
             if (window == null) window = windowMenu.InstantiatedObject.GetComponentInChildren<DialogWindow>();
