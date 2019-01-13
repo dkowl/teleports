@@ -12,10 +12,11 @@ public enum CanvasSortOrder
 public interface IUISystem
 {
 
+    void InitInEditMode();
     void Start();
     GameObject SpawnCanvas(string name, CanvasSortOrder sortOrder = CanvasSortOrder.Normal);
     GameObject SpawnPrefab(GameObject prefab);
     void HandlePostGamePopUpEvents(IEnumerable<PostGamePopUpEvent> popUpEvents);
 
-    MenuController MenuController { get; }
+    IMenuController MenuController { get; }
 }

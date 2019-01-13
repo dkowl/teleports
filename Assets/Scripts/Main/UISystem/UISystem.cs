@@ -6,14 +6,23 @@ public class UISystem : IUISystem
 {
     private List<GameObject> canvases;
     private GameObject gameObject;
-    private MenuController menuController;
+    private IMenuController menuController;
+
+    public UISystem()
+    {
+        canvases = new List<GameObject>();
+    }
+
+    public void InitInEditMode()
+    {
+        menuController = new MenuControllerStub();
+    }
 
     public void Start()
     {
-        Debug.Assert(gameObject == null && canvases == null, "Starting an already started UISystem");
-
+        Debug.Assert(gameObject == null, "Starting an already started UISystem");
+        
         InitGameObject();
-        canvases = new List<GameObject>();
         menuController = new MenuController();
         menuController.FirstStart();
     }
@@ -53,7 +62,7 @@ public class UISystem : IUISystem
 
     public GameObject GameObject => gameObject;
 
-    public MenuController MenuController
+    public IMenuController MenuController
     {
         get
         {

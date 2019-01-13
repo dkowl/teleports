@@ -7,6 +7,7 @@ using UnityEngine;
 public class MenuData : UniquelyNamedObject {
 
 	[SerializeField] private GameObject prefab;
+    [SerializeField] private GameObject nonCanvasPrefab;
     [SerializeField] private bool disableMenusUnder;
     [Tooltip("will parent the menu to the MainCanvas prefab")]
     [SerializeField] private bool useMainCanvas;
@@ -14,6 +15,7 @@ public class MenuData : UniquelyNamedObject {
     [SerializeField] private int sortOrder;
 
     public GameObject Prefab => prefab;
+    public GameObject NonCanvasPrefab => nonCanvasPrefab;
     public bool DisableMenusUnder => disableMenusUnder;
     public bool UseMainCanvas => useMainCanvas;
     public int SortOrder => sortOrder;

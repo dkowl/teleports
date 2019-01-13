@@ -59,14 +59,19 @@ public class PrefabSpawner : MonoBehaviour {
         if (prefab == null) return;
         for (currentId = 0; currentId < spawnAmount; currentId++)
         {
-            if (!isSpawned[currentId] || spawnedInstances[currentId] == null)
+            if (isSpawned[currentId] && spawnedInstances[currentId] != null) continue;
+
+            if (!isSpawned[currentId] && spawnedInstances[currentId] != null)
             {
-                BeforeSpawn();
-                spawnedInstances[currentId] = Instantiate(prefab, transform);
-                spawnedInstances[currentId].hideFlags = HideFlags.DontSave;
-                AfterSpawn();
+                Debug.LogWarning("Prefab marked as not spawned even though it is spawned");
+                DestroyImmediate(spawnedInstances[currentId]);
             }
+
+            BeforeSpawn();
+            spawnedInstances[currentId] = Instantiate(prefab, transform);
+            spawnedInstances[currentId].hideFlags = HideFlags.DontSave;
             isSpawned[currentId] = true;
+            AfterSpawn();
 
         }
     }
@@ -75,10 +80,9 @@ public class PrefabSpawner : MonoBehaviour {
     {
         for (currentId = 0; currentId < spawnedInstances.Count; currentId++)
         {
-            if (isSpawned[currentId])
-            {
-                DestroyImmediate(spawnedInstances[currentId]);
-            }
+            if (!isSpawned[currentId]) continue;
+
+            DestroyImmediate(spawnedInstances[currentId]);
             isSpawned[currentId] = false;
         }
     }

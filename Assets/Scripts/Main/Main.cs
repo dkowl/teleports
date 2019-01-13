@@ -71,7 +71,6 @@ public class Main : Singleton<Main>, ISingletonInstance
             InitializeInEditMode();
             InitializeInPlayMode();
         }
-        AfterInitializationEvent?.Invoke();
         Debug.Log("Main initialized!");
     }
 
@@ -82,18 +81,21 @@ public class Main : Singleton<Main>, ISingletonInstance
         staticData = persistence.GetStaticData();
         gameState = persistence.GetGameState();
         serverData = persistence.GetServerData();
+
+        messageBus = new MessageBus();
+
+        uiSystem = new UISystem();
+        uiSystem.InitInEditMode();
     }
 
     private void InitializeInPlayMode()
     {
-        messageBus = new MessageBus();
-
-        uiSystem = new UISystem();
         loadingGraphics = loadingGraphicsConcrete;
         InitializeInterfaceWithComponent<SceneController, ISceneController>(out sceneController);
         DontDestroyOnLoad(this);
 
         uiSystem.Start();
+        AfterInitializationEvent?.Invoke();
     }
 
     private void InitializeInterfaceWithComponent<T, I>(out I i) where T : Component, I
