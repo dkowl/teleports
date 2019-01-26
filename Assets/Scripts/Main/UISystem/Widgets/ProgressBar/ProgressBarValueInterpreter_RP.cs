@@ -27,9 +27,9 @@ public class ProgressBarValueInterpreter_RP : ProgressBarValueInterpreter {
         switch (id)
         {
             case 0:
-                return Levels.rp.Owned((int)currentValue).ToString();
+                return Levels.rp.RequiredTotalForCurrentLevel((int)currentValue).ToString();
             case 1:
-                return (Levels.rp.Owned((int)currentValue) + Levels.rp.Required((int)currentValue)).ToString();
+                return (Levels.rp.RequiredTotalForCurrentLevel((int)currentValue) + Levels.rp.RequiredFromCurrentLevelToNext((int)currentValue)).ToString();
             default:
                 return base.SecondaryTextString(id);
         }

@@ -15,5 +15,5 @@ public class ProgressBarValueInterpreter_XP : ProgressBarValueInterpreter {
         return CurrentLevel == Levels.xp.MaxLevel ? "Max" : base.ValueTextString();
     }
 
-    private int CurrentLevel => Levels.xp.Level((int) currentValue + (int) minValue);
+    private int CurrentLevel => Levels.xp.LevelByRequiredFromCurrentLevelToNext((int)maxValue);
 }

@@ -63,9 +63,9 @@ public class ProgressBarUI : BaseProgressBarUI, IMessageHandler<RunFinishedMessa
             switch (id)
             {
                 case 0:
-                    return CurrentLevels.Owned((int)DisplayValue).ToString();
+                    return CurrentLevels.RequiredTotalForCurrentLevel((int)DisplayValue).ToString();
                 case 1:
-                    return (CurrentLevels.Owned((int)DisplayValue) + CurrentLevels.Required((int)DisplayValue)).ToString();
+                    return (CurrentLevels.RequiredTotalForCurrentLevel((int)DisplayValue) + CurrentLevels.RequiredFromCurrentLevelToNext((int)DisplayValue)).ToString();
                 case 2:
                     return DeltaString;
                 default:
@@ -101,14 +101,14 @@ public class ProgressBarUI : BaseProgressBarUI, IMessageHandler<RunFinishedMessa
     protected override float MaxValue()
     {
         int disp = (int)DisplayValue;
-        return Mathf.Min(disp + CurrentLevels.Required(disp) - CurrentLevels.Current(disp), CurrentLevels.MaxValue);
+        return Mathf.Min(disp + CurrentLevels.RequiredFromCurrentLevelToNext(disp) - CurrentLevels.AboveCurrentLevel(disp), CurrentLevels.MaxValue);
     }
 
     protected override float MinValue()
     {
         if(valueType == ValueType.XP)
         {
-            return CurrentLevels.Owned((int)DisplayValue);
+            return CurrentLevels.RequiredTotalForCurrentLevel((int)DisplayValue);
         }
         else
         {

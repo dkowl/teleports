@@ -32,17 +32,22 @@ public class BasicProgressBar : MonoBehaviour {
         RP
     }
 
+    public struct Values
+    {
+        public float current;
+        public float target;
+        public float min;
+        public float max;
+        public float delta;
+    }
+
     [SerializeField] private GameObject prefab;
     [SerializeField] private Slider slider;
     [SerializeField] private Text nameText;
     [SerializeField] private Text valueText;
     [SerializeField] private int secondaryTextNo;
     [SerializeField] private Text[] secondaryTexts;
-    [SerializeField] private float currentValue;
-    [SerializeField] private float targetValue;
-    [SerializeField] private float minValue;
-    [SerializeField] private float maxValue;
-    [SerializeField] private float delta;
+    [SerializeField] private Values values;
     [SerializeField] private ValueTextType valueTextType;
     [SerializeField] private AnimationType animationType;
     [SerializeField] private ValueInterpreterType valueInterpreterType;
@@ -63,44 +68,35 @@ public class BasicProgressBar : MonoBehaviour {
     [Button]
     private void Update()
     {
-        currentValue = GetNextValue();
+        values.current = GetNextValue();
         UpdateUiElements();
     }
 
-    public void SetValues(
-        float currentValue,
-        float targetValue,
-        float minValue,
-        float maxValue,
-        float delta)
+    public void SetValues(Values values)
     {
-        Debug.Assert(minValue < maxValue);
-        Debug.Assert(currentValue <= maxValue && currentValue >= minValue);
-        Debug.Assert(targetValue <= maxValue && targetValue >= minValue);
+        Debug.Assert(values.min < values.max);
+        Debug.Assert(values.current <= values.max && values.current >= values.min);
+        Debug.Assert(values.target <= values.max && values.target >= values.min);
 
-        this.currentValue = currentValue;
-        this.targetValue = targetValue;
-        this.minValue = minValue;
-        this.maxValue = maxValue;
-        this.delta = delta;
+        this.values = values;
 
         UpdateUiElements();
     }
 
     private float GetNextValue()
     {
-        float nextValue = currentValue;
-        int direction = currentValue < targetValue ? 1 : -1;
+        float nextValue = values.current;
+        int direction = values.current < values.target ? 1 : -1;
 
         if (animationType == AnimationType.None)
         {
-            return targetValue;
+            return values.target;
         }
 
         if (animationType == AnimationType.Linear || animationType == AnimationType.Asymptotic)
         {
             float delta = linearAnimationSpeed * ValueRange;
-            float maxAllowedDelta = Mathf.Abs(targetValue - currentValue);
+            float maxAllowedDelta = Mathf.Abs(values.target - values.current);
             if (delta > maxAllowedDelta)
             {
                 delta = maxAllowedDelta;
@@ -113,9 +109,9 @@ public class BasicProgressBar : MonoBehaviour {
             nextValue = Mathf.Clamp
             (
                 nextValue +
-                asymptoticAnimationSpeed * (targetValue - nextValue),
+                asymptoticAnimationSpeed * (values.target - nextValue),
                 0,
-                maxValue + 1
+                values.max + 1
             );
         }
 
@@ -152,7 +148,7 @@ public class BasicProgressBar : MonoBehaviour {
                 result = new ProgressBarValueInterpreter();
                 break;
         }
-        result.SetValues(currentValue, targetValue, minValue, maxValue, delta);
+        result.SetValues(values.current, values.target, values.min, values.max, values.delta);
         result.SetValueTextType(valueTextType);
 
         return result;
@@ -170,6 +166,6 @@ public class BasicProgressBar : MonoBehaviour {
         slider.value = valueInterpreter.SliderValue();
     }
 
-    public bool IsAnimating => currentValue != targetValue;
-    private float ValueRange => maxValue - minValue;
+    public bool IsAnimating => values.current != values.target;
+    private float ValueRange => values.max - values.min;
 }

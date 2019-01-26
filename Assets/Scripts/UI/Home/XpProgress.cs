@@ -58,8 +58,8 @@ public class XpProgress : MonoBehaviour {
     void updateUI()
     {
         int
-            currentXp = Levels.xp.Current(xp_),
-            requiredXp = Levels.xp.Required(xp_);
+            currentXp = Levels.xp.AboveCurrentLevel(xp_),
+            requiredXp = Levels.xp.RequiredFromCurrentLevelToNext(xp_);
 
         text_.text = currentXp.ToString() + " / " + requiredXp.ToString();
         if (requiredXp != 0)

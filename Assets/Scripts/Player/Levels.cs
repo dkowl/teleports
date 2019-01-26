@@ -74,7 +74,21 @@ public class Levels {
         return MaxLevel;
     }
 
-    public int Current(int x)
+    public int LevelByRequiredFromCurrentLevelToNext(int x)
+    {
+        int lvl = 0;
+        for (; lvl < MaxLevel; lvl++)
+        {
+            if (RequiredFromCurrentLevelToNext(levels[lvl]) == x)
+            {
+                return lvl + 1;
+            }
+        }
+
+        return lvl;
+    }
+
+    public int AboveCurrentLevel(int x)
     {
         int lvl = Level(x);
         if (lvl > 0 && lvl < MaxLevel)
@@ -82,7 +96,7 @@ public class Levels {
         else return 0;
     }
     
-    public int Required(int x)
+    public int RequiredFromCurrentLevelToNext(int x)
     {
         int lvl = Level(x);
         if (lvl > 0 && lvl < MaxLevel)
@@ -92,12 +106,18 @@ public class Levels {
 
     public int RemainingToNextLevel(int x)
     {
-        return Required(x) - Current(x);
+        return RequiredFromCurrentLevelToNext(x) - AboveCurrentLevel(x);
     }
 
-    public int Owned(int x)
+    public int RequiredTotalForCurrentLevel(int x)
     {
         return levels[Level(x) - 1];
+    }
+
+    public int RequiredTotalForNextLevel(int x)
+    {
+        int lvl = Level(x);
+        return levels[Mathf.Clamp(lvl, 0, MaxLevel - 1)];
     }
 
     public float Progress(int x)
@@ -105,7 +125,7 @@ public class Levels {
         if (Level(x) == MaxLevel)
             return 1;
         else
-            return (float)Current(x) / Required(x);
+            return (float)AboveCurrentLevel(x) / RequiredFromCurrentLevelToNext(x);
     }
 
     public List<Tuple<int, int>> GetSliderProgressionIntervals(int oldValue, int newValue)
@@ -130,12 +150,13 @@ public class Levels {
             }
             else
             {
-                oldValueChange = (Current(oldValue) + 1) * -1;
+                oldValueChange = AboveCurrentLevel(oldValue) * -1;
             }
 
             result.Add(new Tuple<int, int>(oldValue, oldValue + oldValueChange));
             oldLevel += direction;
             oldValue += oldValueChange;
+            if (direction < 0) oldValue--;
         }
 
         return result;
