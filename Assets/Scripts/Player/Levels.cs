@@ -85,7 +85,7 @@ public class Levels {
             }
         }
 
-        return lvl;
+        return 1;
     }
 
     public int AboveCurrentLevel(int x)

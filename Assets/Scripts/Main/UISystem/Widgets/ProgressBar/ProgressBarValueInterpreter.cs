@@ -71,7 +71,7 @@ public class ProgressBarValueInterpreter : IProgressBarValueInterpreter
             if (delta > 0)
                 return '+' + delta.ToString();
             else if (delta < 0)
-                return '-' + delta.ToString();
+                return delta.ToString();
             else
             {
                 return delta.ToString();

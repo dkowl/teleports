@@ -11,12 +11,13 @@ public class PostGameResultAnimator : MonoBehaviour
     [System.Serializable]
     private class AnimatedProgressBar
     {
-        public BasicProgressBar progressBar;
-        public AnimationClip loadStartClip;
-        public AnimationClip loadFinishClip;
-        public Animator animator;
-        public string loadStartTriggerName = "LoadStart";
-        public string loadFinishTriggerName = "LoadFinish";
+        [SerializeField] private BasicProgressBar progressBar;
+        [SerializeField] private AnimationClip loadStartClip;
+        [SerializeField] private AnimationClip loadFinishClip;
+        [SerializeField] private Animator animator;
+        [SerializeField] private string loadStartTriggerName = "LoadStart";
+        [SerializeField] private string loadFinishTriggerName = "LoadFinish";
+        [SerializeField] private string showDeltaTriggerName = "ShowDelta";
 
         public bool IsCorrectlyInitialized()
         {
@@ -26,7 +27,8 @@ public class PostGameResultAnimator : MonoBehaviour
                 loadFinishClip != null &&
                 animator != null &&
                 animator.HasTrigger(loadStartTriggerName) &&
-                animator.HasTrigger(loadFinishTriggerName);
+                animator.HasTrigger(loadFinishTriggerName) &&
+                animator.HasTrigger(showDeltaTriggerName);
         }
 
         public void LoadStart()
@@ -38,6 +40,19 @@ public class PostGameResultAnimator : MonoBehaviour
         {
             animator.SetTrigger(loadFinishTriggerName);
         }
+
+        public void ShowDelta()
+        {
+            animator.SetTrigger(showDeltaTriggerName);
+        }
+
+        public void SetValues(BasicProgressBar.Values values)
+        {
+            progressBar.SetValues(values);
+        }
+
+        public AnimationClip LoadStartClip => loadStartClip;
+        public AnimationClip LoadFinishClip => loadFinishClip;
     }
 
     private enum CommandType
@@ -127,7 +142,8 @@ public class PostGameResultAnimator : MonoBehaviour
                 progressBar.LoadStart();
                 break;
             case CommandType.ChangeSliderValues:
-                progressBar.progressBar.SetValues(currentCommand.sliderValues);
+                progressBar.SetValues(currentCommand.sliderValues);
+                progressBar.ShowDelta();
                 break;
             case CommandType.EndSequence:
                 progressBar.LoadFinish();
@@ -164,82 +180,77 @@ public class PostGameResultAnimator : MonoBehaviour
 
     public void HandleXpEarned(PostGamePopUpEvent_XpEarned xpEarnedEvent)
     {
-        var command = new Command();
-        command.sliderType = SliderType.XP;
+        const SliderType sliderType = SliderType.XP;
 
         if (xpEarnedEvent.IsStartingASequence)
         {
-            command.type = CommandType.StartSequence;
-            command.totalTime = Mathf.Max(xpProgressBar.loadStartClip.length, defaultCommandTime);
-        }
-        else
-        {
-            command.type = CommandType.ChangeSliderValues;
-            command.totalTime = defaultCommandTime;
+            AddSequenceCommand(sliderType, CommandType.StartSequence);
         }
 
-        command.sliderValues = new BasicProgressBar.Values()
+        AddCommand(new Command()
         {
-            current = Levels.xp.AboveCurrentLevel(xpEarnedEvent.OldXp),
-            target = Levels.xp.AboveCurrentLevel(xpEarnedEvent.OldXp) + xpEarnedEvent.NewXp - xpEarnedEvent.OldXp,
-            delta = xpEarnedEvent.NewXp - xpEarnedEvent.OldXp,
-            min = 0,
-            max = Levels.xp.RequiredFromCurrentLevelToNext(xpEarnedEvent.OldXp)
-        };
-
-        AddCommand(command);
+            sliderType = sliderType,
+            type = CommandType.ChangeSliderValues,
+            totalTime = defaultCommandTime,
+            sliderValues = new BasicProgressBar.Values()
+            {
+                current = Levels.xp.AboveCurrentLevel(xpEarnedEvent.OldXp),
+                target = Levels.xp.AboveCurrentLevel(xpEarnedEvent.OldXp) + xpEarnedEvent.NewXp - xpEarnedEvent.OldXp,
+                delta = xpEarnedEvent.NewXp - xpEarnedEvent.OldXp,
+                min = 0,
+                max = Levels.xp.RequiredFromCurrentLevelToNext(xpEarnedEvent.OldXp)
+            }
+        });
 
         if (xpEarnedEvent.IsEndingASequence)
         {
-            var endSequenceCommand = new Command()
-            {
-                sliderType = SliderType.XP,
-                type = CommandType.EndSequence,
-                totalTime = xpProgressBar.loadFinishClip.length
-            };
-
-            AddCommand(endSequenceCommand);
+            AddSequenceCommand(sliderType, CommandType.EndSequence);
         }
     }
 
     public void HandleRpEarned(PostGamePopUpEvent_RpEarned rpEarnedEvent)
     {
-        var command = new Command();
-        command.sliderType = SliderType.RP;
+        const SliderType sliderType = SliderType.RP;
 
         if (rpEarnedEvent.IsStartingASequence)
         {
-            command.type = CommandType.StartSequence;
-            command.totalTime = Mathf.Max(rpProgressBar.loadStartClip.length, defaultCommandTime);
-        }
-        else
-        {
-            command.type = CommandType.ChangeSliderValues;
-            command.totalTime = defaultCommandTime;
+            AddSequenceCommand(sliderType, CommandType.StartSequence);
         }
 
-        command.sliderValues = new BasicProgressBar.Values()
+        AddCommand(new Command()
         {
-            current = rpEarnedEvent.OldRp,
-            target = rpEarnedEvent.NewRp,
-            delta = rpEarnedEvent.NewRp - rpEarnedEvent.OldRp,
-            min = Levels.rp.RequiredTotalForCurrentLevel(rpEarnedEvent.OldRp),
-            max = Levels.rp.RequiredTotalForNextLevel(rpEarnedEvent.OldRp)
-        };
-
-        AddCommand(command);
+            sliderType = sliderType,
+            type = CommandType.ChangeSliderValues,
+            totalTime = defaultCommandTime,
+            sliderValues = new BasicProgressBar.Values()
+            {
+                current = rpEarnedEvent.OldRp,
+                target = rpEarnedEvent.NewRp,
+                delta = rpEarnedEvent.NewRp - rpEarnedEvent.OldRp,
+                min = Levels.rp.RequiredTotalForCurrentLevel(rpEarnedEvent.OldRp),
+                max = Levels.rp.RequiredTotalForNextLevel(rpEarnedEvent.OldRp)
+            }
+        });
 
         if (rpEarnedEvent.IsEndingASequence)
         {
-            var endSequenceCommand = new Command()
-            {
-                sliderType = SliderType.RP,
-                type = CommandType.EndSequence,
-                totalTime = rpProgressBar.loadFinishClip.length
-            };
-
-            AddCommand(endSequenceCommand);
+            AddSequenceCommand(sliderType, CommandType.EndSequence);
         }
+    }
+
+    private void AddSequenceCommand(SliderType sliderType, CommandType commandType)
+    {
+        Debug.Assert(commandType == CommandType.StartSequence || commandType == CommandType.EndSequence);
+
+        var progressBar = GetProgressBarByType(sliderType);
+        var clip = commandType == CommandType.StartSequence ? progressBar.LoadStartClip : progressBar.LoadFinishClip;
+
+        AddCommand( new Command()
+        {
+            sliderType = sliderType,
+            type = commandType,
+            totalTime = clip.length
+        });
     }
 
     private AnimatedProgressBar GetProgressBarByType(SliderType type)
