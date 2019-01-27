@@ -78,6 +78,7 @@ public class PrefabSpawner : MonoBehaviour {
 
     public void Despawn()
     {
+        Debug.Assert(isInitialized);
         for (currentId = 0; currentId < spawnedInstances.Count; currentId++)
         {
             if (!isSpawned[currentId]) continue;
@@ -89,6 +90,7 @@ public class PrefabSpawner : MonoBehaviour {
 
     public void Respawn()
     {
+        Initialize();
         Despawn();
         Spawn();
     }
@@ -114,5 +116,18 @@ public class PrefabSpawner : MonoBehaviour {
     public System.Action AfterSpawnAction
     {
         set { afterSpawnAction = value; }
+    }
+
+    public bool ArePrefabsSpawned
+    {
+        get
+        {
+            foreach (var i in isSpawned)
+            {
+                if (!i) return false;
+            }
+
+            return true;
+        }
     }
 }

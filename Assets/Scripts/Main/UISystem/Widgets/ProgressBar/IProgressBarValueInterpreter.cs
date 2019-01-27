@@ -4,12 +4,8 @@ using UnityEngine;
 
 public interface IProgressBarValueInterpreter
 {
-    void SetValues(
-        float currentValue,
-        float targetValue,
-        float minValue,
-        float maxValue,
-        float delta);
+    BasicProgressBar.Values InterpretValues(float current, float target);
+    void SetValues(BasicProgressBar.Values values);
 
     void SetValueTextType(BasicProgressBar.ValueTextType valueTextType);
 

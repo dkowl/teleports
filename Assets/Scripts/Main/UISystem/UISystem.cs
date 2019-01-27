@@ -76,7 +76,9 @@ public class UISystem : IUISystem
 
     public void HandlePostGamePopUpEvents(IEnumerable<PostGamePopUpEvent> popUpEvents)
     {
-        Debug.LogWarning("Not implemented");
+        var animator = gameObject.GetComponentInChildren<PostGameResultAnimator>();
+        Debug.Assert(animator != null);
+        animator.HandlePostGamePopUpEvents(popUpEvents);
     }
 
     public GameObject GameObject => gameObject;

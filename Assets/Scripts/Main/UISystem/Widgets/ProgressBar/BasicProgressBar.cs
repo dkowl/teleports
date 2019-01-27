@@ -59,10 +59,7 @@ public class BasicProgressBar : MonoBehaviour {
     [Button]
     private void Awake()
     {
-        prefabSpawner = gameObject.GetOrAddComponent<PrefabSpawner>();
-        prefabSpawner.Prefab = prefab;
-        prefabSpawner.AfterSpawnAction = ChildrenSetup;
-        prefabSpawner.Respawn();
+        EnsureSpawned();
     }
 
     [Button]
@@ -70,6 +67,37 @@ public class BasicProgressBar : MonoBehaviour {
     {
         values.current = GetNextValue();
         UpdateUiElements();
+    }
+
+    public void EnsureSpawned()
+    {
+        if (prefabSpawner == null)
+        {
+            prefabSpawner = gameObject.GetOrAddComponent<PrefabSpawner>();
+            prefabSpawner.Prefab = prefab;
+            prefabSpawner.AfterSpawnAction = ChildrenSetup;
+            prefabSpawner.Respawn();
+        }
+        else if(!prefabSpawner.ArePrefabsSpawned)
+        {
+            prefabSpawner.Spawn();
+        }
+    }
+
+    public Values InterpretValues(float current, float target)
+    {
+        return CreateValueInterpreter().InterpretValues(current, target);
+    }
+
+    public void InterpretAndSetValues(float current)
+    {
+        InterpretAndSetValues(current, current);
+    }
+
+    public void InterpretAndSetValues(float current, float target)
+    {
+        var values = InterpretValues(current, target);
+        SetValues(values);
     }
 
     public void SetValues(Values values)
@@ -81,6 +109,11 @@ public class BasicProgressBar : MonoBehaviour {
         this.values = values;
 
         UpdateUiElements();
+    }
+
+    public void Skip()
+    {
+        values.current = values.target;
     }
 
     private float GetNextValue()
@@ -148,7 +181,7 @@ public class BasicProgressBar : MonoBehaviour {
                 result = new ProgressBarValueInterpreter();
                 break;
         }
-        result.SetValues(values.current, values.target, values.min, values.max, values.delta);
+        result.SetValues(values);
         result.SetValueTextType(valueTextType);
 
         return result;

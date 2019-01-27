@@ -5,31 +5,26 @@ using ValueTextType = BasicProgressBar.ValueTextType;
 
 public class ProgressBarValueInterpreter : IProgressBarValueInterpreter
 {
-    protected float currentValue;
-    protected float targetValue;
-    protected float minValue;
-    protected float maxValue;
-    protected float delta;
+    protected BasicProgressBar.Values values;
 
     protected ValueTextType valueTextType;
 
-    public void SetValues(
-        float currentValue,
-        float targetValue,
-        float minValue,
-        float maxValue,
-        float delta)
+    public void SetValues(BasicProgressBar.Values values)
     {
-        this.currentValue = currentValue;
-        this.targetValue = targetValue;
-        this.minValue = minValue;
-        this.maxValue = maxValue;
-        this.delta = delta;
+        this.values = values;
     }
 
     public void SetValueTextType(ValueTextType valueTextType)
     {
         this.valueTextType = valueTextType;
+    }
+
+    public virtual BasicProgressBar.Values InterpretValues(float current, float target)
+    {
+        var valuesCopy = values;
+        valuesCopy.current = current;
+        valuesCopy.target = target;
+        return valuesCopy;
     }
 
     public virtual string NameTextString()
@@ -44,9 +39,9 @@ public class ProgressBarValueInterpreter : IProgressBarValueInterpreter
             case ValueTextType.None:
                 return "";
             case ValueTextType.OneValue:
-                return (currentValue - minValue).ToString("F0");
+                return (values.current - values.min).ToString("F0");
             case ValueTextType.TwoValues:
-                return (currentValue - minValue).ToString("F0") + " / " + (maxValue - minValue).ToString("F0");
+                return (values.current - values.min).ToString("F0") + " / " + (values.max - values.min).ToString("F0");
             case ValueTextType.Percentage:
                 return SliderValue().ToString("P0");
             default:
@@ -61,20 +56,20 @@ public class ProgressBarValueInterpreter : IProgressBarValueInterpreter
 
     public virtual float SliderValue()
     {
-        return Mathf.Clamp((currentValue - minValue) / maxValue, 0f, 1f);
+        return Mathf.Clamp((values.current - values.min) / (values.max - values.min), 0f, 1f);
     }
 
     protected string DeltaString
     {
         get
         {
-            if (delta > 0)
-                return '+' + delta.ToString();
-            else if (delta < 0)
-                return delta.ToString();
+            if (values.delta > 0)
+                return '+' + values.delta.ToString();
+            else if (values.delta < 0)
+                return values.delta.ToString();
             else
             {
-                return delta.ToString();
+                return values.delta.ToString();
             }
         }
     }
