@@ -1,0 +1,178 @@
+fileFormatVersion: 2
+guid: 1ed622969f426e248a48c2f33a611b60
+timeCreated: 1534005004
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Branch01
+    100002: Branch02
+    100004: Branch03
+    100006: Branch04
+    100008: Branch05
+    100010: Fern
+    100012: //RootNode
+    100014: TreeeLong01
+    100016: TreeLong02
+    100018: TreeLong03
+    400000: Branch01
+    400002: Branch02
+    400004: Branch03
+    400006: Branch04
+    400008: Branch05
+    400010: Fern
+    400012: //RootNode
+    400014: TreeeLong01
+    400016: TreeLong02
+    400018: TreeLong03
+    2300000: Branch01
+    2300002: Branch02
+    2300004: Branch03
+    2300006: Branch04
+    2300008: Branch05
+    2300010: Fern
+    2300012: TreeeLong01
+    2300014: TreeLong02
+    2300016: TreeLong03
+    3300000: Branch01
+    3300002: Branch02
+    3300004: Branch03
+    3300006: Branch04
+    3300008: Branch05
+    3300010: Fern
+    3300012: TreeeLong01
+    3300014: TreeLong02
+    3300016: TreeLong03
+    4300000: TreeeLong01
+    4300002: TreeLong02
+    4300004: TreeLong03
+    4300006: Branch03
+    4300008: Branch04
+    4300010: Branch05
+    4300012: Branch01
+    4300014: Branch02
+    4300016: Fern
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PM3D_Cylinder3D1
+    second: {fileID: 2100000, guid: e9fdada476d49c641aa77748e44bcbce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PM3D_Cylinder3D1_1
+    second: {fileID: 2100000, guid: 200d08c3ca219ba4384dbef914494043, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PM3D_Cylinder3D1_2
+    second: {fileID: 2100000, guid: 63c6ecbccbedc5f4f88ce1b938812f86, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PM3D_Cylinder3D1_3
+    second: {fileID: 2100000, guid: a8df8aa5df763d244ba114753c31555e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PM3D_Cylinder3D1_4
+    second: {fileID: 2100000, guid: b4c89a7f905c2264ea3af30600cb0bad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PM3D_Cylinder3D1_5
+    second: {fileID: 2100000, guid: 997ad98c491051b47900c390e44082f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PM3D_Cylinder3D2
+    second: {fileID: 2100000, guid: 519b0e54c7af9a0488b37ed6a13a6b9e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PM3D_Cylinder3D3
+    second: {fileID: 2100000, guid: 8e573641479aa42448d08e4688e88691, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PM3D_Plane3D1
+    second: {fileID: 2100000, guid: 07e2a9361aa63004b95fa20f1588a331, type: 2}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

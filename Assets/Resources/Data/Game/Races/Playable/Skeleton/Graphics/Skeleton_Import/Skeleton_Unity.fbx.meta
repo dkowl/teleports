@@ -63,6 +63,7 @@ ModelImporter:
     100110: //RootNode
     100112: Spine01
     100114: Spine02
+    100116: group1
     400000: Chest
     400002: Head
     400004: Head_END
@@ -121,6 +122,7 @@ ModelImporter:
     400110: //RootNode
     400112: Spine01
     400114: Spine02
+    400116: group1
     4300000: Skeleton
     9500000: //RootNode
     13700000: Skeleton
@@ -195,7 +197,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    rootMotionBoneName: 
+    rootMotionBoneName: Reference
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
