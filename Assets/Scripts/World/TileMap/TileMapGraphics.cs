@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TileMapGraphics : MonoBehaviour {
 
-    [SerializeField] Material material;
-    int sizeX, sizeY;
+    [SerializeField] private Material material;
+    private int sizeX, sizeY;
 
     public void GenerateMesh(TileMap tileMap, Vector3 offset, float tileSize)
     {
@@ -74,7 +74,7 @@ public class TileMapGraphics : MonoBehaviour {
         meshCollider.sharedMesh = mesh;
     }
 
-    void TypeToUvs(Tile.TerrainType type, ref float l, ref float r, ref float b, ref float t)
+    private void TypeToUvs(Tile.TerrainType type, ref float l, ref float r, ref float b, ref float t)
     {
         float padding = 0.03f;
         if(type == Tile.TerrainType.GRASS)
@@ -91,5 +91,10 @@ public class TileMapGraphics : MonoBehaviour {
         r -= padding;
         b += padding;
         t -= padding;
+    }
+
+    public Material Material
+    {
+        set { material = value; }
     }
 }

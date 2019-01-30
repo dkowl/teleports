@@ -45,6 +45,33 @@ public class AssetEditor : Singleton<AssetEditor>
         NameUniqueAssets<SkillGraphics>();
     }
 
+    public static void AddAssetsOfType<T>(Object o, MappedList<T> graphicsList) where T : Object, IUniqueName
+    {
+        graphicsList.ClearList();
+        graphicsList.AddItems(Instance.GetAllAssetsOfType<T>());
+        graphicsList.MakeDict();
+        EditorUtility.SetDirty(o);
+        AssetDatabase.SaveAssets();
+    }
+
+    public static void AddScriptableObjectWrappedDataOfType<T, TWrapper>(Object o, MappedList<T> dataList)
+        where T : IUniqueName
+        where TWrapper : ScriptableObjectDataWrapper<T>
+    {
+        Debug.Assert(dataList != null);
+        dataList.ClearList();
+        var dataWrappers = Instance.GetAllAssetsOfType<TWrapper>();
+        var data = new List<T>();
+        foreach (var dataWrapper in dataWrappers)
+        {
+            data.Add(dataWrapper.Data);
+        }
+        dataList.AddItems(data);
+        dataList.MakeDict();
+        EditorUtility.SetDirty(o);
+        AssetDatabase.SaveAssets();
+    }
+
     private void NameUniqueAssets<T>() where T : Object, IUniqueName
     {
         var assetInfos = GetAllAssetInfosOfType<T>();

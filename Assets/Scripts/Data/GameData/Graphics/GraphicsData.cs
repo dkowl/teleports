@@ -1,15 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.Serialization;
-using Sirenix.OdinInspector;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
-[CreateAssetMenu(fileName = "GraphicsData", menuName = "Data/Graphics")]
-[ShowOdinSerializedPropertiesInInspector]
-public class GraphicsData : SerializedScriptableObject {
+public class GraphicsData : IGraphicsData {
 
     [SerializeField] private MappedList<TeleportGraphics> teleportGraphics;
     [SerializeField] private MappedList<EnemyGraphics> enemyGraphics;
@@ -18,54 +11,28 @@ public class GraphicsData : SerializedScriptableObject {
     [SerializeField] private MappedList<SkillGraphics> skillGraphics;
     [SerializeField] private MappedList<AnimationClipData> animationClips;
 
-    private void OnEnable()
+    public GraphicsData()
     {
-        teleportGraphics.MakeDict();
-        enemyGraphics.MakeDict();
-        raceGraphics.MakeDict();
-        itemGraphics.MakeDict();
-        skillGraphics.MakeDict();
-        animationClips.MakeDict();
+        teleportGraphics = new MappedList<TeleportGraphics>();
+        enemyGraphics = new MappedList<EnemyGraphics>();
+        raceGraphics = new MappedList<RaceGraphics>();
+        itemGraphics = new MappedList<ItemGraphics>();
+        skillGraphics = new MappedList<SkillGraphics>();
+        animationClips = new MappedList<AnimationClipData>();
     }
 
-#if UNITY_EDITOR
-    [Button]
-    private void AddItemGraphics()
-    {
-        AddAssets(itemGraphics);
-    }
-
-    [Button]
-    private void AddRaceGraphics()
-    {
-        AddAssets(raceGraphics);
-    }
-
-    [Button]
-    private void AddSkillGraphics()
-    {
-        AddAssets(skillGraphics);
-    }
-
-    [Button]
-    private void AddAnimationClips()
-    {
-        AddAssets(animationClips);
-    }
-
-    private void AddAssets<T>(MappedList<T> graphicsList) where T : Object, IUniqueName
-    {
-        graphicsList.ClearList();
-        graphicsList.AddItems(AssetEditor.Instance.GetAllAssetsOfType<T>());
-        EditorUtility.SetDirty(this);
-        AssetDatabase.SaveAssets();
-    }
-#endif
-
-    public MappedList<TeleportGraphics> Teleport => teleportGraphics;
+    public IMappedList<TeleportGraphics> TeleportGraphics => teleportGraphics;
+    public IMappedList<EnemyGraphics> EnemyGraphics => enemyGraphics;
+    public IMappedList<RaceGraphics> RaceGraphics => raceGraphics;
+    public IMappedList<ItemGraphics> ItemGraphics => itemGraphics;
+    public IMappedList<SkillGraphics> SkillGraphics => skillGraphics;
+    public IMappedList<AnimationClipData> AnimationClips => animationClips;
+    public MappedList<TeleportGraphics> TeleportGraphicsConcrete => teleportGraphics;
+    public MappedList<EnemyGraphics> EnemyGraphicsConcrete => enemyGraphics;
+    public MappedList<RaceGraphics> RaceGraphicsConcrete => raceGraphics;
+    public MappedList<ItemGraphics> ItemGraphicsConcrete => itemGraphics;
+    public MappedList<SkillGraphics> SkillGraphicsConcrete => skillGraphics;
+    public MappedList<AnimationClipData> AnimationClipsConcrete => animationClips;
     public IList<string> EnemyGraphicsNames => enemyGraphics.AllNames;
     public IList<string> RaceGraphicsNames => raceGraphics.AllNames;
-    public MappedList<ItemGraphics> ItemGraphics => itemGraphics;
-    public MappedList<SkillGraphics> SkillGraphics => skillGraphics;
-    public MappedList<AnimationClipData> AnimationClips => animationClips;
 }

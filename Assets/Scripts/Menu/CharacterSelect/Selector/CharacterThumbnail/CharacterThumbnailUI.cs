@@ -10,30 +10,30 @@ public class CharacterThumbnailUI : SelectorButtonUI {
     public Text characterName, characterLvl;
 
     private int characterSlotID;
-    private PlayerData playerData;
+    private HeroData heroData;
     private CreateHeroConfirmDWSB createHeroConfirmDWSB;
 
-    override protected void LoadDataInternal()
+    protected override void LoadDataInternal()
     {
         base.LoadDataInternal();
 
-        playerData = MainData.Save.GetPlayerData(characterSlotID);
+        heroData = Main.GameState.GetHeroData(characterSlotID);
         if (createHeroConfirmDWSB == null)
         {
             createHeroConfirmDWSB = gameObject.AddComponent<CreateHeroConfirmDWSB>();
         }
 
-        if (playerData != null)
+        if (heroData != null)
         {
             playerIcon.gameObject.SetActive(true);
             teleportIcon.gameObject.SetActive(true);
             newHeroIcon.gameObject.SetActive(false);
 
-            playerIcon.sprite = PlayerGraphics.GetPlayerIcon(playerData);
-            teleportIcon.sprite = PlayerGraphics.GetTeleportIcon(playerData);
+            playerIcon.sprite = PlayerGraphics.GetPlayerIcon(heroData);
+            teleportIcon.sprite = PlayerGraphics.GetTeleportIcon(heroData);
 
-            characterName.text = playerData.CharacterName;
-            characterLvl.text = "Lvl " + playerData.Level.ToString();
+            characterName.text = heroData.CharacterName;
+            characterLvl.text = "Lvl " + heroData.Level.ToString();
         }
         else
         {
@@ -48,13 +48,13 @@ public class CharacterThumbnailUI : SelectorButtonUI {
 
     protected override bool IsActive()
     {
-        return characterSlotID == MainData.Save.CurrentSlotID;
+        return characterSlotID == Main.GameState.CurrentHeroId;
     }
 
     protected override void OnActivate()
     {
-        if(MainData.Save.GetPlayerData(characterSlotID) != null) 
-            MainData.Save.CurrentSlotID = characterSlotID;
+        if(Main.GameState.GetHeroData(characterSlotID) != null) 
+            Main.GameState.SelectHero(characterSlotID);
     }
 
     protected override void OnDeactivate()
@@ -69,8 +69,5 @@ public class CharacterThumbnailUI : SelectorButtonUI {
         LoadDataInternal();
     }
 
-    public int CharacterSlotID
-    {
-        get { return characterSlotID; }
-    }
+    public int CharacterSlotID => characterSlotID;
 }

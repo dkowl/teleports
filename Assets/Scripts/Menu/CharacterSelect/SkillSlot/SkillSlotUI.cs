@@ -12,9 +12,9 @@ public class SkillSlotUI : UnlockableSlotUI {
 
     protected override UnlockableSlot GetSlot()
     {
-        if (MainData.CurrentPlayerData != null)
+        if (Main.GameState.CurrentHeroData != null)
         {
-            skillSlot = MainData.CurrentPlayerData.GetSkillTreeSlot(skillSlotId);
+            skillSlot = Main.GameState.CurrentHeroData.SkillTreeSlots[skillSlotId];
             return skillSlot;
         }
         else
@@ -26,7 +26,7 @@ public class SkillSlotUI : UnlockableSlotUI {
     protected override void OnFull()
     {
         base.OnFull();
-        text.text = MainData.CurrentPlayerData.GetSkillTreeSlotLevel(skillSlotId).ToString();
+        text.text = "undefined";
     }
 
     public void SetSlotID(int id)

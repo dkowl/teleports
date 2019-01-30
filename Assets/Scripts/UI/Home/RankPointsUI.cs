@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class RankPointsUI : MonoBehaviour {
 
-    public Text text_;
+    public Text text;
 
-    void Start()
+    private void Start()
     {
-        text_.text = "Rank points: " + MainData.RankPoints.ToString();
+        text.text = "Rank points: " + Main.GameState.CurrentHeroData.RankPoints;
     }
 }

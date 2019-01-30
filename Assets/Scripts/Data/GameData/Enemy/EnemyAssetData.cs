@@ -13,7 +13,7 @@ public class EnemyAssetData : UniqueScriptableObject {
         EnemyData result = new EnemyData(baseEnemyData);
         foreach(var itemId in itemIds)
         {
-            result.Items.Add(MainData.Game.GetItem(itemId));
+            result.Items.Add(Main.StaticData.Game.Items.GetValue(itemId).GenerateItem());
         }
         return result;
     }

@@ -14,7 +14,7 @@ public class EquipmentSlotComponent : MonoBehaviour {
     {
         Unequip();
 
-        itemObject = Instantiate(MainData.Game.GraphicsData.ItemGraphics.GetValue(itemData.GraphicsId).Prefab, transform);
+        itemObject = Instantiate(Main.StaticData.Graphics.ItemGraphics.GetValue(itemData.GraphicsId).Prefab, transform);
         isEmpty = false;
     }
 

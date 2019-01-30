@@ -7,6 +7,6 @@ public class EnemyID : MappedListID {
 
     protected override IList<string> DropdownValues()
     {
-        return MainData.Game.EnemyNames;
+        return Main.StaticData.Game.Enemies.AllNames;
     }
 }

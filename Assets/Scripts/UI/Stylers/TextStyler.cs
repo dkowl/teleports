@@ -11,9 +11,9 @@ public class TextStyler : LoadableBehaviour {
     [SerializeField] private Stylesheet.TextColor textColor;
     [SerializeField, Range(0, 1)] private float alphaMultiplier = 1f;
 
-    override protected void LoadDataInternal()
+    protected override void LoadDataInternal()
     {
-        Stylesheet stylesheet = MainData.Stylesheet;
+        Stylesheet stylesheet = Main.StaticData.Stylesheet;
 
         Text text = gameObject.GetComponent<Text>();
         if (text != null)
@@ -32,7 +32,7 @@ public class TextStyler : LoadableBehaviour {
 
     private Color GetTextColor()
     {
-        Stylesheet stylesheet = MainData.Stylesheet;
+        Stylesheet stylesheet = Main.StaticData.Stylesheet;
         Color result = stylesheet.GetTextColor(textColor);
         result.a *= alphaMultiplier;
         return result;

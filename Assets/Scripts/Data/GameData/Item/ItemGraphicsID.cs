@@ -11,6 +11,6 @@ public class ItemGraphicsID : MappedListID
 
     protected override IList<string> DropdownValues()
     {
-        return MainData.Game.GraphicsData.ItemGraphics.AllNames;
+        return Main.StaticData.Graphics.ItemGraphics.AllNames;
     }
 }

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public static class PlayerGraphics {
 
-	public static Sprite GetPlayerIcon(PlayerData playerData)
+	public static Sprite GetPlayerIcon(HeroData heroData)
     {
-        return MainData.Game.GetRace(playerData.RaceName).Graphics.Icon;
+        return Main.StaticData.Game.Races.GetValue(heroData.RaceId).Graphics.Icon;
     }
 
-    public static Sprite GetTeleportIcon(PlayerData playerData)
+    public static Sprite GetTeleportIcon(HeroData heroData)
     {
-        return playerData.TeleportData.Graphics.icon;
+        return heroData.TeleportData.Graphics.icon;
     }
 }

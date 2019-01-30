@@ -20,9 +20,8 @@ public partial class ItemData {
         if(graphicsId == null)
         {
             Debug.LogWarning("Item graphics not found, loading defaults...");
-            graphics = MainData.Defaults.itemGraphics;
 
-            graphicsId = new ItemGraphicsID(graphics.UniqueName);
+            graphicsId = new ItemGraphicsID(Main.StaticData.Defaults.itemGraphicsId);
         }
 
         WeaponData.CorrectInvalidData();

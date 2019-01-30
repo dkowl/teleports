@@ -23,10 +23,9 @@ public class CharacterSelectMenu : LoadableBehaviour {
     public delegate void MenuStateSwitched();
     public event MenuStateSwitched MenuStateSwitchedEvent;
 
-    override protected void LoadDataInternal()
+    protected override void LoadDataInternal()
     {
-        Stylesheet stylesheet = MainData.Stylesheet;
-        PlayerData playerData = MainData.CurrentPlayerData;
+        HeroData heroData = Main.GameState.CurrentHeroData;
 
         string titleString = "";
         switch (state)
@@ -38,17 +37,17 @@ public class CharacterSelectMenu : LoadableBehaviour {
                 titleString = newCharacterString;
                 break;
             case State.CurrentHero:
-                if (playerData == null)
+                if (heroData == null)
                     titleString = newCharacterString;
                 else
-                    titleString = MainData.CurrentPlayerData.CharacterName;
+                    titleString = heroData.CharacterName;
                 break;
         }
         titleText.text = titleString;
-        if (playerData != null)
+        if (heroData != null)
         {
-            playerNameText.text = MainData.CurrentPlayerData.CharacterName;
-            playerLevelText.text = "Level " + MainData.CurrentPlayerData.Level.ToString();
+            playerNameText.text = heroData.CharacterName;
+            playerLevelText.text = "Level " + heroData.Level;
         }
         else
         {

@@ -6,17 +6,17 @@ public class EnemySpawner : MonoBehaviour {
 
     public static EnemySpawner instance;
 
-    class Enemy
+    private class Enemy
     {
         public GameObject gameObject, indicator;
         public EnemyData enemyData;
     }
 
-    GameObject player;
+    private GameObject playerGameObject;
 
-    List<Enemy> enemies;
+    private List<Enemy> enemies;
 
-    void Awake()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -26,23 +26,18 @@ public class EnemySpawner : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-    }
-    
-    void Start () {
-
-        player = GameMain.Instance.Player;
 
         enemies = new List<Enemy>();
     }
     
-    void Update()
+    private void Update()
     {
         foreach (Enemy enemy in enemies)
         {
             bool isInViewRange =
-                Vector3.Distance(enemy.gameObject.transform.position, player.transform.position)
+                Vector3.Distance(enemy.gameObject.transform.position, playerGameObject.transform.position)
                 <=
-                player.GetComponent<Unit>().ViewRange;
+                playerGameObject.GetComponent<Unit>().ViewRange;
 
             if (enemy.indicator == null)
             {
@@ -69,7 +64,7 @@ public class EnemySpawner : MonoBehaviour {
         enemyObject.transform.position = position;
         enemyObject.layer = LayerMask.NameToLayer("Enemy");
 
-        UnitData unitData = new UnitData(MainData.Game.GetRace(enemyData.RaceId).BaseStats);
+        UnitData unitData = new UnitData(Main.StaticData.Game.Races.GetValue(enemyData.RaceId).BaseStats);
         foreach (var item in enemyData.Items)
         {
             //Debug.Log("Equipping " + item.DisplayName);
@@ -98,7 +93,12 @@ public class EnemySpawner : MonoBehaviour {
 
     public void SpawnRandom(Vector3 position)
     {
-        Spawn(MainData.Game.Enemies.RandomValue.GenerateBasic(), position);
+        Spawn(Main.StaticData.Game.Enemies.RandomValue.GenerateBasic(), position);
+    }
+
+    public GameObject PlayerGameObject
+    {
+        set { playerGameObject = value; }
     }
 	
 }

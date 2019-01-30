@@ -6,8 +6,8 @@ using UnityEngine.UI;
 [ExecuteInEditMode]
 public class PlayerName : MonoBehaviour {
 
-	void Start () {
+	private void Start () {
         Text text = gameObject.GetComponent<Text>();
-        text.text = MainData.PlayerName;
+        text.text = Main.GameState.CurrentHeroData.CharacterName;
 	}
 }

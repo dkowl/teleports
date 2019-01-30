@@ -42,7 +42,7 @@ public static class UnitSpawner  {
 
     public static void SpawnAnimator(this Unit unit)
     {
-        RaceGraphics raceGraphics = MainData.Game.GetRace(unit.UnitData.RaceName).Graphics;
+        RaceGraphics raceGraphics = Main.StaticData.Game.Races.GetValue(unit.UnitData.RaceName).Graphics;
         Animator animator = unit.Graphics.RaceModel.GetComponentInChildren<Animator>();
         if (animator != null)
         {
@@ -73,11 +73,11 @@ public static class UnitSpawner  {
         if(unit.UnitData.CurrentWeaponMainSkillId != null) skillIds.Add(unit.UnitData.CurrentWeaponMainSkillId);
         skillIds.AddRange(unit.UnitData.SkillIds);
 
-        var skills = MainData.Game.Skills.GetValues(skillIds);
+        var skills = Main.StaticData.Game.Skills.GetValues(skillIds);
         if (skills == null || skills.Count == 0)
         {
             Debug.LogWarning("Unit has no skills, adding default skill");
-            skills = new List<SkillAssetData> {MainData.Game.Skills.GetValue(DataDefaults.skillName)};
+            skills = new List<SkillAssetData> {Main.StaticData.Game.Skills.GetValue(DataDefaults.skillName)};
         }
 
         foreach (var skillAsset in skills)

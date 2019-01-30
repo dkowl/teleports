@@ -8,7 +8,6 @@ public interface IMappedList<T> where T : IUniqueName {
     T GetValue(MappedListID id);
     List<T> GetValues(List<MappedListID> ids);
 
-
     IList<T> AllValues { get; }
     IList<string> AllNames { get; }
     T RandomValue { get; }

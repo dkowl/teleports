@@ -3,76 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-//singleton controlling menu stack
-[ExecuteInEditMode]
-[CreateAssetMenu(fileName = "menuController", menuName = "Menu/Controller")]
-public class MenuController : ScriptableObject
+public class MenuController : IMenuController
 {
-    public enum MenuType { CreateCharacter, ChooseCharacter, Popup, TestA, TestB, Home, DialogWindow, Inventory, Count };
+    public static readonly MenuID MenuIdHome = new MenuID("Home");
+    public static readonly MenuID MenuIdSelectHero = new MenuID("SelectHero");
+    public static readonly MenuID MenuIdCreateHero = new MenuID("CreateHero");
+    public static readonly MenuID MenuIdDialogWindow = new MenuID("DialogWindow");
 
-    private static MenuController instance;
-
-    [NonSerialized] private Menu[] menus = new Menu[(int)MenuType.Count];
+    [NonSerialized] private Dictionary<MenuID, Menu> menus;
     [NonSerialized] private Stack<Menu> menuStack;
-    [NonSerialized] private Transform spawnTransform;
     [NonSerialized] private CommandQueue commandQ = new CommandQueue();
 
-    [SerializeField] private Menu[] menuInspectorLinks;
-    [SerializeField] private MenuType startMenu;
-    [SerializeField] private GameObject mainCanvasPrefab;
-
-    void Awake()
+    public MenuController()
     {
-        Initialize();
-    }
-
-    void OnEnable()
-    {
-        Initialize();
-    }
-
-    void OnDestroy()
-    {
-        CloseAll();
-        instance = null;
-    }
-
-    protected void Initialize()
-    {
-        instance = this;
-        menus = new Menu[(int)MenuType.Count];
+        menus = new Dictionary<MenuID, Menu>();
         menuStack = new Stack<Menu>();
 
-        foreach (Menu menu in menuInspectorLinks)
+        foreach (MenuData menuData in Main.StaticData.UI.Menus.AllValues)
         {
-            menus[(int)menu.MenuType] = menu;
+            var menuId = new MenuID(menuData.UniqueName);
+            menus.Add(menuId, new Menu(menuId));
         }
 
         Debug.Log("Menu Controller initialized!");
     }
-
-    protected void AddCommand(Menu menu, MenuCommand.Type type)
-    {
-        if (type == MenuCommand.Type.Close)
-        {
-            AddCommand(menu, MenuCommand.Type.Hide);
-        }
-        commandQ.AddCommand(new MenuCommand(menu, type));
-    }
     
-    public void FirstStart(Transform newSpawnTransform)
+    public void FirstStart()
     {
-        spawnTransform = newSpawnTransform;
-
-        if (MainData.CurrentPlayerData != null)
-            OpenMenu(startMenu);
+        if (Main.GameState.CurrentHeroData != null)
+            OpenMenu(MenuIdHome);
         else
-            OpenMenu(MenuType.ChooseCharacter);
+            OpenMenu(MenuIdSelectHero);
     }
 
-    public void OpenMenu(MenuType menuType)
+    public void OpenMenu(MenuID menuId)
     {
-        Menu menu = menus[(int)menuType];
+        Menu menu = GetMenu(menuId);
         if (menu != null && !menu.IsOpen)
         {
             if (menu.DisableMenusUnder)
@@ -83,43 +49,37 @@ public class MenuController : ScriptableObject
             AddCommand(menu, MenuCommand.Type.Open);
         }
         else{
-            ShowMenu(menuType);
+            ShowMenu(menuId);
         }
     }
 
-    public void ShowMenu(MenuType menuType)
+    public void ShowMenu(MenuID menuId)
     {
-        Menu menu = menus[(int)menuType];
-        if (menu != null && menu.IsOpen)
-        {
-            while(menuStack.Peek().MenuType != menuType)
-            {
-                CloseTopMenu();
-            }
-            AddCommand(menuStack.Peek(), MenuCommand.Type.Show);
-        }
-    }
-
-    public void CloseMenu(MenuType menuType)
-    {
-        Menu menu = menus[(int)menuType];
-        if (menu == menuStack.Peek())
+        Menu menu = GetMenu(menuId);
+        if (menu == null || !menu.IsOpen) return;
+        while(!menuStack.Peek().MenuId.Equals(menuId))
         {
             CloseTopMenu();
-            if (menu.DisableMenusUnder)
-            {
-                ShowTopMenus();
-            }
+        }
+        AddCommand(menuStack.Peek(), MenuCommand.Type.Show);
+    }
+
+    public void CloseMenu(MenuID menuId)
+    {
+        Menu menu = GetMenu(menuId);
+        if (menu != menuStack.Peek()) return;
+        CloseTopMenu();
+        if (menu.DisableMenusUnder)
+        {
+            ShowTopMenus();
         }
     }
 
     public void CloseTopMenu()
     {
-        if (menuStack.Count != 0)
-        {
-            Menu menu = menuStack.Pop();
-            AddCommand(menu, MenuCommand.Type.Close);
-        }
+        if (menuStack.Count == 0) return;
+        Menu menu = menuStack.Pop();
+        AddCommand(menu, MenuCommand.Type.Close);
     }
 
     public void CloseAll()
@@ -138,21 +98,24 @@ public class MenuController : ScriptableObject
         }
     }
 
-    public bool IsActive(MenuType menuType)
+    public bool IsActive(MenuID menuId)
     {
-        Menu menu = menus[(int)menuType];
-        if (menu != null)
+        Menu menu = GetMenu(menuId);
+        return menu != null && menu.IsActive;
+    }
+
+    public Menu GetMenu(MenuID menuId)
+    {
+        if (!menus.ContainsKey(menuId))
         {
-            return menus[(int)menuType].IsActive;
+            Debug.LogWarning($"Asking for non-existing menu {menuId}");
+            return null;
         }
-        else
-        {
-            return false;
-        }
-    }    
+        return menus[menuId];
+    }
 
     //will close all menus with disableMenusUnder set to false (close popups)
-    public void ShowTopMenus()
+    private void ShowTopMenus()
     {
         while(menuStack.Count != 0)
         {
@@ -169,44 +132,25 @@ public class MenuController : ScriptableObject
         }
     }
 
-    public Menu GetMenu(MenuType menuType)
-    {
-        return menus[(int)menuType];
-    }
-
     public void DisplayMenuStack()
     {
         Debug.Log("Stack Begin v");
         foreach(var menu in menuStack)
         {
-            Debug.Log(menu.MenuType.ToString());
+            Debug.Log(menu.MenuId);
         }
         Debug.Log("Stack End ^");
     }
 
-    //properties
-    public static MenuController Instance
+    private void AddCommand(Menu menu, MenuCommand.Type type)
     {
-        get
+        if (type == MenuCommand.Type.Close)
         {
-            if (instance == null)
-            {
-                instance = Resources.Load("Menu/menuController") as MenuController;
-            }
-            return instance;
+            AddCommand(menu, MenuCommand.Type.Hide);
         }
+        commandQ.AddCommand(new MenuCommand(menu, type));
     }
 
-    public static Transform SpawnTransform
-    {
-        get
-        {
-            return Instance.spawnTransform;
-        }
-    }
-
-    public static GameObject MainCanvasPrefab
-    {
-        get { return Instance.mainCanvasPrefab; }
-    }
+    // deprecated
+    public static IMenuController Instance => Main.UISystem.MenuController;
 }

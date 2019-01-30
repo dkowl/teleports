@@ -17,7 +17,7 @@ public class UnitRagdoll : MonoBehaviour
         mainRigidbodies.Add(firstRb);
     }
 
-    public void ApplyForce(Transform origin, float power)
+    public void ApplyForce(Vector3 origin, float power)
     {
         foreach (var rigidbody in mainRigidbodies)
         {

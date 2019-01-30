@@ -7,34 +7,16 @@ public class RaceGraphics : UniqueScriptableObject {
 
     [SerializeField] private GameObject modelObject;
     [SerializeField] private GameObject ragdollObject;
+    [SerializeField] private Collider collider;
 
     [SerializeField] private RuntimeAnimatorController uiAnimationController;
     [SerializeField] private RuntimeAnimatorController worldAnimationController;
     [SerializeField] private Sprite icon; 
 
-    public GameObject ModelObject
-    {
-        get { return modelObject; }
-    }
-
-    public GameObject RagdollObject
-    {
-        get { return ragdollObject; }
-    }
-
-    public RuntimeAnimatorController UiAnimationController
-    {
-        get { return uiAnimationController; }
-    }
-
-    public RuntimeAnimatorController WorldAnimationController
-    {
-        get { return worldAnimationController; }
-    }
-
-    public Sprite Icon
-    {
-        get { return icon; }
-    }
-
+    public GameObject ModelObject => modelObject;
+    public GameObject RagdollObject => ragdollObject;
+    public Collider Collider => collider;
+    public RuntimeAnimatorController UiAnimationController => uiAnimationController;
+    public RuntimeAnimatorController WorldAnimationController => worldAnimationController;
+    public Sprite Icon => icon;
 }

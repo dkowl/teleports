@@ -18,7 +18,7 @@ public class UnitWeaponCombiner {
     [SerializeField] private float totalReach;
     [SerializeField] private float attackSpeedModifier;
     [SerializeField] private float attacksPerSecond;
-    //[SerializeField] private float damagePerSecond;
+    [SerializeField] private float damagePerSecond;
 
     public UnitWeaponCombiner(UnitData unit, WeaponData weapon)
     {
@@ -35,12 +35,13 @@ public class UnitWeaponCombiner {
         damageBonus = new DamageBonus(weapon, bonusStr, bonusDex, bonusInt);
         speedBonus = new SpeedBonus(weapon, bonusStr, bonusDex, bonusInt, weapon.TotalAttackTime);
         reachBonus = new ReachBonus(weapon, bonusStr, bonusDex, bonusInt);
-        minDamage = (int)weapon.MinDamage;
-        maxDamage = (int)weapon.MaxDamage;
+        minDamage = (int)weapon.MinDamage + (int)damageBonus.Value;
+        maxDamage = (int)weapon.MaxDamage + (int)damageBonus.Value;
         weaponReach = weapon.Reach + reachBonus.Value;
-        totalReach = weaponReach + MainData.Game.GetSkill(unit.MainAttack).Reach;
+        totalReach = weaponReach + Main.StaticData.Game.Skills.GetValue(unit.MainAttack).Data.Reach;
         attackSpeedModifier = weapon.SpeedModifier / speedBonus.Multiplier;
         attacksPerSecond = weapon.AttacksPerSecond / speedBonus.Multiplier;
+        damagePerSecond = AverageDamage * AttacksPerSecond;
     }
 
     public int DamageRoll => Random.Range(minDamage, maxDamage);
@@ -53,7 +54,8 @@ public class UnitWeaponCombiner {
     public float WeaponReach => weaponReach;
     public float AttackSpeedModifier => attackSpeedModifier;
     public float AttacksPerSecond => attacksPerSecond;
-    public float DamagePerSecond => 1;
+    public float DamagePerSecond => damagePerSecond;
+    public float AverageDamage => (minDamage + maxDamage) / 2.0f;
 
     public class AbilityStatBonus
     {
@@ -93,7 +95,7 @@ public class UnitWeaponCombiner {
 
     public class SpeedBonus : AbilityStatBonus
     {
-        public static readonly float maxMultiplier = 0.5f;
+        public static readonly float minMultiplier = 0.5f;
 
         private float multiplier;
 
@@ -103,21 +105,20 @@ public class UnitWeaponCombiner {
             multiplier = 1;
             int[] abilityBonuses = { bonusStr, bonusDex, bonusInt };
             float[] weaponBonuses = { weapon.StrSpeedBonus, weapon.DexSpeedBonus, weapon.IntSpeedBonus };
-            float[] multipliers = new float[abilityBonuses.Length];
-            float[] absoluteDeltas = new float[abilityBonuses.Length];
-            float[] perSecondDeltas = new float[abilityBonuses.Length];
+            float[] abilityContributionScores = new float[abilityBonuses.Length];
+            float abilityContributionScoreTotal = 0;
             for (int i = 0; i<abilityBonuses.Length; i++)
             {
-                multipliers[i] = Mathf.Sqrt(Mathf.Pow(1 - weaponBonuses[i], abilityBonuses[i]));
-                absoluteDeltas[i] = (multiplier - multiplier * multipliers[i]) * (1 - maxMultiplier) * attackTime;
-                float currentAttackTime = attackTime * multiplier;
-                perSecondDeltas[i] = (1 / (currentAttackTime * multipliers[i])) - (1 / currentAttackTime);
-                value += perSecondDeltas[i];
-                multiplier *= multipliers[i];
+                multiplier *= Mathf.Pow(1 - weaponBonuses[i], abilityBonuses[i]);
+                abilityContributionScores[i] = (1 / Mathf.Pow(1 - weaponBonuses[i], abilityBonuses[i])) - 1;
+                abilityContributionScoreTotal += abilityContributionScores[i];
             }
-            strComponent = perSecondDeltas[0];
-            dexComponent = perSecondDeltas[1];
-            intComponent = perSecondDeltas[2];
+            multiplier = Mathf.Sqrt(multiplier);
+            multiplier = multiplier * (1 - minMultiplier) + minMultiplier;
+            value = (1 / (attackTime * multiplier)) - (1 / attackTime);
+            strComponent = value * (abilityContributionScores[0] / abilityContributionScoreTotal);
+            dexComponent = value * (abilityContributionScores[1] / abilityContributionScoreTotal);
+            intComponent = value * (abilityContributionScores[2] / abilityContributionScoreTotal);
         }
 
         public float Multiplier => multiplier;

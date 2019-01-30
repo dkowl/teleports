@@ -1,76 +1,91 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 public class Chunk {
 
-    public const int CHUNK_SIZE = 16;
-    public const float TILE_SIZE = 2f;
+    public const int ChunkSize = 16;
+    public const float TileSize = 2f;
 
-    bool isLoaded_;
-    bool spawnDone_; //true if enemies for this chunk were already spawned
-    int seed_;
-    float posX_, posZ_; //position in world coordinates
-    int idX_, idZ_; //chunk number
-    GameObject gameObject_;
-    TileMap tileMap_;
-    TileMapGraphics tileMapGraphics_;
+    private IWorldCreationParams worldCreationParams;
+    private bool isLoaded;
+    private bool spawnDone; //true if enemies for this chunk were already spawned
+    private float posX, posZ; //position in world coordinates
+    private int idX, idZ; //chunk number
 
-    public Chunk(int seed, float posX, float posZ)
+    private TileMap tileMap;
+    private TileMapGraphics tileMapGraphics;
+
+    private GameObject parentObject;
+    private GameObject gameObject;
+
+    public Chunk(GameObject parentObject, IWorldCreationParams worldCreationParams, float posX, float posZ)
     {
-        isLoaded_ = false;
-        spawnDone_ = false;
-        seed_ = seed;
-        posX_ = posX;
-        posZ_ = posZ;
-        idX_ = (int)((posX_ + size() / 2) / size());
-        idZ_ = (int)((posZ_ + size() / 2) / size());
+        isLoaded = false;
+        spawnDone = false;
+        this.parentObject = parentObject;
+        this.worldCreationParams = worldCreationParams;
+        this.posX = posX;
+        this.posZ = posZ;
+        idX = (int)((this.posX + Size() / 2) / Size());
+        idZ = (int)((this.posZ + Size() / 2) / Size());
     }
 
-    public void load()
+    public void Load()
     {
-        if (isLoaded_ == false)
+        if (isLoaded) return;
+
+        gameObject = new GameObject(GameObjectName);
+        gameObject.transform.parent = parentObject.transform;
+        gameObject.layer = LayerMask.NameToLayer("Ground");
+
+        tileMapGraphics = gameObject.AddComponent<TileMapGraphics>();
+        tileMapGraphics.Material = worldCreationParams.WorldData.TerrainMaterial;
+        tileMap = new TileMap(ChunkSize, ChunkSize, worldCreationParams.Seed, idX, idZ);
+        tileMapGraphics.GenerateMesh(tileMap, new Vector3(posX, 0, posZ), TileSize);
+
+        //spawn one random enemy at random position
+        if (!spawnDone)
         {
-            gameObject_ = Object.Instantiate(Resources.Load("Prefabs/World/Chunk"), GameObject.Find("WorldObject").transform) as GameObject;
-            tileMapGraphics_ = gameObject_.GetComponent<TileMapGraphics>();
-            tileMap_ = new TileMap(CHUNK_SIZE, CHUNK_SIZE, seed_, idX_, idZ_);
-            tileMapGraphics_.GenerateMesh(tileMap_, new Vector3(posX_, 0, posZ_), TILE_SIZE);
-
-            //spawn one random enemy at random position
-            if (!spawnDone_)
-            {
-                Vector3 position = new Vector3(posX_ + Random.Range(0, size()), 0, posZ_ + Random.Range(0, size()));
-                EnemySpawner.instance.SpawnRandom(position);
-                spawnDone_ = true;
-            }
-
-            isLoaded_ = true;
+            SpawnEnemies();
         }
+
+        isLoaded = true;
     }
 
-    public void loadAsync()
+    public void LoadAsync()
     {
-        if (!isLoaded_)
-        {
-            Thread t = new Thread(load);
-            t.Start();
-        }
+        if (isLoaded) return;
+
+        Thread t = new Thread(Load);
+        t.Start();
     }
 
-    public void unload()
+    public void Unload()
     {
-        if (isLoaded_ == true)
-        {
-            GameObject.Destroy(gameObject_);
-            tileMapGraphics_ = null;
-            tileMap_ = null;
-            isLoaded_ = false;
-        }
+        if (isLoaded != true) return;
+
+        Object.Destroy(gameObject);
+        tileMapGraphics = null;
+        tileMap = null;
+        isLoaded = false;
     }
 
-    public static float size()
+    public static float Size()
     {
-        return CHUNK_SIZE * TILE_SIZE;
+        return ChunkSize * TileSize;
     }
+
+    private void SpawnEnemies()
+    {
+        Vector3 position = new Vector3(posX + Random.Range(0, Size()), 0, posZ + Random.Range(0, Size()));
+        EnemySpawner.instance.SpawnRandom(position);
+        spawnDone = true;
+    }
+
+    private string GameObjectName => $"Chunk ({idX}, {idZ})";
 }

@@ -7,8 +7,8 @@ public static class PlayerSpawner {
 	public static GameObject Spawn(GameObject parentObject)
     {     
         //Common
-        PlayerData playerData = MainData.CurrentPlayerData;
-        if (playerData == null) return null;
+        HeroData heroData = Main.GameState.CurrentHeroData;
+        if (heroData == null) return null;
 
         var playerObject = new GameObject("Player");
         playerObject.transform.localPosition = Vector3.zero;
@@ -16,7 +16,7 @@ public static class PlayerSpawner {
         playerObject.tag = "Player";
         playerObject.layer = 9;          
 
-        UnitData unitData = new UnitData(playerData.UnitData);
+        UnitData unitData = new UnitData(heroData.UnitData);
         //unitData.Inventory.Add(MainData.Game.GetItem("Dagger"));
         //unitData.Inventory.Equip("Dagger");
         Unit unit = UnitSpawner.SpawnUnit(playerObject, unitData);
@@ -36,7 +36,6 @@ public static class PlayerSpawner {
         {
             xp = playerObject.AddComponent<XpComponent>();
         }
-        xp.Xp = playerData.Xp;
 
         playerObject.AddComponent<PlayerWorldUI>();
 

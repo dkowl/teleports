@@ -14,6 +14,7 @@ public class PrefabSpawner : MonoBehaviour {
     protected int currentId;
 
     private bool isInitialized = false;
+    private System.Action afterSpawnAction;
 
     private void OnEnable()
     {
@@ -33,8 +34,11 @@ public class PrefabSpawner : MonoBehaviour {
     protected virtual void OnInitialize() { }
 
     protected virtual void BeforeSpawn() { }
-    
-    protected virtual void AfterSpawn() { }
+
+    protected virtual void AfterSpawn()
+    {
+        afterSpawnAction?.Invoke();
+    }
 
     public void Initialize()
     {
@@ -55,32 +59,38 @@ public class PrefabSpawner : MonoBehaviour {
         if (prefab == null) return;
         for (currentId = 0; currentId < spawnAmount; currentId++)
         {
-            if (!isSpawned[currentId] || spawnedInstances[currentId] == null)
+            if (isSpawned[currentId] && spawnedInstances[currentId] != null) continue;
+
+            if (!isSpawned[currentId] && spawnedInstances[currentId] != null)
             {
-                BeforeSpawn();
-                spawnedInstances[currentId] = Instantiate(prefab, transform);
-                spawnedInstances[currentId].hideFlags = HideFlags.DontSave;
-                AfterSpawn();
+                Debug.LogWarning("Prefab marked as not spawned even though it is spawned");
+                DestroyImmediate(spawnedInstances[currentId]);
             }
+
+            BeforeSpawn();
+            spawnedInstances[currentId] = Instantiate(prefab, transform);
+            spawnedInstances[currentId].hideFlags = HideFlags.DontSave;
             isSpawned[currentId] = true;
+            AfterSpawn();
 
         }
     }
 
     public void Despawn()
     {
+        Debug.Assert(isInitialized);
         for (currentId = 0; currentId < spawnedInstances.Count; currentId++)
         {
-            if (isSpawned[currentId])
-            {
-                DestroyImmediate(spawnedInstances[currentId]);
-            }
+            if (!isSpawned[currentId]) continue;
+
+            DestroyImmediate(spawnedInstances[currentId]);
             isSpawned[currentId] = false;
         }
     }
 
     public void Respawn()
     {
+        Initialize();
         Despawn();
         Spawn();
     }
@@ -100,6 +110,24 @@ public class PrefabSpawner : MonoBehaviour {
             isInitialized = false;
             Initialize();
             Spawn();
+        }
+    }
+
+    public System.Action AfterSpawnAction
+    {
+        set { afterSpawnAction = value; }
+    }
+
+    public bool ArePrefabsSpawned
+    {
+        get
+        {
+            foreach (var i in isSpawned)
+            {
+                if (!i) return false;
+            }
+
+            return true;
         }
     }
 }

@@ -25,29 +25,27 @@ public class Item : MonoBehaviour {
 
     public void Equip(Unit unit)
     {
-        if (!isEquipped)
+        if (isEquipped) return;
+
+        slotComponent = ItemSpawner.Spawn(unit.gameObject, data, primarySlot);
+
+        foreach(PerkID perkId in data.Perks)
         {
-            slotComponent = ItemSpawner.Spawn(unit.gameObject, data, primarySlot);
-
-            foreach(PerkID perkId in data.Perks)
-            {
-                unit.AddPerk(MainData.Game.GetPerk(perkId));
-            }
-
-            isEquipped = true;
-            ownerUnit = unit;
+            unit.AddPerk(Main.StaticData.Game.Perks.GetValue(perkId));
         }
+
+        isEquipped = true;
+        ownerUnit = unit;
     }
 
     public void Unequip()
     {
-        if (isEquipped && ownerUnit != null)
+        if (!isEquipped || ownerUnit == null) return;
+
+        slotComponent.Unequip();
+        foreach(PerkID perkId in data.Perks)
         {
-            slotComponent.Unequip();
-            foreach(PerkID perkId in data.Perks)
-            {
-                ownerUnit.RemovePerk(MainData.Game.GetPerk(perkId));
-            }
+            ownerUnit.RemovePerk(Main.StaticData.Game.Perks.GetValue(perkId));
         }
     }
 

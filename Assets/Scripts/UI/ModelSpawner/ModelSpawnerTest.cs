@@ -11,52 +11,51 @@ public class ModelSpawnerTest : LoadableBehaviour {
     private GameObject character, teleport;
     private bool shouldRespawnModels = true;
 
-    override protected void LoadDataInternal()
+    protected override void LoadDataInternal()
     {
-        if (Application.isPlaying)
+        if (!Application.isPlaying) return;
+
+        GameState.HeroChangedEvent -= OnModelChanged;
+        GameState.HeroChangedEvent += OnModelChanged;
+
+        if (character != null)
         {
-            SaveData.OnCharacterIDChangedEvent -= OnModelChanged;
-            SaveData.OnCharacterIDChangedEvent += OnModelChanged;
-
-            if (character != null)
+            if (shouldRespawnModels)
             {
-                if (shouldRespawnModels)
-                {
-                    Destroy(character);
-                    character.tag = "Untagged";
-                }
-                else return;
+                Destroy(character);
+                character.tag = "Untagged";
             }
-            if (teleport != null)
-            {
-                Destroy(teleport);
-            }
+            else return;
+        }
+        if (teleport != null)
+        {
+            Destroy(teleport);
+        }
 
-            character = UnitModelAssembler.GetModel(MainData.CurrentPlayerData.UnitData, true, true);
-            if (character == null)
-                return;
-            character.transform.localPosition += characterLocalPositionOffset;
-            character.transform.Rotate(characterLocalRotationOffset, Space.Self);
+        character = UnitModelAssembler.GetModel(Main.GameState.CurrentHeroData.UnitData, true, true);
+        if (character == null)
+            return;
+        character.transform.localPosition += characterLocalPositionOffset;
+        character.transform.Rotate(characterLocalRotationOffset, Space.Self);
 
             
-            teleport = Instantiate(CurrentPlayerData.TeleportData.Graphics.modelObject, transform);
-            teleport.transform.localPosition += teleportLocalPositionOffset;
-            teleport.transform.Rotate(teleportLocalRotationOffset, Space.Self);
+        teleport = Instantiate(CurrentHeroData.TeleportData.Graphics.modelObject, transform);
+        teleport.transform.localPosition += teleportLocalPositionOffset;
+        teleport.transform.Rotate(teleportLocalRotationOffset, Space.Self);
 
-            shouldRespawnModels = false;
-        }
+        shouldRespawnModels = false;
     }
 
     protected override void SubscribeInternal()
     {
         base.SubscribeInternal();
-        SaveData.OnCharacterIDChangedEvent += OnModelChanged;
+        GameState.HeroChangedEvent += OnModelChanged;
     }
 
     protected override void UnsubscribeInternal()
     {
         base.UnsubscribeInternal();
-        SaveData.OnCharacterIDChangedEvent -= OnModelChanged;
+        GameState.HeroChangedEvent -= OnModelChanged;
     }
 
     public void OnModelChanged()
@@ -65,5 +64,5 @@ public class ModelSpawnerTest : LoadableBehaviour {
         LoadDataInternal();
     }
 
-    public PlayerData CurrentPlayerData => MainData.CurrentPlayerData;
+    public HeroData CurrentHeroData => Main.GameState.CurrentHeroData;
 }

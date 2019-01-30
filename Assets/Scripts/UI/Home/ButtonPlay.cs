@@ -12,6 +12,6 @@ public class ButtonPlay : MonoBehaviour {
 	}
 	
 	void Play () {
-        SceneManager.LoadScene("World");
+        Main.Instance.StartGameSession();
 	}
 }

@@ -6,13 +6,9 @@ public class XpComponent : MonoBehaviour {
 
     [SerializeField]
     private int xp;
-    UnitGraphics graphics;
+    private UnitGraphics graphics;
 
-    public int Xp
-    {
-        get { return xp; }
-        set { xp = value; }
-    } 
+    public int Xp => xp;
 
     public void ReceiveXp(int xp)
     {

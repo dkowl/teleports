@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "world", menuName = "Data/World")]
-public class WorldData : UniqueScriptableObject {
+[System.Serializable]
+public class WorldData : UniquelyNamedObject
+{
 
-	
+    [SerializeField] private Material terrainMaterial;
+
+    public Material TerrainMaterial => terrainMaterial;
+
 }

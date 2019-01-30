@@ -9,8 +9,6 @@ public class DataDefaults {
     public static readonly string unitName = "New Unit";
     public static readonly string skillName = "Attack_Default";
     public static readonly string itemName = "Default Item";
-    [SerializeField] public ItemData itemData;
-    [SerializeField] public ItemGraphics itemGraphics;
-
-
+    [SerializeField] public ItemID itemId;
+    [SerializeField] public ItemGraphicsID itemGraphicsId;
 }

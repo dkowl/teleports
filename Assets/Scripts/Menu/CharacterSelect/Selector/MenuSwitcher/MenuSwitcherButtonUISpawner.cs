@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MenuSwitcherButtonUISpawner : PrefabSpawner {
 
-    public MenuController.MenuType menuType;
+    public MenuID menuId;
     public string buttonString;
     public Transform parentTransform;
 
@@ -12,7 +12,7 @@ public class MenuSwitcherButtonUISpawner : PrefabSpawner {
     {
         MenuSwitcherButtonUI button = SpawnedInstance.GetComponent<MenuSwitcherButtonUI>();
 
-        button.MenuType = menuType;
+        button.MenuId = menuId;
         button.ButtonString = buttonString;
         SpawnedInstance.gameObject.transform.SetParent(parentTransform);
 

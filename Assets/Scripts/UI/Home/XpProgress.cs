@@ -25,8 +25,8 @@ public class XpProgress : MonoBehaviour {
     }
     
     void Start () {
-        xp_ = MainData.Xp;
-        targetXp_ = MainData.Xp;
+        xp_ = Main.GameState.CurrentHeroData.Xp;
+        targetXp_ = xp_;
         updateUI();
     }
 	
@@ -58,8 +58,8 @@ public class XpProgress : MonoBehaviour {
     void updateUI()
     {
         int
-            currentXp = Levels.xp.Current(xp_),
-            requiredXp = Levels.xp.Required(xp_);
+            currentXp = Levels.xp.AboveCurrentLevel(xp_),
+            requiredXp = Levels.xp.RequiredFromCurrentLevelToNext(xp_);
 
         text_.text = currentXp.ToString() + " / " + requiredXp.ToString();
         if (requiredXp != 0)

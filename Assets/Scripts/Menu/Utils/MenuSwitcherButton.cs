@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class MenuSwitcherButton : MonoBehaviour {
 
     [SerializeField]
-    protected MenuController.MenuType menuType;
+    protected MenuID menuId;
     protected Button button;
 
     void Awake()
@@ -19,6 +19,6 @@ public class MenuSwitcherButton : MonoBehaviour {
 
     public void OnClick()
     {
-        MenuController.Instance.OpenMenu(menuType);
+        MenuController.Instance.OpenMenu(menuId);
     }
 }

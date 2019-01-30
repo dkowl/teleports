@@ -19,18 +19,17 @@ public class ProgressBarUI : BaseProgressBarUI, IMessageHandler<RunFinishedMessa
     protected override void Awake()
     {
         base.Awake();
-        MainData.MessageBus.Subscribe(this);
+        Main.MessageBus.Subscribe(this);
     }
 
     protected override bool DetectChange()
     {
-        if (MainData.CurrentPlayerData == null) return false;
-        return base.DetectChange();
+        return Main.GameState.CurrentHeroData != null && base.DetectChange();
     }
 
-    protected override void OnChangeDetected()
+    private void UpdateDelta()
     {
-        delta = currentValue - DisplayValue;
+        delta = CurrentValue() - DisplayValue;
     }
 
     protected override string NameTextString()
@@ -64,9 +63,9 @@ public class ProgressBarUI : BaseProgressBarUI, IMessageHandler<RunFinishedMessa
             switch (id)
             {
                 case 0:
-                    return CurrentLevels.Owned((int)DisplayValue).ToString();
+                    return CurrentLevels.RequiredTotalForCurrentLevel((int)DisplayValue).ToString();
                 case 1:
-                    return (CurrentLevels.Owned((int)DisplayValue) + CurrentLevels.Required((int)DisplayValue)).ToString();
+                    return (CurrentLevels.RequiredTotalForCurrentLevel((int)DisplayValue) + CurrentLevels.RequiredFromCurrentLevelToNext((int)DisplayValue)).ToString();
                 case 2:
                     return DeltaString;
                 default:
@@ -91,9 +90,9 @@ public class ProgressBarUI : BaseProgressBarUI, IMessageHandler<RunFinishedMessa
         switch (valueType)
         {
             case ValueType.XP:
-                return MainData.CurrentPlayerData.Xp;
+                return Main.GameState.CurrentHeroData.Xp;
             case ValueType.RP:
-                return MainData.CurrentPlayerData.RankPoints;
+                return Main.GameState.CurrentHeroData.RankPoints;
             default:
                 return 0;
         }
@@ -102,14 +101,14 @@ public class ProgressBarUI : BaseProgressBarUI, IMessageHandler<RunFinishedMessa
     protected override float MaxValue()
     {
         int disp = (int)DisplayValue;
-        return Mathf.Min(disp + CurrentLevels.Required(disp) - CurrentLevels.Current(disp), CurrentLevels.MaxValue);
+        return Mathf.Min(disp + CurrentLevels.RequiredFromCurrentLevelToNext(disp) - CurrentLevels.AboveCurrentLevel(disp), CurrentLevels.MaxValue);
     }
 
     protected override float MinValue()
     {
         if(valueType == ValueType.XP)
         {
-            return CurrentLevels.Owned((int)DisplayValue);
+            return CurrentLevels.RequiredTotalForCurrentLevel((int)DisplayValue);
         }
         else
         {
@@ -133,6 +132,8 @@ public class ProgressBarUI : BaseProgressBarUI, IMessageHandler<RunFinishedMessa
     public void Handle(RunFinishedMessage message)
     {
         AnimateNextChange();
+        UpdateDelta();
+        animator.SetTrigger("Loading");
     }
 
     protected string DeltaString
