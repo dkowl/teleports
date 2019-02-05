@@ -230,42 +230,6 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Reaper_Attack
-      takeName: Take 001
-      firstFrame: 200
-      lastFrame: 250
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events:
-      - time: 0.24999978
-        functionName: ScytheAttack
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 08a47cef6b88c4649819787961b2f35e,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
       name: Reaper_WallOfDeath
       takeName: Take 001
       firstFrame: 250
@@ -289,18 +253,18 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.38641837
-        functionName: ScythePlant
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 08a47cef6b88c4649819787961b2f35e,
+      - time: 0.451961
+        functionName: Play
+        data: Rocks
+        objectReferenceParameter: {fileID: 11500000, guid: a44dca21f53ac6c43b43e6bdc23f184a,
           type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.451961
-        functionName: PlantScythe
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 63ec5e37fc1f15a40b8d61fc1101e718,
+      - time: 0.45979887
+        functionName: Play
+        data: DeathWave
+        objectReferenceParameter: {fileID: 11500000, guid: a44dca21f53ac6c43b43e6bdc23f184a,
           type: 3}
         floatParameter: 0
         intParameter: 0
@@ -394,9 +358,9 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.25304893
-        functionName: Terrify
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 63ec5e37fc1f15a40b8d61fc1101e718,
+        functionName: Play
+        data: Terrify
+        objectReferenceParameter: {fileID: 11500000, guid: a44dca21f53ac6c43b43e6bdc23f184a,
           type: 3}
         floatParameter: 0
         intParameter: 0
