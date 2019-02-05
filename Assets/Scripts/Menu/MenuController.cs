@@ -100,6 +100,7 @@ public class MenuController : IMenuController
 
     public bool IsActive(MenuID menuId)
     {
+        if (!menus.ContainsKey(menuId)) return false;
         Menu menu = GetMenu(menuId);
         return menu != null && menu.IsActive;
     }

@@ -65,10 +65,10 @@ public class UISystem : IUISystem
         canvas.sortingOrder = menuData.SortOrder;
 
         Debug.Assert(menuData.Prefab != null);
-        Object.Instantiate(menuData.Prefab, canvasObject.transform);
+        Object.Instantiate(menuData.Prefab, canvasObject.transform).SetActive(true);
         if (menuData.NonCanvasPrefab != null)
         {
-            Object.Instantiate(menuData.NonCanvasPrefab, containerObject.transform);
+            Object.Instantiate(menuData.NonCanvasPrefab, containerObject.transform).SetActive(true);
         }
 
         return containerObject;
