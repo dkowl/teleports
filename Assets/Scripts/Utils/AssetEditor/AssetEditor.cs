@@ -122,11 +122,12 @@ public class AssetEditor : Singleton<AssetEditor>
                 var prefabAsset = PrefabUtility.GetPrefabParent(o);
                 Debug.Assert(PrefabUtility.GetPrefabType(prefabAsset) == PrefabType.Prefab);
                 PrefabUtility.ReplacePrefab(prefabRoot, prefabAsset);
+                EditorUtility.SetDirty(prefabAsset);
             }
             EditorSceneManager.MarkSceneDirty(o.gameObject.scene);
             Debug.Log($"Reworking {o.name}");
         }
-        //AssetDatabase.SaveAssets();
+        AssetDatabase.SaveAssets();
     }
 #endif
 }

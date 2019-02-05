@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Teleports.Utils;
 
 [ExecuteInEditMode]
-public class PrefabSpawner : MonoBehaviour {
+public class PrefabSpawner : SerializedMonoBehaviour {
 
     [SerializeField] protected GameObject prefab;
     [SerializeField] protected int spawnAmount = 1;
