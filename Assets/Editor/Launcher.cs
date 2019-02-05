@@ -40,17 +40,19 @@ public static class Launcher
     private static void UnloadExtraScenes()
     {
         unloadedScenePaths = new List<string>();
-        for (int sceneIndex = 0; sceneIndex < EditorSceneManager.sceneCount; sceneIndex++)
+        if (IsSceneLoaded("Main"))
         {
-            var currentScene = EditorSceneManager.GetSceneAt(sceneIndex);
-            if (currentScene.isLoaded && currentScene.name != "Main")
+            for (int sceneIndex = 0; sceneIndex < EditorSceneManager.sceneCount; sceneIndex++)
             {
-                Debug.Log($"Unloading extra scene {currentScene.name}");
-                EditorSceneManager.CloseScene(currentScene, false);
-                unloadedScenePaths.Add(currentScene.path);
+                var currentScene = EditorSceneManager.GetSceneAt(sceneIndex);
+                if (currentScene.isLoaded && currentScene.name != "Main")
+                {
+                    Debug.Log($"Unloading extra scene {currentScene.name}");
+                    EditorSceneManager.CloseScene(currentScene, false);
+                    unloadedScenePaths.Add(currentScene.path);
+                }
             }
         }
-        
         SerializeUnloadedScenePaths();
     }
 
@@ -80,6 +82,19 @@ public static class Launcher
         {
             unloadedScenePaths.Add(EditorPrefs.GetString(unloadedScenePathKeyPrefix + i));
         }
+    }
+
+    private static bool IsSceneLoaded(string name)
+    {
+        for (int sceneIndex = 0; sceneIndex < EditorSceneManager.sceneCount; sceneIndex++)
+        {
+            var currentScene = EditorSceneManager.GetSceneAt(sceneIndex);
+            if (currentScene.isLoaded && currentScene.name == name)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
