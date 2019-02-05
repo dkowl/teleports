@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEditor.SceneManagement;
 #if UNITY_EDITOR
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
@@ -104,6 +105,28 @@ public class AssetEditor : Singleton<AssetEditor>
             result.Add(AssetDatabase.LoadAssetAtPath<T>(AssetDatabase.GUIDToAssetPath(guid)));
         }
         return result;
+    }
+
+    [Button]
+    public void ReworkObjects()
+    {
+        var objects = Resources.FindObjectsOfTypeAll<MenuSwitcherButtonUISpawner>();
+        foreach (var o in objects)
+        {
+            o.Rework();
+            EditorUtility.SetDirty(o);
+            var prefabRoot = PrefabUtility.FindPrefabRoot(o.gameObject);
+            if (PrefabUtility.GetPrefabType(prefabRoot) == PrefabType.PrefabInstance)
+            {
+                Debug.Log($"Replacing prefab {prefabRoot.name}");
+                var prefabAsset = PrefabUtility.GetPrefabParent(o);
+                Debug.Assert(PrefabUtility.GetPrefabType(prefabAsset) == PrefabType.Prefab);
+                PrefabUtility.ReplacePrefab(prefabRoot, prefabAsset);
+            }
+            EditorSceneManager.MarkSceneDirty(o.gameObject.scene);
+            Debug.Log($"Reworking {o.name}");
+        }
+        //AssetDatabase.SaveAssets();
     }
 #endif
 }

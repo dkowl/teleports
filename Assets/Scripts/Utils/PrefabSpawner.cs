@@ -95,7 +95,8 @@ public class PrefabSpawner : MonoBehaviour {
         Spawn();
     }
 
-    public GameObject SpawnedInstance => spawnedInstances[currentId];
+    protected GameObject SpawnedInstance => spawnedInstances[currentId];
+    protected int CurrentInstanceId => currentId;
 
     public GameObject Prefab
     {
