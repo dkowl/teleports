@@ -14,7 +14,7 @@ public class ButtonSpawner : PrefabSpawner {
 
     protected override void AfterSpawn()
     {
-        if (choices != null && currentId < choices.Count)
+        if (choices != null && CurrentInstanceId < choices.Count)
         {
             SpawnedInstance.transform.SetParent(spawnTransform);
 
@@ -22,10 +22,10 @@ public class ButtonSpawner : PrefabSpawner {
 
             Text text = null;
             button.FindOrSpawnChildWithComponent(ref text, "Text");
-            text.text = choices[currentId].Text;
+            text.text = choices[CurrentInstanceId].Text;
 
             button.onClick.AddListener(MenuController.Instance.CloseTopMenu);
-            button.onClick.AddListener(choices[currentId].InvokeCallback);
+            button.onClick.AddListener(choices[CurrentInstanceId].InvokeCallback);
         }
     }
 

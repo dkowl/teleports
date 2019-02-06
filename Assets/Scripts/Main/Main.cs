@@ -6,6 +6,7 @@ using Teleports.Utils;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 
+[DisallowGameObjectCreation]
 public class Main : Singleton<Main>, ISingletonInstance
 {
     [SerializeField] private LoadingGraphics loadingGraphicsConcrete;

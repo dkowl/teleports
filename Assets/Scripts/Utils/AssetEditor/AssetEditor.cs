@@ -113,7 +113,7 @@ public class AssetEditor : Singleton<AssetEditor>
         var objects = Resources.FindObjectsOfTypeAll<MenuSwitcherButtonUISpawner>();
         foreach (var o in objects)
         {
-            o.Rework();
+            //o.Rework();
             EditorUtility.SetDirty(o);
             var prefabRoot = PrefabUtility.FindPrefabRoot(o.gameObject);
             if (PrefabUtility.GetPrefabType(prefabRoot) == PrefabType.PrefabInstance)

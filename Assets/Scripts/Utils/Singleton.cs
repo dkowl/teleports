@@ -1,10 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public interface ISingletonInstance
 {
     void OnFirstAccess();
+}
+
+[AttributeUsage(AttributeTargets.Class)]
+public class DisallowGameObjectCreation : System.Attribute
+{
+
 }
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
@@ -24,16 +32,21 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 Debug.LogWarningFormat("Something is wrong. There is more than one singleton of {0}", typeof(T).ToString());
             }
 
+            if (instance == null && AllowGameObjectCreation())
+            {
+                GameObject singletonObject = new GameObject("(Singleton) " + typeof(T).ToString());
+                instance = singletonObject.AddComponent<T>();
+            }
+
             if (instance != null)
             {
                 InstanceFirstAccess();
-                return instance;
+            }
+            else
+            {
+                Debug.LogError($"Instance of {typeof(T).FullName} cannot be initialized");
             }
 
-            GameObject singletonObject = new GameObject("(Singleton) " + typeof(T).ToString());
-            instance = singletonObject.AddComponent<T>();
-
-            InstanceFirstAccess();
             return instance;
         }
     }
@@ -42,5 +55,12 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         var singletonInstance = instance as ISingletonInstance;
         singletonInstance?.OnFirstAccess();
+    }
+
+    private static bool AllowGameObjectCreation()
+    {
+        var typeInfo = typeof(T).GetTypeInfo();
+        var attribute = typeInfo.GetCustomAttribute<DisallowGameObjectCreation>();
+        return attribute == null;
     }
 }

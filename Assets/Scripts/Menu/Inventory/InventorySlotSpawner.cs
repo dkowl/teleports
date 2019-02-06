@@ -21,10 +21,10 @@ public class InventorySlotSpawner : PrefabSpawner {
         switch (slotType)
         {
             case SpawnedSlotType.Inventory:
-                inventorySlotUi.Initialize(parentMenu, new InventoryMenu.ItemSlotID(currentId));
+                inventorySlotUi.Initialize(parentMenu, new InventoryMenu.ItemSlotID(CurrentInstanceId));
                 break;
             case SpawnedSlotType.Equipment:
-                inventorySlotUi.Initialize(parentMenu, new InventoryMenu.ItemSlotID(eqSlotOrder[currentId]), eqSlotNames[currentId]);
+                inventorySlotUi.Initialize(parentMenu, new InventoryMenu.ItemSlotID(eqSlotOrder[CurrentInstanceId]), eqSlotNames[CurrentInstanceId]);
                 break;
         }
     }
