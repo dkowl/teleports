@@ -5,44 +5,53 @@ using UnityEngine;
 using UnityEngine.UI;
 using Text = TMPro.TextMeshProUGUI;
 
-public class MenuSwitcherButtonUI : SelectorButtonUI {
+public class MenuSwitcherButtonUI : MonoBehaviour {
 
-    [SerializeField] private MenuID menuId;
-    [SerializeField] private string buttonString;
+    [SerializeField] private float inactiveScaleFactor = 0.9f;
+    [SerializeField] private Text buttonText;
 
-    public Text buttonText;
+    private MenuID menuId;
+    private MenuSwitcherButtonUISpawner spawner;
 
-    protected override void LoadDataInternal()
+    private bool isActive;
+
+    public void Activate()
     {
-        base.LoadDataInternal();
-
-        buttonText.text = buttonString;
-    }
-
-    protected override bool IsActive()
-    {
-        return MenuController.Instance.IsActive(menuId);
-    }
-
-    protected override void OnActivate()
-    {
+        if (isActive) return;
+        Debug.Assert(spawner != null);
+        spawner.DeactivatingBeforeActivatingFlag = true;
+        spawner.DeactivateAll();
+        transform.localScale = Vector3.one;
         MenuController.Instance.OpenMenu(menuId);
+        isActive = true;
     }
 
-    protected override void OnDeactivate()
+    public void Deactivate()
     {
+        if (!isActive) return;
+        transform.localScale = Vector3.one * inactiveScaleFactor;
         MenuController.Instance.CloseMenu(menuId);
+        isActive = false;
     }
 
     public MenuID MenuId
     {
-        get { return menuId; }
         set { menuId = value; }
     }
 
     public string ButtonString
     {
-        get { return buttonString; }
-        set { buttonString = value; }
+        set
+        {
+            Debug.Assert(buttonText != null);
+            buttonText.text = value;
+        }
     }
+
+    public MenuSwitcherButtonUISpawner Spawner
+    {
+        set { spawner = value; }
+    }
+
+    public bool IsActive => isActive;
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PopupMenuUI : MenuBehaviour {
+public class PopupMenuUI : MonoBehaviour {
 
     [SerializeField] private RectTransform contentParentTransform;
     private MenuID menuId;
@@ -10,10 +10,14 @@ public class PopupMenuUI : MenuBehaviour {
 
     private PrefabSpawner contentSpawner;
 
-    protected override void OnOpenInternal()
+    private MenuSwitcherButtonUISpawner menuSwitcherButtonUiSpawner;
+
+    private void Start()
     {
-        GetComponent<Animation>().Play("OnOpen");
-        base.OnOpenInternal();
+        if (!FindObjectOfType<MenuSwitcherButtonUISpawner>().LastDeactivationWasCausedByActivation)
+        {
+            GetComponent<Animation>().Play("OnOpen");
+        }
     }
 
     public void Init(MenuID menuId, GameObject content)
@@ -26,7 +30,7 @@ public class PopupMenuUI : MenuBehaviour {
 
     public void Close()
     {
-        MenuController.Instance.CloseMenu(menuId);
+        FindObjectOfType<MenuSwitcherButtonUISpawner>().DeactivateAll();
     }
 
     private void SpawnContent()
