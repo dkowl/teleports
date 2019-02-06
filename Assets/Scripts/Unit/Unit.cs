@@ -182,7 +182,7 @@ public class Unit : MonoBehaviour
     public DeadState DeadState => deadState;
     public bool Alive => !deadState.IsActive;
     public float HealthPercentage => 1f - damageReceived / Hp;
-    public float CurrentHp => Hp - damageReceived;
+    public float CurrentHp => Mathf.Max(0, Hp - damageReceived);
     public List<Perk> Perks => perks;
     public List<Skill> Skills => skills;
     public Skill PrimarySkill => skills.Count > 0 ? skills[0] : null;

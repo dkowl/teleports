@@ -14,7 +14,6 @@ public class InventoryMenu : SerializedMonoBehaviour,
     [SerializeField] private InventoryItemSpawner itemSpawner;
     [SerializeField] private CameraMeshTargeter cameraTargeter;
     [SerializeField] private TextureAtlasFromModels inventoryAtlas;
-    [SerializeField] private InventorySlotSpawner inventorySlotSpawner;
 
     private bool isInitialized;
     private Dictionary<ItemData, int> internalItemIds;
@@ -45,10 +44,6 @@ public class InventoryMenu : SerializedMonoBehaviour,
         BuildTextureAtlas();
         Select(selectedSlotId);
         isInitialized = true;
-
-        inventorySlotSpawner.enabled = false;
-        inventorySlotSpawner.ParentMenu = this;
-        inventorySlotSpawner.enabled = true;
     }
 
     private void BuildTextureAtlas()

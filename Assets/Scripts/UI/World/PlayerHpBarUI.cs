@@ -3,37 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHpBarUI : BaseProgressBarUI {
+public class PlayerHpBarUI : MonoBehaviour {
 
-    Unit playerUnit;
+    private Unit playerUnit;
+    private BasicProgressBar bar;
 
-    void Start()
+    private void Start()
     {
         playerUnit = Main.CurrentGameSession.PlayerGameObject.GetComponent<Unit>();
-        DetectChange();
-        SkipAnimation();
+        bar = gameObject.GetComponent<BasicProgressBar>();
+        Debug.Assert(bar != null);
+
+        bar.CustomValueInterpreter = new ProgressBarValueInterpreter_HP(playerUnit);
+
+        bar.SetValues(new BasicProgressBar.Values
+        {
+            current = playerUnit.CurrentHp,
+            delta = 0,
+            max = playerUnit.Hp,
+            min = 0,
+            target = playerUnit.CurrentHp
+        });
     }
 
-    protected override string NameTextString()
+    private void Update()
     {
-        if (playerUnit != null)
-            return playerUnit.UnitData.Name;
-        else
-            return "Player";
+        bar.SetValues(new BasicProgressBar.Values
+        {
+            current = bar.CurrentValues.current,
+            delta = 0,
+            max = playerUnit.Hp,
+            min = 0,
+            target = playerUnit.CurrentHp
+        });
     }
-
-    protected override float CurrentValue()
-    {
-        if (playerUnit != null)
-            return playerUnit.CurrentHp;
-        else return 0;
-    }
-
-    protected override float MaxValue()
-    {
-        if (playerUnit != null)
-            return playerUnit.Hp;
-        else
-            return 100;
-    }
+    
 }

@@ -29,9 +29,11 @@ public class BasicProgressBar : MonoBehaviour {
     {
         Basic,
         XP,
-        RP
+        RP,
+        Custom // use customValueInterpreter field
     }
 
+    [System.Serializable]
     public struct Values
     {
         public float current;
@@ -55,11 +57,15 @@ public class BasicProgressBar : MonoBehaviour {
     [SerializeField] private float asymptoticAnimationSpeed = 0.05f;
 
     private PrefabSpawner prefabSpawner;
+    
+    // if null - an interpreter will be created based on valueInterpreterType
+    private IProgressBarValueInterpreter customValueInterpreter;
 
     [Button]
     private void Awake()
     {
         EnsureSpawned();
+        ChildrenSetup();
     }
 
     [Button]
@@ -71,6 +77,7 @@ public class BasicProgressBar : MonoBehaviour {
 
     public void EnsureSpawned()
     {
+        if (prefab == null) return;
         if (prefabSpawner == null)
         {
             prefabSpawner = gameObject.GetOrAddComponent<PrefabSpawner>();
@@ -177,6 +184,10 @@ public class BasicProgressBar : MonoBehaviour {
             case ValueInterpreterType.RP:
                 result = new ProgressBarValueInterpreter_RP();
                 break;
+            case ValueInterpreterType.Custom:
+                Debug.Assert(customValueInterpreter != null);
+                result = customValueInterpreter;
+                break;
             default:
                 result = new ProgressBarValueInterpreter();
                 break;
@@ -200,5 +211,10 @@ public class BasicProgressBar : MonoBehaviour {
     }
 
     public bool IsAnimating => values.current != values.target;
+    public IProgressBarValueInterpreter CustomValueInterpreter
+    {
+        set { customValueInterpreter = value; }
+    }
+    public Values CurrentValues => values;
     private float ValueRange => values.max - values.min;
 }

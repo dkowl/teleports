@@ -8,16 +8,13 @@ using Teleports.Utils;
 public class ButtonSpawner : PrefabSpawner {
 
     public delegate void OnClickCallback();
-
-    [SerializeField] protected RectTransform spawnTransform;
+    
     protected List<ButtonChoice> choices;
 
     protected override void AfterSpawn()
     {
         if (choices != null && CurrentInstanceId < choices.Count)
         {
-            SpawnedInstance.transform.SetParent(spawnTransform);
-
             Button button = SpawnedInstance.GetComponent<Button>();
 
             Text text = null;

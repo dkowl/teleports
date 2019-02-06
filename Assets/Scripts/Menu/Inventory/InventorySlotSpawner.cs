@@ -29,11 +29,6 @@ public class InventorySlotSpawner : PrefabSpawner {
         }
     }
 
-    public InventoryMenu ParentMenu
-    {
-        set { parentMenu = value; }
-    }
-
     public enum SpawnedSlotType
     {
         Inventory,

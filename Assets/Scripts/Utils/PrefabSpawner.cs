@@ -9,6 +9,7 @@ public class PrefabSpawner : SerializedMonoBehaviour {
 
     [SerializeField] protected GameObject prefab;
     [SerializeField] protected int spawnAmount = 1;
+    [SerializeField] private Transform spawnTransform;
     
     protected List<bool> isSpawned;
     protected List<GameObject> spawnedInstances;
@@ -32,7 +33,10 @@ public class PrefabSpawner : SerializedMonoBehaviour {
         Despawn();
     }
 
-    protected virtual void OnInitialize() { }
+    // init spawn amount and prefab here
+    protected virtual void PreInitialize() { }
+
+    protected virtual void PostInitialize() { }
 
     protected virtual void BeforeSpawn() { }
 
@@ -43,15 +47,15 @@ public class PrefabSpawner : SerializedMonoBehaviour {
 
     public void Initialize()
     {
-        if (!isInitialized || spawnAmount != spawnedInstances.Count)
-        {
-            if (spawnedInstances != null && spawnedInstances.Count > 0)
-                Despawn();
-            Utils.InitWithValues(ref isSpawned, spawnAmount, false);
-            Utils.InitWithValues(ref spawnedInstances, spawnAmount, null);
-            OnInitialize();
-            isInitialized = true;
-        }
+        if (isInitialized && spawnAmount == spawnedInstances.Count) return;
+
+        PreInitialize();
+        if (spawnedInstances != null && spawnedInstances.Count > 0)
+            Despawn();
+        Utils.InitWithValues(ref isSpawned, spawnAmount, false);
+        Utils.InitWithValues(ref spawnedInstances, spawnAmount, null);
+        PostInitialize();
+        isInitialized = true;
     }
 
     public void Spawn()
@@ -69,7 +73,7 @@ public class PrefabSpawner : SerializedMonoBehaviour {
             }
 
             BeforeSpawn();
-            spawnedInstances[currentId] = Instantiate(prefab, transform);
+            spawnedInstances[currentId] = Instantiate(prefab, SpawnTransform);
             spawnedInstances[currentId].hideFlags = HideFlags.DontSave;
             isSpawned[currentId] = true;
             AfterSpawn();
@@ -110,9 +114,14 @@ public class PrefabSpawner : SerializedMonoBehaviour {
             Despawn();
             spawnAmount = value;
             isInitialized = false;
-            Initialize();
             Spawn();
         }
+    }
+
+    public Transform SpawnTransform
+    {
+        get { return spawnTransform == null ? transform : spawnTransform; }
+        set { spawnTransform = value; }
     }
 
     public System.Action AfterSpawnAction
