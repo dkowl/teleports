@@ -2,15 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IStylesheet : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public interface IStylesheet
+{
+    float GetFontSize(string key);
+    Color GetTextColor(string key);
+    Color GetColor(string key);
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "stylesheet", menuName = "Custom/Stylesheet", order = 7)]
-public class Stylesheet : ScriptableObject
+public class Stylesheet_Legacy : ScriptableObject
 {
     public enum FontSize
     {

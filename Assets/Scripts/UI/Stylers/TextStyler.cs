@@ -7,13 +7,14 @@ using Sirenix.OdinInspector;
 [ExecuteInEditMode]
 public class TextStyler : LoadableBehaviour {
 
-    [SerializeField] private Stylesheet.FontSize fontSize;
-    [SerializeField] private Stylesheet.TextColor textColor;
+    [SerializeField] private Stylesheet_Legacy.FontSize fontSize;
+    [SerializeField] private Stylesheet_Legacy.TextColor textColor;
     [SerializeField, Range(0, 1)] private float alphaMultiplier = 1f;
 
     protected override void LoadDataInternal()
     {
-        Stylesheet stylesheet = Main.StaticData.Stylesheet;
+        Stylesheet_Legacy stylesheet = Main.StaticData.StylesheetLegacy;
+        int i = 0;
 
         Text text = gameObject.GetComponent<Text>();
         if (text != null)
@@ -32,7 +33,7 @@ public class TextStyler : LoadableBehaviour {
 
     private Color GetTextColor()
     {
-        Stylesheet stylesheet = Main.StaticData.Stylesheet;
+        Stylesheet_Legacy stylesheet = Main.StaticData.StylesheetLegacy;
         Color result = stylesheet.GetTextColor(textColor);
         result.a *= alphaMultiplier;
         return result;

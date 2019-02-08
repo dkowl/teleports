@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class ImageStyler : LoadableBehaviour {
 
-    public Stylesheet.ColorPreset color;
+    public Stylesheet_Legacy.ColorPreset color;
 
     protected override void LoadDataInternal()
     {
         Image image = gameObject.GetComponent<Image>();
-        image.color = Main.StaticData.Stylesheet.GetColorPreset(color);
+        image.color = Main.StaticData.StylesheetLegacy.GetColorPreset(color);
     }
 }

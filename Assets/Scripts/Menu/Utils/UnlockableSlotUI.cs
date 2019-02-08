@@ -9,16 +9,16 @@ public abstract class UnlockableSlotUI : LoadableBehaviour {
     public Image foregroundImage, backgroundImage;
     public Text text;
         
-    [SerializeField] protected Stylesheet.ColorPreset lockedColor;
-    [SerializeField] protected Stylesheet.ColorPreset unlockedColor;
-    [SerializeField] protected Stylesheet.ColorPreset lockColor;
+    [SerializeField] protected Stylesheet_Legacy.ColorPreset lockedColor;
+    [SerializeField] protected Stylesheet_Legacy.ColorPreset unlockedColor;
+    [SerializeField] protected Stylesheet_Legacy.ColorPreset lockColor;
 
-    protected Stylesheet stylesheet;
+    protected Stylesheet_Legacy stylesheet;
     protected UnlockableSlot slot;
 
     protected override void LoadDataInternal()
     {
-        stylesheet = Main.StaticData.Stylesheet;
+        stylesheet = Main.StaticData.StylesheetLegacy;
         slot = GetSlot();
 
         if (slot.IsLocked)
