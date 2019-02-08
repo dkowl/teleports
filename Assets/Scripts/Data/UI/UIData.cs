@@ -6,12 +6,14 @@ public class UIData
 {
     [SerializeField] private GameObject mainCanvasPrefab;
     [SerializeField] private GameObject popupMenuPrefab;
-    [SerializeField] private Stylesheet_Legacy stylesheet;
+    [SerializeField] private StylesheetSO stylesheet;
+    [SerializeField] private Stylesheet_Legacy stylesheetLegacy;
     [SerializeField] private MappedList<MenuData> menus;
 
     public GameObject MainCanvasPrefab => mainCanvasPrefab;
     public GameObject PopupMenuPrefab => popupMenuPrefab;
-    public Stylesheet_Legacy StylesheetLegacy => stylesheet;
+    public IStylesheet Stylesheet => stylesheet.Data;
+    public Stylesheet_Legacy StylesheetLegacy => stylesheetLegacy;
 
     public IMappedList<MenuData> Menus => menus;
     public MappedList<MenuData> MenusConcrete => menus;

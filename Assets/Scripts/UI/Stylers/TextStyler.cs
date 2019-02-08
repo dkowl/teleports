@@ -9,6 +9,7 @@ public class TextStyler : LoadableBehaviour {
 
     [SerializeField] private Stylesheet_Legacy.FontSize fontSize;
     [SerializeField] private Stylesheet_Legacy.TextColor textColor;
+    [SerializeField] private StylesheetKeys.FontSize fontSizee;
     [SerializeField, Range(0, 1)] private float alphaMultiplier = 1f;
 
     protected override void LoadDataInternal()

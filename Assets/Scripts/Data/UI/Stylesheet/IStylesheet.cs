@@ -4,7 +4,6 @@ using UnityEngine;
 
 public interface IStylesheet
 {
-    float GetFontSize(string key);
-    Color GetTextColor(string key);
-    Color GetColor(string key);
+    T GetValue<T>(string typeKey, string key);
+    IList<string> GetKeys(string typeKey);
 }
