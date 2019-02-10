@@ -107,12 +107,6 @@ public class AssetEditor : Singleton<AssetEditor>
         return result;
     }
 
-    [Button]
-    private void ReworkTextStylers()
-    {
-        ReworkObjects<TextStyler>();
-    }
-
     private void ReworkObjects<T>() where T : MonoBehaviour, IReworkable
     {
         var objects = Resources.FindObjectsOfTypeAll<T>();

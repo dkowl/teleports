@@ -5,19 +5,11 @@ using UnityEngine.UI;
 using Sirenix.OdinInspector;
 
 [ExecuteInEditMode]
-public class TextStyler : LoadableBehaviour, IReworkable {
-
-    [SerializeField] private Stylesheet_Legacy.FontSize fontSize;
-    [SerializeField] private Stylesheet_Legacy.TextColor textColor;
+public class TextStyler : LoadableBehaviour {
+    
     [SerializeField] private StylesheetKeys.FontSize fontSizePreset;
     [SerializeField] private StylesheetKeys.TextColor textColorPreset;
     [SerializeField, Range(0, 1)] private float alphaMultiplier = 1f;
-
-    public void Rework()
-    {
-        fontSizePreset.String = FontSizeToString(fontSize);
-        textColorPreset.String = TextColorToString(textColor);
-    }
 
     public string FontSizeToString(Stylesheet_Legacy.FontSize fontSize)
     {
