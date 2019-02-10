@@ -25,6 +25,5 @@ public class StaticData : IStaticData {
     public IGameData Game => gameData;
     public IGraphicsData Graphics => graphicsData;
     public UIData UI => uiData;
-    public Stylesheet_Legacy StylesheetLegacy => uiData.StylesheetLegacy;
     public DataDefaults Defaults => defaults;
 }
