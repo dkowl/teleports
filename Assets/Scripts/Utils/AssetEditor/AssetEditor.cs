@@ -108,12 +108,17 @@ public class AssetEditor : Singleton<AssetEditor>
     }
 
     [Button]
-    public void ReworkObjects()
+    private void ReworkTextStylers()
     {
-        var objects = Resources.FindObjectsOfTypeAll<MenuSwitcherButtonUISpawner>();
+        ReworkObjects<TextStyler>();
+    }
+
+    private void ReworkObjects<T>() where T : MonoBehaviour, IReworkable
+    {
+        var objects = Resources.FindObjectsOfTypeAll<T>();
         foreach (var o in objects)
         {
-            //o.Rework();
+            o.Rework();
             EditorUtility.SetDirty(o);
             var prefabRoot = PrefabUtility.FindPrefabRoot(o.gameObject);
             if (PrefabUtility.GetPrefabType(prefabRoot) == PrefabType.PrefabInstance)
@@ -130,4 +135,9 @@ public class AssetEditor : Singleton<AssetEditor>
         AssetDatabase.SaveAssets();
     }
 #endif
+}
+
+public interface IReworkable
+{
+    void Rework();
 }

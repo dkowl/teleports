@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IStylesheet
 {
-    T GetValue<T>(string typeKey, string key);
+    T GetValue<T>(StylesheetKey key);
     IList<string> GetKeys(string typeKey);
 }

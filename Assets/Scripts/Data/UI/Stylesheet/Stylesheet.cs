@@ -33,7 +33,17 @@ public abstract class StylesheetKey
     [ValueDropdown("DropdownValues"), SerializeField]
     private string key;
 
-    public abstract IList<string> DropdownValues();
+    public abstract string PresetType();
+    public IList<string> DropdownValues()
+    {
+        return Main.StaticData.UI.Stylesheet.GetKeys(PresetType());
+    }
+
+    public string String
+    {
+        get { return key; }
+        set { key = value; }
+    }
 }
 
 namespace StylesheetKeys
@@ -41,9 +51,18 @@ namespace StylesheetKeys
     [System.Serializable]
     public class FontSize : StylesheetKey
     {
-        public override IList<string> DropdownValues()
+        public override string PresetType()
         {
-            return Main.StaticData.UI.Stylesheet.GetKeys("Font Size");
+            return "Font Size";
+        }
+    }
+
+    [System.Serializable]
+    public class TextColor : StylesheetKey
+    {
+        public override string PresetType()
+        {
+            return "Text Color";
         }
     }
 }
@@ -84,9 +103,14 @@ public class Stylesheet : IStylesheet
     [OdinSerialize]
     private Dictionary<string, StylesheetDictionary<IStylesheetValue>> dictionaries;
 
-    public T GetValue<T>(string typeKey, string key)
+    public T GetValue<T>(StylesheetKey key)
     {
-        IStylesheetValue value = GetDictionary(typeKey)?.GetValue(key);
+        return GetValue<T>(key.PresetType(), key.String);
+    }
+
+    private T GetValue<T>(string typeKey, string key)
+    {
+        var value = GetDictionary(typeKey)?.GetValue(key) as StylesheetValue<T>;
         Debug.Assert(value != null);
 
         if (typeof(T) != value.Type)
