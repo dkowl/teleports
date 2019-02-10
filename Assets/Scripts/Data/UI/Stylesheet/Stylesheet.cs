@@ -65,6 +65,15 @@ namespace StylesheetKeys
             return "Text Color";
         }
     }
+
+    [System.Serializable]
+    public class Color : StylesheetKey
+    {
+        public override string PresetType()
+        {
+            return "Color";
+        }
+    }
 }
 
 [ShowOdinSerializedPropertiesInInspector]

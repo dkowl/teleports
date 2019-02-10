@@ -5,12 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ImageStyler : LoadableBehaviour {
-
-    public Stylesheet_Legacy.ColorPreset color;
+    
+    [SerializeField] private StylesheetKeys.Color colorPreset;
 
     protected override void LoadDataInternal()
     {
         Image image = gameObject.GetComponent<Image>();
-        image.color = Main.StaticData.StylesheetLegacy.GetColorPreset(color);
+        image.color = Main.StaticData.UI.Stylesheet.GetValue<Color>(colorPreset);
     }
 }
