@@ -13,7 +13,7 @@ public class HUD {
     public void Spawn(GameObject parentObject)
     {
         mainCanvas = Main.UISystem.SpawnCanvas("HUD");
-        hudGameObject = Object.Instantiate(Resources.Load("UI/World/HUD"), mainCanvas.transform) as GameObject;
+        hudGameObject = Object.Instantiate(Main.StaticData.UI.HUD.HUDPrefab, mainCanvas.transform) as GameObject;
     }
 
     public void Despawn()
@@ -25,7 +25,7 @@ public class HUD {
     {
         if (endScreenOn) return;
 
-        endScreen = Object.Instantiate(Resources.Load("Prefabs/UI/EndScreen"), mainCanvas.transform) as GameObject;
+        endScreen = Object.Instantiate(Main.StaticData.UI.HUD.EndScreen, mainCanvas.transform) as GameObject;
         endScreen.GetComponent<EndScreenUI>().SetText(text);
         endScreenOn = true;
     }

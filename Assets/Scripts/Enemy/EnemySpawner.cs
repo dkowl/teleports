@@ -43,7 +43,7 @@ public class EnemySpawner : MonoBehaviour {
             {
                 if (isInViewRange)
                 {
-                    GameObject indicator = Instantiate(Resources.Load("Prefabs/Unit/EnemyIndicator"), gameObject.transform) as GameObject;
+                    GameObject indicator = Instantiate(Main.StaticData.UI.HUD.EnemyIndicator, gameObject.transform) as GameObject;
                     indicator.GetComponent<EnemyIndicator>().SetEnemy(enemy.gameObject);
                     enemy.indicator = indicator;
                 }

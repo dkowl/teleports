@@ -28,14 +28,14 @@ public class UnitGraphics : MonoBehaviour {
     {
         if(targetMarker == null)
         {
-            targetMarker = Instantiate(Resources.Load("Prefabs/Unit/TargetMarker"), gameObject.transform) as GameObject;
+            targetMarker = Instantiate(Main.StaticData.UI.HUD.TargetMarker, gameObject.transform) as GameObject;
         }
         targetMarker.GetComponent<TargetMarker>().SetTargetUnit(target);
     }
 
     public void showDamage(float damage)
     {
-        GameObject obj = Instantiate(Resources.Load("Prefabs/Unit/FloatingDamage"), gameObject.transform) as GameObject;
+        GameObject obj = InstantiateFloatingText();
         FloatingDamage floatingDamage = obj.GetComponent<FloatingDamage>();
         floatingDamage.setText(damage.ToString());
         floatingDamage.setColor(Color.red);
@@ -45,7 +45,7 @@ public class UnitGraphics : MonoBehaviour {
 
     public void showXp(int xp)
     {
-        GameObject obj = Instantiate(Resources.Load("Prefabs/Unit/FloatingDamage"), gameObject.transform) as GameObject;
+        GameObject obj = InstantiateFloatingText();
         obj.GetComponent<FloatingDamage>().setText(xp.ToString() + " XP");
         obj.GetComponent<FloatingDamage>().setColor(Color.yellow);
         obj.GetComponent<FloatingDamage>().lifetime *= 2;
@@ -55,7 +55,7 @@ public class UnitGraphics : MonoBehaviour {
 
     public void showMessage(string message)
     {
-        GameObject obj = Instantiate(Resources.Load("Prefabs/Unit/FloatingDamage"), gameObject.transform) as GameObject;
+        GameObject obj = InstantiateFloatingText();
         obj.GetComponent<FloatingDamage>().setText(message);
         obj.GetComponent<FloatingDamage>().setColor(Color.yellow);
         obj.transform.localPosition = new Vector3(0, gameObject.GetComponent<Unit>().UnitData.Height, 0);
@@ -64,6 +64,11 @@ public class UnitGraphics : MonoBehaviour {
     private float DamageTextScalingFactor(float dmg)
     {
         return Mathf.Max(0f, Mathf.Log10(dmg + 32) - 1);
+    }
+
+    private GameObject InstantiateFloatingText()
+    {
+        return Instantiate(Main.StaticData.UI.HUD.FloatingText, gameObject.transform) as GameObject;
     }
 
     public GameObject RaceModel

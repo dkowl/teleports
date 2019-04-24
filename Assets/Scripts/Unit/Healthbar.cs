@@ -13,7 +13,7 @@ public class Healthbar : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        healthbar = Instantiate(Resources.Load("Prefabs/Unit/Healthbar"), gameObject.transform) as GameObject;
+        healthbar = Instantiate(Main.StaticData.UI.HUD.Healthbar, gameObject.transform) as GameObject;
         unit = gameObject.GetComponent<Unit>();
         healthbar.transform.localPosition = new Vector3(0, unit.UnitData.Height + 0.3f, 0);
         slider = healthbar.transform.GetChild(0).GetChild(0).GetComponent<Slider>();
