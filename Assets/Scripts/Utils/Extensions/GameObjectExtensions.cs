@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Teleports.Utils;
 using UnityEngine;
+using UnityEditor;
 
 public static class GameObjectExtensions {
 
@@ -99,5 +100,14 @@ public static class GameObjectExtensions {
     public static T AddCopyOfComponent<T>(this GameObject gameObject, T component) where T : Component
     {
         return gameObject.AddComponent<T>().CopyValuesFrom(component);
-    } 
+    }
+
+#if UNITY_EDITOR
+    public static void CreateFromEditor(this GameObject gameObject, UnityEditor.MenuCommand command)
+    {
+        GameObjectUtility.SetParentAndAlign(gameObject, command.context as GameObject);
+        Undo.RegisterCreatedObjectUndo(gameObject, "Create " + gameObject.name);
+        Selection.activeObject = gameObject;
+    }
+#endif
 }
