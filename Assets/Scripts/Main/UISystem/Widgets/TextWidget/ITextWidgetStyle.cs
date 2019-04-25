@@ -5,4 +5,5 @@ using UnityEngine;
 public interface ITextWidgetStyle {
 
     TMPro.TMP_FontAsset Font { get; }
+    int? FontSize { get; }
 }

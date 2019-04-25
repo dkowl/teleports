@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Text = TMPro.TextMeshProUGUI;
 using UnityEditor;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 
 [ExecuteInEditMode]
-public class TextWidget : MonoBehaviour
+[ShowOdinSerializedPropertiesInInspector]
+[System.Serializable]
+public class TextWidget : SerializedMonoBehaviour
 {
     private Text text;
-    [SerializeField] private List<ITextWidgetStyle> styles;
+
+    [OdinSerialize]
+    [ListDrawerSettings(Expanded = true)]
+    private List<ITextWidgetStyle> styles = new List<ITextWidgetStyle>();
 
     void Awake()
     {
@@ -18,6 +25,7 @@ public class TextWidget : MonoBehaviour
         }
     }
 
+    [Button]
     void ApplyStyles()
     {
         foreach(var style in styles)
@@ -29,9 +37,10 @@ public class TextWidget : MonoBehaviour
     private void ApplyStyle(ITextWidgetStyle style)
     {
         text.font = style.Font ?? text.font;
+        text.fontSize = style.FontSize ?? text.fontSize;
     }
 
-    [MenuItem("GameObject/Widgets/Text", priority = 11)]
+    [MenuItem("GameObject/Widgets/Text", false, 10)]
     private static void Create(UnityEditor.MenuCommand command)
     {
         GameObject widget = new GameObject("Text Widget");

@@ -27,6 +27,7 @@ namespace StylesheetValues
     public class Float : StylesheetValue<float>{ }
     public class Color : StylesheetValue<UnityEngine.Color>{ }
     public class Sprite : StylesheetValue<UnityEngine.Sprite> { }
+    public class TextStyle : StylesheetValue<TextWidgetStyle> { }
 }
 
 public abstract class StylesheetKey
@@ -81,6 +82,14 @@ namespace StylesheetKeys
         public override string PresetType()
         {
             return "Sprite";
+        }
+    }
+
+    public class TextStyle : StylesheetKey
+    {
+        public override string PresetType()
+        {
+            return "Text Style";
         }
     }
 }

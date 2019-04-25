@@ -19,6 +19,9 @@ public class UnitAttributeData{
 
     static UnitAttributeData()
     {
+        data[(int)UnitAttributesData.AttributeType.Strength] = new Data("Strength");
+        data[(int)UnitAttributesData.AttributeType.Dexterity] = new Data("Dexterity");
+        data[(int)UnitAttributesData.AttributeType.Intelligence] = new Data("Intelligence");
         data[(int)UnitAttributesData.AttributeType.Size] = new Data("Size");
         data[(int)UnitAttributesData.AttributeType.Armor] = new Data("Armor");
         data[(int)UnitAttributesData.AttributeType.Height] = new Data("Height");
