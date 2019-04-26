@@ -19,6 +19,11 @@ public class AttributeUpgraderUI : MonoBehaviour
     [SerializeField] private Text valueText;
     [SerializeField] private Slider valueSlider;
 
+    private void Start()
+    {
+        Update();
+    }
+
     private void Update()
     {
         nameText.text = UnitAttributeData.GetName(attributeType);

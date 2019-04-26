@@ -18,6 +18,8 @@ public class AttributesMenu : MonoBehaviour {
         upgraders = GetComponentsInChildren<AttributeUpgraderUI>();
         spentAttributePoints = new int[3];
         unspentAttributePoints = Main.GameState.CurrentHeroData.TotalAttributePoints;
+
+        Update();
     }
 
     void Update()
