@@ -55,4 +55,6 @@ public class Attribute
     {
         get { return (raw + bonus) * multiplier; }
     }
+
+    public float BaseValue => raw;
 };

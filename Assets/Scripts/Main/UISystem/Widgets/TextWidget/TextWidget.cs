@@ -19,10 +19,7 @@ public class TextWidget : SerializedMonoBehaviour
 
     void Awake()
     {
-        if(text == null)
-        {
-            text = gameObject.AddComponent<Text>();
-        }
+        gameObject.InitComponent(ref text);
     }
 
     [Button]
