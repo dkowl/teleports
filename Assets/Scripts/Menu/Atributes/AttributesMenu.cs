@@ -11,6 +11,7 @@ public class AttributesMenu : MonoBehaviour {
     private AttributeUpgraderUI[] upgraders;
     private int[] spentAttributePoints;
     private int unspentAttributePoints;
+    private static readonly string ValueHighlightColor = "fd6";
 
     void Start()
     {
@@ -29,6 +30,8 @@ public class AttributesMenu : MonoBehaviour {
             upgraders[i].AttributeType = attributeTypes[i];
             int baseValue = (int)Main.GameState.CurrentHeroData.UnitData.Attributes.GetAttribute(attributeTypes[i]).Value;
             int extraValue = spentAttributePoints[i];
+            if (extraValue > 0) upgraders[i].ExtraValueColor = ValueHighlightColor;
+            else upgraders[i].ExtraValueColor = null;
             upgraders[i].AttributeValue = baseValue + extraValue;
             upgraders[i].PlusCallback = SpendAttributePoint;
             upgraders[i].MinusCallback = UnspendAttributePoint;
@@ -66,7 +69,7 @@ public class AttributesMenu : MonoBehaviour {
         var builder = new StringBuilder();
         if(unspentAttributePoints > 0)
         {
-            builder.Append("<color=#ec5>");
+            builder.Append($"<color=#{ValueHighlightColor}>");
         }
         builder.Append(unspentAttributePoints.ToString());
         if(unspentAttributePoints > 0)

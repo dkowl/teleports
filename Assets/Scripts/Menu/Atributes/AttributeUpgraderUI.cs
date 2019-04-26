@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using Text = TMPro.TextMeshProUGUI;
 using Callback = System.Action<UnitAttributesData.AttributeType>;
+using System.Text;
 
 [ExecuteInEditMode]
 public class AttributeUpgraderUI : MonoBehaviour
 {
     [SerializeField] private UnitAttributesData.AttributeType attributeType;
     [SerializeField] private int attributeValue;
+    private string extraValueColor;
     private Callback plusCallback;
     private Callback minusCallback;
 
@@ -20,7 +22,7 @@ public class AttributeUpgraderUI : MonoBehaviour
     private void Update()
     {
         nameText.text = UnitAttributeData.GetName(attributeType);
-        valueText.text = attributeValue.ToString();
+        valueText.text = GetValueString();
         valueSlider.value = (float)attributeValue / 100.0f;
     }
 
@@ -34,8 +36,24 @@ public class AttributeUpgraderUI : MonoBehaviour
         minusCallback(attributeType);
     }
 
+    private string GetValueString()
+    {
+        var builder = new StringBuilder();
+        if (extraValueColor != null)
+        {
+            builder.Append($"<color=#{extraValueColor}>");
+        }
+        builder.Append(attributeValue.ToString());
+        if (extraValueColor != null)
+        {
+            builder.Append("</color>");
+        }
+        return builder.ToString();
+    }
+
     public UnitAttributesData.AttributeType AttributeType { set { attributeType = value; } }
     public int AttributeValue { set { attributeValue = value; } }
+    public string ExtraValueColor {  set { extraValueColor = value; } }
     public Callback PlusCallback { set { plusCallback = value; } }
     public Callback MinusCallback { set { minusCallback = value; } }
 }
