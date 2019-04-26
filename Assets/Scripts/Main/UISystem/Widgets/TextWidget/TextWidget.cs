@@ -17,17 +17,29 @@ public class TextWidget : SerializedMonoBehaviour
     [ListDrawerSettings(Expanded = true)]
     private List<ITextWidgetStyle> styles = new List<ITextWidgetStyle>();
 
-    void Awake()
+    private void Awake()
     {
         gameObject.InitComponent(ref text);
     }
 
     [Button]
-    void ApplyStyles()
+    private void ApplyStyles()
     {
         foreach(var style in styles)
         {
             ApplyStyle(style);
+        }
+    }
+
+    public string Text
+    {
+        set
+        {
+            text.text = value;
+        }
+        get
+        {
+            return text.text;
         }
     }
 

@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
 
 public class AttributesMenu : MonoBehaviour {
 
 	[SerializeField] private List<UnitAttributesData.AttributeType> attributeTypes;
+    [SerializeField] private TextWidget titleText;
 
     private AttributeUpgraderUI[] upgraders;
     private int[] spentAttributePoints;
@@ -22,6 +24,8 @@ public class AttributesMenu : MonoBehaviour {
         Debug.Assert(attributeTypes.Count == upgraders.Length);
         for(int i = 0; i < attributeTypes.Count; i++)
         {
+            titleText.Text = GetTitleText();
+
             upgraders[i].AttributeType = attributeTypes[i];
             int baseValue = (int)Main.GameState.CurrentHeroData.UnitData.Attributes.GetAttribute(attributeTypes[i]).Value;
             int extraValue = spentAttributePoints[i];
@@ -55,5 +59,20 @@ public class AttributesMenu : MonoBehaviour {
         }
         Debug.Assert(false);
         return -1;
+    }
+
+    private string GetTitleText()
+    {
+        var builder = new StringBuilder();
+        if(unspentAttributePoints > 0)
+        {
+            builder.Append("<color=#ec5>");
+        }
+        builder.Append(unspentAttributePoints.ToString());
+        if(unspentAttributePoints > 0)
+        {
+            builder.Append("</color>");
+        }
+        return builder.ToString();
     }
 }
