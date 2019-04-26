@@ -27,6 +27,11 @@ public class Attribute
         Reset(raw);
     }
 
+    public void AddBase(float bonus)
+    {
+        raw += bonus;
+    }
+
     public void AddBonus(float bonus)
     {
         this.bonus += bonus;

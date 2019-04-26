@@ -76,6 +76,38 @@ public partial class HeroData
         postGamePopUpEvents = GeneratePostGamePopUpEvents(oldXp, newXp, oldRp, newRp);
     }
 
+    public enum ApplyAttributePointsResult
+    {
+        OK,
+        WrongAttributeType,
+        NotEnoughPoints
+    }
+
+    public ApplyAttributePointsResult ApplyAttributePoints(List<System.Tuple<UnitAttributesData.AttributeType, int>> pointsToApply)
+    {
+        int totalPointsToApply = 0;
+        foreach(var pts in pointsToApply)
+        {
+            if (!IsValidAttributeTypeToUpgrade(pts.Item1)) return ApplyAttributePointsResult.WrongAttributeType;
+            totalPointsToApply += pts.Item2;
+        }
+        if (totalPointsToApply > TotalAttributePoints) return ApplyAttributePointsResult.NotEnoughPoints;
+        foreach(var pts in pointsToApply)
+        {
+            UnitData.Attributes.GetAttribute(pts.Item1).AddBase(pts.Item2);
+        }
+        totalAttributePoints -= totalPointsToApply;
+        return ApplyAttributePointsResult.OK;
+    }
+
+    private bool IsValidAttributeTypeToUpgrade(UnitAttributesData.AttributeType type)
+    {
+        return 
+            type == UnitAttributesData.AttributeType.Strength ||
+            type == UnitAttributesData.AttributeType.Dexterity ||
+            type == UnitAttributesData.AttributeType.Intelligence;
+    }
+
     private void UpdateLevel()
     {
         int currentLevel = level;

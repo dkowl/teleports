@@ -83,7 +83,7 @@ public class PrefabSpawner : SerializedMonoBehaviour {
 
     public void Despawn()
     {
-        Debug.Assert(isInitialized);
+        if(!isInitialized) return;
         for (currentId = 0; currentId < spawnedInstances.Count; currentId++)
         {
             if (!isSpawned[currentId]) continue;
