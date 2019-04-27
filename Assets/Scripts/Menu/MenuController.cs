@@ -5,7 +5,8 @@ using System;
 
 public class MenuController : IMenuController
 {
-    public static readonly MenuID MenuIdHome = new MenuID("Home");
+    public static readonly MenuID MenuIdHome = new MenuID("HomeBackground");
+    public static readonly MenuID MenuIdHomeForeground = new MenuID("Home");
     public static readonly MenuID MenuIdSelectHero = new MenuID("SelectHero");
     public static readonly MenuID MenuIdCreateHero = new MenuID("CreateHero");
     public static readonly MenuID MenuIdDialogWindow = new MenuID("DialogWindow");

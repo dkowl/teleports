@@ -36,11 +36,23 @@ public class MenuSwitcherButtonUISpawner : PrefabSpawner {
         Debug.Assert(menus != null && menus.Count > CurrentInstanceId);
         Debug.Assert(button != null);
 
-        button.MenuId = menus[CurrentInstanceId].Item1;
+        var menuId = menus[CurrentInstanceId].Item1;
+        button.MenuId = menuId;
+        button.UpdateNotification(menuId);
         button.ButtonString = menus[CurrentInstanceId].Item2;
         button.Spawner = this;
 
         SpawnedInstance.gameObject.transform.SetParent(parentTransform);
+    }
+
+    private void Update()
+    {
+        for(int i = 0; i < menus.Count; i++)
+        {
+            var menuId = menus[i].Item1;
+            var button = spawnedInstances[i].GetComponent<MenuSwitcherButtonUI>();
+            button.UpdateNotification(menuId);
+        }
     }
 
     public bool DeactivatingBeforeActivatingFlag
@@ -63,6 +75,18 @@ public class MenuSwitcherButtonUISpawner : PrefabSpawner {
             }
 
             return result;
+        }
+    }
+
+    public bool HasAnyActive
+    {
+        get
+        {
+            foreach(var button in SpawnedButtons)
+            {
+                if (button.IsActive) return true;
+            }
+            return false;
         }
     }
 }

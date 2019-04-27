@@ -10,8 +10,6 @@ public class PopupMenuUI : MonoBehaviour {
 
     private PrefabSpawner contentSpawner;
 
-    private MenuSwitcherButtonUISpawner menuSwitcherButtonUiSpawner;
-
     private void Start()
     {
         if (!FindObjectOfType<MenuSwitcherButtonUISpawner>().LastDeactivationWasCausedByActivation)
@@ -39,9 +37,5 @@ public class PopupMenuUI : MonoBehaviour {
         contentSpawner.Prefab = content;
         contentSpawner.SpawnTransform = contentParentTransform;
         contentSpawner.Spawn();
-
-        //var animation = GetComponent<Animation>();
-        //Debug.Assert(animation != null);
-        //animation.Play("OnOpen");
     }
 }
