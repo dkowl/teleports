@@ -12,7 +12,7 @@ public class HomeBackgroundMenu : MonoBehaviour {
     
     void Update()
     {
-        if (!buttonSpawner.HasAnyActive)
+        if (!buttonSpawner.HasAnyActive && !MenuController.Instance.IsActive(MenuController.MenuIdHomeForeground))
         {
             MenuController.Instance.OpenMenu(MenuController.MenuIdHomeForeground);
         }

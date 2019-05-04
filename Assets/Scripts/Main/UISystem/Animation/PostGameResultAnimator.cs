@@ -138,6 +138,10 @@ public class PostGameResultAnimator : MonoBehaviour
                 case PostGamePopUpEventType.RpEarned:
                     HandleRpEarned((PostGamePopUpEvent_RpEarned)popUpEvent);
                     break;
+                case PostGamePopUpEventType.LevelUp:
+                    HandleLevelUp((PostGamePopUpEvent_LevelUp)popUpEvent);
+                    break;
+
             }
         }
     }
@@ -182,6 +186,13 @@ public class PostGameResultAnimator : MonoBehaviour
         {
             AddCommand(rpProgressBar.LoadFinishCommand());
         }
+    }
+
+    public void HandleLevelUp(PostGamePopUpEvent_LevelUp levelUpEvent)
+    {
+        AddCommand(new ShowRewardPopupCommand(
+            $"Level {levelUpEvent.NewLevel}!",
+            $"+{levelUpEvent.AttributePointsAdded} attribute points!"));
     }
 
     [Button]

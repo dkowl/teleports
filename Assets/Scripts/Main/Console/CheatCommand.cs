@@ -17,7 +17,7 @@ public class CheatCommand
 
     public bool IsValidInput(string input)
     {
-        return input.StartsWith(name + " ");
+        return input.StartsWith(name + " ") || input == name;
     }
 
     public bool ProcessInput(string input)

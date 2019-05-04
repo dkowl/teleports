@@ -16,7 +16,6 @@ public class CheatConsole : Singleton<CheatConsole>
     private string outputString;
     private List<CheatCommand> commands;
 
-
     private void Awake()
     {
         Disable();
@@ -27,7 +26,8 @@ public class CheatConsole : Singleton<CheatConsole>
         commands = new List<CheatCommand>
         {
             new CheatCommand("AddItem", CheatActions.AddItem),
-            new CheatCommand("SetAttribute", CheatActions.SetAttribute)
+            new CheatCommand("SetAttribute", CheatActions.SetAttribute),
+            new CheatCommand("LevelUp", CheatActions.LevelUp)
         };
     }
 

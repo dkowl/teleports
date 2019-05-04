@@ -10,6 +10,8 @@ public class MenuController : IMenuController
     public static readonly MenuID MenuIdSelectHero = new MenuID("SelectHero");
     public static readonly MenuID MenuIdCreateHero = new MenuID("CreateHero");
     public static readonly MenuID MenuIdDialogWindow = new MenuID("DialogWindow");
+    public static readonly MenuID MenuIdRewardPopup = new MenuID("RewardPopup");
+
 
     [NonSerialized] private Dictionary<MenuID, Menu> menus;
     [NonSerialized] private Stack<Menu> menuStack;

@@ -57,6 +57,22 @@ public static class CheatActions  {
         heroData?.UnitData.Attributes.GetAttribute(type).Reset(value);
     }
 
+    public static void LevelUp(string[] args)
+    {
+        if (!MenuController.Instance.IsActive(MenuController.MenuIdHome))
+        {
+            Print("Home menu must be active");
+            return;
+        }
+
+        HeroData heroData = CurrentHeroData;
+        int xpToEarn = Levels.xp.RemainingToNextLevel(heroData.Xp);
+        var result = new GameSessionResult();
+        result.xpEarned = xpToEarn + 1;
+        Print($"Adding {result.XpEarned} xp");
+        Main.GameState.Update(result);
+    }
+
     private static HeroData CurrentHeroData
     {
         get
