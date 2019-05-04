@@ -16,4 +16,5 @@ public class PostGamePopUpEvent_RankChange : PostGamePopUpEvent
 
     public int OldRank => oldRank;
     public int NewRank => newRank;
+    public bool IsPositive => newRank > oldRank;
 }

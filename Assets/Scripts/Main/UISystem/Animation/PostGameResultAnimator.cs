@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 using UIAnimatorCommands;
 using UnityEngine;
 using MultiCommand = UIAnimatorCommands.MultiCommand;
+using Teleports.Utils;
 
 public class PostGameResultAnimator : MonoBehaviour
 {
@@ -141,6 +142,9 @@ public class PostGameResultAnimator : MonoBehaviour
                 case PostGamePopUpEventType.LevelUp:
                     HandleLevelUp((PostGamePopUpEvent_LevelUp)popUpEvent);
                     break;
+                case PostGamePopUpEventType.RankChange:
+                    HandleRankChange((PostGamePopUpEvent_RankChange)popUpEvent);
+                    break;
 
             }
         }
@@ -193,6 +197,13 @@ public class PostGameResultAnimator : MonoBehaviour
         AddCommand(new ShowRewardPopupCommand(
             $"Level {levelUpEvent.NewLevel}!",
             $"+{levelUpEvent.AttributePointsAdded} attribute points!"));
+    }
+
+    public void HandleRankChange(PostGamePopUpEvent_RankChange rankChangeEvent)
+    {
+        if (!rankChangeEvent.IsPositive) return;
+
+        AddCommand(new ShowRewardPopupCommand($"Rank {RomanNumbers.RomanNumber(rankChangeEvent.NewRank)}!"));        
     }
 
     [Button]

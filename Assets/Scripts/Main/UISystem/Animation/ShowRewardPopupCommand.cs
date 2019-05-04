@@ -8,7 +8,7 @@ public class ShowRewardPopupCommand : IUIAnimatorCommand {
     private string smallText;
     private bool isFinished = false;
 
-    public ShowRewardPopupCommand(string text, string smallText)
+    public ShowRewardPopupCommand(string text, string smallText = "")
     {
         this.text = text;
         this.smallText = smallText;
@@ -21,7 +21,7 @@ public class ShowRewardPopupCommand : IUIAnimatorCommand {
             MenuController.Instance.GetMenu(MenuController.MenuIdRewardPopup).
             InstantiatedObject.GetComponentInChildren<RewardPopupUI>();
         popup.SetMainText(text);
-        popup.AddSmallText(smallText);
+        if(smallText.Length > 0) popup.AddSmallText(smallText);
         popup.SetClickCallback(() => { Skip(); });
     }
 
