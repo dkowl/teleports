@@ -42,7 +42,7 @@ public class Item : MonoBehaviour {
     {
         if (!isEquipped || ownerUnit == null) return;
 
-        slotComponent.Unequip();
+        slotComponent?.Unequip();
         foreach(PerkID perkId in data.Perks)
         {
             ownerUnit.RemovePerk(Main.StaticData.Game.Perks.GetValue(perkId));

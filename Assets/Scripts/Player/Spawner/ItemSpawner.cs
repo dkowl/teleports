@@ -15,7 +15,7 @@ public static class ItemSpawner{
                 return slotComp;
             }
         }
-
+        Debug.LogError("Cannot find the right EquipmentSlotComponent");
         return null;
     }
 
