@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using Teleports.Utils;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public static class GameObjectExtensions {
 

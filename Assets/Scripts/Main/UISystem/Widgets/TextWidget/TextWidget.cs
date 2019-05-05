@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Text = TMPro.TextMeshProUGUI;
-using UnityEditor;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [ExecuteInEditMode]
 [ShowOdinSerializedPropertiesInInspector]
@@ -49,6 +51,7 @@ public class TextWidget : SerializedMonoBehaviour
         text.fontSize = style.FontSize ?? text.fontSize;
     }
 
+#if UNITY_EDITOR
     [MenuItem("GameObject/Widgets/Text", false, 10)]
     private static void Create(UnityEditor.MenuCommand command)
     {
@@ -56,4 +59,5 @@ public class TextWidget : SerializedMonoBehaviour
         widget.AddComponent<TextWidget>();
         widget.CreateFromEditor(command);
     }
+#endif
 }

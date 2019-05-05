@@ -71,7 +71,8 @@ public class BasicProgressBar : MonoBehaviour {
     [Button]
     private void Update()
     {
-        values.current = GetNextValue();
+        float factor = Time.deltaTime * 60;
+        values.current = GetNextValue(factor);
         UpdateUiElements();
     }
 
@@ -123,7 +124,7 @@ public class BasicProgressBar : MonoBehaviour {
         values.current = values.target;
     }
 
-    private float GetNextValue()
+    private float GetNextValue(float timeFactor)
     {
         float nextValue = values.current;
         int direction = values.current < values.target ? 1 : -1;
@@ -135,7 +136,7 @@ public class BasicProgressBar : MonoBehaviour {
 
         if (animationType == AnimationType.Linear || animationType == AnimationType.Asymptotic)
         {
-            float delta = linearAnimationSpeed * ValueRange;
+            float delta = linearAnimationSpeed * timeFactor * ValueRange;
             float maxAllowedDelta = Mathf.Abs(values.target - values.current);
             if (delta > maxAllowedDelta)
             {
@@ -149,7 +150,7 @@ public class BasicProgressBar : MonoBehaviour {
             nextValue = Mathf.Clamp
             (
                 nextValue +
-                asymptoticAnimationSpeed * (values.target - nextValue),
+                asymptoticAnimationSpeed * timeFactor * (values.target - nextValue),
                 0,
                 values.max + 1
             );

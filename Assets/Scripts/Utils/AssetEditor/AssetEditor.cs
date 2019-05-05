@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEditor.SceneManagement;
 #if UNITY_EDITOR
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 #endif
 
 public class AssetEditor : Singleton<AssetEditor>
