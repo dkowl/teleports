@@ -42,7 +42,6 @@ public class InventoryUnitPortrait : PortraitUI, IMessageHandler<ItemEquipMessag
         unitModelSpawner.ShouldRespawn();
         skinnedMeshRenderer = unitModelSpawner.SkinnedMeshRenderer;
         InitCameraTargeter();
-        Debug.Log("Message handled LOL!");
     }
 
     public UnitModelSpawner UnitModelSpawner => unitModelSpawner;

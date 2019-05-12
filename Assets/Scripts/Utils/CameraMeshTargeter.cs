@@ -52,10 +52,11 @@ public class CameraMeshTargeter : MonoBehaviour {
 
     private void Target()
     {
-        List<Vector3> cornerPoints = GetAllCornerPoints(mesh.bounds, MeshComponent.transform.position);
+        Bounds bounds = MeshComponent.GetComponent<Renderer>().bounds;
+        List<Vector3> cornerPoints = GetAllCornerPoints(bounds);
         Rect boundingViewportRect = GetBoundingViewportRect(cornerPoints, cam);
         CenterCameraOnViewportRect(cam, boundingViewportRect, paddingPercentage);
-        SetDistanceFromPoint(cam, mesh.bounds.center + MeshComponent.transform.position, distance);
+        SetDistanceFromPoint(cam, bounds.center, distance);
     }
 
     private void UpdateMesh()
@@ -76,7 +77,7 @@ public class CameraMeshTargeter : MonoBehaviour {
         this.paddingPercentage = paddingPercentage;
     }
 
-    private static List<Vector3> GetAllCornerPoints(Bounds bounds, Vector3 position)
+    private static List<Vector3> GetAllCornerPoints(Bounds bounds)
     {
 
         var result = new List<Vector3>();
@@ -101,7 +102,7 @@ public class CameraMeshTargeter : MonoBehaviour {
                 size.y * axisMultiplierValues[i, 1],
                 size.z * axisMultiplierValues[i, 2]
                 );
-            result.Add(position + bounds.min + vectorToAdd);
+            result.Add(bounds.min + vectorToAdd);
         }
         return result;
     }
