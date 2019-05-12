@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Teleports.Utils;
 
 [Serializable]
 public class InventoryItemSpawner
@@ -37,7 +38,10 @@ public class InventoryItemSpawner
         foreach(var item in spawnedItems)
         {
             if (item != null)
+            {
+                item.SetActive(false);
                 GameObject.Destroy(item);
+            }
         }
     }
 

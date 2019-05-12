@@ -6,8 +6,7 @@ using Sirenix.Serialization;
 using Teleports.Utils;
 
 public class InventoryMenu : SerializedMonoBehaviour, 
-    IMessageHandler<ItemEquipMessage>,
-    IMessageHandler<ItemAddMessage>
+    IMessageHandler<ItemEquipMessage>
 {
 
     [SerializeField] private UnitData unitData;
@@ -19,6 +18,8 @@ public class InventoryMenu : SerializedMonoBehaviour,
     private Dictionary<ItemData, int> internalItemIds;
 
     private ItemSlotID selectedSlotId;
+
+    private EquipmentSlotType lastEquippedSlotType;
     
     public static event System.Action UpdateUiEvent;
 
@@ -53,13 +54,10 @@ public class InventoryMenu : SerializedMonoBehaviour,
 
     public void Select(ItemSlotID itemSlotId)
     {
-        //if (itemSlotId != selectedSlotId)
-        {
-            selectedSlotId = itemSlotId;
-            if (SelectedItem != null)
-                cameraTargeter.SetTarget(itemSpawner.GetItemMeshFilter(internalItemIds[SelectedItem]));
-            UpdateUiEvent?.Invoke();
-        }
+        selectedSlotId = itemSlotId;
+        if (SelectedItem != null)
+            cameraTargeter.SetTarget(itemSpawner.GetItemMeshFilter(internalItemIds[SelectedItem]));
+        UpdateUiEvent?.Invoke();        
     }
 
     public Rect GetItemIconUvRect(ItemData itemData)
@@ -75,35 +73,22 @@ public class InventoryMenu : SerializedMonoBehaviour,
     public void EquipSelected()
     {
         InventoryData.Equip(SelectedItem);
+        Select(new ItemSlotID(lastEquippedSlotType));
     }
 
     public void UnequipSelected()
     {
+        ItemData item = InventoryData.EquipmentData.GetEquipmentSlot(selectedSlotId.equipmentSlotType).Item;
         InventoryData.Unequip(selectedSlotId.equipmentSlotType);
+        Select(new ItemSlotID(InventoryData.InventorySlotIdOf(item)));
     }
 
     public void Handle(ItemEquipMessage message)
     {
         if (message.Type == ItemEquipMessage.EventType.Equip)
         {
-            Select(new ItemSlotID(message.EqSlotType));
+            lastEquippedSlotType = message.EqSlotType;
         }
-        else if(message.Type == ItemEquipMessage.EventType.Unequip)
-        {
-            Select(new ItemSlotID(InventoryData.InventorySlotIdOf(message.Item)));
-        }
-
-        UpdateUiEvent?.Invoke();
-    }
-
-    public void Handle(ItemAddMessage message)
-    {
-        if (message.FirstItemOfThatTypeInInventory)
-        {
-            InitItemSpawner();
-            BuildTextureAtlas();
-        }
-        UpdateUiEvent?.Invoke();
     }
 
     private void InitItemSpawner()

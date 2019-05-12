@@ -29,7 +29,7 @@ public class CameraMeshTargeter : MonoBehaviour {
 
     private void Update()
     {
-        if(MeshComponent != null) Target();
+        if(MeshComponent != null && MeshComponent.gameObject.activeSelf) Target();
     }
 
     public void SetTarget(MeshFilter newTarget)
