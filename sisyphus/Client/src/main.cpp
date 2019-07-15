@@ -1,10 +1,9 @@
-#include <winsock2.h>
-#include <stdexcept>
+#include "WindowsNetwork.h"
+#include <memory>
 
 int main() {
-	WSADATA wsaData;
+	std::unique_ptr<Network> network = std::make_unique<WindowsNetwork>();
 
-	if (WSAStartup(MAKEWORD(2, 2), &wsaData)) {
-		throw std::runtime_error("Winsock initialization failed!");
-	}
+	network->Initialize();
+
 }
