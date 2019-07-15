@@ -1,15 +1,26 @@
 #pragma once
 #include <string>
 
+struct SocketAddress {
+	std::string ip;
+	int port;
+};
+
 class Socket {
 public:
+
 	virtual ~Socket() = default;
 
-	virtual void Connect(std::string ip, int port) = 0;
+	virtual void Connect(const SocketAddress& address) = 0;
+	virtual void Bind(const SocketAddress& address) = 0;
+	virtual void Listen() = 0;
+	
 
 	template<typename T>
 	void Send(const T& data) {
 		Send(reinterpret_cast<const std::byte*>(&data), sizeof(data));
 	}
 	virtual void Send(const std::byte* data, int length) = 0;
+
+	//virtual SocketAddress ReceiveFrom(std::byte* data, int length) = 0;
 };

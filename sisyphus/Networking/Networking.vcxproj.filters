@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="WSAUtils">
+      <UniqueIdentifier>{3c571828-1133-41ed-a97d-13884447dd51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Network.h">
@@ -27,6 +30,12 @@
     <ClInclude Include="src\WindowsSocket.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\WSAUtils\WSAError.h">
+      <Filter>WSAUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WSAUtils\WSAUtils.h">
+      <Filter>WSAUtils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\WindowsNetwork.cpp">
@@ -34,6 +43,12 @@
     </ClCompile>
     <ClCompile Include="src\WindowsSocket.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WSAUtils\WSAError.cpp">
+      <Filter>WSAUtils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WSAUtils\WSAUtils.cpp">
+      <Filter>WSAUtils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

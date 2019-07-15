@@ -3,6 +3,8 @@
 #include <Ws2tcpip.h>
 #include <stdexcept>
 #include <iostream>
+#include "WSAError.h"
+#include "WSAUtils.h"
 
 struct WindowsSocket::PrivateData {
 	SOCKET winSocket;
@@ -23,21 +25,28 @@ WindowsSocket::~WindowsSocket() {
 	}
 }
 
-void WindowsSocket::Connect(std::string ip, int port)
+void WindowsSocket::Connect(const SocketAddress& address)
 {
-	if (port < 0 || port > 65536) {
-		throw std::runtime_error("Invalid port number" + std::to_string(port));
-	}
-
-	struct sockaddr_in sockaddr;
-	sockaddr.sin_family = AF_INET;
-	sockaddr.sin_port = port;
-	struct in_addr inAddr; 
-	inet_pton(AF_INET, ip.c_str(), &inAddr);
-	sockaddr.sin_addr = inAddr; 
+	auto sockaddr = to_sockaddr(address);
 
 	if (connect(privateData->winSocket, reinterpret_cast<const struct sockaddr*>(&sockaddr), sizeof(sockaddr))) {
-		throw std::runtime_error("connecting to " + ip + " port " + std::to_string(port) + " failed!");
+		throw std::runtime_error("connecting to " + address.ip + " port " + std::to_string(address.port) + " failed!");
+	}
+}
+
+void WindowsSocket::Bind(const SocketAddress& address)
+{
+	auto sockaddr = to_sockaddr(address);
+
+	if (bind(privateData->winSocket, reinterpret_cast<const struct sockaddr*>(&sockaddr), sizeof(sockaddr))) {
+		throw std::runtime_error("binding to " + address.ip + " port " + std::to_string(address.port) + " failed!");
+	}
+}
+
+void WindowsSocket::Listen()
+{
+	if (listen(privateData->winSocket, SOMAXCONN)) {
+		ThrowWSAError("listen failed!");
 	}
 }
 

@@ -7,10 +7,13 @@ public:
 	WindowsSocket();
 	~WindowsSocket();
 
-	void Connect(std::string ip, int port) override;
+	void Connect(const SocketAddress& address) override;
+	void Bind(const SocketAddress& address) override;
+	void Listen() override;
 	void Send(const std::byte* data, int length) override;
 
 private:
+
 	struct PrivateData;
 	std::unique_ptr<PrivateData> privateData;
 };
