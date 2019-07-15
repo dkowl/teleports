@@ -21,9 +21,18 @@
     <ClInclude Include="src\WindowsNetwork.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Socket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowsSocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\WindowsNetwork.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WindowsSocket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

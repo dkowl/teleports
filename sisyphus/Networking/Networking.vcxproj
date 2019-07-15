@@ -12,10 +12,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Network.h" />
+    <ClInclude Include="src\Socket.h" />
     <ClInclude Include="src\WindowsNetwork.h" />
+    <ClInclude Include="src\WindowsSocket.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\WindowsNetwork.cpp" />
+    <ClCompile Include="src\WindowsSocket.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

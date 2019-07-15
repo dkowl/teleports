@@ -3,4 +3,5 @@
 
 int main() {
 	std::unique_ptr<Network> network = std::make_unique<WindowsNetwork>();
+	auto socket = network->CreateSocket();
 }
