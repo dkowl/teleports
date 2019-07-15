@@ -40,3 +40,15 @@ void WindowsSocket::Connect(std::string ip, int port)
 		throw std::runtime_error("connecting to " + ip + " port " + std::to_string(port) + " failed!");
 	}
 }
+
+void WindowsSocket::Send(const std::byte* data, int length)
+{
+	int bytesSent = send(privateData->winSocket, reinterpret_cast<const char*>(data), length, 0);
+	if (bytesSent == 0) {
+		throw std::runtime_error("Send failed!");
+	}
+	else if (bytesSent < length) {
+		throw std::runtime_error("Sent only " + std::to_string(bytesSent) + " out of " + std::to_string(length) + " bytes");
+	}
+	std::cout << "Sent " << length << " bytes!\n";
+}
