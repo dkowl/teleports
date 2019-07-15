@@ -3,7 +3,4 @@
 
 int main() {
 	std::unique_ptr<Network> network = std::make_unique<WindowsNetwork>();
-
-	network->Initialize();
-
 }

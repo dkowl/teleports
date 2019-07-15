@@ -2,6 +2,16 @@
 #include <winsock2.h>
 #include <stdexcept>
 
+WindowsNetwork::WindowsNetwork()
+{
+	Initialize();
+}
+
+WindowsNetwork::~WindowsNetwork()
+{
+	Cleanup();
+}
+
 void WindowsNetwork::Initialize()
 {
 	WSADATA wsaData;
@@ -10,4 +20,11 @@ void WindowsNetwork::Initialize()
 		throw std::runtime_error("Winsock initialization failed!");
 	}
 
+}
+
+void WindowsNetwork::Cleanup()
+{
+	if (WSACleanup()) {
+		throw std::runtime_error("WSACleanup failed!");
+	}
 }
