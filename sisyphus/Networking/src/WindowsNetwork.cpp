@@ -15,12 +15,8 @@ WindowsNetwork::~WindowsNetwork()
 }
 
 Network::SocketPtr WindowsNetwork::CreateSocket()
-{
-	SOCKET createdSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-	if (createdSocket == INVALID_SOCKET) {
-		throw std::runtime_error("Socket creation failed");
-	}
-	return std::make_unique<WindowsSocket>(createdSocket);
+{	
+	return std::make_unique<WindowsSocket>();
 }
 
 void WindowsNetwork::Initialize()
@@ -28,7 +24,7 @@ void WindowsNetwork::Initialize()
 	WSADATA wsaData;
 
 	if (WSAStartup(MAKEWORD(2, 2), &wsaData)) {
-		throw std::runtime_error("Winsock initialization failed!");
+		throw std::runtime_error("WSAStartup failed!");
 	}
 
 }

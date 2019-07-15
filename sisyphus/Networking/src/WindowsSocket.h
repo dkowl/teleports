@@ -1,11 +1,13 @@
 #pragma once
 #include "Socket.h"
-#include <WinSock2.h>
+#include <memory>
 
 class WindowsSocket : public Socket {
 public:
-	WindowsSocket(SOCKET winSocket);
+	WindowsSocket();
+	~WindowsSocket();
 
 private:
-	SOCKET winSocket;
+	struct PrivateData;
+	std::unique_ptr<PrivateData> privateData;
 };
