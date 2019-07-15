@@ -11,6 +11,7 @@ public:
 	void Bind(const SocketAddress& address) override;
 	void Listen() override;
 	void Send(const std::byte* data, int length) override;
+	SocketAddress ReceiveFrom(std::byte* data, int length) override;
 
 private:
 

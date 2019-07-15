@@ -22,5 +22,9 @@ public:
 	}
 	virtual void Send(const std::byte* data, int length) = 0;
 
-	//virtual SocketAddress ReceiveFrom(std::byte* data, int length) = 0;
+	template<typename T>
+	SocketAddress ReceiveFrom(T& data) {
+		return ReceiveFrom(reinterpret_cast<std::byte*>(&data), sizeof(data));
+	}
+	virtual SocketAddress ReceiveFrom(std::byte* data, int length) = 0;
 };

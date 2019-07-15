@@ -61,3 +61,19 @@ void WindowsSocket::Send(const std::byte* data, int length)
 	}
 	std::cout << "Sent " << length << " bytes!\n";
 }
+
+SocketAddress WindowsSocket::ReceiveFrom(std::byte* data, int length)
+{
+	struct sockaddr senderAddr;
+	int senderAddrSize = sizeof(senderAddr);
+	int bytesReceived = recvfrom(privateData->winSocket, reinterpret_cast<char*>(data), length, 0, &senderAddr, &senderAddrSize);
+	if (bytesReceived == 0) {
+		throw std::runtime_error("recvfrom failed gracefully");
+	}
+	else if (bytesReceived == SOCKET_ERROR) {
+		ThrowWSAError("recvfrom failed!");
+	}
+	SocketAddress result = from_sockaddr(senderAddr);
+	std::cout << "Received " << bytesReceived << " bytes from " << result.ip << " port " << result.port << std::endl;
+	return result;
+}
