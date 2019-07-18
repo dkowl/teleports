@@ -15,10 +15,11 @@ void InspectDevice(const vk::PhysicalDevice& physicalDevice) {
 	}
 }
 
-int FindGraphicsQueueFamilyIndex(const vk::PhysicalDevice& physicalDevice) {
+int FindGraphicsQueueFamilyIndex(vk::PhysicalDevice& physicalDevice) {
 	auto queueFamilyProperties = physicalDevice.getQueueFamilyProperties();
 	for (int i = 0; i < queueFamilyProperties.size(); i++) {
-		if (queueFamilyProperties[i].queueFlags & vk::QueueFlagBits::eGraphics) {
+		if ((queueFamilyProperties[i].queueFlags & vk::QueueFlagBits::eGraphics) &&
+			true){//physicalDevice.getSurfaceSupportKHR(i, )) {
 			return i;
 		}
 	}
@@ -68,10 +69,17 @@ int main() {
 			1
 		);
 
+		std::vector<const char*> deviceExtensionNames;
+		deviceExtensionNames.push_back(VK_KHR_SWAPCHAIN_EXTENSION_NAME);
+
 		vk::DeviceCreateInfo deviceCreateInfo(
 			{},
 			1,
-			&deviceQueueCreateInfo
+			&deviceQueueCreateInfo,
+			0,
+			nullptr,
+			static_cast<uint32_t>(deviceExtensionNames.size()),
+			deviceExtensionNames.data()
 		);
 		auto device = chosenDevice.createDeviceUnique(deviceCreateInfo);
 
