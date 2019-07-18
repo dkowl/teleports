@@ -65,8 +65,20 @@ int main() {
 			1,
 			&deviceQueueCreateInfo
 		);
-
 		auto device = chosenDevice.createDeviceUnique(deviceCreateInfo);
+
+		vk::CommandPoolCreateInfo commandPoolCreateInfo(
+			{},
+			queueFamilyIndex
+		);
+		auto commandPool = device->createCommandPoolUnique(commandPoolCreateInfo);
+
+		vk::CommandBufferAllocateInfo commandBufferAllocateInfo(
+			*commandPool,
+			vk::CommandBufferLevel::ePrimary,
+			1
+		);
+		auto commandBuffer = device->allocateCommandBuffers(commandBufferAllocateInfo);
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
