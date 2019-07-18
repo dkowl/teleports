@@ -16,10 +16,21 @@
     <Filter Include="Vulkan">
       <UniqueIdentifier>{d2846baf-f097-45a0-8bf4-84e2c9b0a3de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Vulkan\PlatformSpecific">
+      <UniqueIdentifier>{04425203-81db-48c3-a3c3-a27c6e9c67f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\renderer_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Vulkan\platform_specific\ActivatePlatformExtensions.h">
+      <Filter>Vulkan\PlatformSpecific</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Vulkan\platform_specific\PlatformSpecific.h">
+      <Filter>Vulkan\PlatformSpecific</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

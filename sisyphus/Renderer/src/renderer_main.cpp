@@ -1,7 +1,8 @@
-#include <vulkan/vulkan.hpp>
+#include "PlatformSpecific.h"
 #include <exception>
 #include <iostream>
-
+#include <vector>
+#include <string>
 
 void InspectDevice(const vk::PhysicalDevice& physicalDevice) {
 	auto queueFamilyProperties = physicalDevice.getQueueFamilyProperties();
@@ -34,9 +35,16 @@ int main() {
 			VK_API_VERSION_1_0
 		);
 
+		std::vector<const char *> instanceExtensionNames = PlatformSpecific::GetInstanceExtensionNames();
+		instanceExtensionNames.push_back(VK_KHR_SURFACE_EXTENSION_NAME);
+
 		vk::InstanceCreateInfo instanceCreateInfo(
 			{},
-			&applicationInfo
+			&applicationInfo,
+			0,
+			nullptr,
+			static_cast<uint32_t>(instanceExtensionNames.size()),
+			instanceExtensionNames.data()
 		);
 
 		auto instance = vk::createInstanceUnique(instanceCreateInfo);
