@@ -18,11 +18,11 @@ void InspectDevice(const vk::PhysicalDevice& physicalDevice) {
 	}
 }
 
-int FindGraphicsQueueFamilyIndex(vk::PhysicalDevice& physicalDevice) {
+int FindGraphicsQueueFamilyIndex(vk::PhysicalDevice& physicalDevice, vk::SurfaceKHR& surface) {
 	auto queueFamilyProperties = physicalDevice.getQueueFamilyProperties();
 	for (int i = 0; i < queueFamilyProperties.size(); i++) {
 		if ((queueFamilyProperties[i].queueFlags & vk::QueueFlagBits::eGraphics) &&
-			true){//physicalDevice.getSurfaceSupportKHR(i, )) {
+			physicalDevice.getSurfaceSupportKHR(i, surface)) {
 			return i;
 		}
 	}
@@ -58,11 +58,15 @@ int main() {
 			throw::std::runtime_error("No physical devices supporting Vulkan");
 		}
 
+		wc::WindowCreator windowCreator;
+		auto window = windowCreator.Create(wc::Platform::Windows);
+		auto surface = window->GetVulkanSurface(instance.get());
+
 		auto& chosenDevice = physicalDevices[0];
 		std::cout << "Creating a Vulkan Device from " << chosenDevice.getProperties().deviceName << std::endl;
 		InspectDevice(chosenDevice);
 
-		int queueFamilyIndex = FindGraphicsQueueFamilyIndex(chosenDevice);
+		int queueFamilyIndex = FindGraphicsQueueFamilyIndex(chosenDevice, surface);
 		if (queueFamilyIndex == -1) {
 			throw std::runtime_error("Graphics queue not found in the device");
 		}
@@ -98,9 +102,6 @@ int main() {
 			1
 		);
 		auto commandBuffer = device->allocateCommandBuffers(commandBufferAllocateInfo);
-
-		wc::WindowCreator windowCreator;
-		auto window = windowCreator.Create(wc::Platform::Windows);
 
 	}
 	catch (std::exception& e) {
