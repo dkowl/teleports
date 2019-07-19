@@ -3,6 +3,9 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "WindowCreator/WindowCreator.h"
+namespace wc = WindowCreator;
+
 
 void InspectDevice(const vk::PhysicalDevice& physicalDevice) {
 	auto queueFamilyProperties = physicalDevice.getQueueFamilyProperties();
@@ -95,6 +98,10 @@ int main() {
 			1
 		);
 		auto commandBuffer = device->allocateCommandBuffers(commandBufferAllocateInfo);
+
+		wc::WindowCreator windowCreator;
+		auto window = windowCreator.Create(wc::Platform::Windows);
+
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;

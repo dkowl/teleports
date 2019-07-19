@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 namespace WindowCreator {
-	std::unique_ptr<Window> WindowCreator::CreateWindow(Platform platform)
+	std::unique_ptr<Window> WindowCreator::Create(Platform platform)
 	{
 		switch (platform) {
 		case Platform::Windows:

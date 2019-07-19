@@ -10,6 +10,6 @@ namespace WindowCreator {
 
 	class WindowCreator {
 	public:
-		std::unique_ptr<Window> CreateWindow(Platform platform);
+		std::unique_ptr<Window> Create(Platform platform);
 	};
 }

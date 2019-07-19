@@ -1,3 +1,4 @@
+#pragma once
 #include "ActivatePlatformExtensions.h"
 #include <vulkan/vulkan.hpp>
 #include <vector>
