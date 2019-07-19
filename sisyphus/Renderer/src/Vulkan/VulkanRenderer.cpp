@@ -1,6 +1,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <sstream>
 #include "VulkanRenderer.h"
 #include "WindowCreator/WindowCreator.h"
 #include "Utils\BreakAssert.h"
@@ -112,6 +113,7 @@ void VulkanRenderer::InitQueueFamilyIndex()
 	if (queueFamilyIndex == -1) {
 		throw std::runtime_error("Graphics queue not found in the device");
 	}
+	std::cout << "Choosing queue family #" << queueFamilyIndex.value() << std::endl;
 }
 
 void VulkanRenderer::InitDevice()
@@ -167,10 +169,49 @@ void VulkanRenderer::InitCommandBuffers()
 
 void VulkanRenderer::InitSwapchain()
 {
-	/*
-	vk::SwapchainCreateInfoKHR swapchainCreateInfo(
+	BreakAssert(physicalDevice);
+	BreakAssert(surface);
+
+	constexpr int desiredMinImageCount = 3; // triple buffering
+	auto surfaceCapabilites = physicalDevice.getSurfaceCapabilitiesKHR(*surface);
+	std::cout << "Surface minImageCount: " << surfaceCapabilites.minImageCount << std::endl;
+	std::cout << "Surface maxImageCount: " << surfaceCapabilites.maxImageCount << std::endl;
+	if (
+		surfaceCapabilites.minImageCount > desiredMinImageCount ||
+		surfaceCapabilites.maxImageCount < desiredMinImageCount) 
+	{
+		throw std::runtime_error("Surface does not support three image buffers");
+	}
+
+	constexpr vk::Format desiredFormat = vk::Format::eB8G8R8A8Srgb;
+	constexpr vk::ColorSpaceKHR desiredColorSpace = vk::ColorSpaceKHR::eSrgbNonlinear;
+	bool formatFound = false;
+
+	auto surfaceFormats = physicalDevice.getSurfaceFormatsKHR(*surface);
+	std::cout << "Surface formats:\n";
+	for (int i = 0; i < surfaceFormats.size(); i++) {
+		const auto& format = surfaceFormats[i];
+		std::cout << "\t#" << i << ": \n";
+		std::cout << "\t\tFormat: " << vk::to_string(format.format) << std::endl;
+		std::cout << "\t\tColor Space: " << vk::to_string(format.colorSpace) << std::endl;
+
+		if (format.format == desiredFormat && format.colorSpace == desiredColorSpace) {
+			formatFound = true;
+			break;
+		}
+	}
+	if (!formatFound) {
+		std::stringstream ss;
+		ss << "Unable to find desired format: " << vk::to_string(desiredFormat)
+			<< " and color space: " << vk::to_string(desiredColorSpace);
+		throw std::runtime_error(ss.str());
+	}
+
+	system("PAUSE");
+
+	/*vk::SwapchainCreateInfoKHR swapchainCreateInfo(
 		{},
 		surface,
 
-		);*/
+	);*/
 }
