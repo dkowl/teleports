@@ -1,7 +1,9 @@
-#include "WindowsWindow.h"
+#include "WindowCreator.h"
 #include <conio.h>
 
+namespace wc = WindowCreator;
+
 int main() {
-	std::unique_ptr<Window> window = std::make_unique<WindowsWindow>();
+	auto window = wc::WindowCreator().CreateWindow(wc::Platform::Windows);
 	_getch();
 }

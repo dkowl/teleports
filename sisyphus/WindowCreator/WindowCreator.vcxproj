@@ -55,6 +55,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\WindowCreator;$(ProjectDir)src\Win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -68,6 +69,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\WindowCreator;$(ProjectDir)src\Win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -75,12 +77,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\WindowsWindow.cpp" />
+    <ClCompile Include="src\Win32\WindowsWindow.cpp" />
+    <ClCompile Include="src\WindowCreator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Window.h" />
-    <ClInclude Include="src\WindowEvent.h" />
-    <ClInclude Include="src\WindowsWindow.h" />
+    <ClInclude Include="include\WindowCreator\Window.h" />
+    <ClInclude Include="include\WindowCreator\WindowCreator.h" />
+    <ClInclude Include="include\WindowCreator\WindowEvent.h" />
+    <ClInclude Include="src\Win32\WindowsWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

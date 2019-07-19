@@ -18,19 +18,25 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\WindowsWindow.cpp">
+    <ClCompile Include="src\Win32\WindowsWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WindowCreator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\WindowsWindow.h">
+    <ClInclude Include="src\Win32\WindowsWindow.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Window.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="include\WindowCreator\Window.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\WindowEvent.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="include\WindowCreator\WindowEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\WindowCreator\WindowCreator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
