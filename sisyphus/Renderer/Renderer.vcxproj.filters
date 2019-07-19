@@ -24,6 +24,9 @@
     <ClCompile Include="src\renderer_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Vulkan\VulkanRenderer.cpp">
+      <Filter>Vulkan</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Vulkan\platform_specific\ActivatePlatformExtensions.h">
@@ -31,6 +34,9 @@
     </ClInclude>
     <ClInclude Include="src\Vulkan\platform_specific\PlatformSpecific.h">
       <Filter>Vulkan\PlatformSpecific</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Vulkan\VulkanRenderer.h">
+      <Filter>Vulkan</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
