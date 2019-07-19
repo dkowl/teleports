@@ -22,6 +22,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Renderer", "Renderer\Render
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WindowCreator", "WindowCreator\WindowCreator.vcxproj", "{CE85731A-3AA4-44F2-AAA3-AEB58AF4D5E6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utils", "Utils\Utils.vcxproj", "{C32D033F-1533-4D6B-92B9-1DDA3623CFD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -60,6 +62,12 @@ Global
 		{CE85731A-3AA4-44F2-AAA3-AEB58AF4D5E6}.Release|x64.ActiveCfg = Release|x64
 		{CE85731A-3AA4-44F2-AAA3-AEB58AF4D5E6}.Release|x64.Build.0 = Release|x64
 		{CE85731A-3AA4-44F2-AAA3-AEB58AF4D5E6}.Release|x86.ActiveCfg = Release|x64
+		{C32D033F-1533-4D6B-92B9-1DDA3623CFD9}.Debug|x64.ActiveCfg = Debug|x64
+		{C32D033F-1533-4D6B-92B9-1DDA3623CFD9}.Debug|x64.Build.0 = Debug|x64
+		{C32D033F-1533-4D6B-92B9-1DDA3623CFD9}.Debug|x86.ActiveCfg = Debug|x64
+		{C32D033F-1533-4D6B-92B9-1DDA3623CFD9}.Release|x64.ActiveCfg = Release|x64
+		{C32D033F-1533-4D6B-92B9-1DDA3623CFD9}.Release|x64.Build.0 = Release|x64
+		{C32D033F-1533-4D6B-92B9-1DDA3623CFD9}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
