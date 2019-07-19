@@ -60,13 +60,13 @@ namespace WindowCreator {
 	{
 	}
 
-	vk::SurfaceKHR WindowsWindow::GetVulkanSurface(vk::Instance instance)
+	vk::UniqueSurfaceKHR WindowsWindow::GetVulkanSurface(vk::Instance instance)
 	{
 		vk::Win32SurfaceCreateInfoKHR surfaceCreateInfo(
 			{},
 			data->hInstance,
 			data->window
 		);
-		return instance.createWin32SurfaceKHR(surfaceCreateInfo);
+		return instance.createWin32SurfaceKHRUnique(surfaceCreateInfo);
 	}
 }

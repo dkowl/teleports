@@ -9,7 +9,7 @@ namespace WindowCreator {
 		~WindowsWindow();
 
 		void HandleEvent(WindowEvent event) override;
-		vk::SurfaceKHR GetVulkanSurface(vk::Instance instance) override;
+		vk::UniqueSurfaceKHR GetVulkanSurface(vk::Instance instance) override;
 
 	private:
 
