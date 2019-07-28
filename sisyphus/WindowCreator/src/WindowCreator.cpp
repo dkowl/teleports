@@ -3,11 +3,11 @@
 #include <stdexcept>
 
 namespace WindowCreator {
-	std::unique_ptr<Window> WindowCreator::Create(Platform platform)
+	std::unique_ptr<Window> WindowCreator::Create(CreateInfo ci)
 	{
-		switch (platform) {
+		switch (ci.platform) {
 		case Platform::Windows:
-			return std::make_unique<WindowsWindow>();
+			return std::make_unique<WindowsWindow>(WindowsWindow::CreateInfo{ ci.width, ci.height });
 		default:
 			throw std::runtime_error("Invalid window type");
 		}

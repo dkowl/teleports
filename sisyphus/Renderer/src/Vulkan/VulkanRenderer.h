@@ -10,12 +10,17 @@ namespace WindowCreator {
 
 class VulkanRenderer {
 public:
-	VulkanRenderer();
+	struct CreateInfo {
+		int windowWidth;
+		int windowHeight;
+	};
+
+	VulkanRenderer(CreateInfo ci);
 	~VulkanRenderer(); // default
 
 private:
 	void InitInstance();
-	void InitWindow();
+	void InitWindow(int width, int height);
 	void InitSurface();
 	void InitPhysicalDevice();
 	void InitQueueFamilyIndex();

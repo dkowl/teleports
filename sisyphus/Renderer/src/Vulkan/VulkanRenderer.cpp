@@ -30,7 +30,7 @@ std::optional<int> FindGraphicsQueueFamilyIndex(vk::PhysicalDevice& physicalDevi
 	return std::nullopt;
 }
 
-VulkanRenderer::VulkanRenderer():
+VulkanRenderer::VulkanRenderer(CreateInfo ci):
 	instance(nullptr),
 	window(nullptr),
 	surface(nullptr),
@@ -41,7 +41,7 @@ VulkanRenderer::VulkanRenderer():
 	swapchain(nullptr)
 {
 	InitInstance();
-	InitWindow();
+	InitWindow(ci.windowWidth, ci.windowHeight);
 	InitSurface();
 	InitPhysicalDevice();
 	InitQueueFamilyIndex();
@@ -78,10 +78,10 @@ void VulkanRenderer::InitInstance()
 	instance = vk::createInstanceUnique(instanceCreateInfo);
 }
 
-void VulkanRenderer::InitWindow()
+void VulkanRenderer::InitWindow(int width, int height)
 {
 	wc::WindowCreator windowCreator;
-	window = windowCreator.Create(wc::Platform::Windows);
+	window = windowCreator.Create({ wc::Platform::Windows, width, height });
 }
 
 void VulkanRenderer::InitSurface()
@@ -172,6 +172,7 @@ void VulkanRenderer::InitSwapchain()
 	BreakAssert(physicalDevice);
 	BreakAssert(surface);
 
+
 	constexpr int desiredMinImageCount = 3; // triple buffering
 	auto surfaceCapabilites = physicalDevice.getSurfaceCapabilitiesKHR(*surface);
 	std::cout << "Surface minImageCount: " << surfaceCapabilites.minImageCount << std::endl;
@@ -182,6 +183,7 @@ void VulkanRenderer::InitSwapchain()
 	{
 		throw std::runtime_error("Surface does not support three image buffers");
 	}
+
 
 	constexpr vk::Format desiredFormat = vk::Format::eB8G8R8A8Srgb;
 	constexpr vk::ColorSpaceKHR desiredColorSpace = vk::ColorSpaceKHR::eSrgbNonlinear;
@@ -206,6 +208,10 @@ void VulkanRenderer::InitSwapchain()
 			<< " and color space: " << vk::to_string(desiredColorSpace);
 		throw std::runtime_error(ss.str());
 	}
+
+
+	std::cout << "Surface extent: (w: " << surfaceCapabilites.currentExtent.width <<
+		", h: " << surfaceCapabilites.currentExtent.height << ")\n";
 
 	system("PAUSE");
 

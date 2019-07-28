@@ -5,7 +5,12 @@ namespace WindowCreator {
 	class WindowsWindow : public Window {
 
 	public:
-		WindowsWindow();
+		struct CreateInfo {
+			int width;
+			int height;
+		};
+
+		WindowsWindow(CreateInfo ci);
 		~WindowsWindow();
 
 		void HandleEvent(WindowEvent event) override;

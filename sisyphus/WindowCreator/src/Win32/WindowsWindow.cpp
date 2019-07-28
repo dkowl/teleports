@@ -7,7 +7,7 @@ namespace WindowCreator {
 		HWND window;
 	};
 
-	WindowsWindow::WindowsWindow() :
+	WindowsWindow::WindowsWindow(CreateInfo ci) :
 		data(std::make_unique<PrivateData>())
 	{
 		data->hInstance = GetModuleHandle(nullptr);
@@ -30,14 +30,14 @@ namespace WindowCreator {
 			throw std::runtime_error("Failed to register a Windows class");
 		}
 
-		RECT windowRect = { 0, 0, 800, 600 };
+		RECT windowRect = { 0, 0, ci.width, ci.height };
 		AdjustWindowRect(&windowRect, WS_OVERLAPPEDWINDOW, FALSE);
 		data->window = CreateWindowEx(
 			0,
 			"Class Name",
 			"Window Name",
 			WS_OVERLAPPEDWINDOW | WS_VISIBLE,
-			100, 100,
+			0, 0,
 			windowRect.right - windowRect.left,
 			windowRect.bottom - windowRect.top,
 			nullptr,

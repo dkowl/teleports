@@ -8,8 +8,14 @@ namespace WindowCreator {
 		Windows
 	};
 
+	struct CreateInfo {
+		Platform platform;
+		int width;
+		int height;
+	};
+
 	class WindowCreator {
 	public:
-		std::unique_ptr<Window> Create(Platform platform);
+		std::unique_ptr<Window> Create(CreateInfo createInfo);
 	};
 }
