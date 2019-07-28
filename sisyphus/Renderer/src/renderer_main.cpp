@@ -9,5 +9,6 @@ int main() {
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
+		system("PAUSE");
 	}
 }

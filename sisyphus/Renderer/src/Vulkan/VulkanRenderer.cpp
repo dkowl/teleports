@@ -31,6 +31,7 @@ std::optional<int> FindGraphicsQueueFamilyIndex(vk::PhysicalDevice& physicalDevi
 }
 
 VulkanRenderer::VulkanRenderer(CreateInfo ci):
+	ci(ci),
 	instance(nullptr),
 	window(nullptr),
 	surface(nullptr),
@@ -41,7 +42,7 @@ VulkanRenderer::VulkanRenderer(CreateInfo ci):
 	swapchain(nullptr)
 {
 	InitInstance();
-	InitWindow(ci.windowWidth, ci.windowHeight);
+	InitWindow();
 	InitSurface();
 	InitPhysicalDevice();
 	InitQueueFamilyIndex();
@@ -78,10 +79,10 @@ void VulkanRenderer::InitInstance()
 	instance = vk::createInstanceUnique(instanceCreateInfo);
 }
 
-void VulkanRenderer::InitWindow(int width, int height)
+void VulkanRenderer::InitWindow()
 {
 	wc::WindowCreator windowCreator;
-	window = windowCreator.Create({ wc::Platform::Windows, width, height });
+	window = windowCreator.Create({ wc::Platform::Windows, ci.windowWidth, ci.windowHeight });
 }
 
 void VulkanRenderer::InitSurface()
@@ -171,7 +172,7 @@ void VulkanRenderer::InitSwapchain()
 {
 	BreakAssert(physicalDevice);
 	BreakAssert(surface);
-
+	BreakAssert(queueFamilyIndex);
 
 	constexpr int desiredMinImageCount = 3; // triple buffering
 	auto surfaceCapabilites = physicalDevice.getSurfaceCapabilitiesKHR(*surface);
@@ -213,11 +214,48 @@ void VulkanRenderer::InitSwapchain()
 	std::cout << "Surface extent: (w: " << surfaceCapabilites.currentExtent.width <<
 		", h: " << surfaceCapabilites.currentExtent.height << ")\n";
 
-	system("PAUSE");
+	if (!(surfaceCapabilites.supportedTransforms & vk::SurfaceTransformFlagBitsKHR::eIdentity)) {
+		throw std::runtime_error("Identity surface transform not supported");
+	}
 
-	/*vk::SwapchainCreateInfoKHR swapchainCreateInfo(
+	std::cout << "Supported composite alpha: " << vk::to_string(surfaceCapabilites.supportedCompositeAlpha) << "\n";
+	if (!(surfaceCapabilites.supportedCompositeAlpha & vk::CompositeAlphaFlagBitsKHR::eOpaque)) {
+		throw std::runtime_error("Surface opaque composite alpha mode not supported");
+	}
+
+	auto desiredPresentMode = vk::PresentModeKHR::eFifoRelaxed;
+	auto supportedPresentModes = physicalDevice.getSurfacePresentModesKHR(surface.get());
+	bool modeFound = false;
+	std::cout << "Supported present modes: ";
+	for (auto&& mode : supportedPresentModes) {
+		std::cout << vk::to_string(mode) << "\n";
+		if (mode == desiredPresentMode) {
+			modeFound = true;
+		}
+	}
+	if (!modeFound) {
+		throw std::runtime_error("Present mode " + vk::to_string(desiredPresentMode) + " not supported by GPU");
+	}
+	
+	vk::SwapchainCreateInfoKHR swapchainCreateInfo(
 		{},
-		surface,
+		*surface,
+		desiredMinImageCount,
+		desiredFormat,
+		desiredColorSpace,
+		vk::Extent2D{ci.windowWidth, ci.windowHeight},
+		1,
+		vk::ImageUsageFlagBits::eColorAttachment,
+		vk::SharingMode::eExclusive,
+		0,
+		nullptr,
+		vk::SurfaceTransformFlagBitsKHR::eIdentity,
+		vk::CompositeAlphaFlagBitsKHR::eOpaque,
+		desiredPresentMode,
+		false,
+		nullptr
+	);
 
-	);*/
+	swapchain = device->createSwapchainKHRUnique(swapchainCreateInfo);
+	std::cout << "Swapchain initialized!\n";
 }

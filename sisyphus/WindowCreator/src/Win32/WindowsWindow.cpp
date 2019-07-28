@@ -30,7 +30,7 @@ namespace WindowCreator {
 			throw std::runtime_error("Failed to register a Windows class");
 		}
 
-		RECT windowRect = { 0, 0, ci.width, ci.height };
+		RECT windowRect = { 0, 0, static_cast<LONG>(ci.width), static_cast<LONG>(ci.height)};
 		AdjustWindowRect(&windowRect, WS_OVERLAPPEDWINDOW, FALSE);
 		data->window = CreateWindowEx(
 			0,

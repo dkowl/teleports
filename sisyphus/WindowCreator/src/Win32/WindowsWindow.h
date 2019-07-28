@@ -6,8 +6,8 @@ namespace WindowCreator {
 
 	public:
 		struct CreateInfo {
-			int width;
-			int height;
+			uint32_t width;
+			uint32_t height;
 		};
 
 		WindowsWindow(CreateInfo ci);

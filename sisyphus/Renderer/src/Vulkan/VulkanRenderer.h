@@ -11,8 +11,8 @@ namespace WindowCreator {
 class VulkanRenderer {
 public:
 	struct CreateInfo {
-		int windowWidth;
-		int windowHeight;
+		uint32_t windowWidth;
+		uint32_t windowHeight;
 	};
 
 	VulkanRenderer(CreateInfo ci);
@@ -20,7 +20,7 @@ public:
 
 private:
 	void InitInstance();
-	void InitWindow(int width, int height);
+	void InitWindow();
 	void InitSurface();
 	void InitPhysicalDevice();
 	void InitQueueFamilyIndex();
@@ -29,7 +29,7 @@ private:
 	void InitCommandBuffers();
 	void InitSwapchain();
 
-
+	CreateInfo ci;
 	vk::UniqueInstance instance;
 	std::unique_ptr<WindowCreator::Window> window;
 	vk::UniqueSurfaceKHR surface;

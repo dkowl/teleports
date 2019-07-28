@@ -10,8 +10,8 @@ namespace WindowCreator {
 
 	struct CreateInfo {
 		Platform platform;
-		int width;
-		int height;
+		uint32_t width;
+		uint32_t height;
 	};
 
 	class WindowCreator {
