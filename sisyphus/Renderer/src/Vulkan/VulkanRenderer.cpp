@@ -42,15 +42,25 @@ VulkanRenderer::VulkanRenderer(CreateInfo ci):
 	swapchain(nullptr)
 {
 	InitInstance();
+	std::cout << "Vulkan instance initialized!\n\n";
 	InitWindow();
+	std::cout << "Window initialized!\n\n";
 	InitSurface();
+	std::cout << "Surface initialized!\n\n";
 	InitPhysicalDevice();
+	std::cout << "Physical Device initialized!\n\n";
 	InitQueueFamilyIndex();
+	std::cout << "Queue Family Index initialized!\n\n";
 	InitDevice();
+	std::cout << "Vulkan Device initialized!\n\n";
 	InitCommandPool();
+	std::cout << "Command Pool initialized!\n\n";
 	InitCommandBuffers();
+	std::cout << "Command Buffers initialized!\n\n";
 	InitSwapchain();
+	std::cout << "Swapchain initialized!\n\n";
 	InitSwapchainImages();
+	std::cout << swapchainImages.size() << " Swapchain Images initialized!\n\n";
 }
 
 VulkanRenderer::~VulkanRenderer() = default;
@@ -258,15 +268,10 @@ void VulkanRenderer::InitSwapchain()
 	);
 
 	swapchain = device->createSwapchainKHRUnique(swapchainCreateInfo);
-	std::cout << "Swapchain initialized!\n";
-
-	auto swapchainImages = device->getSwapchainImagesKHR(*swapchain);	
 }
 
 void VulkanRenderer::InitSwapchainImages()
 {
 	BreakAssert(swapchain);
 	swapchainImages = device->getSwapchainImagesKHR(*swapchain);
-
-	std::cout << swapchainImages.size() << " swapchain images initialized!\n";	
 }
