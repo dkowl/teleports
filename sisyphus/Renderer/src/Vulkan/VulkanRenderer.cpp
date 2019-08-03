@@ -66,6 +66,8 @@ VulkanRenderer::VulkanRenderer(CreateInfo ci):
 	std::cout << "Swapchain initialized!\n\n";
 	InitSwapchainImages();
 	std::cout << swapchainImages.size() << " Swapchain Images initialized!\n\n";
+	InitImageViews();
+	std::cout << imageViews.size() << " Image Views initialized!\n\n";
 }
 
 VulkanRenderer::~VulkanRenderer() = default;
@@ -292,14 +294,30 @@ void VulkanRenderer::InitImageViews()
 {
 	BreakAssert(!swapchainImages.empty());
 	BreakAssert(format);
-	/*
+	
+	vk::ComponentMapping componentMapping{
+		vk::ComponentSwizzle::eR,
+		vk::ComponentSwizzle::eG,
+		vk::ComponentSwizzle::eB,
+		vk::ComponentSwizzle::eA,
+	};
+	vk::ImageSubresourceRange subresourceRange{
+		vk::ImageAspectFlagBits::eColor,
+		0,
+		1,
+		0,
+		1
+	};
+	imageViews.reserve(swapchainImages.size());
 	for (auto && image : swapchainImages) {
 		vk::ImageViewCreateInfo imageViewCreateInfo(
 			{},
 			image,
 			vk::ImageViewType::e2D,
 			format.value(),
-
+			componentMapping,
+			subresourceRange
 			);
-	}*/
+		imageViews.emplace_back(device->createImageViewUnique(imageViewCreateInfo));
+	}
 }
