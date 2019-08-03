@@ -41,7 +41,8 @@ VulkanRenderer::VulkanRenderer(CreateInfo ci):
 	commandPool(nullptr),
 	format(std::nullopt),
 	colorSpace(std::nullopt),
-	swapchain(nullptr)
+	swapchain(nullptr),
+	depthBuffer(nullptr)
 {
 	InitInstance();
 	std::cout << "Vulkan instance initialized!\n\n";
@@ -68,6 +69,8 @@ VulkanRenderer::VulkanRenderer(CreateInfo ci):
 	std::cout << swapchainImages.size() << " Swapchain Images initialized!\n\n";
 	InitImageViews();
 	std::cout << imageViews.size() << " Image Views initialized!\n\n";
+	InitDepthBuffer();
+	std::cout << "Depth Buffer initialized!\n\n";
 }
 
 VulkanRenderer::~VulkanRenderer() = default;
@@ -320,4 +323,18 @@ void VulkanRenderer::InitImageViews()
 			);
 		imageViews.emplace_back(device->createImageViewUnique(imageViewCreateInfo));
 	}
+}
+
+void VulkanRenderer::InitDepthBuffer()
+{
+	BreakAssert(physicalDevice);
+	BreakAssert(device);
+
+	VulkanDepthBuffer::CreateInfo createInfo{
+		vk::Extent2D{ci.windowWidth, ci.windowHeight},
+		physicalDevice,
+		*device
+	};
+
+	depthBuffer = std::make_unique<VulkanDepthBuffer>(createInfo);	
 }

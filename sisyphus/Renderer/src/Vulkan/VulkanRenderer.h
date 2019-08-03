@@ -1,4 +1,6 @@
 #pragma once
+#include "Vulkan.h"
+#include "VulkanDepthBuffer.h"
 #include "PlatformSpecific.h"
 #include <memory>
 #include <optional>
@@ -31,6 +33,7 @@ private:
 	void InitSwapchain();
 	void InitSwapchainImages();
 	void InitImageViews();
+	void InitDepthBuffer();
 
 	CreateInfo ci;
 	vk::UniqueInstance instance;
@@ -46,4 +49,5 @@ private:
 	vk::UniqueSwapchainKHR swapchain;
 	std::vector<vk::Image> swapchainImages;
 	std::vector<vk::UniqueImageView> imageViews;
+	std::unique_ptr<VulkanDepthBuffer> depthBuffer;
 };

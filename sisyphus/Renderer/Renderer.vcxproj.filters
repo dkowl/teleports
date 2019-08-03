@@ -27,16 +27,22 @@
     <ClCompile Include="src\Vulkan\VulkanRenderer.cpp">
       <Filter>Vulkan</Filter>
     </ClCompile>
+    <ClCompile Include="src\Vulkan\VulkanDepthBuffer.cpp">
+      <Filter>Vulkan</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Vulkan\platform_specific\ActivatePlatformExtensions.h">
-      <Filter>Vulkan\PlatformSpecific</Filter>
-    </ClInclude>
     <ClInclude Include="src\Vulkan\platform_specific\PlatformSpecific.h">
       <Filter>Vulkan\PlatformSpecific</Filter>
     </ClInclude>
     <ClInclude Include="src\Vulkan\VulkanRenderer.h">
       <Filter>Vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Vulkan\VulkanDepthBuffer.h">
+      <Filter>Vulkan</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Vulkan\platform_specific\Vulkan.h">
+      <Filter>Vulkan\PlatformSpecific</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

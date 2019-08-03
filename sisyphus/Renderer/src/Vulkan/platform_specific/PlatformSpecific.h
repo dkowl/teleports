@@ -1,6 +1,5 @@
 #pragma once
-#include "ActivatePlatformExtensions.h"
-#include <vulkan/vulkan.hpp>
+#include "Vulkan.h"
 #include <vector>
 
 namespace PlatformSpecific {

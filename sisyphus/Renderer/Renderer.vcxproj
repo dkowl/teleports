@@ -81,11 +81,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\renderer_main.cpp" />
+    <ClCompile Include="src\Vulkan\VulkanDepthBuffer.cpp" />
     <ClCompile Include="src\Vulkan\VulkanRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Vulkan\platform_specific\ActivatePlatformExtensions.h" />
+    <ClInclude Include="src\Vulkan\platform_specific\Vulkan.h" />
     <ClInclude Include="src\Vulkan\platform_specific\PlatformSpecific.h" />
+    <ClInclude Include="src\Vulkan\VulkanDepthBuffer.h" />
     <ClInclude Include="src\Vulkan\VulkanRenderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
