@@ -27,8 +27,10 @@ private:
 	void InitDevice();
 	void InitCommandPool();
 	void InitCommandBuffers();
+	void InitFormatAndColorSpace();
 	void InitSwapchain();
 	void InitSwapchainImages();
+	void InitImageViews();
 
 	CreateInfo ci;
 	vk::UniqueInstance instance;
@@ -39,6 +41,8 @@ private:
 	vk::UniqueDevice device;
 	vk::UniqueCommandPool commandPool;
 	std::vector<vk::CommandBuffer> commandBuffers;
+	std::optional<vk::Format> format;
+	std::optional<vk::ColorSpaceKHR> colorSpace;
 	vk::UniqueSwapchainKHR swapchain;
 	std::vector<vk::Image> swapchainImages;
 	std::vector<vk::UniqueImageView> imageViews;

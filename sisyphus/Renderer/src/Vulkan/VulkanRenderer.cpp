@@ -39,6 +39,8 @@ VulkanRenderer::VulkanRenderer(CreateInfo ci):
 	queueFamilyIndex(std::nullopt),
 	device(nullptr),
 	commandPool(nullptr),
+	format(std::nullopt),
+	colorSpace(std::nullopt),
 	swapchain(nullptr)
 {
 	InitInstance();
@@ -57,6 +59,9 @@ VulkanRenderer::VulkanRenderer(CreateInfo ci):
 	std::cout << "Command Pool initialized!\n\n";
 	InitCommandBuffers();
 	std::cout << "Command Buffers initialized!\n\n";
+	InitFormatAndColorSpace();
+	std::cout << "Format initialized: " << vk::to_string(format.value()) << std::endl;
+	std::cout << "Color space initialized: " << vk::to_string(colorSpace.value()) << std::endl << std::endl;
 	InitSwapchain();
 	std::cout << "Swapchain initialized!\n\n";
 	InitSwapchainImages();
@@ -179,23 +184,9 @@ void VulkanRenderer::InitCommandBuffers()
 	commandBuffers = device->allocateCommandBuffers(commandBufferAllocateInfo);
 }
 
-void VulkanRenderer::InitSwapchain()
+void VulkanRenderer::InitFormatAndColorSpace()
 {
-	BreakAssert(physicalDevice);
 	BreakAssert(surface);
-	BreakAssert(queueFamilyIndex);
-
-	constexpr int desiredMinImageCount = 3; // triple buffering
-	auto surfaceCapabilites = physicalDevice.getSurfaceCapabilitiesKHR(*surface);
-	std::cout << "Surface minImageCount: " << surfaceCapabilites.minImageCount << std::endl;
-	std::cout << "Surface maxImageCount: " << surfaceCapabilites.maxImageCount << std::endl;
-	if (
-		surfaceCapabilites.minImageCount > desiredMinImageCount ||
-		surfaceCapabilites.maxImageCount < desiredMinImageCount) 
-	{
-		throw std::runtime_error("Surface does not support three image buffers");
-	}
-
 
 	constexpr vk::Format desiredFormat = vk::Format::eB8G8R8A8Srgb;
 	constexpr vk::ColorSpaceKHR desiredColorSpace = vk::ColorSpaceKHR::eSrgbNonlinear;
@@ -220,7 +211,28 @@ void VulkanRenderer::InitSwapchain()
 			<< " and color space: " << vk::to_string(desiredColorSpace);
 		throw std::runtime_error(ss.str());
 	}
+	format = desiredFormat;
+	colorSpace = desiredColorSpace;
+}
 
+void VulkanRenderer::InitSwapchain()
+{
+	BreakAssert(physicalDevice);
+	BreakAssert(surface);
+	BreakAssert(queueFamilyIndex);
+	BreakAssert(format);
+	BreakAssert(colorSpace);
+
+	constexpr int desiredMinImageCount = 3; // triple buffering
+	auto surfaceCapabilites = physicalDevice.getSurfaceCapabilitiesKHR(*surface);
+	std::cout << "Surface minImageCount: " << surfaceCapabilites.minImageCount << std::endl;
+	std::cout << "Surface maxImageCount: " << surfaceCapabilites.maxImageCount << std::endl;
+	if (
+		surfaceCapabilites.minImageCount > desiredMinImageCount ||
+		surfaceCapabilites.maxImageCount < desiredMinImageCount) 
+	{
+		throw std::runtime_error("Surface does not support three image buffers");
+	}
 
 	std::cout << "Surface extent: (w: " << surfaceCapabilites.currentExtent.width <<
 		", h: " << surfaceCapabilites.currentExtent.height << ")\n";
@@ -252,8 +264,8 @@ void VulkanRenderer::InitSwapchain()
 		{},
 		*surface,
 		desiredMinImageCount,
-		desiredFormat,
-		desiredColorSpace,
+		format.value(),
+		colorSpace.value(),
 		vk::Extent2D{ci.windowWidth, ci.windowHeight},
 		1,
 		vk::ImageUsageFlagBits::eColorAttachment,
@@ -274,4 +286,20 @@ void VulkanRenderer::InitSwapchainImages()
 {
 	BreakAssert(swapchain);
 	swapchainImages = device->getSwapchainImagesKHR(*swapchain);
+}
+
+void VulkanRenderer::InitImageViews()
+{
+	BreakAssert(!swapchainImages.empty());
+	BreakAssert(format);
+	/*
+	for (auto && image : swapchainImages) {
+		vk::ImageViewCreateInfo imageViewCreateInfo(
+			{},
+			image,
+			vk::ImageViewType::e2D,
+			format.value(),
+
+			);
+	}*/
 }
