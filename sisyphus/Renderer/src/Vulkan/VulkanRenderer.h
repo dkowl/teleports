@@ -28,6 +28,7 @@ private:
 	void InitCommandPool();
 	void InitCommandBuffers();
 	void InitSwapchain();
+	void InitSwapchainImages();
 
 	CreateInfo ci;
 	vk::UniqueInstance instance;
@@ -39,4 +40,6 @@ private:
 	vk::UniqueCommandPool commandPool;
 	std::vector<vk::CommandBuffer> commandBuffers;
 	vk::UniqueSwapchainKHR swapchain;
+	std::vector<vk::Image> swapchainImages;
+	std::vector<vk::UniqueImageView> imageViews;
 };

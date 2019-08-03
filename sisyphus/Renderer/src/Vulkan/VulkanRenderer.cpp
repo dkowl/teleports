@@ -50,6 +50,7 @@ VulkanRenderer::VulkanRenderer(CreateInfo ci):
 	InitCommandPool();
 	InitCommandBuffers();
 	InitSwapchain();
+	InitSwapchainImages();
 }
 
 VulkanRenderer::~VulkanRenderer() = default;
@@ -258,4 +259,14 @@ void VulkanRenderer::InitSwapchain()
 
 	swapchain = device->createSwapchainKHRUnique(swapchainCreateInfo);
 	std::cout << "Swapchain initialized!\n";
+
+	auto swapchainImages = device->getSwapchainImagesKHR(*swapchain);	
+}
+
+void VulkanRenderer::InitSwapchainImages()
+{
+	BreakAssert(swapchain);
+	swapchainImages = device->getSwapchainImagesKHR(*swapchain);
+
+	std::cout << swapchainImages.size() << " swapchain images initialized!\n";	
 }
