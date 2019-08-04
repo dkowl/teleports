@@ -30,12 +30,18 @@
     <ClInclude Include="src\platform_specific\Vulkan.h">
       <Filter>Source Files\Platform Specific</Filter>
     </ClInclude>
+    <ClInclude Include="src\RendererImpl.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DepthBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RendererImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
