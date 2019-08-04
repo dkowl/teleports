@@ -17,6 +17,7 @@ namespace Vulkan {
 	private:
 		void CreateBuffer();
 		void AllocateMemory();
+		void BindMemory();
 
 		CreateInfo ci;
 		vk::UniqueBuffer buffer;

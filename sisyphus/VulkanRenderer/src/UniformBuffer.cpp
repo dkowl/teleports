@@ -1,5 +1,6 @@
 #include "UniformBuffer.h"
 #include "MemoryUtils.h"
+#include "Utils/BreakAssert.h"
 #include <iostream>
 
 namespace Vulkan {
@@ -11,6 +12,8 @@ namespace Vulkan {
 		std::cout << "\tBuffer created!\n";
 		AllocateMemory();
 		std::cout << "\tMemory allocated!\n";
+		BindMemory();
+		std::cout << "\tMemory bound!\n";
 	}
 
 	UniformBuffer::~UniformBuffer() = default;
@@ -35,5 +38,13 @@ namespace Vulkan {
 		);
 
 		memory = ci.device.allocateMemoryUnique(vk::MemoryAllocateInfo(memoryRequirements.size, memoryTypeIndex));
+	}
+
+	void UniformBuffer::BindMemory()
+	{
+		BreakAssert(buffer);
+		BreakAssert(memory);
+
+		ci.device.bindBufferMemory(*buffer, *memory, 0);
 	}
 }
