@@ -74,6 +74,10 @@ namespace Vulkan {
 		std::cout << "Depth Buffer initialized!\n\n";
 		InitUniformBuffer();
 		std::cout << "Uniform Buffer initialized!\n\n";
+		InitDescriptorSetLayout();
+		std::cout << "Descriptor Set Layout initialized!\n\n";
+		InitPipelineLayout();
+		std::cout << "Pipeline Layout initialized!\n\n";
 	}
 
 	RendererImpl::~RendererImpl() = default;
@@ -353,5 +357,35 @@ namespace Vulkan {
 		};
 
 		uniformBuffer = std::make_unique<UniformBuffer>(createInfo);
+	}
+
+	void RendererImpl::InitDescriptorSetLayout()
+	{
+		BreakAssert(device);
+
+		vk::DescriptorSetLayoutBinding binding{
+			0,
+			vk::DescriptorType::eUniformBuffer,
+			1,
+			vk::ShaderStageFlagBits::eVertex
+		};
+
+		descriptorSetLayout = device->createDescriptorSetLayoutUnique(vk::DescriptorSetLayoutCreateInfo(
+			{},
+			1,
+			&binding
+		));
+	}
+
+	void RendererImpl::InitPipelineLayout()
+	{
+		BreakAssert(descriptorSetLayout);
+		BreakAssert(device);
+
+		pipelineLayout = device->createPipelineLayoutUnique(vk::PipelineLayoutCreateInfo(
+			{},
+			1,
+			&(*descriptorSetLayout)
+		));		
 	}
 }

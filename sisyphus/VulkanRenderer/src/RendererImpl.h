@@ -33,6 +33,8 @@ namespace Vulkan {
 		void InitImageViews();
 		void InitDepthBuffer();
 		void InitUniformBuffer();
+		void InitDescriptorSetLayout();
+		void InitPipelineLayout();
 
 		Renderer::CreateInfo ci;
 		vk::UniqueInstance instance;
@@ -50,5 +52,7 @@ namespace Vulkan {
 		std::vector<vk::UniqueImageView> imageViews;
 		std::unique_ptr<DepthBuffer> depthBuffer;
 		std::unique_ptr<UniformBuffer> uniformBuffer;
+		vk::UniqueDescriptorSetLayout descriptorSetLayout;
+		vk::UniquePipelineLayout pipelineLayout;
 	};
 }
