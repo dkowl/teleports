@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Platform Specific">
       <UniqueIdentifier>{0fc5f79b-8676-42f5-aa68-7ef0ea3c5b38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{953916c5-53f2-4044-b4af-998aebd0ae29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\VulkanRenderer\Renderer.h">
@@ -36,6 +39,9 @@
     <ClInclude Include="src\UniformBuffer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Utils\MemoryUtils.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DepthBuffer.cpp">
@@ -49,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="src\UniformBuffer.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\MemoryUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
