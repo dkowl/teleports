@@ -8,6 +8,7 @@ namespace Vulkan {
 		struct CreateInfo {
 			int size;
 			vk::Device device;
+			vk::PhysicalDevice physicalDevice;
 		};
 
 		UniformBuffer(CreateInfo ci);
@@ -15,8 +16,10 @@ namespace Vulkan {
 
 	private:
 		void CreateBuffer();
+		void AllocateMemory();
 
 		CreateInfo ci;
 		vk::UniqueBuffer buffer;
+		vk::UniqueDeviceMemory memory;
 	};
 }

@@ -348,7 +348,8 @@ namespace Vulkan {
 
 		UniformBuffer::CreateInfo createInfo{
 			1,
-			*device
+			*device,
+			physicalDevice
 		};
 
 		uniformBuffer = std::make_unique<UniformBuffer>(createInfo);

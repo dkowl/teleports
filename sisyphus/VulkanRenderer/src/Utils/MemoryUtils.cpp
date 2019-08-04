@@ -22,7 +22,9 @@ namespace Vulkan {
 
 	uint32_t FindMemoryType(vk::PhysicalDeviceMemoryProperties properties, uint32_t supportedTypeBits, vk::MemoryPropertyFlags propertyFlags)
 	{
-		InspectMemoryProperties(properties);
+		static bool inspected = false;
+		if(!inspected) InspectMemoryProperties(properties);
+		inspected = true;
 
 		uint32_t memoryTypeIndex = uint32_t(~0);
 		for (uint32_t i = 0; i < properties.memoryTypeCount; i++) {
