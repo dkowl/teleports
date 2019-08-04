@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WindowCreator", "WindowCrea
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utils", "Utils\Utils.vcxproj", "{C32D033F-1533-4D6B-92B9-1DDA3623CFD9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VulkanRenderer", "VulkanRenderer\VulkanRenderer.vcxproj", "{E24C7ECB-173A-489E-9CC4-0FB97BC1D4D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -69,6 +71,12 @@ Global
 		{C32D033F-1533-4D6B-92B9-1DDA3623CFD9}.Release|x64.ActiveCfg = Release|x64
 		{C32D033F-1533-4D6B-92B9-1DDA3623CFD9}.Release|x64.Build.0 = Release|x64
 		{C32D033F-1533-4D6B-92B9-1DDA3623CFD9}.Release|x86.ActiveCfg = Release|x64
+		{E24C7ECB-173A-489E-9CC4-0FB97BC1D4D2}.Debug|x64.ActiveCfg = Debug|x64
+		{E24C7ECB-173A-489E-9CC4-0FB97BC1D4D2}.Debug|x64.Build.0 = Debug|x64
+		{E24C7ECB-173A-489E-9CC4-0FB97BC1D4D2}.Debug|x86.ActiveCfg = Debug|x64
+		{E24C7ECB-173A-489E-9CC4-0FB97BC1D4D2}.Release|x64.ActiveCfg = Release|x64
+		{E24C7ECB-173A-489E-9CC4-0FB97BC1D4D2}.Release|x64.Build.0 = Release|x64
+		{E24C7ECB-173A-489E-9CC4-0FB97BC1D4D2}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
