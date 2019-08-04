@@ -85,11 +85,13 @@
     <ClInclude Include="src\platform_specific\PlatformSpecific.h" />
     <ClInclude Include="src\platform_specific\Vulkan.h" />
     <ClInclude Include="src\RendererImpl.h" />
+    <ClInclude Include="src\UniformBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DepthBuffer.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\RendererImpl.cpp" />
+    <ClCompile Include="src\UniformBuffer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

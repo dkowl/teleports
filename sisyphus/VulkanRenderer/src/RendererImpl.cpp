@@ -72,6 +72,8 @@ namespace Vulkan {
 		std::cout << imageViews.size() << " Image Views initialized!\n\n";
 		InitDepthBuffer();
 		std::cout << "Depth Buffer initialized!\n\n";
+		InitUniformBuffer();
+		std::cout << "Uniform Buffer initialized!\n\n";
 	}
 
 	RendererImpl::~RendererImpl() = default;
@@ -338,5 +340,17 @@ namespace Vulkan {
 		};
 
 		depthBuffer = std::make_unique<DepthBuffer>(createInfo);
+	}
+
+	void RendererImpl::InitUniformBuffer()
+	{
+		BreakAssert(device);
+
+		UniformBuffer::CreateInfo createInfo{
+			1,
+			*device
+		};
+
+		uniformBuffer = std::make_unique<UniformBuffer>(createInfo);
 	}
 }

@@ -1,8 +1,9 @@
 #pragma once
-#include "Vulkan.h"
-#include "DepthBuffer.h"
-#include "PlatformSpecific.h"
 #include "Renderer.h"
+#include "Vulkan.h"
+#include "PlatformSpecific.h"
+#include "DepthBuffer.h"
+#include "UniformBuffer.h"
 #include <memory>
 #include <optional>
 
@@ -31,6 +32,7 @@ namespace Vulkan {
 		void InitSwapchainImages();
 		void InitImageViews();
 		void InitDepthBuffer();
+		void InitUniformBuffer();
 
 		Renderer::CreateInfo ci;
 		vk::UniqueInstance instance;
@@ -47,5 +49,6 @@ namespace Vulkan {
 		std::vector<vk::Image> swapchainImages;
 		std::vector<vk::UniqueImageView> imageViews;
 		std::unique_ptr<DepthBuffer> depthBuffer;
+		std::unique_ptr<UniformBuffer> uniformBuffer;
 	};
 }
