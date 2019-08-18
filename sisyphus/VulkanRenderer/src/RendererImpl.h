@@ -35,6 +35,7 @@ namespace Vulkan {
 		void InitUniformBuffer();
 		void InitDescriptorSetLayout();
 		void InitPipelineLayout();
+		void InitDescriptorPool();
 
 		Renderer::CreateInfo ci;
 		vk::UniqueInstance instance;
@@ -54,5 +55,6 @@ namespace Vulkan {
 		std::unique_ptr<UniformBuffer> uniformBuffer;
 		vk::UniqueDescriptorSetLayout descriptorSetLayout;
 		vk::UniquePipelineLayout pipelineLayout;
+		vk::UniqueDescriptorPool descriptorPool;
 	};
 }

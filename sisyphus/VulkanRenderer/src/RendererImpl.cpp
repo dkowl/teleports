@@ -78,6 +78,8 @@ namespace Vulkan {
 		std::cout << "Descriptor Set Layout initialized!\n\n";
 		InitPipelineLayout();
 		std::cout << "Pipeline Layout initialized!\n\n";
+		InitDescriptorPool();
+		std::cout << "Descriptor Pool initialized!\n\n";
 	}
 
 	RendererImpl::~RendererImpl() = default;
@@ -387,5 +389,21 @@ namespace Vulkan {
 			1,
 			&(*descriptorSetLayout)
 		));		
+	}
+
+	void RendererImpl::InitDescriptorPool()
+	{
+		BreakAssert(device);
+
+		vk::DescriptorPoolSize poolSize(vk::DescriptorType::eUniformBuffer, 1);
+
+		vk::DescriptorPoolCreateInfo descriptorPoolCreateInfo(
+			{},
+			1,
+			1,
+			&poolSize
+		);
+		
+		descriptorPool = device->createDescriptorPoolUnique(descriptorPoolCreateInfo);
 	}
 }
