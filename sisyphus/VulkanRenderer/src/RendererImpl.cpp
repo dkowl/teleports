@@ -40,7 +40,7 @@ namespace Vulkan {
 		queueFamilyIndex(std::nullopt),
 		device(nullptr),
 		commandPool(nullptr),
-		format(std::nullopt),
+		colorFormat(std::nullopt),
 		colorSpace(std::nullopt),
 		swapchain(nullptr),
 		depthBuffer(nullptr)
@@ -62,7 +62,7 @@ namespace Vulkan {
 		InitCommandBuffers();
 		std::cout << "Command Buffers initialized!\n\n";
 		InitFormatAndColorSpace();
-		std::cout << "Format initialized: " << vk::to_string(format.value()) << std::endl;
+		std::cout << "Format initialized: " << vk::to_string(colorFormat.value()) << std::endl;
 		std::cout << "Color space initialized: " << vk::to_string(colorSpace.value()) << std::endl << std::endl;
 		InitSwapchain();
 		std::cout << "Swapchain initialized!\n\n";
@@ -82,6 +82,8 @@ namespace Vulkan {
 		std::cout << "Descriptor Set initialized!\n\n";
 		InitUniformBuffer();
 		std::cout << "Uniform Buffer initialized!\n\n";
+		InitRenderPass();
+		std::cout << "Render Pass initialized!\n\n";
 	}
 
 	RendererImpl::~RendererImpl() = default;
@@ -227,7 +229,7 @@ namespace Vulkan {
 				<< " and color space: " << vk::to_string(desiredColorSpace);
 			throw std::runtime_error(ss.str());
 		}
-		format = desiredFormat;
+		colorFormat = desiredFormat;
 		colorSpace = desiredColorSpace;
 	}
 
@@ -236,7 +238,7 @@ namespace Vulkan {
 		BreakAssert(physicalDevice);
 		BreakAssert(surface);
 		BreakAssert(queueFamilyIndex);
-		BreakAssert(format);
+		BreakAssert(colorFormat);
 		BreakAssert(colorSpace);
 
 		constexpr int desiredMinImageCount = 3; // triple buffering
@@ -280,7 +282,7 @@ namespace Vulkan {
 			{},
 			*surface,
 			desiredMinImageCount,
-			format.value(),
+			colorFormat.value(),
 			colorSpace.value(),
 			vk::Extent2D{ ci.windowWidth, ci.windowHeight },
 			1,
@@ -307,7 +309,7 @@ namespace Vulkan {
 	void RendererImpl::InitImageViews()
 	{
 		BreakAssert(!swapchainImages.empty());
-		BreakAssert(format);
+		BreakAssert(colorFormat);
 
 		vk::ComponentMapping componentMapping{
 			vk::ComponentSwizzle::eR,
@@ -328,7 +330,7 @@ namespace Vulkan {
 				{},
 				image,
 				vk::ImageViewType::e2D,
-				format.value(),
+				colorFormat.value(),
 				componentMapping,
 				subresourceRange
 			);
@@ -423,6 +425,66 @@ namespace Vulkan {
 		};
 
 		uniformBuffer = std::make_unique<UniformBuffer>(createInfo);
+	}
+
+	void RendererImpl::InitRenderPass()
+	{
+		BreakAssert(device);
+		BreakAssert(colorFormat);
+
+		vk::AttachmentDescription attachmentDescriptions[2];
+
+		// color
+		attachmentDescriptions[0] = vk::AttachmentDescription(
+			{},
+			colorFormat.value(),
+			vk::SampleCountFlagBits::e1,
+			vk::AttachmentLoadOp::eClear,
+			vk::AttachmentStoreOp::eStore,
+			vk::AttachmentLoadOp::eDontCare,
+			vk::AttachmentStoreOp::eDontCare,
+			vk::ImageLayout::eUndefined,
+			vk::ImageLayout::ePresentSrcKHR
+		);
+
+		// depth
+		attachmentDescriptions[1] = vk::AttachmentDescription(
+			{},
+			DepthBuffer::format,
+			vk::SampleCountFlagBits::e1,
+			vk::AttachmentLoadOp::eClear,
+			vk::AttachmentStoreOp::eDontCare,
+			vk::AttachmentLoadOp::eDontCare,
+			vk::AttachmentStoreOp::eDontCare,
+			vk::ImageLayout::eUndefined,
+			vk::ImageLayout::eDepthStencilAttachmentOptimal
+		);
+
+		vk::AttachmentReference colorReference(0, vk::ImageLayout::eColorAttachmentOptimal);
+		vk::AttachmentReference depthReference(1, vk::ImageLayout::eDepthStencilAttachmentOptimal);
+
+		vk::SubpassDescription subpassDescription(
+			{},
+			vk::PipelineBindPoint::eGraphics,
+			0,
+			nullptr,
+			1,
+			&colorReference,
+			nullptr,
+			&depthReference,
+			0,
+			nullptr
+		);
+
+		vk::RenderPassCreateInfo renderPassCreateInfo(
+			{},
+			2,
+			attachmentDescriptions,
+			1,
+			&subpassDescription
+		);
+
+		renderPass = device->createRenderPassUnique(renderPassCreateInfo);
 	}
 
 	void RendererImpl::UpdateUniformBuffer(Renderer::UniformBufferData data)

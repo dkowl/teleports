@@ -39,6 +39,7 @@ namespace Vulkan {
 		void InitDescriptorPool();
 		void InitDescriptorSet();
 		void InitUniformBuffer();
+		void InitRenderPass();
 
 		Renderer::CreateInfo ci;
 		vk::UniqueInstance instance;
@@ -49,7 +50,7 @@ namespace Vulkan {
 		vk::UniqueDevice device;
 		vk::UniqueCommandPool commandPool;
 		std::vector<vk::CommandBuffer> commandBuffers;
-		std::optional<vk::Format> format;
+		std::optional<vk::Format> colorFormat;
 		std::optional<vk::ColorSpaceKHR> colorSpace;
 		vk::UniqueSwapchainKHR swapchain;
 		std::vector<vk::Image> swapchainImages;
@@ -61,5 +62,7 @@ namespace Vulkan {
 		vk::UniqueDescriptorPool descriptorPool;
 		vk::UniqueDescriptorSet descriptorSet;
 		std::unique_ptr<UniformBuffer> uniformBuffer;
+
+		vk::UniqueRenderPass renderPass;
 	};
 }
