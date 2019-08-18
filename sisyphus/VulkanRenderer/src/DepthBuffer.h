@@ -10,6 +10,8 @@ namespace Vulkan {
 			vk::Device device;
 		};
 
+		static constexpr vk::Format format = vk::Format::eD16Unorm;
+
 		DepthBuffer(CreateInfo ci);
 		~DepthBuffer(); // default
 
@@ -19,7 +21,6 @@ namespace Vulkan {
 		void BindMemory();
 		void CreateImageView();
 
-		static constexpr vk::Format format = vk::Format::eD16Unorm;
 		CreateInfo ci;
 		vk::UniqueImage image;
 		vk::UniqueDeviceMemory memory;
