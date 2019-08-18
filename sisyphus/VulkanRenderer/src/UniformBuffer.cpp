@@ -1,6 +1,5 @@
 #include "UniformBuffer.h"
 #include "MemoryUtils.h"
-#include "Utils/BreakAssert.h"
 #include <iostream>
 
 namespace Vulkan {

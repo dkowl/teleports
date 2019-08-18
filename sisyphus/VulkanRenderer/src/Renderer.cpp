@@ -7,3 +7,8 @@ Vulkan::Renderer::Renderer(CreateInfo ci):
 }
 
 Vulkan::Renderer::~Renderer() = default;
+
+void Vulkan::Renderer::UpdateUniformBuffer(UniformBufferData data)
+{
+	impl->UpdateUniformBuffer(data);
+}

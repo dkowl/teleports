@@ -72,8 +72,6 @@ namespace Vulkan {
 		std::cout << imageViews.size() << " Image Views initialized!\n\n";
 		InitDepthBuffer();
 		std::cout << "Depth Buffer initialized!\n\n";
-		InitUniformBuffer();
-		std::cout << "Uniform Buffer initialized!\n\n";
 		InitDescriptorSetLayout();
 		std::cout << "Descriptor Set Layout initialized!\n\n";
 		InitPipelineLayout();
@@ -82,6 +80,8 @@ namespace Vulkan {
 		std::cout << "Descriptor Pool initialized!\n\n";
 		InitDescriptorSet();
 		std::cout << "Descriptor Set initialized!\n\n";
+		InitUniformBuffer();
+		std::cout << "Uniform Buffer initialized!\n\n";
 	}
 
 	RendererImpl::~RendererImpl() = default;
@@ -350,19 +350,6 @@ namespace Vulkan {
 		depthBuffer = std::make_unique<DepthBuffer>(createInfo);
 	}
 
-	void RendererImpl::InitUniformBuffer()
-	{
-		BreakAssert(device);
-
-		UniformBuffer::CreateInfo createInfo{
-			1,
-			*device,
-			physicalDevice
-		};
-
-		uniformBuffer = std::make_unique<UniformBuffer>(createInfo);
-	}
-
 	void RendererImpl::InitDescriptorSetLayout()
 	{
 		BreakAssert(device);
@@ -421,6 +408,28 @@ namespace Vulkan {
 		);
 
 		descriptorSet = std::move(device->allocateDescriptorSetsUnique(allocateInfo).front());
+	}
+
+	void RendererImpl::InitUniformBuffer()
+	{
+		BreakAssert(device);
+		BreakAssert(descriptorSet);
+
+		UniformBuffer::CreateInfo createInfo{
+			sizeof(Renderer::UniformBufferData),
+			*device,
+			physicalDevice,
+			*descriptorSet
+		};
+
+		uniformBuffer = std::make_unique<UniformBuffer>(createInfo);
+	}
+
+	void RendererImpl::UpdateUniformBuffer(Renderer::UniformBufferData data)
+	{
+		BreakAssert(uniformBuffer);
+
+		uniformBuffer->UpdateData(data);
 	}
 
 }

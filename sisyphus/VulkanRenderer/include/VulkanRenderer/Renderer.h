@@ -11,8 +11,16 @@ namespace Vulkan {
 			uint32_t windowHeight;
 		};
 
+		struct UniformBufferData {
+			char r;
+			char g;
+			char b;
+		};
+
 		Renderer(CreateInfo ci);
 		~Renderer(); // default
+
+		void UpdateUniformBuffer(UniformBufferData data);
 
 	private:
 		std::unique_ptr<RendererImpl> impl;

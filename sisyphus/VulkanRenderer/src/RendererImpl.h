@@ -18,6 +18,8 @@ namespace Vulkan {
 		RendererImpl(Renderer::CreateInfo ci);
 		~RendererImpl(); // default
 
+		void UpdateUniformBuffer(Renderer::UniformBufferData data);
+
 	private:
 		void InitInstance();
 		void InitWindow();
@@ -32,11 +34,11 @@ namespace Vulkan {
 		void InitSwapchainImages();
 		void InitImageViews();
 		void InitDepthBuffer();
-		void InitUniformBuffer();
 		void InitDescriptorSetLayout();
 		void InitPipelineLayout();
 		void InitDescriptorPool();
 		void InitDescriptorSet();
+		void InitUniformBuffer();
 
 		Renderer::CreateInfo ci;
 		vk::UniqueInstance instance;
@@ -53,10 +55,11 @@ namespace Vulkan {
 		std::vector<vk::Image> swapchainImages;
 		std::vector<vk::UniqueImageView> imageViews;
 		std::unique_ptr<DepthBuffer> depthBuffer;
-		std::unique_ptr<UniformBuffer> uniformBuffer;
+
 		vk::UniqueDescriptorSetLayout descriptorSetLayout;
 		vk::UniquePipelineLayout pipelineLayout;
 		vk::UniqueDescriptorPool descriptorPool;
 		vk::UniqueDescriptorSet descriptorSet;
+		std::unique_ptr<UniformBuffer> uniformBuffer;
 	};
 }
