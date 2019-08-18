@@ -36,6 +36,7 @@ namespace Vulkan {
 		void InitDescriptorSetLayout();
 		void InitPipelineLayout();
 		void InitDescriptorPool();
+		void InitDescriptorSet();
 
 		Renderer::CreateInfo ci;
 		vk::UniqueInstance instance;
@@ -56,5 +57,6 @@ namespace Vulkan {
 		vk::UniqueDescriptorSetLayout descriptorSetLayout;
 		vk::UniquePipelineLayout pipelineLayout;
 		vk::UniqueDescriptorPool descriptorPool;
+		vk::UniqueDescriptorSet descriptorSet;
 	};
 }
