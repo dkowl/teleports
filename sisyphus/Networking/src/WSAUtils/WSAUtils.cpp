@@ -18,7 +18,7 @@ struct sockaddr to_sockaddr(const SocketAddress& socketAddress)
 
 	struct sockaddr_in result;
 	result.sin_family = AF_INET;
-	result.sin_port = socketAddress.port;
+	result.sin_port = static_cast<USHORT>(socketAddress.port);
 	struct in_addr inAddr;
 	inet_pton(AF_INET, socketAddress.ip.c_str(), &inAddr);
 	result.sin_addr = inAddr;
