@@ -7,15 +7,18 @@ namespace Vulkan {
 	DepthBuffer::DepthBuffer(CreateInfo ci) :
 		ci(ci)
 	{
-		std::cout << "Depth Buffer:\n";
+		if (ci.logger == nullptr) {
+			throw std::runtime_error("Logger cannot be null");
+		}
+
 		CreateImage();
-		std::cout << "\tImage created!\n";
+		ci.logger->Log("Image created!");
 		AllocateMemory();
-		std::cout << "\tMemory allocated!\n";
+		ci.logger->Log("Memory allocated!");
 		BindMemory();
-		std::cout << "\tMemory bound!\n";
+		ci.logger->Log("Memory bound!");
 		CreateImageView();
-		std::cout << "\tImage View created!\n";
+		ci.logger->Log("Image View created!");
 	}
 
 	DepthBuffer::~DepthBuffer() = default;
@@ -34,7 +37,7 @@ namespace Vulkan {
 		else {
 			throw std::runtime_error("DepthStencilAttachment is not supported for " + vk::to_string(format));
 		}
-		std::cout << "\tImage Tiling: " << vk::to_string(tiling) << std::endl;
+		ci.logger->Log("Image Tiling: " + vk::to_string(tiling));
 
 		vk::ImageCreateInfo imageCreateInfo(
 			{},
@@ -59,10 +62,10 @@ namespace Vulkan {
 		vk::MemoryRequirements memoryRequirements = ci.device.getImageMemoryRequirements(*image);
 		uint32_t supportedTypeBits = memoryRequirements.memoryTypeBits;
 
-		auto memoryTypeIndex = FindMemoryType(memoryProperties, supportedTypeBits, vk::MemoryPropertyFlagBits::eDeviceLocal);
+		auto memoryTypeIndex = FindMemoryType(memoryProperties, supportedTypeBits, vk::MemoryPropertyFlagBits::eDeviceLocal, ci.logger);
 
-		std::cout << "\t" << memoryRequirements.size << " bytes of GPU memory required\n";
-		std::cout << "\tAlignment: " << memoryRequirements.alignment << std::endl;
+		ci.logger->Log(std::to_string(memoryRequirements.size) + " bytes of GPU memory required");
+		ci.logger->Log("Alignment: " + std::to_string(memoryRequirements.alignment));
 		memory = ci.device.allocateMemoryUnique(vk::MemoryAllocateInfo(memoryRequirements.size, memoryTypeIndex));
 	}
 

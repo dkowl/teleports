@@ -9,15 +9,16 @@
 namespace wc = WindowCreator;
 
 namespace Vulkan {
-	void InspectDevice(const vk::PhysicalDevice& physicalDevice) {
+	void InspectDevice(const vk::PhysicalDevice& physicalDevice, ILogger* logger) {
 		auto queueFamilyProperties = physicalDevice.getQueueFamilyProperties();
-		std::cout << "Queue Families:\n";
+		logger->BeginSection("Queue Families:");
 		int index = 1;
 		for (auto&& props : queueFamilyProperties) {
 			auto flags = props.queueFlags;
-			std::cout << "\t#" << index << ": " << vk::to_string(flags) << " Count: " << props.queueCount << std::endl;
+			logger->Log("#" + std::to_string(index) + ": " + vk::to_string(flags) + " Count: " + std::to_string(props.queueCount));
 			index++;
 		}
+		logger->EndSection();
 	}
 
 	std::optional<int> FindGraphicsQueueFamilyIndex(vk::PhysicalDevice& physicalDevice, vk::SurfaceKHR& surface) {
@@ -43,47 +44,60 @@ namespace Vulkan {
 		colorFormat(std::nullopt),
 		colorSpace(std::nullopt),
 		swapchain(nullptr),
-		depthBuffer(nullptr)
+		depthBuffer(nullptr),
+		logger(ci.logger)
 	{
+		if (logger == nullptr) {
+			throw std::runtime_error("Logger not found");
+		}
+
 		InitInstance();
-		std::cout << "Vulkan instance initialized!\n\n";
+		logger->Log("Vulkan instance initialized!");
 		InitWindow();
-		std::cout << "Window initialized!\n\n";
+		logger->Log("Window initialized!");
 		InitSurface();
-		std::cout << "Surface initialized!\n\n";
+		logger->Log("Surface initialized!");
 		InitPhysicalDevice();
-		std::cout << "Physical Device initialized!\n\n";
+		logger->Log("Physical Device initialized!");
 		InitQueueFamilyIndex();
-		std::cout << "Queue Family Index initialized!\n\n";
+		logger->Log("Queue Family Index initialized!");
 		InitDevice();
-		std::cout << "Vulkan Device initialized!\n\n";
+		logger->Log("Vulkan Device initialized!");
 		InitCommandPool();
-		std::cout << "Command Pool initialized!\n\n";
+		logger->Log("Command Pool initialized!");
 		InitCommandBuffers();
-		std::cout << "Command Buffers initialized!\n\n";
+		logger->Log("Command Buffers initialized!");
 		InitFormatAndColorSpace();
-		std::cout << "Format initialized: " << vk::to_string(colorFormat.value()) << std::endl;
-		std::cout << "Color space initialized: " << vk::to_string(colorSpace.value()) << std::endl << std::endl;
+		logger->Log("Format initialized: " + vk::to_string(colorFormat.value()));
+		logger->Log("Color space initialized: " + vk::to_string(colorSpace.value()));
 		InitSwapchain();
-		std::cout << "Swapchain initialized!\n\n";
+		logger->Log("Swapchain initialized!");
 		InitSwapchainImages();
-		std::cout << swapchainImages.size() << " Swapchain Images initialized!\n\n";
+		logger->Log(std::to_string(swapchainImages.size()) + " Swapchain Images initialized!");
 		InitImageViews();
-		std::cout << imageViews.size() << " Image Views initialized!\n\n";
+		logger->Log(std::to_string(imageViews.size()) + " Image Views initialized!");
+		
+		logger->BeginSection("Depth Buffer");
 		InitDepthBuffer();
-		std::cout << "Depth Buffer initialized!\n\n";
+		logger->Log("Depth Buffer initialized!");
+		logger->EndSection();
+
 		InitDescriptorSetLayout();
-		std::cout << "Descriptor Set Layout initialized!\n\n";
+		logger->Log("Descriptor Set Layout initialized!");
 		InitPipelineLayout();
-		std::cout << "Pipeline Layout initialized!\n\n";
+		logger->Log("Pipeline Layout initialized!");
 		InitDescriptorPool();
-		std::cout << "Descriptor Pool initialized!\n\n";
+		logger->Log("Descriptor Pool initialized!");
 		InitDescriptorSet();
-		std::cout << "Descriptor Set initialized!\n\n";
+		logger->Log("Descriptor Set initialized!");
+
+		logger->BeginSection("Uniform Buffer");
 		InitUniformBuffer();
-		std::cout << "Uniform Buffer initialized!\n\n";
+		logger->Log("Uniform Buffer initialized!");
+		logger->EndSection();
+
 		InitRenderPass();
-		std::cout << "Render Pass initialized!\n\n";
+		logger->Log("Render Pass initialized!");
 	}
 
 	RendererImpl::~RendererImpl() = default;
@@ -136,8 +150,8 @@ namespace Vulkan {
 		}
 
 		physicalDevice = physicalDevices[0];
-		std::cout << "Creating a Vulkan Device from " << physicalDevice.getProperties().deviceName << std::endl;
-		InspectDevice(physicalDevice);
+		logger->Log("Creating a Vulkan Device from " + std::string(physicalDevice.getProperties().deviceName));
+		InspectDevice(physicalDevice, logger);
 	}
 
 	void RendererImpl::InitQueueFamilyIndex()
@@ -148,7 +162,7 @@ namespace Vulkan {
 		if (queueFamilyIndex == -1) {
 			throw std::runtime_error("Graphics queue not found in the device");
 		}
-		std::cout << "Choosing queue family #" << queueFamilyIndex.value() << std::endl;
+		logger->Log("Choosing queue family #" + std::to_string(queueFamilyIndex.value()));
 	}
 
 	void RendererImpl::InitDevice()
@@ -211,18 +225,20 @@ namespace Vulkan {
 		bool formatFound = false;
 
 		auto surfaceFormats = physicalDevice.getSurfaceFormatsKHR(*surface);
-		std::cout << "Surface formats:\n";
+		logger->BeginSection("Surface formats:");
 		for (int i = 0; i < surfaceFormats.size(); i++) {
 			const auto& format = surfaceFormats[i];
-			std::cout << "\t#" << i << ": \n";
-			std::cout << "\t\tFormat: " << vk::to_string(format.format) << std::endl;
-			std::cout << "\t\tColor Space: " << vk::to_string(format.colorSpace) << std::endl;
+			logger->BeginSection("#" + std::to_string(i) + ":");
+			logger->Log("Format: " + vk::to_string(format.format));
+			logger->Log("Color Space: " + vk::to_string(format.colorSpace));
+			logger->EndSection();
 
 			if (format.format == desiredFormat && format.colorSpace == desiredColorSpace) {
 				formatFound = true;
 				break;
 			}
 		}
+		logger->EndSection();
 		if (!formatFound) {
 			std::stringstream ss;
 			ss << "Unable to find desired format: " << vk::to_string(desiredFormat)
@@ -243,8 +259,8 @@ namespace Vulkan {
 
 		constexpr int desiredMinImageCount = 3; // triple buffering
 		auto surfaceCapabilites = physicalDevice.getSurfaceCapabilitiesKHR(*surface);
-		std::cout << "Surface minImageCount: " << surfaceCapabilites.minImageCount << std::endl;
-		std::cout << "Surface maxImageCount: " << surfaceCapabilites.maxImageCount << std::endl;
+		logger->Log("Surface minImageCount: " + std::to_string(surfaceCapabilites.minImageCount));
+		logger->Log("Surface maxImageCount: " + std::to_string(surfaceCapabilites.maxImageCount));
 		if (
 			surfaceCapabilites.minImageCount > desiredMinImageCount ||
 			surfaceCapabilites.maxImageCount < desiredMinImageCount)
@@ -252,14 +268,14 @@ namespace Vulkan {
 			throw std::runtime_error("Surface does not support three image buffers");
 		}
 
-		std::cout << "Surface extent: (w: " << surfaceCapabilites.currentExtent.width <<
-			", h: " << surfaceCapabilites.currentExtent.height << ")\n";
+		logger->Log("Surface extent: (w: " + std::to_string(surfaceCapabilites.currentExtent.width) +
+			", h: " +  std::to_string(surfaceCapabilites.currentExtent.height) + ")");
 
 		if (!(surfaceCapabilites.supportedTransforms & vk::SurfaceTransformFlagBitsKHR::eIdentity)) {
 			throw std::runtime_error("Identity surface transform not supported");
 		}
 
-		std::cout << "Supported composite alpha: " << vk::to_string(surfaceCapabilites.supportedCompositeAlpha) << "\n";
+		logger->Log("Supported composite alpha: " + vk::to_string(surfaceCapabilites.supportedCompositeAlpha));
 		if (!(surfaceCapabilites.supportedCompositeAlpha & vk::CompositeAlphaFlagBitsKHR::eOpaque)) {
 			throw std::runtime_error("Surface opaque composite alpha mode not supported");
 		}
@@ -267,9 +283,9 @@ namespace Vulkan {
 		auto desiredPresentMode = vk::PresentModeKHR::eFifoRelaxed;
 		auto supportedPresentModes = physicalDevice.getSurfacePresentModesKHR(surface.get());
 		bool modeFound = false;
-		std::cout << "Supported present modes: ";
+		logger->Log("Supported present modes: ");
 		for (auto&& mode : supportedPresentModes) {
-			std::cout << vk::to_string(mode) << "\n";
+			logger->Log(vk::to_string(mode));
 			if (mode == desiredPresentMode) {
 				modeFound = true;
 			}
@@ -346,7 +362,8 @@ namespace Vulkan {
 		DepthBuffer::CreateInfo createInfo{
 			vk::Extent2D{ci.windowWidth, ci.windowHeight},
 			physicalDevice,
-			*device
+			*device,
+			logger
 		};
 
 		depthBuffer = std::make_unique<DepthBuffer>(createInfo);
@@ -421,7 +438,8 @@ namespace Vulkan {
 			sizeof(Renderer::UniformBufferData),
 			*device,
 			physicalDevice,
-			*descriptorSet
+			*descriptorSet,
+			logger
 		};
 
 		uniformBuffer = std::make_unique<UniformBuffer>(createInfo);

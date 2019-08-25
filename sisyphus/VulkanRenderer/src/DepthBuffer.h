@@ -1,5 +1,6 @@
 #pragma once
 #include "Vulkan.h"
+#include "Utils\ILogger.h"
 
 namespace Vulkan {
 	class DepthBuffer {
@@ -8,6 +9,7 @@ namespace Vulkan {
 			vk::Extent2D extent;
 			vk::PhysicalDevice physicalDevice;
 			vk::Device device;
+			ILogger* logger;
 		};
 
 		static constexpr vk::Format format = vk::Format::eD16Unorm;

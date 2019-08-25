@@ -1,6 +1,7 @@
 #pragma once
 #include "Vulkan.h"
 #include "Utils/BreakAssert.h"
+#include "Utils\ILogger.h"
 
 namespace Vulkan {
 
@@ -11,6 +12,7 @@ namespace Vulkan {
 			vk::Device device;
 			vk::PhysicalDevice physicalDevice;
 			vk::DescriptorSet descriptorSet;
+			ILogger* logger;
 		};
 
 		UniformBuffer(CreateInfo ci);

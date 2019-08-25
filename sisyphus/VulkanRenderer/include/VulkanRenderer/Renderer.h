@@ -1,6 +1,8 @@
 #pragma once
 #include <memory>
 
+class ILogger;
+
 namespace Vulkan {
 	class RendererImpl;
 
@@ -9,6 +11,7 @@ namespace Vulkan {
 		struct CreateInfo {
 			uint32_t windowWidth;
 			uint32_t windowHeight;
+			ILogger* logger;
 		};
 
 		struct UniformBufferData {

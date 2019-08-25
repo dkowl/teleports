@@ -4,6 +4,7 @@
 #include "PlatformSpecific.h"
 #include "DepthBuffer.h"
 #include "UniformBuffer.h"
+#include "Utils\ILogger.h"
 #include <memory>
 #include <optional>
 
@@ -64,5 +65,7 @@ namespace Vulkan {
 		std::unique_ptr<UniformBuffer> uniformBuffer;
 
 		vk::UniqueRenderPass renderPass;
+
+		ILogger* logger;
 	};
 }

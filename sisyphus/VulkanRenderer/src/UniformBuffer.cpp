@@ -1,18 +1,19 @@
 #include "UniformBuffer.h"
 #include "MemoryUtils.h"
-#include <iostream>
 
 namespace Vulkan {
 	UniformBuffer::UniformBuffer(CreateInfo ci) :
 		ci(ci)
 	{
-		std::cout << "Uniform Buffer:\n";
+		if (ci.logger == nullptr) {
+			throw std::runtime_error("Logger cannot be null");
+		}
 		CreateBuffer();
-		std::cout << "\tBuffer created!\n";
+		ci.logger->Log("Buffer created!");
 		AllocateMemory();
-		std::cout << "\tMemory allocated!\n";
+		ci.logger->Log("Memory allocated!");
 		BindMemory();
-		std::cout << "\tMemory bound!\n";
+		ci.logger->Log("Memory bound!");
 	}
 
 	UniformBuffer::~UniformBuffer() = default;
@@ -33,7 +34,8 @@ namespace Vulkan {
 		auto memoryTypeIndex = FindMemoryType(
 			ci.physicalDevice.getMemoryProperties(),
 			memoryRequirements.memoryTypeBits,
-			vk::MemoryPropertyFlagBits::eHostVisible | vk::MemoryPropertyFlagBits::eHostCoherent
+			vk::MemoryPropertyFlagBits::eHostVisible | vk::MemoryPropertyFlagBits::eHostCoherent,
+			ci.logger
 		);
 
 		memory = ci.device.allocateMemoryUnique(vk::MemoryAllocateInfo(memoryRequirements.size, memoryTypeIndex));
