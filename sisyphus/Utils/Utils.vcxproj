@@ -74,10 +74,12 @@
   <ItemGroup>
     <ClInclude Include="include\Utils\BreakAssert.h" />
     <ClInclude Include="include\Utils\ILogger.h" />
+    <ClInclude Include="include\Utils\Logger.h" />
     <ClInclude Include="include\Utils\OstreamLogger.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakAssert.cpp" />
+    <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\OstreamLogger.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

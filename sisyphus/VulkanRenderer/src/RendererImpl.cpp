@@ -505,6 +505,22 @@ namespace Vulkan {
 		renderPass = device->createRenderPassUnique(renderPassCreateInfo);
 	}
 
+	void RendererImpl::CreateShader(uuids::uuid id, const std::string& code, ShaderType type)
+	{
+		BreakAssert(device);
+
+		Shader::CreateInfo shaderInfo{
+			code,
+			type,
+			*device
+		};
+		auto shader = std::make_unique<Shader>(shaderInfo);
+
+		shaders[id] = std::move(shader);
+
+		logger->Log("Shader " + uuids::to_string(id) + " created!");
+	}
+
 	void RendererImpl::UpdateUniformBuffer(Renderer::UniformBufferData data)
 	{
 		BreakAssert(uniformBuffer);

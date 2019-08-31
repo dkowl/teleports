@@ -41,6 +41,8 @@
     <Import Project="..\props\Utils.props" />
     <Import Project="..\props\VulkanRenderer.props" />
     <Import Project="..\props\Vulkan.props" />
+    <Import Project="..\props\stduuid.props" />
+    <Import Project="..\props\Glslang.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -48,6 +50,8 @@
     <Import Project="..\props\Utils.props" />
     <Import Project="..\props\VulkanRenderer.props" />
     <Import Project="..\props\Vulkan.props" />
+    <Import Project="..\props\stduuid.props" />
+    <Import Project="..\props\Glslang.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />

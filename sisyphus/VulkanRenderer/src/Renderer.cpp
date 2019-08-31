@@ -12,3 +12,8 @@ void Vulkan::Renderer::UpdateUniformBuffer(UniformBufferData data)
 {
 	impl->UpdateUniformBuffer(data);
 }
+
+void Vulkan::Renderer::CreateShader(uuids::uuid id, const std::string& code, ShaderType type)
+{
+	impl->CreateShader(id, code, type);
+}

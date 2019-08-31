@@ -1,5 +1,7 @@
 #pragma once
 #include <memory>
+#include "ShaderType.h"
+#include "uuid.h"
 
 class ILogger;
 
@@ -24,6 +26,8 @@ namespace Vulkan {
 		~Renderer(); // default
 
 		void UpdateUniformBuffer(UniformBufferData data);
+
+		void CreateShader(uuids::uuid id, const std::string& code, ShaderType type);
 
 	private:
 		std::unique_ptr<RendererImpl> impl;

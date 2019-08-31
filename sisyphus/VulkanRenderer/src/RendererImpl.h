@@ -4,9 +4,11 @@
 #include "PlatformSpecific.h"
 #include "DepthBuffer.h"
 #include "UniformBuffer.h"
+#include "Shader.h"
 #include "Utils\ILogger.h"
 #include <memory>
 #include <optional>
+#include <unordered_map>
 
 namespace WindowCreator {
 	class Window;
@@ -20,6 +22,7 @@ namespace Vulkan {
 		~RendererImpl(); // default
 
 		void UpdateUniformBuffer(Renderer::UniformBufferData data);
+		void CreateShader(uuids::uuid id, const std::string& code, ShaderType type);
 
 	private:
 		void InitInstance();
@@ -65,6 +68,8 @@ namespace Vulkan {
 		std::unique_ptr<UniformBuffer> uniformBuffer;
 
 		vk::UniqueRenderPass renderPass;
+
+		std::unordered_map<uuids::uuid, std::unique_ptr<Shader>> shaders;
 
 		ILogger* logger;
 	};
