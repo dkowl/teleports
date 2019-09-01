@@ -74,4 +74,8 @@ namespace Vulkan {
 
 		ci.device.updateDescriptorSets(writeDescriptorSet, {});
 	}
+	DeviceData UniformBuffer::GetDeviceData()
+	{
+		return DeviceData(ci.device, *memory, ci.sizeInBytes);
+	}
 }

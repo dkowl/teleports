@@ -48,6 +48,9 @@
     <ClInclude Include="src\ShaderType.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Utils\DeviceData.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DepthBuffer.cpp">
@@ -67,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="src\Shader.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\DeviceData.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

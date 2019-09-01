@@ -44,9 +44,15 @@ int main() {
 		logger->BeginSection("Vulkan Renderer");
 		Vulkan::Renderer renderer(rendererCreateInfo);
 
-		renderer.UpdateUniformBuffer({ '\255', '\0', '\0' });
+		Vulkan::Renderer::UniformBufferData ubData{ 255, 0, 0 };
+		renderer.UpdateUniformBuffer(ubData);
 		logger->EndSection();
 		logger->Log("Uniform Buffer updated with 255, 0, 0\n");
+
+		auto ubDataFromGPU = renderer.GetUniformBufferData();
+		if (memcmp(&ubData, &ubDataFromGPU, sizeof(ubData)) != 0) {
+			throw std::logic_error("Uniform buffer data manipulation error!");
+		}
 
 		renderer.CreateShader(
 			uuids::uuid::from_string("9b8c0852-be27-4c0e-add9-da8e2ccf464f").value(), 

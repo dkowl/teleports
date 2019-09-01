@@ -528,4 +528,9 @@ namespace Vulkan {
 		uniformBuffer->UpdateData(data);
 	}
 
+	Renderer::UniformBufferData RendererImpl::GetUniformBufferData()
+	{
+		return uniformBuffer->GetData<Renderer::UniformBufferData>();
+	}
+
 }

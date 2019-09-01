@@ -22,6 +22,8 @@ namespace Vulkan {
 		~RendererImpl(); // default
 
 		void UpdateUniformBuffer(Renderer::UniformBufferData data);
+		Renderer::UniformBufferData GetUniformBufferData();
+
 		void CreateShader(uuids::uuid id, const std::string& code, ShaderType type);
 
 	private:

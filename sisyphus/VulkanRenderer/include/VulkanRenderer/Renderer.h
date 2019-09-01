@@ -17,15 +17,16 @@ namespace Vulkan {
 		};
 
 		struct UniformBufferData {
-			char r;
-			char g;
-			char b;
+			uint8_t r;
+			uint8_t g;
+			uint8_t b;
 		};
 
 		Renderer(CreateInfo ci);
 		~Renderer(); // default
 
 		void UpdateUniformBuffer(UniformBufferData data);
+		UniformBufferData GetUniformBufferData();
 
 		void CreateShader(uuids::uuid id, const std::string& code, ShaderType type);
 

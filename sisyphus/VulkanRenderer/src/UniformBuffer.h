@@ -1,7 +1,8 @@
 #pragma once
 #include "Vulkan.h"
 #include "Utils/BreakAssert.h"
-#include "Utils\ILogger.h"
+#include "Utils/ILogger.h"
+#include "DeviceData.h"
 
 namespace Vulkan {
 
@@ -22,9 +23,18 @@ namespace Vulkan {
 		void UpdateData(T data) {
 			BreakAssert(sizeof(data) == ci.sizeInBytes);
 
-			std::byte* deviceData = static_cast<std::byte*>(ci.device.mapMemory(*memory, 0, ci.sizeInBytes));
-			memcpy(deviceData, &data, ci.sizeInBytes);
-			ci.device.unmapMemory(*memory);			
+			auto deviceData = GetDeviceData();
+			deviceData.Set(reinterpret_cast<std::byte*>(&data));
+		}
+
+		template<typename T>
+		T GetData() {
+			BreakAssert(sizeof(T) == ci.sizeInBytes);
+
+			T result;
+			auto deviceData = GetDeviceData();
+			deviceData.Get(reinterpret_cast<std::byte*>(&result));
+			return result;
 		}
 
 	private:
@@ -32,6 +42,8 @@ namespace Vulkan {
 		void AllocateMemory();
 		void BindMemory();
 		void UpdateDescriptorSet();
+
+		DeviceData GetDeviceData();
 
 		CreateInfo ci;
 		vk::UniqueBuffer buffer;

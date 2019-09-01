@@ -90,6 +90,7 @@
     <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\ShaderType.h" />
     <ClInclude Include="src\UniformBuffer.h" />
+    <ClInclude Include="src\Utils\DeviceData.h" />
     <ClInclude Include="src\Utils\MemoryUtils.h" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +99,7 @@
     <ClCompile Include="src\RendererImpl.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\UniformBuffer.cpp" />
+    <ClCompile Include="src\Utils\DeviceData.cpp" />
     <ClCompile Include="src\Utils\MemoryUtils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
