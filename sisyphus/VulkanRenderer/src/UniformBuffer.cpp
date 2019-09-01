@@ -14,6 +14,8 @@ namespace Vulkan {
 		ci.logger->Log("Memory allocated!");
 		BindMemory();
 		ci.logger->Log("Memory bound!");
+		UpdateDescriptorSet();
+		ci.logger->Log("Descriptor Set updated!");
 	}
 
 	UniformBuffer::~UniformBuffer() = default;
@@ -22,7 +24,7 @@ namespace Vulkan {
 	{
 		vk::BufferCreateInfo bufferCreateInfo(
 			{},
-			ci.size,
+			ci.sizeInBytes,
 			vk::BufferUsageFlagBits::eUniformBuffer
 		);
 		buffer = ci.device.createBufferUnique(bufferCreateInfo);
@@ -47,5 +49,29 @@ namespace Vulkan {
 		BreakAssert(memory);
 
 		ci.device.bindBufferMemory(*buffer, *memory, 0);
+	}
+
+	void UniformBuffer::UpdateDescriptorSet()
+	{
+		BreakAssert(buffer);
+
+		vk::DescriptorBufferInfo descriptorBufferInfo(
+			*buffer,
+			0,
+			ci.sizeInBytes
+		);
+
+		vk::WriteDescriptorSet writeDescriptorSet(
+			ci.descriptorSet,
+			0,
+			0,
+			1,
+			vk::DescriptorType::eUniformBuffer,
+			nullptr,
+			&descriptorBufferInfo,
+			nullptr
+		);
+
+		ci.device.updateDescriptorSets(writeDescriptorSet, {});
 	}
 }

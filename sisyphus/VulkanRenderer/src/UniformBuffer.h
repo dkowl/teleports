@@ -8,7 +8,7 @@ namespace Vulkan {
 	class UniformBuffer {
 	public:
 		struct CreateInfo {
-			int size;
+			int sizeInBytes;
 			vk::Device device;
 			vk::PhysicalDevice physicalDevice;
 			vk::DescriptorSet descriptorSet;
@@ -20,32 +20,18 @@ namespace Vulkan {
 
 		template<typename T>
 		void UpdateData(T data) {
-			BreakAssert(sizeof(data) == ci.size);
+			BreakAssert(sizeof(data) == ci.sizeInBytes);
 
-			vk::DescriptorBufferInfo descriptorBufferInfo(
-				*buffer,
-				0,
-				ci.size
-			);
-
-			vk::WriteDescriptorSet writeDescriptorSet(
-				ci.descriptorSet,
-				0,
-				0,
-				1,
-				vk::DescriptorType::eUniformBuffer,
-				nullptr,
-				&descriptorBufferInfo,
-				nullptr
-			);
-
-			ci.device.updateDescriptorSets(writeDescriptorSet, {});
+			std::byte* deviceData = static_cast<std::byte*>(ci.device.mapMemory(*memory, 0, ci.sizeInBytes));
+			memcpy(deviceData, &data, ci.sizeInBytes);
+			ci.device.unmapMemory(*memory);			
 		}
 
 	private:
 		void CreateBuffer();
 		void AllocateMemory();
 		void BindMemory();
+		void UpdateDescriptorSet();
 
 		CreateInfo ci;
 		vk::UniqueBuffer buffer;
