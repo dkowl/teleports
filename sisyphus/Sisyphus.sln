@@ -28,6 +28,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utils", "Utils\Utils.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VulkanRenderer", "VulkanRenderer\VulkanRenderer.vcxproj", "{E24C7ECB-173A-489E-9CC4-0FB97BC1D4D2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AssetManagement", "AssetManagement\AssetManagement.vcxproj", "{CBB89831-0AA2-4C01-A866-11E0344BD80B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -78,6 +80,12 @@ Global
 		{E24C7ECB-173A-489E-9CC4-0FB97BC1D4D2}.Release|x64.ActiveCfg = Release|x64
 		{E24C7ECB-173A-489E-9CC4-0FB97BC1D4D2}.Release|x64.Build.0 = Release|x64
 		{E24C7ECB-173A-489E-9CC4-0FB97BC1D4D2}.Release|x86.ActiveCfg = Release|x64
+		{CBB89831-0AA2-4C01-A866-11E0344BD80B}.Debug|x64.ActiveCfg = Debug|x64
+		{CBB89831-0AA2-4C01-A866-11E0344BD80B}.Debug|x64.Build.0 = Debug|x64
+		{CBB89831-0AA2-4C01-A866-11E0344BD80B}.Debug|x86.ActiveCfg = Debug|x64
+		{CBB89831-0AA2-4C01-A866-11E0344BD80B}.Release|x64.ActiveCfg = Release|x64
+		{CBB89831-0AA2-4C01-A866-11E0344BD80B}.Release|x64.Build.0 = Release|x64
+		{CBB89831-0AA2-4C01-A866-11E0344BD80B}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
