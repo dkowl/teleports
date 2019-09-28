@@ -73,9 +73,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Utils\BreakAssert.h" />
+    <ClInclude Include="include\Utils\Filesystem.h" />
     <ClInclude Include="include\Utils\ILogger.h" />
     <ClInclude Include="include\Utils\Logger.h" />
     <ClInclude Include="include\Utils\OstreamLogger.h" />
+    <ClInclude Include="include\Utils\String.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakAssert.cpp" />
