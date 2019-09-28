@@ -38,10 +38,14 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\props\General.props" />
+    <Import Project="..\props\json.props" />
+    <Import Project="..\props\stduuid.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\props\General.props" />
+    <Import Project="..\props\json.props" />
+    <Import Project="..\props\stduuid.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -75,9 +79,11 @@
     <ClInclude Include="include\Utils\BreakAssert.h" />
     <ClInclude Include="include\Utils\Filesystem.h" />
     <ClInclude Include="include\Utils\ILogger.h" />
+    <ClInclude Include="include\Utils\Json.h" />
     <ClInclude Include="include\Utils\Logger.h" />
     <ClInclude Include="include\Utils\OstreamLogger.h" />
     <ClInclude Include="include\Utils\String.h" />
+    <ClInclude Include="include\Utils\UuidJsonSerializer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakAssert.cpp" />
