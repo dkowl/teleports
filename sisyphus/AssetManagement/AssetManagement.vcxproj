@@ -80,7 +80,7 @@
   <ItemGroup>
     <ClInclude Include="include\AssetManagement\Asset.h" />
     <ClInclude Include="include\AssetManagement\AssetManager.h" />
-    <ClInclude Include="src\AssetMetadata.h" />
+    <ClInclude Include="include\AssetManagement\AssetMetadata.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Asset.cpp" />
