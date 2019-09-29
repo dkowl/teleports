@@ -1,7 +1,7 @@
 #pragma once
 #include "json.hpp"
 #include "uuid.h"
-#include "String.h"
+#include "StringUtils.h"
 
 namespace nlohmann {
 	template<>

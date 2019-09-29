@@ -1,7 +1,7 @@
 #pragma once
 #include "uuid.h"
 #include "json.hpp"
-#include "Utils\String.h"
+#include "Utils\StringUtils.h"
 #include "Utils\UuidJsonSerializer.h"
 
 namespace AssetManagement {

@@ -54,7 +54,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\Utils;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -82,13 +82,15 @@
     <ClInclude Include="include\Utils\Json.h" />
     <ClInclude Include="include\Utils\Logger.h" />
     <ClInclude Include="include\Utils\OstreamLogger.h" />
-    <ClInclude Include="include\Utils\String.h" />
+    <ClInclude Include="include\Utils\StringUtils.h" />
+    <ClInclude Include="include\Utils\UuidGenerator.h" />
     <ClInclude Include="include\Utils\UuidJsonSerializer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakAssert.cpp" />
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\OstreamLogger.cpp" />
+    <ClCompile Include="src\UuidGenerator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
