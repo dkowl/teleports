@@ -1,6 +1,6 @@
 #pragma once
 #include "uuid.h"
-#include "Utils\Filesystem.h"
+#include "Utils\FilesystemUtils.h"
 #include "AssetMetadata.h"
 
 namespace AssetManagement {

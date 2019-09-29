@@ -77,7 +77,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Utils\BreakAssert.h" />
-    <ClInclude Include="include\Utils\Filesystem.h" />
+    <ClInclude Include="include\Utils\FilesystemUtils.h" />
     <ClInclude Include="include\Utils\ILogger.h" />
     <ClInclude Include="include\Utils\Json.h" />
     <ClInclude Include="include\Utils\Logger.h" />

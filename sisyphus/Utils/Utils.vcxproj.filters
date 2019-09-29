@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Std Utils">
+      <UniqueIdentifier>{cf957aeb-7fad-4c2b-9b09-d0321cf48bf4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Utils\BreakAssert.h">
@@ -27,20 +30,20 @@
     <ClInclude Include="include\Utils\Logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utils\Filesystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Utils\UuidJsonSerializer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Utils\Json.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Utils\UuidGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Utils\StringUtils.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Std Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\Json.h">
+      <Filter>Header Files\Std Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\FilesystemUtils.h">
+      <Filter>Header Files\Std Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
