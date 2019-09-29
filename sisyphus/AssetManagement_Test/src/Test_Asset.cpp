@@ -23,7 +23,9 @@ TEST_CASE("Asset") {
 	file.open(metaPath, std::ios::trunc);
 	REQUIRE((file.good() && file.is_open()));
 	file << "Random stuff";
+	file.close();
 
 	auto lambda = [assetPath]() {return Asset(assetPath); };
 	REQUIRE_THROWS(lambda());
+	fs::remove_all(dirPath);
 }

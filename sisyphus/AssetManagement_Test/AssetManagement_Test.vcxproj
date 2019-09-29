@@ -84,6 +84,7 @@
   <ItemGroup>
     <ClCompile Include="src\catch_main.cpp" />
     <ClCompile Include="src\Test_Asset.cpp" />
+    <ClCompile Include="src\Test_AssetManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
