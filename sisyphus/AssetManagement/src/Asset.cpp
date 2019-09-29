@@ -11,6 +11,10 @@ namespace AssetManagement {
 		metaPath += ".meta";
 		InitMetadata();
 	}
+	uuids::uuid Asset::GetId() const
+	{
+		return metadata.GetId();
+	}
 	void Asset::InitMetadata()
 	{
 		if (HasMetaFile()) {

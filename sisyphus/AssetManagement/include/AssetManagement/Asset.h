@@ -8,6 +8,8 @@ namespace AssetManagement {
 	public:
 		Asset(Path inPath);
 
+		uuids::uuid GetId() const;
+
 	private:
 		void InitMetadata();
 		bool HasMetaFile();
