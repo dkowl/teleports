@@ -12,6 +12,7 @@ namespace AssetManagement {
 		void InitMetadata();
 		bool HasMetaFile();
 		void ReadMetaFile();
+		void GenerateMetadata();
 		void GenerateMetaFile();
 
 		Path path;

@@ -16,6 +16,9 @@ namespace nlohmann {
 namespace AssetManagement {
 	class AssetMetadata {
 	public:
+		AssetMetadata() = default;
+		AssetMetadata(uuids::uuid id, String name);
+
 		uuids::uuid GetId() const;
 		String GetName() const;
 
@@ -24,6 +27,7 @@ namespace AssetManagement {
 		String name;
 
 		friend struct nlohmann::adl_serializer<AssetManagement::AssetMetadata>;
+		friend class Asset;
 	};
 }
 

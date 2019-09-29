@@ -1,6 +1,7 @@
 #include "Asset.h"
-#include "Utils/Json.h"
 #include <fstream>
+#include "Utils/Json.h"
+#include "Utils/UuidGenerator.h"
 
 namespace AssetManagement {
 	Asset::Asset(Path inPath):
@@ -26,12 +27,29 @@ namespace AssetManagement {
 	void Asset::ReadMetaFile()
 	{
 		std::ifstream metaFile(metaPath);
+		if (!metaFile.is_open()) {
+			throw std::runtime_error("Failed to open meta file " + metaPath.string());
+		}
+
 		json j;
 		metaFile >> j;
 		metadata = j.get<AssetMetadata>();
 	}
+	void Asset::GenerateMetadata()
+	{
+		String name = path.stem().string();
+		uuids::uuid id = GenerateUuid();
+		metadata = AssetMetadata(id, name);
+	}
 	void Asset::GenerateMetaFile()
 	{
-		// TODO:
+		GenerateMetadata();
+		json j = metadata;
+
+		std::ofstream metaFile(metaPath);
+		if (!metaFile.is_open()) {
+			throw std::runtime_error("Failed to create meta file " + metaPath.string());
+		}
+		metaFile << j;
 	}
 }
