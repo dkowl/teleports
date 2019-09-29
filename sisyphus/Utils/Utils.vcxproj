@@ -85,6 +85,7 @@
     <ClInclude Include="include\Utils\StringUtils.h" />
     <ClInclude Include="include\Utils\UuidGenerator.h" />
     <ClInclude Include="include\Utils\UuidJsonSerializer.h" />
+    <ClInclude Include="include\Utils\VectorUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakAssert.cpp" />
