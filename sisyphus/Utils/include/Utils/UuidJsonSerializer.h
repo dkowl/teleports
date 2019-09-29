@@ -10,7 +10,7 @@ namespace nlohmann {
 			j = uuids::to_string(id);
 		}
 		static void from_json(const json& j, uuids::uuid& id) {
-			id.from_string(j.get<String>());
+			id = uuids::uuid::from_string(j.get<String>()).value();
 		}
 	};
 }

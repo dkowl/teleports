@@ -39,7 +39,7 @@ namespace nlohmann {
 			j["name"] = metadata.GetName();
 		}
 		static void from_json(const json& j, AssetManagement::AssetMetadata& metadata) {
-			metadata.id = j["id"];
+			metadata.id = j["id"].get<uuids::uuid>();
 			metadata.name = j["name"];
 		}
 	};
