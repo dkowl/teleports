@@ -6,6 +6,10 @@ namespace AssetManagement {
 	{
 		InitAssets();
 	}
+	int AssetManager::GetAssetCount() const
+	{
+		return static_cast<int>(assets.size());
+	}
 	Vector<Path> AssetManager::FindAllAssetPaths(Path dir)
 	{
 		Vector<Path> result;

@@ -10,6 +10,8 @@ namespace AssetManagement {
 	public:
 		AssetManager(Path inAssetDir);
 
+		int GetAssetCount() const;
+
 	private:
 		static Vector<Path> FindAllAssetPaths(Path dir);
 		void InitAssets();
