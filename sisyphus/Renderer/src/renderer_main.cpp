@@ -2,39 +2,12 @@
 #include <iostream>
 #include "VulkanRenderer\Renderer.h"
 #include "Utils\Logger.h"
-
-const std::string vertexShaderText_PC_C = R"(
-#version 400
-#extension GL_ARB_separate_shader_objects : enable
-#extension GL_ARB_shading_language_420pack : enable
-layout (std140, binding = 0) uniform buffer
-{
-  mat4 mvp;
-} uniformBuffer;
-layout (location = 0) in vec4 pos;
-layout (location = 1) in vec4 inColor;
-layout (location = 0) out vec4 outColor;
-void main()
-{
-  outColor = inColor;
-  gl_Position = uniformBuffer.mvp * pos;
-}
-)";
-
-const std::string fragmentShaderText_C_C = R"(
-#version 400
-#extension GL_ARB_separate_shader_objects : enable
-#extension GL_ARB_shading_language_420pack : enable
-layout (location = 0) in vec4 color;
-layout (location = 0) out vec4 outColor;
-void main()
-{
-  outColor = color;
-}
-)";
+#include "AssetManagement/AssetManager.h"
 
 int main() {
 	try {
+		AssetManagement::AssetManager assetManager("Assets");
+
 		auto logger = &Logger::Get();
 		Vulkan::Renderer::CreateInfo rendererCreateInfo;
 		rendererCreateInfo.windowWidth = 1280;
@@ -54,14 +27,19 @@ int main() {
 			throw std::logic_error("Uniform buffer data manipulation error!");
 		}
 
+		auto vertexShaderFileId = uuids::uuid::from_string("e1124008-e112-4008-a2f3-cf6233498020").value();
+		String vertexShaderText(assetManager.GetAsset(vertexShaderFileId).GetDataAsString());
+		auto fragmentShaderFileId = uuids::uuid::from_string("ce637e01-1d00-405c-8aaa-f0c022235745").value();
+		String fragmentShaderText(assetManager.GetAsset(fragmentShaderFileId).GetDataAsString());
+
 		renderer.CreateShader(
 			uuids::uuid::from_string("9b8c0852-be27-4c0e-add9-da8e2ccf464f").value(), 
-			vertexShaderText_PC_C, 
+			vertexShaderText, 
 			ShaderType::Vertex);
 
 		renderer.CreateShader(
 			uuids::uuid::from_string("36b455c9-b2e0-4bae-a89a-8f7fc750ff74").value(),
-			fragmentShaderText_C_C,
+			fragmentShaderText,
 			ShaderType::Fragment);
 	}
 	catch (std::exception& e) {
