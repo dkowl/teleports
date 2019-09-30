@@ -5,29 +5,10 @@
 #include "Utils\UuidJsonSerializer.h"
 
 namespace AssetManagement {
-	class AssetMetadata;
-}
-
-namespace nlohmann {
-	template<>
-	struct adl_serializer<AssetManagement::AssetMetadata>;
-}
-
-namespace AssetManagement {
-	class AssetMetadata {
-	public:
-		AssetMetadata() = default;
-		AssetMetadata(uuids::uuid id, String name);
-
-		uuids::uuid GetId() const;
-		String GetName() const;
-
-	private:
+	struct AssetMetadata {
 		uuids::uuid id;
 		String name;
-
-		friend struct nlohmann::adl_serializer<AssetManagement::AssetMetadata>;
-		friend class Asset;
+		bool isBinary;
 	};
 }
 
@@ -35,12 +16,14 @@ namespace nlohmann {
 	template<>
 	struct adl_serializer<AssetManagement::AssetMetadata> {
 		static void to_json(json& j, const AssetManagement::AssetMetadata& metadata) {
-			j["id"] = metadata.GetId();
-			j["name"] = metadata.GetName();
+			j["id"] = metadata.id;
+			j["name"] = metadata.name;
+			j["isBinary"] = metadata.isBinary;
 		}
 		static void from_json(const json& j, AssetManagement::AssetMetadata& metadata) {
 			metadata.id = j["id"].get<uuids::uuid>();
 			metadata.name = j["name"];
+			metadata.isBinary = j["isBinary"].get<bool>();
 		}
 	};
 }
