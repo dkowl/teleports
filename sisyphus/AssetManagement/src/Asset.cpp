@@ -2,6 +2,7 @@
 #include <fstream>
 #include "Utils/Json.h"
 #include "Utils/UuidGenerator.h"
+#include "Utils/Logger.h"
 
 namespace AssetManagement {
 	Asset::Asset(Path inPath):
@@ -22,6 +23,10 @@ namespace AssetManagement {
 	uuids::uuid Asset::GetId() const
 	{
 		return metadata.id;
+	}
+	String Asset::GetName() const
+	{
+		return metadata.name;
 	}
 	const Vector<std::byte>& Asset::GetData() const
 	{
@@ -75,6 +80,9 @@ namespace AssetManagement {
 			throw std::runtime_error("Failed to create meta file " + metaPath.string());
 		}
 		metaFile << j;
+
+		Logger::Get().Log("Meta file not found, " + metaPath.string() + " created");
+		Logger::Get().Log("id: " + uuids::to_string(metadata.id) + "\n");
 	}
 	void Asset::LazyLoadData() const
 	{
@@ -100,5 +108,11 @@ namespace AssetManagement {
 		}
 
 		dataIsRead = true;
+
+		Logger::Get().BeginSection("Asset file read from disk");
+		Logger::Get().Log("Id: " + uuids::to_string(metadata.id));
+		Logger::Get().Log("Name: " + metadata.name);
+		Logger::Get().Log("Size: " + std::to_string(size) + " bytes");
+		Logger::Get().EndSection();
 	}
 }

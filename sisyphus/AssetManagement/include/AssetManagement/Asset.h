@@ -13,6 +13,7 @@ namespace AssetManagement {
 		Asset(Path inPath);
 
 		uuids::uuid GetId() const;
+		String GetName() const;
 		const Vector<std::byte>& GetData() const;
 		const std::string_view GetDataAsString() const;
 
