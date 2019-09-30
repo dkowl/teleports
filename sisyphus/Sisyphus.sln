@@ -35,6 +35,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AssetManagement_Test", "Ass
 		{CBB89831-0AA2-4C01-A866-11E0344BD80B} = {CBB89831-0AA2-4C01-A866-11E0344BD80B}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor", "Editor\Editor.vcxproj", "{EB4CB5F1-DEC1-4A96-8A9F-872EBC864BB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -97,6 +99,12 @@ Global
 		{2F226592-0B82-4FD0-983F-EEECAB04D085}.Release|x64.ActiveCfg = Release|x64
 		{2F226592-0B82-4FD0-983F-EEECAB04D085}.Release|x64.Build.0 = Release|x64
 		{2F226592-0B82-4FD0-983F-EEECAB04D085}.Release|x86.ActiveCfg = Release|x64
+		{EB4CB5F1-DEC1-4A96-8A9F-872EBC864BB2}.Debug|x64.ActiveCfg = Debug|x64
+		{EB4CB5F1-DEC1-4A96-8A9F-872EBC864BB2}.Debug|x64.Build.0 = Debug|x64
+		{EB4CB5F1-DEC1-4A96-8A9F-872EBC864BB2}.Debug|x86.ActiveCfg = Debug|x64
+		{EB4CB5F1-DEC1-4A96-8A9F-872EBC864BB2}.Release|x64.ActiveCfg = Release|x64
+		{EB4CB5F1-DEC1-4A96-8A9F-872EBC864BB2}.Release|x64.Build.0 = Release|x64
+		{EB4CB5F1-DEC1-4A96-8A9F-872EBC864BB2}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
