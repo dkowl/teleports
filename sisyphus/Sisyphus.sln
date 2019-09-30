@@ -36,6 +36,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AssetManagement_Test", "Ass
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor", "Editor\Editor.vcxproj", "{EB4CB5F1-DEC1-4A96-8A9F-872EBC864BB2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CBB89831-0AA2-4C01-A866-11E0344BD80B} = {CBB89831-0AA2-4C01-A866-11E0344BD80B}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
