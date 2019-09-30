@@ -10,6 +10,7 @@ namespace AssetManagement {
 	public:
 		AssetManager(Path inAssetDir);
 
+		const Asset& GetAsset(uuids::uuid id) const;
 		int GetAssetCount() const;
 
 	private:
