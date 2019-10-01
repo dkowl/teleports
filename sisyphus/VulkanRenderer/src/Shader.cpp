@@ -67,4 +67,8 @@ namespace Vulkan {
 	{
 		return shaderType;
 	}
+	vk::ShaderModule Shader::GetModule() const
+	{
+		return *shaderModule;
+	}
 }
