@@ -1,7 +1,7 @@
 #include "DeviceData.h"
 
 namespace Vulkan {
-	DeviceData::DeviceData(vk::Device device, vk::DeviceMemory memory, int sizeInBytes) :
+	DeviceData::DeviceData(vk::Device device, vk::DeviceMemory memory, size_t sizeInBytes) :
 		device(device),
 		memory(memory),
 		sizeInBytes(sizeInBytes),

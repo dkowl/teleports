@@ -9,7 +9,7 @@ namespace Vulkan {
 	class UniformBuffer {
 	public:
 		struct CreateInfo {
-			int sizeInBytes;
+			size_t sizeInBytes;
 			vk::Device device;
 			vk::PhysicalDevice physicalDevice;
 			vk::DescriptorSet descriptorSet;
