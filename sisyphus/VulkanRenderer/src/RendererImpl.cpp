@@ -46,6 +46,14 @@ namespace Vulkan {
 		colorSpace(std::nullopt),
 		swapchain(nullptr),
 		depthBuffer(nullptr),
+		descriptorSetLayout(nullptr),
+		pipelineLayout(nullptr),
+		descriptorPool(nullptr),
+		descriptorSet(nullptr),
+		uniformBuffer(nullptr),
+		renderPass(nullptr),
+		vertexBuffer(nullptr),
+		pipeline(nullptr),
 		logger(ci.logger)
 	{
 		if (logger == nullptr) {
@@ -555,14 +563,117 @@ namespace Vulkan {
 
 	void RendererImpl::InitPipeline()
 	{
-		/*vk::PipelineShaderStageCreateInfo shaderStageCreateInfos[2]{
+		BreakAssert(pipelineLayout);
+		BreakAssert(renderPass);
+		BreakAssert(device);
+
+		if (!ShaderExists(vertexShaderId)) {
+			throw std::runtime_error("Vertex shader not found");
+		}
+		if (!ShaderExists(fragmentShaderId)) {
+			throw std::runtime_error("Fragment shader not found");
+		}
+
+		vk::PipelineShaderStageCreateInfo shaderStageCreateInfos[2]{
 			vk::PipelineShaderStageCreateInfo{
 				{},
-
+				vk::ShaderStageFlagBits::eVertex,
+				GetShader(vertexShaderId).GetModule(),
+				"main"
 			},
-			{}
-		};*/
+			vk::PipelineShaderStageCreateInfo{
+				{},
+				vk::ShaderStageFlagBits::eFragment,
+				GetShader(fragmentShaderId).GetModule(),
+				"main"
+			}
+		};
 
+		vk::VertexInputBindingDescription vertexInputBindingDescription(0, sizeof(Renderer::VertexBufferData::Vertex));
+		vk::VertexInputAttributeDescription vertexInputAttributeDescription(0, 0, vk::Format::eR32G32B32Sfloat);
+		vk::PipelineVertexInputStateCreateInfo pipelineVertexInputStateCreateInfo{
+			{},
+			1,
+			&vertexInputBindingDescription,
+			1,
+			&vertexInputAttributeDescription
+		};
+
+		vk::PipelineInputAssemblyStateCreateInfo pipelineInputAssemblyStateCreateInfo{
+			{},
+			vk::PrimitiveTopology::eTriangleList
+		};
+
+		vk::PipelineViewportStateCreateInfo pipelineViewportStateCreateInfo{
+			{},
+			1,
+			nullptr,
+			1,
+			nullptr
+		};
+
+		vk::PipelineRasterizationStateCreateInfo pipelineRasterizationStateCreateInfo{
+			{},
+			false,
+			false,
+			vk::PolygonMode::eFill,
+			vk::CullModeFlagBits::eBack,
+			vk::FrontFace::eClockwise,
+			false,
+			0.0f,
+			0.0f,
+			0.0f,
+			1.0f
+		};
+
+		vk::PipelineMultisampleStateCreateInfo pipelineMultisampleStateCreateInfo;
+
+		vk::PipelineDepthStencilStateCreateInfo pipelineDepthStencilStateCreateInfo{
+			{},
+			true,
+			true,
+			vk::CompareOp::eLessOrEqual
+		};
+
+		vk::PipelineColorBlendStateCreateInfo pipelineColorBlendStateCreateInfo{
+			{},
+			false,
+			vk::LogicOp::eNoOp
+		};
+
+		vk::GraphicsPipelineCreateInfo graphicsPipelineCreateInfo{
+			{},
+			2,
+			shaderStageCreateInfos,
+			&pipelineVertexInputStateCreateInfo,
+			&pipelineInputAssemblyStateCreateInfo,
+			nullptr,
+			&pipelineViewportStateCreateInfo,
+			&pipelineRasterizationStateCreateInfo,
+			&pipelineMultisampleStateCreateInfo,
+			&pipelineDepthStencilStateCreateInfo,
+			&pipelineColorBlendStateCreateInfo,
+			nullptr,
+			*pipelineLayout,
+			*renderPass
+		};
+
+		try {
+			pipeline = device->createGraphicsPipelineUnique(nullptr, graphicsPipelineCreateInfo);
+		}
+		catch(vk::Error& e){
+			logger->Log(e.what());
+			throw;
+		}
+		logger->Log("Pipeline initialized!");
+	}
+
+	Shader& RendererImpl::GetShader(uuids::uuid id)
+	{
+		if (!ShaderExists(id)) {
+			throw std::runtime_error("Shader " + uuids::to_string(id) + " not found");
+		}
+		return *shaders[id];
 	}
 
 	uuids::uuid RendererImpl::CreateShader(const std::string& code, ShaderType type)

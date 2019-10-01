@@ -9,6 +9,11 @@ namespace Vulkan {
 
 	Renderer::~Renderer() = default;
 
+	void Renderer::InitPipeline()
+	{
+		impl->InitPipeline();
+	}
+
 	void Renderer::UpdateUniformBuffer(UniformBufferData data)
 	{
 		impl->UpdateUniformBuffer(data);

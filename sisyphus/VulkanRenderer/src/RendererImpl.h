@@ -22,6 +22,8 @@ namespace Vulkan {
 		RendererImpl(Renderer::CreateInfo ci);
 		~RendererImpl(); // default
 
+		void InitPipeline();
+
 		void UpdateUniformBuffer(Renderer::UniformBufferData data);
 		Renderer::UniformBufferData GetUniformBufferData();
 
@@ -54,7 +56,8 @@ namespace Vulkan {
 		void InitRenderPass();
 		void InitFramebuffers();
 		void InitVertexBuffer();
-		void InitPipeline();
+
+		Shader& GetShader(uuids::uuid id);
 
 		Renderer::CreateInfo ci;
 		vk::UniqueInstance instance;
@@ -81,6 +84,7 @@ namespace Vulkan {
 		vk::UniqueRenderPass renderPass;
 		std::vector<vk::UniqueFramebuffer> framebuffers;
 		std::unique_ptr<VertexBuffer> vertexBuffer;
+		vk::UniquePipeline pipeline;
 
 		std::unordered_map<uuids::uuid, std::unique_ptr<Shader>> shaders;
 		uuids::uuid vertexShaderId;

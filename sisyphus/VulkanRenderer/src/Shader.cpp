@@ -46,7 +46,8 @@ namespace Vulkan {
 		return result;
 	}
 
-	Shader::Shader(const CreateInfo & ci)
+	Shader::Shader(const CreateInfo & ci):
+		shaderType(ci.shaderType)
 	{
 		static bool glslangInitialized = false;
 		if (!glslangInitialized) {

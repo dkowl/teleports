@@ -35,6 +35,8 @@ namespace Vulkan {
 		Renderer(CreateInfo ci);
 		~Renderer(); // default
 
+		void InitPipeline();
+
 		void UpdateUniformBuffer(UniformBufferData data);
 		UniformBufferData GetUniformBufferData();
 

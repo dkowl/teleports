@@ -16,7 +16,6 @@ int main() {
 
 		logger->BeginSection("Vulkan Renderer");
 		Vulkan::Renderer renderer(rendererCreateInfo);
-		logger->EndSection();
 
 		// Shaders
 		auto vertexShaderFileId = uuids::uuid::from_string("e1124008-e112-4008-a2f3-cf6233498020").value();
@@ -34,6 +33,9 @@ int main() {
 
 		renderer.EnableShader(vertexShaderId);
 		renderer.EnableShader(fragmentShaderId);
+
+		renderer.InitPipeline();
+		logger->EndSection();
 
 		// Uniform buffer
 		Vulkan::Renderer::UniformBufferData ubData{ 255, 0, 0 };
