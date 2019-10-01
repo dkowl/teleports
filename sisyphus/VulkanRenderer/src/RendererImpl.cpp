@@ -98,6 +98,9 @@ namespace Vulkan {
 
 		InitRenderPass();
 		logger->Log("Render Pass initialized!");
+
+		InitFramebuffers();
+		logger->Log(std::to_string(framebuffers.size()) + " Framebuffers initialized!");
 	}
 
 	RendererImpl::~RendererImpl() = default;
@@ -503,6 +506,30 @@ namespace Vulkan {
 		);
 
 		renderPass = device->createRenderPassUnique(renderPassCreateInfo);
+	}
+
+	void RendererImpl::InitFramebuffers()
+	{
+		BreakAssert(!imageViews.empty());
+		BreakAssert(depthBuffer);
+		BreakAssert(device);
+		vk::ImageView attachments[2];
+		attachments[1] = depthBuffer->GetImageView();
+
+		for (const auto& imageView : imageViews) {
+			attachments[0] = *imageView;
+			vk::FramebufferCreateInfo framebufferCreateInfo{
+				{},
+				*renderPass,
+				2,
+				attachments,
+				ci.windowWidth,
+				ci.windowHeight,
+				1
+			};
+
+			framebuffers.push_back(device->createFramebufferUnique(framebufferCreateInfo));
+		}
 	}
 
 	void RendererImpl::CreateShader(uuids::uuid id, const std::string& code, ShaderType type)

@@ -17,6 +17,8 @@ namespace Vulkan {
 		DepthBuffer(CreateInfo ci);
 		~DepthBuffer(); // default
 
+		vk::ImageView GetImageView() const;
+
 	private:
 		void CreateImage();
 		void AllocateMemory();

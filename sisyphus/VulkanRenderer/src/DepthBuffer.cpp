@@ -23,6 +23,11 @@ namespace Vulkan {
 
 	DepthBuffer::~DepthBuffer() = default;
 
+	vk::ImageView DepthBuffer::GetImageView() const
+	{
+		return *imageView;
+	}
+
 	void DepthBuffer::CreateImage()
 	{
 		vk::FormatProperties formatProperties = ci.physicalDevice.getFormatProperties(format);

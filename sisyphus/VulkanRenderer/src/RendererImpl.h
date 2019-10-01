@@ -46,6 +46,7 @@ namespace Vulkan {
 		void InitDescriptorSet();
 		void InitUniformBuffer();
 		void InitRenderPass();
+		void InitFramebuffers();
 
 		Renderer::CreateInfo ci;
 		vk::UniqueInstance instance;
@@ -70,6 +71,7 @@ namespace Vulkan {
 		std::unique_ptr<UniformBuffer> uniformBuffer;
 
 		vk::UniqueRenderPass renderPass;
+		std::vector<vk::UniqueFramebuffer> framebuffers;
 
 		std::unordered_map<uuids::uuid, std::unique_ptr<Shader>> shaders;
 
