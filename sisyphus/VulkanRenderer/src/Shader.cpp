@@ -63,4 +63,8 @@ namespace Vulkan {
 
 		shaderModule = ci.device.createShaderModuleUnique(moduleCreateInfo);
 	}
+	ShaderType Shader::GetType() const
+	{
+		return shaderType;
+	}
 }
