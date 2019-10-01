@@ -24,13 +24,11 @@ int main() {
 		auto fragmentShaderFileId = uuids::uuid::from_string("ce637e01-1d00-405c-8aaa-f0c022235745").value();
 		String fragmentShaderText(assetManager.GetAsset(fragmentShaderFileId).GetDataAsString());
 
-		renderer.CreateShader(
-			uuids::uuid::from_string("9b8c0852-be27-4c0e-add9-da8e2ccf464f").value(),
+		auto vertexShaderId = renderer.CreateShader(
 			vertexShaderText,
 			ShaderType::Vertex);
 
-		renderer.CreateShader(
-			uuids::uuid::from_string("36b455c9-b2e0-4bae-a89a-8f7fc750ff74").value(),
+		auto fragmentShaderId = renderer.CreateShader(
 			fragmentShaderText,
 			ShaderType::Fragment);
 

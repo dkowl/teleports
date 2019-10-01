@@ -28,7 +28,7 @@ namespace Vulkan {
 		void UpdateVertexBuffer(Renderer::VertexBufferData data);
 		Renderer::VertexBufferData GetVertexBufferData();
 
-		void CreateShader(uuids::uuid id, const std::string& code, ShaderType type);
+		uuids::uuid CreateShader(const std::string& code, ShaderType type);
 
 	private:
 		void InitInstance();
@@ -52,6 +52,7 @@ namespace Vulkan {
 		void InitRenderPass();
 		void InitFramebuffers();
 		void InitVertexBuffer();
+		void InitPipeline();
 
 		Renderer::CreateInfo ci;
 		vk::UniqueInstance instance;

@@ -5,6 +5,7 @@
 #include "RendererImpl.h"
 #include "WindowCreator\WindowCreator.h"
 #include "Utils\BreakAssert.h"
+#include "Utils\UuidGenerator.h"
 
 namespace wc = WindowCreator;
 
@@ -552,7 +553,19 @@ namespace Vulkan {
 		vertexBuffer = std::make_unique<VertexBuffer>(createInfo);
 	}
 
-	void RendererImpl::CreateShader(uuids::uuid id, const std::string& code, ShaderType type)
+	void RendererImpl::InitPipeline()
+	{
+		/*vk::PipelineShaderStageCreateInfo shaderStageCreateInfos[2]{
+			vk::PipelineShaderStageCreateInfo{
+				{},
+
+			},
+			{}
+		};*/
+
+	}
+
+	uuids::uuid RendererImpl::CreateShader(const std::string& code, ShaderType type)
 	{
 		BreakAssert(device);
 
@@ -562,10 +575,11 @@ namespace Vulkan {
 			*device
 		};
 		auto shader = std::make_unique<Shader>(shaderInfo);
-
+		auto id = GenerateUuid();
 		shaders[id] = std::move(shader);
 
 		logger->Log("Shader " + uuids::to_string(id) + " created!");
+		return id;
 	}
 
 	void RendererImpl::UpdateUniformBuffer(Renderer::UniformBufferData data)
