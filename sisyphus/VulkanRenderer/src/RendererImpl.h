@@ -29,6 +29,8 @@ namespace Vulkan {
 		Renderer::VertexBufferData GetVertexBufferData();
 
 		uuids::uuid CreateShader(const std::string& code, ShaderType type);
+		bool ShaderExists(uuids::uuid id) const;
+		void EnableShader(uuids::uuid id);
 
 	private:
 		void InitInstance();
@@ -81,6 +83,8 @@ namespace Vulkan {
 		std::unique_ptr<VertexBuffer> vertexBuffer;
 
 		std::unordered_map<uuids::uuid, std::unique_ptr<Shader>> shaders;
+		uuids::uuid vertexShaderId;
+		uuids::uuid fragmentShaderId;
 
 		ILogger* logger;
 	};

@@ -582,6 +582,32 @@ namespace Vulkan {
 		return id;
 	}
 
+	bool RendererImpl::ShaderExists(uuids::uuid id) const
+	{
+		return shaders.find(id) != shaders.end();
+	}
+
+	void RendererImpl::EnableShader(uuids::uuid id)
+	{
+		if (!ShaderExists(id)) {
+			throw std::runtime_error("Shader " + uuids::to_string(id) + " does not exist");
+		}
+		auto type = shaders[id]->GetType();
+		switch (type) {
+		case ShaderType::Vertex:
+			vertexShaderId = id;
+			break;
+		case ShaderType::Fragment:
+			fragmentShaderId = id;
+			break;
+		default:
+			BreakAssert(false);
+			break;
+		}
+
+		logger->Log("Shader " + uuids::to_string(id) + " enabled!");
+	}
+
 	void RendererImpl::UpdateUniformBuffer(Renderer::UniformBufferData data)
 	{
 		BreakAssert(uniformBuffer);

@@ -33,4 +33,8 @@ namespace Vulkan {
 	{
 		return impl->CreateShader(code, type);
 	}
+	void Renderer::EnableShader(uuids::uuid id)
+	{
+		impl->EnableShader(id);
+	}
 }

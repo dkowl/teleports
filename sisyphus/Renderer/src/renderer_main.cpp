@@ -32,6 +32,9 @@ int main() {
 			fragmentShaderText,
 			ShaderType::Fragment);
 
+		renderer.EnableShader(vertexShaderId);
+		renderer.EnableShader(fragmentShaderId);
+
 		// Uniform buffer
 		Vulkan::Renderer::UniformBufferData ubData{ 255, 0, 0 };
 		renderer.UpdateUniformBuffer(ubData);
