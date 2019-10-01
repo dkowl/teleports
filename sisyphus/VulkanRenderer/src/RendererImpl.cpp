@@ -101,6 +101,11 @@ namespace Vulkan {
 
 		InitFramebuffers();
 		logger->Log(std::to_string(framebuffers.size()) + " Framebuffers initialized!");
+		
+		logger->BeginSection("Vertex Buffer");
+		InitVertexBuffer();
+		logger->Log("Vertex Buffer initialized!");
+		logger->EndSection();
 	}
 
 	RendererImpl::~RendererImpl() = default;
@@ -435,6 +440,7 @@ namespace Vulkan {
 	void RendererImpl::InitUniformBuffer()
 	{
 		BreakAssert(device);
+		BreakAssert(physicalDevice);
 		BreakAssert(descriptorSet);
 
 		UniformBuffer::CreateInfo createInfo{
@@ -532,6 +538,20 @@ namespace Vulkan {
 		}
 	}
 
+	void RendererImpl::InitVertexBuffer()
+	{
+		BreakAssert(device);
+		BreakAssert(physicalDevice);
+
+		VertexBuffer::CreateInfo createInfo{
+			sizeof(Renderer::VertexBufferData),
+			*device,
+			physicalDevice
+		};
+
+		vertexBuffer = std::make_unique<VertexBuffer>(createInfo);
+	}
+
 	void RendererImpl::CreateShader(uuids::uuid id, const std::string& code, ShaderType type)
 	{
 		BreakAssert(device);
@@ -551,13 +571,25 @@ namespace Vulkan {
 	void RendererImpl::UpdateUniformBuffer(Renderer::UniformBufferData data)
 	{
 		BreakAssert(uniformBuffer);
-
 		uniformBuffer->UpdateData(data);
 	}
 
 	Renderer::UniformBufferData RendererImpl::GetUniformBufferData()
 	{
+		BreakAssert(uniformBuffer);
 		return uniformBuffer->GetData<Renderer::UniformBufferData>();
+	}
+
+	void RendererImpl::UpdateVertexBuffer(Renderer::VertexBufferData data)
+	{
+		BreakAssert(vertexBuffer);
+		vertexBuffer->GetDeviceData().SetData(data);
+	}
+
+	Renderer::VertexBufferData RendererImpl::GetVertexBufferData()
+	{
+		BreakAssert(vertexBuffer);
+		return vertexBuffer->GetDeviceData().GetData<Renderer::VertexBufferData>();
 	}
 
 }

@@ -37,13 +37,13 @@ namespace Vulkan {
 			return result;
 		}
 
+		DeviceData GetDeviceData();
+
 	private:
 		void CreateBuffer();
 		void AllocateMemory();
 		void BindMemory();
 		void UpdateDescriptorSet();
-
-		DeviceData GetDeviceData();
 
 		CreateInfo ci;
 		vk::UniqueBuffer buffer;

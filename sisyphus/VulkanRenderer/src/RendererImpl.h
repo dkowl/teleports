@@ -4,6 +4,7 @@
 #include "PlatformSpecific.h"
 #include "DepthBuffer.h"
 #include "UniformBuffer.h"
+#include "VertexBuffer.h"
 #include "Shader.h"
 #include "Utils\ILogger.h"
 #include <memory>
@@ -23,6 +24,9 @@ namespace Vulkan {
 
 		void UpdateUniformBuffer(Renderer::UniformBufferData data);
 		Renderer::UniformBufferData GetUniformBufferData();
+
+		void UpdateVertexBuffer(Renderer::VertexBufferData data);
+		Renderer::VertexBufferData GetVertexBufferData();
 
 		void CreateShader(uuids::uuid id, const std::string& code, ShaderType type);
 
@@ -47,6 +51,7 @@ namespace Vulkan {
 		void InitUniformBuffer();
 		void InitRenderPass();
 		void InitFramebuffers();
+		void InitVertexBuffer();
 
 		Renderer::CreateInfo ci;
 		vk::UniqueInstance instance;
@@ -72,6 +77,7 @@ namespace Vulkan {
 
 		vk::UniqueRenderPass renderPass;
 		std::vector<vk::UniqueFramebuffer> framebuffers;
+		std::unique_ptr<VertexBuffer> vertexBuffer;
 
 		std::unordered_map<uuids::uuid, std::unique_ptr<Shader>> shaders;
 

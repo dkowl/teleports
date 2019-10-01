@@ -22,11 +22,24 @@ namespace Vulkan {
 			uint8_t b;
 		};
 
+		struct VertexBufferData {
+			struct Vertex {
+				float x;
+				float y;
+				float z;
+			};
+
+			Vertex vertices[4];
+		};
+
 		Renderer(CreateInfo ci);
 		~Renderer(); // default
 
 		void UpdateUniformBuffer(UniformBufferData data);
 		UniformBufferData GetUniformBufferData();
+
+		void UpdateVertexBuffer(VertexBufferData data);
+		VertexBufferData GetVertexBufferData();
 
 		void CreateShader(uuids::uuid id, const std::string& code, ShaderType type);
 

@@ -51,6 +51,9 @@
     <ClInclude Include="src\Utils\DeviceData.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="src\VertexBuffer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DepthBuffer.cpp">
@@ -73,6 +76,9 @@
     </ClCompile>
     <ClCompile Include="src\Utils\DeviceData.cpp">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VertexBuffer.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -20,21 +20,21 @@ namespace Vulkan {
 		void SetData(const T& data) {
 			BreakAssert(sizeof(T) == sizeInBytes);
 
-			Set(reinterpret_cast<std::byte*>(&data));
+			Set(reinterpret_cast<const std::byte*>(&data));
 		}
 
 		template<typename T>
 		void SetData(const T* data, size_t numObjects) {
 			BreakAssert(sizeof(T) * numObjects == sizeInBytes);
 
-			Set(reinterpret_cast<std::byte*>(&data));
+			Set(reinterpret_cast<const std::byte*>(&data));
 		}
 
 		template<typename T>
 		void SetData(const std::vector<T>& data) {
 			BreakAssert(data.size() * sizeof(T) == sizeInBytes);
 
-			Set(reinterpret_cast<std::byte*>(data.data()));
+			Set(reinterpret_cast<const std::byte*>(data.data()));
 		}
 
 		template<typename T>
