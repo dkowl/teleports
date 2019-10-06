@@ -54,6 +54,9 @@
     <ClInclude Include="src\VertexBuffer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Utils\VulkanUtils.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DepthBuffer.cpp">
@@ -79,6 +82,9 @@
     </ClCompile>
     <ClCompile Include="src\VertexBuffer.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\VulkanUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

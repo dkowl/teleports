@@ -6,6 +6,7 @@
 #include "WindowCreator\WindowCreator.h"
 #include "Utils\BreakAssert.h"
 #include "Utils\UuidGenerator.h"
+#include "VulkanUtils.h"
 
 namespace wc = WindowCreator;
 
@@ -59,6 +60,8 @@ namespace Vulkan {
 		if (logger == nullptr) {
 			throw std::runtime_error("Logger not found");
 		}
+
+		EnumerateInstanceLayerProperties();
 
 		InitInstance();
 		logger->Log("Vulkan instance initialized!");
@@ -131,6 +134,9 @@ namespace Vulkan {
 
 		std::vector<const char*> instanceExtensionNames = PlatformSpecific::GetInstanceExtensionNames();
 		instanceExtensionNames.push_back(VK_KHR_SURFACE_EXTENSION_NAME);
+
+		std::vector<const char*> layerNames = "VK_LAYER_LUNARG_standard_validation";
+
 
 		vk::InstanceCreateInfo instanceCreateInfo(
 			{},

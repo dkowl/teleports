@@ -92,6 +92,7 @@
     <ClInclude Include="src\UniformBuffer.h" />
     <ClInclude Include="src\Utils\DeviceData.h" />
     <ClInclude Include="src\Utils\MemoryUtils.h" />
+    <ClInclude Include="src\Utils\VulkanUtils.h" />
     <ClInclude Include="src\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +103,7 @@
     <ClCompile Include="src\UniformBuffer.cpp" />
     <ClCompile Include="src\Utils\DeviceData.cpp" />
     <ClCompile Include="src\Utils\MemoryUtils.cpp" />
+    <ClCompile Include="src\Utils\VulkanUtils.cpp" />
     <ClCompile Include="src\VertexBuffer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
