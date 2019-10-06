@@ -14,4 +14,5 @@ namespace Vulkan {
 	};
 
 	void EnumerateInstanceLayerProperties();
+	bool IsLayerEnabled(std::string layerName);
 }

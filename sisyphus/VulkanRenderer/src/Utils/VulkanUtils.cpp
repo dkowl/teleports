@@ -33,4 +33,14 @@ namespace Vulkan {
 		logger.EndSection();
 
 	}
+	bool IsLayerEnabled(std::string layerName)
+	{
+		auto layerProperties = vk::enumerateInstanceLayerProperties();
+		for (const auto& lp : layerProperties) {
+			if (layerName == lp.layerName) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
