@@ -57,6 +57,8 @@ namespace Vulkan {
 		void InitFramebuffers();
 		void InitVertexBuffer();
 
+		std::vector<const char*> GetInstanceLayerNames();
+
 		Shader& GetShader(uuids::uuid id);
 
 		Renderer::CreateInfo ci;

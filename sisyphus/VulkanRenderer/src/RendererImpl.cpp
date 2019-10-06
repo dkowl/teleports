@@ -61,6 +61,8 @@ namespace Vulkan {
 			throw std::runtime_error("Logger not found");
 		}
 
+		// TODO: single boolean variable controlling the validation layers enabling, set based upon _DEBUG macro, do not spread the macro to more than 1 place
+		// TODO: add a debug callback, according to https://github.com/KhronosGroup/Vulkan-Hpp/blob/master/samples/EnableValidationWithCallback/EnableValidationWithCallback.cpp
 		EnumerateInstanceLayerProperties();
 
 		InitInstance();
@@ -122,6 +124,23 @@ namespace Vulkan {
 
 	RendererImpl::~RendererImpl() = default;
 
+	std::vector<const char*> RendererImpl::GetInstanceLayerNames()
+	{
+		constexpr auto lunarGLayerName = "VK_LAYER_LUNARG_standard_validation";
+		std::vector<const char*> result;
+#ifdef _DEBUG
+		result.push_back(lunarGLayerName);
+#endif
+
+		for (auto&& name : result) {
+			if (!IsLayerEnabled(name)) {
+				throw std::runtime_error(std::string("Cannot find layer ") + std::string(name));
+			}
+		}
+
+		return result;
+	}
+
 	void RendererImpl::InitInstance()
 	{
 		vk::ApplicationInfo applicationInfo(
@@ -134,15 +153,17 @@ namespace Vulkan {
 
 		std::vector<const char*> instanceExtensionNames = PlatformSpecific::GetInstanceExtensionNames();
 		instanceExtensionNames.push_back(VK_KHR_SURFACE_EXTENSION_NAME);
+#ifdef _DEBUG
+		instanceExtensionNames.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+#endif
 
-		std::vector<const char*> layerNames = "VK_LAYER_LUNARG_standard_validation";
-
+		std::vector<const char*> layerNames = GetInstanceLayerNames();
 
 		vk::InstanceCreateInfo instanceCreateInfo(
 			{},
 			&applicationInfo,
-			0,
-			nullptr,
+			static_cast<uint32_t>(layerNames.size()),
+			layerNames.data(),
 			static_cast<uint32_t>(instanceExtensionNames.size()),
 			instanceExtensionNames.data()
 		);
