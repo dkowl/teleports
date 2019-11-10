@@ -92,6 +92,5 @@ namespace Vulkan {
 		uuids::uuid fragmentShaderId;
 
 		ILogger* logger;
-		bool enableValidationLayers;
 	};
 }

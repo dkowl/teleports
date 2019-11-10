@@ -34,6 +34,12 @@ namespace Vulkan {
 		return std::nullopt;
 	}
 
+#if _DEBUG
+	constexpr bool enableValidationLayers = true;
+#else
+	constexpr bool enableValidationLayers = false;
+#endif
+
 	RendererImpl::RendererImpl(Renderer::CreateInfo ci) :
 		ci(ci),
 		instance(nullptr),
@@ -55,12 +61,7 @@ namespace Vulkan {
 		renderPass(nullptr),
 		vertexBuffer(nullptr),
 		pipeline(nullptr),
-		logger(ci.logger),
-#if _DEBUG
-		enableValidationLayers(true)
-#else
-		enableValidationLayers(false)
-#endif
+		logger(ci.logger)
 	{
 		if (logger == nullptr) {
 			throw std::runtime_error("Logger not found");
@@ -131,7 +132,7 @@ namespace Vulkan {
 	std::vector<const char*> RendererImpl::GetInstanceLayerNames()
 	{
 		std::vector<const char*> result;
-		if (!enableValidationLayers) {
+		if constexpr (!enableValidationLayers) {
 			return result;
 		}
 
@@ -158,7 +159,7 @@ namespace Vulkan {
 
 		std::vector<const char*> instanceExtensionNames = PlatformSpecific::GetInstanceExtensionNames();
 		instanceExtensionNames.push_back(VK_KHR_SURFACE_EXTENSION_NAME);
-		if (enableValidationLayers) {
+		if constexpr (enableValidationLayers) {
 			instanceExtensionNames.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
 		}
 
