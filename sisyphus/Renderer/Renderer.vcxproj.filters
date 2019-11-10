@@ -19,4 +19,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="project\Assets\fragmentShader_C_C.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="project\Assets\vertexShader_PC_C.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

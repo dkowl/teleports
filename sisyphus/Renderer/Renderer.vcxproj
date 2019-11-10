@@ -90,6 +90,10 @@
   <ItemGroup>
     <ClCompile Include="src\renderer_main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="project\Assets\fragmentShader_C_C.glsl" />
+    <None Include="project\Assets\vertexShader_PC_C.glsl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
