@@ -678,10 +678,31 @@ namespace Vulkan {
 			vk::CompareOp::eLessOrEqual
 		};
 
+		vk::ColorComponentFlags colorComponentFlags(vk::ColorComponentFlagBits::eR | vk::ColorComponentFlagBits::eG | vk::ColorComponentFlagBits::eB | vk::ColorComponentFlagBits::eA);
+		vk::PipelineColorBlendAttachmentState pipelineColorBlendAttachmentState{
+			false,
+			vk::BlendFactor::eZero,
+			vk::BlendFactor::eZero,
+			vk::BlendOp::eAdd,
+			vk::BlendFactor::eZero,
+			vk::BlendFactor::eZero,
+			vk::BlendOp::eAdd,
+			colorComponentFlags
+		};
 		vk::PipelineColorBlendStateCreateInfo pipelineColorBlendStateCreateInfo{
 			{},
 			false,
-			vk::LogicOp::eNoOp
+			vk::LogicOp::eNoOp,
+			1,
+			&pipelineColorBlendAttachmentState,
+			{{(1.0f, 1.0f, 1.0f, 1.0f)}}
+		};
+
+		std::vector<vk::DynamicState> dynamicStates{ vk::DynamicState::eViewport, vk::DynamicState::eScissor };
+		vk::PipelineDynamicStateCreateInfo pipelineDynamicStateCreateInfo{
+			{},
+			static_cast<uint32_t>(dynamicStates.size()),
+			dynamicStates.data()
 		};
 
 		vk::GraphicsPipelineCreateInfo graphicsPipelineCreateInfo{
@@ -696,7 +717,7 @@ namespace Vulkan {
 			&pipelineMultisampleStateCreateInfo,
 			&pipelineDepthStencilStateCreateInfo,
 			&pipelineColorBlendStateCreateInfo,
-			nullptr,
+			&pipelineDynamicStateCreateInfo,
 			*pipelineLayout,
 			*renderPass
 		};
