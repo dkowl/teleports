@@ -43,6 +43,7 @@ namespace Vulkan {
 	RendererImpl::RendererImpl(Renderer::CreateInfo ci) :
 		ci(ci),
 		instance(nullptr),
+		debugMessenger(nullptr),
 		window(nullptr),
 		surface(nullptr),
 		physicalDevice(nullptr),
@@ -67,11 +68,14 @@ namespace Vulkan {
 			throw std::runtime_error("Logger not found");
 		}
 
-		// TODO: add a debug callback, according to https://github.com/KhronosGroup/Vulkan-Hpp/blob/master/samples/EnableValidationWithCallback/EnableValidationWithCallback.cpp
 		EnumerateInstanceLayerProperties();
 
 		InitInstance();
-		logger->Log("Vulkan instance initialized!");
+		logger->Log("Vulkan Instance initialized!");
+		if constexpr (enableValidationLayers) {
+			InitDebugMessenger();
+			logger->Log("Debug Messenger initialized!");
+		}
 		InitWindow();
 		logger->Log("Window initialized!");
 		InitSurface();
@@ -175,6 +179,12 @@ namespace Vulkan {
 		);
 
 		instance = vk::createInstanceUnique(instanceCreateInfo);
+	}
+
+	void RendererImpl::InitDebugMessenger()
+	{
+		BreakAssert(instance);
+		debugMessenger = std::make_unique<DebugMessenger>(*instance);
 	}
 
 	void RendererImpl::InitWindow()

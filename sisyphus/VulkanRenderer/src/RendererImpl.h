@@ -5,6 +5,7 @@
 #include "DepthBuffer.h"
 #include "UniformBuffer.h"
 #include "VertexBuffer.h"
+#include "DebugMessenger.h"
 #include "Shader.h"
 #include "Utils\ILogger.h"
 #include <memory>
@@ -36,6 +37,7 @@ namespace Vulkan {
 
 	private:
 		void InitInstance();
+		void InitDebugMessenger();
 		void InitWindow();
 		void InitSurface();
 		void InitPhysicalDevice();
@@ -62,6 +64,7 @@ namespace Vulkan {
 
 		Renderer::CreateInfo ci;
 		vk::UniqueInstance instance;
+		std::unique_ptr<DebugMessenger> debugMessenger;
 		std::unique_ptr<WindowCreator::Window> window;
 		vk::UniqueSurfaceKHR surface;
 		vk::PhysicalDevice physicalDevice;

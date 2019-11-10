@@ -83,6 +83,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\VulkanRenderer\Renderer.h" />
+    <ClInclude Include="src\DebugMessenger.h" />
     <ClInclude Include="src\DepthBuffer.h" />
     <ClInclude Include="src\platform_specific\PlatformSpecific.h" />
     <ClInclude Include="src\platform_specific\Vulkan.h" />
@@ -96,6 +97,7 @@
     <ClInclude Include="src\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\DebugMessenger.cpp" />
     <ClCompile Include="src\DepthBuffer.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\RendererImpl.cpp" />
