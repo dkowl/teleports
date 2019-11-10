@@ -466,7 +466,7 @@ namespace Vulkan {
 		vk::DescriptorPoolSize poolSize(vk::DescriptorType::eUniformBuffer, 1);
 
 		vk::DescriptorPoolCreateInfo descriptorPoolCreateInfo(
-			{},
+			{vk::DescriptorPoolCreateFlagBits::eFreeDescriptorSet},
 			1,
 			1,
 			&poolSize
