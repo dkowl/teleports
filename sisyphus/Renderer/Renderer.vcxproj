@@ -45,6 +45,7 @@
     <Import Project="..\props\Glslang.props" />
     <Import Project="..\props\AssetManagement.props" />
     <Import Project="..\props\json.props" />
+    <Import Project="..\props\WindowCreator.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -56,6 +57,7 @@
     <Import Project="..\props\Glslang.props" />
     <Import Project="..\props\AssetManagement.props" />
     <Import Project="..\props\json.props" />
+    <Import Project="..\props\WindowCreator.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -87,6 +89,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\renderer_main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="project\Assets\fragmentShader_C_C.glsl" />
+    <None Include="project\Assets\vertexShader_PC_C.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -9,6 +9,11 @@ namespace Vulkan {
 
 	Renderer::~Renderer() = default;
 
+	void Renderer::InitPipeline()
+	{
+		impl->InitPipeline();
+	}
+
 	void Renderer::UpdateUniformBuffer(UniformBufferData data)
 	{
 		impl->UpdateUniformBuffer(data);
@@ -29,8 +34,12 @@ namespace Vulkan {
 		return impl->GetVertexBufferData();
 	}
 
-	void Renderer::CreateShader(uuids::uuid id, const std::string& code, ShaderType type)
+	uuids::uuid Renderer::CreateShader(const std::string& code, ShaderType type)
 	{
-		impl->CreateShader(id, code, type);
+		return impl->CreateShader(code, type);
+	}
+	void Renderer::EnableShader(uuids::uuid id)
+	{
+		impl->EnableShader(id);
 	}
 }

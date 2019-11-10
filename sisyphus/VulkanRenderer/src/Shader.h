@@ -15,6 +15,9 @@ namespace Vulkan {
 
 		Shader(const CreateInfo & ci);
 
+		ShaderType GetType() const;
+		vk::ShaderModule GetModule() const;
+
 	private:
 		ShaderType shaderType;
 		vk::UniqueShaderModule shaderModule;

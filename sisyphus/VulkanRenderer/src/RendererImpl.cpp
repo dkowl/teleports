@@ -5,6 +5,8 @@
 #include "RendererImpl.h"
 #include "WindowCreator\WindowCreator.h"
 #include "Utils\BreakAssert.h"
+#include "Utils\UuidGenerator.h"
+#include "VulkanUtils.h"
 
 namespace wc = WindowCreator;
 
@@ -32,9 +34,16 @@ namespace Vulkan {
 		return std::nullopt;
 	}
 
+#if _DEBUG
+	constexpr bool enableValidationLayers = true;
+#else
+	constexpr bool enableValidationLayers = false;
+#endif
+
 	RendererImpl::RendererImpl(Renderer::CreateInfo ci) :
 		ci(ci),
 		instance(nullptr),
+		debugMessenger(nullptr),
 		window(nullptr),
 		surface(nullptr),
 		physicalDevice(nullptr),
@@ -45,14 +54,28 @@ namespace Vulkan {
 		colorSpace(std::nullopt),
 		swapchain(nullptr),
 		depthBuffer(nullptr),
+		descriptorSetLayout(nullptr),
+		pipelineLayout(nullptr),
+		descriptorPool(nullptr),
+		descriptorSet(nullptr),
+		uniformBuffer(nullptr),
+		renderPass(nullptr),
+		vertexBuffer(nullptr),
+		pipeline(nullptr),
 		logger(ci.logger)
 	{
 		if (logger == nullptr) {
 			throw std::runtime_error("Logger not found");
 		}
 
+		EnumerateInstanceLayerProperties();
+
 		InitInstance();
-		logger->Log("Vulkan instance initialized!");
+		logger->Log("Vulkan Instance initialized!");
+		if constexpr (enableValidationLayers) {
+			InitDebugMessenger();
+			logger->Log("Debug Messenger initialized!");
+		}
 		InitWindow();
 		logger->Log("Window initialized!");
 		InitSurface();
@@ -110,6 +133,24 @@ namespace Vulkan {
 
 	RendererImpl::~RendererImpl() = default;
 
+	std::vector<const char*> RendererImpl::GetInstanceLayerNames()
+	{
+		std::vector<const char*> result;
+		if constexpr (!enableValidationLayers) {
+			return result;
+		}
+
+		result.push_back("VK_LAYER_LUNARG_standard_validation");
+
+		for (auto&& name : result) {
+			if (!IsLayerEnabled(name)) {
+				throw std::runtime_error(std::string("Cannot find layer ") + std::string(name));
+			}
+		}
+
+		return result;
+	}
+
 	void RendererImpl::InitInstance()
 	{
 		vk::ApplicationInfo applicationInfo(
@@ -122,17 +163,28 @@ namespace Vulkan {
 
 		std::vector<const char*> instanceExtensionNames = PlatformSpecific::GetInstanceExtensionNames();
 		instanceExtensionNames.push_back(VK_KHR_SURFACE_EXTENSION_NAME);
+		if constexpr (enableValidationLayers) {
+			instanceExtensionNames.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+		}
+
+		std::vector<const char*> layerNames = GetInstanceLayerNames();
 
 		vk::InstanceCreateInfo instanceCreateInfo(
 			{},
 			&applicationInfo,
-			0,
-			nullptr,
+			static_cast<uint32_t>(layerNames.size()),
+			layerNames.data(),
 			static_cast<uint32_t>(instanceExtensionNames.size()),
 			instanceExtensionNames.data()
 		);
 
 		instance = vk::createInstanceUnique(instanceCreateInfo);
+	}
+
+	void RendererImpl::InitDebugMessenger()
+	{
+		BreakAssert(instance);
+		debugMessenger = std::make_unique<DebugMessenger>(*instance);
 	}
 
 	void RendererImpl::InitWindow()
@@ -414,7 +466,7 @@ namespace Vulkan {
 		vk::DescriptorPoolSize poolSize(vk::DescriptorType::eUniformBuffer, 1);
 
 		vk::DescriptorPoolCreateInfo descriptorPoolCreateInfo(
-			{},
+			{vk::DescriptorPoolCreateFlagBits::eFreeDescriptorSet},
 			1,
 			1,
 			&poolSize
@@ -552,7 +604,143 @@ namespace Vulkan {
 		vertexBuffer = std::make_unique<VertexBuffer>(createInfo);
 	}
 
-	void RendererImpl::CreateShader(uuids::uuid id, const std::string& code, ShaderType type)
+	void RendererImpl::InitPipeline()
+	{
+		BreakAssert(pipelineLayout);
+		BreakAssert(renderPass);
+		BreakAssert(device);
+
+		if (!ShaderExists(vertexShaderId)) {
+			throw std::runtime_error("Vertex shader not found");
+		}
+		if (!ShaderExists(fragmentShaderId)) {
+			throw std::runtime_error("Fragment shader not found");
+		}
+
+		vk::PipelineShaderStageCreateInfo shaderStageCreateInfos[2]{
+			vk::PipelineShaderStageCreateInfo{
+				{},
+				vk::ShaderStageFlagBits::eVertex,
+				GetShader(vertexShaderId).GetModule(),
+				"main"
+			},
+			vk::PipelineShaderStageCreateInfo{
+				{},
+				vk::ShaderStageFlagBits::eFragment,
+				GetShader(fragmentShaderId).GetModule(),
+				"main"
+			}
+		};
+
+		vk::VertexInputBindingDescription vertexInputBindingDescription(0, sizeof(Renderer::VertexBufferData::Vertex));
+		vk::VertexInputAttributeDescription vertexInputAttributeDescription(0, 0, vk::Format::eR32G32B32Sfloat);
+		vk::PipelineVertexInputStateCreateInfo pipelineVertexInputStateCreateInfo{
+			{},
+			1,
+			&vertexInputBindingDescription,
+			1,
+			&vertexInputAttributeDescription
+		};
+
+		vk::PipelineInputAssemblyStateCreateInfo pipelineInputAssemblyStateCreateInfo{
+			{},
+			vk::PrimitiveTopology::eTriangleList
+		};
+
+		vk::PipelineViewportStateCreateInfo pipelineViewportStateCreateInfo{
+			{},
+			1,
+			nullptr,
+			1,
+			nullptr
+		};
+
+		vk::PipelineRasterizationStateCreateInfo pipelineRasterizationStateCreateInfo{
+			{},
+			false,
+			false,
+			vk::PolygonMode::eFill,
+			vk::CullModeFlagBits::eBack,
+			vk::FrontFace::eClockwise,
+			false,
+			0.0f,
+			0.0f,
+			0.0f,
+			1.0f
+		};
+
+		vk::PipelineMultisampleStateCreateInfo pipelineMultisampleStateCreateInfo;
+
+		vk::PipelineDepthStencilStateCreateInfo pipelineDepthStencilStateCreateInfo{
+			{},
+			true,
+			true,
+			vk::CompareOp::eLessOrEqual
+		};
+
+		vk::ColorComponentFlags colorComponentFlags(vk::ColorComponentFlagBits::eR | vk::ColorComponentFlagBits::eG | vk::ColorComponentFlagBits::eB | vk::ColorComponentFlagBits::eA);
+		vk::PipelineColorBlendAttachmentState pipelineColorBlendAttachmentState{
+			false,
+			vk::BlendFactor::eZero,
+			vk::BlendFactor::eZero,
+			vk::BlendOp::eAdd,
+			vk::BlendFactor::eZero,
+			vk::BlendFactor::eZero,
+			vk::BlendOp::eAdd,
+			colorComponentFlags
+		};
+		vk::PipelineColorBlendStateCreateInfo pipelineColorBlendStateCreateInfo{
+			{},
+			false,
+			vk::LogicOp::eNoOp,
+			1,
+			&pipelineColorBlendAttachmentState,
+			{{(1.0f, 1.0f, 1.0f, 1.0f)}}
+		};
+
+		std::vector<vk::DynamicState> dynamicStates{ vk::DynamicState::eViewport, vk::DynamicState::eScissor };
+		vk::PipelineDynamicStateCreateInfo pipelineDynamicStateCreateInfo{
+			{},
+			static_cast<uint32_t>(dynamicStates.size()),
+			dynamicStates.data()
+		};
+
+		vk::GraphicsPipelineCreateInfo graphicsPipelineCreateInfo{
+			{},
+			2,
+			shaderStageCreateInfos,
+			&pipelineVertexInputStateCreateInfo,
+			&pipelineInputAssemblyStateCreateInfo,
+			nullptr,
+			&pipelineViewportStateCreateInfo,
+			&pipelineRasterizationStateCreateInfo,
+			&pipelineMultisampleStateCreateInfo,
+			&pipelineDepthStencilStateCreateInfo,
+			&pipelineColorBlendStateCreateInfo,
+			&pipelineDynamicStateCreateInfo,
+			*pipelineLayout,
+			*renderPass
+		};
+
+		try {
+			pipeline = device->createGraphicsPipelineUnique(nullptr, graphicsPipelineCreateInfo);
+		}
+		catch(vk::Error& e){
+			logger->Log(e.what());
+			throw;
+		}
+		logger->Log("Pipeline initialized!");
+	}
+
+	Shader& RendererImpl::GetShader(uuids::uuid id)
+	{
+		if (!ShaderExists(id)) {
+			throw std::runtime_error("Shader " + uuids::to_string(id) + " not found");
+		}
+		return *shaders[id];
+	}
+
+	uuids::uuid RendererImpl::CreateShader(const std::string& code, ShaderType type)
 	{
 		BreakAssert(device);
 
@@ -562,10 +750,37 @@ namespace Vulkan {
 			*device
 		};
 		auto shader = std::make_unique<Shader>(shaderInfo);
-
+		auto id = GenerateUuid();
 		shaders[id] = std::move(shader);
 
 		logger->Log("Shader " + uuids::to_string(id) + " created!");
+		return id;
+	}
+
+	bool RendererImpl::ShaderExists(uuids::uuid id) const
+	{
+		return shaders.find(id) != shaders.end();
+	}
+
+	void RendererImpl::EnableShader(uuids::uuid id)
+	{
+		if (!ShaderExists(id)) {
+			throw std::runtime_error("Shader " + uuids::to_string(id) + " does not exist");
+		}
+		auto type = shaders[id]->GetType();
+		switch (type) {
+		case ShaderType::Vertex:
+			vertexShaderId = id;
+			break;
+		case ShaderType::Fragment:
+			fragmentShaderId = id;
+			break;
+		default:
+			BreakAssert(false);
+			break;
+		}
+
+		logger->Log("Shader " + uuids::to_string(id) + " enabled!");
 	}
 
 	void RendererImpl::UpdateUniformBuffer(Renderer::UniformBufferData data)

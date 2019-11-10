@@ -46,7 +46,8 @@ namespace Vulkan {
 		return result;
 	}
 
-	Shader::Shader(const CreateInfo & ci)
+	Shader::Shader(const CreateInfo & ci):
+		shaderType(ci.shaderType)
 	{
 		static bool glslangInitialized = false;
 		if (!glslangInitialized) {
@@ -62,5 +63,13 @@ namespace Vulkan {
 		);
 
 		shaderModule = ci.device.createShaderModuleUnique(moduleCreateInfo);
+	}
+	ShaderType Shader::GetType() const
+	{
+		return shaderType;
+	}
+	vk::ShaderModule Shader::GetModule() const
+	{
+		return *shaderModule;
 	}
 }

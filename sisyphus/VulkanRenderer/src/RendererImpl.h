@@ -5,6 +5,7 @@
 #include "DepthBuffer.h"
 #include "UniformBuffer.h"
 #include "VertexBuffer.h"
+#include "DebugMessenger.h"
 #include "Shader.h"
 #include "Utils\ILogger.h"
 #include <memory>
@@ -22,16 +23,21 @@ namespace Vulkan {
 		RendererImpl(Renderer::CreateInfo ci);
 		~RendererImpl(); // default
 
+		void InitPipeline();
+
 		void UpdateUniformBuffer(Renderer::UniformBufferData data);
 		Renderer::UniformBufferData GetUniformBufferData();
 
 		void UpdateVertexBuffer(Renderer::VertexBufferData data);
 		Renderer::VertexBufferData GetVertexBufferData();
 
-		void CreateShader(uuids::uuid id, const std::string& code, ShaderType type);
+		uuids::uuid CreateShader(const std::string& code, ShaderType type);
+		bool ShaderExists(uuids::uuid id) const;
+		void EnableShader(uuids::uuid id);
 
 	private:
 		void InitInstance();
+		void InitDebugMessenger();
 		void InitWindow();
 		void InitSurface();
 		void InitPhysicalDevice();
@@ -53,8 +59,12 @@ namespace Vulkan {
 		void InitFramebuffers();
 		void InitVertexBuffer();
 
+		std::vector<const char*> GetInstanceLayerNames();
+		Shader& GetShader(uuids::uuid id);
+
 		Renderer::CreateInfo ci;
 		vk::UniqueInstance instance;
+		std::unique_ptr<DebugMessenger> debugMessenger;
 		std::unique_ptr<WindowCreator::Window> window;
 		vk::UniqueSurfaceKHR surface;
 		vk::PhysicalDevice physicalDevice;
@@ -78,8 +88,11 @@ namespace Vulkan {
 		vk::UniqueRenderPass renderPass;
 		std::vector<vk::UniqueFramebuffer> framebuffers;
 		std::unique_ptr<VertexBuffer> vertexBuffer;
+		vk::UniquePipeline pipeline;
 
 		std::unordered_map<uuids::uuid, std::unique_ptr<Shader>> shaders;
+		uuids::uuid vertexShaderId;
+		uuids::uuid fragmentShaderId;
 
 		ILogger* logger;
 	};

@@ -35,13 +35,16 @@ namespace Vulkan {
 		Renderer(CreateInfo ci);
 		~Renderer(); // default
 
+		void InitPipeline();
+
 		void UpdateUniformBuffer(UniformBufferData data);
 		UniformBufferData GetUniformBufferData();
 
 		void UpdateVertexBuffer(VertexBufferData data);
 		VertexBufferData GetVertexBufferData();
 
-		void CreateShader(uuids::uuid id, const std::string& code, ShaderType type);
+		uuids::uuid CreateShader(const std::string& code, ShaderType type);
+		void EnableShader(uuids::uuid id);
 
 	private:
 		std::unique_ptr<RendererImpl> impl;
