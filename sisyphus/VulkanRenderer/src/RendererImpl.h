@@ -58,7 +58,6 @@ namespace Vulkan {
 		void InitVertexBuffer();
 
 		std::vector<const char*> GetInstanceLayerNames();
-
 		Shader& GetShader(uuids::uuid id);
 
 		Renderer::CreateInfo ci;
@@ -93,5 +92,6 @@ namespace Vulkan {
 		uuids::uuid fragmentShaderId;
 
 		ILogger* logger;
+		bool enableValidationLayers;
 	};
 }

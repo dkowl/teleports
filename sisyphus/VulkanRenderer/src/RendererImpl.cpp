@@ -55,13 +55,17 @@ namespace Vulkan {
 		renderPass(nullptr),
 		vertexBuffer(nullptr),
 		pipeline(nullptr),
-		logger(ci.logger)
+		logger(ci.logger),
+#if _DEBUG
+		enableValidationLayers(true)
+#else
+		enableValidationLayers(false)
+#endif
 	{
 		if (logger == nullptr) {
 			throw std::runtime_error("Logger not found");
 		}
 
-		// TODO: single boolean variable controlling the validation layers enabling, set based upon _DEBUG macro, do not spread the macro to more than 1 place
 		// TODO: add a debug callback, according to https://github.com/KhronosGroup/Vulkan-Hpp/blob/master/samples/EnableValidationWithCallback/EnableValidationWithCallback.cpp
 		EnumerateInstanceLayerProperties();
 
@@ -126,11 +130,12 @@ namespace Vulkan {
 
 	std::vector<const char*> RendererImpl::GetInstanceLayerNames()
 	{
-		constexpr auto lunarGLayerName = "VK_LAYER_LUNARG_standard_validation";
 		std::vector<const char*> result;
-#ifdef _DEBUG
-		result.push_back(lunarGLayerName);
-#endif
+		if (!enableValidationLayers) {
+			return result;
+		}
+
+		result.push_back("VK_LAYER_LUNARG_standard_validation");
 
 		for (auto&& name : result) {
 			if (!IsLayerEnabled(name)) {
@@ -153,9 +158,9 @@ namespace Vulkan {
 
 		std::vector<const char*> instanceExtensionNames = PlatformSpecific::GetInstanceExtensionNames();
 		instanceExtensionNames.push_back(VK_KHR_SURFACE_EXTENSION_NAME);
-#ifdef _DEBUG
-		instanceExtensionNames.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
-#endif
+		if (enableValidationLayers) {
+			instanceExtensionNames.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+		}
 
 		std::vector<const char*> layerNames = GetInstanceLayerNames();
 
