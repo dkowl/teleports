@@ -1,7 +1,9 @@
 #pragma once
 #include "Vulkan.h"
 #include <string>
+#include <optional>
 #include "Utils\Throw.h"
+#include "Utils\ILogger.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	struct Version {
@@ -25,4 +27,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		}
 		outPfn = reinterpret_cast<T>(pfn);
 	}
+
+	void InspectDevice(const vk::PhysicalDevice& physicalDevice, ILogger* logger);
+	std::optional<int> FindGraphicsQueueFamilyIndex(vk::PhysicalDevice& physicalDevice, vk::SurfaceKHR& surface);
 }
