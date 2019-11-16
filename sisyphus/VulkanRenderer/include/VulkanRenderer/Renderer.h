@@ -1,21 +1,17 @@
 #pragma once
 #include <memory>
-#include "ShaderType.h"
 #include "uuid.h"
+#include "Renderer/ShaderType.h"
+#include "Renderer/IRenderer.h"
+#include "Renderer/ShaderInfo.h"
 
 class ILogger;
 
-namespace Vulkan {
+namespace Rendering::Vulkan {
 	class RendererImpl;
 
-	class Renderer {
+	class Renderer : public IRenderer {
 	public:
-		struct CreateInfo {
-			uint32_t windowWidth;
-			uint32_t windowHeight;
-			ILogger* logger;
-		};
-
 		struct UniformBufferData {
 			uint8_t r;
 			uint8_t g;
@@ -32,10 +28,10 @@ namespace Vulkan {
 			Vertex vertices[4];
 		};
 
-		Renderer(CreateInfo ci);
+		Renderer(const RendererCreateInfo& ci);
 		~Renderer(); // default
 
-		void InitPipeline();
+		void Draw(const IDrawable& drawable) const override;
 
 		void UpdateUniformBuffer(UniformBufferData data);
 		UniformBufferData GetUniformBufferData();
@@ -43,7 +39,7 @@ namespace Vulkan {
 		void UpdateVertexBuffer(VertexBufferData data);
 		VertexBufferData GetVertexBufferData();
 
-		uuids::uuid CreateShader(const std::string& code, ShaderType type);
+		void CreateShader(const ShaderInfo& shaderInfo);
 		void EnableShader(uuids::uuid id);
 
 	private:

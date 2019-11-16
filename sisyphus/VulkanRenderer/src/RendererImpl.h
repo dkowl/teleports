@@ -16,14 +16,14 @@ namespace WindowCreator {
 	class Window;
 }
 
-namespace Vulkan {
+namespace Rendering::Vulkan {
 
-	class RendererImpl {
+	class RendererImpl : IRenderer {
 	public:
-		RendererImpl(Renderer::CreateInfo ci);
+		RendererImpl(const RendererCreateInfo& ci);
 		~RendererImpl(); // default
 
-		void InitPipeline();
+		void Draw(const IDrawable& drawable) const;
 
 		void UpdateUniformBuffer(Renderer::UniformBufferData data);
 		Renderer::UniformBufferData GetUniformBufferData();
@@ -31,7 +31,7 @@ namespace Vulkan {
 		void UpdateVertexBuffer(Renderer::VertexBufferData data);
 		Renderer::VertexBufferData GetVertexBufferData();
 
-		uuids::uuid CreateShader(const std::string& code, ShaderType type);
+		void CreateShader(const ShaderInfo& shaderInfo);
 		bool ShaderExists(uuids::uuid id) const;
 		void EnableShader(uuids::uuid id);
 
@@ -58,11 +58,13 @@ namespace Vulkan {
 		void InitRenderPass();
 		void InitFramebuffers();
 		void InitVertexBuffer();
+		void InitShaders();
+		void InitPipeline();
 
 		std::vector<const char*> GetInstanceLayerNames();
 		Shader& GetShader(uuids::uuid id);
 
-		Renderer::CreateInfo ci;
+		RendererCreateInfo ci;
 		vk::UniqueInstance instance;
 		std::unique_ptr<DebugMessenger> debugMessenger;
 		std::unique_ptr<WindowCreator::Window> window;

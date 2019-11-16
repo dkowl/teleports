@@ -2,7 +2,7 @@
 #include "Vulkan.h"
 #include <vector>
 
-namespace Vulkan {
+namespace Rendering::Vulkan {
 	namespace PlatformSpecific {
 
 		inline std::vector<const char*> GetInstanceExtensionNames() {

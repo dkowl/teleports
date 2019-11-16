@@ -45,9 +45,6 @@
     <ClInclude Include="src\Shader.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\ShaderType.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Utils\DeviceData.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>

@@ -6,11 +6,12 @@
 #include "WindowCreator\WindowCreator.h"
 #include "Utils\BreakAssert.h"
 #include "Utils\UuidGenerator.h"
+#include "Utils\Logger.h"
 #include "VulkanUtils.h"
 
 namespace wc = WindowCreator;
 
-namespace Vulkan {
+namespace Rendering::Vulkan {
 	void InspectDevice(const vk::PhysicalDevice& physicalDevice, ILogger* logger) {
 		auto queueFamilyProperties = physicalDevice.getQueueFamilyProperties();
 		logger->BeginSection("Queue Families:");
@@ -40,7 +41,7 @@ namespace Vulkan {
 	constexpr bool enableValidationLayers = false;
 #endif
 
-	RendererImpl::RendererImpl(Renderer::CreateInfo ci) :
+	RendererImpl::RendererImpl(const RendererCreateInfo& ci) :
 		ci(ci),
 		instance(nullptr),
 		debugMessenger(nullptr),
@@ -62,7 +63,7 @@ namespace Vulkan {
 		renderPass(nullptr),
 		vertexBuffer(nullptr),
 		pipeline(nullptr),
-		logger(ci.logger)
+		logger(&Logger::Get())
 	{
 		if (logger == nullptr) {
 			throw std::runtime_error("Logger not found");
@@ -129,9 +130,19 @@ namespace Vulkan {
 		InitVertexBuffer();
 		logger->Log("Vertex Buffer initialized!");
 		logger->EndSection();
+
+		InitShaders();
+
+		InitPipeline();
+		logger->Log("Pipeline initialized!");
 	}
 
 	RendererImpl::~RendererImpl() = default;
+
+	void RendererImpl::Draw(const IDrawable & ) const
+	{
+		logger->Log("Calling Draw(), not implemented yet");
+	}
 
 	std::vector<const char*> RendererImpl::GetInstanceLayerNames()
 	{
@@ -190,7 +201,7 @@ namespace Vulkan {
 	void RendererImpl::InitWindow()
 	{
 		wc::WindowCreator windowCreator;
-		window = windowCreator.Create({ wc::Platform::Windows, ci.windowWidth, ci.windowHeight });
+		window = windowCreator.Create({ wc::Platform::Windows, ci.windowExtent.width, ci.windowExtent.height });
 	}
 
 	void RendererImpl::InitSurface()
@@ -360,7 +371,7 @@ namespace Vulkan {
 			desiredMinImageCount,
 			colorFormat.value(),
 			colorSpace.value(),
-			vk::Extent2D{ ci.windowWidth, ci.windowHeight },
+			vk::Extent2D{ ci.windowExtent.width, ci.windowExtent.height },
 			1,
 			vk::ImageUsageFlagBits::eColorAttachment,
 			vk::SharingMode::eExclusive,
@@ -420,7 +431,7 @@ namespace Vulkan {
 		BreakAssert(device);
 
 		DepthBuffer::CreateInfo createInfo{
-			vk::Extent2D{ci.windowWidth, ci.windowHeight},
+			vk::Extent2D{ci.windowExtent.width, ci.windowExtent.height},
 			physicalDevice,
 			*device,
 			logger
@@ -581,8 +592,8 @@ namespace Vulkan {
 				*renderPass,
 				2,
 				attachments,
-				ci.windowWidth,
-				ci.windowHeight,
+				ci.windowExtent.width,
+				ci.windowExtent.height,
 				1
 			};
 
@@ -602,6 +613,25 @@ namespace Vulkan {
 		};
 
 		vertexBuffer = std::make_unique<VertexBuffer>(createInfo);
+	}
+
+	void RendererImpl::InitShaders()
+	{
+		for (const auto& shaderInfo : ci.shaders) {
+			CreateShader(shaderInfo);
+			if (vertexShaderId.is_nil() && shaderInfo.type == ShaderType::Vertex) {
+				EnableShader(vertexShaderId);
+			}
+			if (fragmentShaderId.is_nil() && shaderInfo.type == ShaderType::Fragment) {
+				EnableShader(fragmentShaderId);
+			}
+		}
+		if (vertexShaderId.is_nil()) {
+			throw std::runtime_error("Unable to find a vertex shader");
+		}
+		if (fragmentShaderId.is_nil()) {
+			throw std::runtime_error("Unable to find a fragment shader");
+		}
 	}
 
 	void RendererImpl::InitPipeline()
@@ -722,14 +752,7 @@ namespace Vulkan {
 			*renderPass
 		};
 
-		try {
-			pipeline = device->createGraphicsPipelineUnique(nullptr, graphicsPipelineCreateInfo);
-		}
-		catch(vk::Error& e){
-			logger->Log(e.what());
-			throw;
-		}
-		logger->Log("Pipeline initialized!");
+		pipeline = device->createGraphicsPipelineUnique(nullptr, graphicsPipelineCreateInfo);		
 	}
 
 	Shader& RendererImpl::GetShader(uuids::uuid id)
@@ -740,21 +763,20 @@ namespace Vulkan {
 		return *shaders[id];
 	}
 
-	uuids::uuid RendererImpl::CreateShader(const std::string& code, ShaderType type)
+	void RendererImpl::CreateShader(const ShaderInfo& shaderInfo)
 	{
 		BreakAssert(device);
 
-		Shader::CreateInfo shaderInfo{
-			code,
-			type,
+		Shader::CreateInfo shaderCreateInfo{
+			shaderInfo.code,
+			shaderInfo.type,
 			*device
 		};
-		auto shader = std::make_unique<Shader>(shaderInfo);
-		auto id = GenerateUuid();
+		auto shader = std::make_unique<Shader>(shaderCreateInfo);
+		auto id = shaderInfo.id;
 		shaders[id] = std::move(shader);
 
 		logger->Log("Shader " + uuids::to_string(id) + " created!");
-		return id;
 	}
 
 	bool RendererImpl::ShaderExists(uuids::uuid id) const

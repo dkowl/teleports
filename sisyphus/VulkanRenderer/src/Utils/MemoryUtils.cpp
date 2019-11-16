@@ -1,7 +1,7 @@
 #include "MemoryUtils.h"
 #include "Utils\BreakAssert.h"
 
-namespace Vulkan {
+namespace Rendering::Vulkan {
 	void InspectMemoryProperties(vk::PhysicalDeviceMemoryProperties properties, ILogger* logger) {
 		BreakAssert(logger != nullptr);
 

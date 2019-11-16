@@ -1,10 +1,10 @@
 #pragma once
 
 #include "Vulkan.h"
-#include "ShaderType.h"
+#include "Renderer\ShaderType.h"
 #include <string>
 
-namespace Vulkan {
+namespace Rendering::Vulkan {
 	class Shader {
 	public:
 		struct CreateInfo {

@@ -1,17 +1,17 @@
 #include "Renderer.h"
 #include "RendererImpl.h"
 
-namespace Vulkan {
-	Renderer::Renderer(CreateInfo ci) :
+namespace Rendering::Vulkan {
+	Renderer::Renderer(const RendererCreateInfo& ci) :
 		impl(std::make_unique<RendererImpl>(ci))
 	{
 	}
 
 	Renderer::~Renderer() = default;
 
-	void Renderer::InitPipeline()
+	void Renderer::Draw(const IDrawable & drawable) const
 	{
-		impl->InitPipeline();
+		impl->Draw(drawable);
 	}
 
 	void Renderer::UpdateUniformBuffer(UniformBufferData data)
@@ -34,9 +34,9 @@ namespace Vulkan {
 		return impl->GetVertexBufferData();
 	}
 
-	uuids::uuid Renderer::CreateShader(const std::string& code, ShaderType type)
+	void Renderer::CreateShader(const ShaderInfo& shaderInfo)
 	{
-		return impl->CreateShader(code, type);
+		return impl->CreateShader(shaderInfo);
 	}
 	void Renderer::EnableShader(uuids::uuid id)
 	{

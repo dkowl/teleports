@@ -2,7 +2,7 @@
 #include "Utils\Logger.h"
 #include "MemoryUtils.h"
 
-namespace Vulkan {
+namespace Rendering::Vulkan {
 	VertexBuffer::VertexBuffer(CreateInfo inCi) :
 		ci(inCi)
 	{

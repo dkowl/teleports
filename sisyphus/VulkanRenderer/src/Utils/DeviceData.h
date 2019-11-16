@@ -2,7 +2,7 @@
 #include "Vulkan.h"
 #include "Utils/BreakAssert.h"
 
-namespace Vulkan {
+namespace Rendering::Vulkan {
 	class DeviceData {
 	public:
 		DeviceData(vk::Device device, vk::DeviceMemory memory, size_t sizeInBytes);

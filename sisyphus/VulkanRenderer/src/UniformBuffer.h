@@ -4,7 +4,7 @@
 #include "Utils/ILogger.h"
 #include "DeviceData.h"
 
-namespace Vulkan {
+namespace Rendering::Vulkan {
 
 	class UniformBuffer {
 	public:

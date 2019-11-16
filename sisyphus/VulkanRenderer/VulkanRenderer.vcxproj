@@ -43,6 +43,7 @@
     <Import Project="..\props\Utils.props" />
     <Import Project="..\props\Glslang.props" />
     <Import Project="..\props\stduuid.props" />
+    <Import Project="..\props\RendererInterfaces.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -52,6 +53,7 @@
     <Import Project="..\props\Utils.props" />
     <Import Project="..\props\Glslang.props" />
     <Import Project="..\props\stduuid.props" />
+    <Import Project="..\props\RendererInterfaces.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -89,7 +91,6 @@
     <ClInclude Include="src\platform_specific\Vulkan.h" />
     <ClInclude Include="src\RendererImpl.h" />
     <ClInclude Include="src\Shader.h" />
-    <ClInclude Include="src\ShaderType.h" />
     <ClInclude Include="src\UniformBuffer.h" />
     <ClInclude Include="src\Utils\DeviceData.h" />
     <ClInclude Include="src\Utils\MemoryUtils.h" />

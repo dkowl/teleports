@@ -1,7 +1,7 @@
 #include "VulkanUtils.h"
 #include "Utils\Logger.h"
 
-namespace Vulkan {
+namespace Rendering::Vulkan {
 	Version::Version(uint32_t version) :
 		major(version >> 22),
 		minor((version >> 12) & 0x3ff),

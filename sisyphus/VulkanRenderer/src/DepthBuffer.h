@@ -2,7 +2,7 @@
 #include "Vulkan.h"
 #include "Utils\ILogger.h"
 
-namespace Vulkan {
+namespace Rendering::Vulkan {
 	class DepthBuffer {
 	public:
 		struct CreateInfo {
