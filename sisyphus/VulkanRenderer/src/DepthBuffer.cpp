@@ -3,7 +3,7 @@
 #include "Utils\BreakAssert.h"
 #include <iostream>
 
-namespace Rendering::Vulkan {
+namespace Sisyphus::Rendering::Vulkan {
 	DepthBuffer::DepthBuffer(CreateInfo ci) :
 		ci(ci)
 	{

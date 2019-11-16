@@ -1,7 +1,7 @@
 #include "Renderer.h"
 #include "RendererImpl.h"
 
-namespace Rendering::Vulkan {
+namespace Sisyphus::Rendering::Vulkan {
 	Renderer::Renderer(const RendererCreateInfo& ci) :
 		impl(std::make_unique<RendererImpl>(ci))
 	{

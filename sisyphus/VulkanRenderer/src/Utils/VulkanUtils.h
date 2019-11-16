@@ -2,7 +2,7 @@
 #include "Vulkan.h"
 #include <string>
 
-namespace Rendering::Vulkan {
+namespace Sisyphus::Rendering::Vulkan {
 	struct Version {
 		Version(uint32_t inVersion);
 

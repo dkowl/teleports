@@ -1,5 +1,7 @@
 #pragma once
 
-class IDrawable {
+namespace Sisyphus::Rendering {
+	class IDrawable {
 
-};
+	};
+}

@@ -2,7 +2,7 @@
 #include "Utils\Logger.h"
 #include "MemoryUtils.h"
 
-namespace Rendering::Vulkan {
+namespace Sisyphus::Rendering::Vulkan {
 	VertexBuffer::VertexBuffer(CreateInfo inCi) :
 		ci(inCi)
 	{

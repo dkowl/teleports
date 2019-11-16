@@ -1,6 +1,6 @@
 #include "DeviceData.h"
 
-namespace Rendering::Vulkan {
+namespace Sisyphus::Rendering::Vulkan {
 	DeviceData::DeviceData(vk::Device device, vk::DeviceMemory memory, size_t sizeInBytes) :
 		device(device),
 		memory(memory),

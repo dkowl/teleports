@@ -16,7 +16,7 @@ namespace WindowCreator {
 	class Window;
 }
 
-namespace Rendering::Vulkan {
+namespace Sisyphus::Rendering::Vulkan {
 
 	class RendererImpl : IRenderer {
 	public:

@@ -4,7 +4,7 @@
 #include "Renderer\ShaderType.h"
 #include <string>
 
-namespace Rendering::Vulkan {
+namespace Sisyphus::Rendering::Vulkan {
 	class Shader {
 	public:
 		struct CreateInfo {

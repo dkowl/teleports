@@ -7,7 +7,7 @@
 
 class ILogger;
 
-namespace Rendering::Vulkan {
+namespace Sisyphus::Rendering::Vulkan {
 	class RendererImpl;
 
 	class Renderer : public IRenderer {

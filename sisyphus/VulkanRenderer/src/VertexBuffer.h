@@ -2,7 +2,7 @@
 #include "Vulkan.h"
 #include "DeviceData.h"
 
-namespace Rendering::Vulkan {
+namespace Sisyphus::Rendering::Vulkan {
 	class VertexBuffer {
 	public:
 		struct CreateInfo {

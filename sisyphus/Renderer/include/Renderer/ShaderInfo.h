@@ -3,7 +3,7 @@
 #include <string>
 #include "uuid.h"
 
-namespace Rendering {
+namespace Sisyphus::Rendering {
 	struct ShaderInfo {
 		uuids::uuid id;
 		std::string code;

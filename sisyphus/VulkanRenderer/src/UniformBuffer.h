@@ -4,7 +4,7 @@
 #include "Utils/ILogger.h"
 #include "DeviceData.h"
 
-namespace Rendering::Vulkan {
+namespace Sisyphus::Rendering::Vulkan {
 
 	class UniformBuffer {
 	public:

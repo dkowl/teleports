@@ -2,7 +2,7 @@
 #include "IDrawable.h"
 #include "ShaderInfo.h"
 
-namespace Rendering {
+namespace Sisyphus::Rendering {
 	enum class RendererType {
 		Vulkan
 	};

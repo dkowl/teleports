@@ -11,7 +11,7 @@
 
 namespace wc = WindowCreator;
 
-namespace Rendering::Vulkan {
+namespace Sisyphus::Rendering::Vulkan {
 	void InspectDevice(const vk::PhysicalDevice& physicalDevice, ILogger* logger) {
 		auto queueFamilyProperties = physicalDevice.getQueueFamilyProperties();
 		logger->BeginSection("Queue Families:");

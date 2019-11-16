@@ -1,7 +1,7 @@
 #include "UniformBuffer.h"
 #include "MemoryUtils.h"
 
-namespace Rendering::Vulkan {
+namespace Sisyphus::Rendering::Vulkan {
 	UniformBuffer::UniformBuffer(CreateInfo ci) :
 		ci(ci)
 	{

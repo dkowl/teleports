@@ -24,7 +24,7 @@ VKAPI_ATTR void VKAPI_CALL vkDestroyDebugUtilsMessengerEXT(
 	return pfnVkDestroyDebugUtilsMessengerEXT(instance, messenger, allocator);
 }
 
-namespace Rendering::Vulkan {
+namespace Sisyphus::Rendering::Vulkan {
 	VkBool32 debugMessageCallback(
 		VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
 		VkDebugUtilsMessageTypeFlagsEXT messageTypes,

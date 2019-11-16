@@ -2,7 +2,7 @@
 #include "Vulkan.h"
 #include "Utils\ILogger.h"
 
-namespace Rendering::Vulkan {
+namespace Sisyphus::Rendering::Vulkan {
 	uint32_t FindMemoryType(
 		vk::PhysicalDeviceMemoryProperties properties, 
 		uint32_t supportedTypeBits,

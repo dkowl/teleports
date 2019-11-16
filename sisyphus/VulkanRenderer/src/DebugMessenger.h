@@ -1,7 +1,7 @@
 #pragma once
 #include "Vulkan.h"
 
-namespace Rendering::Vulkan {
+namespace Sisyphus::Rendering::Vulkan {
 
 	class DebugMessenger {
 	public:

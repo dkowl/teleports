@@ -6,7 +6,7 @@
 #include "IRenderer.h"
 #include "ShaderInfo.h"
 
-namespace Rendering {
+namespace Sisyphus::Rendering {
 	class RendererFactory {
 	public:
 		std::unique_ptr<IRenderer> Create(const RendererCreateInfo& ci);

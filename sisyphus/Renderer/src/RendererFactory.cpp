@@ -1,7 +1,7 @@
 #include "RendererFactory.h"
 #include "VulkanRenderer/Renderer.h"
 
-namespace Rendering {
+namespace Sisyphus::Rendering {
 	std::unique_ptr<IRenderer> RendererFactory::Create(const RendererCreateInfo& ci)
 	{
 		if (ci.type != RendererType::Vulkan) {

@@ -4,7 +4,7 @@
 #include "Utils/Logger.h"
 #include <vector>
 
-namespace Rendering::Vulkan {
+namespace Sisyphus::Rendering::Vulkan {
 	EShLanguage ShaderTypeToEShLanguage(ShaderType type) {
 		switch (type) {
 		case ShaderType::Vertex: return EShLangVertex;
