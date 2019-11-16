@@ -621,10 +621,10 @@ namespace Sisyphus::Rendering::Vulkan {
 		for (const auto& shaderInfo : ci.shaders) {
 			CreateShader(shaderInfo);
 			if (vertexShaderId.is_nil() && shaderInfo.type == ShaderType::Vertex) {
-				EnableShader(vertexShaderId);
+				EnableShader(shaderInfo.id);
 			}
 			if (fragmentShaderId.is_nil() && shaderInfo.type == ShaderType::Fragment) {
-				EnableShader(fragmentShaderId);
+				EnableShader(shaderInfo.id);
 			}
 		}
 		if (vertexShaderId.is_nil()) {
