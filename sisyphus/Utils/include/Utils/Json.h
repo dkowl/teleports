@@ -1,4 +1,6 @@
 #pragma once
 #include "json.hpp"
 
-using json = nlohmann::json;
+namespace Sisyphus {
+	using json = ::nlohmann::json;
+}

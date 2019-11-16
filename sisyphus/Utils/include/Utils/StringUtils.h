@@ -1,4 +1,6 @@
 #pragma once
 #include <string>
 
-using String = std::string;
+namespace Sisyphus {
+	using String = ::std::string;
+}
