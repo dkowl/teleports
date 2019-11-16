@@ -4,7 +4,7 @@
 #include "Utils/UuidGenerator.h"
 #include "Utils/Logger.h"
 
-namespace AssetManagement {
+namespace Sisyphus::AssetManagement {
 	Asset::Asset(Path inPath):
 		path(inPath),
 		dataIsRead(false)

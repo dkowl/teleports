@@ -2,7 +2,8 @@
 #include "AssetManagement/AssetManager.h"
 #include "Utils\FilesystemUtils.h"
 #include <fstream>
-using namespace AssetManagement;
+using namespace Sisyphus;
+using namespace Sisyphus::AssetManagement;
 
 TEST_CASE("Asset Manager") {
 	Path dirPath = fs::current_path();

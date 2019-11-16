@@ -5,7 +5,7 @@
 #include "Asset.h"
 #include <memory>
 
-namespace AssetManagement {
+namespace Sisyphus::AssetManagement {
 	class AssetManager {
 	public:
 		AssetManager(Path inAssetDir);

@@ -1,5 +1,5 @@
 #pragma once
 #include "AssetMetadata.h"
 
-namespace AssetManagement {
+namespace Sisyphus::AssetManagement {
 }

@@ -1,7 +1,7 @@
 #include "AssetManager.h"
 #include "Utils\Logger.h"
 
-namespace AssetManagement {
+namespace Sisyphus::AssetManagement {
 	AssetManager::AssetManager(Path inAssetDir):
 		mainAssetDir(inAssetDir)
 	{

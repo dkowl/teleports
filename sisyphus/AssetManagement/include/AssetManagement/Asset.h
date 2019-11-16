@@ -6,7 +6,7 @@
 #include <mutex>
 #include <string_view>
 
-namespace AssetManagement {
+namespace Sisyphus::AssetManagement {
 
 	class Asset {
 	public:
