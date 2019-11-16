@@ -1,7 +1,7 @@
 #include "Throw.h"
 #include <stdexcept>
 
-namespace Sisyphus {
+namespace Sisyphus::Utils {
 	void Throw(const String& message)
 	{
 #if defined(_DEBUG) && defined(_WIN32)
