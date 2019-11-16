@@ -8,7 +8,7 @@
 
 namespace Rendering {
 	class RendererFactory {
-
+	public:
 		std::unique_ptr<IRenderer> Create(const RendererCreateInfo& ci);
 	};
 }
