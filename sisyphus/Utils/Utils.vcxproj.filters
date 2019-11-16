@@ -51,6 +51,9 @@
     <ClInclude Include="include\Utils\ILogger.h">
       <Filter>Header Files\Logger</Filter>
     </ClInclude>
+    <ClInclude Include="include\Utils\Throw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakAssert.cpp">
@@ -63,6 +66,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\UuidGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Throw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

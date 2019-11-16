@@ -83,6 +83,7 @@
     <ClInclude Include="include\Utils\Logger.h" />
     <ClInclude Include="include\Utils\OstreamLogger.h" />
     <ClInclude Include="include\Utils\StringUtils.h" />
+    <ClInclude Include="include\Utils\Throw.h" />
     <ClInclude Include="include\Utils\UuidGenerator.h" />
     <ClInclude Include="include\Utils\UuidJsonSerializer.h" />
     <ClInclude Include="include\Utils\VectorUtils.h" />
@@ -91,6 +92,7 @@
     <ClCompile Include="src\BreakAssert.cpp" />
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\OstreamLogger.cpp" />
+    <ClCompile Include="src\Throw.cpp" />
     <ClCompile Include="src\UuidGenerator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
