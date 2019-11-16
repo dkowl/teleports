@@ -1,5 +1,6 @@
 #include "MemoryUtils.h"
 #include "Utils\BreakAssert.h"
+#include "Utils\Throw.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	void InspectMemoryProperties(vk::PhysicalDeviceMemoryProperties properties, ILogger* logger) {
@@ -49,7 +50,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			supportedTypeBits >>= 1;
 		}
 		if (memoryTypeIndex == ~0) {
-			throw std::runtime_error("Cannot find a supported device local memory type");
+			Utils::Throw("Cannot find a supported device local memory type");
 		}
 		return memoryTypeIndex;
 	}

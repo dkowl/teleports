@@ -1,12 +1,13 @@
 #include "UniformBuffer.h"
 #include "MemoryUtils.h"
+#include "Utils/Throw.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	UniformBuffer::UniformBuffer(CreateInfo ci) :
 		ci(ci)
 	{
 		if (ci.logger == nullptr) {
-			throw std::runtime_error("Logger cannot be null");
+			Utils::Throw("Logger cannot be null");
 		}
 		CreateBuffer();
 		ci.logger->Log("Buffer created!");

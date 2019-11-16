@@ -1,6 +1,7 @@
 #include "DepthBuffer.h"
 #include "MemoryUtils.h"
 #include "Utils\BreakAssert.h"
+#include "Utils\Throw.h"
 #include <iostream>
 
 namespace Sisyphus::Rendering::Vulkan {
@@ -8,7 +9,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		ci(ci)
 	{
 		if (ci.logger == nullptr) {
-			throw std::runtime_error("Logger cannot be null");
+			Utils::Throw("Logger cannot be null");
 		}
 
 		CreateImage();
@@ -32,7 +33,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		vk::FormatProperties formatProperties = ci.physicalDevice.getFormatProperties(format);
 
-		vk::ImageTiling tiling;
+		vk::ImageTiling tiling{};
 		if (formatProperties.optimalTilingFeatures & vk::FormatFeatureFlagBits::eDepthStencilAttachment) {
 			tiling = vk::ImageTiling::eOptimal;
 		}
@@ -40,7 +41,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			tiling = vk::ImageTiling::eLinear;
 		}
 		else {
-			throw std::runtime_error("DepthStencilAttachment is not supported for " + vk::to_string(format));
+			Utils::Throw("DepthStencilAttachment is not supported for " + vk::to_string(format));
 		}
 		ci.logger->Log("Image Tiling: " + vk::to_string(tiling));
 

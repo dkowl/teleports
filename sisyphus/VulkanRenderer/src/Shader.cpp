@@ -2,6 +2,7 @@
 #include "SPIRV/GlslangToSpv.h"
 #include "glslang/StandAlone/ResourceLimits.h"
 #include "Utils/Logger.h"
+#include "Utils/Throw.h"
 #include <vector>
 
 namespace Sisyphus::Rendering::Vulkan {
@@ -9,7 +10,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		switch (type) {
 		case ShaderType::Vertex: return EShLangVertex;
 		case ShaderType::Fragment: return EShLangFragment;
-		default: throw(std::runtime_error("Unknown shader type"));
+		default: { Utils::Throw("Unknown shader type"); return EShLangVertex; }
 		}
 	}
 
@@ -26,13 +27,13 @@ namespace Sisyphus::Rendering::Vulkan {
 		try {
 			bool parseSuccess = shader.parse(&glslang::DefaultTBuiltInResource, 100, false, messages);
 			if (!parseSuccess) {
-				throw std::runtime_error("Shared parsing failed");
+				Utils::Throw("Shared parsing failed");
 			}
 			
 			program.addShader(&shader);
 			bool linkSuccess = program.link(messages);
 			if (!linkSuccess) {
-				throw std::runtime_error("Shader program linking failed");
+				Utils::Throw("Shader program linking failed");
 			}
 		}
 		catch (std::runtime_error& e) {

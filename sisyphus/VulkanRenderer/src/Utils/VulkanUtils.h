@@ -1,6 +1,7 @@
 #pragma once
 #include "Vulkan.h"
 #include <string>
+#include "Utils\Throw.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	struct Version {
@@ -20,7 +21,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	void LoadFunction(std::string name, const vk::Instance& instance, T& outPfn) {
 		auto pfn = instance.getProcAddr(name);
 		if (pfn == nullptr) {
-			throw std::runtime_error(std::string("Unable to find ") + name + " Vulkan function");
+			Utils::Throw(std::string("Unable to find ") + name + " Vulkan function");
 		}
 		outPfn = reinterpret_cast<T>(pfn);
 	}
