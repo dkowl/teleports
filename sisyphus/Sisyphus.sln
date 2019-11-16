@@ -41,6 +41,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor", "Editor\Editor.vcx
 		{CBB89831-0AA2-4C01-A866-11E0344BD80B} = {CBB89831-0AA2-4C01-A866-11E0344BD80B}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestProject", "TestProject\TestProject.vcxproj", "{2958E22D-9F1C-4652-AE6A-2699B25D9C1A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CBB89831-0AA2-4C01-A866-11E0344BD80B} = {CBB89831-0AA2-4C01-A866-11E0344BD80B}
+		{E5C56247-EECA-4F49-80A6-261BE98541C4} = {E5C56247-EECA-4F49-80A6-261BE98541C4}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -109,6 +115,12 @@ Global
 		{EB4CB5F1-DEC1-4A96-8A9F-872EBC864BB2}.Release|x64.ActiveCfg = Release|x64
 		{EB4CB5F1-DEC1-4A96-8A9F-872EBC864BB2}.Release|x64.Build.0 = Release|x64
 		{EB4CB5F1-DEC1-4A96-8A9F-872EBC864BB2}.Release|x86.ActiveCfg = Release|x64
+		{2958E22D-9F1C-4652-AE6A-2699B25D9C1A}.Debug|x64.ActiveCfg = Debug|x64
+		{2958E22D-9F1C-4652-AE6A-2699B25D9C1A}.Debug|x64.Build.0 = Debug|x64
+		{2958E22D-9F1C-4652-AE6A-2699B25D9C1A}.Debug|x86.ActiveCfg = Debug|x64
+		{2958E22D-9F1C-4652-AE6A-2699B25D9C1A}.Release|x64.ActiveCfg = Release|x64
+		{2958E22D-9F1C-4652-AE6A-2699B25D9C1A}.Release|x64.Build.0 = Release|x64
+		{2958E22D-9F1C-4652-AE6A-2699B25D9C1A}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
