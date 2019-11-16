@@ -12,6 +12,7 @@
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)\dependencies\glslang\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glslang.lib;SPIRV.lib;HLSL.lib;OGLCompiler.lib;OSDependent.lib;SPIRV-Tools.lib;SPIRV-Tools-opt.lib;glslang-default-resource-limits.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup />
