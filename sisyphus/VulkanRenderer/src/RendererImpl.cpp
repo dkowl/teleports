@@ -117,8 +117,43 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	RendererImpl::~RendererImpl() = default;
 
-	void RendererImpl::Draw(const IDrawable & ) const
+	void RendererImpl::Draw(const IDrawable & /*drawable*/) const
 	{
+		BreakAssert(device);
+		BreakAssert(!commandBuffers.empty());
+		BreakAssert(!framebuffers.empty());
+		BreakAssert(renderPass);
+		BreakAssert(pipeline);
+		BreakAssert(descriptorSet);
+
+		vk::UniqueSemaphore imageAcquiredSemaphore = device->createSemaphoreUnique(vk::SemaphoreCreateInfo{});
+		constexpr uint64_t timeout = 100000000; // 100ms
+		auto currentBuffer = device->acquireNextImageKHR(*swapchain, timeout, *imageAcquiredSemaphore, nullptr);
+
+		Utils::ThrowAssert(currentBuffer.result == vk::Result::eSuccess, "Failed to acquire an image buffer!");
+		Utils::ThrowAssert(
+			currentBuffer.value < framebuffers.size(),
+			"Acquired image index (" + std::to_string(currentBuffer.value) +
+			") higher that the number of available framebuffers (" + std::to_string(framebuffers.size()) + ")");
+
+		auto& commandBuffer = commandBuffers[0];
+		commandBuffer->begin(vk::CommandBufferBeginInfo{});
+
+		vk::ClearValue clearValues[2];
+		clearValues[0].color = vk::ClearColorValue(std::array<float, 4>{0.9f, 0.9f, 0.9f, 0.9f});
+		clearValues[1].depthStencil = vk::ClearDepthStencilValue(1.0f, 0);
+		vk::RenderPassBeginInfo renderPassBeginInfo{
+			*renderPass,
+			*framebuffers[currentBuffer.value],
+			vk::Rect2D(vk::Offset2D(0, 0), GetExtent2D(ci.windowExtent)),
+			2,
+			clearValues
+		};
+		commandBuffer->beginRenderPass(renderPassBeginInfo, vk::SubpassContents::eInline);
+		commandBuffer->bindPipeline(vk::PipelineBindPoint::eGraphics, *pipeline);
+		commandBuffer->bindDescriptorSets(vk::PipelineBindPoint::eGraphics, *pipelineLayout, 0, *descriptorSet, nullptr);
+		// commandBuffer->bindVertexBuffers(0, drawable.GetVertexBufferData(), { 0 });
+
 		logger->Log("Calling Draw(), not implemented yet");
 	}
 
@@ -262,7 +297,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			vk::CommandBufferLevel::ePrimary,
 			1
 		);
-		commandBuffers = device->allocateCommandBuffers(commandBufferAllocateInfo);
+		commandBuffers = device->allocateCommandBuffersUnique(commandBufferAllocateInfo);
 	}
 
 	void RendererImpl::InitFormatAndColorSpace()

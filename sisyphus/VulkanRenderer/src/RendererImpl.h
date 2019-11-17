@@ -73,7 +73,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		std::optional<int> queueFamilyIndex;
 		vk::UniqueDevice device;
 		vk::UniqueCommandPool commandPool;
-		std::vector<vk::CommandBuffer> commandBuffers;
+		std::vector<vk::UniqueCommandBuffer> commandBuffers;
 		std::optional<vk::Format> colorFormat;
 		std::optional<vk::ColorSpaceKHR> colorSpace;
 		vk::UniqueSwapchainKHR swapchain;
