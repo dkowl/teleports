@@ -66,4 +66,8 @@ namespace Sisyphus::Rendering::Vulkan {
 		}
 		return std::nullopt;
 	}
+	vk::Extent2D GetExtent2D(WindowExtent windowExtent)
+	{
+		return vk::Extent2D(windowExtent.width, windowExtent.height);
+	}
 }
