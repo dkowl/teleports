@@ -9,4 +9,10 @@ namespace Sisyphus::Utils {
 #endif
 		throw std::runtime_error(message);
 	}
+	void ThrowAssert(bool condition, const String& message)
+	{
+		if (!condition) {
+			Throw(message);
+		}
+	}
 }
