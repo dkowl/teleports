@@ -1,3 +1,4 @@
+#pragma once
 #include "Utils\StringUtils.h"
 
 namespace Sisyphus::Utils {
