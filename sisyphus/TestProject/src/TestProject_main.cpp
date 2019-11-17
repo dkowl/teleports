@@ -3,8 +3,46 @@
 #include "Renderer\RendererFactory.h"
 #include "Utils\Logger.h"
 #include "AssetManagement/AssetManager.h"
+#include "Renderer\IDrawable.h"
 
 using namespace Sisyphus;
+
+struct Vertex {
+	float x;
+	float y;
+	float z;
+};
+
+class Vertices : public Rendering::IDrawable {
+public:
+	Vertices(std::vector<Vertex> inVertices) :
+		vertices(std::move(inVertices))
+	{
+	}
+
+	uint32_t GetVertexCount() const override { return static_cast<uint32_t>(vertices.size()); }
+	uint32_t GetVertexStride() const override { return sizeof(Vertex); }
+	size_t GetVertexBufferSize() const override { return vertices.size() * sizeof(Vertex); }
+	const std::byte* GetVertexData() const override { return reinterpret_cast<const std::byte*>(vertices.data()); }
+
+private:
+	std::vector<Vertex> vertices;
+};
+
+// square center is at 0,0
+// x, y - top left corner
+// z - depth
+Vertices MakeSquare(float x, float y, float z) {
+	return Vertices{ {
+		{x, y, z},
+		{-x, y, z},
+		{x, -y, z},
+
+		{x, -y, z},
+		{-x, y, z},
+		{-x, -y, z}
+	} };
+}
 
 int main() {
 	try {
@@ -32,32 +70,16 @@ int main() {
 		auto renderer = RendererFactory().Create(rendererCreateInfo);
 		logger->EndSection();
 
-		/*// Uniform buffer
-		Vulkan::Renderer::UniformBufferData ubData{ 255, 0, 0 };
-		renderer.UpdateUniformBuffer(ubData);
-		logger->Log("Uniform Buffer updated with 255, 0, 0!");
+		Vertices square = MakeSquare(-0.4f, -0.4f, 0.1f);
+		Vertices triangle{ {
+			{-0.5f, 0.5f, 0.2f},
+			{0, -0.5f, 0.2f},
+			{0.5f, 0.5f, 0.2f}
+		} };
+		//renderer->Draw(square);
+		renderer->Draw(triangle);
 
-		auto ubDataFromGPU = renderer.GetUniformBufferData();
-		if (memcmp(&ubData, &ubDataFromGPU, sizeof(ubData)) != 0) {
-			throw std::logic_error("Uniform buffer data manipulation error!");
-		}
-
-		// Vertex buffer
-		Vulkan::Renderer::VertexBufferData vbData{
-			{
-				{ 0.2f, 0.2f, 0.f },
-				{ 0.2f, 0.8f, 0.f },
-				{ 0.8f, 0.8f, 0.f },
-				{ 0.8f, 0.2f, 0.f },
-			}
-		};
-		renderer.UpdateVertexBuffer(vbData);
-		logger->Log("Vertex Buffer updated!");
-
-		auto vbDataFromGPU = renderer.GetVertexBufferData();
-		if (memcmp(&vbData, &vbDataFromGPU, sizeof(vbData)) != 0) {
-			throw std::logic_error("Vertex buffer data manipulation error!");
-		}*/
+		system("PAUSE");
 	}
 	catch (std::exception & e) {
 		std::cout << e.what() << std::endl;

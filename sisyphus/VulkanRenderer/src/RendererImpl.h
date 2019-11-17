@@ -18,7 +18,7 @@ namespace WindowCreator {
 
 namespace Sisyphus::Rendering::Vulkan {
 
-	class RendererImpl : IRenderer {
+	class RendererImpl : public IRenderer {
 	public:
 		RendererImpl(const RendererCreateInfo& ci);
 		~RendererImpl(); // default

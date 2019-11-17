@@ -19,6 +19,8 @@ namespace Sisyphus::Rendering::Vulkan {
 	constexpr bool enableValidationLayers = false;
 #endif
 
+	constexpr uint64_t timeout = 100000000; // 100ms
+
 	RendererImpl::RendererImpl(const RendererCreateInfo& ci) :
 		ci(ci),
 		instance(nullptr),
@@ -125,7 +127,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		vertexBuffer->GetDeviceData().Set(drawable.GetVertexData());
 
 		vk::UniqueSemaphore imageAcquiredSemaphore = device->createSemaphoreUnique(vk::SemaphoreCreateInfo{});
-		constexpr uint64_t timeout = 100000000; // 100ms
 		auto currentBuffer = device->acquireNextImageKHR(*swapchain, timeout, *imageAcquiredSemaphore, nullptr);
 
 		Utils::ThrowAssert(currentBuffer.result == vk::Result::eSuccess, "Failed to acquire an image buffer!");
@@ -138,7 +139,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		commandBuffer->begin(vk::CommandBufferBeginInfo{});
 
 		vk::ClearValue clearValues[2];
-		clearValues[0].color = vk::ClearColorValue(std::array<float, 4>{0.9f, 0.9f, 0.9f, 0.9f});
+		clearValues[0].color = vk::ClearColorValue(std::array<float, 4>{0.9f, 0.8f, 0.7f, 0.9f});
 		clearValues[1].depthStencil = vk::ClearDepthStencilValue(1.0f, 0);
 		vk::RenderPassBeginInfo renderPassBeginInfo{
 			*renderPass,
@@ -158,9 +159,38 @@ namespace Sisyphus::Rendering::Vulkan {
 		commandBuffer->setScissor(0, vk::Rect2D(vk::Offset2D(0, 0), GetExtent2D(ci.windowExtent)));
 
 		commandBuffer->draw(drawable.GetVertexCount(), 1, 0, 0);
+		commandBuffer->endRenderPass();
 		commandBuffer->end();
 
-		logger->Log("Calling Draw(), not implemented yet");
+		vk::UniqueFence drawFence = device->createFenceUnique({});
+
+		vk::PipelineStageFlags waitDestinationStageMask(vk::PipelineStageFlagBits::eColorAttachmentOutput);
+		vk::SubmitInfo submitInfo(1, &*imageAcquiredSemaphore, &waitDestinationStageMask, 1, &*commandBuffer);
+
+		// assuming that the queue support both graphics and present operations for now
+		vk::Queue graphicsQueue = device->getQueue(queueFamilyIndex.value(), 0);
+		vk::Queue presentQueue = device->getQueue(queueFamilyIndex.value(), 0);
+
+		graphicsQueue.submit(submitInfo, *drawFence);
+
+		auto waitResult = device->waitForFences(*drawFence, VK_TRUE, timeout);
+		if (waitResult == vk::Result::eTimeout) {
+			logger->Log("Draw timeout!");
+		}
+		else if (waitResult == vk::Result::eSuccess) {
+			logger->Log("Draw successful!");
+		}
+		else {
+			BreakAssert(false, "Unexpected Draw result!");
+		}
+		vk::PresentInfoKHR presentInfo{
+			0,
+			nullptr,
+			1,
+			&*swapchain,
+			&currentBuffer.value
+		};
+		presentQueue.presentKHR(presentInfo);
 	}
 
 	std::vector<const char*> RendererImpl::GetInstanceLayerNames()
@@ -343,7 +373,6 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		BreakAssert(physicalDevice);
 		BreakAssert(surface);
-		BreakAssert(queueFamilyIndex);
 		BreakAssert(colorFormat);
 		BreakAssert(colorSpace);
 
