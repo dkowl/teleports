@@ -20,6 +20,6 @@ namespace Sisyphus::Rendering {
 
 	class IRenderer {
 
-		virtual void Draw(const IDrawable& drawable) const = 0;
+		virtual void Draw(const IDrawable& drawable) = 0;
 	};
 }

@@ -18,26 +18,13 @@ namespace Sisyphus::Rendering::Vulkan {
 			uint8_t b;
 		};
 
-		struct VertexBufferData {
-			struct Vertex {
-				float x;
-				float y;
-				float z;
-			};
-
-			Vertex vertices[4];
-		};
-
 		Renderer(const RendererCreateInfo& ci);
 		~Renderer(); // default
 
-		void Draw(const IDrawable& drawable) const override;
+		void Draw(const IDrawable& drawable) override;
 
 		void UpdateUniformBuffer(UniformBufferData data);
 		UniformBufferData GetUniformBufferData();
-
-		void UpdateVertexBuffer(VertexBufferData data);
-		VertexBufferData GetVertexBufferData();
 
 		void CreateShader(const ShaderInfo& shaderInfo);
 		void EnableShader(uuids::uuid id);

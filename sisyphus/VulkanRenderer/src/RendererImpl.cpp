@@ -102,29 +102,27 @@ namespace Sisyphus::Rendering::Vulkan {
 		logger->Log("Render Pass initialized!");
 
 		InitFramebuffers();
-		logger->Log(std::to_string(framebuffers.size()) + " Framebuffers initialized!");
-		
-		logger->BeginSection("Vertex Buffer");
-		InitVertexBuffer();
-		logger->Log("Vertex Buffer initialized!");
-		logger->EndSection();
+		logger->Log(std::to_string(framebuffers.size()) + " Framebuffers initialized!");		
 
 		InitShaders();
-
-		InitPipeline();
-		logger->Log("Pipeline initialized!");
 	}
 
 	RendererImpl::~RendererImpl() = default;
 
-	void RendererImpl::Draw(const IDrawable & /*drawable*/) const
+	void RendererImpl::Draw(const IDrawable & drawable)
 	{
 		BreakAssert(device);
 		BreakAssert(!commandBuffers.empty());
 		BreakAssert(!framebuffers.empty());
 		BreakAssert(renderPass);
-		BreakAssert(pipeline);
 		BreakAssert(descriptorSet);
+
+		InitPipeline(drawable.GetVertexStride());
+		BreakAssert(pipeline);
+
+		InitVertexBuffer(drawable.GetVertexBufferSize());
+		BreakAssert(vertexBuffer);
+		vertexBuffer->GetDeviceData().Set(drawable.GetVertexData());
 
 		vk::UniqueSemaphore imageAcquiredSemaphore = device->createSemaphoreUnique(vk::SemaphoreCreateInfo{});
 		constexpr uint64_t timeout = 100000000; // 100ms
@@ -152,7 +150,15 @@ namespace Sisyphus::Rendering::Vulkan {
 		commandBuffer->beginRenderPass(renderPassBeginInfo, vk::SubpassContents::eInline);
 		commandBuffer->bindPipeline(vk::PipelineBindPoint::eGraphics, *pipeline);
 		commandBuffer->bindDescriptorSets(vk::PipelineBindPoint::eGraphics, *pipelineLayout, 0, *descriptorSet, nullptr);
-		// commandBuffer->bindVertexBuffers(0, drawable.GetVertexBufferData(), { 0 });
+		commandBuffer->bindVertexBuffers(0, vertexBuffer->GetBuffer(), { 0 });
+		commandBuffer->setViewport(0, vk::Viewport(
+			0.0f, 0.0f, 
+			static_cast<float>(ci.windowExtent.width), static_cast<float>(ci.windowExtent.height), 
+			0.0f, 1.0f));
+		commandBuffer->setScissor(0, vk::Rect2D(vk::Offset2D(0, 0), GetExtent2D(ci.windowExtent)));
+
+		commandBuffer->draw(drawable.GetVertexCount(), 1, 0, 0);
+		commandBuffer->end();
 
 		logger->Log("Calling Draw(), not implemented yet");
 	}
@@ -614,20 +620,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		}
 	}
 
-	void RendererImpl::InitVertexBuffer()
-	{
-		BreakAssert(device);
-		BreakAssert(physicalDevice);
-
-		VertexBuffer::CreateInfo createInfo{
-			sizeof(Renderer::VertexBufferData),
-			*device,
-			physicalDevice
-		};
-
-		vertexBuffer = std::make_unique<VertexBuffer>(createInfo);
-	}
-
 	void RendererImpl::InitShaders()
 	{
 		for (const auto& shaderInfo : ci.shaders) {
@@ -647,7 +639,23 @@ namespace Sisyphus::Rendering::Vulkan {
 		}
 	}
 
-	void RendererImpl::InitPipeline()
+	void RendererImpl::InitVertexBuffer(size_t size)
+	{
+		logger->BeginSection("Vertex Buffer");
+		BreakAssert(device);
+		BreakAssert(physicalDevice);
+
+		vertexBuffer = std::make_unique<VertexBuffer>(VertexBuffer::CreateInfo{
+			size,
+			*device,
+			physicalDevice
+		});
+
+		logger->Log("Vertex Buffer of size " + std::to_string(size) + " initialized!");
+		logger->EndSection();
+	}
+
+	void RendererImpl::InitPipeline(uint32_t stride)
 	{
 		BreakAssert(pipelineLayout);
 		BreakAssert(renderPass);
@@ -675,7 +683,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			}
 		};
 
-		vk::VertexInputBindingDescription vertexInputBindingDescription(0, sizeof(Renderer::VertexBufferData::Vertex));
+		vk::VertexInputBindingDescription vertexInputBindingDescription(0, stride);
 		vk::VertexInputAttributeDescription vertexInputAttributeDescription(0, 0, vk::Format::eR32G32B32Sfloat);
 		vk::PipelineVertexInputStateCreateInfo pipelineVertexInputStateCreateInfo{
 			{},
@@ -828,18 +836,6 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		BreakAssert(uniformBuffer);
 		return uniformBuffer->GetData<Renderer::UniformBufferData>();
-	}
-
-	void RendererImpl::UpdateVertexBuffer(Renderer::VertexBufferData data)
-	{
-		BreakAssert(vertexBuffer);
-		vertexBuffer->GetDeviceData().SetData(data);
-	}
-
-	Renderer::VertexBufferData RendererImpl::GetVertexBufferData()
-	{
-		BreakAssert(vertexBuffer);
-		return vertexBuffer->GetDeviceData().GetData<Renderer::VertexBufferData>();
 	}
 
 }

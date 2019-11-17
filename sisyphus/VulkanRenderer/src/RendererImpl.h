@@ -23,13 +23,10 @@ namespace Sisyphus::Rendering::Vulkan {
 		RendererImpl(const RendererCreateInfo& ci);
 		~RendererImpl(); // default
 
-		void Draw(const IDrawable& drawable) const;
+		void Draw(const IDrawable& drawable);
 
 		void UpdateUniformBuffer(Renderer::UniformBufferData data);
 		Renderer::UniformBufferData GetUniformBufferData();
-
-		void UpdateVertexBuffer(Renderer::VertexBufferData data);
-		Renderer::VertexBufferData GetVertexBufferData();
 
 		void CreateShader(const ShaderInfo& shaderInfo);
 		bool ShaderExists(uuids::uuid id) const;
@@ -57,9 +54,11 @@ namespace Sisyphus::Rendering::Vulkan {
 		void InitUniformBuffer();
 		void InitRenderPass();
 		void InitFramebuffers();
-		void InitVertexBuffer();
 		void InitShaders();
-		void InitPipeline();
+
+		// happens each Draw()
+		void InitVertexBuffer(size_t size);
+		void InitPipeline(uint32_t stride);
 
 		std::vector<const char*> GetInstanceLayerNames();
 		Shader& GetShader(uuids::uuid id);

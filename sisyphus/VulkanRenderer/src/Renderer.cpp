@@ -9,7 +9,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	Renderer::~Renderer() = default;
 
-	void Renderer::Draw(const IDrawable & drawable) const
+	void Renderer::Draw(const IDrawable & drawable)
 	{
 		impl->Draw(drawable);
 	}
@@ -22,16 +22,6 @@ namespace Sisyphus::Rendering::Vulkan {
 	Renderer::UniformBufferData Renderer::GetUniformBufferData()
 	{
 		return impl->GetUniformBufferData();
-	}
-
-	void Renderer::UpdateVertexBuffer(VertexBufferData data)
-	{
-		impl->UpdateVertexBuffer(data);
-	}
-
-	Renderer::VertexBufferData Renderer::GetVertexBufferData()
-	{
-		return impl->GetVertexBufferData();
 	}
 
 	void Renderer::CreateShader(const ShaderInfo& shaderInfo)
