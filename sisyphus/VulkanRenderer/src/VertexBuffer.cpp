@@ -19,6 +19,11 @@ namespace Sisyphus::Rendering::Vulkan {
 		return DeviceData(ci.device, *memory, ci.sizeInBytes);
 	}
 
+	vk::Buffer VertexBuffer::GetBuffer() const
+	{
+		return *buffer;
+	}
+
 	void VertexBuffer::CreateBuffer()
 	{
 		vk::BufferCreateInfo bufferCreateInfo(

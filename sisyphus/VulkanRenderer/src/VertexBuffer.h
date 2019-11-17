@@ -14,6 +14,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		VertexBuffer(CreateInfo inCi);
 
 		DeviceData GetDeviceData();
+		vk::Buffer GetBuffer() const;
 
 	private:
 		void CreateBuffer();
