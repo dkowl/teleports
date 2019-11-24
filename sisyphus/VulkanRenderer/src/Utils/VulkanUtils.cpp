@@ -71,4 +71,13 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		return vk::Extent2D(windowExtent.width, windowExtent.height);
 	}
+
+	bool operator==(const vk::Extent2D& ex1, const WindowCreator::WindowExtent& ex2)
+	{
+		return ex1.width == ex2.width && ex1.height == ex2.height;
+	}
+	std::string ToString(const vk::Extent2D& extent)
+	{
+		return std::string("{") + std::to_string(extent.width) + ", " + std::to_string(extent.height) + "}";
+	}
 }
