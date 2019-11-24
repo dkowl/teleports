@@ -50,10 +50,11 @@ int main() {
 		AssetManagement::AssetManager assetManager("Assets");
 
 		using namespace Rendering;
+		namespace wc = WindowCreator;
 
-		WindowCreator::WindowCreator windowCreator;
-		auto window = windowCreator.Create(WindowCreator::WindowCreateInfo{
-			WindowCreator::Platform::Windows,
+		wc::WindowCreator windowCreator;
+		auto window = windowCreator.Create(wc::WindowCreateInfo{
+			wc::Platform::Windows,
 			{1280, 720}
 		});
 
@@ -76,14 +77,32 @@ int main() {
 		auto renderer = RendererFactory().Create(rendererCreateInfo);
 		logger->EndSection();
 
-		Vertices square = MakeSquare(-0.4f, -0.4f, 0.1f);
-		Vertices triangle{ {
-			{-0.5f, 0.5f, 0.2f},
-			{0, -0.5f, 0.2f},
-			{0.5f, 0.5f, 0.2f}
-		} };
-		//renderer->Draw(square);
-		renderer->Draw(triangle);
+		while (true) {
+			bool close = false;
+			std::optional<wc::WindowEvent> windowEvent;
+			while (true) {
+				windowEvent = window->GetEvent();
+				if (!windowEvent.has_value()) {
+					break;
+				}
+				else if (windowEvent.value().type == wc::WindowEvent::Type::Close) {
+					close = true;
+					break;
+				}
+			}
+			if (close) {
+				break;
+			}
+
+			Vertices square = MakeSquare(-0.4f, -0.4f, 0.1f);
+			Vertices triangle{ {
+				{-0.5f, 0.5f, 0.2f},
+				{0, -0.5f, 0.2f},
+				{0.5f, 0.5f, 0.2f}
+			} };
+			//renderer->Draw(square);
+			renderer->Draw(triangle);
+		}		
 
 		system("PAUSE");
 	}

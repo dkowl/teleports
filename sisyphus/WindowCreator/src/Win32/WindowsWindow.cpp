@@ -69,12 +69,22 @@ namespace Sisyphus::WindowCreator {
 	{
 		MSG message;
 		BOOL bRet = PeekMessage(&message, data->window, 0, 0, PM_REMOVE);
-
-		if (bRet == -1) {
-			Sisyphus::Utils::Throw("Error when peeking Windows message");
+		if (bRet == 0) {
+			return std::nullopt;
 		}
 
-		return std::optional<WindowEvent>();
+		std::optional<WindowEvent> result = std::nullopt;
+
+		// WM_CLOSE only singals a request to close the window, 
+		// handle it differently when you want to introduce an "Are you sure?" message
+		if (message.message == WM_DESTROY || message.message == WM_QUIT || message.message == WM_CLOSE) {
+			result = WindowEvent{ WindowEvent::Type::Close };
+		}
+
+		TranslateMessage(&message);
+		DispatchMessage(&message);
+
+		return result;
 	}
 
 	vk::UniqueSurfaceKHR WindowsWindow::GetVulkanSurface(vk::Instance instance)
