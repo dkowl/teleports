@@ -1,6 +1,7 @@
 #pragma once
 #include "WindowEvent.h"
 #include <vulkan\vulkan.hpp>
+#include <optional>
 
 namespace WindowCreator {
 
@@ -9,7 +10,7 @@ namespace WindowCreator {
 	public:
 
 		virtual ~Window() = default;
-		virtual void HandleEvent(WindowEvent event) = 0;
+		virtual std::optional<WindowEvent> GetEvent() = 0;
 		virtual vk::UniqueSurfaceKHR GetVulkanSurface(vk::Instance instance) = 0;
 	};
 }

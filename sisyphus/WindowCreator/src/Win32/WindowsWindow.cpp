@@ -56,13 +56,10 @@ namespace WindowCreator {
 		DestroyWindow(data->window);
 	}
 
-#pragma warning(push)
-#pragma warning(disable: 4100)
-	void WindowsWindow::HandleEvent(WindowEvent event)
+	std::optional<WindowEvent> WindowsWindow::GetEvent()
 	{
-		// TODO
+		return std::optional<WindowEvent>();
 	}
-#pragma warning(pop)
 
 	vk::UniqueSurfaceKHR WindowsWindow::GetVulkanSurface(vk::Instance instance)
 	{

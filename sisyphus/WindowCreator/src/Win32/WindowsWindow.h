@@ -13,7 +13,7 @@ namespace WindowCreator {
 		WindowsWindow(CreateInfo ci);
 		~WindowsWindow();
 
-		void HandleEvent(WindowEvent event) override;
+		std::optional<WindowEvent> GetEvent() override;
 		vk::UniqueSurfaceKHR GetVulkanSurface(vk::Instance instance) override;
 
 	private:
