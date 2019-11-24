@@ -1,7 +1,7 @@
 #pragma once
 #include "Window.h"
 
-namespace WindowCreator {
+namespace Sisyphus::WindowCreator {
 	class WindowsWindow : public Window {
 
 	public:

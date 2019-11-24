@@ -1,6 +1,6 @@
 #pragma once
 
-namespace WindowCreator {
+namespace Sisyphus::WindowCreator {
 	class WindowEvent {
 	public:
 		enum class Type {

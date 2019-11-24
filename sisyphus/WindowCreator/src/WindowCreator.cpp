@@ -2,7 +2,7 @@
 #include "WindowsWindow.h"
 #include <stdexcept>
 
-namespace WindowCreator {
+namespace Sisyphus::WindowCreator {
 	std::unique_ptr<Window> WindowCreator::Create(CreateInfo ci)
 	{
 		switch (ci.platform) {

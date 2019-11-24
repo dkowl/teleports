@@ -10,7 +10,7 @@
 #include "Utils\Throw.h"
 #include "VulkanUtils.h"
 
-namespace wc = WindowCreator;
+namespace wc = Sisyphus::WindowCreator;
 
 namespace Sisyphus::Rendering::Vulkan {
 #if _DEBUG

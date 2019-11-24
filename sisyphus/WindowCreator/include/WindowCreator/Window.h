@@ -3,7 +3,7 @@
 #include <vulkan\vulkan.hpp>
 #include <optional>
 
-namespace WindowCreator {
+namespace Sisyphus::WindowCreator {
 
 	class Window {
 

@@ -1,7 +1,8 @@
 #define VK_USE_PLATFORM_WIN32_KHR
 #include "WindowsWindow.h"
+#include "Utils/Throw.h"
 
-namespace WindowCreator {
+namespace Sisyphus::WindowCreator {
 	struct WindowsWindow::PrivateData {
 		HINSTANCE hInstance;
 		HWND window;
@@ -58,6 +59,13 @@ namespace WindowCreator {
 
 	std::optional<WindowEvent> WindowsWindow::GetEvent()
 	{
+		MSG message;
+		BOOL bRet = PeekMessage(&message, data->window, 0, 0, PM_REMOVE);
+
+		if (bRet == -1) {
+			Sisyphus::Utils::Throw("Error when peeking Windows message");
+		}
+
 		return std::optional<WindowEvent>();
 	}
 

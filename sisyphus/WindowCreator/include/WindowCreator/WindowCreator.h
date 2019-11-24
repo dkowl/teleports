@@ -2,7 +2,7 @@
 #include <memory>
 #include "Window.h"
 
-namespace WindowCreator {
+namespace Sisyphus::WindowCreator {
 
 	enum class Platform {
 		Windows

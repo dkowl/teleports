@@ -12,7 +12,7 @@
 #include <optional>
 #include <unordered_map>
 
-namespace WindowCreator {
+namespace Sisyphus::WindowCreator {
 	class Window;
 }
 
