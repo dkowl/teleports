@@ -378,7 +378,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		BreakAssert(surface);
 		BreakAssert(colorFormat);
 		BreakAssert(colorSpace);
-		BreakAssert(windowExtent);
 
 		constexpr int desiredMinImageCount = 3; // triple buffering
 		auto surfaceCapabilites = physicalDevice.getSurfaceCapabilitiesKHR(*surface);
@@ -423,7 +422,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			desiredMinImageCount,
 			colorFormat.value(),
 			colorSpace.value(),
-			vk::Extent2D{ windowExtent->width, windowExtent->height },
+			surfaceCapabilites.currentExtent,
 			1,
 			vk::ImageUsageFlagBits::eColorAttachment,
 			vk::SharingMode::eExclusive,
