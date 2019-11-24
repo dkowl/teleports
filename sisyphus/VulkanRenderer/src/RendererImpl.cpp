@@ -69,8 +69,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		logger->Log("Vulkan Device initialized!");
 		InitCommandPool();
 		logger->Log("Command Pool initialized!");
-		InitCommandBuffers();
-		logger->Log("Command Buffers initialized!");
 		InitFormatAndColorSpace();
 		logger->Log("Format initialized: " + vk::to_string(colorFormat.value()));
 		logger->Log("Color space initialized: " + vk::to_string(colorSpace.value()));
@@ -114,7 +112,6 @@ namespace Sisyphus::Rendering::Vulkan {
 	void RendererImpl::Draw(const IDrawable & drawable)
 	{
 		BreakAssert(device);
-		BreakAssert(!commandBuffers.empty());
 		BreakAssert(!framebuffers.empty());
 		BreakAssert(renderPass);
 		BreakAssert(descriptorSet);
@@ -136,6 +133,8 @@ namespace Sisyphus::Rendering::Vulkan {
 			"Acquired image index (" + std::to_string(currentBuffer.value) +
 			") higher that the number of available framebuffers (" + std::to_string(framebuffers.size()) + ")");
 
+		InitCommandBuffers();
+		BreakAssert(!commandBuffers.empty());
 		auto& commandBuffer = commandBuffers[0];
 		commandBuffer->begin(vk::CommandBufferBeginInfo{});
 
@@ -192,6 +191,8 @@ namespace Sisyphus::Rendering::Vulkan {
 			&currentBuffer.value
 		};
 		presentQueue.presentKHR(presentInfo);
+
+		device->resetCommandPool(*commandPool, {});
 	}
 
 	std::vector<const char*> RendererImpl::GetInstanceLayerNames()

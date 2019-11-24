@@ -42,7 +42,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		void InitQueueFamilyIndex();
 		void InitDevice();
 		void InitCommandPool();
-		void InitCommandBuffers();
 		void InitFormatAndColorSpace();
 		void InitSwapchain();
 		void InitSwapchainImages();
@@ -59,6 +58,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		// happens each Draw()
 		void InitVertexBuffer(size_t size);
+		void InitCommandBuffers();
 		void InitPipeline(uint32_t stride);
 
 		std::vector<const char*> GetInstanceLayerNames();
