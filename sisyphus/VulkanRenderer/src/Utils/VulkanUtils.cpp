@@ -1,5 +1,6 @@
 #include "VulkanUtils.h"
 #include "Utils\Logger.h"
+#include "WindowCreator\Window.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	Version::Version(uint32_t version) :
@@ -66,7 +67,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		}
 		return std::nullopt;
 	}
-	vk::Extent2D GetExtent2D(WindowExtent windowExtent)
+	vk::Extent2D GetExtent2D(WindowCreator::WindowExtent windowExtent)
 	{
 		return vk::Extent2D(windowExtent.width, windowExtent.height);
 	}

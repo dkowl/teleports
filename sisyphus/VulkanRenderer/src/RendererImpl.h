@@ -14,6 +14,7 @@
 
 namespace Sisyphus::WindowCreator {
 	class Window;
+	struct WindowExtent;
 }
 
 namespace Sisyphus::Rendering::Vulkan {
@@ -35,7 +36,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	private:
 		void InitInstance();
 		void InitDebugMessenger();
-		void InitWindow();
+		void InitWindowExtent();
 		void InitSurface();
 		void InitPhysicalDevice();
 		void InitQueueFamilyIndex();
@@ -64,9 +65,9 @@ namespace Sisyphus::Rendering::Vulkan {
 		Shader& GetShader(uuids::uuid id);
 
 		RendererCreateInfo ci;
+		std::unique_ptr<WindowCreator::WindowExtent> windowExtent;
 		vk::UniqueInstance instance;
 		std::unique_ptr<DebugMessenger> debugMessenger;
-		std::unique_ptr<WindowCreator::Window> window;
 		vk::UniqueSurfaceKHR surface;
 		vk::PhysicalDevice physicalDevice;
 		std::optional<int> queueFamilyIndex;

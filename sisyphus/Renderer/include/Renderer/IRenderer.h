@@ -2,19 +2,18 @@
 #include "IDrawable.h"
 #include "ShaderInfo.h"
 
+namespace Sisyphus::WindowCreator {
+	class Window;
+}
+
 namespace Sisyphus::Rendering {
 	enum class RendererType {
 		Vulkan
 	};
 
-	struct WindowExtent {
-		uint32_t width;
-		uint32_t height;
-	};
-
 	struct RendererCreateInfo {
 		RendererType type;
-		WindowExtent windowExtent;
+		WindowCreator::Window* window;
 		std::vector<ShaderInfo> shaders;
 	};
 

@@ -6,13 +6,13 @@ namespace Sisyphus::WindowCreator {
 
 	public:
 		struct CreateInfo {
-			uint32_t width;
-			uint32_t height;
+			WindowExtent extent;
 		};
 
 		WindowsWindow(CreateInfo ci);
 		~WindowsWindow();
 
+		WindowExtent GetExtent() const override;
 		std::optional<WindowEvent> GetEvent() override;
 		vk::UniqueSurfaceKHR GetVulkanSurface(vk::Instance instance) override;
 

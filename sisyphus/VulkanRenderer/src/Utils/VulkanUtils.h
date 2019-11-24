@@ -6,6 +6,10 @@
 #include "Utils\ILogger.h"
 #include "Renderer\IRenderer.h"
 
+namespace Sisyphus::WindowCreator {
+	struct WindowExtent;
+}
+
 namespace Sisyphus::Rendering::Vulkan {
 	struct Version {
 		Version(uint32_t inVersion);
@@ -32,5 +36,5 @@ namespace Sisyphus::Rendering::Vulkan {
 	void InspectDevice(const vk::PhysicalDevice& physicalDevice, ILogger* logger);
 	std::optional<int> FindGraphicsQueueFamilyIndex(vk::PhysicalDevice& physicalDevice, vk::SurfaceKHR& surface);
 
-	vk::Extent2D GetExtent2D(WindowExtent windowExtent);
+	vk::Extent2D GetExtent2D(WindowCreator::WindowExtent windowExtent);
 }

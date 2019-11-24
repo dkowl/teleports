@@ -4,6 +4,7 @@
 #include "Utils\Logger.h"
 #include "AssetManagement/AssetManager.h"
 #include "Renderer\IDrawable.h"
+#include "WindowCreator/WindowCreator.h"
 
 using namespace Sisyphus;
 
@@ -50,11 +51,16 @@ int main() {
 
 		using namespace Rendering;
 
+		WindowCreator::WindowCreator windowCreator;
+		auto window = windowCreator.Create(WindowCreator::WindowCreateInfo{
+			WindowCreator::Platform::Windows,
+			{1280, 720}
+		});
+
 		auto logger = &Logger::Get();
 		RendererCreateInfo rendererCreateInfo;
 		rendererCreateInfo.type = RendererType::Vulkan;
-		rendererCreateInfo.windowExtent.width = 1280;
-		rendererCreateInfo.windowExtent.height = 720;
+		rendererCreateInfo.window = window.get();
 
 		auto vertexShaderFileId = uuids::uuid::from_string("e1124008-e112-4008-a2f3-cf6233498020").value();
 		String vertexShaderText(assetManager.GetAsset(vertexShaderFileId).GetDataAsString());

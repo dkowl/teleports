@@ -31,7 +31,7 @@ namespace Sisyphus::WindowCreator {
 			throw std::runtime_error("Failed to register a Windows class");
 		}
 
-		RECT windowRect = { 0, 0, static_cast<LONG>(ci.width), static_cast<LONG>(ci.height)};
+		RECT windowRect = { 0, 0, static_cast<LONG>(ci.extent.width), static_cast<LONG>(ci.extent.height)};
 		AdjustWindowRect(&windowRect, WS_OVERLAPPEDWINDOW, FALSE);
 		data->window = CreateWindowEx(
 			0,
@@ -55,6 +55,14 @@ namespace Sisyphus::WindowCreator {
 	WindowsWindow::~WindowsWindow()
 	{
 		DestroyWindow(data->window);
+	}
+
+	WindowExtent WindowsWindow::GetExtent() const
+	{
+		RECT rect;
+		auto retVal = GetClientRect(data->window, &rect);
+		Utils::ThrowAssert(retVal != 0);
+		return { static_cast<uint32_t>(rect.right), static_cast<uint32_t>(rect.bottom) };
 	}
 
 	std::optional<WindowEvent> WindowsWindow::GetEvent()

@@ -3,7 +3,6 @@
   <ImportGroup Label="PropertySheets">
     <Import Project="Vulkan.props" />
     <Import Project="Glslang.props" />
-    <Import Project="WindowCreator.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />

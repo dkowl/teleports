@@ -28,6 +28,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utils", "Utils\Utils.vcxproj", "{C32D033F-1533-4D6B-92B9-1DDA3623CFD9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VulkanRenderer", "VulkanRenderer\VulkanRenderer.vcxproj", "{E24C7ECB-173A-489E-9CC4-0FB97BC1D4D2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CE85731A-3AA4-44F2-AAA3-AEB58AF4D5E6} = {CE85731A-3AA4-44F2-AAA3-AEB58AF4D5E6}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AssetManagement", "AssetManagement\AssetManagement.vcxproj", "{CBB89831-0AA2-4C01-A866-11E0344BD80B}"
 EndProject

@@ -23,9 +23,9 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	RendererImpl::RendererImpl(const RendererCreateInfo& ci) :
 		ci(ci),
+		windowExtent(nullptr),
 		instance(nullptr),
 		debugMessenger(nullptr),
-		window(nullptr),
 		surface(nullptr),
 		physicalDevice(nullptr),
 		queueFamilyIndex(std::nullopt),
@@ -57,8 +57,8 @@ namespace Sisyphus::Rendering::Vulkan {
 			InitDebugMessenger();
 			logger->Log("Debug Messenger initialized!");
 		}
-		InitWindow();
-		logger->Log("Window initialized!");
+		InitWindowExtent();
+		logger->Log("Window extent initialized!");
 		InitSurface();
 		logger->Log("Surface initialized!");
 		InitPhysicalDevice();
@@ -118,6 +118,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		BreakAssert(!framebuffers.empty());
 		BreakAssert(renderPass);
 		BreakAssert(descriptorSet);
+		BreakAssert(windowExtent);
 
 		InitPipeline(drawable.GetVertexStride());
 		BreakAssert(pipeline);
@@ -144,7 +145,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		vk::RenderPassBeginInfo renderPassBeginInfo{
 			*renderPass,
 			*framebuffers[currentBuffer.value],
-			vk::Rect2D(vk::Offset2D(0, 0), GetExtent2D(ci.windowExtent)),
+			vk::Rect2D(vk::Offset2D(0, 0), GetExtent2D(*windowExtent)),
 			2,
 			clearValues
 		};
@@ -154,9 +155,9 @@ namespace Sisyphus::Rendering::Vulkan {
 		commandBuffer->bindVertexBuffers(0, vertexBuffer->GetBuffer(), { 0 });
 		commandBuffer->setViewport(0, vk::Viewport(
 			0.0f, 0.0f, 
-			static_cast<float>(ci.windowExtent.width), static_cast<float>(ci.windowExtent.height), 
+			static_cast<float>(windowExtent->width), static_cast<float>(windowExtent->height), 
 			0.0f, 1.0f));
-		commandBuffer->setScissor(0, vk::Rect2D(vk::Offset2D(0, 0), GetExtent2D(ci.windowExtent)));
+		commandBuffer->setScissor(0, vk::Rect2D(vk::Offset2D(0, 0), GetExtent2D(*windowExtent)));
 
 		commandBuffer->draw(drawable.GetVertexCount(), 1, 0, 0);
 		commandBuffer->endRenderPass();
@@ -247,17 +248,16 @@ namespace Sisyphus::Rendering::Vulkan {
 		debugMessenger = std::make_unique<DebugMessenger>(*instance);
 	}
 
-	void RendererImpl::InitWindow()
+	void RendererImpl::InitWindowExtent()
 	{
-		wc::WindowCreator windowCreator;
-		window = windowCreator.Create({ wc::Platform::Windows, ci.windowExtent.width, ci.windowExtent.height });
+		windowExtent = std::make_unique<WindowCreator::WindowExtent>(ci.window->GetExtent());
 	}
 
 	void RendererImpl::InitSurface()
 	{
 		BreakAssert(instance);
-		BreakAssert(window);
-		surface = window->GetVulkanSurface(instance.get());
+		BreakAssert(ci.window);
+		surface = ci.window->GetVulkanSurface(instance.get());
 	}
 
 	void RendererImpl::InitPhysicalDevice()
@@ -375,6 +375,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		BreakAssert(surface);
 		BreakAssert(colorFormat);
 		BreakAssert(colorSpace);
+		BreakAssert(windowExtent);
 
 		constexpr int desiredMinImageCount = 3; // triple buffering
 		auto surfaceCapabilites = physicalDevice.getSurfaceCapabilitiesKHR(*surface);
@@ -419,7 +420,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			desiredMinImageCount,
 			colorFormat.value(),
 			colorSpace.value(),
-			vk::Extent2D{ ci.windowExtent.width, ci.windowExtent.height },
+			vk::Extent2D{ windowExtent->width, windowExtent->height },
 			1,
 			vk::ImageUsageFlagBits::eColorAttachment,
 			vk::SharingMode::eExclusive,
@@ -477,9 +478,10 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		BreakAssert(physicalDevice);
 		BreakAssert(device);
+		BreakAssert(windowExtent);
 
 		DepthBuffer::CreateInfo createInfo{
-			vk::Extent2D{ci.windowExtent.width, ci.windowExtent.height},
+			vk::Extent2D{windowExtent->width, windowExtent->height},
 			physicalDevice,
 			*device,
 			logger
@@ -630,6 +632,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		BreakAssert(!imageViews.empty());
 		BreakAssert(depthBuffer);
 		BreakAssert(device);
+		BreakAssert(windowExtent);
 		vk::ImageView attachments[2];
 		attachments[1] = depthBuffer->GetImageView();
 
@@ -640,8 +643,8 @@ namespace Sisyphus::Rendering::Vulkan {
 				*renderPass,
 				2,
 				attachments,
-				ci.windowExtent.width,
-				ci.windowExtent.height,
+				windowExtent->width,
+				windowExtent->height,
 				1
 			};
 

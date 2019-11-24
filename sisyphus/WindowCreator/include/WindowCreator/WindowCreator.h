@@ -8,14 +8,13 @@ namespace Sisyphus::WindowCreator {
 		Windows
 	};
 
-	struct CreateInfo {
+	struct WindowCreateInfo {
 		Platform platform;
-		uint32_t width;
-		uint32_t height;
+		WindowExtent extent;
 	};
 
 	class WindowCreator {
 	public:
-		std::unique_ptr<Window> Create(CreateInfo createInfo);
+		std::unique_ptr<Window> Create(const WindowCreateInfo& createInfo);
 	};
 }
