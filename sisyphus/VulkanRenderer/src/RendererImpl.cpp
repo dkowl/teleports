@@ -111,6 +111,8 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::Draw(const IDrawable & drawable)
 	{
+		AdaptToSurfaceChanges();
+
 		BreakAssert(device);
 		BreakAssert(!framebuffers.empty());
 		BreakAssert(renderPass);
@@ -669,6 +671,19 @@ namespace Sisyphus::Rendering::Vulkan {
 		}
 		if (fragmentShaderId.is_nil()) {
 			Utils::Throw("Unable to find a fragment shader");
+		}
+	}
+
+	void RendererImpl::AdaptToSurfaceChanges()
+	{
+		BreakAssert(physicalDevice);
+		auto surfaceCapabilities = physicalDevice.getSurfaceCapabilitiesKHR(*surface);
+		bool surfaceChanged = surfaceCapabilities.currentExtent != *windowExtent;
+		if (surfaceChanged) {
+			logger->Log(
+				"Surface extent changed from " + ToString(GetExtent2D(*windowExtent)) +
+				" to " + ToString(surfaceCapabilities.currentExtent));
+			__debugbreak();
 		}
 	}
 

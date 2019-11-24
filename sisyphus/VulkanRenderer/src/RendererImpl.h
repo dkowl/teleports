@@ -57,6 +57,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		void InitShaders();
 
 		// happens each Draw()
+		void AdaptToSurfaceChanges();
 		void InitVertexBuffer(size_t size);
 		void InitCommandBuffers();
 		void InitPipeline(uint32_t stride);
