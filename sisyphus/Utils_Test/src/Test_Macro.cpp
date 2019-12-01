@@ -2,7 +2,7 @@
 #define SIS_NO_DEBUG_BREAK
 #include "Utils/FunctionFileLine.h"
 #include "Utils/Throw.h"
-#include "Utils/BreakAssert.h"
+#include "Utils/DebugAssert.h"
 #include <string>
 #include <iostream>
 
@@ -17,11 +17,11 @@ namespace {
 		PRINT_AND_RETHROW(SIS_THROW("bar"));
 	}
 
-	void FooThrowAssertNoMessage() {
+	void FooThrowAssert() {
 		PRINT_AND_RETHROW(SIS_THROWASSERT(2 * 2 == 5));
 	}
 
-	void FooThrowAssert() {
+	void FooThrowAssertMsg() {
 		PRINT_AND_RETHROW(SIS_THROWASSERT_MSG(2 * 2 == 3, "Maths error"));
 	}
 }
@@ -29,7 +29,14 @@ namespace {
 
 TEST_CASE("Macros") {
 	std::cout << "SIS_FUNCTION_FILE_LINE: " << Foo() << std::endl;
+
 	REQUIRE_THROWS(FooThrow());
-	REQUIRE_THROWS(FooThrowAssertNoMessage());
 	REQUIRE_THROWS(FooThrowAssert());
+	REQUIRE_THROWS(FooThrowAssertMsg());
+
+	std::cout << "SIS_DEBUGASSERT: ";
+	SIS_DEBUGASSERT(1 == 2);
+
+	std::cout << "SIS_DEBUGASSERT_MSG: ";
+	SIS_DEBUGASSERT_MSG(2 == 3, "Maths error");
 }

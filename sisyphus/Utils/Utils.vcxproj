@@ -77,6 +77,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Utils\BreakAssert.h" />
+    <ClInclude Include="include\Utils\DebugAssert.h" />
     <ClInclude Include="include\Utils\FilesystemUtils.h" />
     <ClInclude Include="include\Utils\FunctionFileLine.h" />
     <ClInclude Include="include\Utils\ILogger.h" />
@@ -91,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakAssert.cpp" />
+    <ClCompile Include="src\DebugAssert.cpp" />
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\OstreamLogger.cpp" />
     <ClCompile Include="src\Throw.cpp" />

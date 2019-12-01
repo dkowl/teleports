@@ -5,8 +5,8 @@
 void BreakAssert(bool condition, std::string message)
 {
 	if (!condition) {
-		std::cerr << message << std::endl;
-#ifdef _WIN32
+		std::cerr << "Assertion failed! " << message << std::endl;
+#if defined(_WIN32) && !defined(SIS_NO_DEBUG_BREAK)
 		__debugbreak();
 #endif
 	}
