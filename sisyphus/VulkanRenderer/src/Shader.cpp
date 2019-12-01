@@ -10,7 +10,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		switch (type) {
 		case ShaderType::Vertex: return EShLangVertex;
 		case ShaderType::Fragment: return EShLangFragment;
-		default: { Utils::Throw("Unknown shader type"); return EShLangVertex; }
+		default: { SIS_THROW("Unknown shader type"); return EShLangVertex; }
 		}
 	}
 
@@ -27,13 +27,13 @@ namespace Sisyphus::Rendering::Vulkan {
 		try {
 			bool parseSuccess = shader.parse(&glslang::DefaultTBuiltInResource, 100, false, messages);
 			if (!parseSuccess) {
-				Utils::Throw("Shared parsing failed");
+				SIS_THROW("Shared parsing failed");
 			}
 			
 			program.addShader(&shader);
 			bool linkSuccess = program.link(messages);
 			if (!linkSuccess) {
-				Utils::Throw("Shader program linking failed");
+				SIS_THROW("Shader program linking failed");
 			}
 		}
 		catch (std::runtime_error& e) {

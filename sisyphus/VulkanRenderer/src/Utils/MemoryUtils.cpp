@@ -50,7 +50,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			supportedTypeBits >>= 1;
 		}
 		if (memoryTypeIndex == ~0) {
-			Utils::Throw("Cannot find a supported device local memory type");
+			SIS_THROW("Cannot find a supported device local memory type");
 		}
 		return memoryTypeIndex;
 	}

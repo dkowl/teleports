@@ -7,7 +7,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		ci(ci)
 	{
 		if (ci.logger == nullptr) {
-			Utils::Throw("Logger cannot be null");
+			SIS_THROW("Logger cannot be null");
 		}
 		CreateBuffer();
 		ci.logger->Log("Buffer created!");

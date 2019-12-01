@@ -28,7 +28,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	void LoadFunction(std::string name, const vk::Instance& instance, T& outPfn) {
 		auto pfn = instance.getProcAddr(name);
 		if (pfn == nullptr) {
-			Utils::Throw(std::string("Unable to find ") + name + " Vulkan function");
+			SIS_THROW(std::string("Unable to find ") + name + " Vulkan function");
 		}
 		outPfn = reinterpret_cast<T>(pfn);
 	}

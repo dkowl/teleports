@@ -9,7 +9,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		ci(ci)
 	{
 		if (ci.logger == nullptr) {
-			Utils::Throw("Logger cannot be null");
+			SIS_THROW("Logger cannot be null");
 		}
 
 		CreateImage();
@@ -41,7 +41,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			tiling = vk::ImageTiling::eLinear;
 		}
 		else {
-			Utils::Throw("DepthStencilAttachment is not supported for " + vk::to_string(format));
+			SIS_THROW("DepthStencilAttachment is not supported for " + vk::to_string(format));
 		}
 		ci.logger->Log("Image Tiling: " + vk::to_string(tiling));
 

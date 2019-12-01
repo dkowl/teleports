@@ -46,7 +46,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		logger(&Logger::Get())
 	{
 		if (logger == nullptr) {
-			Utils::Throw("Logger not found");
+			SIS_THROW("Logger not found");
 		}
 
 		EnumerateInstanceLayerProperties();
@@ -208,7 +208,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		for (auto&& name : result) {
 			if (!IsLayerEnabled(name)) {
-				Utils::Throw(std::string("Cannot find layer ") + std::string(name));
+				SIS_THROW(std::string("Cannot find layer ") + std::string(name));
 			}
 		}
 
@@ -283,7 +283,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		BreakAssert(surface);
 		queueFamilyIndex = FindGraphicsQueueFamilyIndex(physicalDevice, *surface);
 		if (queueFamilyIndex == -1) {
-			Utils::Throw("Graphics queue not found in the device");
+			SIS_THROW("Graphics queue not found in the device");
 		}
 		logger->Log("Choosing queue family #" + std::to_string(queueFamilyIndex.value()));
 	}
@@ -366,7 +366,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			std::stringstream ss;
 			ss << "Unable to find desired format: " << vk::to_string(desiredFormat)
 				<< " and color space: " << vk::to_string(desiredColorSpace);
-			Utils::Throw(ss.str());
+			SIS_THROW(ss.str());
 		}
 		colorFormat = desiredFormat;
 		colorSpace = desiredColorSpace;
@@ -387,19 +387,19 @@ namespace Sisyphus::Rendering::Vulkan {
 			surfaceCapabilites.minImageCount > desiredMinImageCount ||
 			surfaceCapabilites.maxImageCount < desiredMinImageCount)
 		{
-			Utils::Throw("Surface does not support three image buffers");
+			SIS_THROW("Surface does not support three image buffers");
 		}
 
 		logger->Log("Surface extent: (w: " + std::to_string(surfaceCapabilites.currentExtent.width) +
 			", h: " +  std::to_string(surfaceCapabilites.currentExtent.height) + ")");
 
 		if (!(surfaceCapabilites.supportedTransforms & vk::SurfaceTransformFlagBitsKHR::eIdentity)) {
-			Utils::Throw("Identity surface transform not supported");
+			SIS_THROW("Identity surface transform not supported");
 		}
 
 		logger->Log("Supported composite alpha: " + vk::to_string(surfaceCapabilites.supportedCompositeAlpha));
 		if (!(surfaceCapabilites.supportedCompositeAlpha & vk::CompositeAlphaFlagBitsKHR::eOpaque)) {
-			Utils::Throw("Surface opaque composite alpha mode not supported");
+			SIS_THROW("Surface opaque composite alpha mode not supported");
 		}
 
 		auto desiredPresentMode = vk::PresentModeKHR::eFifoRelaxed;
@@ -413,7 +413,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			}
 		}
 		if (!modeFound) {
-			Utils::Throw("Present mode " + vk::to_string(desiredPresentMode) + " not supported by GPU");
+			SIS_THROW("Present mode " + vk::to_string(desiredPresentMode) + " not supported by GPU");
 		}
 
 		vk::SwapchainCreateInfoKHR swapchainCreateInfo(
@@ -666,10 +666,10 @@ namespace Sisyphus::Rendering::Vulkan {
 			}
 		}
 		if (vertexShaderId.is_nil()) {
-			Utils::Throw("Unable to find a vertex shader");
+			SIS_THROW("Unable to find a vertex shader");
 		}
 		if (fragmentShaderId.is_nil()) {
-			Utils::Throw("Unable to find a fragment shader");
+			SIS_THROW("Unable to find a fragment shader");
 		}
 	}
 
@@ -709,10 +709,10 @@ namespace Sisyphus::Rendering::Vulkan {
 		BreakAssert(device);
 
 		if (!ShaderExists(vertexShaderId)) {
-			Utils::Throw("Vertex shader not found");
+			SIS_THROW("Vertex shader not found");
 		}
 		if (!ShaderExists(fragmentShaderId)) {
-			Utils::Throw("Fragment shader not found");
+			SIS_THROW("Fragment shader not found");
 		}
 
 		vk::PipelineShaderStageCreateInfo shaderStageCreateInfos[2]{
@@ -826,7 +826,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	Shader& RendererImpl::GetShader(uuids::uuid id)
 	{
 		if (!ShaderExists(id)) {
-			Utils::Throw("Shader " + uuids::to_string(id) + " not found");
+			SIS_THROW("Shader " + uuids::to_string(id) + " not found");
 		}
 		return *shaders[id];
 	}
@@ -855,7 +855,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	void RendererImpl::EnableShader(uuids::uuid id)
 	{
 		if (!ShaderExists(id)) {
-			Utils::Throw("Shader " + uuids::to_string(id) + " does not exist");
+			SIS_THROW("Shader " + uuids::to_string(id) + " does not exist");
 		}
 		auto type = shaders[id]->GetType();
 		switch (type) {
