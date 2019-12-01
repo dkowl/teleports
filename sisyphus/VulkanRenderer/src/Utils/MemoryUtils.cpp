@@ -1,10 +1,10 @@
 #include "MemoryUtils.h"
-#include "Utils\BreakAssert.h"
+#include "Utils\DebugAssert.h"
 #include "Utils\Throw.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	void InspectMemoryProperties(vk::PhysicalDeviceMemoryProperties properties, ILogger* logger) {
-		BreakAssert(logger != nullptr);
+		SIS_DEBUGASSERT(logger != nullptr);
 
 		logger->BeginSection("Memory types");
 		for (uint32_t i = 0; i < properties.memoryTypeCount; i++) {

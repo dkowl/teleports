@@ -46,15 +46,15 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void UniformBuffer::BindMemory()
 	{
-		BreakAssert(buffer);
-		BreakAssert(memory);
+		SIS_DEBUGASSERT(buffer);
+		SIS_DEBUGASSERT(memory);
 
 		ci.device.bindBufferMemory(*buffer, *memory, 0);
 	}
 
 	void UniformBuffer::UpdateDescriptorSet()
 	{
-		BreakAssert(buffer);
+		SIS_DEBUGASSERT(buffer);
 
 		vk::DescriptorBufferInfo descriptorBufferInfo(
 			*buffer,

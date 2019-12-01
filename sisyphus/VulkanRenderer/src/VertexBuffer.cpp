@@ -48,8 +48,8 @@ namespace Sisyphus::Rendering::Vulkan {
 	}
 	void VertexBuffer::BindMemory()
 	{
-		BreakAssert(buffer);
-		BreakAssert(memory);
+		SIS_DEBUGASSERT(buffer);
+		SIS_DEBUGASSERT(memory);
 
 		ci.device.bindBufferMemory(*buffer, *memory, 0);
 	}

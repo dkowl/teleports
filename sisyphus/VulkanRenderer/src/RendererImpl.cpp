@@ -4,7 +4,7 @@
 #include <sstream>
 #include "RendererImpl.h"
 #include "WindowCreator\WindowCreator.h"
-#include "Utils\BreakAssert.h"
+#include "Utils\DebugAssert.h"
 #include "Utils\UuidGenerator.h"
 #include "Utils\Logger.h"
 #include "Utils\Throw.h"
@@ -113,17 +113,17 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		AdaptToSurfaceChanges();
 
-		BreakAssert(device);
-		BreakAssert(!framebuffers.empty());
-		BreakAssert(renderPass);
-		BreakAssert(descriptorSet);
-		BreakAssert(windowExtent);
+		SIS_DEBUGASSERT(device);
+		SIS_DEBUGASSERT(!framebuffers.empty());
+		SIS_DEBUGASSERT(renderPass);
+		SIS_DEBUGASSERT(descriptorSet);
+		SIS_DEBUGASSERT(windowExtent);
 
 		InitPipeline(drawable.GetVertexStride());
-		BreakAssert(pipeline);
+		SIS_DEBUGASSERT(pipeline);
 
 		InitVertexBuffer(drawable.GetVertexBufferSize());
-		BreakAssert(vertexBuffer);
+		SIS_DEBUGASSERT(vertexBuffer);
 		vertexBuffer->GetDeviceData().Set(drawable.GetVertexData());
 
 		vk::UniqueSemaphore imageAcquiredSemaphore = device->createSemaphoreUnique(vk::SemaphoreCreateInfo{});
@@ -136,7 +136,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			") higher that the number of available framebuffers (" + std::to_string(framebuffers.size()) + ")");
 
 		InitCommandBuffers();
-		BreakAssert(!commandBuffers.empty());
+		SIS_DEBUGASSERT(!commandBuffers.empty());
 		auto& commandBuffer = commandBuffers[0];
 		commandBuffer->begin(vk::CommandBufferBeginInfo{});
 
@@ -183,7 +183,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			logger->Log("Draw successful!");
 		}
 		else {
-			BreakAssert(false, "Unexpected Draw result!");
+			SIS_DEBUGASSERT_MSG(false, "Unexpected Draw result!");
 		}
 		vk::PresentInfoKHR presentInfo{
 			0,
@@ -247,7 +247,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitDebugMessenger()
 	{
-		BreakAssert(instance);
+		SIS_DEBUGASSERT(instance);
 		debugMessenger = std::make_unique<DebugMessenger>(*instance);
 	}
 
@@ -258,14 +258,14 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitSurface()
 	{
-		BreakAssert(instance);
-		BreakAssert(ci.window);
+		SIS_DEBUGASSERT(instance);
+		SIS_DEBUGASSERT(ci.window);
 		surface = ci.window->GetVulkanSurface(instance.get());
 	}
 
 	void RendererImpl::InitPhysicalDevice()
 	{
-		BreakAssert(instance);
+		SIS_DEBUGASSERT(instance);
 
 		auto physicalDevices = instance->enumeratePhysicalDevices();
 		if (physicalDevices.empty()) {
@@ -279,8 +279,8 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitQueueFamilyIndex()
 	{
-		BreakAssert(physicalDevice);
-		BreakAssert(surface);
+		SIS_DEBUGASSERT(physicalDevice);
+		SIS_DEBUGASSERT(surface);
 		queueFamilyIndex = FindGraphicsQueueFamilyIndex(physicalDevice, *surface);
 		if (queueFamilyIndex == -1) {
 			SIS_THROW("Graphics queue not found in the device");
@@ -290,8 +290,8 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitDevice()
 	{
-		BreakAssert(physicalDevice);
-		BreakAssert(queueFamilyIndex);
+		SIS_DEBUGASSERT(physicalDevice);
+		SIS_DEBUGASSERT(queueFamilyIndex);
 
 		vk::DeviceQueueCreateInfo deviceQueueCreateInfo(
 			{},
@@ -316,8 +316,8 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitCommandPool()
 	{
-		BreakAssert(queueFamilyIndex);
-		BreakAssert(device);
+		SIS_DEBUGASSERT(queueFamilyIndex);
+		SIS_DEBUGASSERT(device);
 
 		vk::CommandPoolCreateInfo commandPoolCreateInfo(
 			{},
@@ -328,8 +328,8 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitCommandBuffers()
 	{
-		BreakAssert(device);
-		BreakAssert(commandPool);
+		SIS_DEBUGASSERT(device);
+		SIS_DEBUGASSERT(commandPool);
 
 		vk::CommandBufferAllocateInfo commandBufferAllocateInfo(
 			*commandPool,
@@ -341,7 +341,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitFormatAndColorSpace()
 	{
-		BreakAssert(surface);
+		SIS_DEBUGASSERT(surface);
 
 		constexpr vk::Format desiredFormat = vk::Format::eB8G8R8A8Srgb;
 		constexpr vk::ColorSpaceKHR desiredColorSpace = vk::ColorSpaceKHR::eSrgbNonlinear;
@@ -374,10 +374,10 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitSwapchain()
 	{
-		BreakAssert(physicalDevice);
-		BreakAssert(surface);
-		BreakAssert(colorFormat);
-		BreakAssert(colorSpace);
+		SIS_DEBUGASSERT(physicalDevice);
+		SIS_DEBUGASSERT(surface);
+		SIS_DEBUGASSERT(colorFormat);
+		SIS_DEBUGASSERT(colorSpace);
 
 		constexpr int desiredMinImageCount = 3; // triple buffering
 		auto surfaceCapabilites = physicalDevice.getSurfaceCapabilitiesKHR(*surface);
@@ -440,14 +440,14 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitSwapchainImages()
 	{
-		BreakAssert(swapchain);
+		SIS_DEBUGASSERT(swapchain);
 		swapchainImages = device->getSwapchainImagesKHR(*swapchain);
 	}
 
 	void RendererImpl::InitImageViews()
 	{
-		BreakAssert(!swapchainImages.empty());
-		BreakAssert(colorFormat);
+		SIS_DEBUGASSERT(!swapchainImages.empty());
+		SIS_DEBUGASSERT(colorFormat);
 
 		vk::ComponentMapping componentMapping{
 			vk::ComponentSwizzle::eR,
@@ -478,9 +478,9 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitDepthBuffer()
 	{
-		BreakAssert(physicalDevice);
-		BreakAssert(device);
-		BreakAssert(windowExtent);
+		SIS_DEBUGASSERT(physicalDevice);
+		SIS_DEBUGASSERT(device);
+		SIS_DEBUGASSERT(windowExtent);
 
 		DepthBuffer::CreateInfo createInfo{
 			vk::Extent2D{windowExtent->width, windowExtent->height},
@@ -494,7 +494,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitDescriptorSetLayout()
 	{
-		BreakAssert(device);
+		SIS_DEBUGASSERT(device);
 
 		vk::DescriptorSetLayoutBinding binding{
 			0,
@@ -512,8 +512,8 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitPipelineLayout()
 	{
-		BreakAssert(descriptorSetLayout);
-		BreakAssert(device);
+		SIS_DEBUGASSERT(descriptorSetLayout);
+		SIS_DEBUGASSERT(device);
 
 		pipelineLayout = device->createPipelineLayoutUnique(vk::PipelineLayoutCreateInfo(
 			{},
@@ -524,7 +524,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitDescriptorPool()
 	{
-		BreakAssert(device);
+		SIS_DEBUGASSERT(device);
 
 		vk::DescriptorPoolSize poolSize(vk::DescriptorType::eUniformBuffer, 1);
 
@@ -540,8 +540,8 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitDescriptorSet()
 	{
-		BreakAssert(device);
-		BreakAssert(descriptorPool);
+		SIS_DEBUGASSERT(device);
+		SIS_DEBUGASSERT(descriptorPool);
 
 		vk::DescriptorSetAllocateInfo allocateInfo(
 			*descriptorPool,
@@ -554,9 +554,9 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitUniformBuffer()
 	{
-		BreakAssert(device);
-		BreakAssert(physicalDevice);
-		BreakAssert(descriptorSet);
+		SIS_DEBUGASSERT(device);
+		SIS_DEBUGASSERT(physicalDevice);
+		SIS_DEBUGASSERT(descriptorSet);
 
 		UniformBuffer::CreateInfo createInfo{
 			sizeof(Renderer::UniformBufferData),
@@ -571,8 +571,8 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitRenderPass()
 	{
-		BreakAssert(device);
-		BreakAssert(colorFormat);
+		SIS_DEBUGASSERT(device);
+		SIS_DEBUGASSERT(colorFormat);
 
 		vk::AttachmentDescription attachmentDescriptions[2];
 
@@ -631,10 +631,10 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitFramebuffers()
 	{
-		BreakAssert(!imageViews.empty());
-		BreakAssert(depthBuffer);
-		BreakAssert(device);
-		BreakAssert(windowExtent);
+		SIS_DEBUGASSERT(!imageViews.empty());
+		SIS_DEBUGASSERT(depthBuffer);
+		SIS_DEBUGASSERT(device);
+		SIS_DEBUGASSERT(windowExtent);
 		vk::ImageView attachments[2];
 		attachments[1] = depthBuffer->GetImageView();
 
@@ -675,7 +675,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::AdaptToSurfaceChanges()
 	{
-		BreakAssert(physicalDevice);
+		SIS_DEBUGASSERT(physicalDevice);
 		auto surfaceCapabilities = physicalDevice.getSurfaceCapabilitiesKHR(*surface);
 		bool surfaceChanged = surfaceCapabilities.currentExtent != *windowExtent;
 		if (surfaceChanged) {
@@ -689,8 +689,8 @@ namespace Sisyphus::Rendering::Vulkan {
 	void RendererImpl::InitVertexBuffer(size_t size)
 	{
 		logger->BeginSection("Vertex Buffer");
-		BreakAssert(device);
-		BreakAssert(physicalDevice);
+		SIS_DEBUGASSERT(device);
+		SIS_DEBUGASSERT(physicalDevice);
 
 		vertexBuffer = std::make_unique<VertexBuffer>(VertexBuffer::CreateInfo{
 			size,
@@ -704,9 +704,9 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitPipeline(uint32_t stride)
 	{
-		BreakAssert(pipelineLayout);
-		BreakAssert(renderPass);
-		BreakAssert(device);
+		SIS_DEBUGASSERT(pipelineLayout);
+		SIS_DEBUGASSERT(renderPass);
+		SIS_DEBUGASSERT(device);
 
 		if (!ShaderExists(vertexShaderId)) {
 			SIS_THROW("Vertex shader not found");
@@ -833,7 +833,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::CreateShader(const ShaderInfo& shaderInfo)
 	{
-		BreakAssert(device);
+		SIS_DEBUGASSERT(device);
 
 		Shader::CreateInfo shaderCreateInfo{
 			shaderInfo.code,
@@ -866,7 +866,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			fragmentShaderId = id;
 			break;
 		default:
-			BreakAssert(false);
+			SIS_DEBUGASSERT(false);
 			break;
 		}
 
@@ -875,13 +875,13 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::UpdateUniformBuffer(Renderer::UniformBufferData data)
 	{
-		BreakAssert(uniformBuffer);
+		SIS_DEBUGASSERT(uniformBuffer);
 		uniformBuffer->UpdateData(data);
 	}
 
 	Renderer::UniformBufferData RendererImpl::GetUniformBufferData()
 	{
-		BreakAssert(uniformBuffer);
+		SIS_DEBUGASSERT(uniformBuffer);
 		return uniformBuffer->GetData<Renderer::UniformBufferData>();
 	}
 

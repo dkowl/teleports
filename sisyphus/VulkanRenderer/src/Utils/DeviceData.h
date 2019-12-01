@@ -1,6 +1,6 @@
 #pragma once
 #include "Vulkan.h"
-#include "Utils/BreakAssert.h"
+#include "Utils/DebugAssert.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	class DeviceData {
@@ -18,28 +18,28 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		template<typename T>
 		void SetData(const T& data) {
-			BreakAssert(sizeof(T) == sizeInBytes);
+			SIS_DEBUGASSERT(sizeof(T) == sizeInBytes);
 
 			Set(reinterpret_cast<const std::byte*>(&data));
 		}
 
 		template<typename T>
 		void SetData(const T* data, size_t numObjects) {
-			BreakAssert(sizeof(T) * numObjects == sizeInBytes);
+			SIS_DEBUGASSERT(sizeof(T) * numObjects == sizeInBytes);
 
 			Set(reinterpret_cast<const std::byte*>(&data));
 		}
 
 		template<typename T>
 		void SetData(const std::vector<T>& data) {
-			BreakAssert(data.size() * sizeof(T) == sizeInBytes);
+			SIS_DEBUGASSERT(data.size() * sizeof(T) == sizeInBytes);
 
 			Set(reinterpret_cast<const std::byte*>(data.data()));
 		}
 
 		template<typename T>
 		T GetData() {
-			BreakAssert(sizeof(T) == sizeInBytes);
+			SIS_DEBUGASSERT(sizeof(T) == sizeInBytes);
 
 			T result;
 			Get(reinterpret_cast<std::byte*>(&result));
@@ -48,7 +48,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		template<typename T>
 		std::vector<T> GetDataAsVector() {
-			BreakAssert(sizeInBytes % sizeof(T) != 0);
+			SIS_DEBUGASSERT(sizeInBytes % sizeof(T) != 0);
 			size_t numObjects = sizeInBytes / sizeof(T);
 			std::vector<T> result;
 			result.resize(numObjects);

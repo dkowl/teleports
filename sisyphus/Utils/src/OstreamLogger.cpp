@@ -1,6 +1,6 @@
 #include "OstreamLogger.h"
 #include <iostream>
-#include "BreakAssert.h"
+#include "DebugAssert.h"
 
 namespace {
 	constexpr char DecoratorChar = '=';
@@ -37,7 +37,7 @@ void OstreamLogger::BeginSection(std::string name, std::string indenter)
 
 void OstreamLogger::EndSection()
 {
-	BreakAssert(sections.size() > 0);
+	SIS_DEBUGASSERT(sections.size() > 0);
 	if (sections.size() == 0) return;
 
 	Section section = sections.back();

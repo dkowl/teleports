@@ -1,6 +1,6 @@
 #include "DepthBuffer.h"
 #include "MemoryUtils.h"
-#include "Utils\BreakAssert.h"
+#include "Utils\DebugAssert.h"
 #include "Utils\Throw.h"
 #include <iostream>
 
@@ -77,8 +77,8 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void DepthBuffer::BindMemory()
 	{
-		BreakAssert(image);
-		BreakAssert(memory);
+		SIS_DEBUGASSERT(image);
+		SIS_DEBUGASSERT(memory);
 
 		ci.device.bindImageMemory(*image, *memory, 0);
 	}

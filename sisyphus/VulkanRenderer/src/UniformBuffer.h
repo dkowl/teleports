@@ -1,6 +1,6 @@
 #pragma once
 #include "Vulkan.h"
-#include "Utils/BreakAssert.h"
+#include "Utils/DebugAssert.h"
 #include "Utils/ILogger.h"
 #include "DeviceData.h"
 
@@ -21,7 +21,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		template<typename T>
 		void UpdateData(T data) {
-			BreakAssert(sizeof(data) == ci.sizeInBytes);
+			SIS_DEBUGASSERT(sizeof(data) == ci.sizeInBytes);
 
 			auto deviceData = GetDeviceData();
 			deviceData.Set(reinterpret_cast<std::byte*>(&data));
@@ -29,7 +29,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		template<typename T>
 		T GetData() {
-			BreakAssert(sizeof(T) == ci.sizeInBytes);
+			SIS_DEBUGASSERT(sizeof(T) == ci.sizeInBytes);
 
 			T result;
 			auto deviceData = GetDeviceData();
