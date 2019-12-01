@@ -19,6 +19,7 @@ namespace Sisyphus::Rendering {
 
 	class IRenderer {
 	public:
+		virtual ~IRenderer() = default;
 		virtual void Draw(const IDrawable& drawable) = 0;
 	};
 }

@@ -9,23 +9,17 @@
 #include "Utils\Logger.h"
 #include "Utils\Throw.h"
 #include "VulkanUtils.h"
+#include "Instance.h"
 
 namespace wc = Sisyphus::WindowCreator;
 
 namespace Sisyphus::Rendering::Vulkan {
-#if _DEBUG
-	constexpr bool enableValidationLayers = true;
-#else
-	constexpr bool enableValidationLayers = false;
-#endif
 
 	constexpr uint64_t timeout = 100000000; // 100ms
 
 	RendererImpl::RendererImpl(const RendererCreateInfo& ci) :
 		ci(ci),
 		windowExtent(nullptr),
-		instance(nullptr),
-		debugMessenger(nullptr),
 		surface(nullptr),
 		physicalDevice(nullptr),
 		queueFamilyIndex(std::nullopt),
@@ -51,12 +45,8 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		EnumerateInstanceLayerProperties();
 
-		InitInstance();
-		logger->Log("Vulkan Instance initialized!");
-		if constexpr (enableValidationLayers) {
-			InitDebugMessenger();
-			logger->Log("Debug Messenger initialized!");
-		}
+		componentManager.InitComponent(ComponentType::Instance);
+
 		InitWindowExtent();
 		logger->Log("Window extent initialized!");
 		InitSurface();
@@ -197,60 +187,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		device->resetCommandPool(*commandPool, {});
 	}
 
-	std::vector<const char*> RendererImpl::GetInstanceLayerNames()
-	{
-		std::vector<const char*> result;
-		if constexpr (!enableValidationLayers) {
-			return result;
-		}
-
-		result.push_back("VK_LAYER_LUNARG_standard_validation");
-
-		for (auto&& name : result) {
-			if (!IsLayerEnabled(name)) {
-				SIS_THROW(std::string("Cannot find layer ") + std::string(name));
-			}
-		}
-
-		return result;
-	}
-
-	void RendererImpl::InitInstance()
-	{
-		vk::ApplicationInfo applicationInfo(
-			"Vulkan App",
-			VK_MAKE_VERSION(1, 0, 0),
-			"Sisyphus",
-			VK_MAKE_VERSION(1, 0, 0),
-			VK_API_VERSION_1_0
-		);
-
-		std::vector<const char*> instanceExtensionNames = PlatformSpecific::GetInstanceExtensionNames();
-		instanceExtensionNames.push_back(VK_KHR_SURFACE_EXTENSION_NAME);
-		if constexpr (enableValidationLayers) {
-			instanceExtensionNames.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
-		}
-
-		std::vector<const char*> layerNames = GetInstanceLayerNames();
-
-		vk::InstanceCreateInfo instanceCreateInfo(
-			{},
-			&applicationInfo,
-			static_cast<uint32_t>(layerNames.size()),
-			layerNames.data(),
-			static_cast<uint32_t>(instanceExtensionNames.size()),
-			instanceExtensionNames.data()
-		);
-
-		instance = vk::createInstanceUnique(instanceCreateInfo);
-	}
-
-	void RendererImpl::InitDebugMessenger()
-	{
-		SIS_DEBUGASSERT(instance);
-		debugMessenger = std::make_unique<DebugMessenger>(*instance);
-	}
-
 	void RendererImpl::InitWindowExtent()
 	{
 		windowExtent = std::make_unique<WindowCreator::WindowExtent>(ci.window->GetExtent());
@@ -258,16 +194,13 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitSurface()
 	{
-		SIS_DEBUGASSERT(instance);
 		SIS_DEBUGASSERT(ci.window);
-		surface = ci.window->GetVulkanSurface(instance.get());
+		surface = ci.window->GetVulkanSurface(componentManager.GetComponent<Instance>());
 	}
 
 	void RendererImpl::InitPhysicalDevice()
 	{
-		SIS_DEBUGASSERT(instance);
-
-		auto physicalDevices = instance->enumeratePhysicalDevices();
+		auto physicalDevices = componentManager.GetComponent<Instance>().GetVulkanObject().enumeratePhysicalDevices();
 		if (physicalDevices.empty()) {
 			throw::std::runtime_error("No physical devices supporting Vulkan");
 		}

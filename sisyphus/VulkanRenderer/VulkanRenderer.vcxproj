@@ -62,7 +62,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\platform_specific;$(ProjectDir)src\Utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\platform_specific;$(ProjectDir)src\Components;$(ProjectDir)src\Utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -75,7 +75,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\platform_specific;$(ProjectDir)src\Utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\platform_specific;$(ProjectDir)src\Components;$(ProjectDir)src\Utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -85,12 +85,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\VulkanRenderer\Renderer.h" />
+    <ClInclude Include="src\Components\Component.h" />
+    <ClInclude Include="src\Components\ComponentManager.h" />
+    <ClInclude Include="src\Components\ComponentType.h" />
+    <ClInclude Include="src\Components\Instance.h" />
     <ClInclude Include="src\DebugMessenger.h" />
     <ClInclude Include="src\DepthBuffer.h" />
     <ClInclude Include="src\platform_specific\PlatformSpecific.h" />
     <ClInclude Include="src\platform_specific\Vulkan.h" />
     <ClInclude Include="src\RendererImpl.h" />
     <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\Swapchain.h" />
     <ClInclude Include="src\UniformBuffer.h" />
     <ClInclude Include="src\Utils\DeviceData.h" />
     <ClInclude Include="src\Utils\MemoryUtils.h" />
@@ -98,11 +103,16 @@
     <ClInclude Include="src\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Components\Component.cpp" />
+    <ClCompile Include="src\Components\ComponentManager.cpp" />
+    <ClCompile Include="src\Components\ComponentType.cpp" />
+    <ClCompile Include="src\Components\Instance.cpp" />
     <ClCompile Include="src\DebugMessenger.cpp" />
     <ClCompile Include="src\DepthBuffer.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\RendererImpl.cpp" />
     <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\Swapchain.cpp" />
     <ClCompile Include="src\UniformBuffer.cpp" />
     <ClCompile Include="src\Utils\DeviceData.cpp" />
     <ClCompile Include="src\Utils\MemoryUtils.cpp" />

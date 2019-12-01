@@ -5,8 +5,8 @@
 #include "DepthBuffer.h"
 #include "UniformBuffer.h"
 #include "VertexBuffer.h"
-#include "DebugMessenger.h"
 #include "Shader.h"
+#include "ComponentManager.h"
 #include "Utils\ILogger.h"
 #include <memory>
 #include <optional>
@@ -34,8 +34,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		void EnableShader(uuids::uuid id);
 
 	private:
-		void InitInstance();
-		void InitDebugMessenger();
 		void InitWindowExtent();
 		void InitSurface();
 		void InitPhysicalDevice();
@@ -62,13 +60,11 @@ namespace Sisyphus::Rendering::Vulkan {
 		void InitCommandBuffers();
 		void InitPipeline(uint32_t stride);
 
-		std::vector<const char*> GetInstanceLayerNames();
 		Shader& GetShader(uuids::uuid id);
 
 		RendererCreateInfo ci;
+		ComponentManager componentManager;
 		std::unique_ptr<WindowCreator::WindowExtent> windowExtent;
-		vk::UniqueInstance instance;
-		std::unique_ptr<DebugMessenger> debugMessenger;
 		vk::UniqueSurfaceKHR surface;
 		vk::PhysicalDevice physicalDevice;
 		std::optional<int> queueFamilyIndex;
