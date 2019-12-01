@@ -54,6 +54,9 @@
     <ClInclude Include="include\Utils\Throw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Utils\FunctionFileLine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\BreakAssert.cpp">
