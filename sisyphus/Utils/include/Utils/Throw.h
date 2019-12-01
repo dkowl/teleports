@@ -1,10 +1,11 @@
 #pragma once
 #include <stdexcept>
 #include "Utils\StringUtils.h"
-#include "FunctionFileLine.h"
+#include "Utils\FunctionFileLine.h"
 
 #define SIS_THROW(message) do { Sisyphus::Utils::Throw(std::string(message) + " at " + SIS_FUNCTION_FILE_LINE); } while(0)
-#define SIS_THROWASSERT(condition, message) do { Sisyphus::Utils::ThrowAssert(condition, std::string(message) + " " #condition " == false at " + SIS_FUNCTION_FILE_LINE); } while (0)
+#define SIS_THROWASSERT(condition) do { Sisyphus::Utils::ThrowAssert(condition, #condition " == false at " + SIS_FUNCTION_FILE_LINE); } while (0)
+#define SIS_THROWASSERT_MSG(condition, message) do { Sisyphus::Utils::ThrowAssert(condition, std::string(message) + " " #condition " == false at " + SIS_FUNCTION_FILE_LINE); } while (0)
 
 namespace Sisyphus::Utils {
 	inline void Throw(const String& message)

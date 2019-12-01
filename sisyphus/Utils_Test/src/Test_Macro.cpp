@@ -18,11 +18,11 @@ namespace {
 	}
 
 	void FooThrowAssertNoMessage() {
-		PRINT_AND_RETHROW(SIS_THROWASSERT(2 * 2 == 5, ));
+		PRINT_AND_RETHROW(SIS_THROWASSERT(2 * 2 == 5));
 	}
 
 	void FooThrowAssert() {
-		PRINT_AND_RETHROW(SIS_THROWASSERT(2 * 2 == 3, "Maths error"));
+		PRINT_AND_RETHROW(SIS_THROWASSERT_MSG(2 * 2 == 3, "Maths error"));
 	}
 }
 
