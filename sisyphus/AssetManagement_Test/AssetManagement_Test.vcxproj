@@ -76,7 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\catch_main.cpp" />
+    <ClCompile Include="src\AssetManagement_catch_main.cpp" />
     <ClCompile Include="src\Test_Asset.cpp" />
     <ClCompile Include="src\Test_AssetManager.cpp" />
   </ItemGroup>
