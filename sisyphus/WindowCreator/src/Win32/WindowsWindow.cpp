@@ -61,7 +61,7 @@ namespace Sisyphus::WindowCreator {
 	{
 		RECT rect;
 		auto retVal = GetClientRect(data->window, &rect);
-		Utils::ThrowAssert(retVal != 0, "");
+		SIS_THROWASSERT_MSG(retVal != 0, "");
 		return { static_cast<uint32_t>(rect.right), static_cast<uint32_t>(rect.bottom) };
 	}
 

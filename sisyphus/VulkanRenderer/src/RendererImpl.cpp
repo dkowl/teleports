@@ -129,8 +129,8 @@ namespace Sisyphus::Rendering::Vulkan {
 		vk::UniqueSemaphore imageAcquiredSemaphore = device->createSemaphoreUnique(vk::SemaphoreCreateInfo{});
 		auto currentBuffer = device->acquireNextImageKHR(*swapchain, timeout, *imageAcquiredSemaphore, nullptr);
 
-		Utils::ThrowAssert(currentBuffer.result == vk::Result::eSuccess, "Failed to acquire an image buffer!");
-		Utils::ThrowAssert(
+		SIS_THROWASSERT_MSG(currentBuffer.result == vk::Result::eSuccess, "Failed to acquire an image buffer!");
+		SIS_THROWASSERT_MSG(
 			currentBuffer.value < framebuffers.size(),
 			"Acquired image index (" + std::to_string(currentBuffer.value) +
 			") higher that the number of available framebuffers (" + std::to_string(framebuffers.size()) + ")");
