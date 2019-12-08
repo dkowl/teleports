@@ -88,6 +88,7 @@
     <ClInclude Include="src\Components\Component.h" />
     <ClInclude Include="src\Components\ComponentManager.h" />
     <ClInclude Include="src\Components\Instance.h" />
+    <ClInclude Include="src\Components\PhysicalDevice.h" />
     <ClInclude Include="src\DebugMessenger.h" />
     <ClInclude Include="src\DepthBuffer.h" />
     <ClInclude Include="src\platform_specific\PlatformSpecific.h" />
@@ -104,6 +105,7 @@
   <ItemGroup>
     <ClCompile Include="src\Components\ComponentManager.cpp" />
     <ClCompile Include="src\Components\Instance.cpp" />
+    <ClCompile Include="src\Components\PhysicalDevice.cpp" />
     <ClCompile Include="src\DebugMessenger.cpp" />
     <ClCompile Include="src\DepthBuffer.cpp" />
     <ClCompile Include="src\Renderer.cpp" />

@@ -45,18 +45,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		return false;
 	}
 
-	void InspectDevice(const vk::PhysicalDevice& physicalDevice, ILogger* logger) {
-		auto queueFamilyProperties = physicalDevice.getQueueFamilyProperties();
-		logger->BeginSection("Queue Families:");
-		int index = 1;
-		for (auto&& props : queueFamilyProperties) {
-			auto flags = props.queueFlags;
-			logger->Log("#" + std::to_string(index) + ": " + vk::to_string(flags) + " Count: " + std::to_string(props.queueCount));
-			index++;
-		}
-		logger->EndSection();
-	}
-
 	std::optional<int> FindGraphicsQueueFamilyIndex(vk::PhysicalDevice& physicalDevice, vk::SurfaceKHR& surface) {
 		auto queueFamilyProperties = physicalDevice.getQueueFamilyProperties();
 		for (int i = 0; i < queueFamilyProperties.size(); i++) {

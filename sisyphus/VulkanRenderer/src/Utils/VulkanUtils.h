@@ -33,7 +33,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		outPfn = reinterpret_cast<T>(pfn);
 	}
 
-	void InspectDevice(const vk::PhysicalDevice& physicalDevice, ILogger* logger);
 	std::optional<int> FindGraphicsQueueFamilyIndex(vk::PhysicalDevice& physicalDevice, vk::SurfaceKHR& surface);
 
 	vk::Extent2D GetExtent2D(WindowCreator::WindowExtent windowExtent);

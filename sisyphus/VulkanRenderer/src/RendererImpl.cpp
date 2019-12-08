@@ -10,6 +10,7 @@
 #include "Utils\Throw.h"
 #include "VulkanUtils.h"
 #include "Instance.h"
+#include "PhysicalDevice.h"
 
 namespace wc = Sisyphus::WindowCreator;
 
@@ -21,7 +22,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		ci(ci),
 		windowExtent(nullptr),
 		surface(nullptr),
-		physicalDevice(nullptr),
 		queueFamilyIndex(std::nullopt),
 		device(nullptr),
 		commandPool(nullptr),
@@ -46,13 +46,12 @@ namespace Sisyphus::Rendering::Vulkan {
 		EnumerateInstanceLayerProperties();
 
 		componentManager.InitComponent<Instance>();
+		componentManager.InitComponent<PhysicalDevice>();
 
 		InitWindowExtent();
 		logger->Log("Window extent initialized!");
 		InitSurface();
 		logger->Log("Surface initialized!");
-		InitPhysicalDevice();
-		logger->Log("Physical Device initialized!");
 		InitQueueFamilyIndex();
 		logger->Log("Queue Family Index initialized!");
 		InitDevice();
@@ -198,22 +197,12 @@ namespace Sisyphus::Rendering::Vulkan {
 		surface = ci.window->GetVulkanSurface(componentManager.GetComponent<Instance>());
 	}
 
-	void RendererImpl::InitPhysicalDevice()
-	{
-		auto physicalDevices = componentManager.GetComponent<Instance>().GetVulkanObject().enumeratePhysicalDevices();
-		if (physicalDevices.empty()) {
-			throw::std::runtime_error("No physical devices supporting Vulkan");
-		}
-
-		physicalDevice = physicalDevices[0];
-		logger->Log("Creating a Vulkan Device from " + std::string(physicalDevice.getProperties().deviceName));
-		InspectDevice(physicalDevice, logger);
-	}
-
 	void RendererImpl::InitQueueFamilyIndex()
 	{
-		SIS_DEBUGASSERT(physicalDevice);
 		SIS_DEBUGASSERT(surface);
+
+		auto physicalDevice = componentManager.GetComponent<PhysicalDevice>().GetVulkanObject();
+
 		queueFamilyIndex = FindGraphicsQueueFamilyIndex(physicalDevice, *surface);
 		if (queueFamilyIndex == -1) {
 			SIS_THROW("Graphics queue not found in the device");
@@ -223,7 +212,6 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitDevice()
 	{
-		SIS_DEBUGASSERT(physicalDevice);
 		SIS_DEBUGASSERT(queueFamilyIndex);
 
 		vk::DeviceQueueCreateInfo deviceQueueCreateInfo(
@@ -244,7 +232,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			static_cast<uint32_t>(deviceExtensionNames.size()),
 			deviceExtensionNames.data()
 		);
-		device = physicalDevice.createDeviceUnique(deviceCreateInfo);
+		device = componentManager.GetComponent<PhysicalDevice>().GetVulkanObject().createDeviceUnique(deviceCreateInfo);
 	}
 
 	void RendererImpl::InitCommandPool()
@@ -280,7 +268,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		constexpr vk::ColorSpaceKHR desiredColorSpace = vk::ColorSpaceKHR::eSrgbNonlinear;
 		bool formatFound = false;
 
-		auto surfaceFormats = physicalDevice.getSurfaceFormatsKHR(*surface);
+		auto surfaceFormats = componentManager.GetComponent<PhysicalDevice>().GetVulkanObject().getSurfaceFormatsKHR(*surface);
 		logger->BeginSection("Surface formats:");
 		for (int i = 0; i < surfaceFormats.size(); i++) {
 			const auto& format = surfaceFormats[i];
@@ -307,12 +295,12 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitSwapchain()
 	{
-		SIS_DEBUGASSERT(physicalDevice);
 		SIS_DEBUGASSERT(surface);
 		SIS_DEBUGASSERT(colorFormat);
 		SIS_DEBUGASSERT(colorSpace);
 
 		constexpr int desiredMinImageCount = 3; // triple buffering
+		auto physicalDevice = componentManager.GetComponent<PhysicalDevice>().GetVulkanObject();
 		auto surfaceCapabilites = physicalDevice.getSurfaceCapabilitiesKHR(*surface);
 		logger->Log("Surface minImageCount: " + std::to_string(surfaceCapabilites.minImageCount));
 		logger->Log("Surface maxImageCount: " + std::to_string(surfaceCapabilites.maxImageCount));
@@ -411,9 +399,10 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitDepthBuffer()
 	{
-		SIS_DEBUGASSERT(physicalDevice);
 		SIS_DEBUGASSERT(device);
 		SIS_DEBUGASSERT(windowExtent);
+
+		auto physicalDevice = componentManager.GetComponent<PhysicalDevice>().GetVulkanObject();
 
 		DepthBuffer::CreateInfo createInfo{
 			vk::Extent2D{windowExtent->width, windowExtent->height},
@@ -488,8 +477,9 @@ namespace Sisyphus::Rendering::Vulkan {
 	void RendererImpl::InitUniformBuffer()
 	{
 		SIS_DEBUGASSERT(device);
-		SIS_DEBUGASSERT(physicalDevice);
 		SIS_DEBUGASSERT(descriptorSet);
+
+		auto physicalDevice = componentManager.GetComponent<PhysicalDevice>().GetVulkanObject();
 
 		UniformBuffer::CreateInfo createInfo{
 			sizeof(Renderer::UniformBufferData),
@@ -608,7 +598,8 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::AdaptToSurfaceChanges()
 	{
-		SIS_DEBUGASSERT(physicalDevice);
+		auto physicalDevice = componentManager.GetComponent<PhysicalDevice>().GetVulkanObject();
+
 		auto surfaceCapabilities = physicalDevice.getSurfaceCapabilitiesKHR(*surface);
 		bool surfaceChanged = surfaceCapabilities.currentExtent != *windowExtent;
 		if (surfaceChanged) {
@@ -623,7 +614,8 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		logger->BeginSection("Vertex Buffer");
 		SIS_DEBUGASSERT(device);
-		SIS_DEBUGASSERT(physicalDevice);
+
+		auto physicalDevice = componentManager.GetComponent<PhysicalDevice>().GetVulkanObject();
 
 		vertexBuffer = std::make_unique<VertexBuffer>(VertexBuffer::CreateInfo{
 			size,

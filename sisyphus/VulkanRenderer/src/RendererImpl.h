@@ -36,7 +36,6 @@ namespace Sisyphus::Rendering::Vulkan {
 	private:
 		void InitWindowExtent();
 		void InitSurface();
-		void InitPhysicalDevice();
 		void InitQueueFamilyIndex();
 		void InitDevice();
 		void InitCommandPool();
@@ -66,7 +65,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		ComponentManager componentManager;
 		std::unique_ptr<WindowCreator::WindowExtent> windowExtent;
 		vk::UniqueSurfaceKHR surface;
-		vk::PhysicalDevice physicalDevice;
 		std::optional<int> queueFamilyIndex;
 		vk::UniqueDevice device;
 		vk::UniqueCommandPool commandPool;
