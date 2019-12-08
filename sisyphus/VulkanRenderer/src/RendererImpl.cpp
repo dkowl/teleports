@@ -45,7 +45,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		EnumerateInstanceLayerProperties();
 
-		componentManager.InitComponent(ComponentType::Instance);
+		componentManager.InitComponent<Instance>();
 
 		InitWindowExtent();
 		logger->Log("Window extent initialized!");

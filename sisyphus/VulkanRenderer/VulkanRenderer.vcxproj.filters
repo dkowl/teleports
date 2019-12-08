@@ -72,9 +72,6 @@
     <ClInclude Include="src\Components\Instance.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="src\Components\ComponentType.h">
-      <Filter>Source Files\Components</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DepthBuffer.cpp">
@@ -111,12 +108,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Components\Instance.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\ComponentType.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Components\Component.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="src\Components\ComponentManager.cpp">

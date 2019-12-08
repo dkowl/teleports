@@ -12,6 +12,8 @@ namespace Sisyphus::Rendering::Vulkan {
 	false;
 #endif
 
+	static uuids::uuid ComponentID_Instance = uuids::uuid::from_string("9ae5921621d54d96a006e123483bc97a").value();
+
 	std::vector<const char*> Instance::GetLayerNames()
 	{
 		std::vector<const char*> result;
@@ -31,7 +33,6 @@ namespace Sisyphus::Rendering::Vulkan {
 	}
 
 	Instance::Instance() :
-		Component(),
 		instance(nullptr),
 		debugMessenger(nullptr)
 	{
@@ -39,7 +40,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	Instance::~Instance() = default;
 
-	void Instance::OnInitialize()
+	void Instance::Initialize(const ComponentManager &)
 	{
 		vk::ApplicationInfo applicationInfo(
 			"Vulkan App",
@@ -72,13 +73,17 @@ namespace Sisyphus::Rendering::Vulkan {
 			debugMessenger = std::make_unique<DebugMessenger>(*instance);
 		}
 	}
-	ComponentType Instance::GetType() const
+	uuids::uuid Instance::TypeId()
 	{
-		return ComponentType::Instance;
+		return ComponentID_Instance;
 	}
-	std::vector<ComponentType> Instance::GetDependencies() const
+	std::string Instance::ClassName()
 	{
-		return std::vector<ComponentType>();
+		return "Instance";
+	}
+	IComponent::Dependencies Instance::Dependencies()
+	{
+		return {};
 	}
 	vk::Instance Instance::GetVulkanObject() const
 	{

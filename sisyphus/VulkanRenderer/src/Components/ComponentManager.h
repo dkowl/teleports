@@ -1,29 +1,35 @@
 #pragma once
 #include "Component.h"
-#include "Instance.h"
+#include "Utils/Throw.h"
+#include "Utils/Logger.h"
+#include "uuid.h"
 #include <vector>
 #include <memory>
 #include <unordered_map>
 
-#define SIS_REN_VUL_DEFINE_GET_COMPONENT(type) \
-	template<> \
-	const type& GetComponent() const { \
-		return dynamic_cast<const type&>(GetComponent(ComponentType::type)); \
-	}
-
 namespace Sisyphus::Rendering::Vulkan {
 	class ComponentManager {
 	public:
-		void InitComponent(ComponentType type);
 
-		template<typename T>
-		const T& GetComponent() const {
-			static_assert(false, "Refer to a specific specialization");
+		template<Component T>
+		void InitComponent() {
+			uuids::uuid type = T::TypeId();
+			SIS_THROWASSERT_MSG(!components.contains(type), T::ClassName() + " already exists.");
+
+			std::unique_ptr<IComponent> component = std::make_unique<T>();
+			component->Initialize(*this);
+			components.emplace(type, std::move(component));
+
+			Logger::Get().Log(T::ClassName() + " initialized!");
 		}
-		SIS_REN_VUL_DEFINE_GET_COMPONENT(Instance);
+
+		template<Component T>
+		const T& GetComponent() const {
+			return dynamic_cast<const T&>(GetComponent(T::TypeId()));
+		}
 
 	private:
-		const Component& GetComponent(ComponentType type) const;
-		std::unordered_map<ComponentType, std::unique_ptr<Component>> components;
+		const IComponent& GetComponent(uuids::uuid type) const;
+		std::unordered_map<uuids::uuid, std::unique_ptr<IComponent>> components;
 	};
 }

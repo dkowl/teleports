@@ -5,17 +5,18 @@
 namespace Sisyphus::Rendering::Vulkan {
 	class DebugMessenger;
 
-	class Instance : public Component {
+	class Instance : public IVulkanComponent<vk::Instance> {
 	public:
 		Instance();
 		~Instance() override; // default
 
-		void OnInitialize() override;
-		ComponentType GetType() const override;
-		std::vector<ComponentType> GetDependencies() const override;
+		void Initialize(const ComponentManager & componentManager) override;
+		static uuids::uuid TypeId();
+		static std::string ClassName();
+		static Dependencies Dependencies();
 
-		vk::Instance GetVulkanObject() const;
-		operator vk::Instance() const;
+		vk::Instance GetVulkanObject() const override;
+		operator vk::Instance() const override;
 
 	private:
 		static std::vector<const char*> GetLayerNames();
