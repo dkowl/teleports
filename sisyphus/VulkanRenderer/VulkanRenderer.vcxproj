@@ -90,9 +90,11 @@
   <ItemGroup>
     <ClInclude Include="include\VulkanRenderer\Renderer.h" />
     <ClInclude Include="src\Components\Component.h" />
+    <ClInclude Include="src\Components\ComponentEvent.h" />
     <ClInclude Include="src\Components\ComponentManager.h" />
     <ClInclude Include="src\Components\Instance.h" />
     <ClInclude Include="src\Components\PhysicalDevice.h" />
+    <ClInclude Include="src\Components\Surface.h" />
     <ClInclude Include="src\DebugMessenger.h" />
     <ClInclude Include="src\DepthBuffer.h" />
     <ClInclude Include="src\Pch_VulkanRenderer.h" />
@@ -108,12 +110,14 @@
     <ClInclude Include="src\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Components\ComponentEvent.cpp" />
     <ClCompile Include="src\Components\ComponentManager.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\Components\Instance.cpp" />
     <ClCompile Include="src\Components\PhysicalDevice.cpp" />
+    <ClCompile Include="src\Components\Surface.cpp" />
     <ClCompile Include="src\DebugMessenger.cpp" />
     <ClCompile Include="src\DepthBuffer.cpp" />
     <ClCompile Include="src\Pch_VulkanRenderer.cpp">

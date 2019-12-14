@@ -3,10 +3,15 @@
 
 namespace Sisyphus::Rendering::Vulkan {
 
-	const IComponent& ComponentManager::GetComponent(uuids::uuid type) const
+	IComponent& ComponentManager::GetComponent(const uuids::uuid& type) const
 	{
 		auto comp = components.find(type);
 		SIS_THROWASSERT(comp != components.end());
 		return *comp->second;
+	}
+	IComponent* ComponentManager::TryGetComponent(const uuids::uuid& type) const
+	{
+		auto comp = components.find(type);
+		return comp != components.end() ? comp->second.get() : nullptr;
 	}
 }

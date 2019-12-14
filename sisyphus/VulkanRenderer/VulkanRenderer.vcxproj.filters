@@ -78,6 +78,12 @@
     <ClInclude Include="src\Pch_VulkanRenderer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Components\Surface.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\ComponentEvent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DepthBuffer.cpp">
@@ -124,6 +130,12 @@
     </ClCompile>
     <ClCompile Include="src\Pch_VulkanRenderer.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Surface.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\ComponentEvent.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 #include <vector>
 #include <concepts>
 #include "uuid.h"
+#include "ComponentEvent.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 
@@ -21,6 +22,10 @@ namespace Sisyphus::Rendering::Vulkan {
 		virtual ~IComponent() = default;
 
 		virtual void Initialize(const ComponentManager& manager) = 0;
+
+		virtual void HandleEvent(ComponentEvents::Initialization, const uuids::uuid& /*compTypeId*/) {};
+
+		static Dependencies WatchList(ComponentEvents::Initialization) { return Dependencies(); }
 	};
 
 	template<typename VulkanType>
@@ -40,6 +45,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			{T::TypeId()}->std::same_as<uuids::uuid>;
 			{T::ClassName()}->std::same_as<std::string>;
 			{T::Dependencies()}->std::same_as<IComponent::Dependencies>;
+			// {T::WatchList(ComponentEvent::Initialization{})}->std::same_as<IComponent::Dependencies>;
 		};
 
 	template<typename T, typename VulkanType>
