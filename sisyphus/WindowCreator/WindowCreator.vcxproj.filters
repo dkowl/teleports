@@ -21,6 +21,9 @@
     <ClCompile Include="src\WindowCreator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Pch_WindowCreator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Win32\WindowsWindow.h">
@@ -34,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="include\WindowCreator\WindowCreator.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pch_WindowCreator.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

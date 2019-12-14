@@ -40,12 +40,14 @@
     <Import Project="..\props\General.props" />
     <Import Project="..\props\Vulkan.props" />
     <Import Project="..\props\Utils.props" />
+    <Import Project="..\props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\props\General.props" />
     <Import Project="..\props\Vulkan.props" />
     <Import Project="..\props\Utils.props" />
+    <Import Project="..\props\PrecompiledHeaders.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -57,6 +59,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)include\WindowCreator;$(ProjectDir)src\Win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -73,12 +76,17 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)include\WindowCreator;$(ProjectDir)src\Win32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Pch_WindowCreator.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\Win32\WindowsWindow.cpp" />
     <ClCompile Include="src\WindowCreator.cpp" />
   </ItemGroup>
@@ -86,6 +94,7 @@
     <ClInclude Include="include\WindowCreator\Window.h" />
     <ClInclude Include="include\WindowCreator\WindowCreator.h" />
     <ClInclude Include="include\WindowCreator\WindowEvent.h" />
+    <ClInclude Include="src\Pch_WindowCreator.h" />
     <ClInclude Include="src\Win32\WindowsWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

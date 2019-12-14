@@ -1,4 +1,4 @@
-#define VK_USE_PLATFORM_WIN32_KHR
+#include "Pch_WindowCreator.h"
 #include "WindowsWindow.h"
 #include "Utils/Throw.h"
 

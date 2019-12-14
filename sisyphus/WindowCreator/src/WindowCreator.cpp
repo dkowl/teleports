@@ -1,6 +1,6 @@
+#include "Pch_WindowCreator.h"
 #include "WindowCreator.h"
 #include "WindowsWindow.h"
-#include <stdexcept>
 
 namespace Sisyphus::WindowCreator {
 	std::unique_ptr<Window> WindowCreator::Create(const WindowCreateInfo& ci)
