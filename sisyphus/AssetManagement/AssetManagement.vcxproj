@@ -41,6 +41,7 @@
     <Import Project="..\props\stduuid.props" />
     <Import Project="..\props\Utils.props" />
     <Import Project="..\props\json.props" />
+    <Import Project="..\props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -48,6 +49,7 @@
     <Import Project="..\props\stduuid.props" />
     <Import Project="..\props\Utils.props" />
     <Import Project="..\props\json.props" />
+    <Import Project="..\props\PrecompiledHeaders.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -81,11 +83,15 @@
     <ClInclude Include="include\AssetManagement\Asset.h" />
     <ClInclude Include="include\AssetManagement\AssetManager.h" />
     <ClInclude Include="include\AssetManagement\AssetMetadata.h" />
+    <ClInclude Include="src\Pch_AssetManagement.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Asset.cpp" />
     <ClCompile Include="src\AssetManager.cpp" />
-    <ClCompile Include="src\AssetMetadata.cpp" />
+    <ClCompile Include="src\Pch_AssetManagement.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -24,6 +24,9 @@
     <ClInclude Include="include\AssetManagement\AssetMetadata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Pch_AssetManagement.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Asset.cpp">
@@ -32,7 +35,7 @@
     <ClCompile Include="src\AssetManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\AssetMetadata.cpp">
+    <ClCompile Include="src\Pch_AssetManagement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,5 @@
+#include "Pch_AssetManagement.h"
 #include "Asset.h"
-#include <fstream>
 #include "Utils/Json.h"
 #include "Utils/UuidGenerator.h"
 #include "Utils/Logger.h"

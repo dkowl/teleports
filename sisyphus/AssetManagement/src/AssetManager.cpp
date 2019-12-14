@@ -1,3 +1,4 @@
+#include "Pch_AssetManagement.h"
 #include "AssetManager.h"
 #include "Utils\Logger.h"
 
