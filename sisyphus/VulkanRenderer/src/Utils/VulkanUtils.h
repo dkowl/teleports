@@ -5,10 +5,7 @@
 #include "Utils\Throw.h"
 #include "Utils\ILogger.h"
 #include "Renderer\IRenderer.h"
-
-namespace Sisyphus::WindowCreator {
-	struct WindowExtent;
-}
+#include "WindowCreator/WindowExtent.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	struct Version {

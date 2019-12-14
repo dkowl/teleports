@@ -1,7 +1,6 @@
 #include "Pch_VulkanRenderer.h"
 #include "VulkanUtils.h"
 #include "Utils\Logger.h"
-#include "WindowCreator\Window.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	Version::Version(uint32_t version) :
