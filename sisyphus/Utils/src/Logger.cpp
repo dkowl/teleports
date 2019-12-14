@@ -1,6 +1,6 @@
+#include "Pch_Utils.h"
 #include "Logger.h"
 #include "OstreamLogger.h"
-#include <memory>
 
 namespace Logger {
 	std::unique_ptr<ILogger> logger = nullptr;

@@ -40,12 +40,14 @@
     <Import Project="..\props\General.props" />
     <Import Project="..\props\json.props" />
     <Import Project="..\props\stduuid.props" />
+    <Import Project="..\props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\props\General.props" />
     <Import Project="..\props\json.props" />
     <Import Project="..\props\stduuid.props" />
+    <Import Project="..\props\PrecompiledHeaders.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -55,6 +57,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -68,6 +71,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)include\Utils;$(ProjectDir)src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -88,11 +92,16 @@
     <ClInclude Include="include\Utils\UuidGenerator.h" />
     <ClInclude Include="include\Utils\UuidJsonSerializer.h" />
     <ClInclude Include="include\Utils\VectorUtils.h" />
+    <ClInclude Include="src\Pch_Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DebugAssert.cpp" />
     <ClCompile Include="src\Logger.cpp" />
     <ClCompile Include="src\OstreamLogger.cpp" />
+    <ClCompile Include="src\Pch_Utils.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\Throw.cpp" />
     <ClCompile Include="src\UuidGenerator.cpp" />
   </ItemGroup>
