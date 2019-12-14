@@ -30,4 +30,9 @@ namespace Sisyphus::Utils {
 		throw std::runtime_error(message);
 	}
 	void ThrowAssert(bool condition, const String& message);
+
+	template<typename T>
+	void ThrowAssert(T condition, const String& message) {
+		ThrowAssert(static_cast<bool>(condition), message);
+	}
 }
