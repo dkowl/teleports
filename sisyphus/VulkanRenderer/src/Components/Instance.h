@@ -13,7 +13,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		void Initialize(const ComponentManager & componentManager) override;
 		static uuids::uuid TypeId();
 		static std::string ClassName();
-		static Dependencies Dependencies();
+		static ComponentReferences Dependencies();
 
 		vk::Instance GetVulkanObject() const override;
 

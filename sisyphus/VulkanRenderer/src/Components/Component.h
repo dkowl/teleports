@@ -11,21 +11,20 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	class ComponentManager;
 
-	struct ComponentDependency {
-		uuids::uuid componentType;
+	struct ComponentReference {
+		uuids::uuid type;
 	};
+	using ComponentReferences = std::vector<ComponentReference>;
 
 	class IComponent {
 	public:
-		using Dependencies = std::vector<ComponentDependency>;
-
 		virtual ~IComponent() = default;
 
 		virtual void Initialize(const ComponentManager& manager) = 0;
 
 		virtual void HandleEvent(ComponentEvents::Initialization, const uuids::uuid& /*compTypeId*/) {};
 
-		static Dependencies WatchList(ComponentEvents::Initialization) { return Dependencies(); }
+		static ComponentReferences WatchList(ComponentEvents::Initialization) { return ComponentReferences(); }
 	};
 
 	template<typename VulkanType>
@@ -44,8 +43,8 @@ namespace Sisyphus::Rendering::Vulkan {
 		requires { 
 			{T::TypeId()}->std::same_as<uuids::uuid>;
 			{T::ClassName()}->std::same_as<std::string>;
-			{T::Dependencies()}->std::same_as<IComponent::Dependencies>;
-			// {T::WatchList(ComponentEvent::Initialization{})}->std::same_as<IComponent::Dependencies>;
+			{T::Dependencies()}->std::same_as<ComponentReferences>;
+			// {T::WatchList(ComponentEvent::Initialization{})}->std::same_as<ComponentReferences>;
 		};
 
 	template<typename T, typename VulkanType>

@@ -81,7 +81,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		return "Instance";
 	}
-	IComponent::Dependencies Instance::Dependencies()
+	ComponentReferences Instance::Dependencies()
 	{
 		return {};
 	}

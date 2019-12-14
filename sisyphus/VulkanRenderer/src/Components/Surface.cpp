@@ -29,7 +29,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		return "Surface";
 	}
-	IComponent::Dependencies Surface::Dependencies()
+	ComponentReferences Surface::Dependencies()
 	{
 		return { {Instance::TypeId()} };
 	}

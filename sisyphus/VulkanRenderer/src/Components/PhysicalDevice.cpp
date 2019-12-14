@@ -27,7 +27,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		return "PhysicalDevice";
 	}
-	IComponent::Dependencies PhysicalDevice::Dependencies()
+	ComponentReferences PhysicalDevice::Dependencies()
 	{
 		return { {Instance::TypeId()} };
 	}

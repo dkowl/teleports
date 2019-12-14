@@ -44,14 +44,14 @@ namespace Sisyphus::Rendering::Vulkan {
 		template<Component T, ComponentEvent EventT>
 		void UpdateSubscriberLists() {
 			for (auto&& watched : T::WatchList(EventT{})) {
-				subscriberLists[EventT::Id()][watched.componentType].push_back({ T::TypeId() });
+				subscriberLists[EventT::Id()][watched.type].push_back({ T::TypeId() });
 			}
 		}
 
 		template<Component T, ComponentEvent EventT>
 		void Dispatch() {
 			for (auto subscriber : subscriberLists[EventT::Id()][T::TypeId()]) {
-				auto comp = TryGetComponent(subscriber.componentType);
+				auto comp = TryGetComponent(subscriber.type);
 				if (comp != nullptr) {
 					comp->HandleEvent(EventT{}, T::TypeId());
 				}
@@ -68,7 +68,7 @@ namespace Sisyphus::Rendering::Vulkan {
 				uuids::uuid, // Event type
 				std::unordered_map<
 					uuids::uuid, // Component type
-					IComponent::Dependencies // Subscribers
+					ComponentReferences // Subscribers
 				>
 			>;
 		SubscriberLists subscriberLists;
