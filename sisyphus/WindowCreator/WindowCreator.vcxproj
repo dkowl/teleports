@@ -94,6 +94,7 @@
     <ClInclude Include="include\WindowCreator\Window.h" />
     <ClInclude Include="include\WindowCreator\WindowCreator.h" />
     <ClInclude Include="include\WindowCreator\WindowEvent.h" />
+    <ClInclude Include="include\WindowCreator\WindowExtent.h" />
     <ClInclude Include="src\Pch_WindowCreator.h" />
     <ClInclude Include="src\Win32\WindowsWindow.h" />
   </ItemGroup>

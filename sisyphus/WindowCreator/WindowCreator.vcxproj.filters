@@ -41,5 +41,8 @@
     <ClInclude Include="src\Pch_WindowCreator.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\WindowCreator\WindowExtent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
