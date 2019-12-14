@@ -1,3 +1,4 @@
+#include "Pch_VulkanRenderer.h"
 #include "MemoryUtils.h"
 #include "Utils\DebugAssert.h"
 #include "Utils\Throw.h"

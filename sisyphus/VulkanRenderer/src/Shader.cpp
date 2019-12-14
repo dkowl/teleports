@@ -1,9 +1,9 @@
+#include "Pch_VulkanRenderer.h"
 #include "Shader.h"
 #include "SPIRV/GlslangToSpv.h"
 #include "glslang/StandAlone/ResourceLimits.h"
 #include "Utils/Logger.h"
 #include "Utils/Throw.h"
-#include <vector>
 
 namespace Sisyphus::Rendering::Vulkan {
 	EShLanguage ShaderTypeToEShLanguage(ShaderType type) {

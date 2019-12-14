@@ -1,3 +1,4 @@
+#include "Pch_VulkanRenderer.h"
 #include "VertexBuffer.h"
 #include "Utils\Logger.h"
 #include "MemoryUtils.h"

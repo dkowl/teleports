@@ -1,8 +1,8 @@
+#include "Pch_VulkanRenderer.h"
 #include "DepthBuffer.h"
 #include "MemoryUtils.h"
 #include "Utils\DebugAssert.h"
 #include "Utils\Throw.h"
-#include <iostream>
 
 namespace Sisyphus::Rendering::Vulkan {
 	DepthBuffer::DepthBuffer(CreateInfo ci) :

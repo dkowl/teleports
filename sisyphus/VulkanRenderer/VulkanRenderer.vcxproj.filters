@@ -75,6 +75,9 @@
     <ClInclude Include="src\Components\PhysicalDevice.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="src\Pch_VulkanRenderer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DepthBuffer.cpp">
@@ -118,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="src\Components\PhysicalDevice.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Pch_VulkanRenderer.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

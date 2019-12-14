@@ -1,3 +1,4 @@
+#include "Pch_VulkanRenderer.h"
 #include "ComponentManager.h"
 
 namespace Sisyphus::Rendering::Vulkan {

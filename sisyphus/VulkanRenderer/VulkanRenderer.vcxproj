@@ -44,6 +44,7 @@
     <Import Project="..\props\stduuid.props" />
     <Import Project="..\props\RendererInterfaces.props" />
     <Import Project="..\props\WindowCreator.props" />
+    <Import Project="..\props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -54,6 +55,7 @@
     <Import Project="..\props\stduuid.props" />
     <Import Project="..\props\RendererInterfaces.props" />
     <Import Project="..\props\WindowCreator.props" />
+    <Import Project="..\props\PrecompiledHeaders.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
@@ -63,6 +65,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)src\platform_specific;$(ProjectDir)src\Components;$(ProjectDir)src\Utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -76,6 +79,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)src\platform_specific;$(ProjectDir)src\Components;$(ProjectDir)src\Utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -91,6 +95,7 @@
     <ClInclude Include="src\Components\PhysicalDevice.h" />
     <ClInclude Include="src\DebugMessenger.h" />
     <ClInclude Include="src\DepthBuffer.h" />
+    <ClInclude Include="src\Pch_VulkanRenderer.h" />
     <ClInclude Include="src\platform_specific\PlatformSpecific.h" />
     <ClInclude Include="src\platform_specific\Vulkan.h" />
     <ClInclude Include="src\RendererImpl.h" />
@@ -103,11 +108,18 @@
     <ClInclude Include="src\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Components\ComponentManager.cpp" />
+    <ClCompile Include="src\Components\ComponentManager.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\Components\Instance.cpp" />
     <ClCompile Include="src\Components\PhysicalDevice.cpp" />
     <ClCompile Include="src\DebugMessenger.cpp" />
     <ClCompile Include="src\DepthBuffer.cpp" />
+    <ClCompile Include="src\Pch_VulkanRenderer.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\RendererImpl.cpp" />
     <ClCompile Include="src\Shader.cpp" />
