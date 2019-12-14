@@ -6,7 +6,7 @@
 
 namespace Sisyphus::Rendering::Vulkan {
 
-	SIS_DEFINE_COMPONENT_ID(PhysicalDevice, "8ffebfd2bd1b4ac6a35aa814d230e234");
+	SIS_DEFINE_ID(ComponentID_PhysicalDevice, "8ffebfd2bd1b4ac6a35aa814d230e234");
 
 	void PhysicalDevice::Initialize(const ComponentManager& componentManager)
 	{

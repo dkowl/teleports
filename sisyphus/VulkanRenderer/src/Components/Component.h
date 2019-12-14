@@ -5,8 +5,8 @@
 
 namespace Sisyphus::Rendering::Vulkan {
 
-#define SIS_DEFINE_COMPONENT_ID(componentName, id) \
-	static const uuids::uuid ComponentID_##componentName = uuids::uuid::from_string(id).value(); 
+#define SIS_DEFINE_ID(name, id) \
+	static const uuids::uuid name = uuids::uuid::from_string(id).value(); 
 
 	class ComponentManager;
 

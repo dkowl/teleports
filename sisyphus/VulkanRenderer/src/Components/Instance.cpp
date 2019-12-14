@@ -12,7 +12,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	false;
 #endif
 
-	SIS_DEFINE_COMPONENT_ID(Instance, "9ae5921621d54d96a006e123483bc97a");
+	SIS_DEFINE_ID(ComponentID_Instance, "9ae5921621d54d96a006e123483bc97a");
 
 	std::vector<const char*> Instance::GetLayerNames()
 	{
