@@ -11,12 +11,12 @@ namespace Sisyphus::Rendering::Vulkan {
 	class ComponentManager {
 	public:
 
-		template<Component T>
-		void InitComponent() {
+		template<Component T, typename... ConstructorArgs>
+		void InitComponent(ConstructorArgs... args) {
 			uuids::uuid type = T::TypeId();
 			SIS_THROWASSERT_MSG(!components.contains(type), T::ClassName() + " already exists.");
 
-			std::unique_ptr<IComponent> component = std::make_unique<T>();
+			std::unique_ptr<IComponent> component = std::make_unique<T>(args...);
 			component->Initialize(*this);
 			components.emplace(type, std::move(component));
 
