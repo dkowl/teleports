@@ -16,7 +16,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		static Dependencies Dependencies();
 
 		vk::Instance GetVulkanObject() const override;
-		operator vk::Instance() const override;
 
 	private:
 		static std::vector<const char*> GetLayerNames();

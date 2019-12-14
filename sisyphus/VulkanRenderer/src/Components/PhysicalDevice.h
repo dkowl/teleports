@@ -12,7 +12,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		static Dependencies Dependencies();
 
 		vk::PhysicalDevice GetVulkanObject() const override;
-		operator vk::PhysicalDevice() const override;
 
 		void Inspect() const;
 

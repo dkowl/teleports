@@ -89,8 +89,4 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		return *instance;
 	}
-	Instance::operator vk::Instance() const
-	{
-		return GetVulkanObject();
-	}
 }

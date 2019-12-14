@@ -25,8 +25,12 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	template<typename VulkanType>
 	class IVulkanComponent : public IComponent {
+	public:
 		virtual VulkanType GetVulkanObject() const = 0;
-		virtual operator VulkanType() const = 0;
+
+		operator VulkanType() const {
+			return GetVulkanObject();
+		}
 	};
 
 	template <typename T>

@@ -35,10 +35,6 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		return physicalDevice;
 	}
-	PhysicalDevice::operator vk::PhysicalDevice() const
-	{
-		return GetVulkanObject();
-	}
 	void PhysicalDevice::Inspect() const
 	{
 		auto& logger = Logger::Get();
