@@ -83,6 +83,7 @@
     <ClInclude Include="include\Utils\DebugAssert.h" />
     <ClInclude Include="include\Utils\FilesystemUtils.h" />
     <ClInclude Include="include\Utils\FunctionFileLine.h" />
+    <ClInclude Include="include\Utils\Graph.h" />
     <ClInclude Include="include\Utils\ILogger.h" />
     <ClInclude Include="include\Utils\Json.h" />
     <ClInclude Include="include\Utils\Logger.h" />

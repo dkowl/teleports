@@ -14,6 +14,9 @@
     <ClCompile Include="src\Test_Macro.cpp" />
     <ClCompile Include="src\Utils_catch_main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Test_Graph.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{C1EDCEAB-D7CA-48E1-A39B-151442367A08}</ProjectGuid>
