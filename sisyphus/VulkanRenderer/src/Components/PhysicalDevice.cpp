@@ -1,6 +1,7 @@
 #include "Pch_VulkanRenderer.h"
 #include "PhysicalDevice.h"
 #include "Instance.h"
+#include "Surface.h"
 #include "ComponentManager.h"
 #include "Utils/Logger.h"
 
@@ -8,9 +9,10 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	SIS_DEFINE_ID(ComponentID_PhysicalDevice, "8ffebfd2bd1b4ac6a35aa814d230e234");
 
-	void PhysicalDevice::Initialize(const ComponentManager& componentManager)
+	void PhysicalDevice::Initialize(const ComponentManager& inComponentManager)
 	{
-		auto physicalDevices = componentManager.GetComponent<Instance>().GetVulkanObject().enumeratePhysicalDevices();
+		componentManager = &inComponentManager;
+		auto physicalDevices = componentManager->GetComponent<Instance>().GetVulkanObject().enumeratePhysicalDevices();
 		if (physicalDevices.empty()) {
 			SIS_THROW("No physical devices supporting Vulkan");
 		}
@@ -18,6 +20,8 @@ namespace Sisyphus::Rendering::Vulkan {
 		physicalDevice = physicalDevices[0];
 		Logger::Get().Log("Creating a Vulkan Device from " + std::string(physicalDevice.getProperties().deviceName));
 		Inspect();
+
+		FindGraphicsQueueFamilyIndex();
 	}
 	uuids::uuid PhysicalDevice::TypeId()
 	{
@@ -35,6 +39,38 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		return physicalDevice;
 	}
+	void PhysicalDevice::HandleEvent(ComponentEvents::Initialization, const uuids::uuid& compTypeId)
+	{
+		if (compTypeId == Surface::TypeId()) {
+			auto& surface = componentManager->GetComponent<Surface>();
+			FindPresentQueueFamilyIndex(surface);
+		}
+	}
+	uint32_t PhysicalDevice::GetGraphicsQueueFamilyIndex() const
+	{
+		SIS_THROWASSERT(graphicsQueueFamilyIndex);
+		return graphicsQueueFamilyIndex.value();
+	}
+	uint32_t PhysicalDevice::GetPresentQueueFamilyIndex() const
+	{
+		SIS_THROWASSERT(presentQueueFamilyIndex);
+		return presentQueueFamilyIndex.value();
+	}
+	std::vector<vk::DeviceQueueCreateInfo> PhysicalDevice::GetDeviceQueueCreateInfos() const
+	{
+		std::vector<vk::DeviceQueueCreateInfo> result;
+		SIS_THROWASSERT(graphicsQueueFamilyIndex);
+		result.emplace_back( vk::DeviceQueueCreateInfo{
+			{}, graphicsQueueFamilyIndex.value(), 1
+		} );
+		SIS_THROWASSERT(presentQueueFamilyIndex);
+		if (presentQueueFamilyIndex != graphicsQueueFamilyIndex) {
+			result.emplace_back(vk::DeviceQueueCreateInfo{
+				{}, presentQueueFamilyIndex.value(), 1
+			});
+		}
+		return result;
+	}
 	void PhysicalDevice::Inspect() const
 	{
 		auto& logger = Logger::Get();
@@ -47,5 +83,29 @@ namespace Sisyphus::Rendering::Vulkan {
 			index++;
 		}
 		logger.EndSection();
+	}
+	void PhysicalDevice::FindGraphicsQueueFamilyIndex()
+	{
+		auto queueFamilyProperties = physicalDevice.getQueueFamilyProperties();
+		for (int i = 0; i < queueFamilyProperties.size(); i++) {
+			if (queueFamilyProperties[i].queueFlags & vk::QueueFlagBits::eGraphics) {
+				graphicsQueueFamilyIndex = i;
+			}
+		}
+		Logger::Get().LogArgs("Graphics queue family index found: ", graphicsQueueFamilyIndex.value());
+	}
+	void PhysicalDevice::FindPresentQueueFamilyIndex(vk::SurfaceKHR surface)
+	{
+		auto queueFamilyProperties = physicalDevice.getQueueFamilyProperties();
+		for (int i = 0; i < queueFamilyProperties.size(); i++) {
+			if (physicalDevice.getSurfaceSupportKHR(i, surface)) {
+				presentQueueFamilyIndex = i;
+			}
+		}
+		Logger::Get().LogArgs("Present queue family index found: ", presentQueueFamilyIndex.value());
+	}
+	ComponentReferences PhysicalDevice::WatchList(ComponentEvents::Initialization)
+	{
+		return { {Surface::TypeId()} };
 	}
 }

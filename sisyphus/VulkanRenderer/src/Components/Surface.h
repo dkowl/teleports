@@ -19,10 +19,16 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		vk::SurfaceKHR GetVulkanObject() const override;
 
+		void InitFormatAndColorSpace();
 		vk::Extent2D GetExtent() const;
+		vk::Format GetFormat() const;
+		vk::ColorSpaceKHR GetColorSpace() const;
 
 	private:
+		const ComponentManager* componentManager;
 		WindowCreator::Window* window;
 		vk::UniqueSurfaceKHR surface;
+		vk::Format format;
+		vk::ColorSpaceKHR colorSpace;
 	};
 }

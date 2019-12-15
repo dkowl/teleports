@@ -30,8 +30,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		outPfn = reinterpret_cast<T>(pfn);
 	}
 
-	std::optional<int> FindGraphicsQueueFamilyIndex(vk::PhysicalDevice& physicalDevice, vk::SurfaceKHR& surface);
-
 	vk::Extent2D GetExtent2D(WindowCreator::WindowExtent windowExtent);
 	bool operator==(const vk::Extent2D& ex1, const WindowCreator::WindowExtent& ex2);
 	std::string ToString(const vk::Extent2D& extent);

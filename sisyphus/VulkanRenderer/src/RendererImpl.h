@@ -12,11 +12,6 @@
 #include <optional>
 #include <unordered_map>
 
-namespace Sisyphus::WindowCreator {
-	class Window;
-	struct WindowExtent;
-}
-
 namespace Sisyphus::Rendering::Vulkan {
 
 	class RendererImpl : public IRenderer {
@@ -34,12 +29,8 @@ namespace Sisyphus::Rendering::Vulkan {
 		void EnableShader(uuids::uuid id);
 
 	private:
-		void InitWindowExtent();
-		void InitSurface();
-		void InitQueueFamilyIndex();
 		void InitDevice();
 		void InitCommandPool();
-		void InitFormatAndColorSpace();
 		void InitSwapchain();
 		void InitSwapchainImages();
 		void InitImageViews();
@@ -63,14 +54,9 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		RendererCreateInfo ci;
 		ComponentManager componentManager;
-		std::unique_ptr<WindowCreator::WindowExtent> windowExtent;
-		vk::UniqueSurfaceKHR surface;
-		std::optional<int> queueFamilyIndex;
 		vk::UniqueDevice device;
 		vk::UniqueCommandPool commandPool;
 		std::vector<vk::UniqueCommandBuffer> commandBuffers;
-		std::optional<vk::Format> colorFormat;
-		std::optional<vk::ColorSpaceKHR> colorSpace;
 		vk::UniqueSwapchainKHR swapchain;
 		std::vector<vk::Image> swapchainImages;
 		std::vector<vk::UniqueImageView> imageViews;

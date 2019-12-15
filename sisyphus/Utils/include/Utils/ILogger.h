@@ -7,8 +7,8 @@ public:
 	virtual ~ILogger() = default;
 
 	template<typename... Args>
-	void LogArgs(Args... args) {
-		Log(Sisyphus::AssembleString(std::forward(args...)));
+	void LogArgs(Args&&... args) {
+		Log(Sisyphus::AssembleString(std::forward<Args>(args)...));
 	}
 
 	virtual void Log(const std::string& message, int logLevel = 0) = 0;

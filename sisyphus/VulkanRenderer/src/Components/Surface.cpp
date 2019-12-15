@@ -2,6 +2,7 @@
 #include "Surface.h"
 #include "ComponentManager.h"
 #include "Instance.h"
+#include "PhysicalDevice.h"
 #include "VulkanUtils.h"
 #include "WindowCreator\WindowCreator.h"
 #include "Utils\Throw.h"
@@ -16,10 +17,12 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		SIS_THROWASSERT(window);
 	}
-	void Surface::Initialize(const ComponentManager& componentManager)
+	void Surface::Initialize(const ComponentManager& inComponentManager)
 	{
-		surface = window->GetVulkanSurface(componentManager.GetComponent<Instance>());
+		componentManager = &inComponentManager;
+		surface = window->GetVulkanSurface(inComponentManager.GetComponent<Instance>());
 		SIS_THROWASSERT(*surface);
+		InitFormatAndColorSpace();
 	}
 	uuids::uuid Surface::TypeId()
 	{
@@ -37,9 +40,49 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		return *surface;
 	}
+	void Surface::InitFormatAndColorSpace()
+	{
+		auto& logger = Logger::Get();
+
+		constexpr vk::Format desiredFormat = vk::Format::eB8G8R8A8Srgb;
+		constexpr vk::ColorSpaceKHR desiredColorSpace = vk::ColorSpaceKHR::eSrgbNonlinear;
+		bool formatFound = false;
+
+		auto surfaceFormats = componentManager->GetComponent<PhysicalDevice>().GetVulkanObject().getSurfaceFormatsKHR(*surface);
+		logger.BeginSection("Surface formats:");
+		for (int i = 0; i < surfaceFormats.size(); i++) {
+			const auto& surfaceFormat = surfaceFormats[i];
+			logger.BeginSection("#" + std::to_string(i) + ":");
+			logger.Log("Format: " + vk::to_string(surfaceFormat.format));
+			logger.Log("Color Space: " + vk::to_string(surfaceFormat.colorSpace));
+			logger.EndSection();
+
+			if (surfaceFormat.format == desiredFormat && surfaceFormat.colorSpace == desiredColorSpace) {
+				formatFound = true;
+				break;
+			}
+		}
+		logger.EndSection();
+		if (!formatFound) {
+			std::stringstream ss;
+			ss << "Unable to find desired format: " << vk::to_string(desiredFormat)
+				<< " and color space: " << vk::to_string(desiredColorSpace);
+			SIS_THROW(ss.str());
+		}
+		format = desiredFormat;
+		colorSpace = desiredColorSpace;
+	}
 	vk::Extent2D Surface::GetExtent() const
 	{
 		SIS_DEBUGASSERT(window);
 		return GetExtent2D(window->GetExtent());
+	}
+	vk::Format Surface::GetFormat() const
+	{
+		return format;
+	}
+	vk::ColorSpaceKHR Surface::GetColorSpace() const
+	{
+		return colorSpace;
 	}
 }
