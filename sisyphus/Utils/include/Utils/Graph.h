@@ -11,14 +11,27 @@ namespace Sisyphus::Utils {
 		{std::hash<Key>{}(key)}->std::convertible_to<std::size_t>;
 	};
 
-	template<typename T>
+	template<Hashable T>
 	class Graph {
 	public:
-		void AddParents(const T& node, const std::vector<T>& parents) {
+		void EnsureNodeExists(const T& node) {
 			graph[node];
+		}
+
+		void AddEdge(const T& from, const T& to) {
+			EnsureNodeExists(to);
+			graph[from].insert(to);
+		}
+
+		void AddParents(const T& node, const std::vector<T>& parents) {
+			EnsureNodeExists(node);
 			for (auto&& parent : parents) {
-				graph[parent].insert(node);
+				AddEdge(parent, node);
 			}
+		}
+
+		bool Contains(const T& node) {
+			return graph.find(node) != graph.end();
 		}
 
 		std::vector<T> PostOrder() {

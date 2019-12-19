@@ -27,6 +27,7 @@ TEST_CASE("Graph") {
 	}
 
 	auto postOrder = g.PostOrder();
+	REQUIRE(postOrder.size() == 11);
 	for (auto&& resultNode : postOrder) {
 		// Detect if the node has any children
 		for (auto&& node : nodes) {
