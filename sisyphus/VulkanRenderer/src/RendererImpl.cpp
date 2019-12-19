@@ -142,7 +142,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		vk::PipelineStageFlags waitDestinationStageMask(vk::PipelineStageFlagBits::eColorAttachmentOutput);
 		vk::SubmitInfo submitInfo(1, &*imageAcquiredSemaphore, &waitDestinationStageMask, 1, &*commandBuffer);
 
-		auto physicalDevice = componentManager.GetComponent<PhysicalDevice>();
+		const auto& physicalDevice = componentManager.GetComponent<PhysicalDevice>();
 		vk::Queue graphicsQueue = device->getQueue(physicalDevice.GetGraphicsQueueFamilyIndex(), 0);
 		vk::Queue presentQueue = device->getQueue(physicalDevice.GetPresentQueueFamilyIndex(), 0);
 
@@ -172,7 +172,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitDevice()
 	{
-		auto physicalDevice = componentManager.GetComponent<PhysicalDevice>();
+		const auto& physicalDevice = componentManager.GetComponent<PhysicalDevice>();
 		auto deviceQueueCreateInfos = physicalDevice.GetDeviceQueueCreateInfos();
 
 		std::vector<const char*> deviceExtensionNames;
