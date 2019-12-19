@@ -2,17 +2,23 @@
 #include "PhysicalDevice.h"
 #include "Instance.h"
 #include "Surface.h"
-#include "ComponentManager.h"
+#include "ECS/Entity.h"
 #include "Utils/Logger.h"
+#include "Utils/DebugMacros.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 
 	SIS_DEFINE_ID(ComponentID_PhysicalDevice, "8ffebfd2bd1b4ac6a35aa814d230e234");
 
-	void PhysicalDevice::Initialize(const ComponentManager& inComponentManager)
+	PhysicalDevice::~PhysicalDevice()
 	{
-		componentManager = &inComponentManager;
-		auto physicalDevices = componentManager->GetComponent<Instance>().GetVulkanObject().enumeratePhysicalDevices();
+		SIS_DEBUG_ONLY(Logger::Get().Log("~PhysicalDevice"));
+	}
+
+	void PhysicalDevice::Initialize(const ECS::Entity& inEntity)
+	{
+		entity = &inEntity;
+		auto physicalDevices = entity->GetComponent<Instance>().GetVulkanObject().enumeratePhysicalDevices();
 		if (physicalDevices.empty()) {
 			SIS_THROW("No physical devices supporting Vulkan");
 		}
@@ -31,7 +37,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		return "PhysicalDevice";
 	}
-	ComponentReferences PhysicalDevice::Dependencies()
+	ECS::ComponentReferences PhysicalDevice::Dependencies()
 	{
 		return { {Instance::TypeId()} };
 	}
@@ -39,10 +45,10 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		return physicalDevice;
 	}
-	void PhysicalDevice::HandleEvent(ComponentEvents::Initialization, const uuids::uuid& compTypeId)
+	void PhysicalDevice::HandleEvent(ECS::ComponentEvents::Initialization, const uuids::uuid& compTypeId)
 	{
 		if (compTypeId == Surface::TypeId()) {
-			auto& surface = componentManager->GetComponent<Surface>();
+			auto& surface = entity->GetComponent<Surface>();
 			FindPresentQueueFamilyIndex(surface);
 		}
 	}
@@ -104,7 +110,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		}
 		Logger::Get().LogArgs("Present queue family index found: ", presentQueueFamilyIndex.value());
 	}
-	ComponentReferences PhysicalDevice::WatchList(ComponentEvents::Initialization)
+	ECS::ComponentReferences PhysicalDevice::WatchList(ECS::ComponentEvents::Initialization)
 	{
 		return { {Surface::TypeId()} };
 	}

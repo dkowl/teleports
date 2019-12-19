@@ -1,10 +1,10 @@
 #pragma once
-#include "Component.h"
+#include "ECS\Component.h"
 #include "Utils/Graph.h"
 #include <unordered_map>
 #include "uuid.h"
 
-namespace Sisyphus::Rendering::Vulkan {
+namespace Sisyphus::ECS {
 
 	class DependencyGraph {
 	public:

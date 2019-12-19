@@ -6,7 +6,7 @@
 #include "UniformBuffer.h"
 #include "VertexBuffer.h"
 #include "Shader.h"
-#include "ComponentManager.h"
+#include "ECS\Entity.h"
 #include "Utils\ILogger.h"
 #include <memory>
 #include <optional>
@@ -14,7 +14,7 @@
 
 namespace Sisyphus::Rendering::Vulkan {
 
-	class RendererImpl : public IRenderer {
+	class RendererImpl : public IRenderer, public ECS::Entity {
 	public:
 		RendererImpl(const RendererCreateInfo& ci);
 		~RendererImpl(); // default
@@ -53,7 +53,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		Shader& GetShader(uuids::uuid id);
 
 		RendererCreateInfo ci;
-		ComponentManager componentManager;
 		vk::UniqueDevice device;
 		vk::UniqueCommandPool commandPool;
 		std::vector<vk::UniqueCommandBuffer> commandBuffers;

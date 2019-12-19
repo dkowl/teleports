@@ -12,8 +12,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{E24C7ECB-173A-489E-9CC4-0FB97BC1D4D2}</ProjectGuid>
-    <RootNamespace>VulkanRenderer</RootNamespace>
+    <ProjectGuid>{202357B9-0D5E-4C86-94AD-157D3952A2F4}</ProjectGuid>
+    <RootNamespace>ECS</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -21,14 +21,14 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -38,95 +38,66 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\props\General.props" />
-    <Import Project="..\props\Vulkan.props" />
-    <Import Project="..\props\Utils.props" />
-    <Import Project="..\props\Glslang.props" />
     <Import Project="..\props\stduuid.props" />
-    <Import Project="..\props\RendererInterfaces.props" />
-    <Import Project="..\props\WindowCreator.props" />
     <Import Project="..\props\PrecompiledHeaders.props" />
-    <Import Project="..\props\ECS.props" />
+    <Import Project="..\props\Utils.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\props\General.props" />
-    <Import Project="..\props\Vulkan.props" />
-    <Import Project="..\props\Utils.props" />
-    <Import Project="..\props\Glslang.props" />
     <Import Project="..\props\stduuid.props" />
-    <Import Project="..\props\RendererInterfaces.props" />
-    <Import Project="..\props\WindowCreator.props" />
     <Import Project="..\props\PrecompiledHeaders.props" />
-    <Import Project="..\props\ECS.props" />
+    <Import Project="..\props\Utils.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <Optimization>Disabled</Optimization>
+      <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\platform_specific;$(ProjectDir)src\Components;$(ProjectDir)src\Utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <Optimization>MaxSpeed</Optimization>
+      <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\platform_specific;$(ProjectDir)src\Components;$(ProjectDir)src\Utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\VulkanRenderer\Renderer.h" />
-    <ClInclude Include="src\Components\Instance.h" />
-    <ClInclude Include="src\Components\PhysicalDevice.h" />
-    <ClInclude Include="src\Components\Surface.h" />
-    <ClInclude Include="src\DebugMessenger.h" />
-    <ClInclude Include="src\DepthBuffer.h" />
-    <ClInclude Include="src\Pch_VulkanRenderer.h" />
-    <ClInclude Include="src\platform_specific\PlatformSpecific.h" />
-    <ClInclude Include="src\platform_specific\Vulkan.h" />
-    <ClInclude Include="src\RendererImpl.h" />
-    <ClInclude Include="src\Shader.h" />
-    <ClInclude Include="src\Swapchain.h" />
-    <ClInclude Include="src\UniformBuffer.h" />
-    <ClInclude Include="src\Utils\DeviceData.h" />
-    <ClInclude Include="src\Utils\MemoryUtils.h" />
-    <ClInclude Include="src\Utils\VulkanUtils.h" />
-    <ClInclude Include="src\VertexBuffer.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Components\Instance.cpp" />
-    <ClCompile Include="src\Components\PhysicalDevice.cpp" />
-    <ClCompile Include="src\Components\Surface.cpp" />
-    <ClCompile Include="src\DebugMessenger.cpp" />
-    <ClCompile Include="src\DepthBuffer.cpp" />
-    <ClCompile Include="src\Pch_VulkanRenderer.cpp">
+    <ClCompile Include="src\ComponentEvent.cpp" />
+    <ClCompile Include="src\Entity.cpp" />
+    <ClCompile Include="src\Pch_ECS.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Renderer.cpp" />
-    <ClCompile Include="src\RendererImpl.cpp" />
-    <ClCompile Include="src\Shader.cpp" />
-    <ClCompile Include="src\Swapchain.cpp" />
-    <ClCompile Include="src\UniformBuffer.cpp" />
-    <ClCompile Include="src\Utils\DeviceData.cpp" />
-    <ClCompile Include="src\Utils\MemoryUtils.cpp" />
-    <ClCompile Include="src\Utils\VulkanUtils.cpp" />
-    <ClCompile Include="src\VertexBuffer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\ECS\Component.h" />
+    <ClInclude Include="include\ECS\ComponentEvent.h" />
+    <ClInclude Include="include\ECS\DependencyGraph.h" />
+    <ClInclude Include="include\ECS\Entity.h" />
+    <ClInclude Include="src\Pch_ECS.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

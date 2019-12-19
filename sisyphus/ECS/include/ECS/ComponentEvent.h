@@ -2,7 +2,7 @@
 #include <concepts>
 #include "uuid.h"
 
-namespace Sisyphus::Rendering::Vulkan {
+namespace Sisyphus::ECS {
 	
 	namespace ComponentEvents {
 		class ComponentEventBase {};
@@ -16,7 +16,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	// When adding a new event - update the following:
 	//   - ComponentEvent concept (this file)
 	//   - HandleEvent and WatchList method in IComponent (Component.h)
-	//   - UpdateSubscriberLists<T> in ComponentManager (ComponentManager.h)
+	//   - UpdateSubscriberLists<T> in Entity (Entity.h)
 
 	template<typename T>
 	concept ComponentEvent =

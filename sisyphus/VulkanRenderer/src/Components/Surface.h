@@ -1,5 +1,5 @@
 #pragma once
-#include "Component.h"
+#include "ECS/Component.h"
 #include "Vulkan.h"
 
 namespace Sisyphus::WindowCreator {
@@ -8,14 +8,15 @@ namespace Sisyphus::WindowCreator {
 
 namespace Sisyphus::Rendering::Vulkan {
 
-	class Surface : public IVulkanComponent<vk::SurfaceKHR> {
+	class Surface : public ECS::IVulkanComponent<vk::SurfaceKHR> {
 	public:
 		Surface(WindowCreator::Window* inWindow);
+		~Surface();
 
-		void Initialize(const ComponentManager& componentManager) override;
+		void Initialize(const ECS::Entity& inEntity) override;
 		static uuids::uuid TypeId();
 		static std::string ClassName();
-		static ComponentReferences Dependencies();
+		static ECS::ComponentReferences Dependencies();
 
 		vk::SurfaceKHR GetVulkanObject() const override;
 
@@ -25,7 +26,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		vk::ColorSpaceKHR GetColorSpace() const;
 
 	private:
-		const ComponentManager* componentManager;
+		const ECS::Entity* entity;
 		WindowCreator::Window* window;
 		vk::UniqueSurfaceKHR surface;
 		vk::Format format;

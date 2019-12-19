@@ -1,6 +1,6 @@
 #include "Pch_VulkanRenderer.h"
 #include "Surface.h"
-#include "ComponentManager.h"
+#include "ECS/Entity.h"
 #include "Instance.h"
 #include "PhysicalDevice.h"
 #include "VulkanUtils.h"
@@ -17,9 +17,13 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		SIS_THROWASSERT(window);
 	}
-	void Surface::Initialize(const ComponentManager& inComponentManager)
+	Surface::~Surface()
 	{
-		componentManager = &inComponentManager;
+		SIS_DEBUG_ONLY(Logger::Get().Log("~Surface"));
+	}
+	void Surface::Initialize(const ECS::Entity& inComponentManager)
+	{
+		entity = &inComponentManager;
 		surface = window->GetVulkanSurface(inComponentManager.GetComponent<Instance>());
 		SIS_THROWASSERT(*surface);
 		InitFormatAndColorSpace();
@@ -32,9 +36,9 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		return "Surface";
 	}
-	ComponentReferences Surface::Dependencies()
+	ECS::ComponentReferences Surface::Dependencies()
 	{
-		return { {Instance::TypeId()} };
+		return { {Instance::TypeId()}, {PhysicalDevice::TypeId()} };
 	}
 	vk::SurfaceKHR Surface::GetVulkanObject() const
 	{
@@ -48,7 +52,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		constexpr vk::ColorSpaceKHR desiredColorSpace = vk::ColorSpaceKHR::eSrgbNonlinear;
 		bool formatFound = false;
 
-		auto surfaceFormats = componentManager->GetComponent<PhysicalDevice>().GetVulkanObject().getSurfaceFormatsKHR(*surface);
+		auto surfaceFormats = entity->GetComponent<PhysicalDevice>().GetVulkanObject().getSurfaceFormatsKHR(*surface);
 		logger.BeginSection("Surface formats:");
 		for (int i = 0; i < surfaceFormats.size(); i++) {
 			const auto& surfaceFormat = surfaceFormats[i];

@@ -1,9 +1,7 @@
-#include "Pch_VulkanRenderer.h"
+#include "Pch_ECS.h"
 #include "ComponentEvent.h"
 
-
-
-namespace Sisyphus::Rendering::Vulkan {
+namespace Sisyphus::ECS {
 	namespace ComponentEvents {
 		uuids::uuid Initialization::Id()
 		{

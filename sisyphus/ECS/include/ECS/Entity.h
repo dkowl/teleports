@@ -1,6 +1,6 @@
 #pragma once
-#include "Component.h"
-#include "DependencyGraph.h"
+#include "ECS\Component.h"
+#include "ECS\DependencyGraph.h"
 #include "Utils/Throw.h"
 #include "Utils/Logger.h"
 #include "uuid.h"
@@ -8,11 +8,11 @@
 #include <memory>
 #include <unordered_map>
 
-namespace Sisyphus::Rendering::Vulkan {
-	class ComponentManager {
+namespace Sisyphus::ECS {
+	class Entity {
 	public:
 
-		~ComponentManager();
+		~Entity();
 
 		template<Component T, typename... ConstructorArgs>
 		void InitComponent(ConstructorArgs... args) {

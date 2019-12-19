@@ -2,14 +2,14 @@
 #include <vector>
 #include <concepts>
 #include "uuid.h"
-#include "ComponentEvent.h"
+#include "ECS\ComponentEvent.h"
 
-namespace Sisyphus::Rendering::Vulkan {
+namespace Sisyphus::ECS {
 
 #define SIS_DEFINE_ID(name, id) \
 	static const uuids::uuid name = uuids::uuid::from_string(id).value(); 
 
-	class ComponentManager;
+	class Entity;
 
 	struct ComponentReference {
 		uuids::uuid type;
@@ -26,7 +26,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		IComponent& operator=(IComponent&&) = delete;
 
 
-		virtual void Initialize(const ComponentManager& manager) = 0;
+		virtual void Initialize(const Entity& manager) = 0;
 
 		virtual void HandleEvent(ComponentEvents::Initialization, const uuids::uuid& /*compTypeId*/) {};
 

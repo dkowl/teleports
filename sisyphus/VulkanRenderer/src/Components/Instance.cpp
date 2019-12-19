@@ -3,6 +3,8 @@
 #include "VulkanUtils.h"
 #include "DebugMessenger.h"
 #include "platform_specific/PlatformSpecific.h"
+#include "Utils/Logger.h"
+#include "Utils/DebugMacros.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	constexpr bool enableValidationLayers =
@@ -38,9 +40,11 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 	}
 
-	Instance::~Instance() = default;
+	Instance::~Instance() {
+		SIS_DEBUG_ONLY(Logger::Get().Log("~Instance"));
+	}
 
-	void Instance::Initialize(const ComponentManager &)
+	void Instance::Initialize(const ECS::Entity&)
 	{
 		vk::ApplicationInfo applicationInfo(
 			"Vulkan App",
@@ -81,7 +85,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		return "Instance";
 	}
-	ComponentReferences Instance::Dependencies()
+	ECS::ComponentReferences Instance::Dependencies()
 	{
 		return {};
 	}

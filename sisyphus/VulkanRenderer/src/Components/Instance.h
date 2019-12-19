@@ -1,19 +1,19 @@
 #pragma once
-#include "Component.h"
+#include "ECS/Component.h"
 #include "Vulkan.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	class DebugMessenger;
 
-	class Instance : public IVulkanComponent<vk::Instance> {
+	class Instance : public ECS::IVulkanComponent<vk::Instance> {
 	public:
 		Instance();
 		~Instance() override; // default
 
-		void Initialize(const ComponentManager & componentManager) override;
+		void Initialize(const ECS::Entity& entity) override;
 		static uuids::uuid TypeId();
 		static std::string ClassName();
-		static ComponentReferences Dependencies();
+		static ECS::ComponentReferences Dependencies();
 
 		vk::Instance GetVulkanObject() const override;
 
