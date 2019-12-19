@@ -3,6 +3,7 @@
 #include "ECS\DependencyGraph.h"
 #include "Utils/Throw.h"
 #include "Utils/Logger.h"
+#include "Utils/StringUtils.h"
 #include "uuid.h"
 #include <vector>
 #include <memory>
@@ -18,6 +19,7 @@ namespace Sisyphus::ECS {
 		void InitComponent(ConstructorArgs... args) {
 			uuids::uuid type = T::TypeId();
 			SIS_THROWASSERT_MSG(!components.contains(type), T::ClassName() + " already exists.");
+			CheckDependencies<T>();
 
 			if (!knownComponentTypes.contains(type)) {
 				UpdateSubscriberLists<T>();
@@ -41,9 +43,27 @@ namespace Sisyphus::ECS {
 
 		void DestroyAll();
 
+		template<Component T>
+		bool HasComponent() {
+			return HasComponent(T::TypeId());
+		}
+
 		bool HasComponent(const uuids::uuid& compType);
 
 	private:
+		template<typename T>
+		void CheckDependencies() {
+			for (auto&& dependency : T::Dependencies()) {
+				if (!HasComponent(dependency.type)) {
+					SIS_THROW(AssembleString(
+						ComponentRegistry::GetComponentName(dependency.type),
+						" must be initialized before ",
+						T::ClassName())
+					);
+				}
+			}
+		}
+
 		template<Component T>
 		void UpdateSubscriberLists() {
 			UpdateSubscriberLists<T, ComponentEvents::Initialization>();
