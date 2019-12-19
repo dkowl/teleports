@@ -81,6 +81,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Utils\DebugAssert.h" />
+    <ClInclude Include="include\Utils\DebugMacros.h" />
     <ClInclude Include="include\Utils\FilesystemUtils.h" />
     <ClInclude Include="include\Utils\FunctionFileLine.h" />
     <ClInclude Include="include\Utils\Graph.h" />

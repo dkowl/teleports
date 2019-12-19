@@ -1,6 +1,7 @@
 #pragma once
+#include "Utils/DebugMacros.h"
 
-#ifdef _DEBUG
+#ifdef SIS_DEBUG
 #include <string>
 #include <iostream>
 #include "Utils/FunctionFileLine.h"
