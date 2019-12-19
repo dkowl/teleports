@@ -84,6 +84,9 @@
     <ClInclude Include="src\Components\ComponentEvent.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="src\Components\DependencyGraph.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DepthBuffer.cpp">

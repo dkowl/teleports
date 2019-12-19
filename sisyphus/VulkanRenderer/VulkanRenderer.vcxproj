@@ -92,6 +92,7 @@
     <ClInclude Include="src\Components\Component.h" />
     <ClInclude Include="src\Components\ComponentEvent.h" />
     <ClInclude Include="src\Components\ComponentManager.h" />
+    <ClInclude Include="src\Components\DependencyGraph.h" />
     <ClInclude Include="src\Components\Instance.h" />
     <ClInclude Include="src\Components\PhysicalDevice.h" />
     <ClInclude Include="src\Components\Surface.h" />

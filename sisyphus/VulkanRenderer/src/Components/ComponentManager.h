@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include "DependencyGraph.h"
 #include "Utils/Throw.h"
 #include "Utils/Logger.h"
 #include "uuid.h"
@@ -11,6 +12,8 @@ namespace Sisyphus::Rendering::Vulkan {
 	class ComponentManager {
 	public:
 
+		~ComponentManager();
+
 		template<Component T, typename... ConstructorArgs>
 		void InitComponent(ConstructorArgs... args) {
 			uuids::uuid type = T::TypeId();
@@ -18,6 +21,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 			if (!knownComponentTypes.contains(type)) {
 				UpdateSubscriberLists<T>();
+				dependencyGraph.Add<T>();
 			}
 
 			std::unique_ptr<IComponent> component = std::make_unique<T>(args...);
@@ -34,6 +38,10 @@ namespace Sisyphus::Rendering::Vulkan {
 		T& GetComponent() const {
 			return dynamic_cast<T&>(GetComponent(T::TypeId()));
 		}
+
+		void DestroyAll();
+
+		bool HasComponent(const uuids::uuid& compType);
 
 	private:
 		template<Component T>
@@ -72,6 +80,7 @@ namespace Sisyphus::Rendering::Vulkan {
 				>
 			>;
 		SubscriberLists subscriberLists;
+		DependencyGraph dependencyGraph;
 
 		std::unordered_set<uuids::uuid> knownComponentTypes;
 	};
