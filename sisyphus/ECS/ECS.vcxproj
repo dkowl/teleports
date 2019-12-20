@@ -87,6 +87,7 @@
   <ItemGroup>
     <ClCompile Include="src\ComponentEvent.cpp" />
     <ClCompile Include="src\ComponentRegistry.cpp" />
+    <ClCompile Include="src\DependencyGraph.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Pch_ECS.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

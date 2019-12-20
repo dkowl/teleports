@@ -15,9 +15,8 @@ namespace Sisyphus::ECS {
 			}
 		}
 
-		std::vector<uuids::uuid> GetDestructionOrder() {
-			return graph.PostOrder();
-		}
+		std::vector<uuids::uuid> GetDestructionOrder() const;
+		void Clear();
 
 	private:
 		Utils::Graph<uuids::uuid> graph;

@@ -30,11 +30,11 @@ namespace Sisyphus::Utils {
 			}
 		}
 
-		bool Contains(const T& node) {
+		bool Contains(const T& node) const {
 			return graph.find(node) != graph.end();
 		}
 
-		std::vector<T> PostOrder() {
+		std::vector<T> PostOrder() const {
 			std::vector<T> result;
 			std::unordered_set<const T*> visited;
 			for (auto&& node : graph) {
@@ -43,7 +43,7 @@ namespace Sisyphus::Utils {
 				const T* currentNode = &node.first;
 				std::stack<const T*> stack;
 				while(true) {
-					const auto& children = graph[*currentNode];
+					const auto& children = graph.at(*currentNode);
 					std::vector<const T*> unvisitedChildren;
 					for (auto&& child : children) {
 						auto childAddress = &(graph.find(child)->first);
@@ -74,6 +74,11 @@ namespace Sisyphus::Utils {
 			}
 			return result;
 		}
+
+		void Clear() {
+			graph.clear();
+		}
+
 	private:
 		std::unordered_map<T, std::unordered_set<T>> graph;
 	};
