@@ -83,8 +83,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\CompA.cpp" />
+    <ClCompile Include="src\CompB.cpp" />
+    <ClCompile Include="src\CompC.cpp" />
     <ClCompile Include="src\ECS_catch_main.cpp" />
     <ClCompile Include="src\Test_ECS.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\CompA.h" />
+    <ClInclude Include="src\CompB.h" />
+    <ClInclude Include="src\CompC.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
