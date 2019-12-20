@@ -21,6 +21,17 @@ namespace Sisyphus::ECS {
 	};
 	using ComponentReferences = std::vector<ComponentReference>;
 
+	class IComponent;
+
+	template <typename T>
+	concept Component =
+		std::derived_from<T, IComponent> &&
+		requires {
+			{T::TypeId()}->std::same_as<uuids::uuid>;
+			{T::ClassName()}->std::same_as<std::string>;
+			{T::Dependencies()}->std::same_as<ComponentReferences>;
+	};
+
 	class IComponent {
 	public:
 		IComponent() = default;
@@ -32,10 +43,11 @@ namespace Sisyphus::ECS {
 
 
 		virtual void Initialize(const Entity& manager) = 0;
+		
+		virtual void HandleEvent(ComponentEvents::Initialization, const uuids::uuid&) {};
 
-		virtual void HandleEvent(ComponentEvents::Initialization, const uuids::uuid& /*compTypeId*/) {};
-
-		static ComponentReferences WatchList(ComponentEvents::Initialization) { return ComponentReferences(); }
+		template<ComponentEvent T>
+		static ComponentReferences WatchList(T) { return ComponentReferences(); }
 	};
 
 	template<typename VulkanType>
@@ -47,16 +59,6 @@ namespace Sisyphus::ECS {
 			return GetVulkanObject();
 		}
 	};
-
-	template <typename T>
-	concept Component =
-		std::derived_from<T, IComponent> &&
-		requires { 
-			{T::TypeId()}->std::same_as<uuids::uuid>;
-			{T::ClassName()}->std::same_as<std::string>;
-			{T::Dependencies()}->std::same_as<ComponentReferences>;
-			// {T::WatchList(ComponentEvent::Initialization{})}->std::same_as<ComponentReferences>;
-		};
 
 	template<typename T, typename VulkanType>
 	concept VulkanComponent =

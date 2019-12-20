@@ -14,8 +14,7 @@ namespace Sisyphus::ECS {
 	}
 
 	// When adding a new event - update the following:
-	//   - ComponentEvent concept (this file)
-	//   - HandleEvent and WatchList method in IComponent (Component.h)
+	//   - HandleEvent in IComponent (Component.h)
 	//   - UpdateSubscriberLists<T> in Entity (Entity.h)
 
 	template<typename T>
