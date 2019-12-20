@@ -49,11 +49,11 @@ namespace Sisyphus::ECS {
 		void DestroyAll();
 
 		template<Component T>
-		bool HasComponent() {
+		bool HasComponent() const {
 			return HasComponent(T::TypeId());
 		}
 
-		bool HasComponent(const uuids::uuid& compType);
+		bool HasComponent(const uuids::uuid& compType) const;
 
 	private:
 		template<typename T>

@@ -9,6 +9,11 @@ SIS_REGISTER_COMPONENT(CompB);
 bool CompB::compA_initialized = false;
 bool CompB::compC_initialized = false;
 
+CompB::~CompB()
+{
+	SIS_THROWASSERT(!entity->HasComponent<CompC>());
+}
+
 uuids::uuid CompB::TypeId() {
 	return ComponentID_CompB;
 }
@@ -37,6 +42,6 @@ void CompB::HandleEvent(ComponentEvents::Initialization, const uuids::uuid& type
 	}
 }
 
-void CompB::Initialize(const Entity&) {
-
+void CompB::Initialize(const Entity& inEntity) {
+	entity = &inEntity;
 }

@@ -27,4 +27,10 @@ TEST_CASE("Entity") {
 	REQUIRE(e.HasComponent<CompC>());
 	REQUIRE(e.GetComponent<CompA>().compC_initialized);
 	REQUIRE(e.GetComponent<CompB>().compC_initialized);
+	REQUIRE(e.GetComponent<CompC>().initialized);
+
+	REQUIRE_NOTHROW(e.DestroyAll());
+
+	REQUIRE_THROWS(e.GetComponent<CompA>());
+	REQUIRE(e.TryGetComponent<CompB>() == nullptr);
 }

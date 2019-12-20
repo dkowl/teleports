@@ -6,6 +6,8 @@ using namespace Sisyphus::ECS;
 
 class CompB : public IComponent {
 public:
+	~CompB();
+
 	static uuids::uuid TypeId();
 	static std::string ClassName();
 	static ComponentReferences Dependencies();
@@ -14,6 +16,8 @@ public:
 	void HandleEvent(ComponentEvents::Initialization, const uuids::uuid& type) override;
 
 	void Initialize(const Entity&) override;
+
+	const Entity* entity;
 
 	static bool compA_initialized;
 	static bool compC_initialized;

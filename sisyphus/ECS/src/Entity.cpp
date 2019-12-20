@@ -7,7 +7,7 @@ namespace Sisyphus::ECS {
 	IComponent& Entity::GetComponent(const uuids::uuid& type) const
 	{
 		auto comp = components.find(type);
-		SIS_THROWASSERT(comp != components.end());
+		SIS_THROWASSERT(HasComponent(type));
 		return *comp->second;
 	}
 	IComponent* Entity::TryGetComponent(const uuids::uuid& type) const
@@ -24,8 +24,12 @@ namespace Sisyphus::ECS {
 			SIS_DEBUGASSERT(HasComponent(compType));
 			components[compType] = nullptr;
 		}
+		components.clear();
+		subscriberLists.clear();
+		dependencyGraph.Clear();
+		knownComponentTypes.clear();
 	}
-	bool Entity::HasComponent(const uuids::uuid& type) {
+	bool Entity::HasComponent(const uuids::uuid& type) const {
 		auto findResult = components.find(type);
 		return findResult != components.end() && findResult->second != nullptr;
 	}

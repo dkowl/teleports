@@ -12,5 +12,7 @@ public:
 
 	void Initialize(const Entity&) override;
 
+	const Entity* entity;
+
 	bool initialized = false;
 };
