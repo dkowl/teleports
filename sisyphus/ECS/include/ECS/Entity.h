@@ -41,6 +41,11 @@ namespace Sisyphus::ECS {
 			return dynamic_cast<T&>(GetComponent(T::TypeId()));
 		}
 
+		template<Component T>
+		T* TryGetComponent() const {
+			return dynamic_cast<T*>(TryGetComponent(T::TypeId()));
+		}
+
 		void DestroyAll();
 
 		template<Component T>
