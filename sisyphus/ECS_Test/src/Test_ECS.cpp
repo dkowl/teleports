@@ -1,10 +1,10 @@
-#include "catch.hpp"
-#define SIS_NO_DEBUG_BREAK
-#include "uuid.h"
+#include "Pch_ECS_Test.h"
 #include "ECS/Entity.h"
 #include "CompA.h"
 #include "CompB.h"
 #include "CompC.h"
+
+using namespace Sisyphus::ECS;
 
 TEST_CASE("Entity") {
 	Entity e;
@@ -19,8 +19,12 @@ TEST_CASE("Entity") {
 
 	e.InitComponent<CompB>();
 	REQUIRE(e.HasComponent<CompB>());
+	REQUIRE(e.GetComponent<CompA>().compB_initialized);
+	REQUIRE(!e.GetComponent<CompA>().compC_initialized);
+	REQUIRE(!e.GetComponent<CompB>().compA_initialized);
 
 	e.InitComponent<CompC>();
-
-
+	REQUIRE(e.HasComponent<CompC>());
+	REQUIRE(e.GetComponent<CompA>().compC_initialized);
+	REQUIRE(e.GetComponent<CompB>().compC_initialized);
 }

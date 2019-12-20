@@ -1,3 +1,4 @@
+#include "Pch_ECS_Test.h"
 #include "CompA.h"
 #include "CompB.h"
 #include "CompC.h"
