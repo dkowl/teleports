@@ -2,7 +2,7 @@
 #include "ComponentEvent.h"
 
 namespace Sisyphus::ECS {
-	namespace ComponentEvents {
+	namespace Events {
 		uuids::uuid Initialization::Id()
 		{
 			return uuids::uuid();

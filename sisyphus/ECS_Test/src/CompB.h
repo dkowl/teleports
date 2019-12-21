@@ -12,8 +12,8 @@ public:
 	static std::string ClassName();
 	static ComponentReferences Dependencies();
 
-	static ComponentReferences WatchList(ComponentEvents::Initialization);
-	void HandleEvent(ComponentEvents::Initialization, const uuids::uuid& type) override;
+	static ComponentReferences WatchList(Events::Initialization);
+	void HandleEvent(Events::Initialization, const uuids::uuid& type) override;
 
 	void Initialize(const Entity&) override;
 

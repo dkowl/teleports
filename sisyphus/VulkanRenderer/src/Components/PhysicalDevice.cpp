@@ -45,7 +45,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		return physicalDevice;
 	}
-	void PhysicalDevice::HandleEvent(ECS::ComponentEvents::Initialization, const uuids::uuid& compTypeId)
+	void PhysicalDevice::HandleEvent(ECS::Events::Initialization, const uuids::uuid& compTypeId)
 	{
 		if (compTypeId == Surface::TypeId()) {
 			auto& surface = entity->GetComponent<Surface>();
@@ -110,7 +110,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		}
 		Logger::Get().LogArgs("Present queue family index found: ", presentQueueFamilyIndex.value());
 	}
-	ECS::ComponentReferences PhysicalDevice::WatchList(ECS::ComponentEvents::Initialization)
+	ECS::ComponentReferences PhysicalDevice::WatchList(ECS::Events::Initialization)
 	{
 		return { {Surface::TypeId()} };
 	}

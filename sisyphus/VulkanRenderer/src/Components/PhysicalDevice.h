@@ -14,8 +14,8 @@ namespace Sisyphus::Rendering::Vulkan {
 		static ECS::ComponentReferences Dependencies();
 
 		vk::PhysicalDevice GetVulkanObject() const override;
-		void HandleEvent(ECS::ComponentEvents::Initialization, const uuids::uuid& compTypeId) override;
-		static ECS::ComponentReferences WatchList(ECS::ComponentEvents::Initialization);
+		void HandleEvent(ECS::Events::Initialization, const uuids::uuid& compTypeId) override;
+		static ECS::ComponentReferences WatchList(ECS::Events::Initialization);
 
 		uint32_t GetGraphicsQueueFamilyIndex() const;
 		uint32_t GetPresentQueueFamilyIndex() const;

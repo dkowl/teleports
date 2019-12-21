@@ -4,7 +4,7 @@
 
 namespace Sisyphus::ECS {
 	
-	namespace ComponentEvents {
+	namespace Events {
 		class ComponentEventBase {};
 
 		class Initialization : public ComponentEventBase {
@@ -19,7 +19,7 @@ namespace Sisyphus::ECS {
 
 	template<typename T>
 	concept ComponentEvent =
-		std::derived_from<T, ComponentEvents::ComponentEventBase> &&
+		std::derived_from<T, Events::ComponentEventBase> &&
 		requires {
 			{T::Id()}->std::same_as<uuids::uuid>;
 		};

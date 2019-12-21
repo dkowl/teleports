@@ -26,11 +26,11 @@ ComponentReferences CompA::Dependencies() {
 	return {};
 }
 
-ComponentReferences CompA::WatchList(ComponentEvents::Initialization) {
+ComponentReferences CompA::WatchList(Events::Initialization) {
 	return { {CompB::TypeId()}, {CompC::TypeId() } };
 }
 
-void CompA::HandleEvent(ComponentEvents::Initialization, const uuids::uuid& type) {
+void CompA::HandleEvent(Events::Initialization, const uuids::uuid& type) {
 	if (type == CompB::TypeId()) {
 		compB_initialized = true;
 	}

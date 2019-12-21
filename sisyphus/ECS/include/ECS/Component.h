@@ -44,7 +44,7 @@ namespace Sisyphus::ECS {
 
 		virtual void Initialize(const Entity& manager) = 0;
 		
-		virtual void HandleEvent(ComponentEvents::Initialization, const uuids::uuid&) {};
+		virtual void HandleEvent(Events::Initialization, const uuids::uuid&) {};
 
 		template<ComponentEvent T>
 		static ComponentReferences WatchList(T) { return ComponentReferences(); }

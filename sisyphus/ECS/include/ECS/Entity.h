@@ -30,7 +30,7 @@ namespace Sisyphus::ECS {
 			component->Initialize(*this);
 			components.emplace(type, std::move(component));
 
-			Dispatch<T, ComponentEvents::Initialization>();
+			Dispatch<T, Events::Initialization>();
 			Logger::Get().Log(T::ClassName() + " initialized!");
 
 			knownComponentTypes.insert(type);
@@ -71,7 +71,7 @@ namespace Sisyphus::ECS {
 
 		template<Component T>
 		void UpdateSubscriberLists() {
-			UpdateSubscriberLists<T, ComponentEvents::Initialization>();
+			UpdateSubscriberLists<T, Events::Initialization>();
 		}
 
 		template<Component T, ComponentEvent EventT>
