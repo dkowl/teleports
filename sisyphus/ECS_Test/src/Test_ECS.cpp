@@ -33,4 +33,7 @@ TEST_CASE("Entity") {
 
 	REQUIRE_THROWS(e.GetComponent<CompA>());
 	REQUIRE(e.TryGetComponent<CompB>() == nullptr);
+
+	REQUIRE(ComponentRegistry::GetComponentName(CompA::TypeId()) == "CompA");
+	REQUIRE(ComponentRegistry::GetComponentName(CompC::TypeId()) == "CompC");
 }
