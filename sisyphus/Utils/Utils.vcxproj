@@ -93,6 +93,7 @@
     <ClInclude Include="include\Utils\Throw.h" />
     <ClInclude Include="include\Utils\UuidGenerator.h" />
     <ClInclude Include="include\Utils\UuidJsonSerializer.h" />
+    <ClInclude Include="include\Utils\UuidUtils.h" />
     <ClInclude Include="include\Utils\VectorUtils.h" />
     <ClInclude Include="src\Pch_Utils.h" />
   </ItemGroup>

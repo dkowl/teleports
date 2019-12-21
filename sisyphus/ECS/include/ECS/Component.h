@@ -4,11 +4,9 @@
 #include "uuid.h"
 #include "ECS\ComponentEvent.h"
 #include "ECS\ComponentRegistry.h"
+#include "Utils\UuidUtils.h"
 
 namespace Sisyphus::ECS {
-
-#define SIS_DEFINE_ID(name, id) \
-	static const uuids::uuid name = uuids::uuid::from_string(id).value()
 
 #define SIS_REGISTER_COMPONENT(type) \
 	static bool s_##type##_registered = ComponentRegistry::Register(type##::TypeId(), type##::ClassName())

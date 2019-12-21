@@ -19,14 +19,11 @@
     <Filter Include="Header Files\Logger">
       <UniqueIdentifier>{0391116d-d7a8-4289-82c3-fd3308949df1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Uuid">
+      <UniqueIdentifier>{64d81280-e676-4ad9-b717-3efe5cfd1dc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Utils\UuidJsonSerializer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Utils\UuidGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Utils\StringUtils.h">
       <Filter>Header Files\Std Utils</Filter>
     </ClInclude>
@@ -65,6 +62,15 @@
     </ClInclude>
     <ClInclude Include="include\Utils\DebugMacros.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\UuidJsonSerializer.h">
+      <Filter>Uuid</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\UuidGenerator.h">
+      <Filter>Uuid</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\UuidUtils.h">
+      <Filter>Uuid</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
