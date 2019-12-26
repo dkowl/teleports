@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <ImportGroup Label="PropertySheets">
-    <Import Project="Vulkan.props" />
-    <Import Project="Glslang.props" />
-    <Import Project="ECS.props" />
+    <Import Condition="'$(VulkanImported)' ==''" Project="Vulkan.props" />
+    <Import Condition="'$(GlslangImported)' ==''" Project="Glslang.props" />
+    <Import Condition="'$(ECSImported)' ==''" Project="ECS.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup><VulkanRendererImported>true</VulkanRendererImported><VulkanImported>true</VulkanImported><GlslangImported>true</GlslangImported><ECSImported>true</ECSImported></PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)VulkanRenderer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
