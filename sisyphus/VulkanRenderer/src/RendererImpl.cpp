@@ -9,6 +9,7 @@
 #include "PhysicalDevice.h"
 #include "Surface.h"
 #include "Device.h"
+#include "Swapchain.h"
 
 namespace wc = Sisyphus::WindowCreator;
 
@@ -18,7 +19,6 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	RendererImpl::RendererImpl(const RendererCreateInfo& ci) :
 		ci(ci),
-		swapchain(nullptr),
 		depthBuffer(nullptr),
 		descriptorSetLayout(nullptr),
 		pipelineLayout(nullptr),
@@ -40,14 +40,8 @@ namespace Sisyphus::Rendering::Vulkan {
 		InitComponent<PhysicalDevice>();
 		InitComponent<Surface>(ci.window);
 		InitComponent<Device>();
-
-		InitSwapchain();
-		logger->Log("Swapchain initialized!");
-		InitSwapchainImages();
-		logger->Log(std::to_string(swapchainImages.size()) + " Swapchain Images initialized!");
-		InitImageViews();
-		logger->Log(std::to_string(imageViews.size()) + " Image Views initialized!");
-		
+		InitComponent<Swapchain>();
+				
 		logger->BeginSection("Depth Buffer");
 		InitDepthBuffer();
 		logger->Log("Depth Buffer initialized!");
@@ -88,6 +82,8 @@ namespace Sisyphus::Rendering::Vulkan {
 		vk::Extent2D surfaceExtent = GetComponent<Surface>().GetExtent();
 		auto& deviceComponent = GetComponent<Device>();
 		auto device = deviceComponent.GetVulkanObject();
+		auto& swapchainComponent = GetComponent<Swapchain>();
+		auto swapchain = swapchainComponent.GetVulkanObject();
 
 		InitPipeline(drawable.GetVertexStride());
 		SIS_DEBUGASSERT(pipeline);
@@ -96,13 +92,10 @@ namespace Sisyphus::Rendering::Vulkan {
 		SIS_DEBUGASSERT(vertexBuffer);
 		vertexBuffer->GetDeviceData().Set(drawable.GetVertexData());
 
-		vk::UniqueSemaphore imageAcquiredSemaphore = device.createSemaphoreUnique(vk::SemaphoreCreateInfo{});
-		auto currentBuffer = device.acquireNextImageKHR(*swapchain, timeout, *imageAcquiredSemaphore, nullptr);
-
-		SIS_THROWASSERT_MSG(currentBuffer.result == vk::Result::eSuccess, "Failed to acquire an image buffer!");
+		auto acquireResult = swapchainComponent.AcquireNextImage();
 		SIS_THROWASSERT_MSG(
-			currentBuffer.value < framebuffers.size(),
-			"Acquired image index (" + std::to_string(currentBuffer.value) +
+			acquireResult.imageIndex < framebuffers.size(),
+			"Acquired image index (" + std::to_string(acquireResult.imageIndex) +
 			") higher that the number of available framebuffers (" + std::to_string(framebuffers.size()) + ")");
 
 		deviceComponent.InitCommandBuffers();
@@ -114,7 +107,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		clearValues[1].depthStencil = vk::ClearDepthStencilValue(1.0f, 0);
 		vk::RenderPassBeginInfo renderPassBeginInfo{
 			*renderPass,
-			*framebuffers[currentBuffer.value],
+			*framebuffers[acquireResult.imageIndex],
 			vk::Rect2D(vk::Offset2D(0, 0), surfaceExtent),
 			2,
 			clearValues
@@ -136,7 +129,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		vk::UniqueFence drawFence = device.createFenceUnique({});
 
 		vk::PipelineStageFlags waitDestinationStageMask(vk::PipelineStageFlagBits::eColorAttachmentOutput);
-		vk::SubmitInfo submitInfo(1, &*imageAcquiredSemaphore, &waitDestinationStageMask, 1, &commandBuffer);
+		vk::SubmitInfo submitInfo(1, &*acquireResult.semaphore, &waitDestinationStageMask, 1, &commandBuffer);
 
 		vk::Queue graphicsQueue = deviceComponent.GetGraphicsQueue();
 		vk::Queue presentQueue = deviceComponent.GetPresentQueue();
@@ -157,116 +150,12 @@ namespace Sisyphus::Rendering::Vulkan {
 			0,
 			nullptr,
 			1,
-			&*swapchain,
-			&currentBuffer.value
+			&swapchain,
+			&acquireResult.imageIndex
 		};
 		presentQueue.presentKHR(presentInfo);
 
 		deviceComponent.ResetCommandPool();
-	}
-
-	void RendererImpl::InitSwapchain()
-	{
-		auto& surface = GetComponent<Surface>();
-
-		constexpr int desiredMinImageCount = 3; // triple buffering
-		auto physicalDevice = GetComponent<PhysicalDevice>().GetVulkanObject();
-		auto surfaceCapabilites = physicalDevice.getSurfaceCapabilitiesKHR(surface);
-		logger->Log("Surface minImageCount: " + std::to_string(surfaceCapabilites.minImageCount));
-		logger->Log("Surface maxImageCount: " + std::to_string(surfaceCapabilites.maxImageCount));
-		if (
-			surfaceCapabilites.minImageCount > desiredMinImageCount ||
-			surfaceCapabilites.maxImageCount < desiredMinImageCount)
-		{
-			SIS_THROW("Surface does not support three image buffers");
-		}
-
-		logger->Log("Surface extent: (w: " + std::to_string(surfaceCapabilites.currentExtent.width) +
-			", h: " +  std::to_string(surfaceCapabilites.currentExtent.height) + ")");
-
-		if (!(surfaceCapabilites.supportedTransforms & vk::SurfaceTransformFlagBitsKHR::eIdentity)) {
-			SIS_THROW("Identity surface transform not supported");
-		}
-
-		logger->Log("Supported composite alpha: " + vk::to_string(surfaceCapabilites.supportedCompositeAlpha));
-		if (!(surfaceCapabilites.supportedCompositeAlpha & vk::CompositeAlphaFlagBitsKHR::eOpaque)) {
-			SIS_THROW("Surface opaque composite alpha mode not supported");
-		}
-
-		auto desiredPresentMode = vk::PresentModeKHR::eFifoRelaxed;
-		auto supportedPresentModes = physicalDevice.getSurfacePresentModesKHR(surface);
-		bool modeFound = false;
-		logger->Log("Supported present modes: ");
-		for (auto&& mode : supportedPresentModes) {
-			logger->Log(vk::to_string(mode));
-			if (mode == desiredPresentMode) {
-				modeFound = true;
-			}
-		}
-		if (!modeFound) {
-			SIS_THROW("Present mode " + vk::to_string(desiredPresentMode) + " not supported by GPU");
-		}
-
-		auto format = surface.GetFormat();
-		auto colorSpace = surface.GetColorSpace();
-
-		vk::SwapchainCreateInfoKHR swapchainCreateInfo(
-			{},
-			surface,
-			desiredMinImageCount,
-			format,
-			colorSpace,
-			surfaceCapabilites.currentExtent,
-			1,
-			vk::ImageUsageFlagBits::eColorAttachment,
-			vk::SharingMode::eExclusive,
-			0,
-			nullptr,
-			vk::SurfaceTransformFlagBitsKHR::eIdentity,
-			vk::CompositeAlphaFlagBitsKHR::eOpaque,
-			desiredPresentMode,
-			false,
-			nullptr
-		);
-
-		swapchain = GetComponent<Device>().GetVulkanObject().createSwapchainKHRUnique(swapchainCreateInfo);
-	}
-
-	void RendererImpl::InitSwapchainImages()
-	{
-		SIS_DEBUGASSERT(swapchain);
-		swapchainImages = GetComponent<Device>().GetVulkanObject().getSwapchainImagesKHR(*swapchain);
-	}
-
-	void RendererImpl::InitImageViews()
-	{
-		SIS_DEBUGASSERT(!swapchainImages.empty());
-
-		vk::ComponentMapping componentMapping{
-			vk::ComponentSwizzle::eR,
-			vk::ComponentSwizzle::eG,
-			vk::ComponentSwizzle::eB,
-			vk::ComponentSwizzle::eA,
-		};
-		vk::ImageSubresourceRange subresourceRange{
-			vk::ImageAspectFlagBits::eColor,
-			0,
-			1,
-			0,
-			1
-		};
-		imageViews.reserve(swapchainImages.size());
-		for (auto&& image : swapchainImages) {
-			vk::ImageViewCreateInfo imageViewCreateInfo(
-				{},
-				image,
-				vk::ImageViewType::e2D,
-				GetComponent<Surface>().GetFormat(),
-				componentMapping,
-				subresourceRange
-			);
-			imageViews.emplace_back(GetComponent<Device>().GetVulkanObject().createImageViewUnique(imageViewCreateInfo));
-		}
 	}
 
 	void RendererImpl::InitDepthBuffer()
@@ -413,13 +302,12 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitFramebuffers()
 	{
-		SIS_DEBUGASSERT(!imageViews.empty());
 		SIS_DEBUGASSERT(depthBuffer);
 		auto surfaceExtent = GetComponent<Surface>().GetExtent();
 		vk::ImageView attachments[2];
 		attachments[1] = depthBuffer->GetImageView();
 
-		for (const auto& imageView : imageViews) {
+		for (const auto& imageView : GetComponent<Swapchain>().GetImageViews()) {
 			attachments[0] = *imageView;
 			vk::FramebufferCreateInfo framebufferCreateInfo{
 				{},

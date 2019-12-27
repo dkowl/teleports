@@ -29,9 +29,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		void EnableShader(uuids::uuid id);
 
 	private:
-		void InitSwapchain();
-		void InitSwapchainImages();
-		void InitImageViews();
 		void InitDepthBuffer();
 		void InitDescriptorSetLayout();
 		void InitPipelineLayout();
@@ -50,9 +47,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		Shader& GetShader(uuids::uuid id);
 
 		RendererCreateInfo ci;
-		vk::UniqueSwapchainKHR swapchain;
-		std::vector<vk::Image> swapchainImages;
-		std::vector<vk::UniqueImageView> imageViews;
 		std::unique_ptr<DepthBuffer> depthBuffer;
 
 		vk::UniqueDescriptorSetLayout descriptorSetLayout;

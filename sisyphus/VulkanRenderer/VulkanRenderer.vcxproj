@@ -95,6 +95,7 @@
     <ClInclude Include="src\Components\Instance.h" />
     <ClInclude Include="src\Components\PhysicalDevice.h" />
     <ClInclude Include="src\Components\Surface.h" />
+    <ClInclude Include="src\Components\Swapchain.h" />
     <ClInclude Include="src\Components\VulkanComponent.h" />
     <ClInclude Include="src\DebugMessenger.h" />
     <ClInclude Include="src\DepthBuffer.h" />
@@ -103,7 +104,6 @@
     <ClInclude Include="src\platform_specific\Vulkan.h" />
     <ClInclude Include="src\RendererImpl.h" />
     <ClInclude Include="src\Shader.h" />
-    <ClInclude Include="src\Swapchain.h" />
     <ClInclude Include="src\UniformBuffer.h" />
     <ClInclude Include="src\Utils\DeviceData.h" />
     <ClInclude Include="src\Utils\MemoryUtils.h" />
@@ -115,6 +115,7 @@
     <ClCompile Include="src\Components\Instance.cpp" />
     <ClCompile Include="src\Components\PhysicalDevice.cpp" />
     <ClCompile Include="src\Components\Surface.cpp" />
+    <ClCompile Include="src\Components\Swapchain.cpp" />
     <ClCompile Include="src\DebugMessenger.cpp" />
     <ClCompile Include="src\DepthBuffer.cpp" />
     <ClCompile Include="src\Pch_VulkanRenderer.cpp">
@@ -124,7 +125,6 @@
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\RendererImpl.cpp" />
     <ClCompile Include="src\Shader.cpp" />
-    <ClCompile Include="src\Swapchain.cpp" />
     <ClCompile Include="src\UniformBuffer.cpp" />
     <ClCompile Include="src\Utils\DeviceData.cpp" />
     <ClCompile Include="src\Utils\MemoryUtils.cpp" />

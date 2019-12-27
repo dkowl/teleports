@@ -60,9 +60,6 @@
     <ClInclude Include="src\DebugMessenger.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Swapchain.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Components\Instance.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
@@ -79,6 +76,9 @@
       <Filter>Source Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="src\Components\VulkanComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\Swapchain.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
@@ -113,9 +113,6 @@
     <ClCompile Include="src\DebugMessenger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Swapchain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Components\Instance.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
@@ -129,6 +126,9 @@
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="src\Components\Device.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Swapchain.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
