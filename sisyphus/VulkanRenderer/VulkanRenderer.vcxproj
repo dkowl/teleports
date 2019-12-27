@@ -91,9 +91,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\VulkanRenderer\Renderer.h" />
+    <ClInclude Include="src\Components\Device.h" />
     <ClInclude Include="src\Components\Instance.h" />
     <ClInclude Include="src\Components\PhysicalDevice.h" />
     <ClInclude Include="src\Components\Surface.h" />
+    <ClInclude Include="src\Components\VulkanComponent.h" />
     <ClInclude Include="src\DebugMessenger.h" />
     <ClInclude Include="src\DepthBuffer.h" />
     <ClInclude Include="src\Pch_VulkanRenderer.h" />
@@ -109,6 +111,7 @@
     <ClInclude Include="src\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Components\Device.cpp" />
     <ClCompile Include="src\Components\Instance.cpp" />
     <ClCompile Include="src\Components\PhysicalDevice.cpp" />
     <ClCompile Include="src\Components\Surface.cpp" />

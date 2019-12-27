@@ -47,20 +47,4 @@ namespace Sisyphus::ECS {
 		template<ComponentEvent T>
 		static ComponentReferences WatchList(T) { return ComponentReferences(); }
 	};
-
-	template<typename VulkanType>
-	class IVulkanComponent : public IComponent {
-	public:
-		virtual VulkanType GetVulkanObject() const = 0;
-
-		operator VulkanType() const {
-			return GetVulkanObject();
-		}
-	};
-
-	template<typename T, typename VulkanType>
-	concept VulkanComponent =
-		Component<T> &&
-		std::derived_from<T, IVulkanComponent<VulkanType>>;
-
 }

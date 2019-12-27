@@ -1,5 +1,5 @@
 #pragma once
-#include "ECS/Component.h"
+#include "VulkanComponent.h"
 #include "Vulkan.h"
 
 namespace Sisyphus::WindowCreator {
@@ -8,7 +8,7 @@ namespace Sisyphus::WindowCreator {
 
 namespace Sisyphus::Rendering::Vulkan {
 
-	class Surface : public ECS::IVulkanComponent<vk::SurfaceKHR> {
+	class Surface : public IVulkanComponent<vk::SurfaceKHR> {
 	public:
 		Surface(WindowCreator::Window* inWindow);
 		~Surface();

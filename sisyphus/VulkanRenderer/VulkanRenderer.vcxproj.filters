@@ -75,6 +75,12 @@
     <ClInclude Include="src\Components\Surface.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="src\Components\Device.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\VulkanComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DepthBuffer.cpp">
@@ -120,6 +126,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Components\Surface.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\Device.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>

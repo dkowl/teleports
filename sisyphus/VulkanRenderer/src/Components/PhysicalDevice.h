@@ -1,10 +1,10 @@
 #pragma once
-#include "ECS/Component.h"
+#include "VulkanComponent.h"
 #include "Vulkan.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 
-	class PhysicalDevice : public ECS::IVulkanComponent<vk::PhysicalDevice> {
+	class PhysicalDevice : public IVulkanComponent<vk::PhysicalDevice> {
 	public:
 		~PhysicalDevice();
 

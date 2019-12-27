@@ -1,11 +1,11 @@
 #pragma once
-#include "ECS/Component.h"
+#include "VulkanComponent.h"
 #include "Vulkan.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	class DebugMessenger;
 
-	class Instance : public ECS::IVulkanComponent<vk::Instance> {
+	class Instance : public IVulkanComponent<vk::Instance> {
 	public:
 		Instance();
 		~Instance() override; // default
