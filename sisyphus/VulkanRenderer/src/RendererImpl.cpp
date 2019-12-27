@@ -8,6 +8,7 @@
 #include "Instance.h"
 #include "PhysicalDevice.h"
 #include "Surface.h"
+#include "Device.h"
 
 namespace wc = Sisyphus::WindowCreator;
 
@@ -17,8 +18,6 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	RendererImpl::RendererImpl(const RendererCreateInfo& ci) :
 		ci(ci),
-		device(nullptr),
-		commandPool(nullptr),
 		swapchain(nullptr),
 		depthBuffer(nullptr),
 		descriptorSetLayout(nullptr),
@@ -40,11 +39,8 @@ namespace Sisyphus::Rendering::Vulkan {
 		InitComponent<Instance>();
 		InitComponent<PhysicalDevice>();
 		InitComponent<Surface>(ci.window);
+		InitComponent<Device>();
 
-		InitDevice();
-		logger->Log("Vulkan Device initialized!");
-		InitCommandPool();
-		logger->Log("Command Pool initialized!");
 		InitSwapchain();
 		logger->Log("Swapchain initialized!");
 		InitSwapchainImages();
@@ -86,11 +82,12 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		AdaptToSurfaceChanges();
 
-		SIS_DEBUGASSERT(device);
 		SIS_DEBUGASSERT(!framebuffers.empty());
 		SIS_DEBUGASSERT(renderPass);
 		SIS_DEBUGASSERT(descriptorSet);
 		vk::Extent2D surfaceExtent = GetComponent<Surface>().GetExtent();
+		auto& deviceComponent = GetComponent<Device>();
+		auto device = deviceComponent.GetVulkanObject();
 
 		InitPipeline(drawable.GetVertexStride());
 		SIS_DEBUGASSERT(pipeline);
@@ -99,8 +96,8 @@ namespace Sisyphus::Rendering::Vulkan {
 		SIS_DEBUGASSERT(vertexBuffer);
 		vertexBuffer->GetDeviceData().Set(drawable.GetVertexData());
 
-		vk::UniqueSemaphore imageAcquiredSemaphore = device->createSemaphoreUnique(vk::SemaphoreCreateInfo{});
-		auto currentBuffer = device->acquireNextImageKHR(*swapchain, timeout, *imageAcquiredSemaphore, nullptr);
+		vk::UniqueSemaphore imageAcquiredSemaphore = device.createSemaphoreUnique(vk::SemaphoreCreateInfo{});
+		auto currentBuffer = device.acquireNextImageKHR(*swapchain, timeout, *imageAcquiredSemaphore, nullptr);
 
 		SIS_THROWASSERT_MSG(currentBuffer.result == vk::Result::eSuccess, "Failed to acquire an image buffer!");
 		SIS_THROWASSERT_MSG(
@@ -108,10 +105,9 @@ namespace Sisyphus::Rendering::Vulkan {
 			"Acquired image index (" + std::to_string(currentBuffer.value) +
 			") higher that the number of available framebuffers (" + std::to_string(framebuffers.size()) + ")");
 
-		InitCommandBuffers();
-		SIS_DEBUGASSERT(!commandBuffers.empty());
-		auto& commandBuffer = commandBuffers[0];
-		commandBuffer->begin(vk::CommandBufferBeginInfo{});
+		deviceComponent.InitCommandBuffers();
+		auto commandBuffer = deviceComponent.GetCommandBuffer();
+		commandBuffer.begin(vk::CommandBufferBeginInfo{});
 
 		vk::ClearValue clearValues[2];
 		clearValues[0].color = vk::ClearColorValue(std::array<float, 4>{0.9f, 0.8f, 0.7f, 0.9f});
@@ -123,32 +119,31 @@ namespace Sisyphus::Rendering::Vulkan {
 			2,
 			clearValues
 		};
-		commandBuffer->beginRenderPass(renderPassBeginInfo, vk::SubpassContents::eInline);
-		commandBuffer->bindPipeline(vk::PipelineBindPoint::eGraphics, *pipeline);
-		commandBuffer->bindDescriptorSets(vk::PipelineBindPoint::eGraphics, *pipelineLayout, 0, *descriptorSet, nullptr);
-		commandBuffer->bindVertexBuffers(0, vertexBuffer->GetBuffer(), { 0 });
-		commandBuffer->setViewport(0, vk::Viewport(
+		commandBuffer.beginRenderPass(renderPassBeginInfo, vk::SubpassContents::eInline);
+		commandBuffer.bindPipeline(vk::PipelineBindPoint::eGraphics, *pipeline);
+		commandBuffer.bindDescriptorSets(vk::PipelineBindPoint::eGraphics, *pipelineLayout, 0, *descriptorSet, nullptr);
+		commandBuffer.bindVertexBuffers(0, vertexBuffer->GetBuffer(), { 0 });
+		commandBuffer.setViewport(0, vk::Viewport(
 			0.0f, 0.0f, 
 			static_cast<float>(surfaceExtent.width), static_cast<float>(surfaceExtent.height),
 			0.0f, 1.0f));
-		commandBuffer->setScissor(0, vk::Rect2D(vk::Offset2D(0, 0), surfaceExtent));
+		commandBuffer.setScissor(0, vk::Rect2D(vk::Offset2D(0, 0), surfaceExtent));
 
-		commandBuffer->draw(drawable.GetVertexCount(), 1, 0, 0);
-		commandBuffer->endRenderPass();
-		commandBuffer->end();
+		commandBuffer.draw(drawable.GetVertexCount(), 1, 0, 0);
+		commandBuffer.endRenderPass();
+		commandBuffer.end();
 
-		vk::UniqueFence drawFence = device->createFenceUnique({});
+		vk::UniqueFence drawFence = device.createFenceUnique({});
 
 		vk::PipelineStageFlags waitDestinationStageMask(vk::PipelineStageFlagBits::eColorAttachmentOutput);
-		vk::SubmitInfo submitInfo(1, &*imageAcquiredSemaphore, &waitDestinationStageMask, 1, &*commandBuffer);
+		vk::SubmitInfo submitInfo(1, &*imageAcquiredSemaphore, &waitDestinationStageMask, 1, &commandBuffer);
 
-		const auto& physicalDevice = GetComponent<PhysicalDevice>();
-		vk::Queue graphicsQueue = device->getQueue(physicalDevice.GetGraphicsQueueFamilyIndex(), 0);
-		vk::Queue presentQueue = device->getQueue(physicalDevice.GetPresentQueueFamilyIndex(), 0);
+		vk::Queue graphicsQueue = deviceComponent.GetGraphicsQueue();
+		vk::Queue presentQueue = deviceComponent.GetPresentQueue();
 
 		graphicsQueue.submit(submitInfo, *drawFence);
 
-		auto waitResult = device->waitForFences(*drawFence, VK_TRUE, timeout);
+		auto waitResult = device.waitForFences(*drawFence, VK_TRUE, timeout);
 		if (waitResult == vk::Result::eTimeout) {
 			logger->Log("Draw timeout!");
 		}
@@ -167,51 +162,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		};
 		presentQueue.presentKHR(presentInfo);
 
-		device->resetCommandPool(*commandPool, {});
-	}
-
-	void RendererImpl::InitDevice()
-	{
-		const auto& physicalDevice = GetComponent<PhysicalDevice>();
-		auto deviceQueueCreateInfos = physicalDevice.GetDeviceQueueCreateInfos();
-
-		std::vector<const char*> deviceExtensionNames;
-		deviceExtensionNames.push_back(VK_KHR_SWAPCHAIN_EXTENSION_NAME);
-
-		vk::DeviceCreateInfo deviceCreateInfo(
-			{},
-			static_cast<uint32_t>(deviceQueueCreateInfos.size()),
-			deviceQueueCreateInfos.data(),
-			0,
-			nullptr,
-			static_cast<uint32_t>(deviceExtensionNames.size()),
-			deviceExtensionNames.data()
-		);
-		device = physicalDevice.GetVulkanObject().createDeviceUnique(deviceCreateInfo);
-	}
-
-	void RendererImpl::InitCommandPool()
-	{
-		SIS_DEBUGASSERT(device);
-
-		vk::CommandPoolCreateInfo commandPoolCreateInfo(
-			{},
-			GetComponent<PhysicalDevice>().GetGraphicsQueueFamilyIndex()
-		);
-		commandPool = device->createCommandPoolUnique(commandPoolCreateInfo);
-	}
-
-	void RendererImpl::InitCommandBuffers()
-	{
-		SIS_DEBUGASSERT(device);
-		SIS_DEBUGASSERT(commandPool);
-
-		vk::CommandBufferAllocateInfo commandBufferAllocateInfo(
-			*commandPool,
-			vk::CommandBufferLevel::ePrimary,
-			1
-		);
-		commandBuffers = device->allocateCommandBuffersUnique(commandBufferAllocateInfo);
+		deviceComponent.ResetCommandPool();
 	}
 
 	void RendererImpl::InitSwapchain()
@@ -278,13 +229,13 @@ namespace Sisyphus::Rendering::Vulkan {
 			nullptr
 		);
 
-		swapchain = device->createSwapchainKHRUnique(swapchainCreateInfo);
+		swapchain = GetComponent<Device>().GetVulkanObject().createSwapchainKHRUnique(swapchainCreateInfo);
 	}
 
 	void RendererImpl::InitSwapchainImages()
 	{
 		SIS_DEBUGASSERT(swapchain);
-		swapchainImages = device->getSwapchainImagesKHR(*swapchain);
+		swapchainImages = GetComponent<Device>().GetVulkanObject().getSwapchainImagesKHR(*swapchain);
 	}
 
 	void RendererImpl::InitImageViews()
@@ -314,20 +265,18 @@ namespace Sisyphus::Rendering::Vulkan {
 				componentMapping,
 				subresourceRange
 			);
-			imageViews.emplace_back(device->createImageViewUnique(imageViewCreateInfo));
+			imageViews.emplace_back(GetComponent<Device>().GetVulkanObject().createImageViewUnique(imageViewCreateInfo));
 		}
 	}
 
 	void RendererImpl::InitDepthBuffer()
 	{
-		SIS_DEBUGASSERT(device);
-
 		auto physicalDevice = GetComponent<PhysicalDevice>().GetVulkanObject();
 
 		DepthBuffer::CreateInfo createInfo{
 			GetComponent<Surface>().GetExtent(),
 			physicalDevice,
-			*device,
+			GetComponent<Device>(),
 			logger
 		};
 
@@ -336,8 +285,6 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitDescriptorSetLayout()
 	{
-		SIS_DEBUGASSERT(device);
-
 		vk::DescriptorSetLayoutBinding binding{
 			0,
 			vk::DescriptorType::eUniformBuffer,
@@ -345,7 +292,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			vk::ShaderStageFlagBits::eVertex
 		};
 
-		descriptorSetLayout = device->createDescriptorSetLayoutUnique(vk::DescriptorSetLayoutCreateInfo(
+		descriptorSetLayout = GetComponent<Device>().GetVulkanObject().createDescriptorSetLayoutUnique(vk::DescriptorSetLayoutCreateInfo(
 			{},
 			1,
 			&binding
@@ -355,9 +302,8 @@ namespace Sisyphus::Rendering::Vulkan {
 	void RendererImpl::InitPipelineLayout()
 	{
 		SIS_DEBUGASSERT(descriptorSetLayout);
-		SIS_DEBUGASSERT(device);
 
-		pipelineLayout = device->createPipelineLayoutUnique(vk::PipelineLayoutCreateInfo(
+		pipelineLayout = GetComponent<Device>().GetVulkanObject().createPipelineLayoutUnique(vk::PipelineLayoutCreateInfo(
 			{},
 			1,
 			&(*descriptorSetLayout)
@@ -366,8 +312,6 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitDescriptorPool()
 	{
-		SIS_DEBUGASSERT(device);
-
 		vk::DescriptorPoolSize poolSize(vk::DescriptorType::eUniformBuffer, 1);
 
 		vk::DescriptorPoolCreateInfo descriptorPoolCreateInfo(
@@ -377,12 +321,11 @@ namespace Sisyphus::Rendering::Vulkan {
 			&poolSize
 		);
 		
-		descriptorPool = device->createDescriptorPoolUnique(descriptorPoolCreateInfo);
+		descriptorPool = GetComponent<Device>().GetVulkanObject().createDescriptorPoolUnique(descriptorPoolCreateInfo);
 	}
 
 	void RendererImpl::InitDescriptorSet()
 	{
-		SIS_DEBUGASSERT(device);
 		SIS_DEBUGASSERT(descriptorPool);
 
 		vk::DescriptorSetAllocateInfo allocateInfo(
@@ -391,19 +334,18 @@ namespace Sisyphus::Rendering::Vulkan {
 			&*descriptorSetLayout
 		);
 
-		descriptorSet = std::move(device->allocateDescriptorSetsUnique(allocateInfo).front());
+		descriptorSet = std::move(GetComponent<Device>().GetVulkanObject().allocateDescriptorSetsUnique(allocateInfo).front());
 	}
 
 	void RendererImpl::InitUniformBuffer()
 	{
-		SIS_DEBUGASSERT(device);
 		SIS_DEBUGASSERT(descriptorSet);
 
 		auto physicalDevice = GetComponent<PhysicalDevice>().GetVulkanObject();
 
 		UniformBuffer::CreateInfo createInfo{
 			sizeof(Renderer::UniformBufferData),
-			*device,
+			GetComponent<Device>(),
 			physicalDevice,
 			*descriptorSet,
 			logger
@@ -414,8 +356,6 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitRenderPass()
 	{
-		SIS_DEBUGASSERT(device);
-
 		vk::AttachmentDescription attachmentDescriptions[2];
 
 		// color
@@ -468,14 +408,13 @@ namespace Sisyphus::Rendering::Vulkan {
 			&subpassDescription
 		);
 
-		renderPass = device->createRenderPassUnique(renderPassCreateInfo);
+		renderPass = GetComponent<Device>().GetVulkanObject().createRenderPassUnique(renderPassCreateInfo);
 	}
 
 	void RendererImpl::InitFramebuffers()
 	{
 		SIS_DEBUGASSERT(!imageViews.empty());
 		SIS_DEBUGASSERT(depthBuffer);
-		SIS_DEBUGASSERT(device);
 		auto surfaceExtent = GetComponent<Surface>().GetExtent();
 		vk::ImageView attachments[2];
 		attachments[1] = depthBuffer->GetImageView();
@@ -492,7 +431,7 @@ namespace Sisyphus::Rendering::Vulkan {
 				1
 			};
 
-			framebuffers.push_back(device->createFramebufferUnique(framebufferCreateInfo));
+			framebuffers.push_back(GetComponent<Device>().GetVulkanObject().createFramebufferUnique(framebufferCreateInfo));
 		}
 	}
 
@@ -533,13 +472,12 @@ namespace Sisyphus::Rendering::Vulkan {
 	void RendererImpl::InitVertexBuffer(size_t size)
 	{
 		logger->BeginSection("Vertex Buffer");
-		SIS_DEBUGASSERT(device);
 
 		auto physicalDevice = GetComponent<PhysicalDevice>().GetVulkanObject();
 
 		vertexBuffer = std::make_unique<VertexBuffer>(VertexBuffer::CreateInfo{
 			size,
-			*device,
+			GetComponent<Device>(),
 			physicalDevice
 		});
 
@@ -551,7 +489,6 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		SIS_DEBUGASSERT(pipelineLayout);
 		SIS_DEBUGASSERT(renderPass);
-		SIS_DEBUGASSERT(device);
 
 		if (!ShaderExists(vertexShaderId)) {
 			SIS_THROW("Vertex shader not found");
@@ -665,7 +602,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			*renderPass
 		};
 
-		pipeline = device->createGraphicsPipelineUnique(nullptr, graphicsPipelineCreateInfo);		
+		pipeline = GetComponent<Device>().GetVulkanObject().createGraphicsPipelineUnique(nullptr, graphicsPipelineCreateInfo);
 	}
 
 	Shader& RendererImpl::GetShader(uuids::uuid id)
@@ -678,12 +615,10 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::CreateShader(const ShaderInfo& shaderInfo)
 	{
-		SIS_DEBUGASSERT(device);
-
 		Shader::CreateInfo shaderCreateInfo{
 			shaderInfo.code,
 			shaderInfo.type,
-			*device
+			GetComponent<Device>()
 		};
 		auto shader = std::make_unique<Shader>(shaderCreateInfo);
 		auto id = shaderInfo.id;

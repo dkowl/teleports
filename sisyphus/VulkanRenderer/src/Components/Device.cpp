@@ -26,6 +26,15 @@ namespace Sisyphus::Rendering::Vulkan {
 		);
 
 		device = physicalDevice.GetVulkanObject().createDeviceUnique(deviceCreateInfo);
+
+		graphicsQueue = device->getQueue(physicalDevice.GetGraphicsQueueFamilyIndex(), 0);
+		presentQueue = device->getQueue(physicalDevice.GetPresentQueueFamilyIndex(), 0);
+
+		vk::CommandPoolCreateInfo commandPoolCreateInfo(
+			{},
+			physicalDevice.GetGraphicsQueueFamilyIndex()
+		);
+		commandPool = device->createCommandPoolUnique(commandPoolCreateInfo);
 	}
 	uuids::uuid Device::TypeId()
 	{
@@ -42,5 +51,32 @@ namespace Sisyphus::Rendering::Vulkan {
 	vk::Device Device::GetVulkanObject() const
 	{
 		return *device;
+	}
+	vk::Queue Device::GetGraphicsQueue() const
+	{
+		return graphicsQueue;
+	}
+	vk::Queue Device::GetPresentQueue() const
+	{
+		return presentQueue;
+	}
+	void Device::InitCommandBuffers()
+	{
+		vk::CommandBufferAllocateInfo commandBufferAllocateInfo(
+			*commandPool,
+			vk::CommandBufferLevel::ePrimary,
+			1
+		);
+		commandBuffers = device->allocateCommandBuffersUnique(commandBufferAllocateInfo);
+	}
+	void Device::ResetCommandPool()
+	{
+		device->resetCommandPool(*commandPool, {});
+		commandBuffers.clear();
+	}
+	vk::CommandBuffer Device::GetCommandBuffer() const
+	{
+		SIS_THROWASSERT(!commandBuffers.empty());
+		return *(commandBuffers[0]);
 	}
 }

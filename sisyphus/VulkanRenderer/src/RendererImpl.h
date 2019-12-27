@@ -29,8 +29,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		void EnableShader(uuids::uuid id);
 
 	private:
-		void InitDevice();
-		void InitCommandPool();
 		void InitSwapchain();
 		void InitSwapchainImages();
 		void InitImageViews();
@@ -47,15 +45,11 @@ namespace Sisyphus::Rendering::Vulkan {
 		// happens each Draw()
 		void AdaptToSurfaceChanges();
 		void InitVertexBuffer(size_t size);
-		void InitCommandBuffers();
 		void InitPipeline(uint32_t stride);
 
 		Shader& GetShader(uuids::uuid id);
 
 		RendererCreateInfo ci;
-		vk::UniqueDevice device;
-		vk::UniqueCommandPool commandPool;
-		std::vector<vk::UniqueCommandBuffer> commandBuffers;
 		vk::UniqueSwapchainKHR swapchain;
 		std::vector<vk::Image> swapchainImages;
 		std::vector<vk::UniqueImageView> imageViews;

@@ -13,7 +13,18 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		vk::Device GetVulkanObject() const override;
 
+		vk::Queue GetGraphicsQueue() const;
+		vk::Queue GetPresentQueue() const;
+
+		void InitCommandBuffers();
+		void ResetCommandPool();
+		vk::CommandBuffer GetCommandBuffer() const;
+
 	private:
 		vk::UniqueDevice device;
+		vk::Queue graphicsQueue;
+		vk::Queue presentQueue;
+		vk::UniqueCommandPool commandPool;
+		std::vector<vk::UniqueCommandBuffer> commandBuffers;
 	};
 }
