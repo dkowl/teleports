@@ -6,7 +6,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	class Device : public IVulkanComponent<vk::Device> {
 	public:
-		void Initialize(const ECS::Entity& inEntity) override;
+		void Initialize() override;
 		static uuids::uuid TypeId();
 		static std::string ClassName();
 		static ECS::ComponentReferences Dependencies();
@@ -19,6 +19,8 @@ namespace Sisyphus::Rendering::Vulkan {
 		void InitCommandBuffers();
 		void ResetCommandPool();
 		vk::CommandBuffer GetCommandBuffer() const;
+
+		vk::UniqueDeviceMemory AllocateImageMemory(vk::Image image);
 
 	private:
 		vk::UniqueDevice device;

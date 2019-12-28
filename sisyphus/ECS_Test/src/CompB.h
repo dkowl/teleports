@@ -15,9 +15,7 @@ public:
 	static ComponentReferences WatchList(Events::Initialization);
 	void HandleEvent(Events::Initialization, const uuids::uuid& type) override;
 
-	void Initialize(const Entity&) override;
-
-	const Entity* entity;
+	void Initialize() override;
 
 	static bool compA_initialized;
 	static bool compC_initialized;

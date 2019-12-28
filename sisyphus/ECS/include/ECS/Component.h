@@ -39,12 +39,17 @@ namespace Sisyphus::ECS {
 		IComponent& operator=(const IComponent&) = delete;
 		IComponent& operator=(IComponent&&) = delete;
 
+		friend class Entity;
+		Entity& Parent();
 
-		virtual void Initialize(const Entity& manager) = 0;
+		virtual void Initialize() = 0;
 		
 		virtual void HandleEvent(Events::Initialization, const uuids::uuid&) {};
 
 		template<ComponentEvent T>
 		static ComponentReferences WatchList(T) { return ComponentReferences(); }
+
+	private:
+		Entity* entity;
 	};
 }

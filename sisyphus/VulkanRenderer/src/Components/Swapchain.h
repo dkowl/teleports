@@ -6,7 +6,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	class Swapchain : public IVulkanComponent<vk::SwapchainKHR> {
 	public:
-		void Initialize(const ECS::Entity& inEntity) override;
+		void Initialize() override;
 		static uuids::uuid TypeId();
 		static std::string ClassName();
 		static ECS::ComponentReferences Dependencies();
@@ -22,7 +22,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		const std::vector<vk::UniqueImageView>& GetImageViews() const;
 
 	private:
-		const ECS::Entity* entity;
 		vk::UniqueSwapchainKHR swapchain;
 		std::vector<vk::Image> swapchainImages;
 		std::vector<vk::UniqueImageView> imageViews;

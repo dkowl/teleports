@@ -11,14 +11,13 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	constexpr uint64_t timeout = 100000000; // 100ms
 
-	void Swapchain::Initialize(const ECS::Entity& inEntity)
+	void Swapchain::Initialize()
 	{
-		entity = &inEntity;
-		auto& surface = inEntity.GetComponent<Surface>();
+		auto& surface = Parent().GetComponent<Surface>();
 		auto& logger = Logger::Get();
 
 		constexpr int desiredMinImageCount = 3; // triple buffering
-		auto physicalDevice = inEntity.GetComponent<PhysicalDevice>().GetVulkanObject();
+		auto physicalDevice = Parent().GetComponent<PhysicalDevice>().GetVulkanObject();
 		auto surfaceCapabilites = physicalDevice.getSurfaceCapabilitiesKHR(surface);
 		logger.Log("Surface minImageCount: " + std::to_string(surfaceCapabilites.minImageCount));
 		logger.Log("Surface maxImageCount: " + std::to_string(surfaceCapabilites.maxImageCount));
@@ -77,7 +76,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			nullptr
 		);
 
-		auto device = inEntity.GetComponent<Device>().GetVulkanObject();
+		auto device = Parent().GetComponent<Device>().GetVulkanObject();
 		swapchain = device.createSwapchainKHRUnique(swapchainCreateInfo); 
 		swapchainImages = device.getSwapchainImagesKHR(*swapchain);
 
@@ -125,7 +124,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	}
 	Swapchain::AcquireResult Swapchain::AcquireNextImage()
 	{
-		auto device = entity->GetComponent<Device>().GetVulkanObject();
+		auto device = Parent().GetComponent<Device>().GetVulkanObject();
 		AcquireResult result;
 		result.semaphore = device.createSemaphoreUnique({});
 

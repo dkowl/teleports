@@ -44,7 +44,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		SIS_DEBUG_ONLY(Logger::Get().Log("~Instance"));
 	}
 
-	void Instance::Initialize(const ECS::Entity&)
+	void Instance::Initialize()
 	{
 		vk::ApplicationInfo applicationInfo(
 			"Vulkan App",

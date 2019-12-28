@@ -3,13 +3,14 @@
 #include "PhysicalDevice.h"
 #include "Surface.h"
 #include "ECS/Entity.h"
+#include "MemoryUtils.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	SIS_DEFINE_ID(ComponentID_Device, "0eda2bdf788b42e1ac84a372489562b6");
 
-	void Device::Initialize(const ECS::Entity& inEntity)
+	void Device::Initialize()
 	{
-		const auto& physicalDevice = inEntity.GetComponent<PhysicalDevice>();
+		const auto& physicalDevice = Parent().GetComponent<PhysicalDevice>();
 		auto deviceQueueCreateInfos = physicalDevice.GetDeviceQueueCreateInfos();
 
 		std::vector<const char*> deviceExtensionNames;
@@ -78,5 +79,19 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		SIS_THROWASSERT(!commandBuffers.empty());
 		return *(commandBuffers[0]);
+	}
+	vk::UniqueDeviceMemory Device::AllocateImageMemory(vk::Image image)
+	{
+		vk::PhysicalDeviceMemoryProperties memoryProperties = Parent().GetComponent<PhysicalDevice>().GetVulkanObject().getMemoryProperties();
+
+		vk::MemoryRequirements memoryRequirements = device->getImageMemoryRequirements(image);
+		uint32_t supportedTypeBits = memoryRequirements.memoryTypeBits;
+
+		auto memoryTypeIndex = FindMemoryType(memoryProperties, supportedTypeBits, vk::MemoryPropertyFlagBits::eDeviceLocal);
+
+		auto& logger = Logger::Get();
+		logger.Log(std::to_string(memoryRequirements.size) + " bytes of GPU memory required");
+		logger.Log("Alignment: " + std::to_string(memoryRequirements.alignment));
+		return device->allocateMemoryUnique(vk::MemoryAllocateInfo(memoryRequirements.size, memoryTypeIndex));
 	}
 }

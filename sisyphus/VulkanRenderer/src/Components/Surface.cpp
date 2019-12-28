@@ -21,10 +21,9 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		SIS_DEBUG_ONLY(Logger::Get().Log("~Surface"));
 	}
-	void Surface::Initialize(const ECS::Entity& inComponentManager)
+	void Surface::Initialize()
 	{
-		entity = &inComponentManager;
-		surface = window->GetVulkanSurface(inComponentManager.GetComponent<Instance>());
+		surface = window->GetVulkanSurface(Parent().GetComponent<Instance>());
 		SIS_THROWASSERT(*surface);
 		InitFormatAndColorSpace();
 	}
@@ -52,7 +51,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		constexpr vk::ColorSpaceKHR desiredColorSpace = vk::ColorSpaceKHR::eSrgbNonlinear;
 		bool formatFound = false;
 
-		auto surfaceFormats = entity->GetComponent<PhysicalDevice>().GetVulkanObject().getSurfaceFormatsKHR(*surface);
+		auto surfaceFormats = Parent().GetComponent<PhysicalDevice>().GetVulkanObject().getSurfaceFormatsKHR(*surface);
 		logger.BeginSection("Surface formats:");
 		for (int i = 0; i < surfaceFormats.size(); i++) {
 			const auto& surfaceFormat = surfaceFormats[i];

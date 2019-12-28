@@ -11,7 +11,7 @@ bool CompA::compC_initialized = false;
 
 CompA::~CompA()
 {
-	SIS_THROWASSERT(!(entity->HasComponent<CompB>() || entity->HasComponent<CompC>()));
+	SIS_THROWASSERT(!(Parent().HasComponent<CompB>() || Parent().HasComponent<CompC>()));
 }
 
 uuids::uuid CompA::TypeId() {
@@ -42,6 +42,5 @@ void CompA::HandleEvent(Events::Initialization, const uuids::uuid& type) {
 	}
 }
 
-void CompA::Initialize(const Entity& inEntity) {
-	entity = &inEntity;
+void CompA::Initialize() {
 }

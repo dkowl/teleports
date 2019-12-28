@@ -17,7 +17,6 @@ ComponentReferences CompC::Dependencies() {
 	return { {CompB::TypeId()} };
 }
 
-void CompC::Initialize(const Entity& inEntity) {
+void CompC::Initialize() {
 	initialized = true;
-	entity = &inEntity;
 }

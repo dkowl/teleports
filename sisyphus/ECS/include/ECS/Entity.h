@@ -32,7 +32,8 @@ namespace Sisyphus::ECS {
 			}
 
 			std::unique_ptr<IComponent> component = std::make_unique<T>(args...);
-			component->Initialize(*this);
+			component->entity = this;
+			component->Initialize();
 			components.emplace(type, std::move(component));
 
 			Dispatch<T, Events::Initialization>();

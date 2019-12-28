@@ -10,7 +10,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		Instance();
 		~Instance() override; // default
 
-		void Initialize(const ECS::Entity& entity) override;
+		void Initialize() override;
 		static uuids::uuid TypeId();
 		static std::string ClassName();
 		static ECS::ComponentReferences Dependencies();

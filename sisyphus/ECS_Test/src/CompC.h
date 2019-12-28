@@ -10,9 +10,7 @@ public:
 	static std::string ClassName();
 	static ComponentReferences Dependencies();
 
-	void Initialize(const Entity&) override;
-
-	const Entity* entity;
+	void Initialize() override;
 
 	bool initialized = false;
 };

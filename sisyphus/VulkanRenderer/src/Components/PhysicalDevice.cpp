@@ -15,10 +15,9 @@ namespace Sisyphus::Rendering::Vulkan {
 		SIS_DEBUG_ONLY(Logger::Get().Log("~PhysicalDevice"));
 	}
 
-	void PhysicalDevice::Initialize(const ECS::Entity& inEntity)
+	void PhysicalDevice::Initialize()
 	{
-		entity = &inEntity;
-		auto physicalDevices = entity->GetComponent<Instance>().GetVulkanObject().enumeratePhysicalDevices();
+		auto physicalDevices = Parent().GetComponent<Instance>().GetVulkanObject().enumeratePhysicalDevices();
 		if (physicalDevices.empty()) {
 			SIS_THROW("No physical devices supporting Vulkan");
 		}
@@ -48,7 +47,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	void PhysicalDevice::HandleEvent(ECS::Events::Initialization, const uuids::uuid& compTypeId)
 	{
 		if (compTypeId == Surface::TypeId()) {
-			auto& surface = entity->GetComponent<Surface>();
+			auto& surface = Parent().GetComponent<Surface>();
 			FindPresentQueueFamilyIndex(surface);
 		}
 	}

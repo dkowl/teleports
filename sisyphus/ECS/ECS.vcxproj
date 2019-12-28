@@ -85,6 +85,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Component.cpp" />
     <ClCompile Include="src\ComponentEvent.cpp" />
     <ClCompile Include="src\ComponentRegistry.cpp" />
     <ClCompile Include="src\DependencyGraph.cpp" />

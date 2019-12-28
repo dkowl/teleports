@@ -13,7 +13,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		Surface(WindowCreator::Window* inWindow);
 		~Surface();
 
-		void Initialize(const ECS::Entity& inEntity) override;
+		void Initialize() override;
 		static uuids::uuid TypeId();
 		static std::string ClassName();
 		static ECS::ComponentReferences Dependencies();
@@ -26,7 +26,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		vk::ColorSpaceKHR GetColorSpace() const;
 
 	private:
-		const ECS::Entity* entity;
 		WindowCreator::Window* window;
 		vk::UniqueSurfaceKHR surface;
 		vk::Format format;
