@@ -29,7 +29,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		void EnableShader(uuids::uuid id);
 
 	private:
-		void InitDepthBuffer();
 		void InitDescriptorSetLayout();
 		void InitPipelineLayout();
 		void InitDescriptorPool();
@@ -47,7 +46,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		Shader& GetShader(uuids::uuid id);
 
 		RendererCreateInfo ci;
-		std::unique_ptr<DepthBuffer> depthBuffer;
 
 		vk::UniqueDescriptorSetLayout descriptorSetLayout;
 		vk::UniquePipelineLayout pipelineLayout;

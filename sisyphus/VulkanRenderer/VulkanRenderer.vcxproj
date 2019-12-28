@@ -91,6 +91,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\VulkanRenderer\Renderer.h" />
+    <ClInclude Include="src\Components\DepthBuffer.h" />
     <ClInclude Include="src\Components\Device.h" />
     <ClInclude Include="src\Components\Instance.h" />
     <ClInclude Include="src\Components\PhysicalDevice.h" />
@@ -98,7 +99,6 @@
     <ClInclude Include="src\Components\Swapchain.h" />
     <ClInclude Include="src\Components\VulkanComponent.h" />
     <ClInclude Include="src\DebugMessenger.h" />
-    <ClInclude Include="src\DepthBuffer.h" />
     <ClInclude Include="src\Pch_VulkanRenderer.h" />
     <ClInclude Include="src\platform_specific\PlatformSpecific.h" />
     <ClInclude Include="src\platform_specific\Vulkan.h" />
@@ -111,13 +111,13 @@
     <ClInclude Include="src\VertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Components\DepthBuffer.cpp" />
     <ClCompile Include="src\Components\Device.cpp" />
     <ClCompile Include="src\Components\Instance.cpp" />
     <ClCompile Include="src\Components\PhysicalDevice.cpp" />
     <ClCompile Include="src\Components\Surface.cpp" />
     <ClCompile Include="src\Components\Swapchain.cpp" />
     <ClCompile Include="src\DebugMessenger.cpp" />
-    <ClCompile Include="src\DepthBuffer.cpp" />
     <ClCompile Include="src\Pch_VulkanRenderer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>

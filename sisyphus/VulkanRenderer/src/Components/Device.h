@@ -20,7 +20,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		void ResetCommandPool();
 		vk::CommandBuffer GetCommandBuffer() const;
 
-		vk::UniqueDeviceMemory AllocateImageMemory(vk::Image image);
+		vk::UniqueDeviceMemory AllocateAndBindImageMemory(vk::Image image);
 
 	private:
 		vk::UniqueDevice device;

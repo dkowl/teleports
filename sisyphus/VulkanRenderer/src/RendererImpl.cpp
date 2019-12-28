@@ -19,7 +19,6 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	RendererImpl::RendererImpl(const RendererCreateInfo& ci) :
 		ci(ci),
-		depthBuffer(nullptr),
 		descriptorSetLayout(nullptr),
 		pipelineLayout(nullptr),
 		descriptorPool(nullptr),
@@ -41,11 +40,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		InitComponent<Surface>(ci.window);
 		InitComponent<Device>();
 		InitComponent<Swapchain>();
-				
-		logger->BeginSection("Depth Buffer");
-		InitDepthBuffer();
-		logger->Log("Depth Buffer initialized!");
-		logger->EndSection();
+		InitComponent<DepthBuffer>();
 
 		InitDescriptorSetLayout();
 		logger->Log("Descriptor Set Layout initialized!");
@@ -156,20 +151,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		presentQueue.presentKHR(presentInfo);
 
 		deviceComponent.ResetCommandPool();
-	}
-
-	void RendererImpl::InitDepthBuffer()
-	{
-		auto physicalDevice = GetComponent<PhysicalDevice>().GetVulkanObject();
-
-		DepthBuffer::CreateInfo createInfo{
-			GetComponent<Surface>().GetExtent(),
-			physicalDevice,
-			GetComponent<Device>(),
-			logger
-		};
-
-		depthBuffer = std::make_unique<DepthBuffer>(createInfo);
 	}
 
 	void RendererImpl::InitDescriptorSetLayout()
@@ -302,10 +283,9 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitFramebuffers()
 	{
-		SIS_DEBUGASSERT(depthBuffer);
 		auto surfaceExtent = GetComponent<Surface>().GetExtent();
 		vk::ImageView attachments[2];
-		attachments[1] = depthBuffer->GetImageView();
+		attachments[1] = GetComponent<DepthBuffer>().GetImageView();
 
 		for (const auto& imageView : GetComponent<Swapchain>().GetImageViews()) {
 			attachments[0] = *imageView;

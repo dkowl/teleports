@@ -27,9 +27,6 @@
     <ClInclude Include="include\VulkanRenderer\Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\DepthBuffer.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\platform_specific\PlatformSpecific.h">
       <Filter>Source Files\Platform Specific</Filter>
     </ClInclude>
@@ -81,11 +78,11 @@
     <ClInclude Include="src\Components\Swapchain.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="src\Components\DepthBuffer.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\DepthBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -129,6 +126,9 @@
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="src\Components\Swapchain.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Components\DepthBuffer.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>

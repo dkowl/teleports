@@ -80,7 +80,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		SIS_THROWASSERT(!commandBuffers.empty());
 		return *(commandBuffers[0]);
 	}
-	vk::UniqueDeviceMemory Device::AllocateImageMemory(vk::Image image)
+	vk::UniqueDeviceMemory Device::AllocateAndBindImageMemory(vk::Image image)
 	{
 		vk::PhysicalDeviceMemoryProperties memoryProperties = Parent().GetComponent<PhysicalDevice>().GetVulkanObject().getMemoryProperties();
 
@@ -90,8 +90,13 @@ namespace Sisyphus::Rendering::Vulkan {
 		auto memoryTypeIndex = FindMemoryType(memoryProperties, supportedTypeBits, vk::MemoryPropertyFlagBits::eDeviceLocal);
 
 		auto& logger = Logger::Get();
-		logger.Log(std::to_string(memoryRequirements.size) + " bytes of GPU memory required");
+		auto memory = device->allocateMemoryUnique(vk::MemoryAllocateInfo(memoryRequirements.size, memoryTypeIndex));
+		logger.Log(std::to_string(memoryRequirements.size) + " bytes of GPU memory allocated");
 		logger.Log("Alignment: " + std::to_string(memoryRequirements.alignment));
-		return device->allocateMemoryUnique(vk::MemoryAllocateInfo(memoryRequirements.size, memoryTypeIndex));
+
+		device->bindImageMemory(image, *memory, 0);
+
+		return std::move(memory);
+
 	}
 }
