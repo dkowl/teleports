@@ -17,7 +17,7 @@ namespace wc = Sisyphus::WindowCreator;
 
 namespace Sisyphus::Rendering::Vulkan {
 
-	constexpr uint64_t timeout = 100000000; // 1000ms
+	constexpr uint64_t timeout = 1000000000; // 1000ms
 
 	RendererImpl::RendererImpl(const RendererCreateInfo& ci) :
 		ci(ci),
@@ -73,8 +73,8 @@ namespace Sisyphus::Rendering::Vulkan {
 		SIS_DEBUGASSERT(renderPass);
 		SIS_DEBUGASSERT(descriptorSet);
 		auto& surface = GetComponent<Surface>();
-		vk::Extent2D surfaceExtent = surface.GetExtent();
 		surface.DetectResize();
+		vk::Extent2D surfaceExtent = surface.GetExtent();
 
 		auto& deviceComponent = GetComponent<Device>();
 		auto device = deviceComponent.GetVulkanObject();

@@ -38,5 +38,5 @@ void CompA::RegisterEventHandlers()
 
 void CompA::DispatchCustomEvent()
 {
-	Parent().Dispatch<CompA, CustomEvent>();
+	Parent().Dispatch<CustomEvent, CompA>();
 }
