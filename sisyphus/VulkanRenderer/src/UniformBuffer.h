@@ -46,7 +46,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		void UpdateDescriptorSet();
 
 		CreateInfo ci;
-		vk::UniqueBuffer buffer;
 		vk::UniqueDeviceMemory memory;
+		vk::UniqueBuffer buffer;
 	};
 }

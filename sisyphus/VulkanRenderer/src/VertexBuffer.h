@@ -23,7 +23,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		CreateInfo ci;
 
-		vk::UniqueBuffer buffer;
 		vk::UniqueDeviceMemory memory;
+		vk::UniqueBuffer buffer;
 	};
 }
