@@ -29,6 +29,10 @@ TEST_CASE("Entity") {
 	REQUIRE(e.GetComponent<CompB>().compC_initialized);
 	REQUIRE(e.GetComponent<CompC>().initialized);
 
+	REQUIRE(!CompB::customEventHandled);
+	e.GetComponent<CompA>().DispatchCustomEvent();
+	REQUIRE(CompB::customEventHandled);
+
 	REQUIRE_NOTHROW(e.DestroyAll());
 
 	REQUIRE_THROWS(e.GetComponent<CompA>());

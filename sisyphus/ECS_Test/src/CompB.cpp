@@ -8,6 +8,7 @@ SIS_REGISTER_COMPONENT(CompB);
 
 bool CompB::compA_initialized = false;
 bool CompB::compC_initialized = false;
+bool CompB::customEventHandled = false;
 
 CompB::~CompB()
 {
@@ -26,21 +27,12 @@ ComponentReferences CompB::Dependencies() {
 	return { { CompA::TypeId() } };
 }
 
-ComponentReferences CompB::WatchList(Events::Initialization) {
-	return { {CompA::TypeId()}, {CompC::TypeId() } };
-}
-
-void CompB::HandleEvent(Events::Initialization, const uuids::uuid& type) {
-	if (type == CompA::TypeId()) {
-		compA_initialized = true;
-	}
-	else if (type == CompC::TypeId()) {
-		compC_initialized = true;
-	}
-	else {
-		SIS_THROW("Unexpected");
-	}
-}
-
 void CompB::Initialize() {
+}
+
+void CompB::RegisterEventHandlers()
+{
+	RegisterEventHandler<Events::Initialization, CompA>([] {compA_initialized = true; });
+	RegisterEventHandler<Events::Initialization, CompC>([] {compC_initialized = true; });
+	RegisterEventHandler<CustomEvent, CompA>([] {customEventHandled = true; });
 }

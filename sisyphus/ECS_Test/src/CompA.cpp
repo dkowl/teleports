@@ -2,6 +2,7 @@
 #include "CompA.h"
 #include "CompB.h"
 #include "CompC.h"
+#include "ECS/Entity.h"
 
 SIS_DEFINE_ID(ComponentID_CompA, "cab4ccc8f13e46a69930cc64382b869c");
 SIS_REGISTER_COMPONENT(CompA);
@@ -26,21 +27,16 @@ ComponentReferences CompA::Dependencies() {
 	return {};
 }
 
-ComponentReferences CompA::WatchList(Events::Initialization) {
-	return { {CompB::TypeId()}, {CompC::TypeId() } };
-}
-
-void CompA::HandleEvent(Events::Initialization, const uuids::uuid& type) {
-	if (type == CompB::TypeId()) {
-		compB_initialized = true;
-	}
-	else if (type == CompC::TypeId()) {
-		compC_initialized = true;
-	}
-	else {
-		SIS_THROW("Unexpected");
-	}
-}
-
 void CompA::Initialize() {
+}
+
+void CompA::RegisterEventHandlers()
+{
+	RegisterEventHandler<Events::Initialization, CompB>([] {compB_initialized = true; });
+	RegisterEventHandler<Events::Initialization, CompC>([] {compC_initialized = true; });
+}
+
+void CompA::DispatchCustomEvent()
+{
+	Parent().Dispatch<CompA, CustomEvent>();
 }

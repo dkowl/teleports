@@ -1,6 +1,7 @@
 #pragma once
 #include "Vulkan.h"
 #include "uuid.h"
+#include <functional>
 #include <iostream>
 #include <memory>
 #include <optional>

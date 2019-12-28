@@ -28,6 +28,10 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		FindGraphicsQueueFamilyIndex();
 	}
+	void PhysicalDevice::RegisterEventHandlers()
+	{
+		RegisterEventHandler<ECS::Events::Initialization, Surface>(std::bind(&PhysicalDevice::FindPresentQueueFamilyIndex, this));
+	}
 	uuids::uuid PhysicalDevice::TypeId()
 	{
 		return ComponentID_PhysicalDevice;
@@ -43,13 +47,6 @@ namespace Sisyphus::Rendering::Vulkan {
 	vk::PhysicalDevice PhysicalDevice::GetVulkanObject() const
 	{
 		return physicalDevice;
-	}
-	void PhysicalDevice::HandleEvent(ECS::Events::Initialization, const uuids::uuid& compTypeId)
-	{
-		if (compTypeId == Surface::TypeId()) {
-			auto& surface = Parent().GetComponent<Surface>();
-			FindPresentQueueFamilyIndex(surface);
-		}
 	}
 	uint32_t PhysicalDevice::GetGraphicsQueueFamilyIndex() const
 	{
@@ -99,8 +96,10 @@ namespace Sisyphus::Rendering::Vulkan {
 		}
 		Logger::Get().LogArgs("Graphics queue family index found: ", graphicsQueueFamilyIndex.value());
 	}
-	void PhysicalDevice::FindPresentQueueFamilyIndex(vk::SurfaceKHR surface)
+	void PhysicalDevice::FindPresentQueueFamilyIndex()
 	{
+		auto& surface = Parent().GetComponent<Surface>();
+
 		auto queueFamilyProperties = physicalDevice.getQueueFamilyProperties();
 		for (int i = 0; i < queueFamilyProperties.size(); i++) {
 			if (physicalDevice.getSurfaceSupportKHR(i, surface)) {
@@ -108,9 +107,5 @@ namespace Sisyphus::Rendering::Vulkan {
 			}
 		}
 		Logger::Get().LogArgs("Present queue family index found: ", presentQueueFamilyIndex.value());
-	}
-	ECS::ComponentReferences PhysicalDevice::WatchList(ECS::Events::Initialization)
-	{
-		return { {Surface::TypeId()} };
 	}
 }

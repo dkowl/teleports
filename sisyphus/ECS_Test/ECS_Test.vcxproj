@@ -88,6 +88,7 @@
     <ClCompile Include="src\CompA.cpp" />
     <ClCompile Include="src\CompB.cpp" />
     <ClCompile Include="src\CompC.cpp" />
+    <ClCompile Include="src\CustomEvent.cpp" />
     <ClCompile Include="src\ECS_catch_main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
@@ -102,6 +103,7 @@
     <ClInclude Include="src\CompA.h" />
     <ClInclude Include="src\CompB.h" />
     <ClInclude Include="src\CompC.h" />
+    <ClInclude Include="src\CustomEvent.h" />
     <ClInclude Include="src\Pch_ECS_Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

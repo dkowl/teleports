@@ -10,4 +10,8 @@ namespace Sisyphus::ECS {
 		SIS_DEBUGASSERT(entity);
 		return *entity;
 	}
+	void IComponent::HandleEvent(const uuids::uuid& eventId, const uuids::uuid& compId)
+	{
+		eventHandlers.at(eventId).at(compId)();
+	}
 }

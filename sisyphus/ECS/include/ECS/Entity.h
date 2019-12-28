@@ -26,14 +26,16 @@ namespace Sisyphus::ECS {
 			SIS_THROWASSERT_MSG(!components.contains(type), T::ClassName() + " already exists.");
 			CheckDependencies<T>();
 
-			if (!knownComponentTypes.contains(type)) {
-				UpdateSubscriberLists<T>();
-				dependencyGraph.Add<T>();
-			}
-
 			std::unique_ptr<IComponent> component = std::make_unique<T>(args...);
 			component->entity = this;
 			component->Initialize();
+			component->RegisterEventHandlers();
+
+			if (!knownComponentTypes.contains(type)) {
+				UpdateSubscriberLists<T>(component->eventHandlers);
+				dependencyGraph.Add<T>();
+			}
+
 			components.emplace(type, std::move(component));
 
 			Dispatch<T, Events::Initialization>();
@@ -61,8 +63,18 @@ namespace Sisyphus::ECS {
 
 		bool HasComponent(const uuids::uuid& compType) const;
 
+		template<Component T, ComponentEvent EventT>
+		void Dispatch() {
+			for (auto subscriber : subscriberLists[EventT::Id()][T::TypeId()]) {
+				auto comp = TryGetComponent(subscriber.type);
+				if (comp != nullptr) {
+					comp->HandleEvent(EventT::Id(), T::TypeId());
+				}
+			}
+		}
+
 	private:
-		template<typename T>
+		template<Component T>
 		void CheckDependencies() {
 			for (auto&& dependency : T::Dependencies()) {
 				if (!HasComponent(dependency.type)) {
@@ -76,23 +88,10 @@ namespace Sisyphus::ECS {
 		}
 
 		template<Component T>
-		void UpdateSubscriberLists() {
-			UpdateSubscriberLists<T, Events::Initialization>();
-		}
-
-		template<Component T, ComponentEvent EventT>
-		void UpdateSubscriberLists() {
-			for (auto&& watched : T::WatchList(EventT{})) {
-				subscriberLists[EventT::Id()][watched.type].push_back({ T::TypeId() });
-			}
-		}
-
-		template<Component T, ComponentEvent EventT>
-		void Dispatch() {
-			for (auto subscriber : subscriberLists[EventT::Id()][T::TypeId()]) {
-				auto comp = TryGetComponent(subscriber.type);
-				if (comp != nullptr) {
-					comp->HandleEvent(EventT{}, T::TypeId());
+		void UpdateSubscriberLists(const IComponent::EventHandlerMap& eventHandlerMap) {
+			for (auto&& perEventType : eventHandlerMap) {
+				for (auto&& perCompType : perEventType.second) {
+					subscriberLists[perEventType.first][perCompType.first].push_back({ T::TypeId() });
 				}
 			}
 		}

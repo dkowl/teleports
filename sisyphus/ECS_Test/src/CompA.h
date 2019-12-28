@@ -1,6 +1,7 @@
 #pragma once
 #include "uuid.h"
 #include "ECS/Entity.h"
+#include "CustomEvent.h"
 
 using namespace Sisyphus::ECS;
 
@@ -12,10 +13,10 @@ public:
 	static std::string ClassName();
 	static ComponentReferences Dependencies();
 
-	static ComponentReferences WatchList(Events::Initialization);
-	void HandleEvent(Events::Initialization, const uuids::uuid& type) override;
-
 	void Initialize() override;
+	void RegisterEventHandlers() override;
+
+	void DispatchCustomEvent();
 
 	static bool compB_initialized;
 	static bool compC_initialized;

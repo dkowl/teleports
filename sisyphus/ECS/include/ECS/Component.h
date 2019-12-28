@@ -43,13 +43,19 @@ namespace Sisyphus::ECS {
 		Entity& Parent();
 
 		virtual void Initialize() = 0;
-		
-		virtual void HandleEvent(Events::Initialization, const uuids::uuid&) {};
 
-		template<ComponentEvent T>
-		static ComponentReferences WatchList(T) { return ComponentReferences(); }
+		using EventHandler = std::function<void()>;
+		template<ComponentEvent EventT, Component T>
+		void RegisterEventHandler(EventHandler handler) {
+			eventHandlers[EventT::Id()][T::TypeId()] = std::move(handler);
+		}
+		virtual void RegisterEventHandlers() {};
+		
+		void HandleEvent(const uuids::uuid& eventId, const uuids::uuid& compId);
 
 	private:
+		using EventHandlerMap = std::unordered_map<uuids::uuid, std::unordered_map<uuids::uuid, EventHandler>>;
+		EventHandlerMap eventHandlers;
 		Entity* entity;
 	};
 }
