@@ -10,6 +10,8 @@
 #include "Surface.h"
 #include "Device.h"
 #include "Swapchain.h"
+#include "DepthBuffer.h"
+#include "Framebuffers.h"
 
 namespace wc = Sisyphus::WindowCreator;
 
@@ -57,10 +59,9 @@ namespace Sisyphus::Rendering::Vulkan {
 		logger->EndSection();
 
 		InitRenderPass();
-		logger->Log("Render Pass initialized!");
+		logger->Log("Render Pass initialized!");		
 
-		InitFramebuffers();
-		logger->Log(std::to_string(framebuffers.size()) + " Framebuffers initialized!");		
+		InitComponent<Framebuffers>(*renderPass);
 
 		InitShaders();
 	}
@@ -71,7 +72,6 @@ namespace Sisyphus::Rendering::Vulkan {
 	{
 		AdaptToSurfaceChanges();
 
-		SIS_DEBUGASSERT(!framebuffers.empty());
 		SIS_DEBUGASSERT(renderPass);
 		SIS_DEBUGASSERT(descriptorSet);
 		vk::Extent2D surfaceExtent = GetComponent<Surface>().GetExtent();
@@ -79,6 +79,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		auto device = deviceComponent.GetVulkanObject();
 		auto& swapchainComponent = GetComponent<Swapchain>();
 		auto swapchain = swapchainComponent.GetVulkanObject();
+		const auto& framebuffers = GetComponent<Framebuffers>().GetFramebuffers();
 
 		InitPipeline(drawable.GetVertexStride());
 		SIS_DEBUGASSERT(pipeline);
@@ -279,28 +280,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		);
 
 		renderPass = GetComponent<Device>().GetVulkanObject().createRenderPassUnique(renderPassCreateInfo);
-	}
-
-	void RendererImpl::InitFramebuffers()
-	{
-		auto surfaceExtent = GetComponent<Surface>().GetExtent();
-		vk::ImageView attachments[2];
-		attachments[1] = GetComponent<DepthBuffer>().GetImageView();
-
-		for (const auto& imageView : GetComponent<Swapchain>().GetImageViews()) {
-			attachments[0] = *imageView;
-			vk::FramebufferCreateInfo framebufferCreateInfo{
-				{},
-				*renderPass,
-				2,
-				attachments,
-				surfaceExtent.width,
-				surfaceExtent.height,
-				1
-			};
-
-			framebuffers.push_back(GetComponent<Device>().GetVulkanObject().createFramebufferUnique(framebufferCreateInfo));
-		}
 	}
 
 	void RendererImpl::InitShaders()

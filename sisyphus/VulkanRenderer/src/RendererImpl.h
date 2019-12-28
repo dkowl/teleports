@@ -2,7 +2,6 @@
 #include "Renderer.h"
 #include "Vulkan.h"
 #include "PlatformSpecific.h"
-#include "DepthBuffer.h"
 #include "UniformBuffer.h"
 #include "VertexBuffer.h"
 #include "Shader.h"
@@ -35,7 +34,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		void InitDescriptorSet();
 		void InitUniformBuffer();
 		void InitRenderPass();
-		void InitFramebuffers();
 		void InitShaders();
 
 		// happens each Draw()
@@ -54,7 +52,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		std::unique_ptr<UniformBuffer> uniformBuffer;
 
 		vk::UniqueRenderPass renderPass;
-		std::vector<vk::UniqueFramebuffer> framebuffers;
 		std::unique_ptr<VertexBuffer> vertexBuffer;
 		vk::UniquePipeline pipeline;
 
