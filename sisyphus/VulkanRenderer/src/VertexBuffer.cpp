@@ -41,8 +41,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		auto memoryTypeIndex = FindMemoryType(
 			ci.physicalDevice.getMemoryProperties(),
 			memoryRequirements.memoryTypeBits,
-			vk::MemoryPropertyFlagBits::eHostVisible | vk::MemoryPropertyFlagBits::eHostCoherent,
-			&Logger::Get()
+			vk::MemoryPropertyFlagBits::eHostVisible | vk::MemoryPropertyFlagBits::eHostCoherent
 		);
 
 		memory = ci.device.allocateMemoryUnique(vk::MemoryAllocateInfo(memoryRequirements.size, memoryTypeIndex));

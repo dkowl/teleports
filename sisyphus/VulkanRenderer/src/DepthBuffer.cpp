@@ -68,7 +68,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		vk::MemoryRequirements memoryRequirements = ci.device.getImageMemoryRequirements(*image);
 		uint32_t supportedTypeBits = memoryRequirements.memoryTypeBits;
 
-		auto memoryTypeIndex = FindMemoryType(memoryProperties, supportedTypeBits, vk::MemoryPropertyFlagBits::eDeviceLocal, ci.logger);
+		auto memoryTypeIndex = FindMemoryType(memoryProperties, supportedTypeBits, vk::MemoryPropertyFlagBits::eDeviceLocal);
 
 		ci.logger->Log(std::to_string(memoryRequirements.size) + " bytes of GPU memory required");
 		ci.logger->Log("Alignment: " + std::to_string(memoryRequirements.alignment));
