@@ -17,7 +17,7 @@ namespace wc = Sisyphus::WindowCreator;
 
 namespace Sisyphus::Rendering::Vulkan {
 
-	constexpr uint64_t timeout = 100000000; // 100ms
+	constexpr uint64_t timeout = 100000000; // 1000ms
 
 	RendererImpl::RendererImpl(const RendererCreateInfo& ci) :
 		ci(ci),
@@ -70,11 +70,12 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::Draw(const IDrawable & drawable)
 	{
-		AdaptToSurfaceChanges();
-
 		SIS_DEBUGASSERT(renderPass);
 		SIS_DEBUGASSERT(descriptorSet);
-		vk::Extent2D surfaceExtent = GetComponent<Surface>().GetExtent();
+		auto& surface = GetComponent<Surface>();
+		vk::Extent2D surfaceExtent = surface.GetExtent();
+		surface.DetectResize();
+
 		auto& deviceComponent = GetComponent<Device>();
 		auto device = deviceComponent.GetVulkanObject();
 		auto& swapchainComponent = GetComponent<Swapchain>();
@@ -298,21 +299,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		}
 		if (fragmentShaderId.is_nil()) {
 			SIS_THROW("Unable to find a fragment shader");
-		}
-	}
-
-	void RendererImpl::AdaptToSurfaceChanges()
-	{
-		auto physicalDevice = GetComponent<PhysicalDevice>().GetVulkanObject();
-		auto& surface = GetComponent<Surface>();
-
-		auto surfaceCapabilities = physicalDevice.getSurfaceCapabilitiesKHR(surface);
-		bool surfaceChanged = surfaceCapabilities.currentExtent != surface.GetExtent();
-		if (surfaceChanged) {
-			logger->Log(
-				"Surface extent changed from " + ToString(surface.GetExtent()) +
-				" to " + ToString(surfaceCapabilities.currentExtent));
-			__debugbreak();
 		}
 	}
 

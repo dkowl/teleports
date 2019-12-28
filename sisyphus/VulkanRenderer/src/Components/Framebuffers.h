@@ -9,9 +9,13 @@ namespace Sisyphus::Rendering::Vulkan {
 		Framebuffers(vk::RenderPass inRenderPass);
 
 		void Initialize() override;
+		void RegisterEventHandlers() override;
 		static uuids::uuid TypeId();
 		static std::string ClassName();
 		static ECS::ComponentReferences Dependencies();
+
+		void Clean();
+		void Resize();
 
 		const std::vector<vk::UniqueFramebuffer>& GetFramebuffers() const;
 

@@ -8,6 +8,8 @@
 #include "Device.h"
 #include "PhysicalDevice.h"
 #include "Surface.h"
+#include "Events.h"
+#include "Swapchain.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	SIS_DEFINE_ID(ComponentID_DepthBuffer, "110a4062db0746428d15fde397461fcb");
@@ -26,6 +28,11 @@ namespace Sisyphus::Rendering::Vulkan {
 		logger.EndSection();
 	}
 
+	void DepthBuffer::RegisterEventHandlers()
+	{
+		RegisterEventHandler<ResizeEvent, Swapchain>(std::bind(&DepthBuffer::Resize, this));
+	}
+
 	uuids::uuid DepthBuffer::TypeId()
 	{
 		return ComponentID_DepthBuffer;
@@ -39,6 +46,20 @@ namespace Sisyphus::Rendering::Vulkan {
 	ECS::ComponentReferences DepthBuffer::Dependencies()
 	{
 		return { {PhysicalDevice::TypeId()}, {Device::TypeId()}, {Surface::TypeId()} };
+	}
+
+	void DepthBuffer::Clean()
+	{
+		imageView.reset(nullptr);
+		image.reset(nullptr);
+		memory.reset(nullptr);
+	}
+
+	void DepthBuffer::Resize()
+	{
+		Clean();
+		Initialize();
+		Parent().Dispatch<ResizeEvent, DepthBuffer>();
 	}
 
 	vk::ImageView DepthBuffer::GetImageView() const

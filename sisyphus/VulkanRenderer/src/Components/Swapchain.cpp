@@ -5,6 +5,7 @@
 #include "Device.h"
 #include "PhysicalDevice.h"
 #include "ECS/Entity.h"
+#include "Events.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	SIS_DEFINE_ID(ComponentID_Swapchain, "50add9e4abaf44b49728f8d1958881bc");
@@ -106,6 +107,10 @@ namespace Sisyphus::Rendering::Vulkan {
 			imageViews.emplace_back(device.createImageViewUnique(imageViewCreateInfo));
 		}
 	}
+	void Swapchain::RegisterEventHandlers()
+	{
+		RegisterEventHandler<ResizeEvent, Surface>(std::bind(&Swapchain::Resize, this));
+	}
 	uuids::uuid Swapchain::TypeId()
 	{
 		return ComponentID_Swapchain;
@@ -121,6 +126,18 @@ namespace Sisyphus::Rendering::Vulkan {
 	vk::SwapchainKHR Swapchain::GetVulkanObject() const
 	{
 		return *swapchain;
+	}
+	void Swapchain::Clear()
+	{
+		imageViews.clear();
+		swapchainImages.clear();
+		swapchain.reset(nullptr);
+	}
+	void Swapchain::Resize()
+	{
+		Clear();
+		Initialize();
+		Parent().Dispatch<ResizeEvent, Swapchain>();
 	}
 	Swapchain::AcquireResult Swapchain::AcquireNextImage()
 	{

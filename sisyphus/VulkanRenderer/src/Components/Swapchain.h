@@ -7,11 +7,15 @@ namespace Sisyphus::Rendering::Vulkan {
 	class Swapchain : public IVulkanComponent<vk::SwapchainKHR> {
 	public:
 		void Initialize() override;
+		void RegisterEventHandlers() override;
 		static uuids::uuid TypeId();
 		static std::string ClassName();
 		static ECS::ComponentReferences Dependencies();
 
 		vk::SwapchainKHR GetVulkanObject() const override;
+
+		void Clear();
+		void Resize();
 
 		struct AcquireResult {
 			uint32_t imageIndex;

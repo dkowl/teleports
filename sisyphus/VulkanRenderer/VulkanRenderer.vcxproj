@@ -93,6 +93,7 @@
     <ClInclude Include="include\VulkanRenderer\Renderer.h" />
     <ClInclude Include="src\Components\DepthBuffer.h" />
     <ClInclude Include="src\Components\Device.h" />
+    <ClInclude Include="src\Components\Events.h" />
     <ClInclude Include="src\Components\Framebuffers.h" />
     <ClInclude Include="src\Components\Instance.h" />
     <ClInclude Include="src\Components\PhysicalDevice.h" />
@@ -114,6 +115,7 @@
   <ItemGroup>
     <ClCompile Include="src\Components\DepthBuffer.cpp" />
     <ClCompile Include="src\Components\Device.cpp" />
+    <ClCompile Include="src\Components\Events.cpp" />
     <ClCompile Include="src\Components\Framebuffers.cpp" />
     <ClCompile Include="src\Components\Instance.cpp" />
     <ClCompile Include="src\Components\PhysicalDevice.cpp" />

@@ -7,6 +7,7 @@
 #include "WindowCreator\WindowCreator.h"
 #include "Utils\Throw.h"
 #include "Utils/DebugAssert.h"
+#include "Events.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	SIS_DEFINE_ID(ComponentID_Surface, "a070642c63c04385818404553f6a97d3");
@@ -26,6 +27,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		surface = window->GetVulkanSurface(Parent().GetComponent<Instance>());
 		SIS_THROWASSERT(*surface);
 		InitFormatAndColorSpace();
+		extent = GetExtent2D(window->GetExtent());
 	}
 	uuids::uuid Surface::TypeId()
 	{
@@ -75,10 +77,24 @@ namespace Sisyphus::Rendering::Vulkan {
 		format = desiredFormat;
 		colorSpace = desiredColorSpace;
 	}
+	void Surface::DetectResize()
+	{
+		auto physicalDevice = Parent().GetComponent<PhysicalDevice>().GetVulkanObject();
+
+		auto currentExtent = physicalDevice.getSurfaceCapabilitiesKHR(*surface).currentExtent;
+		bool surfaceChanged = currentExtent != extent;
+		if (surfaceChanged) {
+			Logger::Get().Log(
+				"Surface extent changed from " + ToString(GetExtent()) +
+				" to " + ToString(currentExtent));
+			
+			extent = currentExtent;
+			Parent().Dispatch<ResizeEvent, Surface>();
+		}
+	}
 	vk::Extent2D Surface::GetExtent() const
 	{
-		SIS_DEBUGASSERT(window);
-		return GetExtent2D(window->GetExtent());
+		return extent;
 	}
 	vk::Format Surface::GetFormat() const
 	{

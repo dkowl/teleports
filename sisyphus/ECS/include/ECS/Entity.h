@@ -38,7 +38,7 @@ namespace Sisyphus::ECS {
 
 			components.emplace(type, std::move(component));
 
-			Dispatch<T, Events::Initialization>();
+			Dispatch<Events::Initialization, T>();
 			Logger::Get().Log(T::ClassName() + " initialized!");
 
 			knownComponentTypes.insert(type);
@@ -63,7 +63,7 @@ namespace Sisyphus::ECS {
 
 		bool HasComponent(const uuids::uuid& compType) const;
 
-		template<Component T, ComponentEvent EventT>
+		template<ComponentEvent EventT, Component T>
 		void Dispatch() {
 			for (auto subscriber : subscriberLists[EventT::Id()][T::TypeId()]) {
 				auto comp = TryGetComponent(subscriber.type);

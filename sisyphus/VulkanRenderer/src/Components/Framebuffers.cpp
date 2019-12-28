@@ -5,6 +5,7 @@
 #include "DepthBuffer.h"
 #include "Swapchain.h"
 #include "Device.h"
+#include "Events.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	SIS_DEFINE_ID(ComponentID_Framebuffers, "7f95f4a63d16400595144db614c492ce");
@@ -38,6 +39,10 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		Logger::Get().Log(std::to_string(framebuffers.size()) + " Framebuffers initialized!");
 	}
+	void Framebuffers::RegisterEventHandlers()
+	{
+		RegisterEventHandler<ResizeEvent, DepthBuffer>(std::bind(&Framebuffers::Resize, this));
+	}
 	uuids::uuid Framebuffers::TypeId()
 	{
 		return ComponentID_Framebuffers;
@@ -49,6 +54,15 @@ namespace Sisyphus::Rendering::Vulkan {
 	ECS::ComponentReferences Framebuffers::Dependencies()
 	{
 		return { {Surface::TypeId()}, {DepthBuffer::TypeId()}, {Swapchain::TypeId()}, {Device::TypeId()} };
+	}
+	void Framebuffers::Clean()
+	{
+		framebuffers.clear();
+	}
+	void Framebuffers::Resize()
+	{
+		Clean();
+		Initialize();
 	}
 	const std::vector<vk::UniqueFramebuffer>& Framebuffers::GetFramebuffers() const
 	{

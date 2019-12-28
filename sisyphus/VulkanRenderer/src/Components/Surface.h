@@ -21,6 +21,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		vk::SurfaceKHR GetVulkanObject() const override;
 
 		void InitFormatAndColorSpace();
+		void DetectResize();
 		vk::Extent2D GetExtent() const;
 		vk::Format GetFormat() const;
 		vk::ColorSpaceKHR GetColorSpace() const;
@@ -30,5 +31,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		vk::UniqueSurfaceKHR surface;
 		vk::Format format;
 		vk::ColorSpaceKHR colorSpace;
+		vk::Extent2D extent;
 	};
 }

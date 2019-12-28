@@ -8,9 +8,13 @@ namespace Sisyphus::Rendering::Vulkan {
 		static constexpr vk::Format format = vk::Format::eD16Unorm;
 
 		void Initialize() override;
+		void RegisterEventHandlers() override;
 		static uuids::uuid TypeId();
 		static std::string ClassName();
 		static ECS::ComponentReferences Dependencies();
+
+		void Clean();
+		void Resize();
 		
 		vk::ImageView GetImageView() const;
 
