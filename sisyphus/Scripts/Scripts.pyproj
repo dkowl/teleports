@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>56854a45-e2d6-47bb-839a-e313f8fd60cc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>MSB4011fixer.py</StartupFile>
+    <StartupFile>propsPathFixer.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="MSB4011fixer.py" />
+    <Compile Include="propsPathFixer.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

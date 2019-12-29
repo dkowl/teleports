@@ -37,27 +37,27 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\props\General.props" />
-    <Import Project="..\props\Vulkan.props" />
-    <Import Project="..\props\Utils.props" />
-    <Import Project="..\props\Glslang.props" />
-    <Import Project="..\props\stduuid.props" />
-    <Import Project="..\props\RendererInterfaces.props" />
-    <Import Project="..\props\WindowCreator.props" />
-    <Import Project="..\props\PrecompiledHeaders.props" />
-    <Import Project="..\props\ECS.props" />
+    <Import Project="$(SolutionDir)props\General.props" />
+    <Import Project="$(SolutionDir)props\Vulkan.props" />
+    <Import Project="$(SolutionDir)props\Utils.props" />
+    <Import Project="$(SolutionDir)props\Glslang.props" />
+    <Import Project="$(SolutionDir)props\stduuid.props" />
+    <Import Project="$(SolutionDir)props\RendererInterfaces.props" />
+    <Import Project="$(SolutionDir)props\WindowCreator.props" />
+    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
+    <Import Project="$(SolutionDir)props\ECS.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\props\General.props" />
-    <Import Project="..\props\Vulkan.props" />
-    <Import Project="..\props\Utils.props" />
-    <Import Project="..\props\Glslang.props" />
-    <Import Project="..\props\stduuid.props" />
-    <Import Project="..\props\RendererInterfaces.props" />
-    <Import Project="..\props\WindowCreator.props" />
-    <Import Project="..\props\PrecompiledHeaders.props" />
-    <Import Project="..\props\ECS.props" />
+    <Import Project="$(SolutionDir)props\General.props" />
+    <Import Project="$(SolutionDir)props\Vulkan.props" />
+    <Import Project="$(SolutionDir)props\Utils.props" />
+    <Import Project="$(SolutionDir)props\Glslang.props" />
+    <Import Project="$(SolutionDir)props\stduuid.props" />
+    <Import Project="$(SolutionDir)props\RendererInterfaces.props" />
+    <Import Project="$(SolutionDir)props\WindowCreator.props" />
+    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
+    <Import Project="$(SolutionDir)props\ECS.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
