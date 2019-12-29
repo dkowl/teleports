@@ -2,14 +2,16 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <OutDir>out\$(Configuration)\</OutDir>
-    <IntDir>inter\$(Configuration)\</IntDir>
-  <GeneralImported>true</GeneralImported></PropertyGroup>
+    <OutDir>$(ProjectDir)out\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>inter\$(Platform)\$(Configuration)\</IntDir>
+    <GeneralImported>true</GeneralImported>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)src;$(ProjectDir)include\$(ProjectName);$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel Condition="'$(PlatformToolset)' == 'v142'">Level4</WarningLevel>
+      <WarningLevel Condition="'$(PlatformToolset)' == 'Clang_5_0'">EnableAllWarnings</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
   </ItemDefinitionGroup>
