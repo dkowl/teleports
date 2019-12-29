@@ -35,7 +35,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <RootNamespace>Android</RootNamespace>
+    <RootNamespace>TestProject</RootNamespace>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <ProjectVersion>1.0</ProjectVersion>
     <ProjectGuid>{5d3aba21-be81-4321-a4a1-6c16dc00108c}</ProjectGuid>

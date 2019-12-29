@@ -37,7 +37,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{dd20b9a9-06a4-4546-a4ea-ca57bb127003}</ProjectGuid>
     <Keyword>Android</Keyword>
-    <RootNamespace>Android</RootNamespace>
+    <RootNamespace>TestProject</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <ApplicationType>Android</ApplicationType>
