@@ -156,9 +156,7 @@
     <AntProjectPropertiesFile Include="project.properties" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Android.NativeActivity\Android.NativeActivity.vcxproj">
-      <Project>{dd20b9a9-06a4-4546-a4ea-ca57bb127003}</Project>
-    </ProjectReference>
+    <ProjectReference Include="..\NativeActivity\Projects.TestProject.Android.NativeActivity.vcxproj" />
   </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />
   <ImportGroup Label="ExtensionTargets" />

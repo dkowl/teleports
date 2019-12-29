@@ -86,7 +86,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Android", "Android", "{57AB
 EndProject
 Project("{39E2626F-3545-4960-A6E8-258AD8476CE5}") = "Android.Packaging", "Projects\TestProject\Android\Android.Packaging\Android.Packaging.androidproj", "{5D3ABA21-BE81-4321-A4A1-6C16DC00108C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Android.NativeActivity", "Projects\TestProject\Android\Android.NativeActivity\Android.NativeActivity.vcxproj", "{DD20B9A9-06A4-4546-A4EA-CA57BB127003}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Projects.TestProject.Android.NativeActivity", "Projects\TestProject\Android\NativeActivity\Projects.TestProject.Android.NativeActivity.vcxproj", "{DD20B9A9-06A4-4546-A4EA-CA57BB127003}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
