@@ -79,7 +79,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\TestProject_main.cpp" />
+    <ClCompile Include="src\main.TestProject.Windows.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="project\Assets\fragmentShader_C_C.glsl" />
