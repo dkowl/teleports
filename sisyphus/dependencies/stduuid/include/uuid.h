@@ -27,6 +27,8 @@
 #include <iphlpapi.h> 
 #pragma comment(lib, "IPHLPAPI.lib")
 
+#elif defined(__ANDROID__)
+#include <jni.h>
 #elif defined(__linux__) || defined(__unix__)
 #include <uuid/uuid.h>
 #elif defined(__APPLE__)
@@ -247,7 +249,25 @@ namespace uuids
       static std::mt19937 clock_gen(std::random_device{}());
       static std::uniform_int_distribution<short> clock_dis{ -32768, 32767 };
       static std::atomic_short clock_sequence = clock_dis(clock_gen);
+#ifdef __ANDROID__
+      static JNIEnv* jniEnv = nullptr;
+      static jclass uuidClass = nullptr;
+      static jmethodID newGuidMethod = nullptr;
+      static jmethodID mostSignificantBitsMethod = nullptr;
+      static jmethodID leastSignificantBitsMethod = nullptr;
+#endif
    }
+
+#ifdef __ANDROID__
+   void InitJNI(JNIEnv* jni) {
+       using namespace detail;
+       jniEnv = jni;
+       uuidClass = jniEnv->FindClass("java/util/UUID");
+       newGuidMethod = jniEnv->GetStaticMethodID(uuidClass, "randomUUID", "()Ljava/util/UUID");
+       mostSignificantBitsMethod = jniEnv->GetMethodID(uuidClass, "getMostSignificantBits", "()J");
+       leastSignificantBitsMethod = jniEnv->GetMethodID(uuidClass, "getLeastSignificantBits", "()J");
+   }
+#endif
 
    // --------------------------------------------------------------------------------------------------------------------------
    // UUID format https://tools.ietf.org/html/rfc4122
@@ -584,16 +604,16 @@ namespace uuids
    // --------------------------------------------------------------------------------------------------------------------------
 
    // Name string is a fully-qualified domain name
-   static uuid uuid_namespace_dns{ {0x6b, 0xa7, 0xb8, 0x10, 0x9d, 0xad, 0x11, 0xd1, 0x80, 0xb4, 0x00, 0xc0, 0x4f, 0xd4, 0x30, 0xc8} };
+   static uuid uuid_namespace_dns{ { {0x6b, 0xa7, 0xb8, 0x10, 0x9d, 0xad, 0x11, 0xd1, 0x80, 0xb4, 0x00, 0xc0, 0x4f, 0xd4, 0x30, 0xc8} } };
 
    // Name string is a URL
-   static uuid uuid_namespace_url{ {0x6b, 0xa7, 0xb8, 0x11, 0x9d, 0xad, 0x11, 0xd1, 0x80, 0xb4, 0x00, 0xc0, 0x4f, 0xd4, 0x30, 0xc8} };
+   static uuid uuid_namespace_url{ { {0x6b, 0xa7, 0xb8, 0x11, 0x9d, 0xad, 0x11, 0xd1, 0x80, 0xb4, 0x00, 0xc0, 0x4f, 0xd4, 0x30, 0xc8} } };
 
    // Name string is an ISO OID (See https://oidref.com/, https://en.wikipedia.org/wiki/Object_identifier)
-   static uuid uuid_namespace_oid{ {0x6b, 0xa7, 0xb8, 0x12, 0x9d, 0xad, 0x11, 0xd1, 0x80, 0xb4, 0x00, 0xc0, 0x4f, 0xd4, 0x30, 0xc8} };
+   static uuid uuid_namespace_oid{ { {0x6b, 0xa7, 0xb8, 0x12, 0x9d, 0xad, 0x11, 0xd1, 0x80, 0xb4, 0x00, 0xc0, 0x4f, 0xd4, 0x30, 0xc8} } };
 
    // Name string is an X.500 DN, in DER or a text output format (See https://en.wikipedia.org/wiki/X.500, https://en.wikipedia.org/wiki/Abstract_Syntax_Notation_One)
-   static uuid uuid_namespace_x500{ {0x6b, 0xa7, 0xb8, 0x14, 0x9d, 0xad, 0x11, 0xd1, 0x80, 0xb4, 0x00, 0xc0, 0x4f, 0xd4, 0x30, 0xc8} };
+   static uuid uuid_namespace_x500{ {{0x6b, 0xa7, 0xb8, 0x14, 0x9d, 0xad, 0x11, 0xd1, 0x80, 0xb4, 0x00, 0xc0, 0x4f, 0xd4, 0x30, 0xc8} } };
 
    // --------------------------------------------------------------------------------------------------------------------------
    // uuid generators
@@ -633,6 +653,39 @@ namespace uuids
                newId.Data4[6],
                newId.Data4[7]
             } };
+
+         return uuid{ std::begin(bytes), std::end(bytes) };
+
+#elif defined(__ANDROID__)
+         using namespace detail;
+         if (jniEnv == nullptr) {
+              std::cerr << "JNI unititialized. Call InitJNI before generating new uuids on Android.\n";
+              return uuid{};
+         }
+
+         jobject javaUuid = jniEnv->CallStaticObjectMethod(uuidClass, newGuidMethod);
+         jlong mostSignificant = jniEnv->CallLongMethod(javaUuid, mostSignificantBitsMethod);
+         jlong leastSignificant = jniEnv->CallLongMethod(javaUuid, leastSignificantBitsMethod);
+
+         std::array<uint8_t, 16> bytes =
+         { {
+                 static_cast<uint8_t>((mostSignificant >> 56) & 0xFF),
+                 static_cast<uint8_t>((mostSignificant >> 48) & 0xFF),
+                 static_cast<uint8_t>((mostSignificant >> 40) & 0xFF),
+                 static_cast<uint8_t>((mostSignificant >> 32) & 0xFF),
+                 static_cast<uint8_t>((mostSignificant >> 24) & 0xFF),
+                 static_cast<uint8_t>((mostSignificant >> 16) & 0xFF),
+                 static_cast<uint8_t>((mostSignificant >> 8) & 0xFF),
+                 static_cast<uint8_t>((mostSignificant) & 0xFF),
+                 static_cast<uint8_t>((leastSignificant >> 56) & 0xFF),
+                 static_cast<uint8_t>((leastSignificant >> 48) & 0xFF),
+                 static_cast<uint8_t>((leastSignificant >> 40) & 0xFF),
+                 static_cast<uint8_t>((leastSignificant >> 32) & 0xFF),
+                 static_cast<uint8_t>((leastSignificant >> 24) & 0xFF),
+                 static_cast<uint8_t>((leastSignificant >> 16) & 0xFF),
+                 static_cast<uint8_t>((leastSignificant >> 8) & 0xFF),
+                 static_cast<uint8_t>((leastSignificant) & 0xFF)
+         } };
 
          return uuid{ std::begin(bytes), std::end(bytes) };
 
