@@ -10,7 +10,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)ECS\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)ECS\out\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)ECS\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>ECS.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

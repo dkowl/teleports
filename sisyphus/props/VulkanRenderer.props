@@ -11,7 +11,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)VulkanRenderer\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)VulkanRenderer\out\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)VulkanRenderer\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>VulkanRenderer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

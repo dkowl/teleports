@@ -7,14 +7,14 @@
       <AdditionalIncludeDirectories>$(SolutionDir)WindowCreator\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)WindowCreator\out\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)WindowCreator\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>WindowCreator.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
       <AdditionalDependencies>WindowCreator.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)WindowCreator\out\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)WindowCreator\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup />

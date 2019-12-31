@@ -1,8 +1,10 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <ImportGroup Label="PropertySheets" />
-  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="UserMacros">
+    <GeneralOutDir>out\$(Platform)\$(Configuration)\</GeneralOutDir>
+  </PropertyGroup>
   <PropertyGroup>
-    <OutDir>$(ProjectDir)out\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(ProjectDir)$(GeneralOutDir)</OutDir>
     <IntDir>inter\$(Platform)\$(Configuration)\</IntDir>
     <GeneralImported>true</GeneralImported>
   </PropertyGroup>
@@ -15,5 +17,9 @@
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BuildMacro Include="GeneralOutDir">
+      <Value>$(GeneralOutDir)</Value>
+    </BuildMacro>
+  </ItemGroup>
 </Project>

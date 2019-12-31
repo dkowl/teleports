@@ -11,14 +11,14 @@
       <AdditionalIncludeDirectories>$(SolutionDir)AssetManagement\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)AssetManagement\out\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)AssetManagement\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>AssetManagement.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
       <AdditionalDependencies>AssetManagement.lib</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)AssetManagement\out\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)AssetManagement\$(GeneralOutDir)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup />

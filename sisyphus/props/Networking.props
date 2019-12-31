@@ -8,7 +8,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>Networking.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Networking/out/$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Networking/$(GeneralOutDir)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup />
