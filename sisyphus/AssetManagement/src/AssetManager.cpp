@@ -1,9 +1,10 @@
 #include "Pch_AssetManagement.h"
 #include "AssetManager.h"
 #include "Utils\Logger.h"
+#include "Utils/FilesystemUtils.h"
 
 namespace Sisyphus::AssetManagement {
-	AssetManager::AssetManager(Path inAssetDir):
+	AssetManager::AssetManager(std::string inAssetDir):
 		mainAssetDir(inAssetDir)
 	{
 		InitAssets();
@@ -35,12 +36,12 @@ namespace Sisyphus::AssetManagement {
 	{
 		return static_cast<int>(assets.size());
 	}
-	Vector<Path> AssetManager::FindAllAssetPaths(Path dir)
+	std::vector<std::string> AssetManager::FindAllAssetPaths(std::string dir)
 	{
-		Vector<Path> result;
+		std::vector<std::string> result;
 		for (auto&& p : fs::recursive_directory_iterator(dir)) {
 			if (p.is_regular_file() && p.path().extension() != ".meta") {
-				result.push_back(p);
+				result.push_back(p.path().string());
 			}
 		}
 		return result;

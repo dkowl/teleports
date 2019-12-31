@@ -1,7 +1,7 @@
 #pragma once
 #include "uuid.h"
-#include "Utils\FilesystemUtils.h"
-#include "Utils\VectorUtils.h"
+#include <string>
+#include <vector>
 #include "AssetMetadata.h"
 #include <mutex>
 #include <string_view>
@@ -10,11 +10,11 @@ namespace Sisyphus::AssetManagement {
 
 	class Asset {
 	public:
-		Asset(Path inPath);
+		Asset(std::string inPath);
 
 		uuids::uuid GetId() const;
-		String GetName() const;
-		const Vector<std::byte>& GetData() const;
+		std::string GetName() const;
+		const std::vector<std::byte>& GetData() const;
 		const std::string_view GetDataAsString() const;
 
 	private:
@@ -27,12 +27,13 @@ namespace Sisyphus::AssetManagement {
 		void LazyLoadData() const;
 		void ReadData() const;
 
-		Path path;
-		Path metaPath;
+		std::string name;
+		std::string path;
+		std::string metaPath;
 		AssetMetadata metadata;
 
 		mutable bool dataIsRead;
-		mutable Vector<std::byte> data;
+		mutable std::vector<std::byte> data;
 		mutable std::mutex mutex;
 	};	
 }

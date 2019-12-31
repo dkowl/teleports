@@ -1,20 +1,23 @@
 #include "Pch_AssetManagement.h"
 #include "Asset.h"
+#include "Utils/FilesystemUtils.h"
 #include "Utils/Json.h"
 #include "Utils/UuidGenerator.h"
 #include "Utils/Logger.h"
 
 namespace Sisyphus::AssetManagement {
-	Asset::Asset(Path inPath):
+	Asset::Asset(std::string inPath):
 		path(inPath),
 		dataIsRead(false)
 	{
-		if (!fs::is_regular_file(path)) {
+		Path fsPath(path);
+		if (!fs::is_regular_file(fsPath)) {
 			throw std::runtime_error("Asset file cannot be a directory");
 		}
-		else if (!fs::exists(path)) {
-			throw std::runtime_error("Asset file " + path.string() + " does not exist");
+		else if (!fs::exists(fsPath)) {
+			throw std::runtime_error("Asset file " + path + " does not exist");
 		}
+		name = fsPath.stem().string();
 
 		metaPath = path;
 		metaPath += ".meta";
@@ -24,11 +27,11 @@ namespace Sisyphus::AssetManagement {
 	{
 		return metadata.id;
 	}
-	String Asset::GetName() const
+	std::string Asset::GetName() const
 	{
-		return metadata.name;
+		return name;
 	}
-	const Vector<std::byte>& Asset::GetData() const
+	const std::vector<std::byte>& Asset::GetData() const
 	{
 		std::lock_guard lock(mutex);
 		LazyLoadData();
@@ -51,13 +54,14 @@ namespace Sisyphus::AssetManagement {
 	}
 	bool Asset::HasMetaFile()
 	{
-		return fs::is_regular_file(metaPath) && fs::exists(metaPath);
+		Path fsMetaPath(metaPath);
+		return fs::is_regular_file(fsMetaPath) && fs::exists(fsMetaPath);
 	}
 	void Asset::ReadMetaFile()
 	{
 		std::ifstream metaFile(metaPath);
 		if (!metaFile.is_open()) {
-			throw std::runtime_error("Failed to open meta file " + metaPath.string());
+			throw std::runtime_error("Failed to open meta file " + metaPath);
 		}
 
 		json j;
@@ -66,9 +70,9 @@ namespace Sisyphus::AssetManagement {
 	}
 	void Asset::GenerateMetadata()
 	{
-		metadata.id = GenerateUuid();
-		metadata.name = path.stem().string();
-		metadata.isBinary = !(path.extension() == ".txt");
+		metadata.id = GenerateUuid();		
+		metadata.name = name;
+		metadata.isBinary = !(Path(path).extension() == ".txt");
 	}
 	void Asset::GenerateMetaFile()
 	{
@@ -77,11 +81,11 @@ namespace Sisyphus::AssetManagement {
 
 		std::ofstream metaFile(metaPath);
 		if (!metaFile.is_open()) {
-			throw std::runtime_error("Failed to create meta file " + metaPath.string());
+			throw std::runtime_error("Failed to create meta file " + metaPath);
 		}
 		metaFile << j;
 
-		Logger::Get().Log("Meta file not found, " + metaPath.string() + " created");
+		Logger::Get().Log("Meta file not found, " + metaPath + " created");
 		Logger::Get().Log("id: " + uuids::to_string(metadata.id) + "\n");
 	}
 	void Asset::LazyLoadData() const

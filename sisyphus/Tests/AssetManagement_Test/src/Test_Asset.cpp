@@ -11,7 +11,7 @@ TEST_CASE("Asset") {
 	fs::remove_all(dirPath);
 	fs::create_directories(dirPath);
 	Path assetPath = dirPath / "asset.txt";
-	auto createAsset = [assetPath]() {return Asset(assetPath); };
+	auto createAsset = [assetPath]() {return Asset(assetPath.string()); };
 	SECTION("No file") {
 		REQUIRE_THROWS(createAsset());
 	}
@@ -20,7 +20,7 @@ TEST_CASE("Asset") {
 	assetFile << content;
 	assetFile.close();
 
-	Asset asset(assetPath);
+	Asset asset(assetPath.string());
 	Path metaPath = assetPath;
 	metaPath += ".meta";
 	REQUIRE(fs::exists(metaPath));
@@ -47,7 +47,7 @@ TEST_CASE("Asset") {
 		REQUIRE(static_cast<char>(data[0]) == c);
 	}
 
-	Asset asset2(assetPath);
+	Asset asset2(assetPath.string());
 	REQUIRE(id == asset2.GetId());
 
 	std::ofstream file;
