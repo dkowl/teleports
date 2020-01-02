@@ -10,12 +10,34 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)src;$(ProjectDir)include\$(ProjectName);$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <WarningLevel Condition="'$(PlatformToolset)' == 'v142'">Level4</WarningLevel>
-      <WarningLevel Condition="'$(PlatformToolset)' == 'Clang_5_0'">EnableAllWarnings</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
-    </ClCompile>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>	
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(PlatformToolset)' == 'v142'">
+    <ClCompile>
+      <Optimization Condition="'$(Configuration)' == 'Debug'">Disabled</Optimization>	
+      <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>	  
+      <FunctionLevelLinking Condition="'$(Configuration)' == 'Release'">true</FunctionLevelLinking>
+      <IntrinsicFunctions Condition="'$(Configuration)' == 'Release'">true</IntrinsicFunctions>
+	  <LanguageStandard>stdcpplatest</LanguageStandard>
+	  <WarningLevel>Level4</WarningLevel>	  
+	</ClCompile>
+	<Link>		
+      <EnableCOMDATFolding Condition="'$(Configuration)' == 'Release'">true</EnableCOMDATFolding>
+      <OptimizeReferences Condition="'$(Configuration)' == 'Release'">true</OptimizeReferences>
+	</Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(PlatformToolset)' == 'Clang_5_0'">
+    <ClCompile>
+	  <CompileAs>CompileAsCpp</CompileAs>
+	  <CppLanguageStandard>c++1z</CppLanguageStandard>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+	</ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <BuildMacro Include="GeneralOutDir">
