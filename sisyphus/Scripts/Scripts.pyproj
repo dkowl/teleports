@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>56854a45-e2d6-47bb-839a-e313f8fd60cc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>propsPathFixer.py</StartupFile>
+    <StartupFile>generateProjects.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,6 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="generateProjects.py" />
     <Compile Include="MSB4011fixer.py" />
     <Compile Include="propsPathFixer.py" />
   </ItemGroup>
