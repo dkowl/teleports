@@ -1,7 +1,9 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup><PrecompiledHeadersImported>true</PrecompiledHeadersImported></PropertyGroup>
+  <PropertyGroup>
+    <PrecompiledHeadersImported>true</PrecompiledHeadersImported>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -9,7 +11,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <PrecompiledHeaderFile>Pch_$(ProjectName).h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>Pch_$(RootNamespace).h</PrecompiledHeaderFile>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />

@@ -10,34 +10,34 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)src;$(ProjectDir)include\$(ProjectName);$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)$(RootNamespace)\src;$(SolutionDir)$(RootNamespace)\include\$(RootNamespace);$(SolutionDir)$(RootNamespace)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <ConformanceMode>true</ConformanceMode>
-    </ClCompile>	
+    </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(PlatformToolset)' == 'v142'">
     <ClCompile>
-      <Optimization Condition="'$(Configuration)' == 'Debug'">Disabled</Optimization>	
-      <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>	  
+      <Optimization Condition="'$(Configuration)' == 'Debug'">Disabled</Optimization>
+      <Optimization Condition="'$(Configuration)' == 'Release'">MaxSpeed</Optimization>
       <FunctionLevelLinking Condition="'$(Configuration)' == 'Release'">true</FunctionLevelLinking>
       <IntrinsicFunctions Condition="'$(Configuration)' == 'Release'">true</IntrinsicFunctions>
-	  <LanguageStandard>stdcpplatest</LanguageStandard>
-	  <WarningLevel>Level4</WarningLevel>	  
-	</ClCompile>
-	<Link>		
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <WarningLevel>Level4</WarningLevel>
+    </ClCompile>
+    <Link>
       <EnableCOMDATFolding Condition="'$(Configuration)' == 'Release'">true</EnableCOMDATFolding>
       <OptimizeReferences Condition="'$(Configuration)' == 'Release'">true</OptimizeReferences>
-	</Link>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(PlatformToolset)' == 'Clang_5_0'">
     <ClCompile>
-	  <CompileAs>CompileAsCpp</CompileAs>
-	  <CppLanguageStandard>c++1z</CppLanguageStandard>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
       <ExceptionHandling>Enabled</ExceptionHandling>
-	</ClCompile>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <BuildMacro Include="GeneralOutDir">
