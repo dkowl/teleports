@@ -2,6 +2,7 @@ import xml.etree.ElementTree as ET
 from xml.dom import minidom
 import os
 import uuid
+import json
 
 msbuildXmlNamespace = 'http://schemas.microsoft.com/developer/msbuild/2003'
 ET.register_namespace('', msbuildXmlNamespace)
@@ -32,9 +33,24 @@ platforms = [
     )
 ]
 
-# class ProjectInfo:    
+solutionDir = "../"
 
-xmlHeader = r"""<?xml version="1.0" encoding="utf-8"?>"""
+def readProjectGuid(path):
+    with open(path) as file:
+        root = ET.parse(file).root()
+        guidElem = root.find(".//ProjectGuid")
+        return uuid.uuid(guidElem.text)
+
+class ProjectInfo:
+    def __init__(self, projName):
+        projDir = os.path.join(solutionDir, projName)
+        with open(os.path.join(projDir, "projectInfo.json")) as jsonFile:
+            jsonData = json.load(jsonFile)
+            self.name = projName
+            self.outputType = jsonData["outputType"]
+            self.dependencies = jsonData["dependencies"]
+            self.precompiledHeaders = jsonData["precompiledHeaders"]
+            self.test = jsonData["test"]
 
 def projectConfigurations(platform):
     root = ET.Element("ItemGroup")
@@ -116,8 +132,6 @@ def propsImportGroup(projectInfo):
         importElem.set("Project", "$(SolutionDir)props\\" + dep + ".props")
 
     return root
-
-solutionDir = "../"
 
 def getCppPaths(projName, platform):
     sourceDirs = ["src", "include"]
@@ -201,20 +215,10 @@ def generateVcxproj(platform, projectInfo):
 
     print(prettify(root))
 
-class ProjectInfo:
-    def __init__(self):
-        self.name = ""
+def generateProject(projectInfo):
+    print("TODO")
 
-info = ProjectInfo()
-info.name = "AssetManagement"
-info.outputType = "StaticLibrary"
-info.precompiledHeaders = True
-info.dependencies = [
-    "stduuid",
-		"json",
-		"Utils"
-]
-
+info = ProjectInfo("AssetManagement")
 generateVcxproj(platforms[0], info)
 generateVcxproj(platforms[1], info)
 
