@@ -36,21 +36,30 @@ platforms = [
 solutionDir = "../"
 
 def readProjectGuid(path):
-    with open(path) as file:
-        root = ET.parse(file).root()
-        guidElem = root.find(".//ProjectGuid")
-        return uuid.uuid(guidElem.text)
+    if os.path.exists(path):
+        try:
+            with open(path) as file:
+                root = ET.parse(file).getroot()
+                guidElem = root.find(".//{" + msbuildXmlNamespace + "}ProjectGuid")
+                print("guid of " + os.path.basename(path) + " is " + guidElem.text)
+                return uuid.UUID(guidElem.text)
+        except Exception as e:
+            print("Failed to read guid from " + str(path) + ": " + str(e))
+    
+    return uuid.uuid4()
 
 class ProjectInfo:
     def __init__(self, projName):
-        projDir = os.path.join(solutionDir, projName)
-        with open(os.path.join(projDir, "projectInfo.json")) as jsonFile:
+        self.name = projName
+        with open(os.path.join(self.projDir(), "projectInfo.json")) as jsonFile:
             jsonData = json.load(jsonFile)
-            self.name = projName
             self.outputType = jsonData["outputType"]
             self.dependencies = jsonData["dependencies"]
             self.precompiledHeaders = jsonData["precompiledHeaders"]
             self.test = jsonData["test"]
+
+    def projDir(self):
+        return os.path.join(solutionDir, self.name)
 
 def projectConfigurations(platform):
     root = ET.Element("ItemGroup")
@@ -66,12 +75,12 @@ def projectConfigurations(platform):
 
     return root
 
-def globals(platform, projectInfo):
+def globals(platform, projectInfo, projGuid):
     root = ET.Element("PropertyGroup")
     root.set("Label", "Globals")
 
     guidElem = ET.SubElement(root, "ProjectGuid")
-    guidElem.text = str(uuid.uuid4())
+    guidElem.text = str(projGuid)
 
     rootNsElem = ET.SubElement(root, "RootNamespace")
     rootNsElem.text = projectInfo.name
@@ -148,7 +157,7 @@ def getCppPaths(projName, platform):
                         break
                 if exclude:
                     continue
-                result.append(os.path.relpath(os.path.join(root, file), os.path.join(solutionDir, projName)))
+                result.append(os.path.relpath(os.path.join(root, file), os.path.join(solutionDir)))
 
     return result
 
@@ -169,13 +178,13 @@ def getIncludesAndCompiles(platform, projName):
                 pchElem.text = "Create"
     return (includeGroup, compileGroup)
 
-def generateVcxproj(platform, projectInfo):
+def generateVcxproj(platform, projectInfo, projGuid):
     root = ET.Element("Project")
     root.set("DefaultTargets", "Build")
     root.set("xmlns", msbuildXmlNamespace)
 
     root.append(projectConfigurations(platform))
-    root.append(globals(platform, projectInfo))
+    root.append(globals(platform, projectInfo, projGuid))
 
     defaultPropsElem = ET.Element("Import")
     defaultPropsElem.set("Project", R"$(VCTargetsPath)\Microsoft.Cpp.Default.props")
@@ -213,12 +222,19 @@ def generateVcxproj(platform, projectInfo):
     extTargetsElem.set("Label", "ExtensionTargets")
     root.append(extTargetsElem)
 
-    print(prettify(root))
+    return prettify(root)
 
 def generateProject(projectInfo):
-    print("TODO")
-
+    for platform in platforms:
+        platformDir = os.path.join(projectInfo.projDir(), platform.name)
+        if not os.path.exists(platformDir):
+            os.makedirs(platformDir)
+        projFilename = projectInfo.name + "." + platform.name + ".vcxproj"
+        projPath = os.path.join(platformDir, projFilename)
+        projGuid = readProjectGuid(projPath)
+        with open(projPath, 'w') as projFile:
+            projFile.write(generateVcxproj(platform, projectInfo, projGuid))
+            print(projFilename + "generated!")
 info = ProjectInfo("AssetManagement")
-generateVcxproj(platforms[0], info)
-generateVcxproj(platforms[1], info)
+generateProject(info)
 
