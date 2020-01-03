@@ -28,6 +28,7 @@
 #pragma comment(lib, "IPHLPAPI.lib")
 
 #elif defined(__ANDROID__)
+#include <stdexcept>
 #include <jni.h>
 #elif defined(__linux__) || defined(__unix__)
 #include <uuid/uuid.h>
@@ -659,7 +660,7 @@ namespace uuids
 #elif defined(__ANDROID__)
          using namespace detail;
          if (jniEnv == nullptr) {
-              std::cerr << "JNI unititialized. Call InitJNI before generating new uuids on Android.\n";
+              throw std::runtime_error("JNI unititialized. Call InitJNI before generating new uuids on Android.\n");
               return uuid{};
          }
 
