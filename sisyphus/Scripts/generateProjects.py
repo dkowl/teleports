@@ -15,21 +15,32 @@ def prettify(elem):
     return reparsed.toprettyxml(indent="  ")
 
 class Platform:
-    def __init__(self, name, configurations, architectures):
+    def __init__(self, 
+                 name, 
+                 configurations, 
+                 architectures, 
+                 staticLibExt, 
+                 dynamicLibExt):
         self.name = name
         self.configurations = configurations
         self.architectures = architectures
+        self.staticLibExt = staticLibExt
+        self.dynamicLibExt = dynamicLibExt
 
 platforms = [
     Platform(
         "Windows",
         ["Debug", "Release"],
-        ["x64"]
+        ["x64"],
+        ".lib",
+        ".dll"
     ),
     Platform(
         "Android",
         ["Debug", "Release"],
-        ["ARM", "ARM64"]
+        ["ARM", "ARM64"],
+        ".a",
+        ".so"
     )
 ]
 
@@ -89,6 +100,9 @@ def globals(platform, projectInfo, projGuid):
 
     rootNsElem = ET.SubElement(root, "RootNamespace")
     rootNsElem.text = projectInfo.name
+
+    targetSystemElem = ET.SubElement(root, "TargetSystem")
+    targetSystemElem.text = platform.name
 
     if platform.name == "Windows":
         wtpverElem = ET.SubElement(root, "WindowsTargetPlatformVersion")
@@ -252,13 +266,59 @@ def generateVcxproj(platform, projectInfo, isTest):
     with open(projPath, 'w') as projFile:
         projFile.write(generateVcxprojString(platform, projectInfo, targetInfo))
         print(projFilename + "generated!")
-        
+
+def generatePropsString(projectInfo):
+    root = ET.Element("Project")
+    root.set("xmlns", msbuildXmlNamespace)
+    root.set("ToolsVersion", "4.0")
+
+    importGroup = ET.SubElement(root, "ImportGroup")
+    importGroup.set("Label", "PropertySheets")
+
+    for dep in projectInfo.dependencies:
+        importElem = ET.SubElement(importGroup, "Import")
+        importElem.set("Condition", "'$(" + dep + "Imported)' == ''")
+        importElem.set("Project", dep + ".props")
+
+    propertyGroup = ET.SubElement(root, "PropertyGroup")
+    imported = [*[projectInfo.name], *projectInfo.dependencies]
+    for imp in imported:
+        importedElem = ET.SubElement(propertyGroup, imp + "Imported")
+        importedElem.text = "true"
+
+    itemDefGroup = ET.SubElement(root, "ItemDefinitionGroup")
+    clCompileElem = ET.SubElement(itemDefGroup, "ClCompile")
+    includeDirElem = ET.SubElement(clCompileElem, "AdditionalIncludeDirectories")
+    includeDirElem.text = "$SolutionDir" + projectInfo.name + "\include;%(AdditionalIncludeDirectories)"
+
+    for platform in platforms:
+        platformItemDefGroup = ET.SubElement(root, "ItemDefinitionGroup")
+        platformItemDefGroup.set("Condition", "'$(TargetSystem)' == '" + platform.name + "'")
+        linkElem = ET.SubElement(platformItemDefGroup, "Link")
+        librarianElem = ET.SubElement(platformItemDefGroup, "Lib")
+        libDirElem = ET.Element("AdditionalLibraryDirectories")
+        libDirElem.text = "$(SolutionDir)%s\%s\$(GeneralOutDir);%%AdditionalLibraryDirectories" % (projectInfo.name, platform.name)
+        libDependenciesElem = ET.Element("AdditionalDependencies")
+        libDependenciesElem.text = "%s.%s%s;%%(AdditionalDependencies)" % (projectInfo.name, platform.name, platform.staticLibExt)
+        linkElem.append(libDirElem)
+        linkElem.append(libDependenciesElem)
+        librarianElem.append(libDirElem)
+        librarianElem.append(libDependenciesElem)
+
+    return prettify(root)
+
+def generateProps(projectInfo):
+    propsPath = os.path.join(solutionDir, "props", "%s.props" % projectInfo.name)
+    with open(propsPath, 'w') as propsFile:
+        propsFile.write(generatePropsString(projectInfo))
+        print(os.path.basename(propsPath) + " generated!")
 
 def generateProject(projectInfo):
     for platform in platforms:
         generateVcxproj(platform, projectInfo, False)
         if projectInfo.test:
             generateVcxproj(platform, projectInfo, True)
+    generateProps(projectInfo)
 
 
 info = ProjectInfo("AssetManagement")
