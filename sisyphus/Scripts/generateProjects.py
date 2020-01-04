@@ -61,6 +61,11 @@ class ProjectInfo:
     def projDir(self):
         return os.path.join(solutionDir, self.name)
 
+class TargetInfo:
+    def __init__(self, projGuid, isTest):
+        self.projGuid = projGuid
+        self.isTest = isTest
+
 def projectConfigurations(platform):
     root = ET.Element("ItemGroup")
     root.set("Label", "ProjectConfigurations")
@@ -98,7 +103,7 @@ def globals(platform, projectInfo, projGuid):
 
     return root
 
-def configurations(platform, projectInfo):
+def configurations(platform, projectInfo, isTest):
     roots = []
     for config in platform.configurations:
         for arch in platform.architectures:
@@ -106,7 +111,7 @@ def configurations(platform, projectInfo):
             root.set("Condition", "'$(Configuration)|$(Platform)'=='" + config + "|" + arch + "'")
             root.set("Label", "Configuration")
             configTypeElem = ET.SubElement(root, "ConfigurationType")
-            configTypeElem.text = projectInfo.outputType
+            configTypeElem.text = projectInfo.outputType if not isTest else "Application"
             useDebugElem = ET.SubElement(root, "UseDebugLibraries")
             useDebugElem.text = "true" if config == "Debug" else "false"
             toolsetElem = ET.SubElement(root, "PlatformToolset")
@@ -120,7 +125,7 @@ def configurations(platform, projectInfo):
             roots.append(root)
     return roots
 
-def propsImportGroup(projectInfo):
+def propsImportGroup(projectInfo, isTest):
     root = ET.Element("ImportGroup")
     root.set("Label", "PropertySheets")
 
@@ -130,11 +135,14 @@ def propsImportGroup(projectInfo):
     userPropsElem.set("Label", "LocalAppDataPlatform")
 
     dependencies = ["General"]
-    if projectInfo.precompiledHeaders:
-        dependencies.append("PrecompiledHeaders")
-
-    for dep in projectInfo.dependencies:
-        dependencies.append(dep)
+    if isTest:
+        dependencies.append("catch2")
+        dependencies.append(projectInfo.name)
+    else:
+        if projectInfo.precompiledHeaders:
+            dependencies.append("PrecompiledHeaders")
+        for dep in projectInfo.dependencies:
+            dependencies.append(dep)
 
     for dep in dependencies:
         importElem = ET.SubElement(root, "Import")
@@ -142,8 +150,8 @@ def propsImportGroup(projectInfo):
 
     return root
 
-def getCppPaths(projName, platform):
-    sourceDirs = ["src", "include"]
+def getCppPaths(projName, platform, isTest):
+    sourceDirs = ["src", "include"] if not isTest else ["test"]
     result = []
     excludedPlatforms = platforms.copy()
     excludedPlatforms.remove(platform)
@@ -161,8 +169,8 @@ def getCppPaths(projName, platform):
 
     return result
 
-def getIncludesAndCompiles(platform, projName):
-    cppPaths = getCppPaths(projName, platform)
+def getIncludesAndCompiles(platform, projName, isTest):
+    cppPaths = getCppPaths(projName, platform, isTest)
     includeGroup = ET.Element("ItemGroup")
     compileGroup = ET.Element("ItemGroup")
     for path in cppPaths:
@@ -178,19 +186,19 @@ def getIncludesAndCompiles(platform, projName):
                 pchElem.text = "Create"
     return (includeGroup, compileGroup)
 
-def generateVcxproj(platform, projectInfo, projGuid):
+def generateVcxprojString(platform, projectInfo, targetInfo):
     root = ET.Element("Project")
     root.set("DefaultTargets", "Build")
     root.set("xmlns", msbuildXmlNamespace)
 
     root.append(projectConfigurations(platform))
-    root.append(globals(platform, projectInfo, projGuid))
+    root.append(globals(platform, projectInfo, targetInfo.projGuid))
 
     defaultPropsElem = ET.Element("Import")
     defaultPropsElem.set("Project", R"$(VCTargetsPath)\Microsoft.Cpp.Default.props")
     root.append(defaultPropsElem)
 
-    for elem in configurations(platform, projectInfo):
+    for elem in configurations(platform, projectInfo, targetInfo.isTest):
         root.append(elem)
 
     cppPropsElem = ET.Element("Import")
@@ -205,12 +213,12 @@ def generateVcxproj(platform, projectInfo, projGuid):
     sharedElem.set("Label", "Shared")
     root.append(sharedElem)
     
-    root.append(propsImportGroup(projectInfo))
+    root.append(propsImportGroup(projectInfo, targetInfo.isTest))
 
     userMacrosElem = ET.Element("PropertyGroup")
     userMacrosElem.set("Label", "UserMacros")
 
-    includeGroup, compileGroup = getIncludesAndCompiles(platform, projectInfo.name)
+    includeGroup, compileGroup = getIncludesAndCompiles(platform, projectInfo.name, targetInfo.isTest)
     root.append(includeGroup)
     root.append(compileGroup)
 
@@ -224,17 +232,35 @@ def generateVcxproj(platform, projectInfo, projGuid):
 
     return prettify(root)
 
+def generateVcxproj(platform, projectInfo, isTest):
+    targetDir = os.path.join(projectInfo.projDir(), platform.name)
+    if isTest:
+        targetDir += ".Test"
+
+    if not os.path.exists(targetDir):
+        print("Creating target directory: " + targetDir)
+        os.makedirs(targetDir)
+
+    projFilename = projectInfo.name + "." + platform.name
+    if isTest:
+        projFilename += ".Test"
+    projFilename += ".vcxproj"
+
+    projPath = os.path.join(targetDir, projFilename)
+    targetInfo = TargetInfo(projGuid = readProjectGuid(projPath), isTest = isTest)
+
+    with open(projPath, 'w') as projFile:
+        projFile.write(generateVcxprojString(platform, projectInfo, targetInfo))
+        print(projFilename + "generated!")
+        
+
 def generateProject(projectInfo):
     for platform in platforms:
-        platformDir = os.path.join(projectInfo.projDir(), platform.name)
-        if not os.path.exists(platformDir):
-            os.makedirs(platformDir)
-        projFilename = projectInfo.name + "." + platform.name + ".vcxproj"
-        projPath = os.path.join(platformDir, projFilename)
-        projGuid = readProjectGuid(projPath)
-        with open(projPath, 'w') as projFile:
-            projFile.write(generateVcxproj(platform, projectInfo, projGuid))
-            print(projFilename + "generated!")
+        generateVcxproj(platform, projectInfo, False)
+        if projectInfo.test:
+            generateVcxproj(platform, projectInfo, True)
+
+
 info = ProjectInfo("AssetManagement")
 generateProject(info)
 
