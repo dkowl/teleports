@@ -12,7 +12,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <PrecompiledHeaderFile>$(SolutionDir)$(RootNamespace)\src\Pch_$(RootNamespace).h</PrecompiledHeaderFile>
-      <ForcedIncludeFiles>Pch_$(RootNamespace).h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles>$(SolutionDir)$(RootNamespace)\src\Pch_$(RootNamespace).h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />
