@@ -164,27 +164,42 @@ def propsImportGroup(projectInfo, isTest):
 
     return root
 
-def getCppPaths(projName, platform, isTest):
-    sourceDirs = ["src", "include"] if not isTest else ["test"]
-    result = []
+def getCppPathsAndDirs(projName, platform, isTest):
+    sourceDirs = ["src", "include", "test"]
+    resultFiles = []
+    resultDirs = set()
     excludedPlatforms = platforms.copy()
     excludedPlatforms.remove(platform)
     for srcDir in sourceDirs:
-        for root, d, files in os.walk(os.path.join(solutionDir, projName, srcDir)):
-            for file in files:
-                exclude = False
-                for excludedPlatform in excludedPlatforms:
-                    if file.find("." + excludedPlatform.name + ".") != -1:
-                        exclude = True
-                        break
-                if exclude:
-                    continue
-                result.append(os.path.relpath(os.path.join(root, file), os.path.join(solutionDir)))
+        srcPath = os.path.join(solutionDir, projName, srcDir)
+        for root, dirs, files in os.walk(srcPath):
+            if not (srcDir == "test" and not isTest):
+                resultDirs.add(os.path.relpath(root, solutionDir))
+                for dir in dirs:
+                    resultDirs.add(os.path.relpath(os.path.join(root, dir), solutionDir))
+            if (srcDir == "test") == (isTest):
+                for file in files:
+                    exclude = False
+                    for excludedPlatform in excludedPlatforms:
+                        if file.find("." + excludedPlatform.name + ".") != -1:
+                            exclude = True
+                            break
+                    if exclude:
+                        continue
+                    resultFiles.append(os.path.relpath(os.path.join(root, file), os.path.join(solutionDir)))
 
-    return result
+    return resultFiles, resultDirs
 
-def getIncludesAndCompiles(platform, projName, isTest):
-    cppPaths = getCppPaths(projName, platform, isTest)
+def getIncludeDirsIncludesAndCompiles(platform, projName, isTest):
+    cppPaths, cppDirs = getCppPathsAndDirs(projName, platform, isTest)
+    includeDirGroup = ET.Element("ItemDefinitionGroup")
+    clCompileElem = ET.SubElement(includeDirGroup, "ClCompile")
+    includeDirElem = ET.SubElement(clCompileElem, "AdditionalIncludeDirectories")
+    includeDirStr = ""
+    for dir in cppDirs:
+        includeDirStr += "$(SolutionDir)%s;" % dir
+    includeDirStr += "%(AdditionalIncludeDirectories)"
+    includeDirElem.text = includeDirStr
     includeGroup = ET.Element("ItemGroup")
     compileGroup = ET.Element("ItemGroup")
     for path in cppPaths:
@@ -198,7 +213,8 @@ def getIncludesAndCompiles(platform, projName, isTest):
             if (stem == "Pch." + projName or stem == "Pch_" + projName) and platform.name == "Windows":
                 pchElem = ET.SubElement(compileElem, "PrecompiledHeader")
                 pchElem.text = "Create"
-    return (includeGroup, compileGroup)
+
+    return (includeDirGroup, includeGroup, compileGroup)
 
 def generateVcxprojString(platform, projectInfo, targetInfo):
     root = ET.Element("Project")
@@ -232,7 +248,8 @@ def generateVcxprojString(platform, projectInfo, targetInfo):
     userMacrosElem = ET.Element("PropertyGroup")
     userMacrosElem.set("Label", "UserMacros")
 
-    includeGroup, compileGroup = getIncludesAndCompiles(platform, projectInfo.name, targetInfo.isTest)
+    includeDirGroup, includeGroup, compileGroup = getIncludeDirsIncludesAndCompiles(platform, projectInfo.name, targetInfo.isTest)
+    root.append(includeDirGroup)
     root.append(includeGroup)
     root.append(compileGroup)
 
