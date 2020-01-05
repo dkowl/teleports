@@ -3,6 +3,7 @@ from xml.dom import minidom
 import os
 import uuid
 import json
+import traceback
 
 msbuildXmlNamespace = 'http://schemas.microsoft.com/developer/msbuild/2003'
 ET.register_namespace('', msbuildXmlNamespace)
@@ -59,6 +60,22 @@ def readProjectGuid(path):
     
     return uuid.uuid4()
 
+def readFilterGuids(path):
+    result = {}
+    try:
+        with open(path) as file:
+            root = ET.parse(file).getroot()
+            for filterElem in root.iterfind(".//{" + msbuildXmlNamespace + "}Filter"):
+                uuidElem = filterElem.find("{{{0}}}UniqueIdentifier".format(msbuildXmlNamespace))
+                if uuidElem != None:
+                    filterName = filterElem.get("Include")
+                    result[filterName] = uuidElem.text
+                    print("guid of {0} in {1} is {2}".format(filterName, os.path.basename(path), uuidElem.text))
+    except:
+        print("Failed to read guid from {0}: {1}".format(path, traceback.format_exc()))
+
+    return result
+
 class ProjectInfo:
     def __init__(self, projName):
         self.name = projName
@@ -73,9 +90,12 @@ class ProjectInfo:
         return os.path.join(solutionDir, self.name)
 
 class TargetInfo:
-    def __init__(self, projGuid, isTest):
+    def __init__(self, projGuid, filterGuids, isTest, cppPaths, cppDirs):
         self.projGuid = projGuid
+        self.filterGuids = filterGuids
         self.isTest = isTest
+        self.cppPaths = cppPaths
+        self.cppDirs = cppDirs
 
 def projectConfigurations(platform):
     root = ET.Element("ItemGroup")
@@ -190,19 +210,18 @@ def getCppPathsAndDirs(projName, platform, isTest):
 
     return resultFiles, resultDirs
 
-def getIncludeDirsIncludesAndCompiles(platform, projName, isTest):
-    cppPaths, cppDirs = getCppPathsAndDirs(projName, platform, isTest)
+def getIncludeDirsIncludesAndCompiles(targetInfo, platform, projName):
     includeDirGroup = ET.Element("ItemDefinitionGroup")
     clCompileElem = ET.SubElement(includeDirGroup, "ClCompile")
     includeDirElem = ET.SubElement(clCompileElem, "AdditionalIncludeDirectories")
     includeDirStr = ""
-    for dir in cppDirs:
+    for dir in targetInfo.cppDirs:
         includeDirStr += "$(SolutionDir)%s;" % dir
     includeDirStr += "%(AdditionalIncludeDirectories)"
     includeDirElem.text = includeDirStr
     includeGroup = ET.Element("ItemGroup")
     compileGroup = ET.Element("ItemGroup")
-    for path in cppPaths:
+    for path in targetInfo.cppPaths:
         stem, extension = os.path.splitext(os.path.basename(path))
         if extension in (".h", ".hpp"):
             includeElem = ET.SubElement(includeGroup, "ClInclude")
@@ -215,6 +234,53 @@ def getIncludeDirsIncludesAndCompiles(platform, projName, isTest):
                 pchElem.text = "Create"
 
     return (includeDirGroup, includeGroup, compileGroup)
+
+def generateFiltersString(existingFilterUuidDict, cppPaths, projName):
+    root = ET.Element("Project")
+    root.set("ToolsVersion", "4.0")
+    root.set("xmlns", msbuildXmlNamespace)
+    filterGroup = ET.SubElement(root, "ItemGroup")
+    includeGroup = ET.SubElement(root, "ItemGroup")
+    compileGroup = ET.SubElement(root, "ItemGroup")
+    filterNames = set()
+    for path in cppPaths:
+        filterName = os.path.dirname(path)
+        if "test" in filterName:
+            a = 2
+        filterName = filterName.replace(projName + "\\include\\" + projName, "Public Headers")
+        filterName = filterName.replace(projName + "\\src", "Source Files")
+        filterName = filterName.replace(projName + "\\test", "Test Files")
+
+        # add filter if not exists
+        if not filterName in filterNames:
+            filterNames.add(filterName)
+            filterElem = ET.SubElement(filterGroup, "Filter")
+            filterElem.set("Include", filterName)
+            uuidElem = ET.SubElement(filterElem, "UniqueIdentifier")
+            existingUuid = existingFilterUuidDict.get(filterName) 
+            if existingUuid != None:
+                print("{1} - Existing filter uuid detected: {0}".format(existingUuid, filterName))
+                uuidElem.text = str(existingUuid)
+            else:
+                newUuid = uuid.uuid4()
+                print("{1} - Existing filter uuid not detected, generating: {0}".format(newUuid, filterName))
+                uuidElem.text = str(newUuid)
+
+        ext = os.path.splitext(path)[1]
+        isHeader = ext in (".h", ".hpp")
+        isCpp = ext in (".c", ".cpp")
+        if isHeader:
+            clElem = ET.SubElement(includeGroup, "ClInclude")
+        elif isCpp:
+            clElem = ET.SubElement(compileGroup, "ClCompile")
+        else:
+            print("{0} is neither a header nor a cpp file, no filter for it".format(path))
+            continue
+        clElem.set("Include", "$(SolutionDir){0}".format(path))
+        filterElem = ET.SubElement(clElem, "Filter")
+        filterElem.text = filterName
+
+    return prettify(root)
 
 def generateVcxprojString(platform, projectInfo, targetInfo):
     root = ET.Element("Project")
@@ -248,7 +314,7 @@ def generateVcxprojString(platform, projectInfo, targetInfo):
     userMacrosElem = ET.Element("PropertyGroup")
     userMacrosElem.set("Label", "UserMacros")
 
-    includeDirGroup, includeGroup, compileGroup = getIncludeDirsIncludesAndCompiles(platform, projectInfo.name, targetInfo.isTest)
+    includeDirGroup, includeGroup, compileGroup = getIncludeDirsIncludesAndCompiles(targetInfo, platform, projectInfo.name)
     root.append(includeDirGroup)
     root.append(includeGroup)
     root.append(compileGroup)
@@ -263,7 +329,7 @@ def generateVcxprojString(platform, projectInfo, targetInfo):
 
     return prettify(root)
 
-def generateVcxproj(platform, projectInfo, isTest):
+def generateVcxprojAndFilters(platform, projectInfo, isTest):
     targetDir = os.path.join(projectInfo.projDir(), platform.name)
     if isTest:
         targetDir += ".Test"
@@ -278,11 +344,33 @@ def generateVcxproj(platform, projectInfo, isTest):
     projFilename += ".vcxproj"
 
     projPath = os.path.join(targetDir, projFilename)
-    targetInfo = TargetInfo(projGuid = readProjectGuid(projPath), isTest = isTest)
+    filtersPath = projPath + ".filters"
+    cppPaths, cppDirs = getCppPathsAndDirs(projectInfo.name, platform, isTest)
+    targetInfo = TargetInfo(
+        projGuid = readProjectGuid(projPath), 
+        filterGuids = readFilterGuids(filtersPath), 
+        isTest = isTest,
+        cppPaths = cppPaths,
+        cppDirs = cppDirs)
 
-    with open(projPath, 'w') as projFile:
-        projFile.write(generateVcxprojString(platform, projectInfo, targetInfo))
-        print(projFilename + "generated!")
+    try:
+        vcxprojString = generateVcxprojString(platform, projectInfo, targetInfo)
+        with open(projPath, 'w') as projFile:
+            projFile.write(vcxprojString)
+            print(projFilename + " generated!")
+    except:
+        print("Failed to generate {0}: {1}".format(projFilename, traceback.format_exc()))
+
+    try:
+        filtersString = generateFiltersString(
+            existingFilterUuidDict = targetInfo.filterGuids, 
+            projName = projectInfo.name, 
+            cppPaths = targetInfo.cppPaths)
+        with open(filtersPath, 'w') as filtersFile:
+            filtersFile.write(filtersString)
+            print(os.path.basename(filtersPath) + " generated!")
+    except:
+        print("Failed to generate {0}: {1}".format(os.path.basename(filtersPath), traceback.format_exc()))
 
 def generatePropsString(projectInfo):
     root = ET.Element("Project")
@@ -332,9 +420,9 @@ def generateProps(projectInfo):
 
 def generateProject(projectInfo):
     for platform in platforms:
-        generateVcxproj(platform, projectInfo, False)
+        generateVcxprojAndFilters(platform, projectInfo, False)
         if projectInfo.test:
-            generateVcxproj(platform, projectInfo, True)
+            generateVcxprojAndFilters(platform, projectInfo, True)
     generateProps(projectInfo)
 
 
