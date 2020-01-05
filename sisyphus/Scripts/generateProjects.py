@@ -422,7 +422,15 @@ def generateProps(projectInfo):
         propsFile.write(generatePropsString(projectInfo))
         print(os.path.basename(propsPath) + " generated!")
 
+def generateCatchMain(projectInfo):
+    path = os.path.join(solutionDir, projectInfo.name, "test", "catch.main.cpp")
+    with open(path, 'w') as file:
+        file.write("#define CATCH_CONFIG_MAIN\n#include \"catch.hpp\"")
+        print("{0}: catch main generated".format(projectInfo.name))
+
 def generateProject(projectInfo):
+    if projectInfo.test:
+        generateCatchMain(projectInfo)
     for platform in platforms:
         generateVcxprojAndFilters(platform, projectInfo, False)
         if projectInfo.test:
