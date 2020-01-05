@@ -2,16 +2,24 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <stack>
+#ifdef __cpp_concepts
 #include <concepts>
+#endif
 
 namespace Sisyphus::Utils {
 
+#ifdef __cpp_concepts
 	template<typename Key>
 	concept Hashable = requires(Key key) {
 		{std::hash<Key>{}(key)}->std::convertible_to<std::size_t>;
 	};
+#endif
 
+#ifdef __cpp_concepts
 	template<Hashable T>
+#else
+	template<typename T>
+#endif
 	class Graph {
 	public:
 		void EnsureNodeExists(const T& node) {
@@ -34,11 +42,20 @@ namespace Sisyphus::Utils {
 			return graph.find(node) != graph.end();
 		}
 
+		template<typename U>
+		static inline bool SetContains(const std::unordered_set<U>& set, const U& key) {
+#ifdef __clang__
+			return set.find(key) != set.end();
+#else
+			return set.contains(key);
+#endif
+		}
+
 		std::vector<T> PostOrder() const {
 			std::vector<T> result;
 			std::unordered_set<const T*> visited;
 			for (auto&& node : graph) {
-				if (visited.contains(&node.first)) continue;
+				if (SetContains(visited, &node.first)) continue;
 
 				const T* currentNode = &node.first;
 				std::stack<const T*> stack;
@@ -47,7 +64,7 @@ namespace Sisyphus::Utils {
 					std::vector<const T*> unvisitedChildren;
 					for (auto&& child : children) {
 						auto childAddress = &(graph.find(child)->first);
-						if (visited.contains(childAddress)) continue;
+						if (SetContains(visited, childAddress)) continue;
 						unvisitedChildren.push_back(childAddress);
 					}
 
@@ -66,7 +83,7 @@ namespace Sisyphus::Utils {
 						break;
 					}
 					else {
-						while (visited.contains(stack.top())) stack.pop();
+						while (SetContains(visited, stack.top())) stack.pop();
 						currentNode = stack.top();
 						stack.pop();
 					}					
