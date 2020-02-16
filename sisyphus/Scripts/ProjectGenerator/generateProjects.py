@@ -4,6 +4,9 @@ import os
 import uuid
 import json
 import traceback
+from constants import solutionDir
+from ProjectInfo import ProjectInfo
+from generateCatchMain import generateCatchMain
 
 msbuildXmlNamespace = 'http://schemas.microsoft.com/developer/msbuild/2003'
 ET.register_namespace('', msbuildXmlNamespace)
@@ -45,8 +48,6 @@ platforms = [
     )
 ]
 
-solutionDir = "../"
-
 def readProjectGuid(path):
     if os.path.exists(path):
         try:
@@ -75,23 +76,6 @@ def readFilterGuids(path):
         print("Failed to read guid from {0}: {1}".format(path, traceback.format_exc()))
 
     return result
-
-class ProjectInfo:
-    def __init__(self, projName):
-        self.name = projName
-        try:
-            path = os.path.join(self.projDir(), "{0}.projectInfo.json".format(projName))
-            with open(path) as jsonFile:
-                jsonData = json.load(jsonFile)
-                self.outputType = jsonData["outputType"]
-                self.dependencies = jsonData["dependencies"]
-                self.precompiledHeaders = jsonData["precompiledHeaders"]
-                self.test = jsonData["test"]
-        except:
-            print("Failed to read project info from {0}: {1}".format(path, traceback.format_exc()))
-
-    def projDir(self):
-        return os.path.join(solutionDir, self.name)
 
 class TargetInfo:
     def __init__(self, projGuid, filterGuids, isTest, cppPaths, cppDirs):
@@ -398,7 +382,7 @@ def generatePropsString(projectInfo):
     itemDefGroup = ET.SubElement(root, "ItemDefinitionGroup")
     clCompileElem = ET.SubElement(itemDefGroup, "ClCompile")
     includeDirElem = ET.SubElement(clCompileElem, "AdditionalIncludeDirectories")
-    includeDirElem.text = "$SolutionDir" + projectInfo.name + "\include;%(AdditionalIncludeDirectories)"
+    includeDirElem.text = "$(SolutionDir)" + projectInfo.name + "\include;%(AdditionalIncludeDirectories)"
 
     for platform in platforms:
         platformItemDefGroup = ET.SubElement(root, "ItemDefinitionGroup")
@@ -406,7 +390,7 @@ def generatePropsString(projectInfo):
         linkElem = ET.SubElement(platformItemDefGroup, "Link")
         librarianElem = ET.SubElement(platformItemDefGroup, "Lib")
         libDirElem = ET.Element("AdditionalLibraryDirectories")
-        libDirElem.text = "$(SolutionDir)%s\%s\$(GeneralOutDir);%%AdditionalLibraryDirectories" % (projectInfo.name, platform.name)
+        libDirElem.text = "$(SolutionDir)%s\%s\$(GeneralOutDir);%%(AdditionalLibraryDirectories)" % (projectInfo.name, platform.name)
         libDependenciesElem = ET.Element("AdditionalDependencies")
         libDependenciesElem.text = "%s.%s%s;%%(AdditionalDependencies)" % (projectInfo.name, platform.name, platform.staticLibExt)
         linkElem.append(libDirElem)
@@ -421,12 +405,6 @@ def generateProps(projectInfo):
     with open(propsPath, 'w') as propsFile:
         propsFile.write(generatePropsString(projectInfo))
         print(os.path.basename(propsPath) + " generated!")
-
-def generateCatchMain(projectInfo):
-    path = os.path.join(solutionDir, projectInfo.name, "test", "catch.main.cpp")
-    with open(path, 'w') as file:
-        file.write("#define CATCH_CONFIG_MAIN\n#include \"catch.hpp\"")
-        print("{0}: catch main generated".format(projectInfo.name))
 
 def generateProject(projectInfo):
     if projectInfo.test:

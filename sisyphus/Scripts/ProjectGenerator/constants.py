@@ -1,0 +1,2 @@
+solutionDir = "../"
+sourceDir = "ProjectGenerator"

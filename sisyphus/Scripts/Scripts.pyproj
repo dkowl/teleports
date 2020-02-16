@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>56854a45-e2d6-47bb-839a-e313f8fd60cc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>generateProjects.py</StartupFile>
+    <StartupFile>ProjectGenerator\generateProjects.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,9 +21,24 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="generateProjects.py" />
     <Compile Include="MSB4011fixer.py" />
+    <Compile Include="ProjectGenerator\constants.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ProjectGenerator\generateAndroidTestApp.py" />
+    <Compile Include="ProjectGenerator\generateCatchMain.py" />
+    <Compile Include="ProjectGenerator\generateProjects.py" />
+    <Compile Include="ProjectGenerator\ProjectInfo.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="propsPathFixer.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ProjectGenerator\" />
+    <Folder Include="ProjectGenerator\items\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ProjectGenerator\items\catch.main.cpp" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
