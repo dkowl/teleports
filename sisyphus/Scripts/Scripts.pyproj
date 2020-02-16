@@ -28,6 +28,12 @@
     <Compile Include="ProjectGenerator\generateAndroidTestApp.py" />
     <Compile Include="ProjectGenerator\generateCatchMain.py" />
     <Compile Include="ProjectGenerator\generateProjects.py" />
+    <Compile Include="ProjectGenerator\Platform.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ProjectGenerator\projCommon.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ProjectGenerator\ProjectInfo.py">
       <SubType>Code</SubType>
     </Compile>

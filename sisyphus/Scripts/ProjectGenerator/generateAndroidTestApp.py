@@ -4,8 +4,9 @@ from xmlUtils import *
 from constants import *
 import ProjectInfo
 import sisyphusUtils as sis
+from projCommon import *
 
-def generateAndroidTestApp(projectInfo):
+def generateAndroidTestApp(platform, projectInfo):
     appDir = os.path.join(projectInfo.projDir(), "Android.Test", "App")
     srcDir = os.path.join(pythonSourceDir, "items", "AndroidTestApp")
 
@@ -35,6 +36,16 @@ def generateAndroidTestApp(projectInfo):
         with open(dst, 'w') as dstFile:
             dstFile.write(content)
 
-    # androidproj
+    # .androidproj
+    root = ET.Element("Project")
+    root.set("DefaultTargets", "Build")
+    root.set("xmlns", msbuildXmlNamespace)
+    root.append(projectConfigurations(platform))
+
+    androidprojFilename = os.path.join(appDir, "{0}.androidproj".format(projectInfo.testAppName()))
+    with open(androidprojFilename, 'w') as androidprojFile:
+        androidprojFile.write(prettify(root))
+
+    # TODO: rest of the .androidproj, try to be smart about reusing what was done for .vcxproj
 
 

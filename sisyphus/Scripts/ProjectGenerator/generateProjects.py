@@ -6,21 +6,10 @@ import sisyphusUtils as sis
 from xmlUtils import *
 from constants import solutionDir
 from ProjectInfo import ProjectInfo
+from Platform import Platform
+from projCommon import projectConfigurations
 from generateCatchMain import generateCatchMain
 from generateAndroidTestApp import generateAndroidTestApp
-
-class Platform:
-    def __init__(self, 
-                 name, 
-                 configurations, 
-                 architectures, 
-                 staticLibExt, 
-                 dynamicLibExt):
-        self.name = name
-        self.configurations = configurations
-        self.architectures = architectures
-        self.staticLibExt = staticLibExt
-        self.dynamicLibExt = dynamicLibExt
 
 platforms = [
     Platform(
@@ -75,20 +64,6 @@ class TargetInfo:
         self.isTest = isTest
         self.cppPaths = cppPaths
         self.cppDirs = cppDirs
-
-def projectConfigurations(platform):
-    root = ET.Element("ItemGroup")
-    root.set("Label", "ProjectConfigurations")
-    for config in platform.configurations:
-        for arch in platform.architectures:
-            projConfigElem = ET.SubElement(root, "ProjectConfiguration")
-            projConfigElem.set("Include", config + "|" + arch)
-            configElem = ET.SubElement(projConfigElem, "Configuration")
-            configElem.text = config
-            archElem = ET.SubElement(projConfigElem, "Platform")
-            archElem.text = arch
-
-    return root
 
 def globals(platform, projectInfo, projGuid):
     root = ET.Element("PropertyGroup")
@@ -403,7 +378,7 @@ def generateProject(projectInfo):
         if projectInfo.test:
             generateVcxprojAndFilters(platform, projectInfo, True)
             if platform.name == "Android":
-                generateAndroidTestApp(projectInfo)
+                generateAndroidTestApp(platform, projectInfo)
     generateProps(projectInfo)
 
 
