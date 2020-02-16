@@ -5,7 +5,7 @@ import ProjectInfo
 def generateCatchMain(projectInfo):
     filename = "catch.main.cpp"
 
-    sourcePath = os.path.join(sourceDir, "items", filename)
+    sourcePath = os.path.join(pythonSourceDir, "items", filename)
     destPath = os.path.join(solutionDir, projectInfo.name, "test", filename)
 
     with open(sourcePath, 'r') as sourceFile:

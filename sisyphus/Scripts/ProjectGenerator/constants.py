@@ -1,2 +1,2 @@
 solutionDir = "../"
-sourceDir = "ProjectGenerator"
+pythonSourceDir = "ProjectGenerator"

@@ -2,10 +2,12 @@ import os
 import uuid
 import json
 import traceback
+import sisyphusUtils as sis
 from xmlUtils import *
 from constants import solutionDir
 from ProjectInfo import ProjectInfo
 from generateCatchMain import generateCatchMain
+from generateAndroidTestApp import generateAndroidTestApp
 
 class Platform:
     def __init__(self, 
@@ -311,9 +313,7 @@ def generateVcxprojAndFilters(platform, projectInfo, isTest):
     if isTest:
         targetDir += ".Test"
 
-    if not os.path.exists(targetDir):
-        print("Creating target directory: " + targetDir)
-        os.makedirs(targetDir)
+    sis.ensureDirExists(targetDir)
 
     projFilename = projectInfo.name + "." + platform.name
     if isTest:
@@ -402,6 +402,8 @@ def generateProject(projectInfo):
         generateVcxprojAndFilters(platform, projectInfo, False)
         if projectInfo.test:
             generateVcxprojAndFilters(platform, projectInfo, True)
+            if platform.name == "Android":
+                generateAndroidTestApp(projectInfo)
     generateProps(projectInfo)
 
 
