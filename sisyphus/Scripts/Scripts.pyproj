@@ -31,6 +31,9 @@
     <Compile Include="ProjectGenerator\ProjectInfo.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ProjectGenerator\xmlUtils.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="propsPathFixer.py" />
   </ItemGroup>
   <ItemGroup>
