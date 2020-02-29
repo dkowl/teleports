@@ -11,7 +11,7 @@
 extern "C"
 JNIEXPORT JNICALL
 int Java_com_APPNAME_APPNAME_runTest(JNIEnv * env, jclass type) {
-    char* argv[] = { "whatever" };
+    const char* argv[] = { "whatever" };
     int result = Catch::Session().run(1, argv);//fake `argc` and `argv`
     return result;
 }
