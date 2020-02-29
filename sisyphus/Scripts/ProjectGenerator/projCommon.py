@@ -1,5 +1,20 @@
+import os
 import Platform
+import uuid
 from xmlUtils import *
+
+def readProjectGuid(path):
+    if os.path.exists(path):
+        try:
+            with open(path) as file:
+                root = ET.parse(file).getroot()
+                guidElem = root.find(".//{" + msbuildXmlNamespace + "}ProjectGuid")
+                print("guid of " + os.path.basename(path) + " is " + guidElem.text)
+                return uuid.UUID(guidElem.text)
+        except Exception as e:
+            print("Failed to read guid from " + str(path) + ": " + str(e))
+    
+    return uuid.uuid4()
 
 def projectConfigurations(platform):
     root = ET.Element("ItemGroup")

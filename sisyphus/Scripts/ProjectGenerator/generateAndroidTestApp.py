@@ -36,13 +36,37 @@ def generateAndroidTestApp(platform, projectInfo):
         with open(dst, 'w') as dstFile:
             dstFile.write(content)
 
-    # .androidproj
+    # .androidproj    
+    androidprojFilename = os.path.join(appDir, "{0}.androidproj".format(projectInfo.testAppName()))
+    projGuid = readProjectGuid(androidprojFilename)
+
     root = ET.Element("Project")
     root.set("DefaultTargets", "Build")
     root.set("xmlns", msbuildXmlNamespace)
     root.append(projectConfigurations(platform))
 
-    androidprojFilename = os.path.join(appDir, "{0}.androidproj".format(projectInfo.testAppName()))
+    # globals
+    globalsElem = ET.Element("PropertyGroup")
+    globalsElem.set("Label", "Globals")
+
+    guidElem = ET.SubElement(globalsElem, "ProjectGuid")
+    guidElem.text = str(projGuid)
+
+    rootNsElem = ET.SubElement(globalsElem, "RootNamespace")
+    rootNsElem.text = projectInfo.name
+
+    packagingProjWithoutNativeCompElem = ET.SubElement(globalsElem, "_PackagingProjectWithoutNativeComponent")
+    packagingProjWithoutNativeCompElem.text = "true"
+
+    launchActivityElem = ET.SubElement(globalsElem, "LaunchActivity")
+    launchActivityElem.set("Condition", "'$(LaunchActivity)' == ''")
+    launchActivityElem.text = "com.{0}.{0}".format(projectInfo.testAppName())
+
+    javaSrcElem = ET.SubElement(globalsElem, "JaveSourceRoots")
+    javaSrcElem.text = "src"
+
+    root.append(globalsElem)
+
     with open(androidprojFilename, 'w') as androidprojFile:
         androidprojFile.write(prettify(root))
 

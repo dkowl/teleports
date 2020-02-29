@@ -1,4 +1,4 @@
-class Platform:
+class PlatformData:
     def __init__(self, 
                  name, 
                  configurations, 

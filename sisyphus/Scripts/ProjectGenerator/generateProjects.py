@@ -6,20 +6,20 @@ import sisyphusUtils as sis
 from xmlUtils import *
 from constants import solutionDir
 from ProjectInfo import ProjectInfo
-from Platform import Platform
-from projCommon import projectConfigurations
+from Platform import PlatformData
+from projCommon import *
 from generateCatchMain import generateCatchMain
 from generateAndroidTestApp import generateAndroidTestApp
 
 platforms = [
-    Platform(
+    PlatformData(
         "Windows",
         ["Debug", "Release"],
         ["x64"],
         ".lib",
         ".dll"
     ),
-    Platform(
+    PlatformData(
         "Android",
         ["Debug", "Release"],
         ["ARM", "ARM64"],
@@ -27,19 +27,6 @@ platforms = [
         ".so"
     )
 ]
-
-def readProjectGuid(path):
-    if os.path.exists(path):
-        try:
-            with open(path) as file:
-                root = ET.parse(file).getroot()
-                guidElem = root.find(".//{" + msbuildXmlNamespace + "}ProjectGuid")
-                print("guid of " + os.path.basename(path) + " is " + guidElem.text)
-                return uuid.UUID(guidElem.text)
-        except Exception as e:
-            print("Failed to read guid from " + str(path) + ": " + str(e))
-    
-    return uuid.uuid4()
 
 def readFilterGuids(path):
     result = {}
