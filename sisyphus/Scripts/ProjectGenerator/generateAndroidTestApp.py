@@ -7,7 +7,8 @@ import sisyphusUtils as sis
 from projCommon import *
 
 def generateAndroidTestApp(platform, projectInfo):
-    appDir = os.path.join(projectInfo.projDir(), "Android.Test", "App")
+    libDir = os.path.join(projectInfo.projDir(), "Android.Test")
+    appDir = os.path.join(libDir, "App")
     srcDir = os.path.join(pythonSourceDir, "items", "AndroidTestApp")
 
     # other files
@@ -67,9 +68,55 @@ def generateAndroidTestApp(platform, projectInfo):
 
     root.append(globalsElem)
 
+
+    importElem1 = ET.SubElement(root, "Import")
+    importElem1.set("Project", "$(AndroidTargetsPath)\Android.Default.props")
+
+    configGroup = ET.SubElement(root, "PropertyGroup")
+    configGroup.set("Label", "Configuration")
+
+    targetNameElem = ET.SubElement(configGroup, "TargetName")
+    targetNameElem.text = "$(RootNamespace)"
+
+    configTypeElem = ET.SubElement(configGroup, "ConfigurationType")
+    configTypeElem.text = "Application"
+
+    useDebugElem_Debug = ET.SubElement(configGroup, "UseDebugLibraries")
+    useDebugElem_Debug.set("Condition", "'$(Configuration)'=='Debug'")
+    useDebugElem_Debug.text = "true"
+
+    useDebugElem_Release = ET.SubElement(configGroup, "UseDebugLibraries")
+    useDebugElem_Release.set("Condition", "'$(Configuration)'=='Release'")
+    useDebugElem_Release.text = "false"
+
+    importElem2 = ET.SubElement(root, "Import")
+    importElem2.set("Project", "$(AndroidTargetsPath)\Android.props")
+
+    itemDefGroup = ET.SubElement(root, "ItemDefinitionGroup")
+    antPackageElem = ET.SubElement(itemDefGroup, "AntPackage")
+    appNameElem = ET.SubElement(antPackageElem, "AndroidAppLibName")
+    appNameElem.text = projectInfo.name
+
+    itemGroup = ET.SubElement(root, "ItemGroup")
+    contentElem = ET.SubElement(itemGroup, "Content")
+    contentElem.set("Include", "res\\values\strings.xml")
+    buildXmlElem = ET.SubElement(itemGroup, "AntBuildXml")
+    buildXmlElem.set("Include", "build.xml")
+    manifestElem = ET.SubElement(itemGroup, "AndroidManifest")
+    manifestElem.set("Include", "AndroidManifest.xml")
+    propertiesElem = ET.SubElement(itemGroup, "AntProjectPropertiesFile")
+    propertiesElem.set("Include", "project.properties")
+    javaCompileElem = ET.SubElement(itemGroup, "JavaCompile")
+    javaCompileElem.set("Include", "src\com\{0}\{0}.java".format(projectInfo.testAppName()))
+
+    projReferenceElem = ET.SubElement(itemGroup, "ProjectReference")
+    testLibProjFile = os.path.join(libDir, "{0}.Android.Test.vcxproj".format(projectInfo.name))
+    projReferenceElem.set("Include", str(testLibProjFile))
+
+    importElem3 = ET.SubElement(root, "Import")
+    importElem3.set("Project", "$(AndroidTargetsPath)\Android.targets")
+
     with open(androidprojFilename, 'w') as androidprojFile:
         androidprojFile.write(prettify(root))
-
-    # TODO: rest of the .androidproj, try to be smart about reusing what was done for .vcxproj
 
 
