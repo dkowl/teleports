@@ -14,7 +14,7 @@ def generateAndroidTestApp(platform, projectInfo):
     # other files
     filenames = [
         ("AndroidManifest.xml", "AndroidManifest.xml"),
-        ("AndroidTestApp.java", os.path.join("src", "com", "{0}AndroidTestApp.java".format(projectInfo.name))),
+        ("AndroidTestApp.java", os.path.join("src", "com", projectInfo.testAppName(), "{0}.java".format(projectInfo.testAppName()))),
         ("build.xml", "build.xml"),
         ("project.properties", "project.properties"),
         ("strings.xml", os.path.join("res", "values", "strings.xml"))
@@ -54,7 +54,7 @@ def generateAndroidTestApp(platform, projectInfo):
     guidElem.text = str(projGuid)
 
     rootNsElem = ET.SubElement(globalsElem, "RootNamespace")
-    rootNsElem.text = projectInfo.name
+    rootNsElem.text = projectInfo.testAppName()
 
     packagingProjWithoutNativeCompElem = ET.SubElement(globalsElem, "_PackagingProjectWithoutNativeComponent")
     packagingProjWithoutNativeCompElem.text = "true"
@@ -110,8 +110,8 @@ def generateAndroidTestApp(platform, projectInfo):
     javaCompileElem.set("Include", "src\com\{0}\{0}.java".format(projectInfo.testAppName()))
 
     projReferenceElem = ET.SubElement(itemGroup, "ProjectReference")
-    testLibProjFile = os.path.join(libDir, "{0}.Android.Test.vcxproj".format(projectInfo.name))
-    projReferenceElem.set("Include", str(testLibProjFile))
+    testLibProjFile = os.path.join(projectInfo.name, "Android.Test", "{0}.Android.Test.vcxproj".format(projectInfo.name))
+    projReferenceElem.set("Include", "$(SolutionDir)" + str(testLibProjFile))
 
     importElem3 = ET.SubElement(root, "Import")
     importElem3.set("Project", "$(AndroidTargetsPath)\Android.targets")
