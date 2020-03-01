@@ -125,6 +125,15 @@ def propsImportGroup(projectInfo, isTest):
 
     return root
 
+def ensurePrecompiledHeadersExist(projectInfo):
+    assert(projectInfo.precompiledHeaders)
+
+    srcDir = os.path.join(projectInfo.projDir(), "src")
+    pchPath = os.path.join(srcDir, "Pch_{0}.h".format(projectInfo.name))
+    sis.ensureFileExists(pchPath)
+    pchPath = os.path.join(srcDir, "Pch_{0}.cpp".format(projectInfo.name))
+    sis.ensureFileExists(pchPath)
+
 def getCppPathsAndDirs(projName, platform, isTest):
     sourceDirs = ["src", "include", "test"]
     resultFiles = []
@@ -277,6 +286,8 @@ def generateVcxprojAndFilters(platform, projectInfo, isTest):
     targetDir = os.path.join(projectInfo.projDir(), folderName, "")
 
     sis.ensureDirExists(targetDir)
+    if projectInfo.precompiledHeaders:
+       ensurePrecompiledHeadersExist(projectInfo)
 
     projFilename = projectInfo.name + "." + platform.name
     if isTest:
