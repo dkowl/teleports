@@ -103,6 +103,9 @@ def configurations(platform, projectInfo, isTest):
                     wpoElem.text = "true"
                 charsetElem = ET.SubElement(root, "CharacterSet")
                 charsetElem.text = "MultiByte"
+            if platform.name == "Android":
+                androidApiElem = ET.SubElement(root, "AndroidAPILevel")
+                androidApiElem.text = "android-26"
             roots.append(root)
     return roots
 
