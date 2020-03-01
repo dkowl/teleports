@@ -1,4 +1,3 @@
-#pragma once
 #include "catch.hpp"
 #include "Utils/Graph.h"
 #include <iostream>

@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Test Files">
+      <UniqueIdentifier>af89ead1-47c8-4827-aacf-7dcd58b281d1</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup/>
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)AssetManagement\test\catch.main.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_Asset.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_AssetManager.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_Path.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

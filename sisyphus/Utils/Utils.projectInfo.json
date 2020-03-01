@@ -1,0 +1,9 @@
+{
+	"outputType" : "staticLibrary",
+	"dependencies" : [
+		"stduuid",
+		"json"
+	],
+	"precompiledHeaders" : true,
+	"test" : true
+}

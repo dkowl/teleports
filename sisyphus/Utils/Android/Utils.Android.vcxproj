@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM64">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM64">
+      <Configuration>Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E6CB9052-70AF-499A-BE4C-BA3D457FBA96}</ProjectGuid>
+    <RootNamespace>Utils</RootNamespace>
+    <TargetSystem>Android</TargetSystem>
+    <Keyword>Android</Keyword>
+    <ApplicationType>Android</ApplicationType>
+    <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
+    <ConfigurationType>staticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_5_0</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
+    <ConfigurationType>staticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>Clang_5_0</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
+    <ConfigurationType>staticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_5_0</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
+    <ConfigurationType>staticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>Clang_5_0</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$(SolutionDir)props\General.props" />
+    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
+    <Import Project="$(SolutionDir)props\stduuid.props" />
+    <Import Project="$(SolutionDir)props\json.props" />
+  </ImportGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)Utils\src;$(SolutionDir)Utils\include\Utils;$(SolutionDir)Utils\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)Utils\src\Pch_Utils.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\DebugAssert.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\DebugMacros.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\FilesystemUtils.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\FunctionFileLine.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\Graph.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\ILogger.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\Json.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\Logger.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\OstreamLogger.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\PlatformMacros.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\StringUtils.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\Throw.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\UuidGenerator.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\UuidJsonSerializer.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\UuidUtils.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\VectorUtils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)Utils\src\DebugAssert.cpp" />
+    <ClCompile Include="$(SolutionDir)Utils\src\Logger.cpp" />
+    <ClCompile Include="$(SolutionDir)Utils\src\OstreamLogger.cpp" />
+    <ClCompile Include="$(SolutionDir)Utils\src\Pch_Utils.cpp" />
+    <ClCompile Include="$(SolutionDir)Utils\src\Throw.cpp" />
+    <ClCompile Include="$(SolutionDir)Utils\src\UuidGenerator.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

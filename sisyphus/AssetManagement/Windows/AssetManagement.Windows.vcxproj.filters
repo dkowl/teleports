@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>e581554d-a065-44d5-8ba2-79221cb07985</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public Headers">
+      <UniqueIdentifier>6400f03d-79f8-46af-a3ed-46b456c0a5c0</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\cwalk.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\Filesystem.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\Path.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\Pch_AssetManagement.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\Asset.h">
+      <Filter>Public Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\AssetManager.h">
+      <Filter>Public Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\AssetMetadata.h">
+      <Filter>Public Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\Asset.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetMetadata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\cwalk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\Filesystem.Windows.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\Path.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\Pch_AssetManagement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

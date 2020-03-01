@@ -93,41 +93,64 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\..\props\General.props" />
     <Import Project="..\..\..\..\props\PrecompiledHeaders.props" />
+    <Import Project="..\..\..\..\props\AssetManagement.props" />
+    <Import Project="..\..\..\..\props\Renderer.props" />
+    <Import Project="..\..\..\..\props\WindowCreator.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\..\props\General.props" />
     <Import Project="..\..\..\..\props\PrecompiledHeaders.props" />
+    <Import Project="..\..\..\..\props\AssetManagement.props" />
+    <Import Project="..\..\..\..\props\Renderer.props" />
+    <Import Project="..\..\..\..\props\WindowCreator.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\..\props\General.props" />
     <Import Project="..\..\..\..\props\PrecompiledHeaders.props" />
+    <Import Project="..\..\..\..\props\AssetManagement.props" />
+    <Import Project="..\..\..\..\props\Renderer.props" />
+    <Import Project="..\..\..\..\props\WindowCreator.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\..\props\General.props" />
     <Import Project="..\..\..\..\props\PrecompiledHeaders.props" />
+    <Import Project="..\..\..\..\props\AssetManagement.props" />
+    <Import Project="..\..\..\..\props\Renderer.props" />
+    <Import Project="..\..\..\..\props\WindowCreator.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\..\props\General.props" />
-    <Import Project="..\..\..\..\props\PrecompiledHeaders.props" />
+    <Import Project="..\..\..\..\props\AssetManagement.props" />
+    <Import Project="..\..\..\..\props\Renderer.props" />
+    <Import Project="..\..\..\..\props\WindowCreator.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\..\props\General.props" />
     <Import Project="..\..\..\..\props\PrecompiledHeaders.props" />
+    <Import Project="..\..\..\..\props\AssetManagement.props" />
+    <Import Project="..\..\..\..\props\Renderer.props" />
+    <Import Project="..\..\..\..\props\WindowCreator.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\..\props\General.props" />
     <Import Project="..\..\..\..\props\PrecompiledHeaders.props" />
+    <Import Project="..\..\..\..\props\AssetManagement.props" />
+    <Import Project="..\..\..\..\props\Renderer.props" />
+    <Import Project="..\..\..\..\props\WindowCreator.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\..\props\General.props" />
     <Import Project="..\..\..\..\props\PrecompiledHeaders.props" />
+    <Import Project="..\..\..\..\props\AssetManagement.props" />
+    <Import Project="..\..\..\..\props\Renderer.props" />
+    <Import Project="..\..\..\..\props\WindowCreator.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" />
@@ -141,6 +164,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <ClCompile>
       <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <PrecompiledHeaderFile>$(SolutionDir)Projects\$(RootNamespace)\Android\NativeActivity\Pch_$(ProjectName).h</PrecompiledHeaderFile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
@@ -149,6 +176,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <ClCompile>
       <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <PrecompiledHeaderFile>$(SolutionDir)Projects\$(RootNamespace)\Android\NativeActivity\Pch_$(ProjectName).h</PrecompiledHeaderFile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
@@ -157,6 +188,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
       <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <PrecompiledHeaderFile>$(SolutionDir)Projects\$(RootNamespace)\Android\NativeActivity\Pch_$(ProjectName).h</PrecompiledHeaderFile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
@@ -165,6 +200,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <ClCompile>
       <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <PrecompiledHeaderFile>$(SolutionDir)Projects\$(RootNamespace)\Android\NativeActivity\Pch_$(ProjectName).h</PrecompiledHeaderFile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
@@ -173,6 +212,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <PrecompiledHeaderFile>$(SolutionDir)Projects\$(RootNamespace)\Android\NativeActivity\Pch_$(ProjectName).h</PrecompiledHeaderFile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
@@ -181,6 +224,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <PrecompiledHeaderFile>$(SolutionDir)Projects\$(RootNamespace)\Android\NativeActivity\Pch_$(ProjectName).h</PrecompiledHeaderFile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
@@ -189,6 +236,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <ClCompile>
       <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <PrecompiledHeaderFile>$(SolutionDir)Projects\$(RootNamespace)\Android\NativeActivity\Pch_$(ProjectName).h</PrecompiledHeaderFile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
@@ -197,6 +248,10 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <ClCompile>
       <CompileAs>CompileAsCpp</CompileAs>
+      <CppLanguageStandard>c++1z</CppLanguageStandard>
+      <ExceptionHandling>Enabled</ExceptionHandling>
+      <PrecompiledHeaderFile>$(SolutionDir)Projects\$(RootNamespace)\Android\NativeActivity\Pch_$(ProjectName).h</PrecompiledHeaderFile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
@@ -204,10 +259,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Pch_Projects.TestProject.Android.NativeActivity.h" />
-    <ClInclude Include="android_native_app_glue.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="android_native_app_glue.c" />
     <ClCompile Include="main.TestProject.Android.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

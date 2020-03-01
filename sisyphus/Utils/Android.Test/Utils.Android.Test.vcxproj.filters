@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Test Files">
+      <UniqueIdentifier>58be343a-a7c8-4545-9124-b60caa265209</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup/>
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)Utils\test\catch.main.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)Utils\test\Test_Graph.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)Utils\test\Test_Macro.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

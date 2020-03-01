@@ -1,25 +1,39 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<?xml version="1.0" ?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets">
-    <Import Condition="'$(jsonImported)' ==''" Project="json.props" />
-    <Import Condition="'$(stduuidImported)' ==''" Project="stduuid.props" />
-    <Import Condition="'$(UtilsImported)' ==''" Project="Utils.props" />
+    <Import Condition="'$(stduuidImported)' == ''" Project="stduuid.props"/>
+    <Import Condition="'$(jsonImported)' == ''" Project="json.props"/>
+    <Import Condition="'$(UtilsImported)' == ''" Project="Utils.props"/>
   </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
-  <PropertyGroup><AssetManagementImported>true</AssetManagementImported><jsonImported>true</jsonImported><stduuidImported>true</stduuidImported><UtilsImported>true</UtilsImported></PropertyGroup>
+  <PropertyGroup>
+    <AssetManagementImported>true</AssetManagementImported>
+    <stduuidImported>true</stduuidImported>
+    <jsonImported>true</jsonImported>
+    <UtilsImported>true</UtilsImported>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)AssetManagement\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(TargetSystem)' == 'Windows'">
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)AssetManagement\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>AssetManagement.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)AssetManagement\Windows\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>AssetManagement.Windows.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>AssetManagement.lib</AdditionalDependencies>
-    </Lib>
-    <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)AssetManagement\$(GeneralOutDir)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)AssetManagement\Windows\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>AssetManagement.Windows.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemGroup />
+  <ItemDefinitionGroup Condition="'$(TargetSystem)' == 'Android'">
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)AssetManagement\Android\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>AssetManagement.Android.a;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>$(SolutionDir)AssetManagement\Android\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>AssetManagement.Android.a;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+  </ItemDefinitionGroup>
 </Project>
