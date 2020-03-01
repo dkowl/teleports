@@ -31,21 +31,25 @@
     <ConfigurationType>staticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>Clang_5_0</PlatformToolset>
+    <AndroidAPILevel>android-26</AndroidAPILevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
     <ConfigurationType>staticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>Clang_5_0</PlatformToolset>
+    <AndroidAPILevel>android-26</AndroidAPILevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <ConfigurationType>staticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>Clang_5_0</PlatformToolset>
+    <AndroidAPILevel>android-26</AndroidAPILevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
     <ConfigurationType>staticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>Clang_5_0</PlatformToolset>
+    <AndroidAPILevel>android-26</AndroidAPILevel>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
@@ -61,13 +65,10 @@
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)AssetManagement\include\AssetManagement;$(SolutionDir)AssetManagement\src;$(SolutionDir)AssetManagement\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)AssetManagement\src;$(SolutionDir)AssetManagement\include\AssetManagement;$(SolutionDir)AssetManagement\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="$(SolutionDir)AssetManagement\src\cwalk.h" />
-    <ClInclude Include="$(SolutionDir)AssetManagement\src\Filesystem.h" />
-    <ClInclude Include="$(SolutionDir)AssetManagement\src\Path.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\src\Pch_AssetManagement.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\Asset.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\AssetManager.h" />
@@ -77,9 +78,6 @@
     <ClCompile Include="$(SolutionDir)AssetManagement\src\Asset.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetManager.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetMetadata.cpp" />
-    <ClCompile Include="$(SolutionDir)AssetManagement\src\cwalk.cpp" />
-    <ClCompile Include="$(SolutionDir)AssetManagement\src\Filesystem.Android.cpp" />
-    <ClCompile Include="$(SolutionDir)AssetManagement\src\Path.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\Pch_AssetManagement.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

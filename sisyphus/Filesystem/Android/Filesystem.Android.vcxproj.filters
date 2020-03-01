@@ -9,6 +9,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(SolutionDir)Filesystem\src\cwalk.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
     <ClInclude Include="$(SolutionDir)Filesystem\src\Pch_Filesystem.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -23,6 +26,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(SolutionDir)Filesystem\src\cwalk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)Filesystem\src\File.Android.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

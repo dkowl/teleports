@@ -98,6 +98,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Filesystem.Android", "Filesystem\Android\Filesystem.Android.vcxproj", "{2FD12CDA-4779-416C-96F7-8569A3A4E0D7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Filesystem.Android.Test", "Filesystem\Android.Test\Filesystem.Android.Test.vcxproj", "{2CF39A63-BD74-435A-9325-C83EDFD7B327}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2FD12CDA-4779-416C-96F7-8569A3A4E0D7} = {2FD12CDA-4779-416C-96F7-8569A3A4E0D7}
+	EndProjectSection
 EndProject
 Project("{39E2626F-3545-4960-A6E8-258AD8476CE5}") = "FilesystemAndroidTestApp", "Filesystem\Android.Test\App\FilesystemAndroidTestApp.androidproj", "{1E1FA823-CD8F-4FB7-90F5-E3AB6827FC79}"
 EndProject

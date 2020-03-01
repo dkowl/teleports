@@ -16,8 +16,5 @@
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_AssetManager.cpp">
       <Filter>Test Files</Filter>
     </ClCompile>
-    <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_Path.cpp">
-      <Filter>Test Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

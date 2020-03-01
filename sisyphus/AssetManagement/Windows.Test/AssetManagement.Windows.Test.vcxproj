@@ -41,7 +41,7 @@
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)AssetManagement\include\AssetManagement;$(SolutionDir)AssetManagement\src;$(SolutionDir)AssetManagement\include;$(SolutionDir)AssetManagement\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)AssetManagement\src;$(SolutionDir)AssetManagement\test;$(SolutionDir)AssetManagement\include\AssetManagement;$(SolutionDir)AssetManagement\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup/>
@@ -49,7 +49,6 @@
     <ClCompile Include="$(SolutionDir)AssetManagement\test\catch.main.cpp"/>
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_Asset.cpp"/>
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_AssetManager.cpp"/>
-    <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_Path.cpp"/>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
   <ImportGroup Label="ExtensionTargets"/>

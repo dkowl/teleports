@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" ?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -11,12 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6EA74D44-F93A-445F-885C-5064B3B6EB95}</ProjectGuid>
+    <ProjectGuid>6ea74d44-f93a-445f-885c-5064b3b6eb95</ProjectGuid>
     <RootNamespace>Filesystem</RootNamespace>
     <TargetSystem>Windows</TargetSystem>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>staticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -30,33 +30,35 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings" />
-  <ImportGroup Label="Shared" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
+  <ImportGroup Label="ExtensionSettings"/>
+  <ImportGroup Label="Shared"/>
   <ImportGroup Label="PropertySheets">
-    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
-    <Import Project="$(SolutionDir)props\General.props" />
-    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"/>
+    <Import Project="$(SolutionDir)props\General.props"/>
+    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props"/>
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Filesystem\src;$(SolutionDir)Filesystem\include;$(SolutionDir)Filesystem\include\Filesystem;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Filesystem\include;$(SolutionDir)Filesystem\include\Filesystem;$(SolutionDir)Filesystem\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="$(SolutionDir)Filesystem\src\Pch_Filesystem.h" />
-    <ClInclude Include="$(SolutionDir)Filesystem\include\Filesystem\File.h" />
-    <ClInclude Include="$(SolutionDir)Filesystem\include\Filesystem\Filesystem.h" />
-    <ClInclude Include="$(SolutionDir)Filesystem\include\Filesystem\Path.h" />
+    <ClInclude Include="$(SolutionDir)Filesystem\src\cwalk.h"/>
+    <ClInclude Include="$(SolutionDir)Filesystem\src\Pch_Filesystem.h"/>
+    <ClInclude Include="$(SolutionDir)Filesystem\include\Filesystem\File.h"/>
+    <ClInclude Include="$(SolutionDir)Filesystem\include\Filesystem\Filesystem.h"/>
+    <ClInclude Include="$(SolutionDir)Filesystem\include\Filesystem\Path.h"/>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(SolutionDir)Filesystem\src\File.Windows.cpp" />
-    <ClCompile Include="$(SolutionDir)Filesystem\src\Filesystem.Windows.cpp" />
-    <ClCompile Include="$(SolutionDir)Filesystem\src\Path.cpp" />
+    <ClCompile Include="$(SolutionDir)Filesystem\src\cwalk.cpp"/>
+    <ClCompile Include="$(SolutionDir)Filesystem\src\File.Windows.cpp"/>
+    <ClCompile Include="$(SolutionDir)Filesystem\src\Filesystem.Windows.cpp"/>
+    <ClCompile Include="$(SolutionDir)Filesystem\src\Path.cpp"/>
     <ClCompile Include="$(SolutionDir)Filesystem\src\Pch_Filesystem.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
+  <ImportGroup Label="ExtensionTargets"/>
 </Project>
