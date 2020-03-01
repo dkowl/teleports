@@ -86,7 +86,13 @@ def configurations(platform, projectInfo, isTest):
             root.set("Condition", "'$(Configuration)|$(Platform)'=='" + config + "|" + arch + "'")
             root.set("Label", "Configuration")
             configTypeElem = ET.SubElement(root, "ConfigurationType")
-            configTypeElem.text = projectInfo.outputType if not isTest else "Application"
+            if not isTest:
+                configTypeElem.text = projectInfo.outputType
+            else:
+                if platform.name == "Windows":
+                    configTypeElem.text = "Application"
+                else:
+                    configTypeElem.text = "DynamicLibrary"
             useDebugElem = ET.SubElement(root, "UseDebugLibraries")
             useDebugElem.text = "true" if config == "Debug" else "false"
             toolsetElem = ET.SubElement(root, "PlatformToolset")
