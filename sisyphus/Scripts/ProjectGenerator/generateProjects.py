@@ -6,7 +6,7 @@ import sisyphusUtils as sis
 from xmlUtils import *
 from constants import solutionDir
 from ProjectInfo import ProjectInfo
-from Platform import PlatformData
+from Platform import *
 from projCommon import *
 from generateCatchMain import generateCatchMain
 from generateAndroidTestApp import generateAndroidTestApp
@@ -360,8 +360,14 @@ def generatePropsString(projectInfo):
         librarianElem = ET.SubElement(platformItemDefGroup, "Lib")
         libDirElem = ET.Element("AdditionalLibraryDirectories")
         libDirElem.text = "$(SolutionDir)%s\%s\$(GeneralOutDir);%%(AdditionalLibraryDirectories)" % (projectInfo.name, platform.name)
-        libDependenciesElem = ET.Element("AdditionalDependencies")
-        libDependenciesElem.text = "%s.%s%s;%%(AdditionalDependencies)" % (projectInfo.name, platform.name, platform.staticLibExt)
+        if platform.name == "Windows":
+            libDependenciesElem = ET.Element("AdditionalDependencies")
+            libDependenciesElem.text = "%s.%s%s;%%(AdditionalDependencies)" % (projectInfo.name, platform.name, platform.staticLibExt)
+        elif platform.name == "Android":
+            libDependenciesElem = ET.Element("LibraryDependencies")
+            libDependenciesElem.text = "{0};m;%(LibraryDependencies)".format(projectInfo.name)
+        else:
+            assert(false)
         linkElem.append(libDirElem)
         linkElem.append(libDependenciesElem)
         librarianElem.append(libDirElem)

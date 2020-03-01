@@ -31,11 +31,11 @@
   <ItemDefinitionGroup Condition="'$(TargetSystem)' == 'Android'">
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)AssetManagement\Android\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>AssetManagement.Android.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <LibraryDependencies>AssetManagement;m;%(LibraryDependencies)</LibraryDependencies>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)AssetManagement\Android\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>AssetManagement.Android.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <LibraryDependencies>AssetManagement;m;%(LibraryDependencies)</LibraryDependencies>
     </Lib>
   </ItemDefinitionGroup>
 </Project>

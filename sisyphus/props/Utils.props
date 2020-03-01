@@ -27,11 +27,11 @@
   <ItemDefinitionGroup Condition="'$(TargetSystem)' == 'Android'">
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)Utils\Android\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Utils.Android.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <LibraryDependencies>Utils;m;%(LibraryDependencies)</LibraryDependencies>
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Utils\Android\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Utils.Android.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <LibraryDependencies>Utils;m;%(LibraryDependencies)</LibraryDependencies>
     </Lib>
   </ItemDefinitionGroup>
 </Project>
