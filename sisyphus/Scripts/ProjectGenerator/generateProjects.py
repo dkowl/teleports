@@ -271,9 +271,10 @@ def generateVcxprojString(platform, projectInfo, targetInfo):
     return prettify(root)
 
 def generateVcxprojAndFilters(platform, projectInfo, isTest):
-    targetDir = os.path.join(projectInfo.projDir(), platform.name)
+    folderName = platform.name
     if isTest:
-        targetDir += ".Test"
+        folderName += ".Test"
+    targetDir = os.path.join(projectInfo.projDir(), folderName, "")
 
     sis.ensureDirExists(targetDir)
 
@@ -369,7 +370,7 @@ def generateProject(projectInfo):
     generateProps(projectInfo)
 
 
-projects = ["AssetManagement", "Utils"]
+projects = ["AssetManagement", "Utils", "Filesystem"]
 for info in [ProjectInfo(projName) for projName in projects]:
     generateProject(info)
 
