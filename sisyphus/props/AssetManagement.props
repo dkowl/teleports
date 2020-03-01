@@ -4,12 +4,14 @@
     <Import Condition="'$(stduuidImported)' == ''" Project="stduuid.props"/>
     <Import Condition="'$(jsonImported)' == ''" Project="json.props"/>
     <Import Condition="'$(UtilsImported)' == ''" Project="Utils.props"/>
+    <Import Condition="'$(FilesystemImported)' == ''" Project="Filesystem.props"/>
   </ImportGroup>
   <PropertyGroup>
     <AssetManagementImported>true</AssetManagementImported>
     <stduuidImported>true</stduuidImported>
     <jsonImported>true</jsonImported>
     <UtilsImported>true</UtilsImported>
+    <FilesystemImported>true</FilesystemImported>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

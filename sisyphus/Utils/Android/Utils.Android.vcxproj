@@ -59,7 +59,7 @@
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Utils\src;$(SolutionDir)Utils\include\Utils;$(SolutionDir)Utils\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Utils\include;$(SolutionDir)Utils\src;$(SolutionDir)Utils\include\Utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -73,7 +73,6 @@
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\Json.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\Logger.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\OstreamLogger.h" />
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\PlatformMacros.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\StringUtils.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\Throw.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\UuidGenerator.h" />

@@ -58,7 +58,7 @@
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)AssetManagement\include\AssetManagement;$(SolutionDir)AssetManagement\test;$(SolutionDir)AssetManagement\src;$(SolutionDir)AssetManagement\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)AssetManagement\include\AssetManagement;$(SolutionDir)AssetManagement\src;$(SolutionDir)AssetManagement\include;$(SolutionDir)AssetManagement\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />

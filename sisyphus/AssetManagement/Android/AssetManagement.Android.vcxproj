@@ -57,6 +57,7 @@
     <Import Project="$(SolutionDir)props\stduuid.props" />
     <Import Project="$(SolutionDir)props\json.props" />
     <Import Project="$(SolutionDir)props\Utils.props" />
+    <Import Project="$(SolutionDir)props\Filesystem.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>

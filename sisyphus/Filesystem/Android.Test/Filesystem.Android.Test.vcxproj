@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2BE311A6-B062-4C5A-96C2-E1CA439DA023}</ProjectGuid>
-    <RootNamespace>Utils</RootNamespace>
+    <ProjectGuid>{2CF39A63-BD74-435A-9325-C83EDFD7B327}</ProjectGuid>
+    <RootNamespace>Filesystem</RootNamespace>
     <TargetSystem>Android</TargetSystem>
     <Keyword>Android</Keyword>
     <ApplicationType>Android</ApplicationType>
@@ -54,18 +54,17 @@
     <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
     <Import Project="$(SolutionDir)props\General.props" />
     <Import Project="$(SolutionDir)props\catch2.props" />
-    <Import Project="$(SolutionDir)props\Utils.props" />
+    <Import Project="$(SolutionDir)props\Filesystem.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Utils\include;$(SolutionDir)Utils\src;$(SolutionDir)Utils\include\Utils;$(SolutionDir)Utils\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Filesystem\src;$(SolutionDir)Filesystem\test;$(SolutionDir)Filesystem\include;$(SolutionDir)Filesystem\include\Filesystem;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />
   <ItemGroup>
-    <ClCompile Include="$(SolutionDir)Utils\test\catch.main.cpp" />
-    <ClCompile Include="$(SolutionDir)Utils\test\Test_Graph.cpp" />
-    <ClCompile Include="$(SolutionDir)Utils\test\Test_Macro.cpp" />
+    <ClCompile Include="$(SolutionDir)Filesystem\test\catch.main.cpp" />
+    <ClCompile Include="$(SolutionDir)Filesystem\test\Test_Path.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2BE311A6-B062-4C5A-96C2-E1CA439DA023}</ProjectGuid>
-    <RootNamespace>Utils</RootNamespace>
+    <ProjectGuid>{2FD12CDA-4779-416C-96F7-8569A3A4E0D7}</ProjectGuid>
+    <RootNamespace>Filesystem</RootNamespace>
     <TargetSystem>Android</TargetSystem>
     <Keyword>Android</Keyword>
     <ApplicationType>Android</ApplicationType>
@@ -28,22 +28,22 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>staticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>Clang_5_0</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>staticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>Clang_5_0</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>staticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>Clang_5_0</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>staticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>Clang_5_0</PlatformToolset>
   </PropertyGroup>
@@ -53,19 +53,24 @@
   <ImportGroup Label="PropertySheets">
     <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
     <Import Project="$(SolutionDir)props\General.props" />
-    <Import Project="$(SolutionDir)props\catch2.props" />
-    <Import Project="$(SolutionDir)props\Utils.props" />
+    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Utils\include;$(SolutionDir)Utils\src;$(SolutionDir)Utils\include\Utils;$(SolutionDir)Utils\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Filesystem\src;$(SolutionDir)Filesystem\include;$(SolutionDir)Filesystem\include\Filesystem;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ClCompile Include="$(SolutionDir)Utils\test\catch.main.cpp" />
-    <ClCompile Include="$(SolutionDir)Utils\test\Test_Graph.cpp" />
-    <ClCompile Include="$(SolutionDir)Utils\test\Test_Macro.cpp" />
+    <ClInclude Include="$(SolutionDir)Filesystem\src\Pch_Filesystem.h" />
+    <ClInclude Include="$(SolutionDir)Filesystem\include\Filesystem\File.h" />
+    <ClInclude Include="$(SolutionDir)Filesystem\include\Filesystem\Filesystem.h" />
+    <ClInclude Include="$(SolutionDir)Filesystem\include\Filesystem\Path.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)Filesystem\src\File.Android.cpp" />
+    <ClCompile Include="$(SolutionDir)Filesystem\src\Filesystem.Android.cpp" />
+    <ClCompile Include="$(SolutionDir)Filesystem\src\Path.cpp" />
+    <ClCompile Include="$(SolutionDir)Filesystem\src\Pch_Filesystem.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

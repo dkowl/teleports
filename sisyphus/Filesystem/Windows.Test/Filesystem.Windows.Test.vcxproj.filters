@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Test Files">
+      <UniqueIdentifier>c377fcd4-6129-41b7-b685-cc5786b441e5</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup/>
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)Filesystem\test\catch.main.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)Filesystem\test\Test_Path.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

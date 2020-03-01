@@ -39,9 +39,6 @@
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\OstreamLogger.h">
       <Filter>Public Headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\PlatformMacros.h">
-      <Filter>Public Headers</Filter>
-    </ClInclude>
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\StringUtils.h">
       <Filter>Public Headers</Filter>
     </ClInclude>
