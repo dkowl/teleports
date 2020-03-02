@@ -3,6 +3,7 @@ package com.FilesystemAndroidTestApp;
 import android.app.Activity;
 import android.widget.TextView;
 import android.os.Bundle;
+import android.content.res.AssetManager;
 
 public class FilesystemAndroidTestApp extends Activity
 {
@@ -17,7 +18,8 @@ public class FilesystemAndroidTestApp extends Activity
 
         try{
             System.loadLibrary("Filesystem");
-            tv.setText("Test result: " + Integer.toString(runTest()));
+            assetManager = getResources().getAssets();
+            tv.setText("Test result: " + Integer.toString(runTest(assetManager)));
         }
         catch(Exception e){
             tv.setText(e.getMessage());
@@ -26,5 +28,7 @@ public class FilesystemAndroidTestApp extends Activity
         setContentView(tv);
     }
 
-    public static native int runTest();
+    public static native int runTest(AssetManager assetManager);
+
+    private AssetManager assetManager;
 }

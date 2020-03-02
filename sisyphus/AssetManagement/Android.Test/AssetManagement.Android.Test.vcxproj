@@ -62,10 +62,12 @@
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)AssetManagement\src;$(SolutionDir)AssetManagement\test;$(SolutionDir)AssetManagement\include\AssetManagement;$(SolutionDir)AssetManagement\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)AssetManagement\test;$(SolutionDir)AssetManagement\include;$(SolutionDir)AssetManagement\src;$(SolutionDir)AssetManagement\include\AssetManagement;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)AssetManagement\test\Globals.Android.h" />
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)AssetManagement\test\catch.main.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_Asset.cpp" />

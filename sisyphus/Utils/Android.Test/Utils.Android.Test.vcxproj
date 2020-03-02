@@ -62,10 +62,12 @@
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Utils\include\Utils;$(SolutionDir)Utils\include;$(SolutionDir)Utils\test;$(SolutionDir)Utils\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Utils\test;$(SolutionDir)Utils\include;$(SolutionDir)Utils\src;$(SolutionDir)Utils\include\Utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)Utils\test\Globals.Android.h" />
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Utils\test\catch.main.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\test\Test_Graph.cpp" />

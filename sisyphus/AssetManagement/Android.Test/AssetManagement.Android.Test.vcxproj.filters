@@ -5,7 +5,11 @@
       <UniqueIdentifier>af89ead1-47c8-4827-aacf-7dcd58b281d1</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup/>
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)AssetManagement\test\Globals.Android.h">
+      <Filter>Test Files</Filter>
+    </ClInclude>
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)AssetManagement\test\catch.main.cpp">
       <Filter>Test Files</Filter>
