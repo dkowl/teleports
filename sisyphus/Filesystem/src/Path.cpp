@@ -50,7 +50,7 @@ namespace Sisyphus::Fs {
 		return Path(std::string(extension, extensionLength));
 	}
 
-	std::string Path::String() const {
+	const std::string& Path::String() const {
 		return pathString;
 	}
 }

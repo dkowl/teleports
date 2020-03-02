@@ -1,7 +1,8 @@
 #include "Filesystem.h"
+#include <filesystem>
 
 namespace Sisyphus::Fs {
 	bool Exists(const Path& p) {
-		return !p.String().empty();
+		return std::filesystem::exists(p.String());
 	}
 }

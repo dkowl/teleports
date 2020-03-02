@@ -10,6 +10,9 @@
     <ClCompile Include="$(SolutionDir)Filesystem\test\catch.main.cpp">
       <Filter>Test Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)Filesystem\test\Test_Filesystem.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)Filesystem\test\Test_Path.cpp">
       <Filter>Test Files</Filter>
     </ClCompile>

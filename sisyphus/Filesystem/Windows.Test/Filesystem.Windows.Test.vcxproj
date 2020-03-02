@@ -41,12 +41,13 @@
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Filesystem\test;$(SolutionDir)Filesystem\include;$(SolutionDir)Filesystem\src;$(SolutionDir)Filesystem\include\Filesystem;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Filesystem\src;$(SolutionDir)Filesystem\include;$(SolutionDir)Filesystem\include\Filesystem;$(SolutionDir)Filesystem\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup/>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Filesystem\test\catch.main.cpp"/>
+    <ClCompile Include="$(SolutionDir)Filesystem\test\Test_Filesystem.cpp"/>
     <ClCompile Include="$(SolutionDir)Filesystem\test\Test_Path.cpp"/>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
