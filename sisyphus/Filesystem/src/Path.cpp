@@ -1,7 +1,7 @@
 #include "Path.h"
 #include "cwalk.h"
 
-namespace Sisyphus::Filesystem {
+namespace Sisyphus::Fs {
 	Path::Path()
 	{
 	}
@@ -11,7 +11,7 @@ namespace Sisyphus::Filesystem {
 	{
 	}
 
-	Path Path::Stem()
+	Path Path::Stem() const
 	{
 		const char* filename;
 		size_t filenameLength;
@@ -24,7 +24,7 @@ namespace Sisyphus::Filesystem {
 		return Path(std::string(filename, filenameLength - extensionLength));
 	}
 
-	Path Path::Filename()
+	Path Path::Filename() const
 	{
 		const char* filename;
 		size_t filenameLength;
@@ -33,7 +33,7 @@ namespace Sisyphus::Filesystem {
 		return Path(std::string(filename, filenameLength));
 	}
 
-	Path Path::Dirname()
+	Path Path::Dirname() const
 	{
 		size_t dirnameLength;
 		cwk_path_get_dirname(pathString.c_str(), &dirnameLength);
@@ -41,7 +41,7 @@ namespace Sisyphus::Filesystem {
 		return Path(std::string(pathString.c_str(), dirnameLength));
 	}
 
-	Path Path::Extension()
+	Path Path::Extension() const
 	{
 		const char* extension;
 		size_t extensionLength;
@@ -50,7 +50,7 @@ namespace Sisyphus::Filesystem {
 		return Path(std::string(extension, extensionLength));
 	}
 
-	std::string Path::String() {
+	std::string Path::String() const {
 		return pathString;
 	}
 }

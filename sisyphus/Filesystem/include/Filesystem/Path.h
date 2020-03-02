@@ -1,19 +1,19 @@
 #pragma once
 #include <string>
 
-namespace Sisyphus::Filesystem {
+namespace Sisyphus::Fs {
 
 	class Path {
 	public:
 		Path();
 		Path(const std::string& str);
 
-		Path Stem();
-		Path Filename();
-		Path Dirname();
-		Path Extension();
+		Path Stem() const;
+		Path Filename() const;
+		Path Dirname() const;
+		Path Extension() const;
 
-		std::string String();
+		std::string String() const;
 	private:
 		std::string pathString;
 	};
