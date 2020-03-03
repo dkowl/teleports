@@ -8,4 +8,6 @@ namespace Sisyphus::Fs {
 #endif
 
 	bool Exists(const Path& p);
+	bool IsRegularFile(const Path& p);
+	bool IsDirectory(const Path& p);
 }

@@ -11,7 +11,28 @@ namespace Sisyphus::Fs {
 	}
 
 	bool Exists(const Path& p) {
-		auto asset = AAssetManager_open(assetManager, p.String().c_str(), AASSET_MODE_UNKNOWN);
-		return asset != nullptr;
+		if (IsRegularFile(p)) return true;
+		else if (IsDirectory(p)) return true;
+		else return false;
 	}
+
+	bool IsRegularFile(const Path& p) {
+		auto asset = AAssetManager_open(assetManager, p.String().c_str(), AASSET_MODE_UNKNOWN);
+		if (asset == nullptr) return false;
+		else {
+			AAsset_close(asset);
+			return true;
+		}
+	}
+
+	bool IsDirectory(const Path& p) {
+		auto assetDir = AAssetManager_openDir(assetManager, p.String().c_str());
+		if (assetDir == nullptr) return false;
+		else {
+			AAssetDir_close(assetDir);
+			return true;
+		}
+	}
+
+
 }
