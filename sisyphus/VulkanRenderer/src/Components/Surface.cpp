@@ -20,7 +20,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	}
 	Surface::~Surface()
 	{
-		SIS_DEBUG_ONLY(Logger::Get().Log("~Surface"));
+		SIS_DEBUG_ONLY(Logger().Log("~Surface"));
 	}
 	void Surface::Initialize()
 	{
@@ -47,7 +47,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	}
 	void Surface::InitFormatAndColorSpace()
 	{
-		auto& logger = Logger::Get();
+		auto& logger = Logger();
 
 		constexpr vk::Format desiredFormat = vk::Format::eB8G8R8A8Srgb;
 		constexpr vk::ColorSpaceKHR desiredColorSpace = vk::ColorSpaceKHR::eSrgbNonlinear;
@@ -84,7 +84,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		auto currentExtent = physicalDevice.getSurfaceCapabilitiesKHR(*surface).currentExtent;
 		bool surfaceChanged = currentExtent != extent;
 		if (surfaceChanged) {
-			Logger::Get().Log(
+			Logger().Log(
 				"Surface extent changed from " + ToString(GetExtent()) +
 				" to " + ToString(currentExtent));
 			

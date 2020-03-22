@@ -18,7 +18,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void EnumerateInstanceLayerProperties()
 	{
-		auto& logger = Logger::Get();
+		auto& logger = Logger();
 		auto layerProperties = vk::enumerateInstanceLayerProperties();
 		logger.BeginSection("Vulkan Instance Layers");
 		if (layerProperties.empty()) {

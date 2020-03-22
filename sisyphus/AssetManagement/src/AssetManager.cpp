@@ -18,10 +18,10 @@ namespace Sisyphus::AssetManagement {
 	}
 	void AssetManager::AddAsset(std::unique_ptr<Asset> asset)
 	{
-		Logger::Get().BeginSection("Asset detected");
-		Logger::Get().Log("Id: " + uuids::to_string(asset->GetId()));
-		Logger::Get().Log("Name: " + asset->GetName());
-		Logger::Get().EndSection();
+		Logger().BeginSection("Asset detected");
+		Logger().Log("Id: " + uuids::to_string(asset->GetId()));
+		Logger().Log("Name: " + asset->GetName());
+		Logger().EndSection();
 		assets.insert({ asset->GetId(), std::move(asset) });
 	}
 	const Asset& AssetManager::GetAsset(uuids::uuid id) const

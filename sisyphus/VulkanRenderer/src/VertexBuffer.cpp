@@ -8,11 +8,11 @@ namespace Sisyphus::Rendering::Vulkan {
 		ci(inCi)
 	{
 		CreateBuffer();
-		Logger::Get().Log("Buffer created!");
+		Logger().Log("Buffer created!");
 		AllocateMemory();
-		Logger::Get().Log("Memory allocated!");
+		Logger().Log("Memory allocated!");
 		BindMemory();
-		Logger::Get().Log("Memory bound!");
+		Logger().Log("Memory bound!");
 	}
 
 	DeviceData VertexBuffer::GetDeviceData()

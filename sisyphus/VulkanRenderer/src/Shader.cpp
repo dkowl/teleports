@@ -37,8 +37,8 @@ namespace Sisyphus::Rendering::Vulkan {
 			}
 		}
 		catch (std::runtime_error& e) {
-			Logger::Get().Log(shader.getInfoLog());
-			Logger::Get().Log(shader.getInfoDebugLog());
+			Logger().Log(shader.getInfoLog());
+			Logger().Log(shader.getInfoDebugLog());
 			throw e;
 		}
 

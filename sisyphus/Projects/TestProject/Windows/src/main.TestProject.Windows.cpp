@@ -58,7 +58,7 @@ int main() {
 			{1280, 720}
 		});
 
-		auto logger = &Logger::Get();
+		auto logger = &Logger();
 		RendererCreateInfo rendererCreateInfo;
 		rendererCreateInfo.type = RendererType::Vulkan;
 		rendererCreateInfo.window = window.get();

@@ -2,6 +2,6 @@
 
 #include "ILogger.h"
 
-namespace Logger {
-	ILogger& Get();
+namespace Sisyphus {
+	ILogger& Logger();
 }

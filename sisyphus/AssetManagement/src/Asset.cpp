@@ -85,8 +85,8 @@ namespace Sisyphus::AssetManagement {
 		}
 		metaFile << j;
 
-		Logger::Get().Log("Meta file not found, " + metaPath + " created");
-		Logger::Get().Log("id: " + uuids::to_string(metadata.id) + "\n");
+		Logger().Log("Meta file not found, " + metaPath + " created");
+		Logger().Log("id: " + uuids::to_string(metadata.id) + "\n");
 	}
 	void Asset::LazyLoadData() const
 	{
@@ -113,10 +113,10 @@ namespace Sisyphus::AssetManagement {
 
 		dataIsRead = true;
 
-		Logger::Get().BeginSection("Asset file read from disk");
-		Logger::Get().Log("Id: " + uuids::to_string(metadata.id));
-		Logger::Get().Log("Name: " + metadata.name);
-		Logger::Get().Log("Size: " + std::to_string(size) + " bytes");
-		Logger::Get().EndSection();
+		Logger().BeginSection("Asset file read from disk");
+		Logger().Log("Id: " + uuids::to_string(metadata.id));
+		Logger().Log("Name: " + metadata.name);
+		Logger().Log("Size: " + std::to_string(size) + " bytes");
+		Logger().EndSection();
 	}
 }

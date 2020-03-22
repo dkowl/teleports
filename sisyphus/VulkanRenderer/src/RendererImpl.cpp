@@ -29,7 +29,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		renderPass(nullptr),
 		vertexBuffer(nullptr),
 		pipeline(nullptr),
-		logger(&Logger::Get())
+		logger(&Logger())
 	{
 		if (logger == nullptr) {
 			SIS_THROW("Logger not found");

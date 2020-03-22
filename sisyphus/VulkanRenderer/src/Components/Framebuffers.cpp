@@ -37,7 +37,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			framebuffers.push_back(Parent().GetComponent<Device>().GetVulkanObject().createFramebufferUnique(framebufferCreateInfo));
 		}
 
-		Logger::Get().Log(std::to_string(framebuffers.size()) + " Framebuffers initialized!");
+		Logger().Log(std::to_string(framebuffers.size()) + " Framebuffers initialized!");
 	}
 	void Framebuffers::RegisterEventHandlers()
 	{

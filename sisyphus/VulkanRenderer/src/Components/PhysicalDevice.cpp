@@ -12,7 +12,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	PhysicalDevice::~PhysicalDevice()
 	{
-		SIS_DEBUG_ONLY(Logger::Get().Log("~PhysicalDevice"));
+		SIS_DEBUG_ONLY(Logger().Log("~PhysicalDevice"));
 	}
 
 	void PhysicalDevice::Initialize()
@@ -23,7 +23,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		}
 
 		physicalDevice = physicalDevices[0];
-		Logger::Get().Log("Creating a Vulkan Device from " + std::string(physicalDevice.getProperties().deviceName));
+		Logger().Log("Creating a Vulkan Device from " + std::string(physicalDevice.getProperties().deviceName));
 		Inspect();
 
 		FindGraphicsQueueFamilyIndex();
@@ -75,7 +75,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	}
 	void PhysicalDevice::Inspect() const
 	{
-		auto& logger = Logger::Get();
+		auto& logger = Logger();
 		auto queueFamilyProperties = physicalDevice.getQueueFamilyProperties();
 		logger.BeginSection("Queue Families:");
 		int index = 1;
@@ -94,7 +94,7 @@ namespace Sisyphus::Rendering::Vulkan {
 				graphicsQueueFamilyIndex = i;
 			}
 		}
-		Logger::Get().LogArgs("Graphics queue family index found: ", graphicsQueueFamilyIndex.value());
+		Logger().LogArgs("Graphics queue family index found: ", graphicsQueueFamilyIndex.value());
 	}
 	void PhysicalDevice::FindPresentQueueFamilyIndex()
 	{
@@ -106,6 +106,6 @@ namespace Sisyphus::Rendering::Vulkan {
 				presentQueueFamilyIndex = i;
 			}
 		}
-		Logger::Get().LogArgs("Present queue family index found: ", presentQueueFamilyIndex.value());
+		Logger().LogArgs("Present queue family index found: ", presentQueueFamilyIndex.value());
 	}
 }

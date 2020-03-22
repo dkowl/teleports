@@ -39,7 +39,7 @@ namespace Sisyphus::ECS {
 			components.emplace(type, std::move(component));
 
 			Dispatch<Events::Initialization, T>();
-			Logger::Get().Log(T::ClassName() + " initialized!");
+			Logger().Log(T::ClassName() + " initialized!");
 
 			knownComponentTypes.insert(type);
 		}

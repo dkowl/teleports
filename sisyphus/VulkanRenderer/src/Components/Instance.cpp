@@ -41,7 +41,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	}
 
 	Instance::~Instance() {
-		SIS_DEBUG_ONLY(Logger::Get().Log("~Instance"));
+		SIS_DEBUG_ONLY(Logger().Log("~Instance"));
 	}
 
 	void Instance::Initialize()

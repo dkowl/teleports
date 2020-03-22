@@ -20,7 +20,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		auto& physicalDevice = Parent().GetComponent<PhysicalDevice>();
 		auto& surface = Parent().GetComponent<Surface>();
 
-		auto& logger = Logger::Get();
+		auto& logger = Logger();
 		logger.BeginSection("DepthBuffer");
 		image = CreateImage(surface.GetExtent(), device, physicalDevice);
 		memory = device.AllocateAndBindImageMemory(*image);
@@ -80,7 +80,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		else {
 			SIS_THROW(vk::to_string(feature) + " is not supported for " + vk::to_string(format));
 		}
-		Logger::Get().Log("Image Tiling for " + vk::to_string(feature) + " in " + vk::to_string(format) + " is " + vk::to_string(tiling));
+		Logger().Log("Image Tiling for " + vk::to_string(feature) + " in " + vk::to_string(format) + " is " + vk::to_string(tiling));
 		return tiling;
 	}
 

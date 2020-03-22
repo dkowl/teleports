@@ -15,6 +15,7 @@
     <ProjectGuid>{EB4CB5F1-DEC1-4A96-8A9F-872EBC864BB2}</ProjectGuid>
     <RootNamespace>Editor</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+	<TargetSystem>Windows</TargetSystem>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">

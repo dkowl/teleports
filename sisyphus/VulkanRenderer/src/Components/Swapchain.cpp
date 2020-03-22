@@ -15,7 +15,7 @@ namespace Sisyphus::Rendering::Vulkan {
 	void Swapchain::Initialize()
 	{
 		auto& surface = Parent().GetComponent<Surface>();
-		auto& logger = Logger::Get();
+		auto& logger = Logger();
 
 		constexpr int desiredMinImageCount = 3; // triple buffering
 		auto physicalDevice = Parent().GetComponent<PhysicalDevice>().GetVulkanObject();

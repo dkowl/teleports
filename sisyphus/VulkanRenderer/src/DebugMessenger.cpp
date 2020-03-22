@@ -32,7 +32,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		const VkDebugUtilsMessengerCallbackDataEXT* callbackData,
 		void* /*userData*/)
 	{
-		auto& logger = Logger::Get();
+		auto& logger = Logger();
 
 		logger.BeginSection(
 			vk::to_string(static_cast<vk::DebugUtilsMessageSeverityFlagBitsEXT>(messageSeverity)) + ": " +

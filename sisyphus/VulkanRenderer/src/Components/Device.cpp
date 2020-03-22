@@ -89,7 +89,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		auto memoryTypeIndex = FindMemoryType(memoryProperties, supportedTypeBits, vk::MemoryPropertyFlagBits::eDeviceLocal);
 
-		auto& logger = Logger::Get();
+		auto& logger = Logger();
 		auto memory = device->allocateMemoryUnique(vk::MemoryAllocateInfo(memoryRequirements.size, memoryTypeIndex));
 		logger.Log(std::to_string(memoryRequirements.size) + " bytes of GPU memory allocated");
 		logger.Log("Alignment: " + std::to_string(memoryRequirements.alignment));

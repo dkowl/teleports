@@ -6,7 +6,7 @@
 
 namespace Sisyphus::Rendering::Vulkan {
 	void InspectMemoryProperties(vk::PhysicalDeviceMemoryProperties properties) {
-		auto& logger = Logger::Get();
+		auto& logger = Logger();
 
 		logger.BeginSection("Memory types");
 		for (uint32_t i = 0; i < properties.memoryTypeCount; i++) {
@@ -40,7 +40,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			inspected = true;
 		}
 
-		auto& logger = Logger::Get();
+		auto& logger = Logger();
 
 		uint32_t memoryTypeIndex = uint32_t(~0);
 		for (uint32_t i = 0; i < properties.memoryTypeCount; i++) {
