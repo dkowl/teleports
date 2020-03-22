@@ -7,6 +7,7 @@ namespace Sisyphus::Fs {
 	public:
 		Path();
 		Path(const std::string& str);
+		Path& operator=(const std::string& str);
 
 		Path Stem() const;
 		Path Filename() const;

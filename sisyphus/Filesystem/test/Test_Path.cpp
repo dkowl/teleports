@@ -11,6 +11,10 @@ TEST_CASE("Stem") {
 	REQUIRE(path.Dirname().String() == "Dir/Dir2/");
 	REQUIRE(path.Extension().String() == ".cpp");
 
+	path = "file.h"; // testing operator=
+	REQUIRE(path.Extension().String() != ".cpp");
+	REQUIRE(path.Extension().String() == ".h");
+
 	Path emptyPath("");
 	REQUIRE(emptyPath.Filename().String().empty());
 

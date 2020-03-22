@@ -11,6 +11,12 @@ namespace Sisyphus::Fs {
 	{
 	}
 
+	Path& Path::operator=(const std::string& str)
+	{
+		pathString = str;
+		return *this;
+	}
+
 	Path Path::Stem() const
 	{
 		const char* filename;
