@@ -13,4 +13,7 @@ namespace Sisyphus::Fs {
 	{
 		return std::filesystem::is_directory(p.String());
 	}
+	uint64_t FileSize(const Path& p) {
+		return std::filesystem::file_size(p.String());
+	}
 }

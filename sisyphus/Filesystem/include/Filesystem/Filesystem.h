@@ -10,4 +10,6 @@ namespace Sisyphus::Fs {
 	bool Exists(const Path& p);
 	bool IsRegularFile(const Path& p);
 	bool IsDirectory(const Path& p);
+
+	uint64_t FileSize(const Path& p);
 }

@@ -34,5 +34,15 @@ namespace Sisyphus::Fs {
 		}
 	}
 
+	uint64_t FileSize(const Path& p) {
+		auto asset = AAssetManager_open(assetManager, p.String().c_str(), AASSET_MODE_UNKNOWN);
+		if (asset == nullptr) return 0;
+		else {
+			uint64_t length = AAsset_getLength64(asset);
+			AAsset_close(asset);
+			return length;
+		}
+	}
+
 
 }
