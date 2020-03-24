@@ -1,11 +1,16 @@
 #include "catch.hpp"
 #include "AssetManagement/AssetManager.h"
+#include "Utils/PlatformMacros.h"
+#ifdef SIS_WINDOWS
 #include "Utils\FilesystemUtils.h"
+#endif
 #include <fstream>
+#include <iostream>
 using namespace Sisyphus;
 using namespace Sisyphus::AssetManagement;
 
 TEST_CASE("Asset Manager") {
+#ifdef SIS_WINDOWS
 	Path dirPath = fs::current_path();
 	dirPath /= "temp";
 	fs::remove_all(dirPath);
@@ -30,4 +35,9 @@ TEST_CASE("Asset Manager") {
 	AssetManager manager(dirPath.string(), false);
 	REQUIRE(manager.GetAssetCount() == 3);
 	fs::remove_all(dirPath);
+#endif
+#ifdef SIS_ANDROID
+	std::cout << "No Android tests yet\n";
+	REQUIRE(false);
+#endif
 }
