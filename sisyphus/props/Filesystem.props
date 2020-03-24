@@ -17,19 +17,11 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Filesystem\Windows\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Filesystem.Windows.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)Filesystem\Windows\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Filesystem.Windows.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(TargetSystem)' == 'Android'">
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)Filesystem\Android\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LibraryDependencies>Filesystem;m;%(LibraryDependencies)</LibraryDependencies>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)Filesystem\Android\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>Filesystem;m;%(LibraryDependencies)</LibraryDependencies>
-    </Lib>
   </ItemDefinitionGroup>
 </Project>

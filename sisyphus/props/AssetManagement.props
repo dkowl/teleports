@@ -23,19 +23,11 @@
       <AdditionalLibraryDirectories>$(SolutionDir)AssetManagement\Windows\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>AssetManagement.Windows.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)AssetManagement\Windows\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>AssetManagement.Windows.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(TargetSystem)' == 'Android'">
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)AssetManagement\Android\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LibraryDependencies>AssetManagement;m;%(LibraryDependencies)</LibraryDependencies>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)AssetManagement\Android\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <LibraryDependencies>AssetManagement;m;%(LibraryDependencies)</LibraryDependencies>
-    </Lib>
   </ItemDefinitionGroup>
 </Project>

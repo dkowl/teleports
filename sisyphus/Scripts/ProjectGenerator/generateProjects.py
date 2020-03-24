@@ -359,8 +359,6 @@ def generatePropsString(projectInfo):
     for platform in platforms:
         platformItemDefGroup = ET.SubElement(root, "ItemDefinitionGroup")
         platformItemDefGroup.set("Condition", "'$(TargetSystem)' == '" + platform.name + "'")
-        linkElem = ET.SubElement(platformItemDefGroup, "Link")
-        librarianElem = ET.SubElement(platformItemDefGroup, "Lib")
         libDirElem = ET.Element("AdditionalLibraryDirectories")
         libDirElem.text = "$(SolutionDir)%s\%s\$(GeneralOutDir);%%(AdditionalLibraryDirectories)" % (projectInfo.name, platform.name)
         if platform.name == "Windows":
@@ -371,10 +369,9 @@ def generatePropsString(projectInfo):
             libDependenciesElem.text = "{0};m;%(LibraryDependencies)".format(projectInfo.name)
         else:
             assert(false)
+        linkElem = ET.SubElement(platformItemDefGroup, "Link")
         linkElem.append(libDirElem)
         linkElem.append(libDependenciesElem)
-        librarianElem.append(libDirElem)
-        librarianElem.append(libDependenciesElem)
 
     return prettify(root)
 
