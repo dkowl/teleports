@@ -73,9 +73,8 @@ namespace Sisyphus::Fs {
 	{
 		return End();
 	}
-	bool RecursiveDirectoryIterator::operator!=(End end)
+	bool RecursiveDirectoryIterator::operator!=(End)
 	{
-		end;
 		return impl->stdIterator != std::filesystem::recursive_directory_iterator();
 	}
 }

@@ -21,6 +21,7 @@ namespace Sisyphus::Fs {
 			~RecursiveDirectoryIterator(); // default
 			RecursiveDirectoryIterator(const RecursiveDirectoryIterator& other);
 
+
 			const Path& operator*() const;
 			const Path* operator->() const;
 			RecursiveDirectoryIterator& operator++();

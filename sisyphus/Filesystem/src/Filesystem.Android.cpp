@@ -1,6 +1,8 @@
 #include "Filesystem.h"
 #include "android/asset_manager.h"
 #include "android/asset_manager_jni.h"
+#include "Utils/Throw.h"
+#include <vector>
 
 namespace Sisyphus::Fs {
 
@@ -44,5 +46,89 @@ namespace Sisyphus::Fs {
 		}
 	}
 
+	class RecursiveDirectoryIterator::Impl {
+	public:
+		Impl(const Path& p) {
+			auto assetDir = AAssetManager_openDir(assetManager, p.String().c_str());
+			SIS_THROWASSERT_MSG(assetDir != nullptr, "Failed to open asset directory: " + p.String());
+			assetDirs.push_back(assetDir);
 
+			Increment();
+		}
+
+		void Increment() {
+			// Recursive alogrithm	
+			const char* nextFilename = nullptr;
+			while (!assetDirs.empty()) {
+				auto nextFilename = AAssetDir_getNextFileName(assetDirs.back());
+				if (nextFilename == nullptr) {
+					assetDirs.pop_back();
+				}
+				else {
+					break;
+				}
+			}
+
+			AddIfDir(nextFilename);
+
+			currentPath = nextFilename == nullptr ? nextFilename : "";
+		}
+
+		std::vector<AAssetDir*> assetDirs;
+		Path currentPath;
+
+	private:
+		void AddIfDir(const char* dirName) {
+			AAssetDir* assetDir = nullptr;
+			bool failed = false;
+			try {
+				assetDir = AAssetManager_openDir(assetManager, dirName);
+			}
+			catch (...) {
+				failed = true;
+			}
+			if (!failed && assetDir != nullptr) {
+				assetDirs.push_back(assetDir);
+			}
+		}
+	};
+
+	RecursiveDirectoryIterator::RecursiveDirectoryIterator(const Path& p) :
+		impl(std::make_unique<Impl>(p))
+	{
+	}
+
+	RecursiveDirectoryIterator::~RecursiveDirectoryIterator() = default;
+
+	RecursiveDirectoryIterator::RecursiveDirectoryIterator(const RecursiveDirectoryIterator& other)
+	{
+		impl = std::make_unique<Impl>(*(other.impl));
+	}
+
+	const Path& RecursiveDirectoryIterator::operator*() const
+	{
+		return impl->currentPath;
+	}
+	const Path* RecursiveDirectoryIterator::operator->() const
+	{
+		return &(impl->currentPath);
+	}
+
+	RecursiveDirectoryIterator& RecursiveDirectoryIterator::operator++()
+	{
+		impl->Increment();
+		return *this;
+	}
+	RecursiveDirectoryIterator& RecursiveDirectoryIterator::begin()
+	{
+		return *this;
+	}
+	RecursiveDirectoryIterator::End RecursiveDirectoryIterator::end() const
+	{
+		return End();
+	}
+	bool RecursiveDirectoryIterator::operator!=(End)
+	{
+		return impl->currentPath.Empty();
+	}
 }
