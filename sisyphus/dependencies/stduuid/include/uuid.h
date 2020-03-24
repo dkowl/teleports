@@ -260,7 +260,7 @@ namespace uuids
    }
 
 #ifdef __ANDROID__
-   void InitJNI(JNIEnv* jni) {
+   inline void InitJNI(JNIEnv* jni) {
        using namespace detail;
        jniEnv = jni;
        uuidClass = jniEnv->FindClass("java/util/UUID");
