@@ -27,7 +27,7 @@ TEST_CASE("Asset Manager") {
 	file2.close();
 	file3.close();
 
-	AssetManager manager(dirPath.string());
+	AssetManager manager(dirPath.string(), false);
 	REQUIRE(manager.GetAssetCount() == 3);
 	fs::remove_all(dirPath);
 }

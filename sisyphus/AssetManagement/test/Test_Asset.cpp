@@ -20,19 +20,19 @@ TEST_CASE("Asset") {
 	assetFile << content;
 	assetFile.close();
 
-	Asset asset(assetPath.string());
+	Asset asset(assetPath.string(), false);
 	Path metaPath = assetPath;
 	metaPath += ".meta";
 	REQUIRE(fs::exists(metaPath));
-	auto id = asset.GetId();
+	auto id = asset.Id();
 
 	SECTION("GetDataAsString") {
-		auto data = asset.GetDataAsString();
+		auto data = asset.DataAsString();
 		REQUIRE(data == content);
 		assetFile.open(assetPath);
 		assetFile.clear();
 		assetFile << "Other Content";
-		data = asset.GetDataAsString();
+		data = asset.DataAsString();
 		REQUIRE(data == content);
 		assetFile.close();
 	}
@@ -42,13 +42,13 @@ TEST_CASE("Asset") {
 		char c = 32;
 		assetFile << c;
 		assetFile.close();
-		REQUIRE_NOTHROW(asset.GetData());
-		auto data = asset.GetData();
+		REQUIRE_NOTHROW(asset.Data());
+		auto data = asset.Data();
 		REQUIRE(static_cast<char>(data[0]) == c);
 	}
 
 	Asset asset2(assetPath.string());
-	REQUIRE(id == asset2.GetId());
+	REQUIRE(id == asset2.Id());
 
 	std::ofstream file;
 	file.open(metaPath, std::ios::trunc);

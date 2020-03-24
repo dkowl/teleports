@@ -8,14 +8,14 @@
 namespace Sisyphus::AssetManagement {
 	class AssetManager {
 	public:
-		AssetManager(std::string inAssetDir);
+		AssetManager(std::string inAssetDir, bool isReadOnly = true);
 
 		const Asset& GetAsset(uuids::uuid id) const;
 		int GetAssetCount() const;
 
 	private:
 		static std::vector<std::string> FindAllAssetPaths(std::string dir);
-		void InitAssets();
+		void InitAssets(bool isReadOnly);
 		void AddAsset(std::unique_ptr<Asset> asset);
 
 		std::string mainAssetDir;

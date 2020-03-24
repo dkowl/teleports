@@ -5,9 +5,26 @@
 #include "Utils\UuidJsonSerializer.h"
 
 namespace Sisyphus::AssetManagement {
-	struct AssetMetadata {
+	class AssetMetadata {
+	public:
+		AssetMetadata() = default;
+		AssetMetadata(const std::string& assetPath, bool inReadOnly = true);
+
+		const uuids::uuid& Id() const;
+		const std::string& Name() const;
+		bool IsBinary() const;
+
+	private:
+		enum class ReadStatus {
+			Ok,
+			Failed
+		};
+		ReadStatus ReadFromFile(const std::string& path);
+		void WriteToFile(const std::string& path) const;
+
+		friend struct nlohmann::adl_serializer<AssetMetadata>;
 		uuids::uuid id;
-		String name;
+		std::string name;
 		bool isBinary;
 	};
 }

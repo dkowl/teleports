@@ -10,12 +10,12 @@ namespace Sisyphus::AssetManagement {
 
 	class Asset {
 	public:
-		Asset(std::string inPath);
+		Asset(std::string inPath, bool inReadOnly = true);
 
-		uuids::uuid GetId() const;
-		std::string GetName() const;
-		const std::vector<std::byte>& GetData() const;
-		const std::string_view GetDataAsString() const;
+		const uuids::uuid& Id() const;
+		const std::string& Name() const;
+		const std::vector<std::byte>& Data() const;
+		const std::string_view DataAsString() const;
 
 	private:
 		void InitMetadata();
@@ -27,11 +27,10 @@ namespace Sisyphus::AssetManagement {
 		void LazyLoadData() const;
 		void ReadData() const;
 
-		std::string name;
 		std::string path;
-		std::string metaPath;
 		AssetMetadata metadata;
 
+		bool readOnly;
 		mutable bool dataIsRead;
 		mutable std::vector<std::byte> data;
 		mutable std::mutex mutex;

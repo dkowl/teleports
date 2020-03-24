@@ -1,28 +1,28 @@
 #include "Pch_AssetManagement.h"
 #include "AssetManager.h"
 #include "Utils\Logger.h"
-#include "Utils/FilesystemUtils.h"
+#include "Filesystem/Filesystem.h"
 
 namespace Sisyphus::AssetManagement {
-	AssetManager::AssetManager(std::string inAssetDir):
+	AssetManager::AssetManager(std::string inAssetDir, bool isReadOnly):
 		mainAssetDir(inAssetDir)
 	{
-		InitAssets();
+		InitAssets(isReadOnly);
 	}
-	void AssetManager::InitAssets()
+	void AssetManager::InitAssets(bool isReadOnly)
 	{
 		auto paths = FindAllAssetPaths(mainAssetDir);
 		for (auto&& p : paths) {
-			AddAsset(std::make_unique<Asset>(p));
+			AddAsset(std::make_unique<Asset>(p, isReadOnly));
 		}
 	}
 	void AssetManager::AddAsset(std::unique_ptr<Asset> asset)
 	{
 		Logger().BeginSection("Asset detected");
-		Logger().Log("Id: " + uuids::to_string(asset->GetId()));
-		Logger().Log("Name: " + asset->GetName());
+		Logger().Log("Id: " + uuids::to_string(asset->Id()));
+		Logger().Log("Name: " + asset->Name());
 		Logger().EndSection();
-		assets.insert({ asset->GetId(), std::move(asset) });
+		assets.insert({ asset->Id(), std::move(asset) });
 	}
 	const Asset& AssetManager::GetAsset(uuids::uuid id) const
 	{
@@ -39,9 +39,9 @@ namespace Sisyphus::AssetManagement {
 	std::vector<std::string> AssetManager::FindAllAssetPaths(std::string dir)
 	{
 		std::vector<std::string> result;
-		for (auto&& p : fs::recursive_directory_iterator(dir)) {
-			if (p.is_regular_file() && p.path().extension() != ".meta") {
-				result.push_back(p.path().string());
+		for (auto&& p : Fs::RecursiveDirectoryIterator(dir)) {
+			if (Fs::IsRegularFile(p) && p.Extension().String() != ".meta") {
+				result.push_back(p.String());
 			}
 		}
 		return result;
