@@ -24,9 +24,18 @@ namespace Sisyphus::Fs {
 	class RecursiveDirectoryIterator::Impl {
 	public:
 		Impl(const Path& p):
-			currentPath(p),
 			stdIterator(p.String())
 		{
+			UpdateCurrentPath();
+		}
+
+		void UpdateCurrentPath() {
+			if (stdIterator != std::filesystem::recursive_directory_iterator()) {
+				currentPath = stdIterator->path().string();
+			}
+			else {
+				currentPath = "";
+			}
 		}
 
 		std::filesystem::recursive_directory_iterator stdIterator;
@@ -57,12 +66,7 @@ namespace Sisyphus::Fs {
 	{
 		std::error_code dummy;
 		impl->stdIterator.increment(dummy);
-		if (impl->stdIterator != std::filesystem::recursive_directory_iterator()) {
-			impl->currentPath = impl->stdIterator->path().string();
-		}
-		else {
-			impl->currentPath = "";
-		}
+		impl->UpdateCurrentPath();
 		return *this;
 	}
 	RecursiveDirectoryIterator& RecursiveDirectoryIterator::begin()
