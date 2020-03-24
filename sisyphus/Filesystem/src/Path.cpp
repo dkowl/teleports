@@ -56,6 +56,11 @@ namespace Sisyphus::Fs {
 		return Path(std::string(extension, extensionLength));
 	}
 
+	bool Path::Empty() const
+	{
+		return pathString.empty();
+	}
+
 	const std::string& Path::String() const {
 		return pathString;
 	}

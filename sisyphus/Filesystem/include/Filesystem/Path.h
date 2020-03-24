@@ -13,6 +13,7 @@ namespace Sisyphus::Fs {
 		Path Filename() const;
 		Path Dirname() const;
 		Path Extension() const;
+		bool Empty() const;
 
 		const std::string& String() const;
 	private:
