@@ -167,7 +167,10 @@ def getCppPathsAndDirs(projName, platform, isTest):
                         continue
                     resultFiles.append(os.path.relpath(os.path.join(root, file), os.path.join(solutionDir)))
 
-    return resultFiles, resultDirs
+    # converting a set into a list for deterministic iteration so that project files don't change unnecessarily
+    resultDirsList = [dir for dir in resultDirs]
+    resultDirsList.sort()
+    return resultFiles, resultDirsList
 
 def getIncludeDirsIncludesAndCompiles(targetInfo, platform, projName):
     includeDirGroup = ET.Element("ItemDefinitionGroup")

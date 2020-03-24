@@ -62,7 +62,7 @@
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)Filesystem\src;$(SolutionDir)Filesystem\include\Filesystem;$(SolutionDir)Filesystem\test;$(SolutionDir)Filesystem\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Filesystem\include;$(SolutionDir)Filesystem\include\Filesystem;$(SolutionDir)Filesystem\src;$(SolutionDir)Filesystem\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
