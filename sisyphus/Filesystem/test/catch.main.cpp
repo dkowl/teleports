@@ -11,12 +11,14 @@
 
 JNIEnv* JavaGlobals::jniEnv = nullptr;
 jobject JavaGlobals::assetManager = nullptr;
+jstring JavaGlobals::filesDir = nullptr;
 
 extern "C"
 JNIEXPORT JNICALL
-int Java_com_FilesystemAndroidTestApp_FilesystemAndroidTestApp_runTest(JNIEnv * env, jclass type, jobject assetManager) {
-	JavaGlobals::jniEnv = env;
+int Java_com_FilesystemAndroidTestApp_FilesystemAndroidTestApp_runTest(JNIEnv * env, jclass type, jobject assetManager, jstring filesDir) {
+    JavaGlobals::jniEnv = env;
     JavaGlobals::assetManager = assetManager;
+    JavaGlobals::filesDir = filesDir;
     const char* argv[] = { "whatever" };
     int result = Catch::Session().run(1, argv);//fake `argc` and `argv`
     return result;

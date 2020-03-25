@@ -18,8 +18,8 @@ public class UtilsAndroidTestApp extends Activity
 
         try{
             System.loadLibrary("Utils");
-            assetManager = getResources().getAssets();
-            tv.setText("Test result: " + Integer.toString(runTest(assetManager)));
+            filesDir = getFilesDir().getAbsolutePath();
+            tv.setText("Files dir: " + filesDir + "\nTest result: " + Integer.toString(runTest(assetManager, filesDir)));
         }
         catch(Exception e){
             tv.setText(e.getMessage());
@@ -27,8 +27,9 @@ public class UtilsAndroidTestApp extends Activity
 
         setContentView(tv);
     }
-
-    public static native int runTest(AssetManager assetManager);
+    
+    public static native int runTest(AssetManager assetManager, String filesDir);
 
     private AssetManager assetManager;
+    private String filesDir;
 }
