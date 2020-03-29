@@ -6,6 +6,17 @@ vsMajorVersionHeader = "# Visual Studio Version "
 varVsVersion = "VisualStudioVersion"
 varMinVsVersion = "MinimumVisualStudioVersion"
 
+projectTypeIds = {
+    "cpp":"8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942",
+    "python":"888888A0-9F3D-457C-B088-3A5042F75D52",
+    "folder":"2150E333-8FDC-42A3-9474-1A3956D46DE8",
+    "android":"39E2626F-3545-4960-A6E8-258AD8476CE5"
+}
+
+projectTypes = {}
+for projType, id in projectTypeIds.items():
+    projectTypes[id] = projType
+
 def readAfterPrefix(line, prefix):
     assert line.startswith(prefix), "%s does not start with %s" % (line, prefix)
     return line[len(prefix):]
@@ -46,6 +57,7 @@ class SolutionBlock:
             self.values = line[argEnd + findResult + len(' = '):].split(', ')
 
     def writeFirstLine(self):
+        assert len(self.name) > 0, "A block must have a name"
         result = ''
         result += self.name
         if self.arg:
@@ -54,7 +66,6 @@ class SolutionBlock:
             result += ' = %s' % self.values[0]
             for v in self.values[1:]:
                 result += ', %s' % v
-        result += '\n'
         return result
 
     def endToken(self):
@@ -67,23 +78,36 @@ class SolutionBlock:
             if line == self.endToken():
                 endFound = True
                 break
-            self.content.append(line)
+            assert line[0] == '\t', "A block content must be indented with \\t"
+            self.content.append(line[1:])
         assert endFound, 'A block must have an end (%s)' % self.endToken()
 
-    def __init__(self, lines):
+    def __init__(self):
+        self.name = ''
+        self.arg = None
+        self.values = None
+        self.content = []  
+
+    def readFromLines(self, lines):
         self.parseFirstLine(lines[0])
-        self.readContent(lines[1:])     
+        self.readContent(lines[1:])
+
+    def asLines(self):
+        lines = [self.writeFirstLine()]
+        for line in self.content:
+            lines.append('\t' + line)
+        lines.append(self.endToken())
+        return lines
 
     def write(self):
         result = ''
-        result += self.writeFirstLine()
-        for line in self.content:
+        for line in self.asLines():
             result += line + '\n'
-        result += self.endToken() + '\n'
         return result
 
     def numLines(self):
         return len(self.content) + 2
+
 
 def readBlocks(lines):
     i = 0
@@ -92,10 +116,48 @@ def readBlocks(lines):
         if lines[i] == '':
             i = i + 1
             continue
-        block = SolutionBlock(lines[i:])
+        block = SolutionBlock()
+        block.readFromLines(lines[i:])
         blocks.append(block)
         i = i + block.numLines()
     return blocks
+
+
+class SolutionProject:
+    def __init__(self, block):
+        self.projType = projectTypes[block.arg.strip('\"{}')]
+        self.name = block.values[0].strip('\"')
+        self.path = block.values[1].strip('\"')
+        self.id = block.values[2].strip('\"{}')
+
+        self.dependencies = []
+        subBlocks = readBlocks(block.content)
+        for subBlock in subBlocks:
+            if subBlock.arg == "ProjectDependencies":
+                for line in subBlock.content:
+                    ids = readAssignmentExpr(line)
+                    self.dependencies.append(ids[0].strip('{}'))
+
+    def toBlock(self):
+        block = SolutionBlock()
+        block.name = 'Project'
+        block.arg = '\"{%s}\"' % projectTypeIds[self.projType]
+        block.values = ['\"%s\"' % self.name, '\"%s\"' % self.path, '\"{%s}\"' % self.id]
+
+        if len(self.dependencies) > 0:
+            subBlock = SolutionBlock()
+            subBlock.name = "ProjectSection"
+            subBlock.arg = "ProjectDependencies"
+            subBlock.values = ['postProject']
+            for dependency in self.dependencies:
+                subBlock.content.append('{{{0}}} = {{{0}}}'.format(dependency))
+            block.content = subBlock.asLines()
+
+        return block
+
+    def write(self):
+        return self.toBlock().write()
+
 
 class Solution:
     def readHeader(self, lines):
@@ -116,14 +178,17 @@ class Solution:
         lines = content.splitlines()
 
         self.readHeader(lines[1:5])
-        self.blocks = readBlocks(lines[5:])
-        
+        self.projects = []
+        blocks = readBlocks(lines[5:])
+        for block in blocks:
+            if block.name == "Project":
+                self.projects.append(SolutionProject(block))        
 
     def write(self):
         content = '\n'
         content += self.writeHeader()
-        for block in self.blocks:
-            content += block.write()
+        for project in self.projects:
+            content += project.write()
         content += '\n'
 
         return content
