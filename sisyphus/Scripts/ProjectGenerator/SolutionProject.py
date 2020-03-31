@@ -1,16 +1,27 @@
 import SolutionCommon as Common
 import SolutionBlock as Block
+import Platform
 
 class SolutionProject:
-    def __init__(self, block):
-        self.projTypeId = block.arg.strip('\"{}')
-        self.name = block.values[0].strip('\"')
-        self.path = block.values[1].strip('\"')
-        self.id = block.values[2].strip('\"{}')
+    def __init__(self, block = None):
+        self.projTypeId = ''
+        self.name = ''
+        self.path = ''
+        self.id = ''
+        self.dependencies = []
 
         # populated from SolutionGlobals
         self.configPlatforms = {} # dict<configPlatformName, tuple<configPlatformName, build(bool)>>
         self.nestedProjects = [] # list<projectId>
+
+        if block != None:
+            self.initFromBlock(block)
+
+    def initFromBlock(self, block):
+        self.projTypeId = block.arg.strip('\"{}')
+        self.name = block.values[0].strip('\"')
+        self.path = block.values[1].strip('\"')
+        self.id = block.values[2].strip('\"{}')
 
         self.dependencies = []
         subBlocks = Block.readBlocks(block.content)
@@ -39,3 +50,15 @@ class SolutionProject:
 
     def write(self):
         return self.toBlock().write()
+
+    def updateConfigPlatformsForPlatform(self, platform):
+        for slnConfig in Common.solutionConfigurations:
+            buildPlatforms = platform.architectures
+            defaultPlatform = buildPlatforms[0]
+            for slnPlatform in Common.solutionPlatforms:
+                configPlatformString = '%s|%s' % (slnConfig, slnPlatform)
+                defaultConfigPlatformString = '%s|%s' % (slnConfig, defaultPlatform)
+                if slnPlatform in buildPlatforms:
+                    self.configPlatforms[configPlatformString] = (configPlatformString, True)
+                else:
+                    self.configPlatforms[configPlatformString] = (defaultConfigPlatformString, False)

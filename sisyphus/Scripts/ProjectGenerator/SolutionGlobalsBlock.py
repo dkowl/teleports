@@ -60,7 +60,7 @@ class SolutionGlobalsBlock:
         slnConfigPlatformBlock.arg = 'SolutionConfigurationPlatforms'
         slnConfigPlatformBlock.values = ['preSolution']
         for slnConfigPlatform in self.solutionConfigPlatforms:
-            slnConfigPlatformBlock.content.append('{{{0}}} = {{{0}}}'.format(slnConfigPlatform))
+            slnConfigPlatformBlock.content.append('{0} = {0}'.format(slnConfigPlatform))
 
         projConfigPlatformBlock = SolutionBlock()
         projConfigPlatformBlock.name = 'GlobalSection'

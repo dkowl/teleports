@@ -5,6 +5,8 @@ from constants import *
 import ProjectInfo
 import sisyphusUtils as sis
 from projCommon import *
+import SolutionCommon
+import SolutionProject
 
 def generateAndroidTestApp(platform, projectInfo):
     libDir = os.path.join(projectInfo.projDir(), "Android.Test")
@@ -118,5 +120,15 @@ def generateAndroidTestApp(platform, projectInfo):
 
     with open(androidprojFilename, 'w') as androidprojFile:
         androidprojFile.write(prettify(root))
+
+    solutionProject = SolutionProject.SolutionProject()
+    solutionProject.name = projectInfo.testAppName()
+    solutionProject.id = str(projGuid).upper()
+    solutionProject.path = os.path.relpath(androidprojFilename, solutionDir)
+    solutionProject.projTypeId = SolutionCommon.projectTypeIds['android']
+    solutionProject.updateConfigPlatformsForPlatform(platform)
+
+    return solutionProject
+
 
 

@@ -1,10 +1,13 @@
 import os
+import uuid
 import constants
 import SolutionCommon as Common
 from SolutionCommon import readAfterPrefix, readVar, writeVar
 import SolutionBlock as Block
 import SolutionProject as Project
 import SolutionGlobalsBlock as GlobalsBlock
+from generateProjects import generateProject
+from ProjectInfo import ProjectInfo
 
 class Solution:
     def readHeader(self, lines):
@@ -68,11 +71,50 @@ class Solution:
             
         self.read(content)
 
-    
+    def findProjectByName(self, name):
+        for project in self.projects.values():
+            if project.name == name:
+                return project
+        return None
+
+    def insertProjects(self, projects):
+        for project in projects:
+            self.insertProject(project)
+
+    def insertProject(self, newProject):
+            self.projects[newProject.id] = newProject
+
 
 solutionFilename = "Sisyphus.sln"
 solutionPath = constants.solutionDir + solutionFilename
 
 solution = Solution(solutionPath)
 print(solution.write())
+
+projects = ["AssetManagement", "Utils", "Filesystem"]
+projectInfos = [ProjectInfo(projName) for projName in projects]
+
+for projectInfo in projectInfos:
+    solutionFolder = solution.findProjectByName(projectInfo.name)
+    if solutionFolder == None:
+        solutionFolder = Project.SolutionProject()
+        solutionFolder.id = str(uuid.uuid4()).toUpper()
+        solutionFolder.name = projectInfo.name
+    solutionFolder.projTypeId = Common.projectTypeIds['folder']
+    solutionFolder.path = projectInfo.name
+
+    solutionProjects = generateProject(projectInfo)
+
+    solutionFolder.nestedProjects = []
+    for slnProject in solutionProjects:
+        solutionFolder.nestedProjects.append(slnProject.id)
+
+    solutionProjects.append(solutionFolder)
+
+    solution.insertProjects(solutionProjects)
+
+    # TODO: intra- & inter-project dependencies
+
+print(solution.write())
+
 

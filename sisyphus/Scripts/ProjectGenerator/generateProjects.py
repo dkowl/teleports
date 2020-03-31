@@ -5,11 +5,14 @@ import traceback
 import sisyphusUtils as sis
 from xmlUtils import *
 from constants import solutionDir
+import constants
 from ProjectInfo import ProjectInfo
 from Platform import *
 from projCommon import *
 from generateCatchMain import generateCatchMain
 from generateAndroidTestApp import generateAndroidTestApp
+import SolutionCommon
+import SolutionProject
 
 platforms = [
     PlatformData(
@@ -301,10 +304,10 @@ def generateVcxprojAndFilters(platform, projectInfo, isTest):
     if projectInfo.precompiledHeaders:
        ensurePrecompiledHeadersExist(projectInfo)
 
-    projFilename = projectInfo.name + "." + platform.name
+    projName = projectInfo.name + "." + platform.name
     if isTest:
-        projFilename += ".Test"
-    projFilename += ".vcxproj"
+        projName += ".Test"
+    projFilename = projName + ".vcxproj"
 
     projPath = os.path.join(targetDir, projFilename)
     filtersPath = projPath + ".filters"
@@ -334,6 +337,15 @@ def generateVcxprojAndFilters(platform, projectInfo, isTest):
             print(os.path.basename(filtersPath) + " generated!")
     except:
         print("Failed to generate {0}: {1}".format(os.path.basename(filtersPath), traceback.format_exc()))
+
+    solutionProject = SolutionProject.SolutionProject()
+    solutionProject.name = projName
+    solutionProject.id = str(targetInfo.projGuid).upper()
+    solutionProject.projType = SolutionCommon.projectTypeIds['cpp']
+    solutionProject.path = os.path.relpath(projPath, solutionDir)
+    solutionProject.updateConfigPlatformsForPlatform(platform)
+
+    return solutionProject
 
 def generatePropsString(projectInfo):
     root = ET.Element("Project")
@@ -385,18 +397,21 @@ def generateProps(projectInfo):
         print(os.path.basename(propsPath) + " generated!")
 
 def generateProject(projectInfo):
+    solutionProjects = []
     if projectInfo.test:
         generateCatchMain(projectInfo)
     for platform in platforms:
-        generateVcxprojAndFilters(platform, projectInfo, False)
+        solutionProjects.append(generateVcxprojAndFilters(platform, projectInfo, False))
         if projectInfo.test:
-            generateVcxprojAndFilters(platform, projectInfo, True)
+            solutionProjects.append(generateVcxprojAndFilters(platform, projectInfo, True))
             if platform.name == "Android":
-                generateAndroidTestApp(platform, projectInfo)
+                solutionProjects.append(generateAndroidTestApp(platform, projectInfo))
     generateProps(projectInfo)
+    return solutionProjects
 
 
 projects = ["AssetManagement", "Utils", "Filesystem"]
+
 for info in [ProjectInfo(projName) for projName in projects]:
     generateProject(info)
 
