@@ -40,6 +40,18 @@
     <Compile Include="ProjectGenerator\ProjectInfo.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ProjectGenerator\SolutionBlock.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ProjectGenerator\SolutionCommon.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ProjectGenerator\SolutionGlobalsBlock.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ProjectGenerator\SolutionProject.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ProjectGenerator\xmlUtils.py">
       <SubType>Code</SubType>
     </Compile>
