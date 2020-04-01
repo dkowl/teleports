@@ -1,6 +1,12 @@
 from SolutionCommon import *
 from SolutionBlock import *
 
+class ConfigPlatformEntry:
+    def __init__(self):
+        self.activeCfg = ''
+        self.build = False
+        self.deploy = False
+
 class SolutionGlobalsBlock:
     def __init__(self, globalBlock):
         self.solutionConfigPlatforms = []
@@ -31,11 +37,13 @@ class SolutionGlobalsBlock:
                             return default
 
                     projectConfigPlatform = fromDictOrDefault(self.projectConfigPlatforms, projectId, {})
-                    entry = fromDictOrDefault(projectConfigPlatform, leftConfigPlatform, ('', False))
+                    entry = fromDictOrDefault(projectConfigPlatform, leftConfigPlatform, ConfigPlatformEntry())
                     if leftMode == 'ActiveCfg':
-                        entry = (right, entry[1])
+                        entry.activeCfg = right
                     elif leftMode == 'Build.0':
-                        entry = (entry[0], True)
+                        entry.build = True
+                    elif leftMode == 'Deploy.0':
+                        entry.deploy = True
                     projectConfigPlatform[leftConfigPlatform] = entry
                     self.projectConfigPlatforms[projectId] = projectConfigPlatform
             elif block.arg == 'NestedProjects':
@@ -68,9 +76,11 @@ class SolutionGlobalsBlock:
         projConfigPlatformBlock.values = ['postSolution']
         for projId, projConfigPlatform in self.projectConfigPlatforms.items():
             for configPlatform, entry in projConfigPlatform.items():
-                projConfigPlatformBlock.content.append('{%s}.%s.ActiveCfg = %s' % (projId, configPlatform, entry[0]))
-                if entry[1] == True:
-                    projConfigPlatformBlock.content.append('{%s}.%s.Build.0 = %s' % (projId, configPlatform, entry[0]))
+                projConfigPlatformBlock.content.append('{%s}.%s.ActiveCfg = %s' % (projId, configPlatform, entry.activeCfg))
+                if entry.build == True:
+                    projConfigPlatformBlock.content.append('{%s}.%s.Build.0 = %s' % (projId, configPlatform, entry.activeCfg))
+                if entry.deploy == True:
+                    projConfigPlatformBlock.content.append('{%s}.%s.Deploy.0 = %s' % (projId, configPlatform, entry.activeCfg))
 
         propertiesBlock = SolutionBlock()
         propertiesBlock.name = 'GlobalSection'

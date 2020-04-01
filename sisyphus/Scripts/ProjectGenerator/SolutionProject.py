@@ -1,6 +1,7 @@
 import SolutionCommon as Common
 import SolutionBlock as Block
 import Platform
+import SolutionGlobalsBlock
 
 class SolutionProject:
     def __init__(self, block = None):
@@ -57,7 +58,14 @@ class SolutionProject:
             for slnPlatform in Common.solutionPlatforms:
                 configPlatformString = '%s|%s' % (slnConfig, slnPlatform)
                 defaultConfigPlatformString = '%s|%s' % (slnConfig, defaultPlatform)
+                entry = SolutionGlobalsBlock.ConfigPlatformEntry()
+
                 if slnPlatform in buildPlatforms:
-                    self.configPlatforms[configPlatformString] = (configPlatformString, True)
+                    entry.activeCfg = configPlatformString
+                    entry.build = True
+                    if self.projTypeId == Common.projectTypeIds['android']:
+                        entry.deploy = True
                 else:
-                    self.configPlatforms[configPlatformString] = (defaultConfigPlatformString, False)
+                    entry.activeCfg = defaultConfigPlatformString
+
+                self.configPlatforms[configPlatformString] = entry
