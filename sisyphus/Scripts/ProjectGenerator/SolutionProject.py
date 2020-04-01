@@ -8,11 +8,11 @@ class SolutionProject:
         self.name = ''
         self.path = ''
         self.id = ''
-        self.dependencies = []
+        self.dependencies = set() # set<id(str)>
 
         # populated from SolutionGlobals
         self.configPlatforms = {} # dict<configPlatformName, tuple<configPlatformName, build(bool)>>
-        self.nestedProjects = [] # list<projectId>
+        self.nestedProjects = [] # list<projectId(str)>
 
         if block != None:
             self.initFromBlock(block)
@@ -23,13 +23,12 @@ class SolutionProject:
         self.path = block.values[1].strip('\"')
         self.id = block.values[2].strip('\"{}')
 
-        self.dependencies = []
         subBlocks = Block.readBlocks(block.content)
         for subBlock in subBlocks:
             if subBlock.arg == "ProjectDependencies":
                 for line in subBlock.content:
                     ids = Common.readAssignmentExpr(line)
-                    self.dependencies.append(ids[0].strip('{}'))
+                    self.dependencies.add(ids[0].strip('{}'))
 
     def toBlock(self):
         block = Block.SolutionBlock()

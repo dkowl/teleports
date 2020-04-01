@@ -61,7 +61,6 @@ class Solution:
         for project in self.projects.values():
             content += project.write()
         content += self.globals.write()
-        content += '\n'
 
         return content
 
@@ -89,12 +88,12 @@ solutionFilename = "Sisyphus.sln"
 solutionPath = constants.solutionDir + solutionFilename
 
 solution = Solution(solutionPath)
-print(solution.write())
 
-projects = ["AssetManagement", "Utils", "Filesystem"]
-projectInfos = [ProjectInfo(projName) for projName in projects]
+projectNames = ["AssetManagement", "Utils", "Filesystem"]
+projectInfos = {projName: ProjectInfo(projName) for projName in projectNames}
+projectsToInsert = []
 
-for projectInfo in projectInfos:
+for projectInfo in projectInfos.values():
     solutionFolder = solution.findProjectByName(projectInfo.name)
     if solutionFolder == None:
         solutionFolder = Project.SolutionProject()
@@ -103,18 +102,28 @@ for projectInfo in projectInfos:
     solutionFolder.projTypeId = Common.projectTypeIds['folder']
     solutionFolder.path = projectInfo.name
 
-    solutionProjects = generateProject(projectInfo)
+    generateProject(projectInfo)
+
+    projectInfo.updateProjectDependencies()
+
+    solutionProjects = projectInfo.getAllSolutionProjects()
 
     solutionFolder.nestedProjects = []
     for slnProject in solutionProjects:
         solutionFolder.nestedProjects.append(slnProject.id)
 
-    solutionProjects.append(solutionFolder)
+    projectsToInsert.append(solutionFolder)
+    projectsToInsert += solutionProjects
 
-    solution.insertProjects(solutionProjects)
+for projectInfo in projectInfos.values():
+    for dependency in projectInfo.dependencies:
+        if dependency in projectInfos:
+            projectInfo.addInterProjectDependency(projectInfos[dependency])
 
-    # TODO: intra- & inter-project dependencies
+solution.insertProjects(projectsToInsert)
 
-print(solution.write())
+with open(constants.solutionDir + "Sisyphus.sln", 'w') as newSlnFile:
+    newSlnFile.write(solution.write())
+    print("Solution file written!")
 
 

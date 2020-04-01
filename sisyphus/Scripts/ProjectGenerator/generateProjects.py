@@ -6,7 +6,7 @@ import sisyphusUtils as sis
 from xmlUtils import *
 from constants import solutionDir
 import constants
-from ProjectInfo import ProjectInfo
+import ProjectInfo
 from Platform import *
 from projCommon import *
 from generateCatchMain import generateCatchMain
@@ -341,7 +341,7 @@ def generateVcxprojAndFilters(platform, projectInfo, isTest):
     solutionProject = SolutionProject.SolutionProject()
     solutionProject.name = projName
     solutionProject.id = str(targetInfo.projGuid).upper()
-    solutionProject.projType = SolutionCommon.projectTypeIds['cpp']
+    solutionProject.projTypeId = SolutionCommon.projectTypeIds['cpp']
     solutionProject.path = os.path.relpath(projPath, solutionDir)
     solutionProject.updateConfigPlatformsForPlatform(platform)
 
@@ -397,21 +397,15 @@ def generateProps(projectInfo):
         print(os.path.basename(propsPath) + " generated!")
 
 def generateProject(projectInfo):
-    solutionProjects = []
     if projectInfo.test:
         generateCatchMain(projectInfo)
     for platform in platforms:
-        solutionProjects.append(generateVcxprojAndFilters(platform, projectInfo, False))
+        platformSolutionProjects = ProjectInfo.PlatformSolutionProjects()
+        platformSolutionProjects.mainProj = generateVcxprojAndFilters(platform, projectInfo, False)
         if projectInfo.test:
-            solutionProjects.append(generateVcxprojAndFilters(platform, projectInfo, True))
+            platformSolutionProjects.testProj = generateVcxprojAndFilters(platform, projectInfo, True)
             if platform.name == "Android":
-                solutionProjects.append(generateAndroidTestApp(platform, projectInfo))
+                platformSolutionProjects.testAppProj = generateAndroidTestApp(platform, projectInfo)
+        projectInfo.solutionProjects[platform] = platformSolutionProjects
     generateProps(projectInfo)
-    return solutionProjects
-
-
-projects = ["AssetManagement", "Utils", "Filesystem"]
-
-for info in [ProjectInfo(projName) for projName in projects]:
-    generateProject(info)
 
