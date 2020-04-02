@@ -36,15 +36,15 @@ class ProjectInfo:
     def __init__(self, projName):
         self.name = projName
         try:
-            path = os.path.join(self.projDir(), "{0}.projectInfo.json".format(projName))
-            with open(path) as jsonFile:
+            self.path = os.path.join(self.projDir(), "{0}.projectInfo.json".format(projName))
+            with open(self.path) as jsonFile:
                 jsonData = json.load(jsonFile)
                 self.outputType = jsonData["outputType"]
                 self.dependencies = jsonData["dependencies"]
                 self.precompiledHeaders = jsonData["precompiledHeaders"]
                 self.test = jsonData["test"]
         except:
-            print("Failed to read project info from {0}: {1}".format(path, traceback.format_exc()))
+            print("Failed to read project info from {0}: {1}".format(self.path, traceback.format_exc()))
 
         # to be filled by generateProject()
         self.solutionProjects = {} # dict<Platform, PlatformSolutionProjects>

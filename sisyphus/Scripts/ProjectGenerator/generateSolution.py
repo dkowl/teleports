@@ -101,6 +101,7 @@ for projectInfo in projectInfos.values():
         solutionFolder.name = projectInfo.name
     solutionFolder.projTypeId = Common.projectTypeIds['folder']
     solutionFolder.path = projectInfo.name
+    solutionFolder.solutionItems = [os.path.relpath(projectInfo.path, constants.solutionDir)]
 
     generateProject(projectInfo)
 

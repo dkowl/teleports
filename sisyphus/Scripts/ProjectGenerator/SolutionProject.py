@@ -10,6 +10,7 @@ class SolutionProject:
         self.path = ''
         self.id = ''
         self.dependencies = set() # set<id(str)>
+        self.solutionItems = set()
 
         # populated from SolutionGlobals
         self.configPlatforms = {} # dict<configPlatformName, tuple<configPlatformName, build(bool)>>
@@ -30,6 +31,10 @@ class SolutionProject:
                 for line in subBlock.content:
                     ids = Common.readAssignmentExpr(line)
                     self.dependencies.add(ids[0].strip('{}'))
+            if subBlock.arg == 'SolutionItems':
+                for line in subBlock.content:
+                    paths = Common.readAssignmentExpr(line)
+                    self.solutionItems.add(paths[0])
 
     def toBlock(self):
         block = Block.SolutionBlock()
@@ -44,8 +49,18 @@ class SolutionProject:
             subBlock.values = ['postProject']
             for dependency in self.dependencies:
                 subBlock.content.append('{{{0}}} = {{{0}}}'.format(dependency))
-                subBlock.content.sort() # for deterministic output
-            block.content = subBlock.asLines()
+            subBlock.content.sort() # for deterministic output
+            block.content += subBlock.asLines()
+
+        if len(self.solutionItems) > 0:
+            subBlock = Block.SolutionBlock()
+            subBlock.name = 'ProjectSection'
+            subBlock.arg = 'SolutionItems'
+            subBlock.values = ['preProject']
+            for item in self.solutionItems:
+                subBlock.content.append('{0} = {0}'.format(item))
+            subBlock.content.sort()
+            block.content += subBlock.asLines()
 
         return block
 
