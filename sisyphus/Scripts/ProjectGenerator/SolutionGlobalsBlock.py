@@ -95,6 +95,7 @@ class SolutionGlobalsBlock:
         for parent, children in self.nestedProjects.items():
             for child in children:
                 nestedProjectsBlock.content.append('{%s} = {%s}' % (child, parent))
+        nestedProjectsBlock.content.sort() # for deterministic output
 
         extensibilityGlobalsBlock = SolutionBlock()
         extensibilityGlobalsBlock.name = 'GlobalSection'

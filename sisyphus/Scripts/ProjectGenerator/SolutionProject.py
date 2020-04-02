@@ -44,6 +44,7 @@ class SolutionProject:
             subBlock.values = ['postProject']
             for dependency in self.dependencies:
                 subBlock.content.append('{{{0}}} = {{{0}}}'.format(dependency))
+                subBlock.content.sort() # for deterministic output
             block.content = subBlock.asLines()
 
         return block
