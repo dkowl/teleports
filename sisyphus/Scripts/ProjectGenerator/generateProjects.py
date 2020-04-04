@@ -149,7 +149,7 @@ def ensurePrecompiledHeadersExist(projectInfo):
         pchPath = os.path.join(dir, "Pch_{0}.h".format(projName))
         sis.ensureFileExists(pchPath)
         pchPath = os.path.join(dir, "Pch_{0}.cpp".format(projName))
-        sis.ensureFileExists(pchPath)
+        sis.ensureFileExists(pchPath, '#include "%s"' % "Pch_{0}.h".format(projName))
 
     ensurePrecompiledHeadersExistInDir(projectInfo.sourceDir(), projectInfo.name)
     if projectInfo.test:

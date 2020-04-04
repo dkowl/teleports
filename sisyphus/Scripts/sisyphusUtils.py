@@ -13,8 +13,9 @@ def ensureDirExists(dir):
         print("Creating directory: {0}".format(dir))
         os.makedirs(dir)
 
-def ensureFileExists(filepath):
+def ensureFileExists(filepath, defaultContent = ''):
     ensureDirExists(os.path.dirname(filepath))
     if not os.path.exists(filepath):
         print("Creating file: {0}".format(filepath))
-        open(filepath, 'w')
+        with open(filepath, 'w') as file:
+            file.write(defaultContent)
