@@ -72,7 +72,10 @@
     <ClInclude Include="$(SolutionDir)Utils\test\Pch_Utils_Test.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(SolutionDir)Utils\test\catch.main.cpp" />
+    <ClCompile Include="$(SolutionDir)Utils\test\catch.main.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles />
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)Utils\test\Pch_Utils_Test.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\test\Test_Graph.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\test\Test_Macro.cpp" />

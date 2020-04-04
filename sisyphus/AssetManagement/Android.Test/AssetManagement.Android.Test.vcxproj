@@ -72,7 +72,10 @@
     <ClInclude Include="$(SolutionDir)AssetManagement\test\Pch_AssetManagement_Test.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(SolutionDir)AssetManagement\test\catch.main.cpp" />
+    <ClCompile Include="$(SolutionDir)AssetManagement\test\catch.main.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles />
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Pch_AssetManagement_Test.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_Asset.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_AssetManager.cpp" />
