@@ -96,6 +96,7 @@ projectsToInsert = []
 for projectInfo in projectInfos.values():
     solutionFolder = solution.findProjectByName(projectInfo.name)
     if solutionFolder == None:
+
         solutionFolder = Project.SolutionProject()
         solutionFolder.id = str(uuid.uuid4()).toUpper()
         solutionFolder.name = projectInfo.name

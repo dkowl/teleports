@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
@@ -10,9 +11,13 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup>
-    <ClCompile>
+    <ClCompile Condition="'$(IsTestProject)' != 'true'">
       <PrecompiledHeaderFile>$(SolutionDir)$(RootNamespace)\src\Pch_$(RootNamespace).h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>$(SolutionDir)$(RootNamespace)\src\Pch_$(RootNamespace).h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+	<ClCompile Condition="'$(IsTestProject)' == 'true'">
+      <PrecompiledHeaderFile>$(SolutionDir)$(RootNamespace)\test\Pch_$(RootNamespace)_Test.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>$(SolutionDir)$(RootNamespace)\test\Pch_$(RootNamespace)_Test.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />

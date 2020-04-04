@@ -25,6 +25,7 @@
     <Keyword>Android</Keyword>
     <ApplicationType>Android</ApplicationType>
     <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
@@ -59,6 +60,7 @@
     <Import Project="$(SolutionDir)props\General.props" />
     <Import Project="$(SolutionDir)props\catch2.props" />
     <Import Project="$(SolutionDir)props\Filesystem.props" />
+    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -67,9 +69,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="$(SolutionDir)Filesystem\test\Globals.Android.h" />
+    <ClInclude Include="$(SolutionDir)Filesystem\test\Pch_Filesystem_Test.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Filesystem\test\catch.main.cpp" />
+    <ClCompile Include="$(SolutionDir)Filesystem\test\Pch_Filesystem_Test.cpp" />
     <ClCompile Include="$(SolutionDir)Filesystem\test\Test_Filesystem.cpp" />
     <ClCompile Include="$(SolutionDir)Filesystem\test\Test_Path.cpp" />
   </ItemGroup>

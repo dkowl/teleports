@@ -55,12 +55,12 @@ class TargetInfo:
         self.cppPaths = cppPaths
         self.cppDirs = cppDirs
 
-def globals(platform, projectInfo, projGuid):
+def globals(platform, projectInfo, targetInfo):
     root = ET.Element("PropertyGroup")
     root.set("Label", "Globals")
 
     guidElem = ET.SubElement(root, "ProjectGuid")
-    guidElem.text = str(projGuid)
+    guidElem.text = str(targetInfo.projGuid)
 
     rootNsElem = ET.SubElement(root, "RootNamespace")
     rootNsElem.text = projectInfo.name
@@ -78,6 +78,10 @@ def globals(platform, projectInfo, projGuid):
         appTypeElem.text = "Android"
         appTypeRevElem = ET.SubElement(root, "ApplicationTypeRevision")
         appTypeRevElem.text = "3.0"
+
+    if targetInfo.isTest:
+        testProjectElem = ET.SubElement(root, 'IsTestProject')
+        testProjectElem.text = 'true'
 
     return root
 
@@ -126,10 +130,11 @@ def propsImportGroup(projectInfo, isTest):
         dependencies.append("catch2")
         dependencies.append(projectInfo.name)
     else:
-        if projectInfo.precompiledHeaders:
-            dependencies.append("PrecompiledHeaders")
         for dep in projectInfo.dependencies:
             dependencies.append(dep)
+            
+    if projectInfo.precompiledHeaders:
+        dependencies.append("PrecompiledHeaders")
 
     for dep in dependencies:
         importElem = ET.SubElement(root, "Import")
@@ -140,11 +145,15 @@ def propsImportGroup(projectInfo, isTest):
 def ensurePrecompiledHeadersExist(projectInfo):
     assert(projectInfo.precompiledHeaders)
 
-    srcDir = os.path.join(projectInfo.projDir(), "src")
-    pchPath = os.path.join(srcDir, "Pch_{0}.h".format(projectInfo.name))
-    sis.ensureFileExists(pchPath)
-    pchPath = os.path.join(srcDir, "Pch_{0}.cpp".format(projectInfo.name))
-    sis.ensureFileExists(pchPath)
+    def ensurePrecompiledHeadersExistInDir(dir, projName):
+        pchPath = os.path.join(dir, "Pch_{0}.h".format(projName))
+        sis.ensureFileExists(pchPath)
+        pchPath = os.path.join(dir, "Pch_{0}.cpp".format(projName))
+        sis.ensureFileExists(pchPath)
+
+    ensurePrecompiledHeadersExistInDir(projectInfo.sourceDir(), projectInfo.name)
+    if projectInfo.test:
+        ensurePrecompiledHeadersExistInDir(projectInfo.testSourceDir(), projectInfo.name + "_Test")
 
 def getCppPathsAndDirs(projName, platform, isTest):
     sourceDirs = ["src", "include", "test"]
@@ -194,7 +203,8 @@ def getIncludeDirsIncludesAndCompiles(targetInfo, platform, projName):
         elif extension in (".c", ".cpp"):
             compileElem = ET.SubElement(compileGroup, "ClCompile")
             compileElem.set("Include", "$(SolutionDir)" + str(path))
-            if (stem == "Pch." + projName or stem == "Pch_" + projName) and platform.name == "Windows":
+            pchSuffix = projName if not targetInfo.isTest else projName + '_Test'
+            if (stem == "Pch." + pchSuffix or stem == "Pch_" + pchSuffix) and platform.name == "Windows":
                 pchElem = ET.SubElement(compileElem, "PrecompiledHeader")
                 pchElem.text = "Create"
 
@@ -253,7 +263,7 @@ def generateVcxprojString(platform, projectInfo, targetInfo):
     root.set("xmlns", msbuildXmlNamespace)
 
     root.append(projectConfigurations(platform))
-    root.append(globals(platform, projectInfo, targetInfo.projGuid))
+    root.append(globals(platform, projectInfo, targetInfo))
 
     defaultPropsElem = ET.Element("Import")
     defaultPropsElem.set("Project", R"$(VCTargetsPath)\Microsoft.Cpp.Default.props")

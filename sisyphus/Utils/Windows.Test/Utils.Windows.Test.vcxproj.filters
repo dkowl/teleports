@@ -5,9 +5,16 @@
       <UniqueIdentifier>4635f8bf-2553-4997-8aa9-da2992461ceb</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup/>
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)Utils\test\Pch_Utils_Test.h">
+      <Filter>Test Files</Filter>
+    </ClInclude>
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Utils\test\catch.main.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)Utils\test\Pch_Utils_Test.cpp">
       <Filter>Test Files</Filter>
     </ClCompile>
     <ClCompile Include="$(SolutionDir)Utils\test\Test_Graph.cpp">

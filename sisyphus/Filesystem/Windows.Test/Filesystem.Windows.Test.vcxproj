@@ -15,6 +15,7 @@
     <RootNamespace>Filesystem</RootNamespace>
     <TargetSystem>Windows</TargetSystem>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -38,15 +39,21 @@
     <Import Project="$(SolutionDir)props\General.props"/>
     <Import Project="$(SolutionDir)props\catch2.props"/>
     <Import Project="$(SolutionDir)props\Filesystem.props"/>
+    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props"/>
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)Filesystem\include;$(SolutionDir)Filesystem\include\Filesystem;$(SolutionDir)Filesystem\src;$(SolutionDir)Filesystem\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemGroup/>
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)Filesystem\test\Pch_Filesystem_Test.h"/>
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Filesystem\test\catch.main.cpp"/>
+    <ClCompile Include="$(SolutionDir)Filesystem\test\Pch_Filesystem_Test.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)Filesystem\test\Test_Filesystem.cpp"/>
     <ClCompile Include="$(SolutionDir)Filesystem\test\Test_Path.cpp"/>
   </ItemGroup>

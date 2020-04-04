@@ -25,6 +25,7 @@
     <Keyword>Android</Keyword>
     <ApplicationType>Android</ApplicationType>
     <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
@@ -59,6 +60,7 @@
     <Import Project="$(SolutionDir)props\General.props" />
     <Import Project="$(SolutionDir)props\catch2.props" />
     <Import Project="$(SolutionDir)props\AssetManagement.props" />
+    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -67,9 +69,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="$(SolutionDir)AssetManagement\test\Globals.Android.h" />
+    <ClInclude Include="$(SolutionDir)AssetManagement\test\Pch_AssetManagement_Test.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)AssetManagement\test\catch.main.cpp" />
+    <ClCompile Include="$(SolutionDir)AssetManagement\test\Pch_AssetManagement_Test.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_Asset.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_AssetManager.cpp" />
   </ItemGroup>

@@ -52,6 +52,15 @@ class ProjectInfo:
     def projDir(self):
         return os.path.join(solutionDir, self.name)
 
+    def includeDir(self):
+        return os.path.join(self.projDir(), 'include')
+
+    def sourceDir(self):
+        return os.path.join(self.projDir(), 'src')
+
+    def testSourceDir(self):
+        return os.path.join(self.projDir(), 'test')
+
     def testAppName(self):
         return self.name + "AndroidTestApp"
 
