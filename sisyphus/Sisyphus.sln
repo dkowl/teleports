@@ -1,4 +1,3 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
@@ -147,6 +146,8 @@ Project("{39E2626F-3545-4960-A6E8-258AD8476CE5}") = "AssetManagementAndroidTestA
 	ProjectSection(ProjectDependencies) = postProject
 		{3E2FAE76-97C7-4032-8992-7C49ACC276A1} = {3E2FAE76-97C7-4032-8992-7C49ACC276A1}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SisyphusVsExtension", "SisyphusVsExtension\SisyphusVsExtension.csproj", "{B1E08AA0-0BDA-4030-8D66-8B38DB67CE78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -416,6 +417,18 @@ Global
 		{9DA7DAC0-025E-484C-BEBA-852EAFC8F59C}.Release|ARM64.Build.0 = Release|ARM64
 		{9DA7DAC0-025E-484C-BEBA-852EAFC8F59C}.Release|ARM64.Deploy.0 = Release|ARM64
 		{9DA7DAC0-025E-484C-BEBA-852EAFC8F59C}.Release|x64.ActiveCfg = Release|ARM
+		{B1E08AA0-0BDA-4030-8D66-8B38DB67CE78}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{B1E08AA0-0BDA-4030-8D66-8B38DB67CE78}.Debug|ARM.Build.0 = Debug|Any CPU
+		{B1E08AA0-0BDA-4030-8D66-8B38DB67CE78}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{B1E08AA0-0BDA-4030-8D66-8B38DB67CE78}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{B1E08AA0-0BDA-4030-8D66-8B38DB67CE78}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B1E08AA0-0BDA-4030-8D66-8B38DB67CE78}.Debug|x64.Build.0 = Debug|Any CPU
+		{B1E08AA0-0BDA-4030-8D66-8B38DB67CE78}.Release|ARM.ActiveCfg = Release|Any CPU
+		{B1E08AA0-0BDA-4030-8D66-8B38DB67CE78}.Release|ARM.Build.0 = Release|Any CPU
+		{B1E08AA0-0BDA-4030-8D66-8B38DB67CE78}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{B1E08AA0-0BDA-4030-8D66-8B38DB67CE78}.Release|ARM64.Build.0 = Release|Any CPU
+		{B1E08AA0-0BDA-4030-8D66-8B38DB67CE78}.Release|x64.ActiveCfg = Release|Any CPU
+		{B1E08AA0-0BDA-4030-8D66-8B38DB67CE78}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

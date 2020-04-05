@@ -41,10 +41,12 @@ class Solution:
     def read(self, content):
         lines = content.splitlines()
 
-        self.readHeader(lines[1:5])
+        while lines[0] == '':
+            lines = lines[1:]
+        self.readHeader(lines[0:4])
         self.projects = {}
         self.globals = None
-        blocks = Block.readBlocks(lines[5:])
+        blocks = Block.readBlocks(lines[4:])
         for block in blocks:
             if block.name == "Project":
                 newProject = Project.SolutionProject(block)
@@ -56,8 +58,7 @@ class Solution:
     def write(self):
         self.populateGlobalsFromProjectData()
 
-        content = '\n'
-        content += self.writeHeader()
+        content = self.writeHeader()
         for project in self.projects.values():
             content += project.write()
         content += self.globals.write()
