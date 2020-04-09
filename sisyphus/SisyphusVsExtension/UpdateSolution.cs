@@ -3,6 +3,7 @@ using System.ComponentModel.Design;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Task = System.Threading.Tasks.Task;
@@ -180,8 +181,8 @@ namespace SisyphusVsExtension
             string url = urlProperty.GetValue(pythonFileNode) as string;
             string workingDir = System.IO.Path.GetDirectoryName(scriptsProject.FullName);
 
-            var startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            var startInfo = new ProcessStartInfo();
+            startInfo.WindowStyle = ProcessWindowStyle.Normal;
             startInfo.RedirectStandardInput = true;
             startInfo.RedirectStandardOutput = true;
             startInfo.CreateNoWindow = true;
@@ -196,7 +197,7 @@ namespace SisyphusVsExtension
             // reading asynchronously to avoid deadlocks
             // it's retarded how complex it is to read some output here by the way
             string output = "";
-            cmd.OutputDataReceived += new System.Diagnostics.DataReceivedEventHandler((sender, e) => { output += e.Data + "\n"; });
+            cmd.OutputDataReceived += new DataReceivedEventHandler((sender, e) => { output += e.Data + "\n"; });
 
             cmd.Start();
             cmd.StandardInput.WriteLine("python.exe " + url + " " + workingDir);
@@ -220,7 +221,13 @@ namespace SisyphusVsExtension
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
             RunPython();
+
+            sw.Stop();
+            LogToOutput($"Time elapsed: {sw.Elapsed}");
         }
     }
 }
