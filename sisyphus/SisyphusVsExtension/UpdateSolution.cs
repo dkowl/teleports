@@ -213,7 +213,7 @@ namespace SisyphusVsExtension
             cmd.WaitForExit();
 
             LogToOutput(output);
-            if (error != "")
+            if (error != "" && error != "\n")
             {
                 LogToOutput("ERROR: " + error);
             }
@@ -236,7 +236,7 @@ namespace SisyphusVsExtension
             RunPython();
 
             sw.Stop();
-            LogToOutput($"Time elapsed: {sw.Elapsed}");
+            LogToOutput($"Time elapsed: {sw.Elapsed}\n");
         }
     }
 }
