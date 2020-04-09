@@ -1,4 +1,8 @@
 import os
+import sys
+if len(sys.argv) > 1:
+    os.chdir(sys.argv[1])
+    sys.path.append(sys.argv[1])
 import uuid
 import constants
 import SolutionCommon as Common
@@ -8,6 +12,7 @@ import SolutionProject as Project
 import SolutionGlobalsBlock as GlobalsBlock
 from generateProjects import generateProject
 from ProjectInfo import ProjectInfo
+import sisyphusUtils as sis
 
 class Solution:
     def readHeader(self, lines):
@@ -84,7 +89,6 @@ class Solution:
     def insertProject(self, newProject):
             self.projects[newProject.id] = newProject
 
-
 solutionFilename = "Sisyphus.sln"
 solutionPath = constants.solutionDir + solutionFilename
 
@@ -125,8 +129,5 @@ for projectInfo in projectInfos.values():
 
 solution.insertProjects(projectsToInsert)
 
-with open(constants.solutionDir + "Sisyphus.sln", 'w') as newSlnFile:
-    newSlnFile.write(solution.write())
-    print("Solution file written!")
-
+sis.updateFile(solutionPath, solution.write())
 

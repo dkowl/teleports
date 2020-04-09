@@ -336,9 +336,7 @@ def generateVcxprojAndFilters(platform, projectInfo, isTest):
 
     try:
         vcxprojString = generateVcxprojString(platform, projectInfo, targetInfo)
-        with open(projPath, 'w') as projFile:
-            projFile.write(vcxprojString)
-            print(projFilename + " generated!")
+        sis.updateFile(projPath, vcxprojString)
     except:
         print("Failed to generate {0}: {1}".format(projFilename, traceback.format_exc()))
 
@@ -347,9 +345,7 @@ def generateVcxprojAndFilters(platform, projectInfo, isTest):
             existingFilterUuidDict = targetInfo.filterGuids, 
             projName = projectInfo.name, 
             cppPaths = targetInfo.cppPaths)
-        with open(filtersPath, 'w') as filtersFile:
-            filtersFile.write(filtersString)
-            print(os.path.basename(filtersPath) + " generated!")
+        sis.updateFile(filtersPath, filtersString)        
     except:
         print("Failed to generate {0}: {1}".format(os.path.basename(filtersPath), traceback.format_exc()))
 
@@ -407,9 +403,7 @@ def generatePropsString(projectInfo):
 
 def generateProps(projectInfo):
     propsPath = os.path.join(solutionDir, "props", "%s.props" % projectInfo.name)
-    with open(propsPath, 'w') as propsFile:
-        propsFile.write(generatePropsString(projectInfo))
-        print(os.path.basename(propsPath) + " generated!")
+    sis.updateFile(propsPath, generatePropsString(projectInfo))
 
 def generateProject(projectInfo):
     if projectInfo.test:

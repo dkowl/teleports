@@ -99,19 +99,8 @@ namespace SisyphusVsExtension
             return result;
         }
 
-        /// <summary>
-        /// This function is the callback used to execute the command when the menu item is clicked.
-        /// See the constructor to see how the menu item is associated with this function using
-        /// OleMenuCommandService service and MenuCommand class.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event args.</param>
-        private void Execute(object sender, EventArgs e)
+        private void RunPython()
         {
-            ThreadHelper.ThrowIfNotOnUIThread();
-            string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
-            string title = "UpdateSolution";
-
             Projects projects = Dte.Solution.Projects as Projects;
 
             var projNames = new System.Collections.Generic.List<string>();
@@ -119,7 +108,7 @@ namespace SisyphusVsExtension
             foreach (Project proj in projects)
             {
                 projNames.Add(proj.Name);
-                if(proj.Name == "Scripts")
+                if (proj.Name == "Scripts")
                 {
                     scriptsProject = proj;
                 }
@@ -131,7 +120,7 @@ namespace SisyphusVsExtension
             foreach (ProjectItem item in GetAllItemsRecursive(scriptsProject.ProjectItems))
             {
                 itemNames.Add(item.Name);
-                if(item.Name == "generateSolution.py")
+                if (item.Name == "generateSolution.py")
                 {
                     mainItem = item as OAFileItem;
                 }
@@ -145,11 +134,46 @@ namespace SisyphusVsExtension
 
             var pythonFileNodeType = pythonFileNode.GetType();
 
+            var fileNodeType = pythonFileNodeType.BaseType.BaseType;
+
+            var urlProperty = fileNodeType.GetProperty("Url");
+
+            string url = urlProperty.GetValue(pythonFileNode) as string;
+            string workingDir = System.IO.Path.GetDirectoryName(scriptsProject.FullName);
+
+            var startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.RedirectStandardInput = true;
+            startInfo.CreateNoWindow = true;
+            startInfo.UseShellExecute = false;
+            startInfo.FileName = "cmd.exe";
+            startInfo.WorkingDirectory = workingDir;
+
+            var cmd = new System.Diagnostics.Process();
+            cmd.StartInfo = startInfo;
+            cmd.Start();
+            cmd.StandardInput.WriteLine("python.exe " + url + " " + workingDir);
+            cmd.StandardInput.Flush();
+
             var execCommandMethod = pythonFileNodeType.GetMethod("ExecCommandOnNode", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
 
             Guid guidPythonToolsCmdSet = new Guid("bdfa79d2-2cd2-474a-a82a-ce8694116825");
             uint startWithoutDebuggingCmdId = 0x4004;
-            execCommandMethod.Invoke(pythonFileNode, new object[] { guidPythonToolsCmdSet, startWithoutDebuggingCmdId, 0u, null, null });
+            //execCommandMethod.Invoke(pythonFileNode, new object[] { guidPythonToolsCmdSet, startWithoutDebuggingCmdId, 0u, null, null });
+        }
+
+        /// <summary>
+        /// This function is the callback used to execute the command when the menu item is clicked.
+        /// See the constructor to see how the menu item is associated with this function using
+        /// OleMenuCommandService service and MenuCommand class.
+        /// </summary>
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event args.</param>
+        private void Execute(object sender, EventArgs e)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            RunPython();
         }
     }
 }

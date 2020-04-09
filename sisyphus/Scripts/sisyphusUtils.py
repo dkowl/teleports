@@ -19,3 +19,16 @@ def ensureFileExists(filepath, defaultContent = ''):
         print("Creating file: {0}".format(filepath))
         with open(filepath, 'w') as file:
             file.write(defaultContent)
+
+def updateFile(filepath, newContent):
+    oldContent = None
+    if os.path.exists(filepath):
+        with open(filepath, 'r') as file:        
+            oldContent = file.read()
+
+    if oldContent != newContent:
+        with open(filepath, 'w') as file:
+            file.write(newContent)
+            print(os.path.basename(filepath) + " written.")
+    else:
+        print("No changes to " + os.path.basename(filepath) + ".")

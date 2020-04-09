@@ -118,8 +118,7 @@ def generateAndroidTestApp(platform, projectInfo):
     importElem3 = ET.SubElement(root, "Import")
     importElem3.set("Project", "$(AndroidTargetsPath)\Android.targets")
 
-    with open(androidprojFilename, 'w') as androidprojFile:
-        androidprojFile.write(prettify(root))
+    sis.updateFile(androidprojFilename, prettify(root))
 
     solutionProject = SolutionProject.SolutionProject()
     solutionProject.name = projectInfo.testAppName()
