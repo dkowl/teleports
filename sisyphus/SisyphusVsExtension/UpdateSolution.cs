@@ -185,6 +185,7 @@ namespace SisyphusVsExtension
             startInfo.WindowStyle = ProcessWindowStyle.Normal;
             startInfo.RedirectStandardInput = true;
             startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardError = true;
             startInfo.CreateNoWindow = true;
             startInfo.UseShellExecute = false;
             startInfo.FileName = "cmd.exe";
@@ -199,15 +200,23 @@ namespace SisyphusVsExtension
             string output = "";
             cmd.OutputDataReceived += new DataReceivedEventHandler((sender, e) => { output += e.Data + "\n"; });
 
+            string error = "";
+            cmd.ErrorDataReceived += new DataReceivedEventHandler((sender, e) => { error += e.Data + "\n"; });
+
             cmd.Start();
             cmd.StandardInput.WriteLine("python.exe " + url + " " + workingDir);
             cmd.StandardInput.Flush();
             cmd.BeginOutputReadLine();
+            cmd.BeginErrorReadLine();
             cmd.StandardInput.WriteLine("exit");
             cmd.StandardInput.Flush();
             cmd.WaitForExit();
 
             LogToOutput(output);
+            if (error != "")
+            {
+                LogToOutput("ERROR: " + error);
+            }
         }
 
         /// <summary>
