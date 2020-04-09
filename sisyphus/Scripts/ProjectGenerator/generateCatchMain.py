@@ -1,5 +1,6 @@
 import os
 import logging
+import sisyphusUtils as sis
 from constants import *
 import ProjectInfo
 
@@ -12,6 +13,4 @@ def generateCatchMain(projectInfo):
             content = sourceFile.read()
             content = content.replace("APPNAME", projectInfo.testAppName())
 
-        with open(destPath, 'w') as destFile:
-            destFile.write(content)
-            logging.info("{0}: {1} generated".format(projectInfo.name, filename))
+        sis.updateFile(destPath, content)

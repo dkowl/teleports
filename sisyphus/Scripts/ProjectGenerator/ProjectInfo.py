@@ -33,10 +33,10 @@ class PlatformSolutionProjects():
         
 
 class ProjectInfo:
-    def __init__(self, projName):
+    def __init__(self, projName, path):
         self.name = projName
-        try:
-            self.path = os.path.join(self.projDir(), "{0}.projectInfo.json".format(projName))
+        self.path = path
+        try:            
             with open(self.path) as jsonFile:
                 jsonData = json.load(jsonFile)
                 self.outputType = jsonData["outputType"]

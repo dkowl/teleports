@@ -34,3 +34,6 @@ def updateFile(filepath, newContent):
             logger.info(os.path.basename(filepath) + " written.")
     else:
         logger.debug("No changes to " + os.path.basename(filepath) + ".")
+
+def getSubdirectories(dir):
+    return next(os.walk(dir))[1]

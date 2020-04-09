@@ -90,14 +90,27 @@ class Solution:
     def insertProject(self, newProject):
             self.projects[newProject.id] = newProject
 
+def findProjects():
+    subDirs = sis.getSubdirectories(constants.solutionDir)
+    projects = []
+    for subDir in subDirs:
+        projInfoPath = os.path.join(constants.solutionDir, subDir, os.path.basename(subDir) + ".projectInfo.json")
+        if os.path.exists(projInfoPath):
+            projects.append(ProjectInfo(subDir, projInfoPath))
+            logging.info(f"Project found: {subDir}")
+    if projects.count == 0:
+        logging.error("No projects found. Are you missing .projectInfo.json files?")
+    return projects
+
+# MAIN STARTS HERE
 logging.basicConfig(stream=sys.stdout, level=logging.INFO, format='%(levelname)s:%(message)s')
+
 solutionFilename = "Sisyphus.sln"
 solutionPath = constants.solutionDir + solutionFilename
 
 solution = Solution(solutionPath)
 
-projectNames = ["AssetManagement", "Utils", "Filesystem"]
-projectInfos = {projName: ProjectInfo(projName) for projName in projectNames}
+projectInfos = {p.name: p for p in findProjects()}
 projectsToInsert = []
 
 for projectInfo in projectInfos.values():
