@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 using Task = System.Threading.Tasks.Task;
 using EnvDTE;
 using Microsoft.VisualStudioTools.Project.Automation;
+using Microsoft.VisualStudio.Threading;
 
 namespace SisyphusVsExtension
 {
@@ -32,6 +33,8 @@ namespace SisyphusVsExtension
         private readonly AsyncPackage package;
 
         private static DTE Dte;
+        private static readonly Guid guidSisyphusOutputWindowPane = new Guid("{EDEC662F-BA1B-46A6-A76C-0125482579A3}");
+        private static bool sisyphusOutputWindowPaneCreated = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateSolution"/> class.
@@ -79,7 +82,7 @@ namespace SisyphusVsExtension
             // the UI thread.
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
 
-            Dte = await package.GetServiceAsync(typeof(DTE)) as DTE;
+            Dte = await package.GetServiceAsync(typeof(DTE)) as DTE ?? throw new Exception("DTE not found");
 
             OleMenuCommandService commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
             Instance = new UpdateSolution(package, commandService);
@@ -87,6 +90,7 @@ namespace SisyphusVsExtension
 
         private static System.Collections.Generic.List<ProjectItem> GetAllItemsRecursive(ProjectItems items)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
             var result = new System.Collections.Generic.List<ProjectItem>();
             foreach (ProjectItem item in items)
             {
@@ -99,8 +103,43 @@ namespace SisyphusVsExtension
             return result;
         }
 
+        private void InitSisyphusOutputWindowPane(IVsOutputWindow outWindow)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+            outWindow.CreatePane(guidSisyphusOutputWindowPane, "Sisyphus", 1, 1);
+            sisyphusOutputWindowPaneCreated = true;
+        }
+
+        private void LogToOutput(string text)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            IVsOutputWindow outWindow = Package.GetGlobalService(typeof(SVsOutputWindow)) as IVsOutputWindow;
+            if (!sisyphusOutputWindowPaneCreated)
+            {
+                InitSisyphusOutputWindowPane(outWindow);
+            }
+
+            IVsOutputWindowPane sisyphusPane;
+            outWindow.GetPane(guidSisyphusOutputWindowPane, out sisyphusPane);
+            sisyphusPane.OutputString(text);
+            sisyphusPane.Activate();
+        }
+
+        private void RunPythonFileLikeVS(object pythonFileNode)
+        {
+            var pythonFileNodeType = pythonFileNode.GetType();
+            var execCommandMethod = pythonFileNodeType.GetMethod("ExecCommandOnNode", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+
+            Guid guidPythonToolsCmdSet = new Guid("bdfa79d2-2cd2-474a-a82a-ce8694116825");
+            uint startWithoutDebuggingCmdId = 0x4004;
+            execCommandMethod.Invoke(pythonFileNode, new object[] { guidPythonToolsCmdSet, startWithoutDebuggingCmdId, 0u, null, null });
+        }
+
         private void RunPython()
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             Projects projects = Dte.Solution.Projects as Projects;
 
             var projNames = new System.Collections.Generic.List<string>();
@@ -144,22 +183,30 @@ namespace SisyphusVsExtension
             var startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.RedirectStandardInput = true;
+            startInfo.RedirectStandardOutput = true;
             startInfo.CreateNoWindow = true;
             startInfo.UseShellExecute = false;
             startInfo.FileName = "cmd.exe";
             startInfo.WorkingDirectory = workingDir;
 
+
             var cmd = new System.Diagnostics.Process();
             cmd.StartInfo = startInfo;
+
+            // reading asynchronously to avoid deadlocks
+            // it's retarded how complex it is to read some output here by the way
+            string output = "";
+            cmd.OutputDataReceived += new System.Diagnostics.DataReceivedEventHandler((sender, e) => { output += e.Data + "\n"; });
+
             cmd.Start();
             cmd.StandardInput.WriteLine("python.exe " + url + " " + workingDir);
             cmd.StandardInput.Flush();
+            cmd.BeginOutputReadLine();
+            cmd.StandardInput.WriteLine("exit");
+            cmd.StandardInput.Flush();
+            cmd.WaitForExit();
 
-            var execCommandMethod = pythonFileNodeType.GetMethod("ExecCommandOnNode", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-
-            Guid guidPythonToolsCmdSet = new Guid("bdfa79d2-2cd2-474a-a82a-ce8694116825");
-            uint startWithoutDebuggingCmdId = 0x4004;
-            //execCommandMethod.Invoke(pythonFileNode, new object[] { guidPythonToolsCmdSet, startWithoutDebuggingCmdId, 0u, null, null });
+            LogToOutput(output);
         }
 
         /// <summary>
