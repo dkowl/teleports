@@ -1,5 +1,6 @@
 import os
 import sys
+import logging
 if len(sys.argv) > 1:
     os.chdir(sys.argv[1])
     sys.path.append(sys.argv[1])
@@ -89,6 +90,7 @@ class Solution:
     def insertProject(self, newProject):
             self.projects[newProject.id] = newProject
 
+logging.basicConfig(stream=sys.stdout, level=logging.INFO, format='%(levelname)s:%(message)s')
 solutionFilename = "Sisyphus.sln"
 solutionPath = constants.solutionDir + solutionFilename
 

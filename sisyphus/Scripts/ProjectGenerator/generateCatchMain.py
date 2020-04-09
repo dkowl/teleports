@@ -1,4 +1,5 @@
 import os
+import logging
 from constants import *
 import ProjectInfo
 
@@ -13,4 +14,4 @@ def generateCatchMain(projectInfo):
 
         with open(destPath, 'w') as destFile:
             destFile.write(content)
-            print("{0}: {1} generated".format(projectInfo.name, filename))
+            logging.info("{0}: {1} generated".format(projectInfo.name, filename))

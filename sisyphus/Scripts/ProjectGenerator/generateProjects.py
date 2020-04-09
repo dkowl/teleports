@@ -1,6 +1,7 @@
 import os
 import uuid
 import json
+import logging
 import traceback
 import sisyphusUtils as sis
 from xmlUtils import *
@@ -41,9 +42,9 @@ def readFilterGuids(path):
                 if uuidElem != None:
                     filterName = filterElem.get("Include")
                     result[filterName] = uuidElem.text
-                    print("guid of {0} in {1} is {2}".format(filterName, os.path.basename(path), uuidElem.text))
+                    logging.debug("guid of {0} in {1} is {2}".format(filterName, os.path.basename(path), uuidElem.text))
     except:
-        print("Failed to read guid from {0}: {1}".format(path, traceback.format_exc()))
+        logging.warning("Failed to read guid from {0}: {1}".format(path, traceback.format_exc()))
 
     return result
 
@@ -239,11 +240,11 @@ def generateFiltersString(existingFilterUuidDict, cppPaths, projName):
             uuidElem = ET.SubElement(filterElem, "UniqueIdentifier")
             existingUuid = existingFilterUuidDict.get(filterName) 
             if existingUuid != None:
-                print("{1} - Existing filter uuid detected: {0}".format(existingUuid, filterName))
+                logging.debug("{1} - Existing filter uuid detected: {0}".format(existingUuid, filterName))
                 uuidElem.text = str(existingUuid)
             else:
                 newUuid = uuid.uuid4()
-                print("{1} - Existing filter uuid not detected, generating: {0}".format(newUuid, filterName))
+                logging.info("{1} - Existing filter uuid not detected, generating: {0}".format(newUuid, filterName))
                 uuidElem.text = str(newUuid)
 
         ext = os.path.splitext(path)[1]
@@ -254,7 +255,7 @@ def generateFiltersString(existingFilterUuidDict, cppPaths, projName):
         elif isCpp:
             clElem = ET.SubElement(compileGroup, "ClCompile")
         else:
-            print("{0} is neither a header nor a cpp file, no filter for it".format(path))
+            logging.warning("{0} is neither a header nor a cpp file, no filter for it".format(path))
             continue
         clElem.set("Include", "$(SolutionDir){0}".format(path))
         filterElem = ET.SubElement(clElem, "Filter")
@@ -338,7 +339,7 @@ def generateVcxprojAndFilters(platform, projectInfo, isTest):
         vcxprojString = generateVcxprojString(platform, projectInfo, targetInfo)
         sis.updateFile(projPath, vcxprojString)
     except:
-        print("Failed to generate {0}: {1}".format(projFilename, traceback.format_exc()))
+        logging.error("Failed to generate {0}: {1}".format(projFilename, traceback.format_exc()))
 
     try:
         filtersString = generateFiltersString(
@@ -347,7 +348,7 @@ def generateVcxprojAndFilters(platform, projectInfo, isTest):
             cppPaths = targetInfo.cppPaths)
         sis.updateFile(filtersPath, filtersString)        
     except:
-        print("Failed to generate {0}: {1}".format(os.path.basename(filtersPath), traceback.format_exc()))
+        logging.error("Failed to generate {0}: {1}".format(os.path.basename(filtersPath), traceback.format_exc()))
 
     solutionProject = SolutionProject.SolutionProject()
     solutionProject.name = projName

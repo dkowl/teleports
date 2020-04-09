@@ -2,6 +2,7 @@ import os
 import Platform
 import uuid
 from xmlUtils import *
+import logging
 
 def readProjectGuid(path):
     if os.path.exists(path):
@@ -9,10 +10,10 @@ def readProjectGuid(path):
             with open(path) as file:
                 root = ET.parse(file).getroot()
                 guidElem = root.find(".//{" + msbuildXmlNamespace + "}ProjectGuid")
-                print("guid of " + os.path.basename(path) + " is " + guidElem.text)
+                logging.debug("guid of " + os.path.basename(path) + " is " + guidElem.text)
                 return uuid.UUID(guidElem.text)
         except Exception as e:
-            print("Failed to read guid from " + str(path) + ": " + str(e))
+            logging.warning("Failed to read guid from " + str(path) + ": " + str(e))
     
     return uuid.uuid4()
 
