@@ -30,7 +30,12 @@ class PlatformSolutionProjects():
     def addInterProjectDependency(self, other):
         assert self.mainProj != None and other.mainProj != None
         self.mainProj.dependencies.add(other.mainProj.id)
-        
+
+def readOrDefault(jsonData, key, default):
+    if key in jsonData:
+        return jsonData[key]
+    else:
+        return default
 
 class ProjectInfo:
     def __init__(self, projName, path):
@@ -39,10 +44,10 @@ class ProjectInfo:
         try:            
             with open(self.path) as jsonFile:
                 jsonData = json.load(jsonFile)
-                self.outputType = jsonData["outputType"]
-                self.dependencies = jsonData["dependencies"]
-                self.precompiledHeaders = jsonData["precompiledHeaders"]
-                self.test = jsonData["test"]
+                self.outputType = readOrDefault(jsonData, 'outputType', 'staticLibrary')
+                self.dependencies = readOrDefault(jsonData, 'dependencies', [])
+                self.precompiledHeaders = readOrDefault(jsonData, 'precompiledHeaders', False)
+                self.test = readOrDefault(jsonData, 'test', False)
         except:
             print("Failed to read project info from {0}: {1}".format(self.path, traceback.format_exc()))
 
