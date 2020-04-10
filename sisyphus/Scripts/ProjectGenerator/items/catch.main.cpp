@@ -15,12 +15,12 @@ jstring JavaGlobals::filesDir = nullptr;
 
 extern "C"
 JNIEXPORT JNICALL
-int Java_com_SIS_REPLACE(APPNAME)_SIS_REPLACE(APPNAME)_runTest(JNIEnv * env, jclass type, jobject assetManager, jstring filesDir) {
+jstring Java_com_SIS_REPLACE(APPNAME)_SIS_REPLACE(APPNAME)_runTest(JNIEnv * env, jclass type, jobject assetManager, jstring filesDir) {
     JavaGlobals::jniEnv = env;
     JavaGlobals::assetManager = assetManager;
     JavaGlobals::filesDir = filesDir;
     const char* argv[] = { "whatever" };
-    int result = Catch::Session().run(1, argv);//fake `argc` and `argv`
-    return result;
+    int result = Catch::Session().run(1, argv); //fake `argc` and `argv`
+    return env->NewStringUTF(std::to_string(result).c_str());
 }
 #endif
