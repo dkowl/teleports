@@ -5,8 +5,7 @@
     <ProjectGuid>56854a45-e2d6-47bb-839a-e313f8fd60cc</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>ProjectGenerator\generateSolution.py</StartupFile>
-    <SearchPath>
-    </SearchPath>
+    <SearchPath>ProjectGenerator</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>Scripts</Name>
