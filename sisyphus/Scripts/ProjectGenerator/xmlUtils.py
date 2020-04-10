@@ -9,4 +9,7 @@ def prettify(elem):
     """
     rough_string = ET.tostring(elem, 'utf-8')
     reparsed = minidom.parseString(rough_string)
-    return reparsed.toprettyxml(indent="  ")
+    result = str(reparsed.toprettyxml(indent="  ", encoding='utf-8'), encoding='utf-8')
+    result = result.replace('/>', ' />')
+    result = result.rstrip()
+    return result

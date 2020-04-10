@@ -1,11 +1,11 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>cbb1a4c3-3a66-49c3-a44e-60b2c44643ad</UniqueIdentifier>
+      <UniqueIdentifier>{CBB1A4C3-3A66-49C3-A44E-60B2C44643AD}</UniqueIdentifier>
     </Filter>
     <Filter Include="Public Headers">
-      <UniqueIdentifier>10c0b230-8920-4911-b6c6-de429415a3c0</UniqueIdentifier>
+      <UniqueIdentifier>{10C0B230-8920-4911-B6C6-DE429415A3C0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

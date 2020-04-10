@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -11,13 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>72dc88b2-2961-48dc-aa07-b672e02db141</ProjectGuid>
+    <ProjectGuid>{72DC88B2-2961-48DC-AA07-B672E02DB141}</ProjectGuid>
     <RootNamespace>AssetManagement</RootNamespace>
     <TargetSystem>Windows</TargetSystem>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -31,15 +31,15 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
-  <ImportGroup Label="ExtensionSettings"/>
-  <ImportGroup Label="Shared"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets">
-    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"/>
-    <Import Project="$(SolutionDir)props\General.props"/>
-    <Import Project="$(SolutionDir)props\catch2.props"/>
-    <Import Project="$(SolutionDir)props\AssetManagement.props"/>
-    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props"/>
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$(SolutionDir)props\General.props" />
+    <Import Project="$(SolutionDir)props\catch2.props" />
+    <Import Project="$(SolutionDir)props\AssetManagement.props" />
+    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -47,19 +47,19 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="$(SolutionDir)AssetManagement\test\Pch_AssetManagement_Test.h"/>
+    <ClInclude Include="$(SolutionDir)AssetManagement\test\Pch_AssetManagement_Test.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)AssetManagement\test\catch.main.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <ForcedIncludeFiles/>
+      <ForcedIncludeFiles />
     </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Pch_AssetManagement_Test.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_Asset.cpp"/>
-    <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_AssetManager.cpp"/>
+    <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_Asset.cpp" />
+    <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_AssetManager.cpp" />
   </ItemGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
-  <ImportGroup Label="ExtensionTargets"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

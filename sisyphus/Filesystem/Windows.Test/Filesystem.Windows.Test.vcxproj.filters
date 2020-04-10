@@ -1,8 +1,8 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Test Files">
-      <UniqueIdentifier>c377fcd4-6129-41b7-b685-cc5786b441e5</UniqueIdentifier>
+      <UniqueIdentifier>{C377FCD4-6129-41B7-B685-CC5786B441E5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

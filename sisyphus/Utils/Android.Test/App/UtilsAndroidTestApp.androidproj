@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|ARM">
@@ -19,32 +19,32 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>fcad4f59-fca5-4633-90d3-b06b1f01f86f</ProjectGuid>
+    <ProjectGuid>{FCAD4F59-FCA5-4633-90D3-B06B1F01F86F}</ProjectGuid>
     <RootNamespace>UtilsAndroidTestApp</RootNamespace>
     <_PackagingProjectWithoutNativeComponent>true</_PackagingProjectWithoutNativeComponent>
     <LaunchActivity Condition="'$(LaunchActivity)' == ''">com.UtilsAndroidTestApp.UtilsAndroidTestApp</LaunchActivity>
     <JaveSourceRoots>src</JaveSourceRoots>
   </PropertyGroup>
-  <Import Project="$(AndroidTargetsPath)\Android.Default.props"/>
+  <Import Project="$(AndroidTargetsPath)\Android.Default.props" />
   <PropertyGroup Label="Configuration">
     <TargetName>$(RootNamespace)</TargetName>
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries Condition="'$(Configuration)'=='Debug'">true</UseDebugLibraries>
     <UseDebugLibraries Condition="'$(Configuration)'=='Release'">false</UseDebugLibraries>
   </PropertyGroup>
-  <Import Project="$(AndroidTargetsPath)\Android.props"/>
+  <Import Project="$(AndroidTargetsPath)\Android.props" />
   <ItemDefinitionGroup>
     <AntPackage>
       <AndroidAppLibName>Utils</AndroidAppLibName>
     </AntPackage>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Content Include="res\values\strings.xml"/>
-    <AntBuildXml Include="build.xml"/>
-    <AndroidManifest Include="AndroidManifest.xml"/>
-    <AntProjectPropertiesFile Include="project.properties"/>
-    <JavaCompile Include="src\com\UtilsAndroidTestApp\UtilsAndroidTestApp.java"/>
-    <ProjectReference Include="$(SolutionDir)Utils\Android.Test\Utils.Android.Test.vcxproj"/>
+    <Content Include="res\values\strings.xml" />
+    <AntBuildXml Include="build.xml" />
+    <AndroidManifest Include="AndroidManifest.xml" />
+    <AntProjectPropertiesFile Include="project.properties" />
+    <JavaCompile Include="src\com\UtilsAndroidTestApp\UtilsAndroidTestApp.java" />
+    <ProjectReference Include="$(SolutionDir)Utils\Android.Test\Utils.Android.Test.vcxproj" />
   </ItemGroup>
-  <Import Project="$(AndroidTargetsPath)\Android.targets"/>
+  <Import Project="$(AndroidTargetsPath)\Android.targets" />
 </Project>

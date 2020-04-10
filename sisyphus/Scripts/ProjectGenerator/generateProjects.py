@@ -61,7 +61,7 @@ def globals(platform, projectInfo, targetInfo):
     root.set("Label", "Globals")
 
     guidElem = ET.SubElement(root, "ProjectGuid")
-    guidElem.text = str(targetInfo.projGuid)
+    guidElem.text = sis.formatGuid(targetInfo.projGuid)
 
     rootNsElem = ET.SubElement(root, "RootNamespace")
     rootNsElem.text = projectInfo.name
@@ -241,11 +241,11 @@ def generateFiltersString(existingFilterUuidDict, cppPaths, projName):
             existingUuid = existingFilterUuidDict.get(filterName) 
             if existingUuid != None:
                 logging.debug("{1} - Existing filter uuid detected: {0}".format(existingUuid, filterName))
-                uuidElem.text = str(existingUuid)
+                uuidElem.text = sis.formatGuid(existingUuid)
             else:
                 newUuid = uuid.uuid4()
                 logging.info("{1} - Existing filter uuid not detected, generating: {0}".format(newUuid, filterName))
-                uuidElem.text = str(newUuid)
+                uuidElem.text = sis.formatGuid(newUuid)
 
         ext = os.path.splitext(path)[1]
         isHeader = ext in (".h", ".hpp")

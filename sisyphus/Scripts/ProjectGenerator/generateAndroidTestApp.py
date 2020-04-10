@@ -43,7 +43,7 @@ def generateAndroidTestApp(platform, projectInfo):
     globalsElem.set("Label", "Globals")
 
     guidElem = ET.SubElement(globalsElem, "ProjectGuid")
-    guidElem.text = str(projGuid)
+    guidElem.text = sis.formatGuid(projGuid)
 
     rootNsElem = ET.SubElement(globalsElem, "RootNamespace")
     rootNsElem.text = projectInfo.testAppName()

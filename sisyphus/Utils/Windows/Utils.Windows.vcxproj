@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -11,12 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>bfe50a8b-e672-42a2-b197-3a73c8cb04dd</ProjectGuid>
+    <ProjectGuid>{BFE50A8B-E672-42A2-B197-3A73C8CB04DD}</ProjectGuid>
     <RootNamespace>Utils</RootNamespace>
     <TargetSystem>Windows</TargetSystem>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>staticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -30,15 +30,15 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
-  <ImportGroup Label="ExtensionSettings"/>
-  <ImportGroup Label="Shared"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets">
-    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"/>
-    <Import Project="$(SolutionDir)props\General.props"/>
-    <Import Project="$(SolutionDir)props\stduuid.props"/>
-    <Import Project="$(SolutionDir)props\json.props"/>
-    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props"/>
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$(SolutionDir)props\General.props" />
+    <Import Project="$(SolutionDir)props\stduuid.props" />
+    <Import Project="$(SolutionDir)props\json.props" />
+    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -46,34 +46,34 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="$(SolutionDir)Utils\src\Pch_Utils.h"/>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\DebugAssert.h"/>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\DebugMacros.h"/>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\FilesystemUtils.h"/>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\FunctionFileLine.h"/>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\Graph.h"/>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\ILogger.h"/>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\Json.h"/>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\Logger.h"/>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\OstreamLogger.h"/>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\PlatformMacros.h"/>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\StringUtils.h"/>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\Throw.h"/>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\UuidGenerator.h"/>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\UuidJsonSerializer.h"/>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\UuidUtils.h"/>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\VectorUtils.h"/>
+    <ClInclude Include="$(SolutionDir)Utils\src\Pch_Utils.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\DebugAssert.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\DebugMacros.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\FilesystemUtils.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\FunctionFileLine.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\Graph.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\ILogger.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\Json.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\Logger.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\OstreamLogger.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\PlatformMacros.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\StringUtils.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\Throw.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\UuidGenerator.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\UuidJsonSerializer.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\UuidUtils.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\VectorUtils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(SolutionDir)Utils\src\DebugAssert.cpp"/>
-    <ClCompile Include="$(SolutionDir)Utils\src\Logger.cpp"/>
-    <ClCompile Include="$(SolutionDir)Utils\src\OstreamLogger.cpp"/>
+    <ClCompile Include="$(SolutionDir)Utils\src\DebugAssert.cpp" />
+    <ClCompile Include="$(SolutionDir)Utils\src\Logger.cpp" />
+    <ClCompile Include="$(SolutionDir)Utils\src\OstreamLogger.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\Pch_Utils.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="$(SolutionDir)Utils\src\Throw.cpp"/>
-    <ClCompile Include="$(SolutionDir)Utils\src\UuidGenerator.cpp"/>
+    <ClCompile Include="$(SolutionDir)Utils\src\Throw.cpp" />
+    <ClCompile Include="$(SolutionDir)Utils\src\UuidGenerator.cpp" />
   </ItemGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
-  <ImportGroup Label="ExtensionTargets"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

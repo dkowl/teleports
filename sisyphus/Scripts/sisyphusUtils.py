@@ -63,3 +63,8 @@ def generateFiles(srcDir, dstDir, filenames, replaceDict):
     # .gitignore only understands '/', not '\'
     gitignoreContent = gitignoreContent.replace('\\', '/')
     updateFile(os.path.join(dstDir, '.gitignore'), gitignoreContent)
+
+def formatGuid(guid):
+    guidStr = str(guid)
+    guidStr = guidStr.strip('{}')
+    return '{%s}' % guidStr.upper()

@@ -1,11 +1,11 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>ad737f43-0bf4-40eb-9637-99f4a2bd3f0b</UniqueIdentifier>
+      <UniqueIdentifier>{AD737F43-0BF4-40EB-9637-99F4A2BD3F0B}</UniqueIdentifier>
     </Filter>
     <Filter Include="Public Headers">
-      <UniqueIdentifier>b93adc5d-b0b9-4201-beb0-879af7937277</UniqueIdentifier>
+      <UniqueIdentifier>{B93ADC5D-B0B9-4201-BEB0-879AF7937277}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

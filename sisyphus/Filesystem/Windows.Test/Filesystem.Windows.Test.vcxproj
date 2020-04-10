@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -11,13 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>3e350d19-5cfa-4d04-873a-006e12c2b22e</ProjectGuid>
+    <ProjectGuid>{3E350D19-5CFA-4D04-873A-006E12C2B22E}</ProjectGuid>
     <RootNamespace>Filesystem</RootNamespace>
     <TargetSystem>Windows</TargetSystem>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -31,15 +31,15 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
-  <ImportGroup Label="ExtensionSettings"/>
-  <ImportGroup Label="Shared"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets">
-    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"/>
-    <Import Project="$(SolutionDir)props\General.props"/>
-    <Import Project="$(SolutionDir)props\catch2.props"/>
-    <Import Project="$(SolutionDir)props\Filesystem.props"/>
-    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props"/>
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$(SolutionDir)props\General.props" />
+    <Import Project="$(SolutionDir)props\catch2.props" />
+    <Import Project="$(SolutionDir)props\Filesystem.props" />
+    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -47,19 +47,19 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="$(SolutionDir)Filesystem\test\Pch_Filesystem_Test.h"/>
+    <ClInclude Include="$(SolutionDir)Filesystem\test\Pch_Filesystem_Test.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Filesystem\test\catch.main.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <ForcedIncludeFiles/>
+      <ForcedIncludeFiles />
     </ClCompile>
     <ClCompile Include="$(SolutionDir)Filesystem\test\Pch_Filesystem_Test.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="$(SolutionDir)Filesystem\test\Test_Filesystem.cpp"/>
-    <ClCompile Include="$(SolutionDir)Filesystem\test\Test_Path.cpp"/>
+    <ClCompile Include="$(SolutionDir)Filesystem\test\Test_Filesystem.cpp" />
+    <ClCompile Include="$(SolutionDir)Filesystem\test\Test_Path.cpp" />
   </ItemGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
-  <ImportGroup Label="ExtensionTargets"/>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
 </Project>
