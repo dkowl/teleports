@@ -2,6 +2,7 @@
 #include "android/asset_manager.h"
 #include "android/asset_manager_jni.h"
 #include "Utils/Throw.h"
+#include "Logger/Logger.h"
 #include <vector>
 
 namespace Sisyphus::Fs {
@@ -9,7 +10,22 @@ namespace Sisyphus::Fs {
 	AAssetManager* assetManager = nullptr;
 
 	void Init_Android(void* env, void* javaAssetManager) {
-		assetManager = AAssetManager_fromJava((JNIEnv*)env, (jobject)javaAssetManager);
+		if (env == nullptr) {
+			Logger().Log("JNIEnv is null!");
+			return;
+		}
+		if(javaAssetManager == nullptr){
+			Logger().Log("javaAssetManager is null!");
+			return;
+		}
+		try {
+			Logger().Log("Calling Init_Android");
+			assetManager = AAssetManager_fromJava((JNIEnv*)env, (jobject)javaAssetManager);
+		}
+		catch (...) {
+			Logger().Log("Init_Android FAILED!");
+		}
+		Logger().Log("Android filesystem initialized");
 	}
 
 	bool Exists(const Path& p) {
