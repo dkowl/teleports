@@ -2,10 +2,12 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets">
     <Import Condition="'$(UtilsImported)' == ''" Project="Utils.props" />
+    <Import Condition="'$(LoggerImported)' == ''" Project="Logger.props" />
   </ImportGroup>
   <PropertyGroup>
     <FilesystemImported>true</FilesystemImported>
     <UtilsImported>true</UtilsImported>
+    <LoggerImported>true</LoggerImported>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

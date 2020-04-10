@@ -119,6 +119,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Filesystem", "Filesystem", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Filesystem.Windows", "Filesystem\Windows\Filesystem.Windows.vcxproj", "{6EA74D44-F93A-445F-885C-5064B3B6EB95}"
 	ProjectSection(ProjectDependencies) = postProject
+		{B1CAD26F-1A85-4FE9-B4EB-3CEAE6D37F61} = {B1CAD26F-1A85-4FE9-B4EB-3CEAE6D37F61}
 		{BFE50A8B-E672-42A2-B197-3A73C8CB04DD} = {BFE50A8B-E672-42A2-B197-3A73C8CB04DD}
 	EndProjectSection
 EndProject
@@ -129,6 +130,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Filesystem.Windows.Test", "
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Filesystem.Android", "Filesystem\Android\Filesystem.Android.vcxproj", "{2FD12CDA-4779-416C-96F7-8569A3A4E0D7}"
 	ProjectSection(ProjectDependencies) = postProject
+		{E40A887D-FDCE-4CD8-8709-84F066FC3995} = {E40A887D-FDCE-4CD8-8709-84F066FC3995}
 		{E6CB9052-70AF-499A-BE4C-BA3D457FBA96} = {E6CB9052-70AF-499A-BE4C-BA3D457FBA96}
 	EndProjectSection
 EndProject

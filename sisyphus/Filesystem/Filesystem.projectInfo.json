@@ -1,7 +1,8 @@
 {
 	"outputType" : "staticLibrary",
 	"dependencies" : [
-		"Utils"
+		"Utils",
+		"Logger"
 	],
 	"precompiledHeaders" : true,
 	"test" : true
