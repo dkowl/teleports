@@ -15,7 +15,7 @@ jstring JavaGlobals::filesDir = nullptr;
 
 extern "C"
 JNIEXPORT JNICALL
-int Java_com_FilesystemAndroidTestApp_FilesystemAndroidTestApp_runTest(JNIEnv * env, jclass type, jobject assetManager, jstring filesDir) {
+int Java_com_SIS_REPLACE(APPNAME)_SIS_REPLACE(APPNAME)_runTest(JNIEnv * env, jclass type, jobject assetManager, jstring filesDir) {
     JavaGlobals::jniEnv = env;
     JavaGlobals::assetManager = assetManager;
     JavaGlobals::filesDir = filesDir;
