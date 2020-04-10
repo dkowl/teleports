@@ -1,16 +1,21 @@
 import os
 import logging
 import sisyphusUtils as sis
-from constants import *
+import constants
 import ProjectInfo
 
 def generateCatchMain(projectInfo):
-    for filename in ["catch.main.cpp", "Globals.Android.h"]:
-        sourcePath = os.path.join(pythonSourceDir, "items", filename)
-        destPath = os.path.join(solutionDir, projectInfo.name, "test", filename)
+    srcDir = os.path.join(constants.pythonSourceDir, "items")
+    dstDir = projectInfo.projDir()
 
-        with open(sourcePath, 'r') as sourceFile:
-            content = sourceFile.read()
-            content = content.replace("APPNAME", projectInfo.testAppName())
+    filenames = [
+        ("catch.main.cpp", os.path.join('test', "catch.main.cpp")),
+        ("Globals.Android.h", os.path.join('test', "Globals.Android.h"))
+        ]
 
-        sis.updateFile(destPath, content)
+    replaceDict = {
+        "APPNAME": projectInfo.testAppName()
+        }
+
+    sis.generateFiles(srcDir, dstDir, filenames, replaceDict)
+

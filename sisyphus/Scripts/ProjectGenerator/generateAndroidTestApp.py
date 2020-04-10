@@ -27,17 +27,7 @@ def generateAndroidTestApp(platform, projectInfo):
         "PROJNAME": projectInfo.name
         }
 
-    for srcName, dstName in filenames:
-        src = os.path.join(srcDir, srcName)
-        dst = os.path.join(appDir, dstName)
-        sis.ensureDirExists(dst)
-
-        with open(src, 'r') as srcFile:
-            content = srcFile.read()
-            content = sis.replace(content, replaceDict)
-
-        with open(dst, 'w') as dstFile:
-            dstFile.write(content)
+    sis.generateFiles(srcDir, appDir, filenames, replaceDict)
 
     # .androidproj    
     androidprojFilename = os.path.join(appDir, "{0}.androidproj".format(projectInfo.testAppName()))

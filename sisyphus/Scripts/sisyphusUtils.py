@@ -37,3 +37,27 @@ def updateFile(filepath, newContent):
 
 def getSubdirectories(dir):
     return next(os.walk(dir))[1]
+
+def appendToFilename(path, prefix):
+    dir, filename = os.path.split(path)
+    filename = prefix + filename
+    return os.path.join(dir, filename)
+
+# filenames is a list fo tuples in the form of (srcName, dstName)
+# replaceDict is used when executing the SIS_REPLACE() macro
+def generateFiles(srcDir, dstDir, filenames, replaceDict):
+    gitignoreContent = ''
+    for srcName, dstName in filenames:
+        src = os.path.join(srcDir, srcName)
+        dst = os.path.join(dstDir, dstName)
+        ensureDirExists(dst)
+
+        gitignoreContent += dstName + '\n'
+
+        with open(src, 'r') as srcFile:
+            content = srcFile.read()
+            content = replace(content, replaceDict)
+
+        updateFile(dst, content)
+
+    updateFile(os.path.join(dstDir, '.gitignore'), gitignoreContent)
