@@ -28,6 +28,8 @@ TEST_CASE("Filesystem") {
 	REQUIRE(!Fs::IsRegularFile(dummyPath));
 	REQUIRE(!Fs::IsDirectory(dummyPath));
 
+#ifdef SIS_WINDOWS
+
 	std::fstream file(dummyPath.String(), std::fstream::out);
 	if (file.good()) {
 		std::cout << "File " << dummyPath.String() << " opened.\n";
@@ -53,6 +55,7 @@ TEST_CASE("Filesystem") {
 	else {
 		std::cout << "File " << dummyPath.String() << " deleted.\n";
 	}
+#endif
 }
 
 TEST_CASE("RecursiveDirectoryIterator"){

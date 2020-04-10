@@ -1,9 +1,11 @@
 #include "catch.hpp"
 #include "Path.h"
+#include "Utils/PlatformMacros.h"
 
 using namespace Sisyphus::Fs;
 
 TEST_CASE("Stem") {
+#ifdef SIS_WINDOWS
 	Path path("Dir/Dir2/file.cpp");
 
 	REQUIRE(path.Stem().String() == "file");
@@ -20,4 +22,5 @@ TEST_CASE("Stem") {
 
 	Path defaultPath;
 	REQUIRE(defaultPath.Filename().String().empty());
+#endif
 }
