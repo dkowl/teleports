@@ -52,7 +52,7 @@ def generateFiles(srcDir, dstDir, filenames, replaceDict):
         dst = os.path.join(dstDir, dstName)
         ensureDirExists(dst)
 
-        gitignoreContent += dstName + '\n'
+        gitignoreContent += '/' + dstName + '\n'
 
         with open(src, 'r') as srcFile:
             content = srcFile.read()
@@ -60,4 +60,6 @@ def generateFiles(srcDir, dstDir, filenames, replaceDict):
 
         updateFile(dst, content)
 
+    # .gitignore only understands '/', not '\'
+    gitignoreContent = gitignoreContent.replace('\\', '/')
     updateFile(os.path.join(dstDir, '.gitignore'), gitignoreContent)
