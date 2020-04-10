@@ -118,7 +118,7 @@ for projectInfo in projectInfos.values():
     if solutionFolder == None:
 
         solutionFolder = Project.SolutionProject()
-        solutionFolder.id = str(uuid.uuid4()).toUpper()
+        solutionFolder.id = sis.formatGuid(uuid.uuid4())
         solutionFolder.name = projectInfo.name
     solutionFolder.projTypeId = Common.projectTypeIds['folder']
     solutionFolder.path = projectInfo.name
