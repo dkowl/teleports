@@ -1,6 +1,9 @@
 #pragma once
-#if defined(_WIN64)
+#include "Utils/PlatformMacros.h"
+#ifdef SIS_WINDOWS
 #define VK_USE_PLATFORM_WIN32_KHR
+#elif defined(SIS_ANDROID)
+#define VK_USE_PLATFORM_ANDROID_KHR
 #endif
 #include <vulkan\vulkan.hpp>
 #include <optional>
