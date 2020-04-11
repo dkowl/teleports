@@ -6,9 +6,12 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)dependencies\vulkan\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)\dependencies\vulkan\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    <Link Condition="'$(TargetSystem)' == 'Windows'">
+      <AdditionalLibraryDirectories>$(SolutionDir)\dependencies\vulkan\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>	  
       <AdditionalDependencies>vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+	<Link Condition="'$(TargetSystem)' == 'Android'">	  
+      <AdditionalDependencies>vulkan;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup />
