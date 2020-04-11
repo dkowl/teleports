@@ -37,7 +37,10 @@ struct CatchListener : Catch::TestEventListenerBase {
 	}
 
 	void testCaseStarting(const Catch::TestCaseInfo& testCaseInfo) override {
-		logger->LogInline(testCaseInfo.name + " ");
+		Sisyphus::Logging::Section section(testCaseInfo.name);
+		section.leftHeaderDecorator = "(";
+		section.rightHeaderDecorator = ")";
+		logger->BeginSection(section);
 	}
 
 	void testCaseEnded(const Catch::TestCaseStats& testCaseStats) override {
@@ -45,6 +48,21 @@ struct CatchListener : Catch::TestEventListenerBase {
 		if (!testCaseStats.stdErr.empty()) {
 			logger->Log("ERROR: " + testCaseStats.stdErr);
 		}
+		logger->EndSection();
+	}
+
+	bool assertionEnded(const Catch::AssertionStats& assertionStats) override {
+		const Catch::AssertionResult& result = assertionStats.assertionResult;
+		if (!result.isOk()) {
+			logger->BeginSection("Assertion FAILED");
+			logger->Log(std::string(result.getSourceInfo().file) + ": line " + std::to_string(result.getSourceInfo().line));
+			logger->Log(result.getExpressionInMacro() + " expanded to " + result.getExpandedExpression());
+			if (result.hasMessage()) {
+				logger->Log("Message: " + result.getMessage());
+			}
+			logger->EndSection();
+		}
+		return true;
 	}
 private:
 	std::stringstream sstream;
