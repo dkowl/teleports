@@ -129,7 +129,9 @@ def propsImportGroup(projectInfo, isTest):
     dependencies = ["General"]
     if isTest:
         dependencies.append("catch2")
-        dependencies.append(projectInfo.name)
+        dependencies.append("Logger")
+        if projectInfo.name != "Logger":
+            dependencies.append(projectInfo.name)
     else:
         for dep in projectInfo.dependencies:
             dependencies.append(dep)
