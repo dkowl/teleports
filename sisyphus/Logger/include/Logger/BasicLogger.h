@@ -9,8 +9,9 @@ namespace Sisyphus::Logging {
 		BasicLogger();
 
 		void Log(const std::string& message, int logLevel = 0) override;
+		void LogInline(const std::string& message, int logLevel = 0) override;
 
-		void BeginSection(std::string name, std::string indenter) override;
+		void BeginSection(std::string name, std::string indenter = "\t") override;
 		void EndSection() override;
 
 		void SetLogLevel(int logLevel) override;
@@ -20,6 +21,8 @@ namespace Sisyphus::Logging {
 
 		int currentLogLevel;
 	private:
+		void LogInternal(const std::string& message, int logLevel, bool isInline);
+
 		struct Section {
 			std::string name;
 			std::string indenter;

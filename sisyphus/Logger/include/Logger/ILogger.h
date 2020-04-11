@@ -13,6 +13,7 @@ namespace Sisyphus::Logging {
 		}
 
 		virtual void Log(const std::string& message, int logLevel = 0) = 0;
+		virtual void LogInline(const std::string& message, int logLevel = 0) = 0;
 
 		virtual void BeginSection(std::string name, std::string indenter = "\t") = 0;
 		virtual void EndSection() = 0;

@@ -19,13 +19,12 @@ namespace Sisyphus::Logging {
 
 	void BasicLogger::Log(const std::string& message, int logLevel)
 	{
-		if (logLevel > currentLogLevel) return;
+		LogInternal(message, logLevel, false);
+	}
 
-		for (auto&& section : sections) {
-			Output(section.indenter);
-		}
-		Output(message);
-		Output("\n");
+	void BasicLogger::LogInline(const std::string& message, int logLevel)
+	{
+		LogInternal(message, logLevel, true);
 	}
 
 	void BasicLogger::BeginSection(std::string name, std::string indenter)
@@ -47,6 +46,17 @@ namespace Sisyphus::Logging {
 	void BasicLogger::SetLogLevel(int logLevel)
 	{
 		currentLogLevel = logLevel;
+	}
+
+	void BasicLogger::LogInternal(const std::string& message, int logLevel, bool isInline)
+	{
+		if (logLevel > currentLogLevel) return;
+
+		for (auto&& section : sections) {
+			Output(section.indenter);
+		}
+		Output(message);
+		if(!isInline) Output("\n");
 	}
 
 	std::string BasicLogger::Section::Header() const
