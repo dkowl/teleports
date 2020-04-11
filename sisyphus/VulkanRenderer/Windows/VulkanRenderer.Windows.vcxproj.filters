@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{CC7F97EB-B2CB-49AC-9134-EA77660339F4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Components">
+      <UniqueIdentifier>{A76928A5-9606-4E1B-9244-0B3479375263}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\platform_specific">
+      <UniqueIdentifier>{1C02C434-32F8-4F69-8554-A19A0B3F251D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{25745DB3-9A4D-44B3-B28F-912BE6B2FA72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public Headers">
+      <UniqueIdentifier>{AB14421C-9BE1-471D-8EEB-C129978AF55B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\DebugMessenger.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Pch_VulkanRenderer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\RendererImpl.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Shader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\UniformBuffer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\VertexBuffer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\DepthBuffer.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\Device.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\Events.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\Framebuffers.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\Instance.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\PhysicalDevice.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\Surface.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\Swapchain.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\VulkanComponent.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\platform_specific\PlatformSpecific.h">
+      <Filter>Source Files\platform_specific</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\platform_specific\Vulkan.h">
+      <Filter>Source Files\platform_specific</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Utils\DeviceData.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Utils\MemoryUtils.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Utils\VulkanUtils.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\include\VulkanRenderer\Renderer.h">
+      <Filter>Public Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\DebugMessenger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Pch_VulkanRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\RendererImpl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\UniformBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\VertexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\DepthBuffer.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\Device.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\Events.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\Framebuffers.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\Instance.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\PhysicalDevice.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\Surface.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\Swapchain.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Utils\DeviceData.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Utils\MemoryUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Utils\VulkanUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -100,7 +100,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		commandBuffer.begin(vk::CommandBufferBeginInfo{});
 
 		vk::ClearValue clearValues[2];
-		clearValues[0].color = vk::ClearColorValue(std::array<float, 4>{0.9f, 0.8f, 0.7f, 0.9f});
+		clearValues[0].color = vk::ClearColorValue(std::array<float, 4>{ {0.9f, 0.8f, 0.7f, 0.9f}});
 		clearValues[1].depthStencil = vk::ClearDepthStencilValue(1.0f, 0);
 		vk::RenderPassBeginInfo renderPassBeginInfo{
 			*renderPass,
@@ -408,7 +408,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			vk::LogicOp::eNoOp,
 			1,
 			&pipelineColorBlendAttachmentState,
-			{{(1.0f, 1.0f, 1.0f, 1.0f)}}
+			{{1.0f, 1.0f, 1.0f, 1.0f}}
 		};
 
 		std::vector<vk::DynamicState> dynamicStates{ vk::DynamicState::eViewport, vk::DynamicState::eScissor };

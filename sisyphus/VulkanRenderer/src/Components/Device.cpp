@@ -96,7 +96,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		device->bindImageMemory(image, *memory, 0);
 
-		return std::move(memory);
+		return memory;
 
 	}
 }

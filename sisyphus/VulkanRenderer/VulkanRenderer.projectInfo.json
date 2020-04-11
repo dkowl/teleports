@@ -1,0 +1,15 @@
+{
+	"outputType" : "staticLibrary",
+	"dependencies" : [
+		"Vulkan",
+		"WindowCreator",
+		"RendererInterfaces",
+		"stduuid",
+		"Glslang",
+		"Utils",
+		"Logger",
+		"ECS"
+	],
+	"precompiledHeaders" : true,
+	"test" : false
+}

@@ -149,7 +149,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		SIS_THROWASSERT_MSG(callResult.result == vk::Result::eSuccess, "Failed to acquire an image buffer!");
 		result.imageIndex = callResult.value;
 
-		return std::move(result);
+		return result;
 	}
 	const std::vector<vk::UniqueImageView>& Swapchain::GetImageViews() const
 	{

@@ -13,8 +13,10 @@ namespace Sisyphus::Rendering::Vulkan {
 		}
 	};
 
+#ifdef __cpp_concepts
 	template<typename T, typename VulkanType>
 	concept VulkanComponent =
 		ECS::Component<T> &&
 		std::derived_from<T, IVulkanComponent<VulkanType>>;
+#endif
 }

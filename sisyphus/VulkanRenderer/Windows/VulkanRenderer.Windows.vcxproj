@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8B9912C5-46DB-4A12-8A53-C630BE1B5EA0}</ProjectGuid>
+    <RootNamespace>VulkanRenderer</RootNamespace>
+    <TargetSystem>Windows</TargetSystem>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>staticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>staticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$(SolutionDir)props\General.props" />
+    <Import Project="$(SolutionDir)props\Vulkan.props" />
+    <Import Project="$(SolutionDir)props\WindowCreator.props" />
+    <Import Project="$(SolutionDir)props\RendererInterfaces.props" />
+    <Import Project="$(SolutionDir)props\stduuid.props" />
+    <Import Project="$(SolutionDir)props\Glslang.props" />
+    <Import Project="$(SolutionDir)props\Utils.props" />
+    <Import Project="$(SolutionDir)props\Logger.props" />
+    <Import Project="$(SolutionDir)props\ECS.props" />
+    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
+  </ImportGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)VulkanRenderer\include;$(SolutionDir)VulkanRenderer\include\VulkanRenderer;$(SolutionDir)VulkanRenderer\src;$(SolutionDir)VulkanRenderer\src\Components;$(SolutionDir)VulkanRenderer\src\Utils;$(SolutionDir)VulkanRenderer\src\platform_specific;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\DebugMessenger.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Pch_VulkanRenderer.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\RendererImpl.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Shader.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\UniformBuffer.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\VertexBuffer.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\DepthBuffer.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\Device.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\Events.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\Framebuffers.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\Instance.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\PhysicalDevice.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\Surface.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\Swapchain.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Components\VulkanComponent.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\platform_specific\PlatformSpecific.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\platform_specific\Vulkan.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Utils\DeviceData.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Utils\MemoryUtils.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\src\Utils\VulkanUtils.h" />
+    <ClInclude Include="$(SolutionDir)VulkanRenderer\include\VulkanRenderer\Renderer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\DebugMessenger.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Pch_VulkanRenderer.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Renderer.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\RendererImpl.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Shader.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\UniformBuffer.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\VertexBuffer.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\DepthBuffer.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\Device.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\Events.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\Framebuffers.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\Instance.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\PhysicalDevice.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\Surface.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\Swapchain.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Utils\DeviceData.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Utils\MemoryUtils.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Utils\VulkanUtils.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>
