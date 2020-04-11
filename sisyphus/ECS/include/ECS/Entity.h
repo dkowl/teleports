@@ -20,7 +20,11 @@ namespace Sisyphus::ECS {
 		Entity& operator=(Entity&&) = delete;
 		~Entity();
 
+#ifdef __cpp_concepts
 		template<Component T, typename... ConstructorArgs>
+#else
+		template<typename T, typename... ConstructorArgs>
+#endif
 		void InitComponent(ConstructorArgs... args) {
 			uuids::uuid type = T::TypeId();
 			SIS_THROWASSERT_MSG(!components.contains(type), T::ClassName() + " already exists.");
@@ -44,26 +48,42 @@ namespace Sisyphus::ECS {
 			knownComponentTypes.insert(type);
 		}
 
+#ifdef __cpp_concepts
 		template<Component T>
+#else
+		template<typename T>
+#endif
 		T& GetComponent() const {
 			return dynamic_cast<T&>(GetComponent(T::TypeId()));
 		}
 
+#ifdef __cpp_concepts
 		template<Component T>
+#else
+		template<typename T>
+#endif
 		T* TryGetComponent() const {
 			return dynamic_cast<T*>(TryGetComponent(T::TypeId()));
 		}
 
 		void DestroyAll();
 
+#ifdef __cpp_concepts
 		template<Component T>
+#else
+		template<typename T>
+#endif
 		bool HasComponent() const {
 			return HasComponent(T::TypeId());
 		}
 
 		bool HasComponent(const uuids::uuid& compType) const;
 
+#ifdef __cpp_concepts
 		template<ComponentEvent EventT, Component T>
+#else
+		template<typename EventT, typename T>
+#endif
 		void Dispatch() {
 			for (auto subscriber : subscriberLists[EventT::Id()][T::TypeId()]) {
 				auto comp = TryGetComponent(subscriber.type);
@@ -74,7 +94,11 @@ namespace Sisyphus::ECS {
 		}
 
 	private:
+#ifdef __cpp_concepts
 		template<Component T>
+#else
+		template<typename T>
+#endif
 		void CheckDependencies() {
 			for (auto&& dependency : T::Dependencies()) {
 				if (!HasComponent(dependency.type)) {
@@ -87,7 +111,11 @@ namespace Sisyphus::ECS {
 			}
 		}
 
+#ifdef __cpp_concepts
 		template<Component T>
+#else
+		template<typename T>
+#endif
 		void UpdateSubscriberLists(const IComponent::EventHandlerMap& eventHandlerMap) {
 			for (auto&& perEventType : eventHandlerMap) {
 				for (auto&& perCompType : perEventType.second) {

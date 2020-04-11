@@ -8,7 +8,11 @@ namespace Sisyphus::ECS {
 
 	class DependencyGraph {
 	public:
+#ifdef __cpp_concepts
 		template<Component T>
+#else
+		template<typename T>
+#endif
 		void Add() {
 			for (auto&& dependency : T::Dependencies()) {
 				graph.AddEdge(dependency.type, T::TypeId());

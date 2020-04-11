@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
+#ifdef __cpp_concepts
 #include <concepts>
+#endif
 #include "uuid.h"
 #include "ECS\ComponentEvent.h"
 #include "ECS\ComponentRegistry.h"
@@ -21,6 +23,7 @@ namespace Sisyphus::ECS {
 
 	class IComponent;
 
+#ifdef __cpp_concepts
 	template <typename T>
 	concept Component =
 		std::derived_from<T, IComponent> &&
@@ -29,6 +32,7 @@ namespace Sisyphus::ECS {
 			{T::ClassName()}->std::same_as<std::string>;
 			{T::Dependencies()}->std::same_as<ComponentReferences>;
 	};
+#endif
 
 	class IComponent {
 	public:
@@ -45,7 +49,11 @@ namespace Sisyphus::ECS {
 		virtual void Initialize() = 0;
 
 		using EventHandler = std::function<void()>;
+#ifdef __cpp_concepts
 		template<ComponentEvent EventT, Component T>
+#else
+		template<typename EventT, typename T>
+#endif
 		void RegisterEventHandler(EventHandler handler) {
 			eventHandlers[EventT::Id()][T::TypeId()] = std::move(handler);
 		}
