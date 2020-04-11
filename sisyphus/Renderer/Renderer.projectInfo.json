@@ -1,0 +1,8 @@
+{
+	"outputType" : "staticLibrary",
+	"dependencies" : [
+		"VulkanRenderer"
+	],
+	"precompiledHeaders" : false,
+	"test" : false
+}
