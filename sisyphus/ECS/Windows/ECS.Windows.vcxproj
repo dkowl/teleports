@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F0EE9F25-4422-4601-9786-09D04963B4D5}</ProjectGuid>
+    <RootNamespace>ECS</RootNamespace>
+    <TargetSystem>Windows</TargetSystem>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>staticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>staticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$(SolutionDir)props\General.props" />
+    <Import Project="$(SolutionDir)props\Utils.props" />
+    <Import Project="$(SolutionDir)props\Logger.props" />
+    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
+  </ImportGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)ECS\include;$(SolutionDir)ECS\include\ECS;$(SolutionDir)ECS\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)ECS\src\Pch_ECS.h" />
+    <ClInclude Include="$(SolutionDir)ECS\include\ECS\Component.h" />
+    <ClInclude Include="$(SolutionDir)ECS\include\ECS\ComponentEvent.h" />
+    <ClInclude Include="$(SolutionDir)ECS\include\ECS\ComponentRegistry.h" />
+    <ClInclude Include="$(SolutionDir)ECS\include\ECS\DependencyGraph.h" />
+    <ClInclude Include="$(SolutionDir)ECS\include\ECS\Entity.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)ECS\src\Component.cpp" />
+    <ClCompile Include="$(SolutionDir)ECS\src\ComponentEvent.cpp" />
+    <ClCompile Include="$(SolutionDir)ECS\src\ComponentRegistry.cpp" />
+    <ClCompile Include="$(SolutionDir)ECS\src\DependencyGraph.cpp" />
+    <ClCompile Include="$(SolutionDir)ECS\src\Entity.cpp" />
+    <ClCompile Include="$(SolutionDir)ECS\src\Pch_ECS.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

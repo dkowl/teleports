@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Test Files">
+      <UniqueIdentifier>{885B96C7-3B6E-4529-BADC-F10A83D2F642}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)ECS\test\catch.globals.h">
+      <Filter>Test Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)ECS\test\CompA.h">
+      <Filter>Test Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)ECS\test\CompB.h">
+      <Filter>Test Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)ECS\test\CompC.h">
+      <Filter>Test Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)ECS\test\CustomEvent.h">
+      <Filter>Test Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)ECS\test\Globals.Android.h">
+      <Filter>Test Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)ECS\test\Pch_ECS_Test.h">
+      <Filter>Test Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)ECS\test\catch.listener.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)ECS\test\catch.main.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)ECS\test\CompA.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)ECS\test\CompB.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)ECS\test\CompC.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)ECS\test\CustomEvent.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)ECS\test\Pch_ECS_Test.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)ECS\test\Test_ECS.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

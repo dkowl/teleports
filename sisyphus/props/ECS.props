@@ -1,18 +1,29 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets">
-    <Import Condition="'$(stduuidImported)' ==''" Project="stduuid.props" />
-    <Import Condition="'$(UtilsImported)' ==''" Project="Utils.props" />
+    <Import Condition="'$(UtilsImported)' == ''" Project="Utils.props" />
+    <Import Condition="'$(LoggerImported)' == ''" Project="Logger.props" />
   </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
-  <PropertyGroup><ECSImported>true</ECSImported><stduuidImported>true</stduuidImported><UtilsImported>true</UtilsImported></PropertyGroup>
+  <PropertyGroup>
+    <ECSImported>true</ECSImported>
+    <UtilsImported>true</UtilsImported>
+    <LoggerImported>true</LoggerImported>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)ECS\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(TargetSystem)' == 'Windows'">
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)ECS\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ECS.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ECS\Windows\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ECS.Windows.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup />
+  <ItemDefinitionGroup Condition="'$(TargetSystem)' == 'Android'">
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)ECS\Android\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LibraryDependencies>ECS;m;%(LibraryDependencies)</LibraryDependencies>
+    </Link>
+  </ItemDefinitionGroup>
 </Project>
