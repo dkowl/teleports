@@ -27,7 +27,7 @@ namespace Sisyphus::ECS {
 #endif
 		void InitComponent(ConstructorArgs... args) {
 			uuids::uuid type = T::TypeId();
-			SIS_THROWASSERT_MSG(!components.contains(type), T::ClassName() + " already exists.");
+			SIS_THROWASSERT_MSG(components.find(type) == components.end(), T::ClassName() + " already exists.");
 			CheckDependencies<T>();
 
 			std::unique_ptr<IComponent> component = std::make_unique<T>(args...);
@@ -35,7 +35,7 @@ namespace Sisyphus::ECS {
 			component->Initialize();
 			component->RegisterEventHandlers();
 
-			if (!knownComponentTypes.contains(type)) {
+			if (knownComponentTypes.find(type) == knownComponentTypes.end()) {
 				UpdateSubscriberLists<T>(component->eventHandlers);
 				dependencyGraph.Add<T>();
 			}
@@ -54,7 +54,7 @@ namespace Sisyphus::ECS {
 		template<typename T>
 #endif
 		T& GetComponent() const {
-			return dynamic_cast<T&>(GetComponent(T::TypeId()));
+			return static_cast<T&>(GetComponent(T::TypeId()));
 		}
 
 #ifdef __cpp_concepts
@@ -63,7 +63,7 @@ namespace Sisyphus::ECS {
 		template<typename T>
 #endif
 		T* TryGetComponent() const {
-			return dynamic_cast<T*>(TryGetComponent(T::TypeId()));
+			return static_cast<T*>(TryGetComponent(T::TypeId()));
 		}
 
 		void DestroyAll();
