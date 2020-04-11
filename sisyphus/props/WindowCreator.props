@@ -1,21 +1,31 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
-  <ImportGroup Label="PropertySheets" />
-  <PropertyGroup Label="UserMacros" />
-  <PropertyGroup><WindowCreatorImported>true</WindowCreatorImported></PropertyGroup>
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="'$(UtilsImported)' == ''" Project="Utils.props" />
+    <Import Condition="'$(LoggerImported)' == ''" Project="Logger.props" />
+    <Import Condition="'$(VulkanImported)' == ''" Project="Vulkan.props" />
+  </ImportGroup>
+  <PropertyGroup>
+    <WindowCreatorImported>true</WindowCreatorImported>
+    <UtilsImported>true</UtilsImported>
+    <LoggerImported>true</LoggerImported>
+    <VulkanImported>true</VulkanImported>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)WindowCreator\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)WindowCreator\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WindowCreator.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <Lib>
-      <AdditionalDependencies>WindowCreator.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
-    <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)WindowCreator\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Lib>
   </ItemDefinitionGroup>
-  <ItemGroup />
+  <ItemDefinitionGroup Condition="'$(TargetSystem)' == 'Windows'">
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)WindowCreator\Windows\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>WindowCreator.Windows.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(TargetSystem)' == 'Android'">
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)WindowCreator\Android\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LibraryDependencies>WindowCreator;m;%(LibraryDependencies)</LibraryDependencies>
+    </Link>
+  </ItemDefinitionGroup>
 </Project>

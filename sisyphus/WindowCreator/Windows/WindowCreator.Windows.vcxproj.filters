@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{F550B10D-786C-4A36-9D0D-967C91158A9B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Windows">
+      <UniqueIdentifier>{254E233F-6665-4155-91FE-CE7150C28424}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public Headers">
+      <UniqueIdentifier>{DAA26CC8-1F02-41F4-A771-8327B50D139E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)WindowCreator\src\Pch_WindowCreator.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)WindowCreator\src\Windows\Window.Windows.h">
+      <Filter>Source Files\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)WindowCreator\include\WindowCreator\Window.h">
+      <Filter>Public Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)WindowCreator\include\WindowCreator\WindowCreator.h">
+      <Filter>Public Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)WindowCreator\include\WindowCreator\WindowEvent.h">
+      <Filter>Public Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)WindowCreator\include\WindowCreator\WindowExtent.h">
+      <Filter>Public Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)WindowCreator\src\Pch_WindowCreator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)WindowCreator\src\WindowCreator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)WindowCreator\src\Windows\Window.Windows.cpp">
+      <Filter>Source Files\Windows</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

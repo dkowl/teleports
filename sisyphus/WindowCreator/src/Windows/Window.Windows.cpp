@@ -1,5 +1,5 @@
 #include "Pch_WindowCreator.h"
-#include "WindowsWindow.h"
+#include "Window.Windows.h"
 #include "Utils/Throw.h"
 
 namespace Sisyphus::WindowCreator {

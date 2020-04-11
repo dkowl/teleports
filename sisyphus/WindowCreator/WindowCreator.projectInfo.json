@@ -1,0 +1,10 @@
+{
+	"outputType" : "staticLibrary",
+	"dependencies" : [
+		"Utils",
+		"Logger",
+		"Vulkan"
+	],
+	"precompiledHeaders" : true,
+	"test" : false
+}

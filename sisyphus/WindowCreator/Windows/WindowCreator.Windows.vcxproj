@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{98F8A69E-C5E8-45AC-8F22-54A0E9E52A60}</ProjectGuid>
+    <RootNamespace>WindowCreator</RootNamespace>
+    <TargetSystem>Windows</TargetSystem>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>staticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>staticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
+    <Import Project="$(SolutionDir)props\General.props" />
+    <Import Project="$(SolutionDir)props\Utils.props" />
+    <Import Project="$(SolutionDir)props\Logger.props" />
+    <Import Project="$(SolutionDir)props\Vulkan.props" />
+    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
+  </ImportGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)WindowCreator\include;$(SolutionDir)WindowCreator\include\WindowCreator;$(SolutionDir)WindowCreator\src;$(SolutionDir)WindowCreator\src\Windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)WindowCreator\src\Pch_WindowCreator.h" />
+    <ClInclude Include="$(SolutionDir)WindowCreator\src\Windows\Window.Windows.h" />
+    <ClInclude Include="$(SolutionDir)WindowCreator\include\WindowCreator\Window.h" />
+    <ClInclude Include="$(SolutionDir)WindowCreator\include\WindowCreator\WindowCreator.h" />
+    <ClInclude Include="$(SolutionDir)WindowCreator\include\WindowCreator\WindowEvent.h" />
+    <ClInclude Include="$(SolutionDir)WindowCreator\include\WindowCreator\WindowExtent.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)WindowCreator\src\Pch_WindowCreator.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)WindowCreator\src\WindowCreator.cpp" />
+    <ClCompile Include="$(SolutionDir)WindowCreator\src\Windows\Window.Windows.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>
