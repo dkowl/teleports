@@ -11,7 +11,7 @@
 namespace Sisyphus::ECS {
 
 #define SIS_REGISTER_COMPONENT(type) \
-	static bool s_##type##_registered = ComponentRegistry::Register(type##::TypeId(), type##::ClassName())
+	static bool s_##type##_registered = ComponentRegistry::Register(type::TypeId(), type::ClassName())
 
 
 	class Entity;
