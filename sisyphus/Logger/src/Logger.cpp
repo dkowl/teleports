@@ -2,6 +2,7 @@
 #include "OstreamLogger.h"
 #include "AndroidLogger.h"
 #include "Utils/PlatformMacros.h"
+#include <iostream>
 
 namespace Sisyphus {
 
@@ -14,7 +15,7 @@ namespace Sisyphus {
 #ifdef SIS_ANDROID
 			logger = std::make_unique<AndroidLogger>();
 #else
-			logger = std::make_unique<OstreamLogger>();
+			logger = std::make_unique<OstreamLogger>(std::cout);
 #endif
 		}
 	}
