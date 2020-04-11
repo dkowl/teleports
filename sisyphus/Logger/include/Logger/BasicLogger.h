@@ -11,7 +11,8 @@ namespace Sisyphus::Logging {
 		void Log(const std::string& message, int logLevel = 0) override;
 		void LogInline(const std::string& message, int logLevel = 0) override;
 
-		void BeginSection(std::string name, std::string indenter = "\t") override;
+		void BeginSection(const Section& section) override;
+		void BeginSection(const std::string& name) override;
 		void EndSection() override;
 
 		void SetLogLevel(int logLevel) override;
@@ -22,14 +23,6 @@ namespace Sisyphus::Logging {
 		int currentLogLevel;
 	private:
 		void LogInternal(const std::string& message, int logLevel, bool isInline);
-
-		struct Section {
-			std::string name;
-			std::string indenter;
-
-			std::string Header() const;
-			std::string Footer() const;
-		};
 
 		std::vector<Section> sections;
 	};

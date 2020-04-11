@@ -1,15 +1,6 @@
 #include "BasicLogger.h"
 #include "Utils/DebugAssert.h"
 
-namespace {
-	constexpr char DecoratorChar = '=';
-	constexpr int HeaderDecoratorWidth = 5;
-
-	std::string HeaderDecorator() {
-		return std::string(HeaderDecoratorWidth, DecoratorChar);
-	}
-}
-
 namespace Sisyphus::Logging {
 	BasicLogger::BasicLogger() :
 		currentLogLevel(0)
@@ -27,11 +18,15 @@ namespace Sisyphus::Logging {
 		LogInternal(message, logLevel, true);
 	}
 
-	void BasicLogger::BeginSection(std::string name, std::string indenter)
-	{
-		Section section{ name, indenter };
+	void BasicLogger::BeginSection(const Section& section) {
 		Log(section.Header());
-		sections.emplace_back(section);
+		sections.push_back(section);
+	}
+
+	void BasicLogger::BeginSection(const std::string& name)
+	{
+		Section section(name);
+		BeginSection(section);
 	}
 
 	void BasicLogger::EndSection()
@@ -41,6 +36,7 @@ namespace Sisyphus::Logging {
 
 		Section section = sections.back();
 		sections.pop_back();
+		if (!section.Footer().empty()) Log(section.Footer());
 	}
 
 	void BasicLogger::SetLogLevel(int logLevel)
@@ -57,16 +53,5 @@ namespace Sisyphus::Logging {
 		}
 		Output(message);
 		if(!isInline) Output("\n");
-	}
-
-	std::string BasicLogger::Section::Header() const
-	{
-		return HeaderDecorator() + " " + name + " " + HeaderDecorator();
-	}
-
-	std::string BasicLogger::Section::Footer() const
-	{
-		int footerWidth = (HeaderDecoratorWidth + 1) * 2 + static_cast<int>(name.size());
-		return std::string(footerWidth, DecoratorChar);
 	}
 }

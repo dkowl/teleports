@@ -51,6 +51,7 @@
     <ClInclude Include="$(SolutionDir)Logger\include\Logger\ILogger.h" />
     <ClInclude Include="$(SolutionDir)Logger\include\Logger\Logger.h" />
     <ClInclude Include="$(SolutionDir)Logger\include\Logger\OstreamLogger.h" />
+    <ClInclude Include="$(SolutionDir)Logger\include\Logger\Section.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Logger\src\BasicLogger.cpp" />
@@ -59,6 +60,7 @@
     <ClCompile Include="$(SolutionDir)Logger\src\Pch_Logger.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)Logger\src\Section.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
