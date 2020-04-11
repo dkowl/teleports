@@ -44,12 +44,11 @@ namespace Sisyphus::Fs {
 	}
 
 	bool IsDirectory(const Path& p) {
+		// https://stackoverflow.com/questions/26101371/checking-if-directory-folder-exists-in-apk-via-native-code-only
 		auto assetDir = AAssetManager_openDir(assetManager, p.String().c_str());
-		if (assetDir == nullptr) return false;
-		else {
-			AAssetDir_close(assetDir);
-			return true;
-		}
+		bool openSuccessful = AAssetDir_getNextFileName(assetDir) != nullptr;
+		AAssetDir_close(assetDir);
+		return openSuccessful;
 	}
 
 	uint64_t FileSize(const Path& p) {
