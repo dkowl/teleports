@@ -10,11 +10,14 @@ def generateCatchMain(projectInfo):
 
     filenames = [
         ("catch.main.cpp", os.path.join('test', "catch.main.cpp")),
+        ("catch.listener.cpp", os.path.join('test', "catch.listener.cpp")),
+        ("catch.globals.h", os.path.join('test', "catch.globals.h")),
         ("Globals.Android.h", os.path.join('test', "Globals.Android.h"))
         ]
 
     replaceDict = {
-        "APPNAME": projectInfo.testAppName()
+        "APPNAME": projectInfo.testAppName(),
+        "PROJNAME": projectInfo.name
         }
 
     sis.generateFiles(srcDir, dstDir, filenames, replaceDict)

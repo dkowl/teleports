@@ -4,6 +4,7 @@
 #define CATCH_CONFIG_MAIN
 #endif
 #include "catch.hpp"
+#include "catch.globals.h"
 
 #ifdef __ANDROID__
 #include <jni.h>
@@ -19,8 +20,8 @@ jstring Java_com_SIS_REPLACE(APPNAME)_SIS_REPLACE(APPNAME)_runTest(JNIEnv * env,
     JavaGlobals::jniEnv = env;
     JavaGlobals::assetManager = assetManager;
     JavaGlobals::filesDir = filesDir;
-    const char* argv[] = { "whatever" };
-    int result = Catch::Session().run(1, argv); //fake `argc` and `argv`
-    return env->NewStringUTF(std::to_string(result).c_str());
+    const char* argv[] = { "SIS_REPLACE(PROJNAME)" };
+    Catch::Session().run(1, argv);
+    return env->NewStringUTF(CatchGlobals::listenerOutput.c_str());
 }
 #endif

@@ -209,7 +209,7 @@ def getIncludeDirsIncludesAndCompiles(targetInfo, platform, projName):
                 pchElem = ET.SubElement(compileElem, "PrecompiledHeader")
                 pchElem.text = "Create"
             # special treatment for catch.main.cpp because of catch's #define based conditional compilation
-            if stem == 'catch.main':
+            if stem in ['catch.main', 'catch.listener']:
                 pchElem = ET.SubElement(compileElem, 'PrecompiledHeader')
                 pchElem.text = 'NotUsing'
                 forcedIncludeElem = ET.SubElement(compileElem, 'ForcedIncludeFiles')

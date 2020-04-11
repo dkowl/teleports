@@ -20,7 +20,7 @@ public class SIS_REPLACE(APPNAME) extends Activity
         try{
             System.loadLibrary("SIS_REPLACE(PROJNAME)");
             filesDir = getFilesDir().getAbsolutePath();
-            tv.setText("Files dir: " + filesDir + "\nTest result: " + runTest(assetManager, filesDir));
+            tv.setText("Files dir: " + filesDir + "\n" + runTest(assetManager, filesDir));
         }
         catch(Exception e){
             tv.setText(e.getMessage());

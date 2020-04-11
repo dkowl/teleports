@@ -6,11 +6,17 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(SolutionDir)Utils\test\catch.globals.h">
+      <Filter>Test Files</Filter>
+    </ClInclude>
     <ClInclude Include="$(SolutionDir)Utils\test\Pch_Utils_Test.h">
       <Filter>Test Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(SolutionDir)Utils\test\catch.listener.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)Utils\test\catch.main.cpp">
       <Filter>Test Files</Filter>
     </ClCompile>

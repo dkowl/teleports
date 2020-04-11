@@ -68,10 +68,15 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="$(SolutionDir)AssetManagement\test\catch.globals.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\test\Globals.Android.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\test\Pch_AssetManagement_Test.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(SolutionDir)AssetManagement\test\catch.listener.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <ForcedIncludeFiles />
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\test\catch.main.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <ForcedIncludeFiles />

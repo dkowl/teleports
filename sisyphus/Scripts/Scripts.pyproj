@@ -70,6 +70,8 @@
     <Content Include="ProjectGenerator\items\AndroidTestApp\build.xml" />
     <Content Include="ProjectGenerator\items\AndroidTestApp\project.properties" />
     <Content Include="ProjectGenerator\items\AndroidTestApp\strings.xml" />
+    <Content Include="ProjectGenerator\items\catch.listener.cpp" />
+    <Content Include="ProjectGenerator\items\catch.globals.h" />
     <Content Include="ProjectGenerator\items\catch.main.cpp" />
     <Content Include="ProjectGenerator\items\Globals.Android.h" />
   </ItemGroup>

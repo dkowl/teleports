@@ -6,6 +6,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(SolutionDir)AssetManagement\test\catch.globals.h">
+      <Filter>Test Files</Filter>
+    </ClInclude>
     <ClInclude Include="$(SolutionDir)AssetManagement\test\Globals.Android.h">
       <Filter>Test Files</Filter>
     </ClInclude>
@@ -14,6 +17,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(SolutionDir)AssetManagement\test\catch.listener.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\test\catch.main.cpp">
       <Filter>Test Files</Filter>
     </ClCompile>
