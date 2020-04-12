@@ -1,6 +1,6 @@
 Glslang binaries are not tracked.
 
-#What to do:
+# What to do:
 
 Clone this repo: https://github.com/KhronosGroup/glslang
 
@@ -19,10 +19,10 @@ $SOURCE_DIR is usually ../.. when you run from a build-android/debug directory o
 
 $ANDROID_NDK_ROOT - you can (should?) use the one bundled with Visual Studio, mine was at: C:\\Microsoft\AndroidNDK64\android-ndk-r16b
 
-#Why?:
+# Why?:
 
 These files are over 2GB, so 
-1. they would exhaust the free github LFS sotrage quate and cost 5$/month, not a big deal but why waste money when you don't have to
+1. they would exhaust the free github LFS storage quate and cost 5$/month, not a big deal but why waste money when you don't have to
 2. this would increase total repo size considerably
 
 Downsides:
