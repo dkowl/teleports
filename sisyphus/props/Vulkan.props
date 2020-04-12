@@ -11,7 +11,7 @@
       <AdditionalDependencies>vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
 	<Link Condition="'$(TargetSystem)' == 'Android'">	  
-      <AdditionalDependencies>vulkan;%(AdditionalDependencies)</AdditionalDependencies>
+      <LibraryDependencies>vulkan;%(LibraryDependencies)</LibraryDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup />
