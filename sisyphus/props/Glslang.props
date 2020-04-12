@@ -8,11 +8,14 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)dependencies\glslang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)\dependencies\glslang\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glslang.lib;SPIRV.lib;HLSL.lib;OGLCompiler.lib;OSDependent.lib;SPIRV-Tools.lib;SPIRV-Tools-opt.lib;glslang-default-resource-limits.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    <Link Condition="'$(TargetSystem)' == 'Windows'">
+      <AdditionalLibraryDirectories>$(SolutionDir)\dependencies\glslang\lib\Windows\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>      <AdditionalDependencies>glslang.lib;SPIRV.lib;HLSL.lib;OGLCompiler.lib;OSDependent.lib;SPIRV-Tools.lib;SPIRV-Tools-opt.lib;glslang-default-resource-limits.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>
+	<Link Condition="'$(TargetSystem)' == 'Android'">
+	  <AdditionalLibraryDirectories>$(SolutionDir)\dependencies\glslang\lib\Android\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+	  <LibraryDependencies>glslang;glslang-default-resource-limits;HLSL;OGLCompiler;OSDependent;SPIRV;SPIRV-Tools;SPIRV-Tools-opt;SPIRV-Tools-link;SPIRV-Tools-reduce;SPVRemapper;SPIRV-Tools-shared;%(LibraryDependencies)</LibraryDependencies>
+	</Link>
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>
