@@ -5,8 +5,9 @@
 #include "AssetManagement/AssetManager.h"
 #include "Renderer\IDrawable.h"
 #include "WindowCreator/WindowCreator.h"
+#include <android/native_activity.h>
 
-using namespace Sisyphus;
+/*using namespace Sisyphus;
 
 struct Vertex {
 	float x;
@@ -110,4 +111,9 @@ int main() {
 		std::cout << e.what() << std::endl;
 		system("PAUSE");
 	}
+}*/
+
+// Android entry point
+void ANativeActivity_onCreate(ANativeActivity* activity, void* savedState, size_t savedStateSize) {
+	Sisyphus::Logger().Log("Hello from C++!");
 }
