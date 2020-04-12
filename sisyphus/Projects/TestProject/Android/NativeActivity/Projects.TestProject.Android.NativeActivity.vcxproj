@@ -26,12 +26,14 @@
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <ApplicationType>Android</ApplicationType>
     <ApplicationTypeRevision>3.0</ApplicationTypeRevision>
+    <TargetSystem>Android</TargetSystem>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>Clang_5_0</PlatformToolset>
+    <AndroidAPILevel>android-26</AndroidAPILevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -59,6 +61,7 @@
     <Import Project="..\..\..\..\props\AssetManagement.props" />
     <Import Project="..\..\..\..\props\Renderer.props" />
     <Import Project="..\..\..\..\props\WindowCreator.props" />
+    <Import Project="..\..\..\..\props\Vulkan.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -67,6 +70,7 @@
     <Import Project="..\..\..\..\props\AssetManagement.props" />
     <Import Project="..\..\..\..\props\Renderer.props" />
     <Import Project="..\..\..\..\props\WindowCreator.props" />
+    <Import Project="..\..\..\..\props\Vulkan.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -75,6 +79,7 @@
     <Import Project="..\..\..\..\props\AssetManagement.props" />
     <Import Project="..\..\..\..\props\Renderer.props" />
     <Import Project="..\..\..\..\props\WindowCreator.props" />
+    <Import Project="..\..\..\..\props\Vulkan.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -83,6 +88,7 @@
     <Import Project="..\..\..\..\props\AssetManagement.props" />
     <Import Project="..\..\..\..\props\Renderer.props" />
     <Import Project="..\..\..\..\props\WindowCreator.props" />
+    <Import Project="..\..\..\..\props\Vulkan.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" />
@@ -98,7 +104,12 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
-      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL;</LibraryDependencies>
+      <LibraryDependencies>%(LibraryDependencies);GLESv1_CM;EGL</LibraryDependencies>
+      <AdditionalDependencies />
+      <AdditionalOptions />
+      <VerboseOutput>false</VerboseOutput>
+      <ShowProgress>false</ShowProgress>
+      <UnresolvedSymbolReferences>false</UnresolvedSymbolReferences>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
@@ -141,7 +152,10 @@
     <ClInclude Include="Pch_Projects.TestProject.Android.NativeActivity.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.TestProject.Android.cpp" />
+    <ClCompile Include="main.TestProject.Android.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+      </ForcedIncludeFiles>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
