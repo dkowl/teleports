@@ -26,6 +26,9 @@
     <ClCompile Include="$(SolutionDir)Utils\test\Pch_Utils_Test.cpp">
       <Filter>Test Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)Utils\test\Test.StringUtils.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)Utils\test\Test_Graph.cpp">
       <Filter>Test Files</Filter>
     </ClCompile>

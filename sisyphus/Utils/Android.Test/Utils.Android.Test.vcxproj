@@ -83,6 +83,7 @@
       <ForcedIncludeFiles />
     </ClCompile>
     <ClCompile Include="$(SolutionDir)Utils\test\Pch_Utils_Test.cpp" />
+    <ClCompile Include="$(SolutionDir)Utils\test\Test.StringUtils.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\test\Test_Graph.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\test\Test_Macro.cpp" />
   </ItemGroup>
