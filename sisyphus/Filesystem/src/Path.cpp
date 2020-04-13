@@ -1,5 +1,6 @@
 #include "Path.h"
 #include "cwalk.h"
+#include <vector>
 
 namespace Sisyphus::Fs {
 	Path::Path()
@@ -14,6 +15,15 @@ namespace Sisyphus::Fs {
 	Path& Path::operator=(const std::string& str)
 	{
 		pathString = str;
+		return *this;
+	}
+
+	Path& Path::operator/=(const Path& p)
+	{
+		size_t length = cwk_path_join(CStr(), p.CStr(), nullptr, 0) + 1;
+		std::vector<char> joined(length);
+		cwk_path_join(CStr(), p.CStr(), joined.data(), length);
+		pathString = joined.data();
 		return *this;
 	}
 
@@ -59,6 +69,11 @@ namespace Sisyphus::Fs {
 	bool Path::Empty() const
 	{
 		return pathString.empty();
+	}
+
+	const char* Path::CStr() const
+	{
+		return pathString.c_str();
 	}
 
 	const std::string& Path::String() const {

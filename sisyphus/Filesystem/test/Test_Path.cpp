@@ -21,4 +21,15 @@ TEST_CASE("Path") {
 
 	Path defaultPath;
 	REQUIRE(defaultPath.Filename().String().empty());
+
+	// operator/=
+	path = "Dir";
+	path /= Path("file.cpp");
+	REQUIRE(path.Dirname().String() == "Dir/");
+	REQUIRE(path.Filename().String() == "file.cpp");
+	path = "Dir";
+	path /= "file.cpp";
+	REQUIRE(path.Dirname().String() == "Dir/");
+	REQUIRE(path.Filename().String() == "file.cpp");
+	
 }

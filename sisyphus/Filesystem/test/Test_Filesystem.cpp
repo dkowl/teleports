@@ -2,12 +2,14 @@
 #include "Filesystem.h"
 #include "Path.h"
 #include "Utils/PlatformMacros.h"
+#include "Utils/StringUtils.h"
+#include "Logger/Logger.h"
 #include <fstream>
-#include <iostream>
 #include <cstdio>
 #include <set>
 
 using namespace Sisyphus;
+using namespace Sisyphus::Logging;
 
 #ifdef SIS_WINDOWS
 #include <filesystem>
@@ -18,24 +20,25 @@ using namespace Sisyphus;
 #endif
 
 TEST_CASE("Filesystem") {
+	Fs::Path workingDir = std::string("./");
+
 #ifdef SIS_ANDROID
 	Fs::Init_Android((void*)JavaGlobals::jniEnv, (void*)JavaGlobals::assetManager);
+	workingDir = StringFromJava(JavaGlobals::jniEnv, JavaGlobals::filesDir);
 #endif
 
-	Fs::Path dummyPath("dummy.txt");
+	Fs::Path dummyPath(workingDir.String() + "dummy.txt");
 
 	REQUIRE(!Fs::Exists(dummyPath));
 	REQUIRE(!Fs::IsRegularFile(dummyPath));
 	REQUIRE(!Fs::IsDirectory(dummyPath));
 
-#ifdef SIS_WINDOWS
-
 	std::fstream file(dummyPath.String(), std::fstream::out);
 	if (file.good()) {
-		std::cout << "File " << dummyPath.String() << " opened.\n";
+		Logger().Log(AssembleString("File ", dummyPath.String(), " opened.\n"));
 	}
 	else {
-		std::cout << "Error opening file " << dummyPath.String() << "\n";
+		Logger().Log(AssembleString("Error opening file ", dummyPath.String(),  "\n"));
 		REQUIRE(false);
 	}
 
@@ -50,12 +53,11 @@ TEST_CASE("Filesystem") {
 
 	file.close();
 	if (remove(dummyPath.String().c_str()) != 0) {
-		std::cout << "Error deleting file " << dummyPath.String() << "\n";
+		Logger().Log(AssembleString("Error deleting file ", dummyPath.String(), "\n"));
 	}
 	else {
-		std::cout << "File " << dummyPath.String() << " deleted.\n";
+		Logger().Log(AssembleString("File ", dummyPath.String(), " deleted.\n"));
 	}
-#endif
 }
 
 TEST_CASE("RecursiveDirectoryIterator"){

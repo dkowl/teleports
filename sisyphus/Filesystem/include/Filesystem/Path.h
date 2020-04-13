@@ -8,6 +8,11 @@ namespace Sisyphus::Fs {
 		Path();
 		Path(const std::string& str);
 		Path& operator=(const std::string& str);
+		Path& operator/=(const Path& p);
+		template<typename T>
+		Path& operator/=(const T& p) {
+			return *this /= Path(p);
+		}
 
 		Path Stem() const;
 		Path Filename() const;
@@ -15,6 +20,7 @@ namespace Sisyphus::Fs {
 		Path Extension() const;
 		bool Empty() const;
 
+		const char* CStr() const;
 		const std::string& String() const;
 	private:
 		std::string pathString;
