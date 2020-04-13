@@ -90,6 +90,7 @@
     <ClCompile Include="$(SolutionDir)Utils\src\Logger.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\OstreamLogger.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\Pch_Utils.cpp" />
+    <ClCompile Include="$(SolutionDir)Utils\src\StringUtils.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\Throw.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\UuidGenerator.cpp" />
   </ItemGroup>

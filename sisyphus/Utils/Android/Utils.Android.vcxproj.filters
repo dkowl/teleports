@@ -74,6 +74,9 @@
     <ClCompile Include="$(SolutionDir)Utils\src\Pch_Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)Utils\src\StringUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)Utils\src\Throw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -71,6 +71,7 @@
     <ClCompile Include="$(SolutionDir)Utils\src\Pch_Utils.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)Utils\src\StringUtils.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\Throw.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\UuidGenerator.cpp" />
   </ItemGroup>
