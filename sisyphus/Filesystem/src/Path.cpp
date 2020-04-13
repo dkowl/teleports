@@ -7,15 +7,14 @@ namespace Sisyphus::Fs {
 	{
 	}
 
-	Path::Path(const std::string& str) :
-		pathString(str)
+	Path::Path(const char* cStr):
+		pathString(cStr)
 	{
 	}
 
-	Path& Path::operator=(const std::string& str)
+	Path::Path(const std::string& str) :
+		pathString(str)
 	{
-		pathString = str;
-		return *this;
 	}
 
 	Path& Path::operator/=(const Path& p)

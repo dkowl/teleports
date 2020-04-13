@@ -20,16 +20,30 @@ TEST_CASE("Path") {
 	REQUIRE(emptyPath.Filename().String().empty());
 
 	Path defaultPath;
-	REQUIRE(defaultPath.Filename().String().empty());
-
-	// operator/=
-	path = "Dir";
-	path /= Path("file.cpp");
-	REQUIRE(path.Dirname().String() == "Dir/");
-	REQUIRE(path.Filename().String() == "file.cpp");
-	path = "Dir";
-	path /= "file.cpp";
-	REQUIRE(path.Dirname().String() == "Dir/");
-	REQUIRE(path.Filename().String() == "file.cpp");
-	
+	REQUIRE(defaultPath.Filename().String().empty());	
 }
+
+TEST_CASE("Path - operators") {
+	Path path;
+	SECTION("operator/=") {
+		path = "Dir";
+		path /= Path("file.cpp");
+	}
+	SECTION("template operator/=") {
+		path = "Dir";
+		path /= "file.cpp";
+	}
+	SECTION("P / P") {
+		path = Path("Dir") / Path("file.cpp");
+	}
+	SECTION("P / non-P") {
+		path = Path("Dir") / std::string("file.cpp");
+	}
+	SECTION("non-P / P") {
+		path = "Dir" / Path("file.cpp");
+	}
+
+	REQUIRE(path.Dirname().String() == "Dir/");
+	REQUIRE(path.Filename().String() == "file.cpp");
+ }
+
