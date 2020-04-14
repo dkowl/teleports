@@ -1,6 +1,7 @@
 #include "StringUtils.h"
 
 namespace Sisyphus {
+#ifdef SIS_ANDROID
     std::string StringFromJava(JNIEnv* env, jstring jStr) {
         if (!jStr)
             return "";
@@ -19,4 +20,5 @@ namespace Sisyphus {
         env->DeleteLocalRef(stringClass);
         return ret;
     }
+#endif
 }
