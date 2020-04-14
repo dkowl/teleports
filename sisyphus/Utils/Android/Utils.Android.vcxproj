@@ -78,6 +78,7 @@
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\Logger.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\OstreamLogger.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\PlatformMacros.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\PosixUtils.Android.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\StringUtils.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\Throw.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\UuidGenerator.h" />
@@ -90,6 +91,7 @@
     <ClCompile Include="$(SolutionDir)Utils\src\Logger.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\OstreamLogger.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\Pch_Utils.cpp" />
+    <ClCompile Include="$(SolutionDir)Utils\src\PosixUtils.Android.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\StringUtils.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\Throw.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\UuidGenerator.cpp" />
