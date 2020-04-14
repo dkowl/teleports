@@ -43,7 +43,8 @@ TEST_CASE("Path - operators") {
 		path = "Dir" / Path("file.cpp");
 	}
 
-	REQUIRE(path.Dirname().String() == "Dir/");
+	REQUIRE(path.Dirname().String().substr(0, 3) == "Dir");
+	REQUIRE(Path::IsSeparator(path.Dirname().CStr() + 3));
 	REQUIRE(path.Filename().String() == "file.cpp");
  }
 
