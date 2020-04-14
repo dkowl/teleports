@@ -20,7 +20,6 @@ namespace Sisyphus::Fs {
 			return p1;
 		}
 
-
 		Path Stem() const;
 		Path Filename() const;
 		Path Dirname() const;
@@ -29,6 +28,8 @@ namespace Sisyphus::Fs {
 
 		const char* CStr() const;
 		const std::string& String() const;
+
+		static bool IsSeparator(const char* s);
 	private:
 		std::string pathString;
 	};

@@ -78,4 +78,8 @@ namespace Sisyphus::Fs {
 	const std::string& Path::String() const {
 		return pathString;
 	}
+
+	bool Path::IsSeparator(const char* sep) {
+		return cwk_path_is_separator(sep);
+	}
 }
