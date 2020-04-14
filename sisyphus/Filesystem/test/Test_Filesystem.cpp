@@ -23,17 +23,17 @@ TEST_CASE("Filesystem") {
 	Fs::Path workingDir = std::string("./");
 
 #ifdef SIS_ANDROID
-	Fs::Init_Android((void*)JavaGlobals::jniEnv, (void*)JavaGlobals::assetManager);
 	workingDir = StringFromJava(JavaGlobals::jniEnv, JavaGlobals::filesDir);
 #endif
 
-	Fs::Path dummyPath(workingDir.String() + "dummy.txt");
+	Fs::Path filename = "dummy.txt";
+	Fs::Path dummyPath = workingDir / filename;
 
 	REQUIRE(!Fs::Exists(dummyPath));
 	REQUIRE(!Fs::IsRegularFile(dummyPath));
 	REQUIRE(!Fs::IsDirectory(dummyPath));
 
-	std::fstream file(dummyPath.String(), std::fstream::out);
+	std::fstream file(dummyPath.String(), std::fstream::out | std::fstream::binary);
 	if (file.good()) {
 		Logger().Log(AssembleString("File ", dummyPath.String(), " opened.\n"));
 	}
@@ -46,6 +46,12 @@ TEST_CASE("Filesystem") {
 		REQUIRE(Fs::Exists(dummyPath));
 		REQUIRE(Fs::IsRegularFile(dummyPath));
 		REQUIRE(!Fs::IsDirectory(dummyPath));
+
+		REQUIRE(Fs::FileSize(dummyPath) == 0);
+		int numbers[] = { 1 , 2, 3 };
+		file.write(reinterpret_cast<const char*>(numbers), sizeof(numbers));
+		file.flush();
+		REQUIRE(Fs::FileSize(dummyPath) == 3 * sizeof(int));
 	}
 	catch (...) {
 
@@ -95,4 +101,5 @@ TEST_CASE("RecursiveDirectoryIterator"){
 	std::filesystem::remove_all(dirName);
 	std::cout << "Directory " << dirName << " deleted with its content\n";
 #endif
+	// TODO: Android
 }
