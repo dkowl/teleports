@@ -1,109 +1,96 @@
 #include "Filesystem.h"
-#include "android/asset_manager.h"
-#include "android/asset_manager_jni.h"
 #include "Utils/Throw.h"
+#include "Utils/PosixUtils.Android.h"
 #include "Logger/Logger.h"
 #include <vector>
+#include <sys/stat.h>
+#include <dirent.h>
 
 namespace Sisyphus::Fs {
 
-	AAssetManager* assetManager = nullptr;
+	namespace {
+		bool CheckFileMode(const Path& p, int mode) {
+			struct stat statBuf;
+			int result = stat(p.CStr(), &statBuf);
+			if (result == 0) return (statBuf.st_mode & S_IFMT) == mode;
+			else if (errno == ENOENT) return false;
+			else {
+				SIS_THROW(ErrorString(errno));
+			}
+			return false;
+		}
 
-	void Init_Android(void* env, void* javaAssetManager) {
-		if (env == nullptr) {
-			Logger().Log("JNIEnv is null!");
-			return;
+		struct stat GetStat(const Path& p) {
+			struct stat statBuf;
+			int result = stat(p.CStr(), &statBuf);
+			if (result != 0) SIS_THROW(ErrorString(errno));
+			return statBuf;
 		}
-		if(javaAssetManager == nullptr){
-			Logger().Log("javaAssetManager is null!");
-			return;
-		}
-		try {
-			Logger().Log("Calling Init_Android");
-			assetManager = AAssetManager_fromJava((JNIEnv*)env, (jobject)javaAssetManager);
-		}
-		catch (...) {
-			Logger().Log("Init_Android FAILED!");
-		}
-		Logger().Log("Android filesystem initialized");
 	}
 
 	bool Exists(const Path& p) {
-		if (IsRegularFile(p)) return true;
-		else if (IsDirectory(p)) return true;
-		else return false;
+		struct stat statBuf;
+		int result = stat(p.CStr(), &statBuf);
+		if (result == 0) return true;
+		else if (errno == ENOENT) return false;
+		else {
+			SIS_THROW(ErrorString(errno));
+		}
+		return false;
 	}
 
 	bool IsRegularFile(const Path& p) {
-		auto asset = AAssetManager_open(assetManager, p.String().c_str(), AASSET_MODE_UNKNOWN);
-		if (asset == nullptr) return false;
-		else {
-			AAsset_close(asset);
-			return true;
-		}
+		return CheckFileMode(p, S_IFREG);
 	}
 
 	bool IsDirectory(const Path& p) {
-		// https://stackoverflow.com/questions/26101371/checking-if-directory-folder-exists-in-apk-via-native-code-only
-		auto assetDir = AAssetManager_openDir(assetManager, p.String().c_str());
-		bool openSuccessful = AAssetDir_getNextFileName(assetDir) != nullptr;
-		AAssetDir_close(assetDir);
-		return openSuccessful;
+		return CheckFileMode(p, S_IFDIR);
 	}
 
 	uint64_t FileSize(const Path& p) {
-		auto asset = AAssetManager_open(assetManager, p.String().c_str(), AASSET_MODE_UNKNOWN);
-		if (asset == nullptr) return 0;
-		else {
-			uint64_t length = AAsset_getLength64(asset);
-			AAsset_close(asset);
-			return length;
-		}
+		auto statBuf = GetStat(p);
+		return statBuf.st_size;
 	}
 
 	class RecursiveDirectoryIterator::Impl {
 	public:
 		Impl(const Path& p) {
-			auto assetDir = AAssetManager_openDir(assetManager, p.String().c_str());
-			SIS_THROWASSERT_MSG(assetDir != nullptr, "Failed to open asset directory: " + p.String());
-			assetDirs.push_back(assetDir);
+			auto dir = opendir(p.CStr());
+			SIS_THROWASSERT_MSG(dir != nullptr, "Failed to open directory: " + p.String());
+			dirs.push_back(dir);
 
 			Increment();
 		}
 
 		void Increment() {
 			// Recursive alogrithm	
-			const char* nextFilename = nullptr;
-			while (!assetDirs.empty()) {
-				auto nextFilename = AAssetDir_getNextFileName(assetDirs.back());
-				if (nextFilename == nullptr) {
-					assetDirs.pop_back();
+			struct dirent* entry = nullptr;
+			while (!dirs.empty()) {
+				entry = readdir(dirs.back());
+				if (entry == nullptr) {
+					currentPath = currentPath.Dirname();
+					dirs.pop_back();
 				}
 				else {
 					break;
 				}
 			}
-
-			AddIfDir(nextFilename);
-
-			currentPath = nextFilename == nullptr ? nextFilename : "";
+			if (entry) {
+				AddIfDir(entry);
+			}
+			else { // the end
+				currentPath =  "";
+			}
 		}
 
-		std::vector<AAssetDir*> assetDirs;
+		std::vector<DIR*> dirs;
 		Path currentPath;
 
 	private:
-		void AddIfDir(const char* dirName) {
-			AAssetDir* assetDir = nullptr;
-			bool failed = false;
-			try {
-				assetDir = AAssetManager_openDir(assetManager, dirName);
-			}
-			catch (...) {
-				failed = true;
-			}
-			if (!failed && assetDir != nullptr) {
-				assetDirs.push_back(assetDir);
+		void AddIfDir(struct dirent* entry) {
+			if (entry && entry->d_type == DT_DIR) {
+				currentPath /= entry->d_name;
+				dirs.push_back(opendir(currentPath.CStr()));				
 			}
 		}
 	};
