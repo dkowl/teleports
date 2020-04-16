@@ -3,6 +3,9 @@
 #include "AssetManagement/RawData.h"
 #include "AssetManagement/RawDataView.h"
 
+#include <thread>
+#include <iostream>
+
 using namespace Sisyphus;
 
 TEST_CASE("RawData - RefCount") {
@@ -30,4 +33,35 @@ TEST_CASE("RawData - Data Access") {
 	memcpy(data.Ptr(), str.c_str(), data.Size());
 	RawDataView view(data);
 	REQUIRE(view.AsString() == str);
+}
+
+TEST_CASE("Thread safety") {
+	RawData data(10000);
+
+	auto create = [&data](int n, std::string tag) {
+		for (int i = 0; i < n; i++) {
+			// std::cout << tag << ": all destroyed\n";
+			RawDataView view1(data);
+			// std::cout << tag << ": created 1\n";
+			RawDataView view2(view1);
+			// std::cout << tag << ": created 2\n";
+			RawDataView view3 = view2;
+			// std::cout << tag << ": created 3\n";
+		}
+	};
+
+	auto read = [&data](int n) {
+		for (int i = 0; i < n; i++) {
+			// std::cout << "reading: " << data.RefCount() << "\n";
+			REQUIRE(data.RefCount() <= 6);
+		}
+	};
+
+	std::thread creator1(create, 100, "creator1");
+	std::thread reader(read, 100);
+	std::thread creator2(create, 100, "creator2");
+
+	creator1.join();
+	reader.join();
+	creator2.join();
 }
