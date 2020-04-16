@@ -57,11 +57,20 @@ TEST_CASE("Thread safety") {
 		}
 	};
 
-	std::thread creator1(create, 100, "creator1");
-	std::thread reader(read, 100);
-	std::thread creator2(create, 100, "creator2");
+	auto execute = [&](int n) {
+		std::thread creator1(create, n, "creator1");
+		std::thread reader(read, n * 10);
+		std::thread creator2(create, n, "creator2");
 
-	creator1.join();
-	reader.join();
-	creator2.join();
+		creator1.join();
+		reader.join();
+		creator2.join();
+	};
+
+	try {
+		REQUIRE_NOTHROW(execute(1000));
+	}
+	catch (...) {
+
+	}
 }
