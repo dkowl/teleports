@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Renderer\RendererFactory.h"
 #include "Utils\Logger.h"
-#include "AssetManagement/AssetManager.h"
+#include "AssetManagement/AssetReader.h"
 #include "Renderer\IDrawable.h"
 #include "WindowCreator/WindowCreator.h"
 
@@ -47,7 +47,8 @@ Vertices MakeSquare(float x, float y, float z) {
 
 int main() {
 	try {
-		AssetManagement::AssetManager assetManager("Assets", false);
+		auto assetReader = AssetManagement::AssetReader::Create(AssetManagement::AssetReader::ReaderType::Unpacked);
+		assetReader->ReadAssets("Assets");
 
 		using namespace Rendering;
 		namespace wc = WindowCreator;
@@ -64,9 +65,9 @@ int main() {
 		rendererCreateInfo.window = window.get();
 
 		auto vertexShaderFileId = uuids::uuid::from_string("e1124008-e112-4008-a2f3-cf6233498020").value();
-		String vertexShaderText(assetManager.GetAsset(vertexShaderFileId).Data().AsString());
+		String vertexShaderText(assetReader->GetAsset(vertexShaderFileId).Data().AsString());
 		auto fragmentShaderFileId = uuids::uuid::from_string("ce637e01-1d00-405c-8aaa-f0c022235745").value();
-		String fragmentShaderText(assetManager.GetAsset(fragmentShaderFileId).Data().AsString());
+		String fragmentShaderText(assetReader->GetAsset(fragmentShaderFileId).Data().AsString());
 
 		rendererCreateInfo.shaders = {
 			{vertexShaderFileId, vertexShaderText, ShaderType::Vertex },

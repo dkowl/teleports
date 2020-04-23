@@ -29,7 +29,7 @@
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_Asset.cpp">
       <Filter>Test Files</Filter>
     </ClCompile>
-    <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_AssetManager.cpp">
+    <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_AssetReader.cpp">
       <Filter>Test Files</Filter>
     </ClCompile>
   </ItemGroup>

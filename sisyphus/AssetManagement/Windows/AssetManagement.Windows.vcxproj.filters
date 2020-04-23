@@ -21,9 +21,6 @@
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\Asset.h">
       <Filter>Public Headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\AssetManager.h">
-      <Filter>Public Headers</Filter>
-    </ClInclude>
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\AssetMetadata.h">
       <Filter>Public Headers</Filter>
     </ClInclude>
@@ -45,9 +42,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\Asset.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetMetadata.cpp">

@@ -6,8 +6,8 @@
 namespace Sisyphus::AssetManagement {
 
 	AssetUnpacked::AssetUnpacked(const Fs::Path& inPath):
-		path(inPath),
-		metadata(inPath.String(), false)
+		metadata(inPath.String(), false),
+		path(inPath)
 	{
 		SIS_THROWASSERT(Fs::Exists(inPath));
 	}

@@ -65,7 +65,7 @@
     </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test.RawData.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_Asset.cpp" />
-    <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_AssetManager.cpp" />
+    <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_AssetReader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

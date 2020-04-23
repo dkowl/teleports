@@ -52,7 +52,6 @@
     <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetReaderUnpacked.Windows.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\src\Pch_AssetManagement.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\Asset.h" />
-    <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\AssetManager.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\AssetMetadata.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\AssetReader.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\AssetUnpacked.h" />
@@ -62,7 +61,6 @@
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AsserReaderUnpacked.Windows.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\Asset.cpp" />
-    <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetManager.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetMetadata.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetReader.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetReaderPacked.Windows.cpp" />
