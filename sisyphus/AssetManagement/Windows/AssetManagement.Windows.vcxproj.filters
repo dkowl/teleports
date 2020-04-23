@@ -15,9 +15,6 @@
     <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetReaderUnpacked.Windows.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetUnpacked.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="$(SolutionDir)AssetManagement\src\Pch_AssetManagement.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -31,6 +28,9 @@
       <Filter>Public Headers</Filter>
     </ClInclude>
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\AssetReader.h">
+      <Filter>Public Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\AssetUnpacked.h">
       <Filter>Public Headers</Filter>
     </ClInclude>
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\RawData.h">

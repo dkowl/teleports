@@ -1,7 +1,9 @@
 #include "Pch_AssetManagement.h"
 #include "AssetManager.h"
 #include "Utils\Logger.h"
+#include "Utils/Throw.h"
 #include "Filesystem/Filesystem.h"
+#include "AssetUnpacked.h"
 
 namespace Sisyphus::AssetManagement {
 	AssetManager::AssetManager(std::string inAssetDir, bool isReadOnly):
@@ -13,16 +15,21 @@ namespace Sisyphus::AssetManagement {
 	{
 		auto paths = FindAllAssetPaths(mainAssetDir);
 		for (auto&& p : paths) {
-			AddAsset(std::make_unique<Asset>(p, isReadOnly));
+			if (!isReadOnly) {
+				AddAsset(std::make_unique<AssetUnpacked>(p));
+			}
+			else {
+				SIS_THROWASSERT(false);
+			}
 		}
 	}
 	void AssetManager::AddAsset(std::unique_ptr<Asset> asset)
 	{
 		Logger().BeginSection("Asset detected");
-		Logger().Log("Id: " + uuids::to_string(asset->Id()));
-		Logger().Log("Name: " + asset->Name());
+		Logger().Log("Id: " + uuids::to_string(asset->Metadata().Id()));
+		Logger().Log("Name: " + asset->Metadata().Name());
 		Logger().EndSection();
-		assets.insert({ asset->Id(), std::move(asset) });
+		assets.insert({ asset->Metadata().Id(), std::move(asset) });
 	}
 	const Asset& AssetManager::GetAsset(uuids::uuid id) const
 	{

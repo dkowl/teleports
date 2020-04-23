@@ -47,7 +47,7 @@ Vertices MakeSquare(float x, float y, float z) {
 
 int main() {
 	try {
-		AssetManagement::AssetManager assetManager("Assets");
+		AssetManagement::AssetManager assetManager("Assets", false);
 
 		using namespace Rendering;
 		namespace wc = WindowCreator;
@@ -64,9 +64,9 @@ int main() {
 		rendererCreateInfo.window = window.get();
 
 		auto vertexShaderFileId = uuids::uuid::from_string("e1124008-e112-4008-a2f3-cf6233498020").value();
-		String vertexShaderText(assetManager.GetAsset(vertexShaderFileId).DataAsString());
+		String vertexShaderText(assetManager.GetAsset(vertexShaderFileId).Data().AsString());
 		auto fragmentShaderFileId = uuids::uuid::from_string("ce637e01-1d00-405c-8aaa-f0c022235745").value();
-		String fragmentShaderText(assetManager.GetAsset(fragmentShaderFileId).DataAsString());
+		String fragmentShaderText(assetManager.GetAsset(fragmentShaderFileId).Data().AsString());
 
 		rendererCreateInfo.shaders = {
 			{vertexShaderFileId, vertexShaderText, ShaderType::Vertex },

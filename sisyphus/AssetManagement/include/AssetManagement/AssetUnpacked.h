@@ -3,18 +3,25 @@
 #include "AssetMetadata.h"
 #include "RawData.h"
 #include "Filesystem/Path.h"
+#include <mutex>
 
 namespace Sisyphus::AssetManagement {
 	class AssetUnpacked : public Asset {
 	public:
 		AssetUnpacked(const Fs::Path& path);
 
-		//const RawData& Data() const override;
-		//const AssetMetadata& Metadata() const override;
+		RawDataView Data() const override;
+		const AssetMetadata& Metadata() const override;
 
 	private:
+		void LazyLoadData() const;
+		void ReadData() const;
+
 		AssetMetadata metadata;
-		RawData data;
+		Fs::Path path;
+		// lazy loaded
+		mutable RawData data;
+		mutable std::mutex dataMutex;
 	};
 
 }

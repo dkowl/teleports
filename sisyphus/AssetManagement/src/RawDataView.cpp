@@ -1,17 +1,29 @@
 #include "RawDataView.h"
 #include "RawData.h"
 #include "Utils/DebugAssert.h"
+#include "Utils/Throw.h"
+#include "Utils/Logger.h"
 
 namespace Sisyphus {
-	RawDataView::RawDataView(RawData& inData) :
-		data(&inData)
+	RawDataView::RawDataView():
+		data(nullptr)
 	{
-		data->AddView(this);
+	}
+
+	RawDataView::RawDataView(const RawData& inData):
+		RawDataView()
+	{
+		Init(&inData);
 	}
 
 	RawDataView::~RawDataView()
 	{
-		data->ReleaseView(this);
+		try {
+			Release();
+		}
+		catch (...) {
+			Logger().Log("Exception thrown when releasing a RawDataView!");
+		}
 	}
 
 	RawDataView::RawDataView(const RawDataView& other):
@@ -21,9 +33,8 @@ namespace Sisyphus {
 
 	RawDataView& RawDataView::operator=(const RawDataView& other)
 	{
-		data->ReleaseView(this);
-		data = other.data;
-		data->AddView(this);
+		Release();
+		Init(other.data);
 		return *this;
 	}
 	void* RawDataView::Ptr() const
@@ -38,5 +49,24 @@ namespace Sisyphus {
 	{
 		SIS_DEBUGASSERT(data->Ptr());
 		return std::string(reinterpret_cast<char*>(data->Ptr()), data->Size());
+	}
+	bool RawDataView::Empty() const
+	{
+		return data == nullptr;
+	}
+	void RawDataView::Init(const RawData* inData)
+	{
+		SIS_THROWASSERT(Empty());
+		data = inData;
+		if (data) {
+			data->AddView(this);
+		}
+	}
+	void RawDataView::Release()
+	{
+		if (data) {
+			data->ReleaseView(this);
+			data = nullptr;
+		}
 	}
 }

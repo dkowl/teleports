@@ -21,6 +21,9 @@ namespace Sisyphus {
 		// moves deleted because RawDataViews track the address in memory
 		RawData(RawData&& other) = delete;
 		RawData& operator=(RawData&& other) = delete;
+		// deferred initialization allowed
+		void Init(size_t size);
+		void Release() noexcept;
 
 		void* Ptr() const;
 		size_t Size() const;
@@ -28,12 +31,12 @@ namespace Sisyphus {
 		int RefCount() const;
 	private:
 		friend class RawDataView;
-		void AddView(RawDataView* view);
-		void ReleaseView(RawDataView* view);
+		void AddView(RawDataView* view) const;
+		void ReleaseView(RawDataView* view) const;
 
 		void* address;
 		size_t size;
 		mutable std::mutex viewsMutex;
-		std::unordered_set<RawDataView*> views;
+		mutable std::unordered_set<RawDataView*> views;
 	};
 }

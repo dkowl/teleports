@@ -6,7 +6,8 @@ namespace Sisyphus {
 
 	class RawDataView {
 	public:
-		RawDataView(RawData& inData);
+		RawDataView();
+		RawDataView(const RawData& inData);
 		~RawDataView();
 		RawDataView(const RawDataView& other);
 		RawDataView& operator=(const RawDataView& other);
@@ -19,7 +20,11 @@ namespace Sisyphus {
 		size_t Size() const;
 		// string_view was previously considered, but that would create an untracked reference to the resource
 		std::string AsString() const;
+		bool Empty() const;
 	private:
-		RawData* data;
+		void Init(const RawData* inData);
+		void Release();
+
+		const RawData* data;
 	};
 }
