@@ -36,6 +36,7 @@ TEST_CASE("Asset Reader Unpacked") {
 		auto reader = AssetReader::Create(AssetReader::ReaderType::Unpacked);
 		reader->ReadAssets(dirPath.string());
 		REQUIRE(reader->AssetCount() == 3);
+		REQUIRE(reader->GetAllAssetIds().size() == reader->AssetCount());
 	}
 	catch (...) {
 		REQUIRE(false);

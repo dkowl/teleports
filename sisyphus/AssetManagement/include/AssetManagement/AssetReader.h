@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <memory>
+#include <vector>
 #include "AssetManagement/Asset.h"
 
 // class AssetIterator;
@@ -19,6 +20,7 @@ namespace Sisyphus::AssetManagement {
 		virtual void ReadAssets(std::string directory) = 0;
 		virtual const Asset& GetAsset(uuids::uuid id) const = 0;
 		virtual int AssetCount() const = 0;
+		virtual std::vector<uuids::uuid> GetAllAssetIds() const = 0;
 		// TODO: virtual AssetIterator GetIterator() = 0;
 	};
 

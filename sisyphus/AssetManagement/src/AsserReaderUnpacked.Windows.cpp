@@ -38,6 +38,15 @@ namespace Sisyphus::AssetManagement {
 		return static_cast<int>(assets.size());
 	}
 
+	std::vector<uuids::uuid> AssetReaderUnpacked::GetAllAssetIds() const
+	{
+		std::vector<uuids::uuid> result;
+		for (auto&& asset : assets) {
+			result.push_back(asset.first);
+		}
+		return result;
+	}
+
 	void AssetReaderUnpacked::AddAsset(std::unique_ptr<Asset> asset)
 	{
 		Logger().BeginSection("Asset detected");
