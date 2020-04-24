@@ -23,11 +23,16 @@ namespace Sisyphus::AssetManagement {
 		case ReaderType::Packed:
 			// TODO: return std::make_unique<AssetReaderPacked>();
 			return nullptr;
-			break;
 		default:
 			SIS_THROW("Unexpected ReaderType");
 			return nullptr;
 		}
+#ifdef SIS_CLANG
+		// funny how clang complains about control reaching the end without return here,
+		// that's why the extra return is added
+		// MSVC however does not accept it because it's unreachable
+		// that's why it's #ifdefed out, even funnier
 		return nullptr;
+#endif
 	}
 }
