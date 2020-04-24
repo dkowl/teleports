@@ -6,3 +6,7 @@
 #ifdef __ANDROID__
 #define SIS_ANDROID
 #endif
+
+#ifdef __clang__
+#define SIS_CLANG
+#endif
