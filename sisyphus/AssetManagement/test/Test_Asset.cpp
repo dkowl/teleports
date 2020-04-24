@@ -31,6 +31,7 @@ TEST_CASE("Asset") {
 	metaPath += ".meta";
 	REQUIRE(fs::exists(metaPath));
 	auto id = asset.Metadata().Id();
+	REQUIRE(id == asset.Metadata().BundleId());
 
 	SECTION("GetDataAsString") {
 		auto data = asset.Data().AsString();

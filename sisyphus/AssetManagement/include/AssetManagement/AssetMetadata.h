@@ -11,6 +11,7 @@ namespace Sisyphus::AssetManagement {
 		AssetMetadata(const std::string& assetPath, bool inReadOnly = true);
 
 		const uuids::uuid& Id() const;
+		const uuids::uuid& BundleId() const;
 		const std::string& Name() const;
 		bool IsBinary() const;
 
@@ -24,6 +25,7 @@ namespace Sisyphus::AssetManagement {
 
 		friend struct nlohmann::adl_serializer<AssetMetadata>;
 		uuids::uuid id;
+		uuids::uuid bundleId;
 		std::string name;
 		bool isBinary;
 	};
@@ -34,11 +36,18 @@ namespace nlohmann {
 	struct adl_serializer<Sisyphus::AssetManagement::AssetMetadata> {
 		static void to_json(json& j, const Sisyphus::AssetManagement::AssetMetadata& metadata) {
 			j["id"] = metadata.id;
+			j["bundleId"] = metadata.bundleId;
 			j["name"] = metadata.name;
 			j["isBinary"] = metadata.isBinary;
 		}
 		static void from_json(const json& j, Sisyphus::AssetManagement::AssetMetadata& metadata) {
 			metadata.id = j["id"].get<uuids::uuid>();
+			if (j.contains("bundleId")) {
+				metadata.bundleId = j["bundleId"].get<uuids::uuid>();
+			}
+			else {
+				metadata.bundleId = metadata.id;
+			}
 			metadata.name = j["name"];
 			metadata.isBinary = j["isBinary"].get<bool>();
 		}

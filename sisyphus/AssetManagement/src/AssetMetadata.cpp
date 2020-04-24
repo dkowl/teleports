@@ -16,6 +16,7 @@ namespace Sisyphus::AssetManagement {
 			}
 			else {
 				id = GenerateUuid();
+				bundleId = id;
 				Fs::Path fsAssetPath(assetPath);
 				name = fsAssetPath.Stem().String();
 				isBinary = !(Fs::Path(assetPath).Extension().String() == ".txt");
@@ -28,6 +29,11 @@ namespace Sisyphus::AssetManagement {
 	const uuids::uuid& AssetMetadata::Id() const
 	{
 		return id;
+	}
+
+	const uuids::uuid& AssetMetadata::BundleId() const
+	{
+		return bundleId;
 	}
 
 	const std::string& AssetMetadata::Name() const
