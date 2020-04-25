@@ -63,6 +63,7 @@
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Pch_AssetManagement_Test.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\test\Test.AssetPacker.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test.RawData.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_Asset.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_AssetReader.cpp" />
