@@ -6,14 +6,16 @@
 
 namespace Sisyphus {
 	RawDataView::RawDataView():
-		data(nullptr)
+		data(nullptr),
+		offset(0),
+		length(0)
 	{
 	}
 
-	RawDataView::RawDataView(const RawData& inData):
+	RawDataView::RawDataView(const RawData& inData, size_t inOffset, size_t inLength):
 		RawDataView()
 	{
-		Init(&inData);
+		Init(&inData, inOffset, inLength);
 	}
 
 	RawDataView::~RawDataView()
@@ -27,38 +29,41 @@ namespace Sisyphus {
 	}
 
 	RawDataView::RawDataView(const RawDataView& other):
-		RawDataView(*(other.data))
+		RawDataView(*(other.data), other.offset, other.length)
 	{
 	}
 
 	RawDataView& RawDataView::operator=(const RawDataView& other)
 	{
 		Release();
-		Init(other.data);
+		Init(other.data, other.offset, other.length);
 		return *this;
 	}
 	void* RawDataView::Ptr() const
 	{
-		return data->Ptr();
+		return reinterpret_cast<char*>(data->Ptr()) + offset;
 	}
 	size_t RawDataView::Size() const
 	{
-		return data->Size();
+		return length;
 	}
 	std::string RawDataView::AsString() const
 	{
 		SIS_DEBUGASSERT(data->Ptr());
-		return std::string(reinterpret_cast<char*>(data->Ptr()), data->Size());
+		return std::string(reinterpret_cast<char*>(data->Ptr()) + offset, length);
 	}
 	bool RawDataView::Empty() const
 	{
 		return data == nullptr;
 	}
-	void RawDataView::Init(const RawData* inData)
+	void RawDataView::Init(const RawData* inData, size_t inOffset, size_t inLength)
 	{
 		SIS_THROWASSERT(Empty());
 		data = inData;
+		offset = inOffset;
 		if (data) {
+			SIS_DEBUGASSERT(inOffset + inLength <= data->Size());
+			length = inLength == 0 ? data->Size() - inOffset : inLength;
 			data->AddView(this);
 		}
 	}
@@ -67,6 +72,8 @@ namespace Sisyphus {
 		if (data) {
 			data->ReleaseView(this);
 			data = nullptr;
+			offset = 0;
+			length = 0;
 		}
 	}
 }

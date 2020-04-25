@@ -33,9 +33,17 @@ TEST_CASE("RawData - Data Access") {
 	memcpy(data.Ptr(), str.c_str(), data.Size());
 	RawDataView view(data);
 	REQUIRE(view.AsString() == str);
+	RawDataView view2(data, 0, 3);
+	REQUIRE(view2.AsString() == "Hel");
+	RawDataView view3(data, 2, 3);
+	REQUIRE(view3.AsString() == "llo");
+	RawDataView view4 = view3;
+	REQUIRE(view4.AsString() == "llo");
+	RawDataView view5(data, 6, 0);
+	REQUIRE(view5.AsString() == "World!");
 }
 
-TEST_CASE("Thread safety") {
+TEST_CASE("RawData - Thread safety") {
 	RawData data(10000);
 
 	auto create = [&data](int n, std::string tag) {

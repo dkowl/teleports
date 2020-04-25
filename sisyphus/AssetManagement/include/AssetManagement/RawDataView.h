@@ -7,7 +7,7 @@ namespace Sisyphus {
 	class RawDataView {
 	public:
 		RawDataView();
-		RawDataView(const RawData& inData);
+		RawDataView(const RawData& inData, size_t inOffset = 0, size_t inLength = 0); // length of 0 means 'till the end'
 		~RawDataView();
 		RawDataView(const RawDataView& other);
 		RawDataView& operator=(const RawDataView& other);
@@ -22,9 +22,11 @@ namespace Sisyphus {
 		std::string AsString() const;
 		bool Empty() const;
 	private:
-		void Init(const RawData* inData);
+		void Init(const RawData* inData, size_t inOffset = 0, size_t inLength = 0);
 		void Release();
 
 		const RawData* data;
+		size_t offset;
+		size_t length;
 	};
 }
