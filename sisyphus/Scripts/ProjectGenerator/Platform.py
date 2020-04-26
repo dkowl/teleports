@@ -10,3 +10,22 @@ class PlatformData:
         self.architectures = architectures
         self.staticLibExt = staticLibExt
         self.dynamicLibExt = dynamicLibExt
+
+platforms = {
+    "Windows":   
+    PlatformData(
+        "Windows",
+        ["Debug", "Release"],
+        ["x64"],
+        ".lib",
+        ".dll"
+    ),
+    "Android":
+    PlatformData(
+        "Android",
+        ["Debug", "Release"],
+        ["ARM", "ARM64"],
+        ".a",
+        ".so"
+    )
+}

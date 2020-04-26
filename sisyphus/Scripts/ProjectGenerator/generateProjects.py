@@ -8,29 +8,12 @@ from xmlUtils import *
 from constants import solutionDir
 import constants
 import ProjectInfo
-from Platform import *
+import Platform
 from projCommon import *
 from generateCatchMain import generateCatchMain
 from generateAndroidTestApp import generateAndroidTestApp
 import SolutionCommon
 import SolutionProject
-
-platforms = [
-    PlatformData(
-        "Windows",
-        ["Debug", "Release"],
-        ["x64"],
-        ".lib",
-        ".dll"
-    ),
-    PlatformData(
-        "Android",
-        ["Debug", "Release"],
-        ["ARM", "ARM64"],
-        ".a",
-        ".so"
-    )
-]
 
 def readFilterGuids(path):
     result = {}
@@ -162,7 +145,7 @@ def getCppPathsAndDirs(projName, platform, isTest):
     sourceDirs = ["src", "include", "test"]
     resultFiles = []
     resultDirs = set()
-    excludedPlatforms = platforms.copy()
+    excludedPlatforms = list(Platform.platforms.values())
     excludedPlatforms.remove(platform)
     for srcDir in sourceDirs:
         srcPath = os.path.join(solutionDir, projName, srcDir)
@@ -385,7 +368,7 @@ def generatePropsString(projectInfo):
     includeDirElem = ET.SubElement(clCompileElem, "AdditionalIncludeDirectories")
     includeDirElem.text = "$(SolutionDir)" + projectInfo.name + "\include;%(AdditionalIncludeDirectories)"
 
-    for platform in platforms:
+    for platform in projectInfo.platforms():
         platformItemDefGroup = ET.SubElement(root, "ItemDefinitionGroup")
         platformItemDefGroup.set("Condition", "'$(TargetSystem)' == '" + platform.name + "'")
         libDirElem = ET.Element("AdditionalLibraryDirectories")
@@ -411,7 +394,7 @@ def generateProps(projectInfo):
 def generateProject(projectInfo):
     if projectInfo.test:
         generateCatchMain(projectInfo)
-    for platform in platforms:
+    for platform in projectInfo.platforms():
         platformSolutionProjects = ProjectInfo.PlatformSolutionProjects()
         platformSolutionProjects.mainProj = generateVcxprojAndFilters(platform, projectInfo, False)
         if projectInfo.test:

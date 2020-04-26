@@ -1,6 +1,7 @@
 import os
 import json
 import traceback
+import Platform
 from constants import solutionDir
 from SolutionProject import SolutionProject
 
@@ -48,6 +49,7 @@ class ProjectInfo:
                 self.dependencies = readOrDefault(jsonData, 'dependencies', [])
                 self.precompiledHeaders = readOrDefault(jsonData, 'precompiledHeaders', False)
                 self.test = readOrDefault(jsonData, 'test', False)
+                self.platformNames = readOrDefault(jsonData, 'platforms', ['Windows', 'Android'])
         except:
             print("Failed to read project info from {0}: {1}".format(self.path, traceback.format_exc()))
 
@@ -68,6 +70,9 @@ class ProjectInfo:
 
     def testAppName(self):
         return self.name + "AndroidTestApp"
+
+    def platforms(self):
+        return [Platform.platforms[name] for name in self.platformNames]
 
     def getAllSolutionProjects(self):
         result = []
