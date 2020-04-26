@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="'$(UtilsImported)' == ''" Project="Utils.props" />
+  </ImportGroup>
+  <PropertyGroup>
+    <AndroidGlobalsImported>true</AndroidGlobalsImported>
+    <UtilsImported>true</UtilsImported>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)AndroidGlobals\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(TargetSystem)' == 'Android'">
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)AndroidGlobals\Android\$(GeneralOutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <LibraryDependencies>AndroidGlobals;m;%(LibraryDependencies)</LibraryDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+</Project>

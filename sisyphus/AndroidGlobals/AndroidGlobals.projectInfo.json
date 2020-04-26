@@ -1,0 +1,11 @@
+{
+	"outputType" : "staticLibrary",
+	"dependencies" : [
+		"Utils"
+	],
+	"precompiledHeaders" : false,
+	"test" : false,
+	"platforms" : [
+		"Android"
+	]
+}
