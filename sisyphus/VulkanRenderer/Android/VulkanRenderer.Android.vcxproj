@@ -56,17 +56,17 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets">
     <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
-    <Import Project="$(SolutionDir)props\General.props" />
-    <Import Project="$(SolutionDir)props\AndroidGlobals.props" />
-    <Import Project="$(SolutionDir)props\Vulkan.props" />
-    <Import Project="$(SolutionDir)props\WindowCreator.props" />
-    <Import Project="$(SolutionDir)props\RendererInterfaces.props" />
-    <Import Project="$(SolutionDir)props\stduuid.props" />
-    <Import Project="$(SolutionDir)props\Glslang.props" />
-    <Import Project="$(SolutionDir)props\Utils.props" />
-    <Import Project="$(SolutionDir)props\Logger.props" />
-    <Import Project="$(SolutionDir)props\ECS.props" />
-    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
+    <Import Condition="'$(GeneralImported)' == ''" Project="$(SolutionDir)props\General.props" />
+    <Import Condition="'$(AndroidGlobalsImported)' == ''" Project="$(SolutionDir)props\AndroidGlobals.props" />
+    <Import Condition="'$(VulkanImported)' == ''" Project="$(SolutionDir)props\Vulkan.props" />
+    <Import Condition="'$(WindowCreatorImported)' == ''" Project="$(SolutionDir)props\WindowCreator.props" />
+    <Import Condition="'$(RendererInterfacesImported)' == ''" Project="$(SolutionDir)props\RendererInterfaces.props" />
+    <Import Condition="'$(stduuidImported)' == ''" Project="$(SolutionDir)props\stduuid.props" />
+    <Import Condition="'$(GlslangImported)' == ''" Project="$(SolutionDir)props\Glslang.props" />
+    <Import Condition="'$(UtilsImported)' == ''" Project="$(SolutionDir)props\Utils.props" />
+    <Import Condition="'$(LoggerImported)' == ''" Project="$(SolutionDir)props\Logger.props" />
+    <Import Condition="'$(ECSImported)' == ''" Project="$(SolutionDir)props\ECS.props" />
+    <Import Condition="'$(PrecompiledHeadersImported)' == ''" Project="$(SolutionDir)props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>

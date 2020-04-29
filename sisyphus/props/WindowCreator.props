@@ -10,6 +10,8 @@
     <UtilsImported>true</UtilsImported>
     <LoggerImported>true</LoggerImported>
     <VulkanImported>true</VulkanImported>
+    <stduuidImported>true</stduuidImported>
+    <jsonImported>true</jsonImported>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

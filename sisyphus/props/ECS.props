@@ -8,6 +8,8 @@
     <ECSImported>true</ECSImported>
     <UtilsImported>true</UtilsImported>
     <LoggerImported>true</LoggerImported>
+    <stduuidImported>true</stduuidImported>
+    <jsonImported>true</jsonImported>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

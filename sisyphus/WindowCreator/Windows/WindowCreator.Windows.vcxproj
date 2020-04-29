@@ -35,11 +35,11 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets">
     <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
-    <Import Project="$(SolutionDir)props\General.props" />
-    <Import Project="$(SolutionDir)props\Utils.props" />
-    <Import Project="$(SolutionDir)props\Logger.props" />
-    <Import Project="$(SolutionDir)props\Vulkan.props" />
-    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
+    <Import Condition="'$(GeneralImported)' == ''" Project="$(SolutionDir)props\General.props" />
+    <Import Condition="'$(UtilsImported)' == ''" Project="$(SolutionDir)props\Utils.props" />
+    <Import Condition="'$(LoggerImported)' == ''" Project="$(SolutionDir)props\Logger.props" />
+    <Import Condition="'$(VulkanImported)' == ''" Project="$(SolutionDir)props\Vulkan.props" />
+    <Import Condition="'$(PrecompiledHeadersImported)' == ''" Project="$(SolutionDir)props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>

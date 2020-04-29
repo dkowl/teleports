@@ -127,6 +127,7 @@ def propsImportGroup(projectInfo, isTest, platform):
 
     for dep in dependencies:
         importElem = ET.SubElement(root, "Import")
+        importElem.set("Condition", "'$(" + dep + "Imported)' == ''")
         importElem.set("Project", "$(SolutionDir)props\\" + dep + ".props")
 
     return root
@@ -361,7 +362,7 @@ def generatePropsString(projectInfo):
         importElem.set("Project", dep + ".props")
 
     propertyGroup = ET.SubElement(root, "PropertyGroup")
-    imported = [*[projectInfo.name], *projectInfo.dependencies]
+    imported = [*[projectInfo.name], *projectInfo.dependencies, *projectInfo.indirectDependencies]
     for imp in imported:
         importedElem = ET.SubElement(propertyGroup, imp + "Imported")
         importedElem.text = "true"

@@ -35,10 +35,10 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets">
     <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
-    <Import Project="$(SolutionDir)props\General.props" />
-    <Import Project="$(SolutionDir)props\stduuid.props" />
-    <Import Project="$(SolutionDir)props\json.props" />
-    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
+    <Import Condition="'$(GeneralImported)' == ''" Project="$(SolutionDir)props\General.props" />
+    <Import Condition="'$(stduuidImported)' == ''" Project="$(SolutionDir)props\stduuid.props" />
+    <Import Condition="'$(jsonImported)' == ''" Project="$(SolutionDir)props\json.props" />
+    <Import Condition="'$(PrecompiledHeadersImported)' == ''" Project="$(SolutionDir)props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>

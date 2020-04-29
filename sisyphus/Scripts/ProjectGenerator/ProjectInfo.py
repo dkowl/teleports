@@ -56,6 +56,8 @@ class ProjectInfo:
         # to be filled by generateProject()
         self.solutionProjects = {} # dict<Platform, PlatformSolutionProjects>
 
+        self.indirectDependencies = []
+
     def projDir(self):
         return os.path.join(solutionDir, self.name)
 
@@ -88,3 +90,19 @@ class ProjectInfo:
         for platform in self.solutionProjects.keys():
             assert platform in other.solutionProjects
             self.solutionProjects[platform].addInterProjectDependency(other.solutionProjects[platform])
+
+    def computeDependencies(self, projectDict):
+        result = set()
+        for dep in self.dependencies:
+            result.add(dep)
+            if dep in projectDict:
+                result.update(projectDict[dep].computeDependencies(projectDict))
+        return result
+
+    def updateIndirectDependencies(self, projectDict):
+        self.indirectDependencies = []
+        allDependencies = self.computeDependencies(projectDict)
+        for dep in allDependencies:
+            if dep not in self.dependencies:
+                self.indirectDependencies.append(dep)
+

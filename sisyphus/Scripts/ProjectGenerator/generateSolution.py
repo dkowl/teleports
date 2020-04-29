@@ -111,6 +111,8 @@ solutionPath = constants.solutionDir + solutionFilename
 solution = Solution(solutionPath)
 
 projectInfos = {p.name: p for p in findProjects()}
+for projectInfo in projectInfos.values():
+    projectInfo.updateIndirectDependencies(projectInfos)
 projectsToInsert = []
 
 for projectInfo in projectInfos.values():

@@ -12,6 +12,7 @@
     <jsonImported>true</jsonImported>
     <UtilsImported>true</UtilsImported>
     <FilesystemImported>true</FilesystemImported>
+    <LoggerImported>true</LoggerImported>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

@@ -20,6 +20,7 @@
     <UtilsImported>true</UtilsImported>
     <LoggerImported>true</LoggerImported>
     <ECSImported>true</ECSImported>
+    <jsonImported>true</jsonImported>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
