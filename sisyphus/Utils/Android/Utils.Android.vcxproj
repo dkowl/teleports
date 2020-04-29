@@ -57,6 +57,7 @@
   <ImportGroup Label="PropertySheets">
     <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
     <Import Project="$(SolutionDir)props\General.props" />
+    <Import Project="$(SolutionDir)props\AndroidGlobals.props" />
     <Import Project="$(SolutionDir)props\stduuid.props" />
     <Import Project="$(SolutionDir)props\json.props" />
     <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />

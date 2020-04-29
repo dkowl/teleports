@@ -100,7 +100,7 @@ def configurations(platform, projectInfo, isTest):
             roots.append(root)
     return roots
 
-def propsImportGroup(projectInfo, isTest):
+def propsImportGroup(projectInfo, isTest, platform):
     root = ET.Element("ImportGroup")
     root.set("Label", "PropertySheets")
 
@@ -110,6 +110,9 @@ def propsImportGroup(projectInfo, isTest):
     userPropsElem.set("Label", "LocalAppDataPlatform")
 
     dependencies = ["General"]
+    if platform.name == 'Android':
+        if projectInfo.name != 'AndroidGlobals':
+            dependencies.append('AndroidGlobals')
     if isTest:
         dependencies.append("catch2")
         dependencies.append("Logger")
@@ -275,7 +278,7 @@ def generateVcxprojString(platform, projectInfo, targetInfo):
     sharedElem.set("Label", "Shared")
     root.append(sharedElem)
     
-    root.append(propsImportGroup(projectInfo, targetInfo.isTest))
+    root.append(propsImportGroup(projectInfo, targetInfo.isTest, platform))
 
     userMacrosElem = ET.Element("PropertyGroup")
     userMacrosElem.set("Label", "UserMacros")
