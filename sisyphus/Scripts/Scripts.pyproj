@@ -73,7 +73,6 @@
     <Content Include="ProjectGenerator\items\catch.listener.cpp" />
     <Content Include="ProjectGenerator\items\catch.globals.h" />
     <Content Include="ProjectGenerator\items\catch.main.cpp" />
-    <Content Include="ProjectGenerator\items\Globals.Android.h" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

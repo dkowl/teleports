@@ -10,5 +10,5 @@
 #endif
 
 #ifdef SIS_ANDROID
-#include "Globals.Android.h"
+#include "AndroidGlobals/Globals.Android.h"
 #endif

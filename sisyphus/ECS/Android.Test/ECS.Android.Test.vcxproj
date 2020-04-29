@@ -75,7 +75,6 @@
     <ClInclude Include="$(SolutionDir)ECS\test\CompB.h" />
     <ClInclude Include="$(SolutionDir)ECS\test\CompC.h" />
     <ClInclude Include="$(SolutionDir)ECS\test\CustomEvent.h" />
-    <ClInclude Include="$(SolutionDir)ECS\test\Globals.Android.h" />
     <ClInclude Include="$(SolutionDir)ECS\test\Pch_ECS_Test.h" />
   </ItemGroup>
   <ItemGroup>

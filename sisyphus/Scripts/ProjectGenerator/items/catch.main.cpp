@@ -8,18 +8,14 @@
 
 #ifdef __ANDROID__
 #include <jni.h>
-#include "Globals.Android.h"
-
-JNIEnv* JavaGlobals::jniEnv = nullptr;
-jobject JavaGlobals::assetManager = nullptr;
-jstring JavaGlobals::filesDir = nullptr;
+#include "AndroidGlobals/Globals.Android.h"
 
 extern "C"
 JNIEXPORT JNICALL
 jstring Java_com_SIS_REPLACE(APPNAME)_SIS_REPLACE(APPNAME)_runTest(JNIEnv * env, jclass type, jobject assetManager, jstring filesDir) {
-    JavaGlobals::jniEnv = env;
-    JavaGlobals::assetManager = assetManager;
-    JavaGlobals::filesDir = filesDir;
+    Sisyphus::AndroidGlobals::InitEnv(env);
+    Sisyphus::AndroidGlobals::InitAssetManager(assetManager);
+    Sisyphus::AndroidGlobals::InitFilesDir(filesDir);
     const char* argv[] = { "SIS_REPLACE(PROJNAME)" };
     Catch::Session().run(1, argv);
     return env->NewStringUTF(CatchGlobals::listenerOutput.c_str());

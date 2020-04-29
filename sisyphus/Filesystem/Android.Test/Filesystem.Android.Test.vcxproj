@@ -71,7 +71,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="$(SolutionDir)Filesystem\test\catch.globals.h" />
-    <ClInclude Include="$(SolutionDir)Filesystem\test\Globals.Android.h" />
     <ClInclude Include="$(SolutionDir)Filesystem\test\Pch_Filesystem_Test.h" />
   </ItemGroup>
   <ItemGroup>

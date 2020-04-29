@@ -9,9 +9,6 @@
     <ClInclude Include="$(SolutionDir)Utils\test\catch.globals.h">
       <Filter>Test Files</Filter>
     </ClInclude>
-    <ClInclude Include="$(SolutionDir)Utils\test\Globals.Android.h">
-      <Filter>Test Files</Filter>
-    </ClInclude>
     <ClInclude Include="$(SolutionDir)Utils\test\Pch_Utils_Test.h">
       <Filter>Test Files</Filter>
     </ClInclude>

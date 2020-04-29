@@ -21,9 +21,6 @@
     <ClInclude Include="$(SolutionDir)ECS\test\CustomEvent.h">
       <Filter>Test Files</Filter>
     </ClInclude>
-    <ClInclude Include="$(SolutionDir)ECS\test\Globals.Android.h">
-      <Filter>Test Files</Filter>
-    </ClInclude>
     <ClInclude Include="$(SolutionDir)ECS\test\Pch_ECS_Test.h">
       <Filter>Test Files</Filter>
     </ClInclude>

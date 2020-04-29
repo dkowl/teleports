@@ -16,14 +16,14 @@ using namespace Sisyphus::Logging;
 #endif
 
 #ifdef SIS_ANDROID
-#include "Globals.Android.h"
+#include "AndroidGlobals/Globals.Android.h"
 #endif
 
 TEST_CASE("Filesystem") {
 	Fs::Path workingDir = std::string("./");
 
 #ifdef SIS_ANDROID
-	workingDir = StringFromJava(JavaGlobals::jniEnv, JavaGlobals::filesDir);
+	workingDir = StringFromJava(AndroidGlobals::Env(), AndroidGlobals::FilesDir());
 #endif
 
 	Fs::Path filename = "dummy.txt";
