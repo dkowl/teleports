@@ -8,8 +8,8 @@
     <FilesystemImported>true</FilesystemImported>
     <UtilsImported>true</UtilsImported>
     <LoggerImported>true</LoggerImported>
-    <stduuidImported>true</stduuidImported>
     <jsonImported>true</jsonImported>
+    <stduuidImported>true</stduuidImported>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

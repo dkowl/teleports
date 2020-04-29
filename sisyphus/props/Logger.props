@@ -6,8 +6,8 @@
   <PropertyGroup>
     <LoggerImported>true</LoggerImported>
     <UtilsImported>true</UtilsImported>
-    <stduuidImported>true</stduuidImported>
     <jsonImported>true</jsonImported>
+    <stduuidImported>true</stduuidImported>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

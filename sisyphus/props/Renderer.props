@@ -6,15 +6,15 @@
   <PropertyGroup>
     <RendererImported>true</RendererImported>
     <VulkanRendererImported>true</VulkanRendererImported>
-    <VulkanImported>true</VulkanImported>
+    <ECSImported>true</ECSImported>
+    <GlslangImported>true</GlslangImported>
     <LoggerImported>true</LoggerImported>
     <RendererInterfacesImported>true</RendererInterfacesImported>
-    <jsonImported>true</jsonImported>
-    <ECSImported>true</ECSImported>
-    <stduuidImported>true</stduuidImported>
-    <GlslangImported>true</GlslangImported>
-    <WindowCreatorImported>true</WindowCreatorImported>
     <UtilsImported>true</UtilsImported>
+    <VulkanImported>true</VulkanImported>
+    <WindowCreatorImported>true</WindowCreatorImported>
+    <jsonImported>true</jsonImported>
+    <stduuidImported>true</stduuidImported>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

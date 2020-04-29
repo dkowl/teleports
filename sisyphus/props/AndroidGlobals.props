@@ -6,8 +6,8 @@
   <PropertyGroup>
     <AndroidGlobalsImported>true</AndroidGlobalsImported>
     <UtilsImported>true</UtilsImported>
-    <stduuidImported>true</stduuidImported>
     <jsonImported>true</jsonImported>
+    <stduuidImported>true</stduuidImported>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

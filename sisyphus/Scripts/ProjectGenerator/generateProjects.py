@@ -362,7 +362,7 @@ def generatePropsString(projectInfo):
         importElem.set("Project", dep + ".props")
 
     propertyGroup = ET.SubElement(root, "PropertyGroup")
-    imported = [*[projectInfo.name], *projectInfo.dependencies, *projectInfo.indirectDependencies]
+    imported = [*[projectInfo.name], *projectInfo.dependencies, *sorted(projectInfo.indirectDependencies)]
     for imp in imported:
         importedElem = ET.SubElement(propertyGroup, imp + "Imported")
         importedElem.text = "true"
