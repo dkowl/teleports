@@ -56,21 +56,26 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets">
     <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
-    <Import Project="$(SolutionDir)props\General.props" />
-    <Import Project="$(SolutionDir)props\stduuid.props" />
-    <Import Project="$(SolutionDir)props\json.props" />
-    <Import Project="$(SolutionDir)props\Utils.props" />
-    <Import Project="$(SolutionDir)props\Filesystem.props" />
-    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
+    <Import Condition="'$(GeneralImported)' == ''" Project="$(SolutionDir)props\General.props" />
+    <Import Condition="'$(AndroidGlobalsImported)' == ''" Project="$(SolutionDir)props\AndroidGlobals.props" />
+    <Import Condition="'$(stduuidImported)' == ''" Project="$(SolutionDir)props\stduuid.props" />
+    <Import Condition="'$(jsonImported)' == ''" Project="$(SolutionDir)props\json.props" />
+    <Import Condition="'$(UtilsImported)' == ''" Project="$(SolutionDir)props\Utils.props" />
+    <Import Condition="'$(FilesystemImported)' == ''" Project="$(SolutionDir)props\Filesystem.props" />
+    <Import Condition="'$(PrecompiledHeadersImported)' == ''" Project="$(SolutionDir)props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)AssetManagement\include;$(SolutionDir)AssetManagement\include\AssetManagement;$(SolutionDir)AssetManagement\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)AssetManagement\include;$(SolutionDir)AssetManagement\include\AssetManagement;$(SolutionDir)AssetManagement\src;$(SolutionDir)AssetManagement\src\Android;$(SolutionDir)AssetManagement\src\Windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetReaderPacked.Android.h" />
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetBundle.h" />
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetPacked.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\src\Pch_AssetManagement.h" />
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\ResourceLoader.h" />
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\Android\AssetBundle.Android.h" />
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\Android\AssetReaderPacked.Android.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\Asset.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\AssetMetadata.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\AssetPacker.h" />
@@ -81,14 +86,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\Asset.cpp" />
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetBundle.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetMetadata.cpp" />
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetPacked.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetPacker.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetReader.cpp" />
-    <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetReaderPacked.Android.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetUnpacked.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\Pch_AssetManagement.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\RawData.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\RawDataView.cpp" />
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\Android\AssetBundle.Android.cpp" />
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\Android\AssetReaderPacked.Android.cpp" />
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\Android\ResourceLoader.Android.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

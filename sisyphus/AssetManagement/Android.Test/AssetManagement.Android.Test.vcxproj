@@ -57,20 +57,20 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets">
     <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
-    <Import Project="$(SolutionDir)props\General.props" />
-    <Import Project="$(SolutionDir)props\catch2.props" />
-    <Import Project="$(SolutionDir)props\Logger.props" />
-    <Import Project="$(SolutionDir)props\AssetManagement.props" />
-    <Import Project="$(SolutionDir)props\PrecompiledHeaders.props" />
+    <Import Condition="'$(GeneralImported)' == ''" Project="$(SolutionDir)props\General.props" />
+    <Import Condition="'$(AndroidGlobalsImported)' == ''" Project="$(SolutionDir)props\AndroidGlobals.props" />
+    <Import Condition="'$(catch2Imported)' == ''" Project="$(SolutionDir)props\catch2.props" />
+    <Import Condition="'$(LoggerImported)' == ''" Project="$(SolutionDir)props\Logger.props" />
+    <Import Condition="'$(AssetManagementImported)' == ''" Project="$(SolutionDir)props\AssetManagement.props" />
+    <Import Condition="'$(PrecompiledHeadersImported)' == ''" Project="$(SolutionDir)props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)AssetManagement\include;$(SolutionDir)AssetManagement\include\AssetManagement;$(SolutionDir)AssetManagement\src;$(SolutionDir)AssetManagement\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)AssetManagement\include;$(SolutionDir)AssetManagement\include\AssetManagement;$(SolutionDir)AssetManagement\src;$(SolutionDir)AssetManagement\src\Android;$(SolutionDir)AssetManagement\src\Windows;$(SolutionDir)AssetManagement\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="$(SolutionDir)AssetManagement\test\catch.globals.h" />
-    <ClInclude Include="$(SolutionDir)AssetManagement\test\Globals.Android.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\test\Pch_AssetManagement_Test.h" />
   </ItemGroup>
   <ItemGroup>

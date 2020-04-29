@@ -4,7 +4,6 @@
 #include <vector>
 #include "AssetManagement/Asset.h"
 
-// class AssetIterator;
 namespace Sisyphus::AssetManagement {
 	class AssetReader {
 	public:
@@ -21,7 +20,6 @@ namespace Sisyphus::AssetManagement {
 		virtual const Asset& GetAsset(uuids::uuid id) const = 0;
 		virtual int AssetCount() const = 0;
 		virtual std::vector<uuids::uuid> GetAllAssetIds() const = 0;
-		// TODO: virtual AssetIterator GetIterator() = 0;
 	};
 
 }

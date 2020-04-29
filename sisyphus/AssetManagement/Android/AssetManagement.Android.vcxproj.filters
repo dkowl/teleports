@@ -4,16 +4,31 @@
     <Filter Include="Source Files">
       <UniqueIdentifier>{AD737F43-0BF4-40EB-9637-99F4A2BD3F0B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Android">
+      <UniqueIdentifier>{C11EAC49-FCC8-4105-98B9-DB74E79B2432}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Public Headers">
       <UniqueIdentifier>{B93ADC5D-B0B9-4201-BEB0-879AF7937277}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetReaderPacked.Android.h">
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetBundle.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetPacked.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="$(SolutionDir)AssetManagement\src\Pch_AssetManagement.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\ResourceLoader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\Android\AssetBundle.Android.h">
+      <Filter>Source Files\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\Android\AssetReaderPacked.Android.h">
+      <Filter>Source Files\Android</Filter>
     </ClInclude>
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\Asset.h">
       <Filter>Public Headers</Filter>
@@ -41,16 +56,19 @@
     <ClCompile Include="$(SolutionDir)AssetManagement\src\Asset.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetBundle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetMetadata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetPacked.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetPacker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetReader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetReaderPacked.Android.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetUnpacked.cpp">
@@ -64,6 +82,15 @@
     </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\RawDataView.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\Android\AssetBundle.Android.cpp">
+      <Filter>Source Files\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\Android\AssetReaderPacked.Android.cpp">
+      <Filter>Source Files\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\Android\ResourceLoader.Android.cpp">
+      <Filter>Source Files\Android</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

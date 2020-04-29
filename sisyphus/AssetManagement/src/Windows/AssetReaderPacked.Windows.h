@@ -1,5 +1,6 @@
 #pragma once
 #include "AssetReader.h"
+#include "AssetBundle.h"
 #include <unordered_map>
 #include <memory>
 #include "uuid.h"
@@ -10,6 +11,6 @@ namespace Sisyphus::AssetManagement {
 		void ReadAssets(std::string dir);
 
 	private:
-		std::unordered_map<uuids::uuid, std::unique_ptr<Asset>> assets;
+		std::unordered_map<uuids::uuid, AssetBundle> bundles;
 	};
 }
