@@ -1,19 +1,13 @@
 #include "Globals.Android.h"
 #include "Utils/DebugAssert.h"
 #include "Utils/Throw.h"
+#include <android/asset_manager_jni.h>
 
 namespace Sisyphus {
 	namespace AndroidGlobals {
 		JNIEnv* env = nullptr;
 		jobject assetManager = nullptr;
 		jstring filesDir = nullptr;
-
-		void Init(JNIEnv* inEnv, jobject inAssetManager) {
-			SIS_THROWASSERT(inEnv);
-			SIS_THROWASSERT(inAssetManager);
-			env = inEnv;
-			assetManager = inAssetManager;
-		}
 
 		void InitEnv(JNIEnv* inEnv)
 		{
@@ -38,10 +32,11 @@ namespace Sisyphus {
 			return env;
 		}
 
-		jobject AssetManager() {
+		AAssetManager* AssetManager() {
 			SIS_DEBUGASSERT(assetManager);
-			return assetManager;
+			return AAssetManager_fromJava(Env(), assetManager);
 		}
+
 		jstring FilesDir()
 		{
 			SIS_DEBUGASSERT(filesDir);

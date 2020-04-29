@@ -1,5 +1,6 @@
 #pragma once
 #include <jni.h>
+#include <android/asset_manager.h>
 
 namespace Sisyphus {
 	namespace AndroidGlobals {
@@ -8,7 +9,7 @@ namespace Sisyphus {
 		void InitFilesDir(jstring filesDir);
 
 		JNIEnv* Env();
-		jobject AssetManager();
+		AAssetManager* AssetManager();
 		jstring FilesDir();
 	}
 }
