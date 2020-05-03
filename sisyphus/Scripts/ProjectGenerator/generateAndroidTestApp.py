@@ -8,25 +8,6 @@ from projCommon import *
 import SolutionCommon
 import SolutionProject
 
-def appendTestDataContent(projectInfo, itemGroup, appDir):
-    testDataDir = os.path.join(projectInfo.projDir(), 'test_data')
-
-    if not os.path.exists(testDataDir):
-        return ''
-
-    paths = []
-    for dirpath, dirnames, filenames in os.walk(testDataDir):
-        for filename in filenames:
-            srcPath = os.path.join(dirpath, filename)
-            itemPath = os.path.join('assets', os.path.relpath(srcPath, projectInfo.projDir()))
-            dstPath = os.path.join(appDir, itemPath)
-            sis.copyFile(srcPath, dstPath, True)
-            contentElem = ET.SubElement(itemGroup, "Content")
-            contentElem.set("Include", str(itemPath))
-
-    # .gitignore content
-    return 'assets/test_data*\n'
-
 def generateAndroidTestApp(platform, projectInfo):
     libDir = os.path.join(projectInfo.projDir(), "Android.Test")
     appDir = os.path.join(libDir, "App")
@@ -46,7 +27,8 @@ def generateAndroidTestApp(platform, projectInfo):
         "PROJNAME": projectInfo.name
         }
 
-    gitignoreContent = sis.generateFiles(srcDir, appDir, filenames, replaceDict)
+    sis.generateFiles(srcDir, appDir, filenames, replaceDict)
+    gitignorePaths = [filename for ignored, filename in filenames]
 
     # .androidproj    
     androidprojFilename = os.path.join(appDir, "{0}.androidproj".format(projectInfo.testAppName()))
@@ -109,7 +91,11 @@ def generateAndroidTestApp(platform, projectInfo):
     appNameElem.text = projectInfo.name
 
     itemGroup = ET.SubElement(root, "ItemGroup")
-    gitignoreContent += appendTestDataContent(projectInfo, itemGroup, appDir)
+    testDataItemPaths = copyTestDataContent(platform, projectInfo, appDir)
+    for itemPath in testDataItemPaths:        
+        contentElem = ET.SubElement(itemGroup, "Content")
+        contentElem.set("Include", str(itemPath))
+        gitignorePaths.append(itemPath)
     contentElem = ET.SubElement(itemGroup, "Content")
     contentElem.set("Include", "res\\values\strings.xml")
     buildXmlElem = ET.SubElement(itemGroup, "AntBuildXml")
@@ -129,7 +115,7 @@ def generateAndroidTestApp(platform, projectInfo):
     importElem3.set("Project", "$(AndroidTargetsPath)\Android.targets")
 
     sis.updateFile(androidprojFilename, prettify(root))
-    sis.updateFile(os.path.join(appDir, '.gitignore'), gitignoreContent)
+    generateGitignore(appDir, gitignorePaths)
 
     solutionProject = SolutionProject.SolutionProject()
     solutionProject.name = projectInfo.testAppName()

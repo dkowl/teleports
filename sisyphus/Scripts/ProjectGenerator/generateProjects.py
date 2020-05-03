@@ -405,6 +405,10 @@ def generateProject(projectInfo):
             platformSolutionProjects.testProj = generateVcxprojAndFilters(platform, projectInfo, True)
             if platform.name == "Android":
                 platformSolutionProjects.testAppProj = generateAndroidTestApp(platform, projectInfo)
+            elif platform.name == "Windows":
+                winTestAppDir = os.path.join(projectInfo.projDir(), 'Windows.Test')
+                copiedFiles = copyTestDataContent(platform, projectInfo, winTestAppDir)
+                generateGitignore(winTestAppDir, copiedFiles)
         projectInfo.solutionProjects[platform] = platformSolutionProjects
     generateProps(projectInfo)
 

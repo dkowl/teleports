@@ -3,6 +3,7 @@ import Platform
 import uuid
 from xmlUtils import *
 import logging
+import sisyphusUtils as sis
 
 def readProjectGuid(path):
     if os.path.exists(path):
@@ -30,3 +31,32 @@ def projectConfigurations(platform):
             archElem.text = arch
 
     return root
+
+def copyTestDataContent(platform, projectInfo, appDir):
+    testDataDir = os.path.join(projectInfo.projDir(), 'test_data')
+
+    if not os.path.exists(testDataDir):
+        return ''
+
+    copiedPaths = []
+    for dirpath, dirnames, filenames in os.walk(testDataDir):
+        for filename in filenames:
+            srcPath = os.path.join(dirpath, filename)
+            itemPath = os.path.relpath(srcPath, projectInfo.projDir())
+            if platform.name == 'Android':
+                itemPath = os.path.join('assets', itemPath)
+            dstPath = os.path.join(appDir, itemPath)
+            sis.copyFile(srcPath, dstPath, True)
+            copiedPaths.append(itemPath)
+
+    return copiedPaths
+
+def generateGitignore(dir, ignoredPaths):
+    if len(ignoredPaths) == 0:
+        return
+    gitignoreContent = ''
+    for path in ignoredPaths:
+        gitignoreContent += path + '\n'
+    # .gitignore only understands '/', not '\'
+    gitignoreContent = gitignoreContent.replace('\\', '/')
+    sis.updateFile(os.path.join(dir, '.gitignore'), gitignoreContent)

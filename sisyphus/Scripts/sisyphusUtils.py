@@ -67,23 +67,16 @@ def appendToFilename(path, prefix):
 # filenames is a list fo tuples in the form of (srcName, dstName)
 # replaceDict is used when executing the SIS_REPLACE() macro
 def generateFiles(srcDir, dstDir, filenames, replaceDict):
-    gitignoreContent = ''
     for srcName, dstName in filenames:
         src = os.path.join(srcDir, srcName)
         dst = os.path.join(dstDir, dstName)
         ensureDirExists(dst)
-
-        gitignoreContent += '/' + dstName + '\n'
 
         with open(src, 'r') as srcFile:
             content = srcFile.read()
             content = replace(content, replaceDict)
 
         updateFile(dst, content)
-
-    # .gitignore only understands '/', not '\'
-    gitignoreContent = gitignoreContent.replace('\\', '/')
-    return gitignoreContent
 
 def formatGuid(guid):
     guidStr = str(guid)
