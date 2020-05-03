@@ -58,10 +58,10 @@
   <ImportGroup Label="PropertySheets">
     <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
     <Import Condition="'$(GeneralImported)' == ''" Project="$(SolutionDir)props\General.props" />
-    <Import Condition="'$(AndroidGlobalsImported)' == ''" Project="$(SolutionDir)props\AndroidGlobals.props" />
+    <Import Condition="'$(AssetManagementImported)' == ''" Project="$(SolutionDir)props\AssetManagement.props" />
     <Import Condition="'$(catch2Imported)' == ''" Project="$(SolutionDir)props\catch2.props" />
     <Import Condition="'$(LoggerImported)' == ''" Project="$(SolutionDir)props\Logger.props" />
-    <Import Condition="'$(AssetManagementImported)' == ''" Project="$(SolutionDir)props\AssetManagement.props" />
+    <Import Condition="'$(AndroidGlobalsImported)' == ''" Project="$(SolutionDir)props\AndroidGlobals.props" />
     <Import Condition="'$(PrecompiledHeadersImported)' == ''" Project="$(SolutionDir)props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
@@ -85,6 +85,7 @@
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Pch_AssetManagement_Test.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test.AssetPacker.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test.RawData.cpp" />
+    <ClCompile Include="$(SolutionDir)AssetManagement\test\Test.ResourceLoader.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_Asset.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_AssetReader.cpp" />
   </ItemGroup>

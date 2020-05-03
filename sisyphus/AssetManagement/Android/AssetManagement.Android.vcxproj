@@ -57,11 +57,11 @@
   <ImportGroup Label="PropertySheets">
     <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
     <Import Condition="'$(GeneralImported)' == ''" Project="$(SolutionDir)props\General.props" />
-    <Import Condition="'$(AndroidGlobalsImported)' == ''" Project="$(SolutionDir)props\AndroidGlobals.props" />
     <Import Condition="'$(stduuidImported)' == ''" Project="$(SolutionDir)props\stduuid.props" />
     <Import Condition="'$(jsonImported)' == ''" Project="$(SolutionDir)props\json.props" />
     <Import Condition="'$(UtilsImported)' == ''" Project="$(SolutionDir)props\Utils.props" />
     <Import Condition="'$(FilesystemImported)' == ''" Project="$(SolutionDir)props\Filesystem.props" />
+    <Import Condition="'$(AndroidGlobalsImported)' == ''" Project="$(SolutionDir)props\AndroidGlobals.props" />
     <Import Condition="'$(PrecompiledHeadersImported)' == ''" Project="$(SolutionDir)props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
@@ -73,7 +73,6 @@
     <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetBundle.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetPacked.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\src\Pch_AssetManagement.h" />
-    <ClInclude Include="$(SolutionDir)AssetManagement\src\ResourceLoader.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\src\Android\AssetBundle.Android.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\src\Android\AssetReaderPacked.Android.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\Asset.h" />
@@ -83,6 +82,7 @@
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\AssetUnpacked.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\RawData.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\RawDataView.h" />
+    <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\ResourceLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\Asset.cpp" />

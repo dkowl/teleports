@@ -26,7 +26,7 @@ namespace Sisyphus::AssetManagement {
 
 	ResourceLoader::LoadResult ResourceLoader::Load(RawData& data) {
 		auto& file = privateData->file;
-		file.seekg(0, file.beg);
+		Rewind();
 		size_t size = 0;
 		if (privateData->isBinary) {
 			size = Fs::FileSize(privateData->path);
@@ -37,10 +37,11 @@ namespace Sisyphus::AssetManagement {
 			// So in a text file, there is an extra /0 at the end of data for each newline in it
 			file.ignore(std::numeric_limits<std::streamsize>::max());
 			size = file.gcount();
-			file.seekg(0, file.beg);
+			Rewind();
 		}
 		data.Init(size);
 		file.read(reinterpret_cast<char*>(data.Ptr()), size);
+		Rewind();
 
 		return LoadResult{ true, size };	
 	}
@@ -54,5 +55,11 @@ namespace Sisyphus::AssetManagement {
 			Logger().Log("Error reading resource " + path);
 			return LoadResult{ false, 0 };
 		}
+	}
+
+	void ResourceLoader::Rewind() {
+		auto& file = privateData->file;
+		file.clear();
+		file.seekg(0, file.beg);
 	}
 }

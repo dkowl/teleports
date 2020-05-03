@@ -21,9 +21,6 @@
     <ClInclude Include="$(SolutionDir)AssetManagement\src\Pch_AssetManagement.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="$(SolutionDir)AssetManagement\src\ResourceLoader.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="$(SolutionDir)AssetManagement\src\Android\AssetBundle.Android.h">
       <Filter>Source Files\Android</Filter>
     </ClInclude>
@@ -49,6 +46,9 @@
       <Filter>Public Headers</Filter>
     </ClInclude>
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\RawDataView.h">
+      <Filter>Public Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\ResourceLoader.h">
       <Filter>Public Headers</Filter>
     </ClInclude>
   </ItemGroup>

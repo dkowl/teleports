@@ -1,5 +1,5 @@
 #pragma once
-#include "RawData.h"
+#include "AssetManagement/RawData.h"
 #include <string>
 #include <optional>
 
@@ -17,6 +17,8 @@ namespace Sisyphus::AssetManagement {
 		};
 		LoadResult Load(RawData& data);
 		static LoadResult Load(RawData& data, std::string path, bool isBinary = true);
+
+		void Rewind();
 
 	private:
 		struct PrivateData;

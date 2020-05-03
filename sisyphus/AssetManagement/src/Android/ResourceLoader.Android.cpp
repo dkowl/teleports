@@ -31,10 +31,12 @@ namespace Sisyphus::AssetManagement {
 	}
 
 	ResourceLoader::LoadResult ResourceLoader::Load(RawData& data) {
+		Rewind();
 		auto& asset = privateData->asset;
 		auto size = AAsset_getLength64(asset);
 		data.Init(size);
 		AAsset_read(asset, data.Ptr(), size);
+		Rewind();
 		return LoadResult{ true, static_cast<size_t>(size) };		
 	}
 
@@ -47,5 +49,9 @@ namespace Sisyphus::AssetManagement {
 			Logger().Log("Error reading resource " + path);
 			return LoadResult{ false, 0 };
 		}
+	}
+
+	void ResourceLoader::Rewind() {
+		AAsset_seek64(privateData->asset, 0, SEEK_SET);
 	}
 }

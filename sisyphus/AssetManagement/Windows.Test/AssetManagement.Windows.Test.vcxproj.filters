@@ -29,6 +29,9 @@
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test.RawData.cpp">
       <Filter>Test Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\test\Test.ResourceLoader.cpp">
+      <Filter>Test Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\test\Test_Asset.cpp">
       <Filter>Test Files</Filter>
     </ClCompile>

@@ -51,7 +51,6 @@
     <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetBundle.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetPacked.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\src\Pch_AssetManagement.h" />
-    <ClInclude Include="$(SolutionDir)AssetManagement\src\ResourceLoader.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\src\Windows\AssetBundle.Windows.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\src\Windows\AssetReaderPacked.Windows.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\src\Windows\AssetReaderUnpacked.Windows.h" />
@@ -62,6 +61,7 @@
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\AssetUnpacked.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\RawData.h" />
     <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\RawDataView.h" />
+    <ClInclude Include="$(SolutionDir)AssetManagement\include\AssetManagement\ResourceLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\Asset.cpp" />
