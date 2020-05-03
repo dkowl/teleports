@@ -8,6 +8,24 @@ from projCommon import *
 import SolutionCommon
 import SolutionProject
 
+def appendTestDataContent(projectInfo, itemGroup, appDir):
+    testDataDir = os.path.join(projectInfo.projDir(), 'test_data')
+
+    if not os.path.exists(testDataDir):
+        return
+
+    paths = []
+    for dirpath, dirnames, filenames in os.walk(testDataDir):
+        for filename in filenames:
+            srcPath = os.path.join(dirpath, filename)
+            itemPath = os.path.join('assets', os.path.relpath(srcPath, projectInfo.projDir()))
+            dstPath = os.path.join(appDir, itemPath)
+            sis.copyFile(srcPath, dstPath, True)
+            contentElem = ET.SubElement(itemGroup, "Content")
+            contentElem.set("Include", str(itemPath))
+
+    sis.appendFile(os.path.join(appDir, '.gitignore'), 'assets/test_data*')
+
 def generateAndroidTestApp(platform, projectInfo):
     libDir = os.path.join(projectInfo.projDir(), "Android.Test")
     appDir = os.path.join(libDir, "App")
@@ -90,6 +108,7 @@ def generateAndroidTestApp(platform, projectInfo):
     appNameElem.text = projectInfo.name
 
     itemGroup = ET.SubElement(root, "ItemGroup")
+    appendTestDataContent(projectInfo, itemGroup, appDir)
     contentElem = ET.SubElement(itemGroup, "Content")
     contentElem.set("Include", "res\\values\strings.xml")
     buildXmlElem = ET.SubElement(itemGroup, "AntBuildXml")
