@@ -33,7 +33,7 @@ def writeFile(filepath, content, binary = False):
     ensureDirExists(filepath)
     with open(filepath, 'wb' if binary else 'w') as file:
         file.write(content)
-        logger.info(os.path.basename(filepath) + " written.")
+        logger.info(filepath + " written.")
 
 def updateFile(filepath, newContent, binary = False):
     oldContent = getFileContent(filepath, binary)
@@ -83,7 +83,7 @@ def generateFiles(srcDir, dstDir, filenames, replaceDict):
 
     # .gitignore only understands '/', not '\'
     gitignoreContent = gitignoreContent.replace('\\', '/')
-    updateFile(os.path.join(dstDir, '.gitignore'), gitignoreContent)
+    return gitignoreContent
 
 def formatGuid(guid):
     guidStr = str(guid)
