@@ -22,18 +22,39 @@ def ensureFileExists(filepath, defaultContent = ''):
         with open(filepath, 'w') as file:
             file.write(defaultContent)
 
-def updateFile(filepath, newContent):
-    oldContent = None
+def getFileContent(filepath, binary = False):
+    content = None
     if os.path.exists(filepath):
-        with open(filepath, 'r') as file:        
-            oldContent = file.read()
+        with open(filepath, 'rb' if binary else 'r') as file:        
+            content = file.read()
+    return content
+
+def writeFile(filepath, content, binary = False):
+    ensureDirExists(filepath)
+    with open(filepath, 'wb' if binary else 'w') as file:
+        file.write(content)
+        logger.info(os.path.basename(filepath) + " written.")
+
+def updateFile(filepath, newContent, binary = False):
+    oldContent = getFileContent(filepath, binary)
 
     if oldContent != newContent:
-        with open(filepath, 'w') as file:
-            file.write(newContent)
-            logger.info(os.path.basename(filepath) + " written.")
+        writeFile(filepath, newContent, binary)
     else:
         logger.debug("No changes to " + os.path.basename(filepath) + ".")
+
+def appendFile(filepath, newContent, binary = False):
+    oldContent = getFileContent(filepath, binary)
+
+    if oldContent != None:
+        writeFile(filepath, oldContent + newContent, binary)
+    else:
+        writeFile(filepath, newContent, binary)
+
+def copyFile(src, dst, binary = False):
+    with open(src, 'rb' if binary else 'r') as file:
+        content = file.read()
+    updateFile(dst, content, binary)
 
 def getSubdirectories(dir):
     return next(os.walk(dir))[1]
