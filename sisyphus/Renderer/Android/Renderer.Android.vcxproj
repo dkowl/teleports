@@ -57,7 +57,6 @@
   <ImportGroup Label="PropertySheets">
     <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
     <Import Condition="'$(GeneralImported)' == ''" Project="$(SolutionDir)props\General.props" />
-    <Import Condition="'$(AndroidGlobalsImported)' == ''" Project="$(SolutionDir)props\AndroidGlobals.props" />
     <Import Condition="'$(VulkanRendererImported)' == ''" Project="$(SolutionDir)props\VulkanRenderer.props" />
   </ImportGroup>
   <ItemDefinitionGroup>

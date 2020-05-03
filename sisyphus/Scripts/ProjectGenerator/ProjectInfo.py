@@ -23,14 +23,14 @@ class PlatformSolutionProjects():
     def updateProjectDependencies(self):
         assert self.mainProj != None
         if self.testProj != None:
-            self.testProj.dependencies.add(self.mainProj.id)
+            self.testProj.addDependency(self.mainProj)
         if self.testAppProj != None:
             assert self.testProj != None
-            self.testAppProj.dependencies.add(self.testProj.id)
+            self.testAppProj.addDependency(self.testProj)
 
     def addInterProjectDependency(self, other):
         assert self.mainProj != None and other.mainProj != None
-        self.mainProj.dependencies.add(other.mainProj.id)
+        self.mainProj.addDependency(other.mainProj)
 
 def readOrDefault(jsonData, key, default):
     if key in jsonData:
@@ -39,6 +39,8 @@ def readOrDefault(jsonData, key, default):
         return default
 
 class ProjectInfo:
+    allProjects = {}
+
     def __init__(self, projName, path):
         self.name = projName
         self.path = path
@@ -54,9 +56,11 @@ class ProjectInfo:
             print("Failed to read project info from {0}: {1}".format(self.path, traceback.format_exc()))
 
         # to be filled by generateProject()
-        self.solutionProjects = {} # dict<Platform, PlatformSolutionProjects>
+        self.solutionProjects = {} # dict<Platform name, PlatformSolutionProjects>
 
         self.indirectDependencies = []
+
+        type(self).allProjects[projName] = self
 
     def projDir(self):
         return os.path.join(solutionDir, self.name)
@@ -88,8 +92,8 @@ class ProjectInfo:
 
     def addInterProjectDependency(self, other):
         for platform in self.solutionProjects.keys():
-            assert platform in other.solutionProjects
-            self.solutionProjects[platform].addInterProjectDependency(other.solutionProjects[platform])
+            if platform in other.solutionProjects:
+                self.solutionProjects[platform].addInterProjectDependency(other.solutionProjects[platform])
 
     def computeDependencies(self, projectDict):
         result = set()

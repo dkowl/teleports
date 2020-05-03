@@ -85,3 +85,6 @@ class SolutionProject:
                     entry.activeCfg = defaultConfigPlatformString
 
                 self.configPlatforms[configPlatformString] = entry
+
+    def addDependency(self, otherProject):
+        self.dependencies.add(otherProject.id)

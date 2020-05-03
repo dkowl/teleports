@@ -76,6 +76,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AssetManagement.Windows", "
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AssetManagement.Android", "AssetManagement\Android\AssetManagement.Android.vcxproj", "{40B0383C-A83B-4C74-969D-BC02C5B31702}"
 	ProjectSection(ProjectDependencies) = postProject
+		{17B91526-50BA-4D87-A816-4475C7745A8C} = {17B91526-50BA-4D87-A816-4475C7745A8C}
 		{2FD12CDA-4779-416C-96F7-8569A3A4E0D7} = {2FD12CDA-4779-416C-96F7-8569A3A4E0D7}
 		{E6CB9052-70AF-499A-BE4C-BA3D457FBA96} = {E6CB9052-70AF-499A-BE4C-BA3D457FBA96}
 	EndProjectSection
@@ -87,6 +88,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AssetManagement.Windows.Tes
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AssetManagement.Android.Test", "AssetManagement\Android.Test\AssetManagement.Android.Test.vcxproj", "{3E2FAE76-97C7-4032-8992-7C49ACC276A1}"
 	ProjectSection(ProjectDependencies) = postProject
+		{17B91526-50BA-4D87-A816-4475C7745A8C} = {17B91526-50BA-4D87-A816-4475C7745A8C}
 		{40B0383C-A83B-4C74-969D-BC02C5B31702} = {40B0383C-A83B-4C74-969D-BC02C5B31702}
 	EndProjectSection
 EndProject
@@ -99,6 +101,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utils.Android", "Utils\Andr
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utils.Android.Test", "Utils\Android.Test\Utils.Android.Test.vcxproj", "{2BE311A6-B062-4C5A-96C2-E1CA439DA023}"
 	ProjectSection(ProjectDependencies) = postProject
+		{17B91526-50BA-4D87-A816-4475C7745A8C} = {17B91526-50BA-4D87-A816-4475C7745A8C}
 		{E6CB9052-70AF-499A-BE4C-BA3D457FBA96} = {E6CB9052-70AF-499A-BE4C-BA3D457FBA96}
 	EndProjectSection
 EndProject
@@ -138,6 +141,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Filesystem.Android", "Files
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Filesystem.Android.Test", "Filesystem\Android.Test\Filesystem.Android.Test.vcxproj", "{2CF39A63-BD74-435A-9325-C83EDFD7B327}"
 	ProjectSection(ProjectDependencies) = postProject
+		{17B91526-50BA-4D87-A816-4475C7745A8C} = {17B91526-50BA-4D87-A816-4475C7745A8C}
 		{2FD12CDA-4779-416C-96F7-8569A3A4E0D7} = {2FD12CDA-4779-416C-96F7-8569A3A4E0D7}
 	EndProjectSection
 EndProject
@@ -187,6 +191,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ECS.Android", "ECS\Android\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ECS.Android.Test", "ECS\Android.Test\ECS.Android.Test.vcxproj", "{5482BC50-9A5A-4672-8719-0FB3F4F18373}"
 	ProjectSection(ProjectDependencies) = postProject
+		{17B91526-50BA-4D87-A816-4475C7745A8C} = {17B91526-50BA-4D87-A816-4475C7745A8C}
 		{6E8DA399-2956-443F-B44B-D7EA674BB0AF} = {6E8DA399-2956-443F-B44B-D7EA674BB0AF}
 	EndProjectSection
 EndProject

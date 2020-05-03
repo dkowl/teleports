@@ -58,10 +58,10 @@
   <ImportGroup Label="PropertySheets">
     <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
     <Import Condition="'$(GeneralImported)' == ''" Project="$(SolutionDir)props\General.props" />
-    <Import Condition="'$(AndroidGlobalsImported)' == ''" Project="$(SolutionDir)props\AndroidGlobals.props" />
+    <Import Condition="'$(UtilsImported)' == ''" Project="$(SolutionDir)props\Utils.props" />
     <Import Condition="'$(catch2Imported)' == ''" Project="$(SolutionDir)props\catch2.props" />
     <Import Condition="'$(LoggerImported)' == ''" Project="$(SolutionDir)props\Logger.props" />
-    <Import Condition="'$(UtilsImported)' == ''" Project="$(SolutionDir)props\Utils.props" />
+    <Import Condition="'$(AndroidGlobalsImported)' == ''" Project="$(SolutionDir)props\AndroidGlobals.props" />
     <Import Condition="'$(PrecompiledHeadersImported)' == ''" Project="$(SolutionDir)props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ItemDefinitionGroup>

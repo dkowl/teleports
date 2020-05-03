@@ -5,6 +5,7 @@
     <Import Condition="'$(jsonImported)' == ''" Project="json.props" />
     <Import Condition="'$(UtilsImported)' == ''" Project="Utils.props" />
     <Import Condition="'$(FilesystemImported)' == ''" Project="Filesystem.props" />
+    <Import Condition="'$(AndroidGlobalsImported)' == ''" Project="AndroidGlobals.props" />
   </ImportGroup>
   <PropertyGroup>
     <AssetManagementImported>true</AssetManagementImported>
@@ -12,6 +13,7 @@
     <jsonImported>true</jsonImported>
     <UtilsImported>true</UtilsImported>
     <FilesystemImported>true</FilesystemImported>
+    <AndroidGlobalsImported>true</AndroidGlobalsImported>
     <LoggerImported>true</LoggerImported>
   </PropertyGroup>
   <ItemDefinitionGroup>

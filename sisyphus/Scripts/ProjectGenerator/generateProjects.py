@@ -110,16 +110,19 @@ def propsImportGroup(projectInfo, isTest, platform):
     userPropsElem.set("Label", "LocalAppDataPlatform")
 
     dependencies = ["General"]
-    if platform.name == 'Android':
-        if projectInfo.name != 'AndroidGlobals':
-            dependencies.append('AndroidGlobals')
     if isTest:
+        dependencies.append(projectInfo.name)
         dependencies.append("catch2")
-        dependencies.append("Logger")
         if projectInfo.name != "Logger":
-            dependencies.append(projectInfo.name)
+            dependencies.append("Logger")
+        if projectInfo.name != 'AndroidGlobals' and platform.name == 'Android':
+            dependencies.append('AndroidGlobals')
     else:
         for dep in projectInfo.dependencies:
+            # ignore project that don't support the current platform
+            allProjects = ProjectInfo.ProjectInfo.allProjects
+            if dep in allProjects and platform.name not in allProjects[dep].platformNames:
+                continue
             dependencies.append(dep)
             
     if projectInfo.precompiledHeaders:
@@ -404,11 +407,12 @@ def generateProject(projectInfo):
         if projectInfo.test:
             platformSolutionProjects.testProj = generateVcxprojAndFilters(platform, projectInfo, True)
             if platform.name == "Android":
+                platformSolutionProjects.testProj.addDependency(ProjectInfo.ProjectInfo.allProjects['AndroidGlobals'].solutionProjects['Android'].mainProj)
                 platformSolutionProjects.testAppProj = generateAndroidTestApp(platform, projectInfo)
             elif platform.name == "Windows":
                 winTestAppDir = os.path.join(projectInfo.projDir(), 'Windows.Test')
                 copiedFiles = copyTestDataContent(platform, projectInfo, winTestAppDir)
                 generateGitignore(winTestAppDir, copiedFiles)
-        projectInfo.solutionProjects[platform] = platformSolutionProjects
+        projectInfo.solutionProjects[platform.name] = platformSolutionProjects
     generateProps(projectInfo)
 

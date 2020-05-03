@@ -4,7 +4,8 @@
 		"stduuid",
 		"json",
 		"Utils",
-		"Filesystem"
+		"Filesystem",
+		"AndroidGlobals"
 	],
 	"precompiledHeaders" : true,
 	"test" : true
