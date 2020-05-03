@@ -38,6 +38,14 @@ namespace SisyphusVsExtension
         private static bool sisyphusOutputWindowPaneCreated = false;
 
         /// <summary>
+		/// This Guid is the persistence guid for the output window.
+		/// It can be found by running this sample, bringing up the output window,
+		/// selecting it in the Persisted window and then looking in the Properties
+		/// window.
+		/// </summary>
+		public static readonly Guid guidOutputWindowFrame = new Guid("{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}");
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="UpdateSolution"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
@@ -114,6 +122,14 @@ namespace SisyphusVsExtension
         private void LogToOutput(string text)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
+
+            // showing the output window in case it's hidden
+            IVsUIShell uiShell = Package.GetGlobalService(typeof(SVsUIShell)) as IVsUIShell;
+            Guid outputWindowGuid = guidOutputWindowFrame;
+            IVsWindowFrame outputWindowFrame;
+            uiShell.FindToolWindow((uint)__VSCREATETOOLWIN.CTW_fForceCreate, ref outputWindowGuid, out outputWindowFrame);
+            if (outputWindowFrame != null)
+                outputWindowFrame.Show();
 
             IVsOutputWindow outWindow = Package.GetGlobalService(typeof(SVsOutputWindow)) as IVsOutputWindow;
             if (!sisyphusOutputWindowPaneCreated)
