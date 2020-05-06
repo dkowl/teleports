@@ -15,7 +15,7 @@ namespace Sisyphus::AssetManagement {
 			bool ok;
 			size_t size;
 		};
-		LoadResult Load(RawData& data);
+		LoadResult Load(RawData& data, size_t offset = 0, size_t length = 0); // length of 0 means 'till the end'
 		static LoadResult Load(RawData& data, std::string path, bool isBinary = true);
 
 		void Rewind();

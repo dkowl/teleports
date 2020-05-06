@@ -1,6 +1,7 @@
 #include "ResourceLoader.h"
 #include "Filesystem/Filesystem.h"
 #include "Logger/Logger.h"
+#include "Utils/Throw.h"
 
 namespace Sisyphus::AssetManagement {
 	struct ResourceLoader::PrivateData {
@@ -11,6 +12,7 @@ namespace Sisyphus::AssetManagement {
 
 	ResourceLoader::ResourceLoader(std::string path, bool isBinary)
 	{
+		SIS_THROWASSERT(Fs::Exists(path));
 		std::ios::openmode openmode = std::ios::in;
 		if (isBinary) openmode |= std::ios::binary;
 		privateData = std::make_unique<PrivateData>(PrivateData{ path, isBinary, std::ifstream(path, openmode) });
@@ -24,7 +26,7 @@ namespace Sisyphus::AssetManagement {
 		return file ? std::optional<uint8_t>(static_cast<uint8_t>(byte)) : std::nullopt;
 	}
 
-	ResourceLoader::LoadResult ResourceLoader::Load(RawData& data) {
+	ResourceLoader::LoadResult ResourceLoader::Load(RawData& data, size_t offset, size_t length) {
 		auto& file = privateData->file;
 		Rewind();
 		size_t size = 0;
@@ -39,7 +41,12 @@ namespace Sisyphus::AssetManagement {
 			size = file.gcount();
 			Rewind();
 		}
+		size -= offset;
+		if (length > 0 && size > length) {
+			size = length;
+		}
 		data.Init(size);
+		file.seekg(offset, file.beg);
 		file.read(reinterpret_cast<char*>(data.Ptr()), size);
 		Rewind();
 

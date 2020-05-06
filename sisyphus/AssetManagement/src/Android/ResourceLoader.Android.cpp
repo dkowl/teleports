@@ -30,11 +30,15 @@ namespace Sisyphus::AssetManagement {
 		}
 	}
 
-	ResourceLoader::LoadResult ResourceLoader::Load(RawData& data) {
+	ResourceLoader::LoadResult ResourceLoader::Load(RawData& data, size_t offset, size_t length) {
 		Rewind();
 		auto& asset = privateData->asset;
-		auto size = AAsset_getLength64(asset);
+		auto size = AAsset_getLength64(asset) - offset;
+		if (length > 0 && size > length) {
+			size = length;
+		}
 		data.Init(size);
+		AAsset_seek64(asset, offset, SEEK_SET);
 		AAsset_read(asset, data.Ptr(), size);
 		Rewind();
 		return LoadResult{ true, static_cast<size_t>(size) };		

@@ -32,7 +32,12 @@ TEST_CASE("Resource Loader") {
 	REQUIRE(ReadBytesToString(loader) == "Hello World!");
 
 	RawData data2;
-	loader.Load(data2);
+	loader.Load(data2, 6);
 	RawDataView dataView2(data2);
-	REQUIRE(dataView2.AsString() == "Hello World!");
+	REQUIRE(dataView2.AsString() == "World!");
+
+	RawData data3;
+	loader.Load(data3, 6, 5);
+	RawDataView dataView3(data3);
+	REQUIRE(dataView3.AsString() == "World");
 }
