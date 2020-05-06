@@ -32,8 +32,8 @@ namespace Sisyphus::Fs {
 		size_t filenameLength;
 		cwk_path_get_basename(pathString.c_str(), &filename, &filenameLength);
 
-		const char* extension;
-		size_t extensionLength;
+		const char* extension = nullptr;
+		size_t extensionLength = 0;
 		cwk_path_get_extension(pathString.c_str(), &extension, &extensionLength);
 
 		return Path(std::string(filename, filenameLength - extensionLength));
@@ -45,7 +45,7 @@ namespace Sisyphus::Fs {
 		size_t filenameLength;
 		cwk_path_get_basename(pathString.c_str(), &filename, &filenameLength);
 
-		return Path(std::string(filename, filenameLength));
+		return filename ? Path(std::string(filename, filenameLength)) : "";
 	}
 
 	Path Path::Dirname() const
@@ -53,16 +53,16 @@ namespace Sisyphus::Fs {
 		size_t dirnameLength;
 		cwk_path_get_dirname(pathString.c_str(), &dirnameLength);
 
-		return Path(std::string(pathString.c_str(), dirnameLength));
+		return dirnameLength ? Path(std::string(pathString.c_str(), dirnameLength)) : "";
 	}
 
 	Path Path::Extension() const
 	{
-		const char* extension;
-		size_t extensionLength;
+		const char* extension = nullptr;
+		size_t extensionLength = 0;
 		cwk_path_get_extension(pathString.c_str(), &extension, &extensionLength);
 
-		return Path(std::string(extension, extensionLength));
+		return extension ? Path(std::string(extension, extensionLength)) : "";
 	}
 
 	bool Path::Empty() const

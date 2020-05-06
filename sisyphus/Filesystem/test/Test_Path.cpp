@@ -48,3 +48,13 @@ TEST_CASE("Path - operators") {
 	REQUIRE(path.Filename().String() == "file.cpp");
  }
 
+TEST_CASE("Path - file with no extension") {
+	Path path("dir/file");
+	REQUIRE(path.Extension().String() == "");
+	REQUIRE(path.Stem().String() == "file");
+
+	Path emptyPath;
+	REQUIRE(emptyPath.Filename().String().empty());
+	REQUIRE(emptyPath.Dirname().String().empty());
+}
+
