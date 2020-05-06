@@ -42,6 +42,8 @@
     <Content Include="assets\test_data\AssetPacker\Test.AssetPacker.cpp" />
     <Content Include="assets\test_data\AssetPacker\Assets\DeathKnight_Unity.fbx" />
     <Content Include="assets\test_data\AssetPacker\Assets\DeathKnight_Unity.fbx.meta" />
+    <Content Include="assets\test_data\AssetPacker\Assets\HelloWorld.txt" />
+    <Content Include="assets\test_data\AssetPacker\Assets\HelloWorld.txt.meta" />
     <Content Include="assets\test_data\AssetPacker\Assets\subdir\DeathKnightSword1_Icon.png" />
     <Content Include="assets\test_data\AssetPacker\Assets\subdir\DeathKnightSword1_Icon.png.meta" />
     <Content Include="assets\test_data\AssetPacker\Assets\subdir\DeathKnight_Sword1.fbx" />

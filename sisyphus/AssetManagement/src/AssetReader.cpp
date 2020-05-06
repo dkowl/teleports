@@ -1,9 +1,9 @@
 #include "AssetReader.h"
 #include "Utils/Throw.h"
 #include "Utils/PlatformMacros.h"
+#include "AssetReaderPacked.h"
 #ifdef SIS_WINDOWS
 #include "AssetReaderUnpacked.Windows.h"
-#include "AssetReaderPacked.Windows.h"
 #elif defined(SIS_ANDROID)
 #include "AssetReaderPacked.Android.h"
 #endif
@@ -21,8 +21,7 @@ namespace Sisyphus::AssetManagement {
 #endif
 			break;
 		case ReaderType::Packed:
-			// TODO: return std::make_unique<AssetReaderPacked>();
-			return nullptr;
+			return std::make_unique<AssetReaderPacked>();
 		default:
 			SIS_THROW("Unexpected ReaderType");
 			return nullptr;

@@ -9,7 +9,7 @@ namespace Sisyphus::AssetManagement {
 		offset(inOffset),
 		length(inLength)
 	{
-		metadata = json(metadataString);
+		metadata = json::parse(metadataString).get<AssetMetadata>();
 	}
 
 	RawDataView AssetPacked::Data() const

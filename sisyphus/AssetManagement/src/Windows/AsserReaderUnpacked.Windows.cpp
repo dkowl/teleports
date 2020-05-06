@@ -17,7 +17,7 @@ namespace Sisyphus::AssetManagement {
 		}
 	}
 
-	void AssetReaderUnpacked::ReadAssets(std::string directory) {
+	void AssetReaderUnpacked::ReadAssets(const std::string& directory) {
 		auto paths = FindAllAssetPaths(directory);
 		for (auto&& p : paths) {
 			AddAsset(std::make_unique<AssetUnpacked>(p));

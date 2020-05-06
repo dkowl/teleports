@@ -6,6 +6,8 @@ res/values/strings.xml
 assets/test_data/AssetPacker/Test.AssetPacker.cpp
 assets/test_data/AssetPacker/Assets/DeathKnight_Unity.fbx
 assets/test_data/AssetPacker/Assets/DeathKnight_Unity.fbx.meta
+assets/test_data/AssetPacker/Assets/HelloWorld.txt
+assets/test_data/AssetPacker/Assets/HelloWorld.txt.meta
 assets/test_data/AssetPacker/Assets/subdir/DeathKnightSword1_Icon.png
 assets/test_data/AssetPacker/Assets/subdir/DeathKnightSword1_Icon.png.meta
 assets/test_data/AssetPacker/Assets/subdir/DeathKnight_Sword1.fbx

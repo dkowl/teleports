@@ -4,7 +4,7 @@
 namespace Sisyphus::AssetManagement {
 	class AssetReaderUnpacked : public AssetReader {
 	public:
-		void ReadAssets(std::string directory) override;
+		void ReadAssets(const std::string& directory) override;
 		const Asset& GetAsset(uuids::uuid id) const override;
 		int AssetCount() const override;
 		std::vector<uuids::uuid> GetAllAssetIds() const override;

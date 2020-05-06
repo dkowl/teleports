@@ -18,14 +18,11 @@
     <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetPacked.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="$(SolutionDir)AssetManagement\src\Pch_AssetManagement.h">
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetReaderPacked.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="$(SolutionDir)AssetManagement\src\Windows\AssetBundle.Windows.h">
-      <Filter>Source Files\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SolutionDir)AssetManagement\src\Windows\AssetReaderPacked.Windows.h">
-      <Filter>Source Files\Windows</Filter>
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\Pch_AssetManagement.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="$(SolutionDir)AssetManagement\src\Windows\AssetReaderUnpacked.Windows.h">
       <Filter>Source Files\Windows</Filter>
@@ -74,6 +71,9 @@
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetReaderPacked.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetUnpacked.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -87,12 +87,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\Windows\AsserReaderUnpacked.Windows.cpp">
-      <Filter>Source Files\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SolutionDir)AssetManagement\src\Windows\AssetBundle.Windows.cpp">
-      <Filter>Source Files\Windows</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SolutionDir)AssetManagement\src\Windows\AssetReaderPacked.Windows.cpp">
       <Filter>Source Files\Windows</Filter>
     </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\Windows\ResourceLoader.Windows.cpp">

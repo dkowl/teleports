@@ -10,8 +10,10 @@ namespace Sisyphus::AssetManagement {
 	};
 
 	ResourceLoader::ResourceLoader(std::string path, bool inIsBinary) {
+		Logger().Log("Opening Android asset at " + path);
 		auto asset = AAssetManager_open(AndroidGlobals::AssetManager(), path.c_str(), 0);
 		SIS_THROWASSERT(asset);
+		Logger().Log("Asset opened successfully");
 		privateData = std::make_unique<PrivateData>(PrivateData{ asset });
 	}
 

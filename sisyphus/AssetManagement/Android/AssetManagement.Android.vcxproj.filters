@@ -18,11 +18,11 @@
     <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetPacked.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="$(SolutionDir)AssetManagement\src\Pch_AssetManagement.h">
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\AssetReaderPacked.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="$(SolutionDir)AssetManagement\src\Android\AssetBundle.Android.h">
-      <Filter>Source Files\Android</Filter>
+    <ClInclude Include="$(SolutionDir)AssetManagement\src\Pch_AssetManagement.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="$(SolutionDir)AssetManagement\src\Android\AssetReaderPacked.Android.h">
       <Filter>Source Files\Android</Filter>
@@ -71,6 +71,9 @@
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetReaderPacked.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetUnpacked.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -82,9 +85,6 @@
     </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\RawDataView.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SolutionDir)AssetManagement\src\Android\AssetBundle.Android.cpp">
-      <Filter>Source Files\Android</Filter>
     </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\Android\AssetReaderPacked.Android.cpp">
       <Filter>Source Files\Android</Filter>
