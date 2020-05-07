@@ -413,5 +413,6 @@ def generateProject(projectInfo):
                 copiedFiles = copyTestDataContent(platform, projectInfo, winTestAppDir)
                 generateGitignore(winTestAppDir, copiedFiles)
         projectInfo.solutionProjects[platform.name] = platformSolutionProjects
-    generateProps(projectInfo)
+    if projectInfo.outputType != 'Application':
+        generateProps(projectInfo)
 
