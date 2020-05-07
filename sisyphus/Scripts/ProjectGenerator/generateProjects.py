@@ -32,12 +32,14 @@ def readFilterGuids(path):
     return result
 
 class TargetInfo:
-    def __init__(self, projGuid, filterGuids, isTest, cppPaths, cppDirs):
+    def __init__(self, projGuid, filterGuids, isTest, cppPaths, cppDirs, platform, outputType):
         self.projGuid = projGuid
         self.filterGuids = filterGuids
         self.isTest = isTest
         self.cppPaths = cppPaths
         self.cppDirs = cppDirs
+        self.platform = platform
+        self.outputType = outputType
 
 def globals(platform, projectInfo, targetInfo):
     root = ET.Element("PropertyGroup")
@@ -69,7 +71,8 @@ def globals(platform, projectInfo, targetInfo):
 
     return root
 
-def configurations(platform, projectInfo, isTest):
+def configurations(projectInfo, targetInfo):
+    platform = targetInfo.platform
     roots = []
     for config in platform.configurations:
         for arch in platform.architectures:
@@ -77,13 +80,7 @@ def configurations(platform, projectInfo, isTest):
             root.set("Condition", "'$(Configuration)|$(Platform)'=='" + config + "|" + arch + "'")
             root.set("Label", "Configuration")
             configTypeElem = ET.SubElement(root, "ConfigurationType")
-            if not isTest:
-                configTypeElem.text = projectInfo.outputType
-            else:
-                if platform.name == "Windows":
-                    configTypeElem.text = "Application"
-                else:
-                    configTypeElem.text = "DynamicLibrary"
+            configTypeElem.text = targetInfo.outputType
             useDebugElem = ET.SubElement(root, "UseDebugLibraries")
             useDebugElem.text = "true" if config == "Debug" else "false"
             toolsetElem = ET.SubElement(root, "PlatformToolset")
@@ -266,7 +263,7 @@ def generateVcxprojString(platform, projectInfo, targetInfo):
     defaultPropsElem.set("Project", R"$(VCTargetsPath)\Microsoft.Cpp.Default.props")
     root.append(defaultPropsElem)
 
-    for elem in configurations(platform, projectInfo, targetInfo.isTest):
+    for elem in configurations(projectInfo, targetInfo):
         root.append(elem)
 
     cppPropsElem = ET.Element("Import")
@@ -301,7 +298,7 @@ def generateVcxprojString(platform, projectInfo, targetInfo):
 
     return prettify(root)
 
-def generateVcxprojAndFilters(platform, projectInfo, isTest):
+def generateVcxprojAndFilters(platform, projectInfo, isTest, outputType):
     folderName = platform.name
     if isTest:
         folderName += ".Test"
@@ -324,7 +321,9 @@ def generateVcxprojAndFilters(platform, projectInfo, isTest):
         filterGuids = readFilterGuids(filtersPath), 
         isTest = isTest,
         cppPaths = cppPaths,
-        cppDirs = cppDirs)
+        cppDirs = cppDirs,
+        platform = platform,
+        outputType = outputType)
 
     try:
         vcxprojString = generateVcxprojString(platform, projectInfo, targetInfo)
@@ -397,14 +396,21 @@ def generateProps(projectInfo):
     propsPath = os.path.join(solutionDir, "props", "%s.props" % projectInfo.name)
     sis.updateFile(propsPath, generatePropsString(projectInfo))
 
+def generateAndroidApp(projectInfo):
+    print("generateAndroidApp: Please implement me!")
+
 def generateProject(projectInfo):
     if projectInfo.test:
         generateCatchMain(projectInfo)
     for platform in projectInfo.platforms():
         platformSolutionProjects = ProjectInfo.PlatformSolutionProjects()
-        platformSolutionProjects.mainProj = generateVcxprojAndFilters(platform, projectInfo, False)
-        if projectInfo.test:
-            platformSolutionProjects.testProj = generateVcxprojAndFilters(platform, projectInfo, True)
+              
+        platformSolutionProjects.mainProj = generateVcxprojAndFilters(platform, projectInfo, False, projectInfo.mainProjOutputType(platform))
+        if projectInfo.outputType == 'Application' and platform.name == 'Android':
+            platformSolutionProjects.mainAppProj = generateAndroidApp(projectInfo)
+
+        if projectInfo.test:            
+            platformSolutionProjects.testProj = generateVcxprojAndFilters(platform, projectInfo, True, projectInfo.testProjOutputType(platform))
             if platform.name == "Android":
                 platformSolutionProjects.testProj.addDependency(ProjectInfo.ProjectInfo.allProjects['AndroidGlobals'].solutionProjects['Android'].mainProj)
                 platformSolutionProjects.testAppProj = generateAndroidTestApp(platform, projectInfo)

@@ -9,11 +9,12 @@ from SolutionProject import SolutionProject
 class PlatformSolutionProjects():
     def __init__(self):
         self.mainProj = None
+        self.mainAppProj = None
         self.testProj = None
         self.testAppProj = None
 
     def getAllProjects(self):
-        projects = [self.mainProj, self.testProj, self.testAppProj]
+        projects = [self.mainProj, self.mainAppProj, self.testProj, self.testAppProj]
         result = []
         for project in projects:
             if project != None:
@@ -22,6 +23,8 @@ class PlatformSolutionProjects():
 
     def updateProjectDependencies(self):
         assert self.mainProj != None
+        if self.mainAppProj != None:
+            self.mainAppProj.addDependency(self.mainProj)
         if self.testProj != None:
             self.testProj.addDependency(self.mainProj)
         if self.testAppProj != None:
@@ -79,6 +82,18 @@ class ProjectInfo:
 
     def platforms(self):
         return [Platform.platforms[name] for name in self.platformNames]
+
+    def mainProjOutputType(self, platform):
+        if self.outputType == 'Application' and platform.name == 'Android':
+            return 'DynamicLibrary'
+        else:
+            return self.outputType
+
+    def testProjOutputType(self, platform):
+        if platform.name == 'Android':
+            return 'DynamicLibrary'
+        else:
+            return 'Application'
 
     def getAllSolutionProjects(self):
         result = []
