@@ -148,14 +148,14 @@ def ensurePrecompiledHeadersExist(projectInfo):
     if projectInfo.test:
         ensurePrecompiledHeadersExistInDir(projectInfo.testSourceDir(), projectInfo.name + "_Test")
 
-def getCppPathsAndDirs(projName, platform, isTest):
+def getCppPathsAndDirs(projectInfo, platform, isTest):
     sourceDirs = ["src", "include", "test"]
     resultFiles = []
     resultDirs = set()
     excludedPlatforms = list(Platform.platforms.values())
     excludedPlatforms.remove(platform)
     for srcDir in sourceDirs:
-        srcPath = os.path.join(solutionDir, projName, srcDir)
+        srcPath = os.path.join(projectInfo.projDir(), srcDir)
         for root, dirs, files in os.walk(srcPath):
             if not (srcDir == "test" and not isTest):
                 resultDirs.add(os.path.relpath(root, solutionDir))
@@ -319,7 +319,7 @@ def generateVcxprojAndFilters(platform, projectInfo, isTest):
 
     projPath = os.path.join(targetDir, projFilename)
     filtersPath = projPath + ".filters"
-    cppPaths, cppDirs = getCppPathsAndDirs(projectInfo.name, platform, isTest)
+    cppPaths, cppDirs = getCppPathsAndDirs(projectInfo, platform, isTest)
     targetInfo = TargetInfo(
         projGuid = readProjectGuid(projPath), 
         filterGuids = readFilterGuids(filtersPath), 
