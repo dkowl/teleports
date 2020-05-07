@@ -90,6 +90,16 @@ class Solution:
     def insertProject(self, newProject):
             self.projects[newProject.id] = newProject
 
+    def getOrCreateSolutionFolder(self, name, path):
+        solutionFolder = self.findProjectByName(name)
+        if solutionFolder == None:
+            solutionFolder = Project.SolutionProject()
+            solutionFolder.id = sis.formatGuid(uuid.uuid4()).strip('{}')
+            solutionFolder.name = name
+        solutionFolder.projTypeId = Common.projectTypeIds['folder']
+        solutionFolder.path = path
+        return solutionFolder
+
 def findProjects():
     projects = []
     for root, dirs, files in os.walk(constants.solutionDir):
@@ -114,16 +124,30 @@ findProjects()
 projectInfos = ProjectInfo.allProjects
 for projectInfo in projectInfos.values():
     projectInfo.updateIndirectDependencies(projectInfos)
-projectsToInsert = []
+projectsToInsert = []    
 
 for projectInfo in projectInfos.values():
-    solutionFolder = solution.findProjectByName(projectInfo.name)
-    if solutionFolder == None:
-        solutionFolder = Project.SolutionProject()
-        solutionFolder.id = uuid.uuid4()
-        solutionFolder.name = projectInfo.name
-    solutionFolder.projTypeId = Common.projectTypeIds['folder']
-    solutionFolder.path = projectInfo.name
+    solutionFolderHierarchy = []
+    projRelPath = os.path.relpath(projectInfo.projDir(), constants.solutionDir)
+    while projRelPath:
+        splitPath = os.path.split(projRelPath)
+        solutionFolderHierarchy.append(splitPath[1])
+        if splitPath[0]:
+            projRelPath = splitPath[0]
+        else:
+            break
+
+    prevParentSolutionFolder = None
+    fullPath = ''
+    for parentFolder in reversed(solutionFolderHierarchy):
+        fullPath = os.path.join(fullPath, parentFolder)
+        parentSolutionFolder = solution.getOrCreateSolutionFolder(parentFolder, fullPath)
+        if prevParentSolutionFolder and parentSolutionFolder.id not in prevParentSolutionFolder.nestedProjects:
+            prevParentSolutionFolder.nestedProjects.append(parentSolutionFolder.id)
+        prevParentSolutionFolder = parentSolutionFolder
+        projectsToInsert.append(parentSolutionFolder)
+
+    solutionFolder = prevParentSolutionFolder
     solutionFolder.solutionItems = [os.path.relpath(projectInfo.path, constants.solutionDir)]
 
     generateProject(projectInfo)
@@ -136,7 +160,6 @@ for projectInfo in projectInfos.values():
     for slnProject in solutionProjects:
         solutionFolder.nestedProjects.append(slnProject.id)
 
-    projectsToInsert.append(solutionFolder)
     projectsToInsert += solutionProjects
 
 for projectInfo in projectInfos.values():
