@@ -208,7 +208,7 @@ def getIncludeDirsIncludesAndCompiles(targetInfo, platform, projName):
 
     return (includeDirGroup, includeGroup, compileGroup)
 
-def generateFiltersString(existingFilterUuidDict, cppPaths, projName):
+def generateFiltersString(existingFilterUuidDict, cppPaths, projectInfo):
     root = ET.Element("Project")
     root.set("ToolsVersion", "4.0")
     root.set("xmlns", msbuildXmlNamespace)
@@ -217,9 +217,8 @@ def generateFiltersString(existingFilterUuidDict, cppPaths, projName):
     compileGroup = ET.SubElement(root, "ItemGroup")
     filterNames = set()
     for path in cppPaths:
-        filterName = os.path.dirname(path)
-        if "test" in filterName:
-            a = 2
+        filterName = os.path.dirname(os.path.relpath(os.path.join(constants.solutionDir, path), os.path.dirname(projectInfo.projDir())))
+        projName = projectInfo.name
         filterName = filterName.replace(projName + "\\include\\" + projName, "Public Headers")
         filterName = filterName.replace(projName + "\\src", "Source Files")
         filterName = filterName.replace(projName + "\\test", "Test Files")
@@ -336,7 +335,7 @@ def generateVcxprojAndFilters(platform, projectInfo, isTest):
     try:
         filtersString = generateFiltersString(
             existingFilterUuidDict = targetInfo.filterGuids, 
-            projName = projectInfo.name, 
+            projectInfo = projectInfo, 
             cppPaths = targetInfo.cppPaths)
         sis.updateFile(filtersPath, filtersString)        
     except:
