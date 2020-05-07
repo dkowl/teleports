@@ -63,7 +63,7 @@ class ProjectInfo:
         type(self).allProjects[projName] = self
 
     def projDir(self):
-        return os.path.join(solutionDir, self.name)
+        return os.path.dirname(self.path)
 
     def includeDir(self):
         return os.path.join(self.projDir(), 'include')

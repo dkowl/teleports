@@ -91,13 +91,13 @@ class Solution:
             self.projects[newProject.id] = newProject
 
 def findProjects():
-    subDirs = sis.getSubdirectories(constants.solutionDir)
     projects = []
-    for subDir in subDirs:
-        projInfoPath = os.path.join(constants.solutionDir, subDir, os.path.basename(subDir) + ".projectInfo.json")
-        if os.path.exists(projInfoPath):
-            projects.append(ProjectInfo(subDir, projInfoPath))
-            logging.info(f"Project found: {subDir}")
+    for root, dirs, files in os.walk(constants.solutionDir):
+        for dir in dirs:
+            projInfoPath = os.path.join(root, dir, os.path.basename(dir) + '.projectInfo.json')
+            if os.path.exists(projInfoPath):
+                projects.append(ProjectInfo(dir, projInfoPath))
+                logging.info(f"Project found: {dir}")
     if projects.count == 0:
         logging.error("No projects found. Are you missing .projectInfo.json files?")
     return projects
