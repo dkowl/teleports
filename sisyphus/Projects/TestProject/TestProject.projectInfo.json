@@ -1,0 +1,7 @@
+{
+	"outputType" : "Application",
+	"dependencies" : [
+		"AssetManagement",
+		"Renderer"
+	]
+}
