@@ -119,9 +119,8 @@ projectsToInsert = []
 for projectInfo in projectInfos.values():
     solutionFolder = solution.findProjectByName(projectInfo.name)
     if solutionFolder == None:
-
         solutionFolder = Project.SolutionProject()
-        solutionFolder.id = sis.formatGuid(uuid.uuid4())
+        solutionFolder.id = uuid.uuid4()
         solutionFolder.name = projectInfo.name
     solutionFolder.projTypeId = Common.projectTypeIds['folder']
     solutionFolder.path = projectInfo.name
