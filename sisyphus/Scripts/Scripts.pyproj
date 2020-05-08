@@ -24,7 +24,7 @@
     <Compile Include="ProjectGenerator\constants.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ProjectGenerator\generateAndroidTestApp.py" />
+    <Compile Include="ProjectGenerator\AndroidApps.py" />
     <Compile Include="ProjectGenerator\generateCatchMain.py" />
     <Compile Include="ProjectGenerator\generateProjects.py" />
     <Compile Include="ProjectGenerator\generateSolution.py">

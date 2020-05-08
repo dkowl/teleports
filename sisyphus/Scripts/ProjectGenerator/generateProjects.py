@@ -11,7 +11,7 @@ import ProjectInfo
 import Platform
 from projCommon import *
 from generateCatchMain import generateCatchMain
-from generateAndroidTestApp import generateAndroidTestApp
+import AndroidApps
 import SolutionCommon
 import SolutionProject
 
@@ -152,7 +152,7 @@ def getCppPathsAndDirs(projectInfo, platform, isTest):
     excludedPlatforms = list(Platform.platforms.values())
     excludedPlatforms.remove(platform)
     for srcDir in sourceDirs:
-        srcPath = os.path.join(projectInfo.projDir(), srcDir)
+        srcPath = os.path.join(projectInfo.dir(), srcDir)
         for root, dirs, files in os.walk(srcPath):
             if not (srcDir == "test" and not isTest):
                 resultDirs.add(os.path.relpath(root, solutionDir))
@@ -214,7 +214,7 @@ def generateFiltersString(existingFilterUuidDict, cppPaths, projectInfo):
     compileGroup = ET.SubElement(root, "ItemGroup")
     filterNames = set()
     for path in cppPaths:
-        filterName = os.path.dirname(os.path.relpath(os.path.join(constants.solutionDir, path), os.path.dirname(projectInfo.projDir())))
+        filterName = os.path.dirname(os.path.relpath(os.path.join(constants.solutionDir, path), os.path.dirname(projectInfo.dir())))
         projName = projectInfo.name
         filterName = filterName.replace(projName + "\\include\\" + projName, "Public Headers")
         filterName = filterName.replace(projName + "\\src", "Source Files")
@@ -302,7 +302,7 @@ def generateVcxprojAndFilters(platform, projectInfo, isTest, outputType):
     folderName = platform.name
     if isTest:
         folderName += ".Test"
-    targetDir = os.path.join(projectInfo.projDir(), folderName, "")
+    targetDir = os.path.join(projectInfo.dir(), folderName, "")
 
     sis.ensureDirExists(targetDir)
     if projectInfo.precompiledHeaders:
@@ -406,18 +406,29 @@ def generateProject(projectInfo):
         platformSolutionProjects = ProjectInfo.PlatformSolutionProjects()
               
         platformSolutionProjects.mainProj = generateVcxprojAndFilters(platform, projectInfo, False, projectInfo.mainProjOutputType(platform))
-        if projectInfo.outputType == 'Application' and platform.name == 'Android':
-            platformSolutionProjects.mainAppProj = generateAndroidApp(projectInfo)
+        if projectInfo.outputType == 'Application':
+            if platform.name == 'Android':
+                platformSolutionProjects.mainAppProj = AndroidApps.AndroidGameApp(projectInfo).generate()
+            elif platform.name == 'Windows':
+                copiedFiles = copyDirContent(
+                    projectInfo.assetDir(),
+                    projectInfo.projDir(platform),
+                    projectInfo.dir()
+                    )
+                generateGitignore(projectInfo.projDir(platform), copiedFiles)
 
         if projectInfo.test:            
             platformSolutionProjects.testProj = generateVcxprojAndFilters(platform, projectInfo, True, projectInfo.testProjOutputType(platform))
             if platform.name == "Android":
                 platformSolutionProjects.testProj.addDependency(ProjectInfo.ProjectInfo.allProjects['AndroidGlobals'].solutionProjects['Android'].mainProj)
-                platformSolutionProjects.testAppProj = generateAndroidTestApp(platform, projectInfo)
+                platformSolutionProjects.testAppProj = AndroidApps.AndroidTestApp(projectInfo).generate()
             elif platform.name == "Windows":
-                winTestAppDir = os.path.join(projectInfo.projDir(), 'Windows.Test')
-                copiedFiles = copyTestDataContent(platform, projectInfo, winTestAppDir)
-                generateGitignore(winTestAppDir, copiedFiles)
+                copiedFiles = copyDirContent(
+                    projectInfo.testDataDir(),
+                    projectInfo.testProjDir(platform),
+                    projectInfo.dir()
+                    )
+                generateGitignore(projectInfo.testProjDir(platform), copiedFiles)
         projectInfo.solutionProjects[platform.name] = platformSolutionProjects
     if projectInfo.outputType != 'Application':
         generateProps(projectInfo)

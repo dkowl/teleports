@@ -6,7 +6,7 @@ import ProjectInfo
 
 def generateCatchMain(projectInfo):
     srcDir = os.path.join(constants.pythonSourceDir, "items")
-    dstDir = projectInfo.projDir()
+    dstDir = projectInfo.dir()
 
     filenames = [
         ("catch.main.cpp", os.path.join('test', "catch.main.cpp")),

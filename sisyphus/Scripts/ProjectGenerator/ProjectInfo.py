@@ -65,17 +65,32 @@ class ProjectInfo:
 
         type(self).allProjects[projName] = self
 
-    def projDir(self):
+    def dir(self):
         return os.path.dirname(self.path)
 
+    def projDir(self, platform):
+        return os.path.join(self.dir(), platform.name)
+
+    def testProjDir(self, platform):
+        return os.path.join(self.dir(), f'{platform.name}.Test')
+
+    def testDataDir(self):
+        return os.path.join(self.dir(), 'test_data')
+
+    def assetDir(self):
+        return os.path.join(self.dir(), 'assets')
+
     def includeDir(self):
-        return os.path.join(self.projDir(), 'include')
+        return os.path.join(self.dir(), 'include')
 
     def sourceDir(self):
-        return os.path.join(self.projDir(), 'src')
+        return os.path.join(self.dir(), 'src')
 
     def testSourceDir(self):
-        return os.path.join(self.projDir(), 'test')
+        return os.path.join(self.dir(), 'test')
+
+    def gameAppName(self):
+        return self.name + 'AndroidApp'
 
     def testAppName(self):
         return self.name + "AndroidTestApp"

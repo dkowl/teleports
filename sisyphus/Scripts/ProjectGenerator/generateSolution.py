@@ -128,7 +128,7 @@ projectsToInsert = []
 
 for projectInfo in projectInfos.values():
     solutionFolderHierarchy = []
-    projRelPath = os.path.relpath(projectInfo.projDir(), constants.solutionDir)
+    projRelPath = os.path.relpath(projectInfo.dir(), constants.solutionDir)
     while projRelPath:
         splitPath = os.path.split(projRelPath)
         solutionFolderHierarchy.append(splitPath[1])

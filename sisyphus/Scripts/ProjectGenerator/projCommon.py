@@ -32,22 +32,22 @@ def projectConfigurations(platform):
 
     return root
 
-def copyTestDataContent(platform, projectInfo, appDir):
-    testDataDir = os.path.join(projectInfo.projDir(), 'test_data')
+# returns a list of copied file paths relative to rootDir
+def copyDirContent(srcDir, dstDir, rootDir, dstRootDir = None):
+    if not os.path.exists(srcDir):
+        return []
 
-    if not os.path.exists(testDataDir):
-        return ''
+    if not dstRootDir:
+        dstRootDir = dstDir
 
     copiedPaths = []
-    for dirpath, dirnames, filenames in os.walk(testDataDir):
+    for dirpath, dirnames, filenames in os.walk(srcDir):
         for filename in filenames:
             srcPath = os.path.join(dirpath, filename)
-            itemPath = os.path.relpath(srcPath, projectInfo.projDir())
-            if platform.name == 'Android':
-                itemPath = os.path.join('assets', itemPath)
-            dstPath = os.path.join(appDir, itemPath)
+            itemPath = os.path.relpath(srcPath, rootDir)
+            dstPath = os.path.join(dstDir, itemPath)
             sis.copyFile(srcPath, dstPath, True)
-            copiedPaths.append(itemPath)
+            copiedPaths.append(os.path.relpath(dstPath, dstRootDir))
 
     return copiedPaths
 
@@ -60,3 +60,10 @@ def generateGitignore(dir, ignoredPaths):
     # .gitignore only understands '/', not '\'
     gitignoreContent = gitignoreContent.replace('\\', '/')
     sis.updateFile(os.path.join(dir, '.gitignore'), gitignoreContent)
+
+def getFilepathsRecursive(dir, rootDir = dir):
+    paths = []
+    for dirpath, dirnames, filenames in os.walk(dir):
+        for filename in filenames:
+            paths.append(os.path.relpath(os.path.join(dirpath, filename), rootDir))
+    return paths
