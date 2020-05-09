@@ -1,0 +1,9 @@
+{
+	"outputType" : "Application",
+	"dependencies" : [
+		"AssetManagement"
+	],
+	"platforms" : [ 
+		"Windows" 
+	]
+}
