@@ -1,7 +1,7 @@
 #include "AssetReaderUnpacked.Windows.h"
 #include "AssetUnpacked.h"
 #include "Filesystem/Filesystem.h"
-#include "Utils/Logger.h"
+#include "Logger/Logger.h"
 
 namespace Sisyphus::AssetManagement {
 	namespace {
