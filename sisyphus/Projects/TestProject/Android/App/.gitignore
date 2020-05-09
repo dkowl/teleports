@@ -1,5 +1,4 @@
 AndroidManifest.xml
-src/com/TestProjectAndroidApp/TestProjectAndroidApp.java
 build.xml
 project.properties
 res/values/strings.xml

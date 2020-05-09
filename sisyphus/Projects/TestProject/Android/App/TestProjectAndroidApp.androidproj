@@ -47,7 +47,6 @@
     <AntBuildXml Include="build.xml" />
     <AndroidManifest Include="AndroidManifest.xml" />
     <AntProjectPropertiesFile Include="project.properties" />
-    <JavaCompile Include="src\com\TestProjectAndroidApp\TestProjectAndroidApp.java" />
     <ProjectReference Include="$(SolutionDir)Projects\TestProject\Android\TestProject.Android.vcxproj" />
   </ItemGroup>
   <Import Project="$(AndroidTargetsPath)\Android.targets" />

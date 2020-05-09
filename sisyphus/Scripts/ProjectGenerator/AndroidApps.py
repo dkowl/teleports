@@ -17,7 +17,7 @@ class AndroidApp:
         return self.projectInfo.gameAppName()
 
     def javaMainName(self):
-        return 'AndroidApp.java'
+        return None
 
     def libProjDirName(self):
         return 'Android'
@@ -32,13 +32,18 @@ class AndroidApp:
         return os.path.join(constants.pythonSourceDir, 'items', 'AndroidApp')
 
     def filesToCopy(self):
-        return [
+        result = [
             ("AndroidManifest.xml", "AndroidManifest.xml"),
-            (self.javaMainName(), os.path.join("src", "com", self.appName(), self.projectInfo.name + self.javaMainName())),
             ("build.xml", "build.xml"),
             ("project.properties", "project.properties"),
             ("strings.xml", os.path.join("res", "values", "strings.xml"))
             ]  
+
+        if self.javaMainName():
+            result.append(
+                (self.javaMainName(), os.path.join("src", "com", self.appName(), self.projectInfo.name + self.javaMainName()))
+                )
+        return result
 
     def replaceDict(self):
         return {
@@ -127,8 +132,9 @@ class AndroidApp:
         manifestElem.set("Include", "AndroidManifest.xml")
         propertiesElem = ET.SubElement(itemGroup, "AntProjectPropertiesFile")
         propertiesElem.set("Include", "project.properties")
-        javaCompileElem = ET.SubElement(itemGroup, "JavaCompile")
-        javaCompileElem.set("Include", "src\com\{0}\{0}.java".format(self.appName()))
+        if self.javaMainName():
+            javaCompileElem = ET.SubElement(itemGroup, "JavaCompile")
+            javaCompileElem.set("Include", "src\com\{0}\{0}.java".format(self.appName()))
 
         projReferenceElem = ET.SubElement(itemGroup, "ProjectReference")
         libProjFile = os.path.relpath(os.path.join(self.libDir(), f'{self.projectInfo.name}.{self.libProjDirName()}.vcxproj'), constants.solutionDir)

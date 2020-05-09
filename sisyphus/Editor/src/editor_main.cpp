@@ -1,12 +1,19 @@
-#include "AssetManagement/AssetManager.h"
+#include "AssetManagement/AssetReader.h"
 #include "Utils/FilesystemUtils.h"
+#include <iostream>
 
 int main() {
 	using namespace Sisyphus;
 
-	Path projectPath = R"(C:\Teleports\teleports\sisyphus\Renderer\project)";
+	Path projectPath = R"(C:\Repos\teleports\sisyphus\Projects\TestProject\Windows\project)";
 	Path assetDir = projectPath / "Assets";
 
-	AssetManagement::AssetManager assetManager(assetDir.string());
+	auto assetReader = AssetManagement::AssetReader::Create(AssetManagement::AssetReader::ReaderType::Unpacked);
+	try {
+		assetReader->ReadAssets(assetDir.string());
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
 	return 0;
 }
