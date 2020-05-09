@@ -14,7 +14,7 @@
     </Link>
 	<Link Condition="'$(TargetSystem)' == 'Android'">
 	  <AdditionalLibraryDirectories>$(SolutionDir)\dependencies\glslang\lib\Android\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-	  <LibraryDependencies>glslang;glslang-default-resource-limits;HLSL;OGLCompiler;OSDependent;SPIRV;SPIRV-Tools;SPIRV-Tools-opt;SPIRV-Tools-link;SPIRV-Tools-reduce;SPVRemapper;SPIRV-Tools-shared;%(LibraryDependencies)</LibraryDependencies>
+	  <LibraryDependencies>glslang;glslang-default-resource-limits;HLSL;OGLCompiler;OSDependent;SPIRV;SPIRV-Tools;SPIRV-Tools-opt;SPIRV-Tools-link;SPIRV-Tools-reduce;SPVRemapper;%(LibraryDependencies)</LibraryDependencies>
 	</Link>
   </ItemDefinitionGroup>
   <ItemGroup />
