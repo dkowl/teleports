@@ -20,7 +20,7 @@ using namespace Sisyphus::Logging;
 #endif
 
 TEST_CASE("Filesystem") {
-	Fs::Path workingDir = std::string("./");
+	Fs::Path workingDir = Fs::CurrentPath();
 
 #ifdef SIS_ANDROID
 	workingDir = StringFromJava(AndroidGlobals::Env(), AndroidGlobals::FilesDir());

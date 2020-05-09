@@ -5,6 +5,7 @@
 #include <vector>
 #include <sys/stat.h>
 #include <dirent.h>
+#include <unistd.h>
 
 namespace Sisyphus::Fs {
 
@@ -26,6 +27,13 @@ namespace Sisyphus::Fs {
 			if (result != 0) SIS_THROW(ErrorString(errno));
 			return statBuf;
 		}
+	}
+
+	Path CurrentPath() {
+		char* buf = getcwd(nullptr, 0);
+		std::string result(buf);
+		free(buf);
+		return result;
 	}
 
 	bool Exists(const Path& p) {

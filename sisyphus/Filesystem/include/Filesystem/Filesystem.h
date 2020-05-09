@@ -9,6 +9,8 @@ namespace Sisyphus::Fs {
 	void Init_Android(void* env, void* javaAssetManager);
 #endif
 
+	Path CurrentPath();
+
 	bool Exists(const Path& p);
 	bool IsRegularFile(const Path& p);
 	bool IsDirectory(const Path& p);

@@ -1,11 +1,11 @@
-#include "..\include\Filesystem\Filesystem.h"
-#include "..\include\Filesystem\Filesystem.h"
-#include "..\include\Filesystem\Filesystem.h"
-#include "..\include\Filesystem\Filesystem.h"
 #include "Filesystem.h"
 #include <filesystem>
 
 namespace Sisyphus::Fs {
+	Path CurrentPath()
+	{
+		return std::filesystem::current_path().string();
+	}
 	bool Exists(const Path& p) {
 		return std::filesystem::exists(p.String());
 	}
