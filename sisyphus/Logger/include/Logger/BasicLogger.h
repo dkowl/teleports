@@ -8,21 +8,21 @@ namespace Sisyphus::Logging {
 	public:
 		BasicLogger();
 
-		void Log(const std::string& message, int logLevel = 0) override;
-		void LogInline(const std::string& message, int logLevel = 0) override;
+		void Log(const std::string& message, LogLevel logLevel = LogLevel::Info) override;
+		void LogInline(const std::string& message, LogLevel logLevel = LogLevel::Info) override;
 
 		void BeginSection(const Section& section) override;
 		void BeginSection(const std::string& name) override;
 		void EndSection() override;
 
-		void SetLogLevel(int logLevel) override;
+		void SetLogLevel(LogLevel logLevel) override;
 
 	protected:
 		virtual void Output(const std::string& s) = 0;
 
-		int currentLogLevel;
+		LogLevel currentLogLevel;
 	private:
-		void LogInternal(const std::string& message, int logLevel, bool isInline);
+		void LogInternal(const std::string& message, LogLevel logLevel, bool isInline);
 
 		std::vector<Section> sections;
 	};

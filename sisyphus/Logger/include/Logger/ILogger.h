@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Logger/LogLevel.h"
 #include "Logger/Section.h"
 #include "Utils/StringUtils.h"
 
@@ -13,13 +14,13 @@ namespace Sisyphus::Logging {
 			Log(Sisyphus::AssembleString(std::forward<Args>(args)...));
 		}
 
-		virtual void Log(const std::string& message, int logLevel = 0) = 0;
-		virtual void LogInline(const std::string& message, int logLevel = 0) = 0;
+		virtual void Log(const std::string& message, LogLevel logLevel = LogLevel::Info) = 0;
+		virtual void LogInline(const std::string& message, LogLevel logLevel = LogLevel::Info) = 0;
 
 		virtual void BeginSection(const Section& section) = 0;
 		virtual void BeginSection(const std::string& name) = 0;
 		virtual void EndSection() = 0;
 
-		virtual void SetLogLevel(int logLevel) = 0;
+		virtual void SetLogLevel(LogLevel logLevel) = 0;
 	};
 }

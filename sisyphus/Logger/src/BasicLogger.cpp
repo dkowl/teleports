@@ -3,17 +3,17 @@
 
 namespace Sisyphus::Logging {
 	BasicLogger::BasicLogger() :
-		currentLogLevel(0)
+		currentLogLevel(LogLevel::Info)
 	{
 
 	}
 
-	void BasicLogger::Log(const std::string& message, int logLevel)
+	void BasicLogger::Log(const std::string& message, LogLevel logLevel)
 	{
 		LogInternal(message, logLevel, false);
 	}
 
-	void BasicLogger::LogInline(const std::string& message, int logLevel)
+	void BasicLogger::LogInline(const std::string& message, LogLevel logLevel)
 	{
 		LogInternal(message, logLevel, true);
 	}
@@ -39,12 +39,12 @@ namespace Sisyphus::Logging {
 		if (!section.Footer().empty()) Log(section.Footer());
 	}
 
-	void BasicLogger::SetLogLevel(int logLevel)
+	void BasicLogger::SetLogLevel(LogLevel logLevel)
 	{
 		currentLogLevel = logLevel;
 	}
 
-	void BasicLogger::LogInternal(const std::string& message, int logLevel, bool isInline)
+	void BasicLogger::LogInternal(const std::string& message, LogLevel logLevel, bool isInline)
 	{
 		if (logLevel > currentLogLevel) return;
 
