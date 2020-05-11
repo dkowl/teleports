@@ -9,6 +9,8 @@ namespace Sisyphus::Fs {
 		Path(const char* cStr);
 		Path(const std::string& str);
 
+		bool operator==(const Path& other);
+
 		Path& operator/=(const Path& p);
 		template<typename T>
 		Path& operator/=(const T& p) {

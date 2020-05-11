@@ -17,6 +17,13 @@ namespace Sisyphus::Fs {
 	{
 	}
 
+	bool Path::operator==(const Path& other)
+	{
+		// TODO: compare normalized paths so that 'dir/file' == 'dir\file'
+		// TODO: test
+		return pathString == other.pathString;
+	}
+
 	Path& Path::operator/=(const Path& p)
 	{
 		size_t length = cwk_path_join(CStr(), p.CStr(), nullptr, 0) + 1;
