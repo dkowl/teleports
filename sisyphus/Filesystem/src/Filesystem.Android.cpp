@@ -36,6 +36,10 @@ namespace Sisyphus::Fs {
 		return result;
 	}
 
+	void CreateDirectories(const Path& p) {
+		SIS_THROW("TODO");
+	}
+
 	bool Exists(const Path& p) {
 		struct stat statBuf;
 		int result = stat(p.CStr(), &statBuf);

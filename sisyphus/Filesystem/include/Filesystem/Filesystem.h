@@ -1,15 +1,11 @@
 #pragma once
 #include "Path.h"
-#include "Utils/PlatformMacros.h"
 #include <memory>
 
 namespace Sisyphus::Fs {
 
-#ifdef SIS_ANDROID
-	void Init_Android(void* env, void* javaAssetManager);
-#endif
-
 	Path CurrentPath();
+	void CreateDirectories(const Path& p);
 
 	bool Exists(const Path& p);
 	bool IsRegularFile(const Path& p);

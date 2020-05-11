@@ -6,6 +6,10 @@ namespace Sisyphus::Fs {
 	{
 		return std::filesystem::current_path().string();
 	}
+	void CreateDirectories(const Path& p)
+	{
+		std::filesystem::create_directories(p.String());
+	}
 	bool Exists(const Path& p) {
 		return std::filesystem::exists(p.String());
 	}
