@@ -6,7 +6,7 @@ namespace Sisyphus::Logging {
 	public:
 		OstreamLogger(std::ostream& inOstream);
 	protected:
-		void Output(const std::string& s) override;
+		void Output(const std::string& s, LogLevel logLevel) override;
 	private:
 		std::ostream& ostream;
 	};

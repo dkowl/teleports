@@ -7,7 +7,7 @@ namespace Sisyphus::Logging {
 		ostream(inOstream)
 	{}
 
-	void OstreamLogger::Output(const std::string& s) {
-		ostream << s;
+	void OstreamLogger::Output(const std::string& s, LogLevel) {
+		ostream << s << "\n";
 	}
 }

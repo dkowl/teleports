@@ -15,7 +15,7 @@ namespace Sisyphus::Logging {
 		}
 
 		virtual void Log(const std::string& message, LogLevel logLevel = LogLevel::Info) = 0;
-		virtual void LogInline(const std::string& message, LogLevel logLevel = LogLevel::Info) = 0;
+		virtual void LogInline(const std::string& message) = 0;
 
 		virtual void BeginSection(const Section& section) = 0;
 		virtual void BeginSection(const std::string& name) = 0;
