@@ -2,7 +2,6 @@
 #include <unordered_map>
 #include <set>
 #include <fstream>
-#include <Filesystem>
 #include "Utils/Json.h"
 #include "Utils/Throw.h"
 #include "Logger/Logger.h"
@@ -66,7 +65,7 @@ namespace Sisyphus::AssetManagement {
 
 			if (!Fs::Exists(destDir)) {
 				Logger().Log("Directory " + destDir.String() + " does not exist, creating...");
-				std::filesystem::create_directories(destDir.String());
+				Fs::CreateDirectories(destDir);
 			}
 
 			std::ofstream bundleFile(bundlePath.String(), std::ios::out | std::ios::binary);
