@@ -1,0 +1,10 @@
+{
+	"outputType" : "Application",
+	"dependencies" : [
+		"AssetManagement",
+		"CLI11"
+	],
+	"platforms" : [ 
+		"Windows" 
+	]
+}
