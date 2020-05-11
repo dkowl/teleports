@@ -24,6 +24,9 @@
     <ClInclude Include="$(SolutionDir)Logger\include\Logger\Logger.h">
       <Filter>Public Headers</Filter>
     </ClInclude>
+    <ClInclude Include="$(SolutionDir)Logger\include\Logger\LogLevel.h">
+      <Filter>Public Headers</Filter>
+    </ClInclude>
     <ClInclude Include="$(SolutionDir)Logger\include\Logger\OstreamLogger.h">
       <Filter>Public Headers</Filter>
     </ClInclude>

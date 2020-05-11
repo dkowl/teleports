@@ -3,7 +3,7 @@
 #include "VulkanUtils.h"
 #include "DebugMessenger.h"
 #include "platform_specific/PlatformSpecific.h"
-#include "Utils/Logger.h"
+#include "Logger/Logger.h"
 #include "Utils/DebugMacros.h"
 
 namespace Sisyphus::Rendering::Vulkan {

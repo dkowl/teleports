@@ -2,7 +2,7 @@
 #include "MemoryUtils.h"
 #include "Utils\DebugAssert.h"
 #include "Utils\Throw.h"
-#include "Utils\Logger.h"
+#include "Logger/Logger.h"
 
 namespace Sisyphus::Rendering::Vulkan {
 	void InspectMemoryProperties(vk::PhysicalDeviceMemoryProperties properties) {

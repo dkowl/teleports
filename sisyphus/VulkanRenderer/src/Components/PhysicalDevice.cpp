@@ -3,7 +3,7 @@
 #include "Instance.h"
 #include "Surface.h"
 #include "ECS/Entity.h"
-#include "Utils/Logger.h"
+#include "Logger/Logger.h"
 #include "Utils/DebugMacros.h"
 
 namespace Sisyphus::Rendering::Vulkan {

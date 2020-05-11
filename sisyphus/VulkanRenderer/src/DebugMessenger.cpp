@@ -1,7 +1,7 @@
 #include "Pch_VulkanRenderer.h"
 #include "DebugMessenger.h"
 #include "VulkanUtils.h"
-#include "Utils/Logger.h"
+#include "Logger/Logger.h"
 
 using namespace std::string_literals;
 

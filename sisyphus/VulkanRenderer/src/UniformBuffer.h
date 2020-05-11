@@ -1,7 +1,7 @@
 #pragma once
 #include "Vulkan.h"
 #include "Utils/DebugAssert.h"
-#include "Utils/ILogger.h"
+#include "Logger/ILogger.h"
 #include "DeviceData.h"
 
 namespace Sisyphus::Rendering::Vulkan {
@@ -13,7 +13,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			vk::Device device;
 			vk::PhysicalDevice physicalDevice;
 			vk::DescriptorSet descriptorSet;
-			ILogger* logger;
+			Logging::ILogger* logger;
 		};
 
 		UniformBuffer(CreateInfo ci);

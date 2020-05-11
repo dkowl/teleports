@@ -73,10 +73,7 @@
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\FilesystemUtils.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\FunctionFileLine.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\Graph.h" />
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\ILogger.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\Json.h" />
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\Logger.h" />
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\OstreamLogger.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\PlatformMacros.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\PosixUtils.Android.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\StringUtils.h" />
@@ -88,8 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Utils\src\DebugAssert.cpp" />
-    <ClCompile Include="$(SolutionDir)Utils\src\Logger.cpp" />
-    <ClCompile Include="$(SolutionDir)Utils\src\OstreamLogger.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\Pch_Utils.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\PosixUtils.Android.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\StringUtils.cpp" />

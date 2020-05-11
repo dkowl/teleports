@@ -2,7 +2,7 @@
 #include "Utils/UuidGenerator.h"
 #include "Filesystem/Path.h"
 #include "Utils/Json.h"
-#include "Utils/Logger.h"
+#include "Logger/Logger.h"
 #include <fstream>
 
 namespace Sisyphus::AssetManagement {

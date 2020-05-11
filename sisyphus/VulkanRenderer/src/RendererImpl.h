@@ -6,7 +6,7 @@
 #include "VertexBuffer.h"
 #include "Shader.h"
 #include "ECS\Entity.h"
-#include "Utils\ILogger.h"
+#include "Logger/ILogger.h"
 #include <memory>
 #include <optional>
 #include <unordered_map>
@@ -58,6 +58,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		uuids::uuid vertexShaderId;
 		uuids::uuid fragmentShaderId;
 
-		ILogger* logger;
+		Logging::ILogger* logger;
 	};
 }

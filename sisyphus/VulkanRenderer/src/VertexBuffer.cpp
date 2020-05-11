@@ -1,6 +1,6 @@
 #include "Pch_VulkanRenderer.h"
 #include "VertexBuffer.h"
-#include "Utils\Logger.h"
+#include "Logger/Logger.h"
 #include "MemoryUtils.h"
 
 namespace Sisyphus::Rendering::Vulkan {

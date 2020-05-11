@@ -3,7 +3,7 @@
 #include <string>
 #include <optional>
 #include "Utils\Throw.h"
-#include "Utils\ILogger.h"
+#include "Logger/ILogger.h"
 #include "Renderer\IRenderer.h"
 #include "WindowCreator/WindowExtent.h"
 

@@ -2,7 +2,7 @@
 #include "RendererImpl.h"
 #include "Utils\DebugAssert.h"
 #include "Utils\UuidGenerator.h"
-#include "Utils\Logger.h"
+#include "Logger/Logger.h"
 #include "Utils\Throw.h"
 #include "VulkanUtils.h"
 #include "Instance.h"

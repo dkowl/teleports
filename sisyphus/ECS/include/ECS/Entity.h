@@ -2,7 +2,7 @@
 #include "ECS\Component.h"
 #include "ECS\DependencyGraph.h"
 #include "Utils/Throw.h"
-#include "Utils/Logger.h"
+#include "Logger/Logger.h"
 #include "Utils/StringUtils.h"
 #include "uuid.h"
 #include <vector>

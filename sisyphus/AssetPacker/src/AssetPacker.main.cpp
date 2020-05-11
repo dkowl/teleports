@@ -1,7 +1,7 @@
 #include "AssetManagement/AssetPacker.h"
 #include "AssetManagement/AssetReader.h"
 #include "Filesystem/Filesystem.h"
-#include "Utils/Logger.h"
+#include "Logger/Logger.h"
 
 using namespace Sisyphus;
 using namespace Sisyphus::AssetManagement;

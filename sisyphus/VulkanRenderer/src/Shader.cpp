@@ -2,7 +2,7 @@
 #include "Shader.h"
 #include "SPIRV/GlslangToSpv.h"
 #include "glslang/StandAlone/ResourceLimits.h"
-#include "Utils/Logger.h"
+#include "Logger/Logger.h"
 #include "Utils/Throw.h"
 
 namespace Sisyphus::Rendering::Vulkan {

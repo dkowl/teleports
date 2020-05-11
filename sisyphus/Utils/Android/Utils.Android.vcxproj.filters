@@ -27,16 +27,7 @@
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\Graph.h">
       <Filter>Public Headers</Filter>
     </ClInclude>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\ILogger.h">
-      <Filter>Public Headers</Filter>
-    </ClInclude>
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\Json.h">
-      <Filter>Public Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\Logger.h">
-      <Filter>Public Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SolutionDir)Utils\include\Utils\OstreamLogger.h">
       <Filter>Public Headers</Filter>
     </ClInclude>
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\PlatformMacros.h">
@@ -66,12 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Utils\src\DebugAssert.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SolutionDir)Utils\src\Logger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SolutionDir)Utils\src\OstreamLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(SolutionDir)Utils\src\Pch_Utils.cpp">

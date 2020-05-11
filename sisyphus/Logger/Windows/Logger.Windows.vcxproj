@@ -50,9 +50,9 @@
     <ClInclude Include="$(SolutionDir)Logger\include\Logger\BasicLogger.h" />
     <ClInclude Include="$(SolutionDir)Logger\include\Logger\ILogger.h" />
     <ClInclude Include="$(SolutionDir)Logger\include\Logger\Logger.h" />
+    <ClInclude Include="$(SolutionDir)Logger\include\Logger\LogLevel.h" />
     <ClInclude Include="$(SolutionDir)Logger\include\Logger\OstreamLogger.h" />
     <ClInclude Include="$(SolutionDir)Logger\include\Logger\Section.h" />
-    <ClInclude Include="..\include\Logger\LogLevel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Logger\src\BasicLogger.cpp" />

@@ -1,6 +1,6 @@
 #include "AssetUnpacked.h"
 #include "Filesystem/Filesystem.h"
-#include "Utils/Logger.h"
+#include "Logger/Logger.h"
 #include "Utils/Throw.h"
 #include "ResourceLoader.h"
 
