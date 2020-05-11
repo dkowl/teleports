@@ -23,7 +23,7 @@
     <ClCompile Include="$(SolutionDir)Editor\src\EditorState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="$(SolutionDir)Editor\src\editor_main.cpp">
+    <ClCompile Include="$(SolutionDir)Editor\src\main.Editor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(SolutionDir)Editor\src\Project.cpp">
