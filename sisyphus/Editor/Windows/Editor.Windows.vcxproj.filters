@@ -5,9 +5,28 @@
       <UniqueIdentifier>{E88331E5-DDF5-442A-925B-D3541E5AAE72}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <ClInclude Include="$(SolutionDir)Editor\src\Editor.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)Editor\src\EditorState.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)Editor\src\Project.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)Editor\src\Editor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)Editor\src\EditorState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)Editor\src\editor_main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)Editor\src\Project.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

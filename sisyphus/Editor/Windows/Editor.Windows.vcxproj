@@ -37,16 +37,27 @@
     <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" />
     <Import Condition="'$(GeneralImported)' == ''" Project="$(SolutionDir)props\General.props" />
     <Import Condition="'$(AssetManagementImported)' == ''" Project="$(SolutionDir)props\AssetManagement.props" />
+    <Import Condition="'$(FilesystemImported)' == ''" Project="$(SolutionDir)props\Filesystem.props" />
+    <Import Condition="'$(LoggerImported)' == ''" Project="$(SolutionDir)props\Logger.props" />
+    <Import Condition="'$(UtilsImported)' == ''" Project="$(SolutionDir)props\Utils.props" />
     <Import Condition="'$(CLI11Imported)' == ''" Project="$(SolutionDir)props\CLI11.props" />
+    <Import Condition="'$(jsonImported)' == ''" Project="$(SolutionDir)props\json.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)Editor\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemGroup />
   <ItemGroup>
+    <ClInclude Include="$(SolutionDir)Editor\src\Editor.h" />
+    <ClInclude Include="$(SolutionDir)Editor\src\EditorState.h" />
+    <ClInclude Include="$(SolutionDir)Editor\src\Project.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)Editor\src\Editor.cpp" />
+    <ClCompile Include="$(SolutionDir)Editor\src\EditorState.cpp" />
     <ClCompile Include="$(SolutionDir)Editor\src\editor_main.cpp" />
+    <ClCompile Include="$(SolutionDir)Editor\src\Project.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

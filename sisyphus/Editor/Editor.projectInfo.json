@@ -2,7 +2,11 @@
 	"outputType" : "Application",
 	"dependencies" : [
 		"AssetManagement",
-		"CLI11"
+		"Filesystem",
+		"Logger",
+		"Utils",
+		"CLI11",
+		"json"
 	],
 	"platforms" : [ 
 		"Windows" 
