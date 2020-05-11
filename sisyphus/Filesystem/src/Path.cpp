@@ -65,6 +65,14 @@ namespace Sisyphus::Fs {
 		return extension ? Path(std::string(extension, extensionLength)) : "";
 	}
 
+	std::string Path::LastSegment() const
+	{
+		cwk_segment segment;
+		bool hasSegments = cwk_path_get_last_segment(pathString.c_str(), &segment);
+		if (!hasSegments) return "";
+		else return std::string(segment.begin, segment.size);
+	}
+
 	bool Path::Empty() const
 	{
 		return pathString.empty();

@@ -24,6 +24,7 @@ namespace Sisyphus::Fs {
 		Path Filename() const;
 		Path Dirname() const;
 		Path Extension() const;
+		std::string LastSegment() const;
 		bool Empty() const;
 
 		const char* CStr() const;

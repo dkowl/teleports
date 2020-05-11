@@ -11,16 +11,22 @@ TEST_CASE("Path") {
 	REQUIRE(path.Filename().String() == "file.cpp");
 	REQUIRE(path.Dirname().String() == "Dir/Dir2/");
 	REQUIRE(path.Extension().String() == ".cpp");
+	REQUIRE(path.LastSegment() == "file.cpp");
 
 	path = "file.h"; // testing operator=
 	REQUIRE(path.Extension().String() != ".cpp");
 	REQUIRE(path.Extension().String() == ".h");
 
+	Path dir("Dir/Dir2/");
+	REQUIRE(dir.LastSegment() == "Dir2");
+
 	Path emptyPath("");
 	REQUIRE(emptyPath.Filename().String().empty());
+	REQUIRE(emptyPath.LastSegment() == "");
 
 	Path defaultPath;
-	REQUIRE(defaultPath.Filename().String().empty());	
+	REQUIRE(defaultPath.Filename().String().empty());
+	REQUIRE(defaultPath.LastSegment() == "");
 }
 
 TEST_CASE("Path - operators") {
