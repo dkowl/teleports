@@ -14,11 +14,19 @@ namespace Sisyphus::Logging {
 			Log(Sisyphus::AssembleString(std::forward<Args>(args)...));
 		}
 
-		virtual void Log(const std::string& message, LogLevel logLevel = LogLevel::Info, const std::string& tag = "") = 0;
+		virtual void Log(
+			const std::string& message, 
+			LogLevel logLevel = LogLevel::Default,
+			const std::string& tag = ""
+		) = 0;
 		virtual void LogInline(const std::string& message) = 0;
 
 		virtual void BeginSection(const Section& section) = 0;
-		virtual void BeginSection(const std::string& name) = 0;
+		virtual void BeginSection(
+			const std::string& name, 
+			LogLevel logLevel = LogLevel::Default,
+			const std::string& tag = ""
+		) = 0;
 		virtual void EndSection() = 0;
 
 		virtual void SetLogLevel(LogLevel logLevel) = 0;

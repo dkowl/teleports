@@ -6,6 +6,7 @@ namespace Sisyphus {
 		Fatal = 100,
 		Error = 200,
 		Warn = 300,
+		Default = 350,
 		Info = 400,
 		Debug = 500,
 		Trace = 600,

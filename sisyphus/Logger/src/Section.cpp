@@ -1,12 +1,14 @@
 #include "Section.h"
 
 namespace Sisyphus::Logging {
-	Section::Section(const std::string& name):
-		name(name),
+	Section::Section(const std::string& inName, LogLevel inLogLevel, const std::string& inTag):
+		name(inName),
 		indenter("\t"),
 		leftHeaderDecorator("====="),
 		rightHeaderDecorator("====="),
-		footer("")
+		footer(""),
+		logLevel(inLogLevel),
+		tag(inTag)
 	{}
 
 	std::string Section::Header() const {

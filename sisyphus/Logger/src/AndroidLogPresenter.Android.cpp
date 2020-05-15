@@ -10,6 +10,7 @@ namespace Sisyphus::Logging {
 				{LogLevel::All, ANDROID_LOG_UNKNOWN},
 				{LogLevel::Trace, ANDROID_LOG_VERBOSE},
 				{LogLevel::Debug, ANDROID_LOG_DEBUG},
+				{LogLevel::Default, ANDROID_LOG_DEFAULT},
 				{LogLevel::Info, ANDROID_LOG_INFO},
 				{LogLevel::Warn, ANDROID_LOG_WARN},
 				{LogLevel::Error, ANDROID_LOG_ERROR},

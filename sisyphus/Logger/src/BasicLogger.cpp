@@ -18,14 +18,14 @@ namespace Sisyphus::Logging {
 
 	BasicLogger::BasicLogger(CreateInfo ci) :
 		info(ci),
-		currentLogLevel(LogLevel::Info)
+		currentLogLevel(LogLevel::Default)
 	{
 		SIS_DEBUGASSERT(info.presenter != nullptr);
 	}
 
 	void BasicLogger::Log(const std::string& message, LogLevel logLevel, const std::string& tag)
 	{
-		if (logLevel > currentLogLevel) return;
+		if (ShouldSkipLog(logLevel)) return;
 
 		std::string outString;
 		for (auto&& section : sections) {
@@ -36,7 +36,7 @@ namespace Sisyphus::Logging {
 			inlineBuffer = "";
 		}
 		outString += message;
-		info.presenter->Present(outString, logLevel, MergeTags(info.tag, tag));
+		info.presenter->Present(outString, logLevel, FinalTag(tag));
 	}
 
 	void BasicLogger::LogInline(const std::string& message)
@@ -45,13 +45,13 @@ namespace Sisyphus::Logging {
 	}
 
 	void BasicLogger::BeginSection(const Section& section) {
-		Log(section.Header());
+		Log(section.Header(), section.logLevel, section.tag);
 		sections.push_back(section);
 	}
 
-	void BasicLogger::BeginSection(const std::string& name)
+	void BasicLogger::BeginSection(const std::string& name, LogLevel logLevel, const std::string& tag)
 	{
-		Section section(name);
+		Section section(name, logLevel, tag);
 		BeginSection(section);
 	}
 
@@ -62,11 +62,25 @@ namespace Sisyphus::Logging {
 
 		Section section = sections.back();
 		sections.pop_back();
-		if (!section.Footer().empty()) Log(section.Footer());
+		if (!section.Footer().empty()) Log(section.Footer(), section.logLevel, section.tag);
 	}
 
 	void BasicLogger::SetLogLevel(LogLevel logLevel)
 	{
 		currentLogLevel = logLevel;
+	}
+	bool BasicLogger::ShouldSkipLog(LogLevel logLevel) const
+	{
+		if (logLevel == LogLevel::Default && !sections.empty()) {
+			logLevel = sections.back().logLevel;
+		}
+		return logLevel > currentLogLevel;
+	}
+	std::string BasicLogger::FinalTag(std::string tag) const
+	{
+		if (tag == "" && !sections.empty()) {
+			tag = sections.back().tag;
+		}
+		return MergeTags(info.tag, tag);
 	}
 }
