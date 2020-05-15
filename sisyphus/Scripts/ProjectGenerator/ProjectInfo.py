@@ -62,6 +62,7 @@ class ProjectInfo:
         self.solutionProjects = {} # dict<Platform name, PlatformSolutionProjects>
 
         self.indirectDependencies = []
+        self.projectDependencies = [] # all dependencies excluding 3rd party ones
 
         type(self).allProjects[projName] = self
 
@@ -133,10 +134,18 @@ class ProjectInfo:
                 result.update(projectDict[dep].computeDependencies(projectDict))
         return result
 
-    def updateIndirectDependencies(self, projectDict):
+    def updateDependencyLists(self, projectDict):
         self.indirectDependencies = []
+        self.projectDependencies = []
         allDependencies = self.computeDependencies(projectDict)
         for dep in allDependencies:
             if dep not in self.dependencies:
                 self.indirectDependencies.append(dep)
+            if dep in projectDict:
+                self.projectDependencies.append(dep)
+        self.indirectDependencies.sort()
+        self.projectDependencies.sort()
+
+    def allDependencies(self):
+        return [*self.dependencies, *self.indirectDependencies]
 

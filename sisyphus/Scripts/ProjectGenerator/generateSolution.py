@@ -123,7 +123,7 @@ solution = Solution(solutionPath)
 findProjects()
 projectInfos = ProjectInfo.allProjects
 for projectInfo in projectInfos.values():
-    projectInfo.updateIndirectDependencies(projectInfos)
+    projectInfo.updateDependencyLists(projectInfos)
 projectsToInsert = []    
 
 for projectInfo in projectInfos.values():
@@ -163,7 +163,7 @@ for projectInfo in projectInfos.values():
     projectsToInsert += solutionProjects
 
 for projectInfo in projectInfos.values():
-    for dependency in projectInfo.dependencies:
+    for dependency in projectInfo.projectDependencies:
         if dependency in projectInfos:
             projectInfo.addInterProjectDependency(projectInfos[dependency])
 
