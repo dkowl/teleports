@@ -1,4 +1,4 @@
-#include "AndroidLogger.h"
+#include "AndroidLogPresenter.h"
 #include <android/log.h>
 #include <unordered_map>
 
@@ -21,9 +21,11 @@ namespace Sisyphus::Logging {
 		}
 	}
 
-	void AndroidLogger::Output(const std::string& s, LogLevel logLevel) {
-		// WISH: map logLevels to interal Android log levels from https://developer.android.com/ndk/reference/group/logging
-
-		__android_log_write(AndroidLogLevel(logLevel), "Sisyphus", s.c_str());
+	void AndroidLogPresenter::Present(const std::string& s, LogLevel logLevel, const std::string& tag) {
+		std::string finalTag = "Sisyhpus";
+		if (!tag.empty()) {
+			finalTag += "-" + tag;
+		}
+		__android_log_write(AndroidLogLevel(logLevel), finalTag.c_str(), s.c_str());
 	}
 }

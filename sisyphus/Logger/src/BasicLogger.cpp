@@ -2,13 +2,28 @@
 #include "Utils/DebugAssert.h"
 
 namespace Sisyphus::Logging {
-	BasicLogger::BasicLogger() :
-		currentLogLevel(LogLevel::Info)
-	{
-
+	namespace {
+		std::string MergeTags(std::string tagA, std::string tagB) {
+			if (tagA.empty()) {
+				return tagB;
+			}
+			else if (tagB.empty()) {
+				return tagA;
+			}
+			else{
+				return tagA + "-" + tagB;
+			}
+		}
 	}
 
-	void BasicLogger::Log(const std::string& message, LogLevel logLevel)
+	BasicLogger::BasicLogger(CreateInfo ci) :
+		info(ci),
+		currentLogLevel(LogLevel::Info)
+	{
+		SIS_DEBUGASSERT(info.presenter != nullptr);
+	}
+
+	void BasicLogger::Log(const std::string& message, LogLevel logLevel, const std::string& tag)
 	{
 		if (logLevel > currentLogLevel) return;
 
@@ -21,7 +36,7 @@ namespace Sisyphus::Logging {
 			inlineBuffer = "";
 		}
 		outString += message;
-		Output(outString, logLevel);
+		info.presenter->Present(outString, logLevel, MergeTags(info.tag, tag));
 	}
 
 	void BasicLogger::LogInline(const std::string& message)

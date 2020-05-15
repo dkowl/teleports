@@ -46,18 +46,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="$(SolutionDir)Logger\src\Pch_Logger.h" />
-    <ClInclude Include="$(SolutionDir)Logger\include\Logger\AndroidLogger.h" />
+    <ClInclude Include="$(SolutionDir)Logger\include\Logger\AndroidLogPresenter.h" />
     <ClInclude Include="$(SolutionDir)Logger\include\Logger\BasicLogger.h" />
     <ClInclude Include="$(SolutionDir)Logger\include\Logger\ILogger.h" />
     <ClInclude Include="$(SolutionDir)Logger\include\Logger\Logger.h" />
     <ClInclude Include="$(SolutionDir)Logger\include\Logger\LogLevel.h" />
-    <ClInclude Include="$(SolutionDir)Logger\include\Logger\OstreamLogger.h" />
+    <ClInclude Include="$(SolutionDir)Logger\include\Logger\LogPresenter.h" />
+    <ClInclude Include="$(SolutionDir)Logger\include\Logger\OstreamLogPresenter.h" />
     <ClInclude Include="$(SolutionDir)Logger\include\Logger\Section.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Logger\src\BasicLogger.cpp" />
     <ClCompile Include="$(SolutionDir)Logger\src\Logger.cpp" />
-    <ClCompile Include="$(SolutionDir)Logger\src\OstreamLogger.cpp" />
+    <ClCompile Include="$(SolutionDir)Logger\src\OstreamLogPresenter.cpp" />
     <ClCompile Include="$(SolutionDir)Logger\src\Pch_Logger.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
