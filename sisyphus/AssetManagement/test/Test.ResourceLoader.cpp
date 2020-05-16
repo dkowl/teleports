@@ -24,7 +24,6 @@ TEST_CASE("Resource Loader") {
 	loader.Load(data);
 	RawDataView dataView(data);
 	REQUIRE(dataView.AsString() == "Hello World!");
-
 	
 	REQUIRE(ReadBytesToString(loader) == "Hello World!");
 	REQUIRE(ReadBytesToString(loader) == "");
@@ -40,4 +39,12 @@ TEST_CASE("Resource Loader") {
 	loader.Load(data3, 6, 5);
 	RawDataView dataView3(data3);
 	REQUIRE(dataView3.AsString() == "World");
+
+	ResourceLoader emptyLoader("test_data/ResourceLoader/empty.txt");
+	RawData emptyData;
+	auto loadResult = emptyLoader.Load(emptyData);
+	REQUIRE(!loadResult.ok);
+
+	auto makeDirLoader = []() {ResourceLoader dirLoader("test_data/ResourceLoader"); };
+	REQUIRE_THROWS(makeDirLoader());	
 }

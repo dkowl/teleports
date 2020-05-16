@@ -2,6 +2,7 @@
 #include "Filesystem/Filesystem.h"
 #include "Logger/Logger.h"
 #include "Utils/Throw.h"
+#include "Utils/DebugAssert.h"
 
 namespace Sisyphus::AssetManagement {
 	struct ResourceLoader::PrivateData {
@@ -13,6 +14,7 @@ namespace Sisyphus::AssetManagement {
 	ResourceLoader::ResourceLoader(std::string path, bool isBinary)
 	{
 		SIS_THROWASSERT(Fs::Exists(path));
+		SIS_THROWASSERT(!Fs::IsDirectory(path));
 		std::ios::openmode openmode = std::ios::in;
 		if (isBinary) openmode |= std::ios::binary;
 		privateData = std::make_unique<PrivateData>(PrivateData{ path, isBinary, std::ifstream(path, openmode) });
@@ -27,6 +29,7 @@ namespace Sisyphus::AssetManagement {
 	}
 
 	ResourceLoader::LoadResult ResourceLoader::Load(RawData& data, size_t offset, size_t length) {
+		SIS_DEBUGASSERT(data.Empty());
 		auto& file = privateData->file;
 		Rewind();
 		size_t size = 0;
@@ -45,15 +48,21 @@ namespace Sisyphus::AssetManagement {
 		if (length > 0 && size > length) {
 			size = length;
 		}
-		data.Init(size);
-		file.seekg(offset, file.beg);
-		file.read(reinterpret_cast<char*>(data.Ptr()), size);
-		Rewind();
+		if (size == 0) {
+			return LoadResult{ false, 0 };
+		}
+		else {
+			data.Init(size);
+			file.seekg(offset, file.beg);
+			file.read(reinterpret_cast<char*>(data.Ptr()), size);
+			Rewind();
 
-		return LoadResult{ true, size };	
+			return LoadResult{ true, size };
+		}
 	}
 
 	ResourceLoader::LoadResult ResourceLoader::Load(RawData& data, std::string path, bool isBinary) {
+		SIS_DEBUGASSERT(data.Empty());
 		try {
 			ResourceLoader loader(path, isBinary);
 			return loader.Load(data);
