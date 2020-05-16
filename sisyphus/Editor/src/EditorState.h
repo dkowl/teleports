@@ -7,7 +7,8 @@ namespace Sisyphus::Editor {
 
 	class EditorState {
 	public:
-		const std::vector<Fs::Path> LastOpenedProjects() const;
+		const std::vector<Fs::Path>& LastOpenedProjects() const;
+		void PopLastOpenedProject();
 
 		void SaveToFile(const Fs::Path& path) const;
 		void ReadFromFile(const Fs::Path& path);

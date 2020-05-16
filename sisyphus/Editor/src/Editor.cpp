@@ -6,8 +6,7 @@
 namespace Sisyphus::Editor {
 	namespace {
 		Fs::Path SavePath() {
-			Fs::Path p = std::filesystem::temp_directory_path().string();
-			p /= "Local";
+			Fs::Path p = std::filesystem::temp_directory_path().parent_path().string();
 			p /= "Sisyphus";
 			p /= "editorState.json";
 
@@ -20,18 +19,20 @@ namespace Sisyphus::Editor {
 
 		const auto& lastProjectPaths = state.LastOpenedProjects();
 		if (lastProjectPaths.empty()) {
-			Logger().Log("Editor: No recent projects found", LogLevel::Info);
+			Logger().Log("No recent projects found", LogLevel::Info);
 		}
 		else {
-			Logger().BeginSection("Editor: Recent projects:");
+			Logger().BeginSection("Recent projects:");
 			for (auto&& p : lastProjectPaths) {
 				Logger().Log(p.String(), LogLevel::Info);
 			}
+			Logger().EndSection();
 		}
+
+		OpenMostRecentProject();
 	}
 
 	Editor::~Editor() {
-		Logger().Log("Editor: Saving state", LogLevel::Info);
 		SaveState();
 	}
 
@@ -48,6 +49,21 @@ namespace Sisyphus::Editor {
 		CloseCurrentProject();
 		currentProject = Project(path);
 		state.OnProjectOpened(path);
+	}
+	void Editor::OpenMostRecentProject()
+	{
+		for (auto&& path : state.LastOpenedProjects()) {
+			try {
+				OpenProject(path);
+			}
+			catch (...) {
+				Logger().Log("Failed to open recent project: " + path.String(), LogLevel::Warn);
+				Logger().Log("Removing the project from the recent list", LogLevel::Warn);
+				state.PopLastOpenedProject();
+				continue;
+			}
+			break;
+		}
 	}
 	void Editor::CloseCurrentProject()
 	{

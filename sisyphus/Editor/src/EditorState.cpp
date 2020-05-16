@@ -2,6 +2,7 @@
 #include <fstream>
 #include "Logger/Logger.h"
 #include "Utils/Json.h"
+#include "Utils/DebugAssert.h"
 #include "AssetManagement/ResourceLoader.h"
 #include "AssetManagement/RawDataView.h"
 #include "Filesystem/Filesystem.h"
@@ -19,22 +20,29 @@ namespace nlohmann {
 }
 
 namespace Sisyphus::Editor {
-	const std::vector<Fs::Path> EditorState::LastOpenedProjects() const
+	const std::vector<Fs::Path>& EditorState::LastOpenedProjects() const
 	{
 		return lastOpenedProjects;
 	}
+	void EditorState::PopLastOpenedProject()
+	{
+		SIS_DEBUGASSERT(!lastOpenedProjects.empty());
+		lastOpenedProjects.pop_back();
+	}
 	void EditorState::SaveToFile(const Fs::Path& path) const {
-		Fs::CreateDirectories(path);
+		Fs::CreateDirectories(path.Dirname());
 		std::ofstream file(path.String());
 
 		json j;
 		j["lastOpenedProjects"] = lastOpenedProjects;
+		Logger().Log("Saving state: " + j.dump(), LogLevel::Debug);
 
 		file << j.dump();
-		Logger().Log("Editor state saved to file");
+		Logger().Log("State saved to " + path.String());
 }
 
 	void EditorState::ReadFromFile(const Fs::Path& path) {
+		Logger().Log("Trying to read Editor state from " + path.String(), LogLevel::Debug);
 		try {
 			RawData data;
 			auto loadResult = AssetManagement::ResourceLoader::Load(data, path.String());
@@ -56,12 +64,13 @@ namespace Sisyphus::Editor {
 	}
 	void EditorState::OnProjectOpened(const Fs::Path& path)
 	{
+		// moving the opened project to the front of the list
 		int found = 0;
 		for (int i = 0; i < lastOpenedProjects.size() - found; i++) {			
 			if (lastOpenedProjects[i] == path) {
 				found++;
 			}
-			if (found) {
+			if (found && i + found < lastOpenedProjects.size()) {
 				lastOpenedProjects[i] = lastOpenedProjects[i + found];
 			}
 		}

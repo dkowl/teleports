@@ -2,6 +2,7 @@
 #include "Utils/Throw.h"
 #include "Filesystem/Filesystem.h"
 #include "AssetManagement/AssetReader.h"
+#include "Logger/Logger.h"
 
 namespace Sisyphus::Editor {
 	namespace Am = AssetManagement;
@@ -9,6 +10,7 @@ namespace Sisyphus::Editor {
 	Project::Project(const Fs::Path& inPath) :
 		path(inPath)
 	{
+		Logger().Log("Opening project: " + inPath.String(), LogLevel::Info);
 		SIS_THROWASSERT(Fs::IsDirectory(path));
 		name = path.LastSegment();
 		auto projectInfoPath = path / (name + ".projectInfo.json");

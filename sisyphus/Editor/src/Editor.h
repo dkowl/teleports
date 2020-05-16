@@ -19,6 +19,7 @@ namespace Sisyphus::Editor {
 		void SaveState();
 
 		void OpenProject(const Fs::Path& path);
+		void OpenMostRecentProject();
 		void CloseCurrentProject();
 
 	private:

@@ -50,12 +50,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="$(SolutionDir)Editor\src\Editor.h" />
+    <ClInclude Include="$(SolutionDir)Editor\src\EditorCLI.h" />
     <ClInclude Include="$(SolutionDir)Editor\src\EditorState.h" />
     <ClInclude Include="$(SolutionDir)Editor\src\Project.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Editor\src\Editor.cpp" />
     <ClCompile Include="$(SolutionDir)Editor\src\Editor.Logger.cpp" />
+    <ClCompile Include="$(SolutionDir)Editor\src\EditorCLI.cpp" />
     <ClCompile Include="$(SolutionDir)Editor\src\EditorState.cpp" />
     <ClCompile Include="$(SolutionDir)Editor\src\main.Editor.cpp" />
     <ClCompile Include="$(SolutionDir)Editor\src\Project.cpp" />
