@@ -18,7 +18,7 @@ namespace Sisyphus::Logging {
 
 	BasicLogger::BasicLogger(CreateInfo ci) :
 		info(ci),
-		currentLogLevel(LogLevel::Default)
+		currentLogLevel(LogLevel::All)
 	{
 		SIS_DEBUGASSERT(info.presenter != nullptr);
 	}
