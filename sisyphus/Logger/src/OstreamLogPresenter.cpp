@@ -7,7 +7,10 @@ namespace Sisyphus::Logging {
 		ostream(inOstream)
 	{}
 
-	void OstreamLogPresenter::Present(const std::string& s, LogLevel, const std::string&) {
+	void OstreamLogPresenter::Present(const std::string& s, LogLevel, const std::string& tag) {
+		if (!tag.empty()) {
+			ostream << tag << ": ";
+		}
 		ostream << s << "\n";
 	}
 }
