@@ -28,7 +28,7 @@ namespace Sisyphus {
 		}
 	}
 
-	ILogger& Logger() {
+	ILogger& DefaultLogger() {
 		if (logger == nullptr) {
 			InitLogger();
 		}

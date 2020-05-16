@@ -1,0 +1,23 @@
+#include "Logger/Logger.h"
+#include "Logger/BasicLogger.h"
+
+namespace Sisyphus {
+	using namespace Logging;
+	namespace {
+		std::unique_ptr<ILogger> logger = nullptr;
+
+		void InitLogger() {
+			BasicLogger::CreateInfo createInfo;
+			createInfo.presenter = &DefaultLogPresenter();
+			createInfo.tag = "SIS_REPLACE(PROJNAME)";
+			logger = std::make_unique<BasicLogger>(createInfo);
+		}
+	}
+
+	Logging::ILogger& Logger() {
+		if (logger == nullptr) {
+			InitLogger();
+		}
+		return *logger;
+	}
+}

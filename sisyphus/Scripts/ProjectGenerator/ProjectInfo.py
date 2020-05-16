@@ -2,7 +2,9 @@ import os
 import json
 import traceback
 import Platform
-from constants import solutionDir
+import sisyphusUtils as sis
+import constants
+import projCommon
 from SolutionProject import SolutionProject
 
 # this data is passed to Solution to manage project build dependencies
@@ -148,4 +150,45 @@ class ProjectInfo:
 
     def allDependencies(self):
         return [*self.dependencies, *self.indirectDependencies]
+
+    def generateLoggerFile(self):
+        assert('Logger' in self.allDependencies())
+        filenames = [
+            ('other/Logger.cpp.template', f'src/{self.name}.Logger.cpp')
+            ]
+        replaceDict = {'PROJNAME': self.name}
+        return sis.generateFiles(type(self).allProjects['Logger'].dir(), self.dir(), filenames, replaceDict)
+
+    def generateCatchFiles(self):
+        assert(self.test)
+        srcDir = os.path.join(constants.pythonSourceDir, "items")
+        dstDir = self.dir()
+
+        filenames = [
+            ("catch.main.cpp", os.path.join('test', "catch.main.cpp")),
+            ("catch.listener.cpp", os.path.join('test', "catch.listener.cpp")),
+            ("catch.globals.h", os.path.join('test', "catch.globals.h"))
+            ]
+
+        replaceDict = {
+            "APPNAME": self.testAppName(),
+            "PROJNAME": self.name
+            }
+
+        return sis.generateFiles(srcDir, dstDir, filenames, replaceDict)
+
+    def generateNeededFiles(self):
+        gitignorePaths = []
+        if self.test:
+            gitignorePaths += self.generateCatchFiles()
+        if 'Logger' in self.allDependencies():
+            gitignorePaths += self.generateLoggerFile()
+
+        if gitignorePaths:
+            projCommon.generateGitignore(self.dir(), gitignorePaths)
+
+        
+             
+
+    
 

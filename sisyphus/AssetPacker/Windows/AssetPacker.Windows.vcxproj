@@ -45,6 +45,7 @@
   </ItemDefinitionGroup>
   <ItemGroup />
   <ItemGroup>
+    <ClCompile Include="$(SolutionDir)AssetPacker\src\AssetPacker.Logger.cpp" />
     <ClCompile Include="$(SolutionDir)AssetPacker\src\AssetPacker.main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,3 +1,4 @@
-/test/catch.main.cpp
-/test/catch.listener.cpp
-/test/catch.globals.h
+test/catch.main.cpp
+test/catch.listener.cpp
+test/catch.globals.h
+src/ECS.Logger.cpp

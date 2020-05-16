@@ -67,6 +67,7 @@ def appendToFilename(path, prefix):
 # filenames is a list fo tuples in the form of (srcName, dstName)
 # replaceDict is used when executing the SIS_REPLACE() macro
 def generateFiles(srcDir, dstDir, filenames, replaceDict):
+    copiedFiles = []
     for srcName, dstName in filenames:
         src = os.path.join(srcDir, srcName)
         dst = os.path.join(dstDir, dstName)
@@ -77,6 +78,8 @@ def generateFiles(srcDir, dstDir, filenames, replaceDict):
             content = replace(content, replaceDict)
 
         updateFile(dst, content)
+        copiedFiles.append(dstName)
+    return copiedFiles
 
 def formatGuid(guid):
     guidStr = str(guid)

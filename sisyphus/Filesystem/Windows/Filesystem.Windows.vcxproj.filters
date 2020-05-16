@@ -32,6 +32,9 @@
     <ClCompile Include="$(SolutionDir)Filesystem\src\File.Windows.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)Filesystem\src\Filesystem.Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)Filesystem\src\Filesystem.Windows.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

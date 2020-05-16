@@ -399,9 +399,8 @@ def generateProps(projectInfo):
 def generateAndroidApp(projectInfo):
     print("generateAndroidApp: Please implement me!")
 
-def generateProject(projectInfo):
-    if projectInfo.test:
-        generateCatchMain(projectInfo)
+def generateProject(projectInfo): 
+    projectInfo.generateNeededFiles()
     for platform in projectInfo.platforms():
         platformSolutionProjects = ProjectInfo.PlatformSolutionProjects()
               

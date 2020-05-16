@@ -104,6 +104,9 @@
     <ClCompile Include="$(SolutionDir)VulkanRenderer\src\VertexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\VulkanRenderer.Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\DepthBuffer.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>

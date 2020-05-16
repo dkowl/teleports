@@ -72,6 +72,7 @@
     <ClInclude Include="$(SolutionDir)Renderer\include\Renderer\ShaderType.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(SolutionDir)Renderer\src\Renderer.Logger.cpp" />
     <ClCompile Include="$(SolutionDir)Renderer\src\RendererFactory.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

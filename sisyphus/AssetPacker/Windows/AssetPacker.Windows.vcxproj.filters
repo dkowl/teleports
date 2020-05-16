@@ -7,6 +7,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ClCompile Include="$(SolutionDir)AssetPacker\src\AssetPacker.Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetPacker\src\AssetPacker.main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

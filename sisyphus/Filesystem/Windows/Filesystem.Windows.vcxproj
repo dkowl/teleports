@@ -55,6 +55,7 @@
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Filesystem\src\cwalk.cpp" />
     <ClCompile Include="$(SolutionDir)Filesystem\src\File.Windows.cpp" />
+    <ClCompile Include="$(SolutionDir)Filesystem\src\Filesystem.Logger.cpp" />
     <ClCompile Include="$(SolutionDir)Filesystem\src\Filesystem.Windows.cpp" />
     <ClCompile Include="$(SolutionDir)Filesystem\src\Path.cpp" />
     <ClCompile Include="$(SolutionDir)Filesystem\src\Pch_Filesystem.cpp">

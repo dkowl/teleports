@@ -32,5 +32,8 @@
     <ClCompile Include="$(SolutionDir)WindowCreator\src\WindowCreator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)WindowCreator\src\WindowCreator.Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

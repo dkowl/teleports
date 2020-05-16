@@ -77,6 +77,7 @@
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)WindowCreator\src\Pch_WindowCreator.cpp" />
     <ClCompile Include="$(SolutionDir)WindowCreator\src\WindowCreator.cpp" />
+    <ClCompile Include="$(SolutionDir)WindowCreator\src\WindowCreator.Logger.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Editor\src\Editor.cpp" />
+    <ClCompile Include="$(SolutionDir)Editor\src\Editor.Logger.cpp" />
     <ClCompile Include="$(SolutionDir)Editor\src\EditorState.cpp" />
     <ClCompile Include="$(SolutionDir)Editor\src\main.Editor.cpp" />
     <ClCompile Include="$(SolutionDir)Editor\src\Project.cpp" />

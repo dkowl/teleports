@@ -87,6 +87,7 @@
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\Asset.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetBundle.cpp" />
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetManagement.Logger.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetMetadata.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetPacked.cpp" />
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetPacker.cpp" />

@@ -35,6 +35,9 @@
     <ClCompile Include="$(SolutionDir)Filesystem\src\Filesystem.Android.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)Filesystem\src\Filesystem.Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)Filesystem\src\Path.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

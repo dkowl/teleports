@@ -47,6 +47,7 @@
   <ItemGroup />
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Projects\TestProject\src\main.TestProject.cpp" />
+    <ClCompile Include="$(SolutionDir)Projects\TestProject\src\TestProject.Logger.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

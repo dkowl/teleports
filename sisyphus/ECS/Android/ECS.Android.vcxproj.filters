@@ -41,6 +41,9 @@
     <ClCompile Include="$(SolutionDir)ECS\src\DependencyGraph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)ECS\src\ECS.Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)ECS\src\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

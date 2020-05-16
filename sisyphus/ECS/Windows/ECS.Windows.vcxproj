@@ -58,6 +58,7 @@
     <ClCompile Include="$(SolutionDir)ECS\src\ComponentEvent.cpp" />
     <ClCompile Include="$(SolutionDir)ECS\src\ComponentRegistry.cpp" />
     <ClCompile Include="$(SolutionDir)ECS\src\DependencyGraph.cpp" />
+    <ClCompile Include="$(SolutionDir)ECS\src\ECS.Logger.cpp" />
     <ClCompile Include="$(SolutionDir)ECS\src\Entity.cpp" />
     <ClCompile Include="$(SolutionDir)ECS\src\Pch_ECS.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

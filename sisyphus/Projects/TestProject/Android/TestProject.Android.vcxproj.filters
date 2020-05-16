@@ -10,5 +10,8 @@
     <ClCompile Include="$(SolutionDir)Projects\TestProject\src\main.TestProject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)Projects\TestProject\src\TestProject.Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

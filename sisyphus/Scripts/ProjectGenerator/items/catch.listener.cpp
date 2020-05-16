@@ -4,7 +4,8 @@
 #include <string>
 #include <sstream>
 #include <memory>
-#include "Logger/OstreamLogger.h"
+#include "Logger/OstreamLogPresenter.h"
+#include "Logger/BasicLogger.h"
 #include "catch.globals.h"
 
 std::string CatchGlobals::listenerOutput = "";
@@ -21,8 +22,12 @@ struct CatchListener : Catch::TestEventListenerBase {
 
 	void testRunStarting(const Catch::TestRunInfo& testRunInfo) override {
 		sstream.clear();
-		logger = std::make_unique<Sisyphus::Logging::OstreamLogger>(sstream);
-
+		presenter = std::make_unique<Sisyphus::Logging::OstreamLogPresenter>(sstream);
+		Sisyphus::Logging::BasicLogger::CreateInfo createInfo;
+		createInfo.presenter = presenter.get();
+		createInfo.tag = "SIS_REPLACE(PROJNAME)-Test";
+		logger = std::make_unique<Sisyphus::Logging::BasicLogger>(createInfo);
+		
 		logger->BeginSection("Test run:" + testRunInfo.name);
 	}
 
@@ -66,7 +71,8 @@ struct CatchListener : Catch::TestEventListenerBase {
 	}
 private:
 	std::stringstream sstream;
-	std::unique_ptr<Sisyphus::Logging::OstreamLogger> logger;
+	std::unique_ptr<Sisyphus::Logging::OstreamLogPresenter> presenter;
+	std::unique_ptr<Sisyphus::Logging::ILogger> logger;
 };
 
 CATCH_REGISTER_LISTENER(CatchListener)

@@ -84,6 +84,7 @@
     <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Shader.cpp" />
     <ClCompile Include="$(SolutionDir)VulkanRenderer\src\UniformBuffer.cpp" />
     <ClCompile Include="$(SolutionDir)VulkanRenderer\src\VertexBuffer.cpp" />
+    <ClCompile Include="$(SolutionDir)VulkanRenderer\src\VulkanRenderer.Logger.cpp" />
     <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\DepthBuffer.cpp" />
     <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\Device.cpp" />
     <ClCompile Include="$(SolutionDir)VulkanRenderer\src\Components\Events.cpp" />

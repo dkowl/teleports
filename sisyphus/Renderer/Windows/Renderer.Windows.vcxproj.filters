@@ -26,6 +26,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(SolutionDir)Renderer\src\Renderer.Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)Renderer\src\RendererFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

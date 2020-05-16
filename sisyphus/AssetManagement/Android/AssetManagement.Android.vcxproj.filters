@@ -59,6 +59,9 @@
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetBundle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetManagement.Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)AssetManagement\src\AssetMetadata.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
