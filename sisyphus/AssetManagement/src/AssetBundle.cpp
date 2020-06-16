@@ -16,12 +16,12 @@ namespace Sisyphus::AssetManagement {
 	AssetBundle::AssetBundle(const std::string& inPath):
 		AssetBundle()
 	{		
-		ReadAssets(inPath);
+		Read(inPath);
 	}
 
 	AssetBundle::~AssetBundle() = default;
 
-	void AssetBundle::ReadAssets(const std::string& inPath)
+	void AssetBundle::Read(const std::string& inPath)
 	{
 		path = inPath;
 		auto fsPath = Fs::Path(path);

@@ -10,20 +10,20 @@
 
 namespace Sisyphus::AssetManagement {
 
-	std::unique_ptr<AssetReader> AssetReader::Create(ReaderType type)
+	std::unique_ptr<AssetReader> AssetReader::Create(AssetReaderType type)
 	{
 		switch (type) {
-		case ReaderType::Unpacked:
+		case AssetReaderType::Unpacked:
 #ifdef SIS_ANDROID
 			SIS_THROW("AssetReaderUnpacked not supported on Android");
 #else
 			return std::make_unique<AssetReaderUnpacked>();
 #endif
 			break;
-		case ReaderType::Packed:
+		case AssetReaderType::Packed:
 			return std::make_unique<AssetReaderPacked>();
 		default:
-			SIS_THROW("Unexpected ReaderType");
+			SIS_THROW("Unexpected AssetReaderType");
 			return nullptr;
 		}
 #ifdef SIS_CLANG

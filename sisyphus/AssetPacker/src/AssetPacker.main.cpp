@@ -26,8 +26,8 @@ int main(int argc, char** argv) {
 			dstDir = "assets_packed";
 		}
 
-		auto reader = AssetReader::Create(AssetReader::ReaderType::Unpacked);
-		reader->ReadAssets(srcDir.String());
+		auto reader = AssetReader::Create(AssetReaderType::Unpacked);
+		reader->Read(srcDir.String());
 
 		AssetPacker packer;
 		packer.PackAssets(*reader, dstDir);

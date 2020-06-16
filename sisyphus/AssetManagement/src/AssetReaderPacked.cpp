@@ -32,7 +32,7 @@ namespace Sisyphus::AssetManagement {
 		}
 	}
 
-	void AssetReaderPacked::ReadAssets(const std::string& dir)
+	void AssetReaderPacked::Read(const std::string& dir)
 	{
 		auto paths = FindAllBundlePaths(dir);
 

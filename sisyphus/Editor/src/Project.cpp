@@ -17,8 +17,8 @@ namespace Sisyphus::Editor {
 		SIS_THROWASSERT(Fs::Exists(projectInfoPath));
 
 		auto assetDir = path / "assets/";
-		auto assetReader = Am::AssetReader::Create(Am::AssetReader::ReaderType::Unpacked);
-		assetReader->ReadAssets(assetDir.String());
+		auto assetReader = Am::AssetReader::Create(Am::AssetReaderType::Unpacked);
+		assetReader->Read(assetDir.String());
 	}
 
 	std::string Project::Name() const {

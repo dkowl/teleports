@@ -15,7 +15,7 @@ namespace Sisyphus::AssetManagement {
 
 		~AssetBundle();
 
-		void ReadAssets(const std::string& inPath) override;
+		void Read(const std::string& inPath) override;
 		const Asset& GetAsset(uuids::uuid assetId) const override;
 		int AssetCount() const override;
 		std::vector<uuids::uuid> GetAllAssetIds() const override;

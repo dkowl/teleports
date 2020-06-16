@@ -33,8 +33,8 @@ TEST_CASE("Asset Reader Unpacked") {
 		file2.close();
 		file3.close();
 
-		auto reader = AssetReader::Create(AssetReader::ReaderType::Unpacked);
-		reader->ReadAssets(dirPath.string());
+		auto reader = AssetReader::Create(AssetReaderType::Unpacked);
+		reader->Read(dirPath.string());
 		REQUIRE(reader->AssetCount() == 3);
 		REQUIRE(reader->GetAllAssetIds().size() == reader->AssetCount());
 	}
@@ -47,7 +47,7 @@ TEST_CASE("Asset Reader Unpacked") {
 
 TEST_CASE("AssetReaderPacked") {
 	auto reader = AssetReader::Create();
-	reader->ReadAssets("test_data/AssetPacker/Assets_Packed");
+	reader->Read("test_data/AssetPacker/Assets_Packed");
 	REQUIRE(reader->AssetCount() == 4);
 	std::set<uuids::uuid> bundleIds{
 		*uuids::uuid::from_string("5d59b856-2e12-4aad-9499-e880c56d36b7"),

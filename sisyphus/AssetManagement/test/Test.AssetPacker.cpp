@@ -19,8 +19,8 @@ TEST_CASE("Asset Packer") {
 	std::filesystem::path destPath = "../test_data/AssetPacker/Assets_Packed";
 	std::filesystem::remove_all(destPath);
 	std::filesystem::create_directories(destPath);
-	auto reader = AssetReader::Create(AssetReader::ReaderType::Unpacked);
-	reader->ReadAssets(srcPath.string());
+	auto reader = AssetReader::Create(AssetReaderType::Unpacked);
+	reader->Read(srcPath.string());
 	REQUIRE(reader->AssetCount() == 4);
 	AssetPacker packer;
 	packer.PackAssets(*reader, destPath.string());
