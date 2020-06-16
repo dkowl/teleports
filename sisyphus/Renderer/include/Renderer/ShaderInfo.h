@@ -1,5 +1,6 @@
 #pragma once
-#include "ShaderType.h"
+#include "Renderer/VertexInputLayout.h"
+#include "Renderer/ShaderType.h"
 #include <string>
 #include "uuid.h"
 
@@ -8,5 +9,6 @@ namespace Sisyphus::Rendering {
 		uuids::uuid id;
 		std::string code;
 		ShaderType type;
+		std::optional<VertexInputLayout> vertexInputLayout;
 	};
 }

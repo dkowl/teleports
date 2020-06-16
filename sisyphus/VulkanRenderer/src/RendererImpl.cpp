@@ -82,7 +82,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		auto swapchain = swapchainComponent.GetVulkanObject();
 		const auto& framebuffers = GetComponent<Framebuffers>().GetFramebuffers();
 
-		InitPipeline(drawable.GetVertexStride());
+		InitPipeline(drawable.GetVertexShaderId());
 		SIS_DEBUGASSERT(pipeline);
 
 		InitVertexBuffer(drawable.GetVertexBufferSize());
@@ -285,10 +285,11 @@ namespace Sisyphus::Rendering::Vulkan {
 
 	void RendererImpl::InitShaders()
 	{
+		uuids::uuid vertexShaderId;
 		for (const auto& shaderInfo : ci.shaders) {
 			CreateShader(shaderInfo);
 			if (vertexShaderId.is_nil() && shaderInfo.type == ShaderType::Vertex) {
-				EnableShader(shaderInfo.id);
+				vertexShaderId = shaderInfo.id;
 			}
 			if (fragmentShaderId.is_nil() && shaderInfo.type == ShaderType::Fragment) {
 				EnableShader(shaderInfo.id);
@@ -318,7 +319,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		logger->EndSection();
 	}
 
-	void RendererImpl::InitPipeline(uint32_t stride)
+	void RendererImpl::InitPipeline(uuids::uuid vertexShaderId)
 	{
 		SIS_DEBUGASSERT(pipelineLayout);
 		SIS_DEBUGASSERT(renderPass);
@@ -326,6 +327,7 @@ namespace Sisyphus::Rendering::Vulkan {
 		if (!ShaderExists(vertexShaderId)) {
 			SIS_THROW("Vertex shader not found");
 		}
+		const auto& vertexShader = GetShader(vertexShaderId);
 		if (!ShaderExists(fragmentShaderId)) {
 			SIS_THROW("Fragment shader not found");
 		}
@@ -334,7 +336,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			vk::PipelineShaderStageCreateInfo{
 				{},
 				vk::ShaderStageFlagBits::eVertex,
-				GetShader(vertexShaderId).GetModule(),
+				vertexShader.GetModule(),
 				"main"
 			},
 			vk::PipelineShaderStageCreateInfo{
@@ -345,15 +347,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			}
 		};
 
-		vk::VertexInputBindingDescription vertexInputBindingDescription(0, stride);
-		vk::VertexInputAttributeDescription vertexInputAttributeDescription(0, 0, vk::Format::eR32G32B32Sfloat);
-		vk::PipelineVertexInputStateCreateInfo pipelineVertexInputStateCreateInfo{
-			{},
-			1,
-			&vertexInputBindingDescription,
-			1,
-			&vertexInputAttributeDescription
-		};
+		vk::PipelineVertexInputStateCreateInfo pipelineVertexInputStateCreateInfo = *vertexShader.GetPipelineVertexInputStateCreateInfo();
 
 		vk::PipelineInputAssemblyStateCreateInfo pipelineInputAssemblyStateCreateInfo{
 			{},
@@ -451,7 +445,8 @@ namespace Sisyphus::Rendering::Vulkan {
 		Shader::CreateInfo shaderCreateInfo{
 			shaderInfo.code,
 			shaderInfo.type,
-			GetComponent<Device>()
+			GetComponent<Device>(),
+			shaderInfo.vertexInputLayout
 		};
 		auto shader = std::make_unique<Shader>(shaderCreateInfo);
 		auto id = shaderInfo.id;
@@ -472,9 +467,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		}
 		auto type = shaders[id]->GetType();
 		switch (type) {
-		case ShaderType::Vertex:
-			vertexShaderId = id;
-			break;
 		case ShaderType::Fragment:
 			fragmentShaderId = id;
 			break;

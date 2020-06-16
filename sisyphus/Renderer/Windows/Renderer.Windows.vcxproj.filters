@@ -24,6 +24,9 @@
     <ClInclude Include="$(SolutionDir)Renderer\include\Renderer\ShaderType.h">
       <Filter>Public Headers</Filter>
     </ClInclude>
+    <ClInclude Include="$(SolutionDir)Renderer\include\Renderer\VertexInputLayout.h">
+      <Filter>Public Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Renderer\src\Renderer.Logger.cpp">

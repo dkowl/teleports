@@ -21,7 +21,7 @@ public:
 	}
 
 	uint32_t GetVertexCount() const override { return static_cast<uint32_t>(vertices.size()); }
-	uint32_t GetVertexStride() const override { return sizeof(Vertex); }
+	uuids::uuid GetVertexShaderId() const override { return uuids::uuid::from_string("e1124008-e112-4008-a2f3-cf6233498020").value(); }
 	size_t GetVertexBufferSize() const override { return vertices.size() * sizeof(Vertex); }
 	const std::byte* GetVertexData() const override { return reinterpret_cast<const std::byte*>(vertices.data()); }
 
@@ -72,8 +72,28 @@ int main() {
 		auto fragmentShaderFileId = uuids::uuid::from_string("ce637e01-1d00-405c-8aaa-f0c022235745").value();
 		String fragmentShaderText(assetReader->GetAsset(fragmentShaderFileId).Data().AsString());
 
+		VertexInputAttribute positionAttr{
+			{
+				{ComponentType::Float, 32},
+				{ComponentType::Float, 32},
+				{ComponentType::Float, 32}
+			},
+			0
+		};
+
+		VertexInputBinding vertexBinding{
+			{
+				{positionAttr}
+			},
+			int(sizeof(Vertex))
+		};
+
+		VertexInputLayout vertexLayout{
+			{ vertexBinding	}
+		};
+
 		rendererCreateInfo.shaders = {
-			{vertexShaderFileId, vertexShaderText, ShaderType::Vertex },
+			{vertexShaderFileId, vertexShaderText, ShaderType::Vertex, vertexLayout},
 			{fragmentShaderFileId, fragmentShaderText, ShaderType::Fragment}
 		};
 

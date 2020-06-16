@@ -38,7 +38,7 @@ namespace Sisyphus::Rendering::Vulkan {
 
 		// happens each Draw()
 		void InitVertexBuffer(size_t size);
-		void InitPipeline(uint32_t stride);
+		void InitPipeline(uuids::uuid vertexShaderId);
 
 		Shader& GetShader(uuids::uuid id);
 
@@ -55,7 +55,6 @@ namespace Sisyphus::Rendering::Vulkan {
 		vk::UniquePipeline pipeline;
 
 		std::unordered_map<uuids::uuid, std::unique_ptr<Shader>> shaders;
-		uuids::uuid vertexShaderId;
 		uuids::uuid fragmentShaderId;
 
 		Logging::ILogger* logger;

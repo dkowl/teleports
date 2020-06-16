@@ -1,6 +1,6 @@
 #pragma once
-#include "IDrawable.h"
-#include "ShaderInfo.h"
+#include "Renderer/IDrawable.h"
+#include "Renderer/ShaderInfo.h"
 
 namespace Sisyphus::WindowCreator {
 	class Window;

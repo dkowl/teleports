@@ -49,6 +49,7 @@
     <ClInclude Include="$(SolutionDir)Renderer\include\Renderer\RendererFactory.h" />
     <ClInclude Include="$(SolutionDir)Renderer\include\Renderer\ShaderInfo.h" />
     <ClInclude Include="$(SolutionDir)Renderer\include\Renderer\ShaderType.h" />
+    <ClInclude Include="$(SolutionDir)Renderer\include\Renderer\VertexInputLayout.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Renderer\src\Renderer.Logger.cpp" />
