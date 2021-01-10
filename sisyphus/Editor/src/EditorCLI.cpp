@@ -55,6 +55,14 @@ namespace Sisyphus::Editor {
 	}
 
 	void EditorCLI::PackAssets() {
-		// TODO
+		auto project = editor.CurrentProject();
+		if (project)
+		{
+			project->PackAssets();
+		}
+		else
+		{
+			std::cout << "No project is open\n";
+		}
 	}
 }

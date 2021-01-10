@@ -1,6 +1,6 @@
 #pragma once
 #include <unordered_map>
-#include <optional>
+#include <memory>
 #include "Project.h"
 #include "EditorState.h"
 
@@ -25,7 +25,7 @@ namespace Sisyphus::Editor {
 		Project* CurrentProject();
 
 	private:
-		std::optional<Project> currentProject;
+		std::unique_ptr<Project> currentProject;
 		EditorState state;
 	};
 }

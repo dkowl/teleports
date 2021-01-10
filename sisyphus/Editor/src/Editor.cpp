@@ -47,7 +47,7 @@ namespace Sisyphus::Editor {
 	void Editor::OpenProject(const Fs::Path& path)
 	{
 		CloseCurrentProject();
-		currentProject = Project(path);
+		currentProject = std::make_unique<Project>(path);
 		state.OnProjectOpened(path);
 	}
 	void Editor::OpenMostRecentProject()
@@ -67,7 +67,7 @@ namespace Sisyphus::Editor {
 	}
 	void Editor::CloseCurrentProject()
 	{
-		currentProject = std::nullopt;
+		currentProject = nullptr;
 	}
 
 	Project* Editor::CurrentProject()
