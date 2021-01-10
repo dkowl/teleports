@@ -62,7 +62,7 @@ namespace Sisyphus::Editor {
 			lastOpenedProjects.clear();
 		}
 	}
-	void EditorState::OnProjectOpened(const Fs::Path& path)
+	void EditorState::OnProjectOpened(Fs::Path path)
 	{
 		// moving the opened project to the front of the list
 		int found = 0;

@@ -13,7 +13,7 @@ namespace Sisyphus::Editor {
 		void SaveToFile(const Fs::Path& path) const;
 		void ReadFromFile(const Fs::Path& path);
 
-		void OnProjectOpened(const Fs::Path& path);
+		void OnProjectOpened(Fs::Path path);
 	private:
 		std::vector<Fs::Path> lastOpenedProjects;
 	};
