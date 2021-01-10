@@ -23,7 +23,7 @@ namespace Sisyphus::Rendering::Vulkan {
 			return result;
 		}
 
-		result.push_back("VK_LAYER_LUNARG_standard_validation");
+		result.push_back("VK_LAYER_KHRONOS_validation");
 
 		for (auto&& name : result) {
 			if (!IsLayerEnabled(name)) {
