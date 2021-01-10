@@ -22,6 +22,8 @@ namespace Sisyphus::Editor {
 		void OpenMostRecentProject();
 		void CloseCurrentProject();
 
+		Project* CurrentProject();
+
 	private:
 		std::optional<Project> currentProject;
 		EditorState state;

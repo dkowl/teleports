@@ -69,4 +69,16 @@ namespace Sisyphus::Editor {
 	{
 		currentProject = std::nullopt;
 	}
+
+	Project* Editor::CurrentProject()
+	{
+		if (currentProject)
+		{
+			return &(*currentProject);
+		}
+		else
+		{
+			return nullptr;
+		}
+	}
 }

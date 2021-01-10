@@ -9,6 +9,7 @@ namespace Sisyphus::Editor {
 
 		void Run();
 
+		void Status();
 		void OpenProject();
 		void PackAssets();
 
@@ -16,10 +17,15 @@ namespace Sisyphus::Editor {
 		Editor& editor;
 
 		CLI::App app;
-		std::string openProject_path;
+
+		CLI::App* statusCmd;
+
 		CLI::App* openProjectCmd;
+		std::string openProject_path;
+
 		CLI::App* packAssetsCmd;
-		bool exitFlag;
+
 		CLI::App* exitCmd;
+		bool exitFlag;
 	};
 }
