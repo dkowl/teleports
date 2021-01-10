@@ -64,6 +64,11 @@ namespace Sisyphus::AssetManagement {
 	ResourceLoader::LoadResult ResourceLoader::Load(RawData& data, std::string path, bool isBinary) {
 		SIS_DEBUGASSERT(data.Empty());
 		try {
+			if (!Fs::Exists(path) || Fs::IsDirectory(path))
+			{
+				Logger().Log("Invalid path: " + path);
+				return LoadResult{ false, 0 };
+			}
 			ResourceLoader loader(path, isBinary);
 			return loader.Load(data);
 		}
