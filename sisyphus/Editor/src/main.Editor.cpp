@@ -7,10 +7,18 @@
 int main() {
 	using namespace Sisyphus::Editor;
 
-	Editor editor;
+	try {
+		Editor editor;
 
-	EditorCLI cli(editor);
-	cli.Run();
+		EditorCLI cli(editor);
+		cli.Run();
+	}
+	catch (std::runtime_error& e) {
+		std::cerr << e.what() << "\n";
+	}
+	catch (...) {
+		std::cerr << "Unknown exception.\n";
+	}
 
 	return 0;
 }
