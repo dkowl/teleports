@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include <optional>
 #include "Filesystem/Path.h"
 
 namespace Sisyphus::Editor {

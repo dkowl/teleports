@@ -42,6 +42,7 @@
     <Import Condition="'$(UtilsImported)' == ''" Project="$(SolutionDir)props\Utils.props" />
     <Import Condition="'$(CLI11Imported)' == ''" Project="$(SolutionDir)props\CLI11.props" />
     <Import Condition="'$(jsonImported)' == ''" Project="$(SolutionDir)props\json.props" />
+    <Import Condition="'$(PrecompiledHeadersImported)' == ''" Project="$(SolutionDir)props\PrecompiledHeaders.props" />
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -52,6 +53,7 @@
     <ClInclude Include="$(SolutionDir)Editor\src\Editor.h" />
     <ClInclude Include="$(SolutionDir)Editor\src\EditorCLI.h" />
     <ClInclude Include="$(SolutionDir)Editor\src\EditorState.h" />
+    <ClInclude Include="$(SolutionDir)Editor\src\Pch_Editor.h" />
     <ClInclude Include="$(SolutionDir)Editor\src\Project.h" />
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +62,9 @@
     <ClCompile Include="$(SolutionDir)Editor\src\EditorCLI.cpp" />
     <ClCompile Include="$(SolutionDir)Editor\src\EditorState.cpp" />
     <ClCompile Include="$(SolutionDir)Editor\src\main.Editor.cpp" />
+    <ClCompile Include="$(SolutionDir)Editor\src\Pch_Editor.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)Editor\src\Project.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
