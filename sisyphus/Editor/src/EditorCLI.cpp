@@ -3,9 +3,13 @@
 
 namespace Sisyphus::Editor {
 	EditorCLI::EditorCLI(Editor& inEditor):
+		out(std::cout),
 		editor(inEditor),
 		exitFlag(false)
 	{
+		helpCmd = app.add_subcommand("help", "Shows help");
+		helpCmd->callback([this]() {Help(); });
+
 		statusCmd = app.add_subcommand("status", "Shows current status");
 		statusCmd->callback([this]() { Status(); });
 
@@ -22,7 +26,7 @@ namespace Sisyphus::Editor {
 
 	void EditorCLI::Run()
 	{
-		std::cout << app.help();
+		Help();
 		while (!exitFlag) {
 			std::string cmd;
 			std::getline(std::cin, cmd);
@@ -36,16 +40,21 @@ namespace Sisyphus::Editor {
 		}
 	}
 
+	void EditorCLI::Help()
+	{
+		out << app.help("", CLI::AppFormatMode::All);
+	}
+
 	void EditorCLI::Status()
 	{
 		auto project = editor.CurrentProject();
 		if (project)
 		{
-			std::cout << "Project: " << project->Name() << "\n";
+			out << "Project: " << project->Name() << "\n";
 		}
 		else
 		{
-			std::cout << "No project is open\n";
+			out << "No project is open\n";
 		}
 	}
 
@@ -62,7 +71,7 @@ namespace Sisyphus::Editor {
 		}
 		else
 		{
-			std::cout << "No project is open\n";
+			out << "No project is open\n";
 		}
 	}
 }

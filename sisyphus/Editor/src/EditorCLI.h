@@ -1,6 +1,7 @@
 #pragma once
 #include "Editor.h"
 #include "CLI11.hpp"
+#include <ostream>
 
 namespace Sisyphus::Editor {
 	class EditorCLI {
@@ -9,6 +10,7 @@ namespace Sisyphus::Editor {
 
 		void Run();
 
+		void Help();
 		void Status();
 		void OpenProject();
 		void PackAssets();
@@ -16,7 +18,11 @@ namespace Sisyphus::Editor {
 	private:
 		Editor& editor;
 
+		std::ostream& out;
+
 		CLI::App app;
+
+		CLI::App* helpCmd;
 
 		CLI::App* statusCmd;
 
