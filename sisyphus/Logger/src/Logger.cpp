@@ -2,7 +2,7 @@
 #include "BasicLogger.h"
 #include "OstreamLogPresenter.h"
 #include "AndroidLogPresenter.h"
-#include "Utils/PlatformMacros.h"
+#include "Utils/Platform.h"
 #include <iostream>
 
 namespace Sisyphus {

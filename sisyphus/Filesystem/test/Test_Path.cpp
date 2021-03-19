@@ -1,6 +1,6 @@
 #include "catch.hpp"
 #include "Path.h"
-#include "Utils/PlatformMacros.h"
+#include "Utils/Platform.h"
 
 using namespace Sisyphus::Fs;
 

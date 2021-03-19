@@ -1,7 +1,7 @@
 #include "catch.hpp"
 #include "AssetManagement/Asset.h"
 #include "AssetManagement/AssetUnpacked.h"
-#include "Utils/PlatformMacros.h"
+#include "Utils/Platform.h"
 #ifdef SIS_WINDOWS
 #include "Utils\FilesystemUtils.h"
 #endif

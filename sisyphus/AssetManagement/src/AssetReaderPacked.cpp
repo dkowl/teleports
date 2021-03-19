@@ -3,7 +3,7 @@
 #include "Filesystem/Path.h"
 #include "Utils/Throw.h"
 #include <vector>
-#include "Utils/PlatformMacros.h"
+#include "Utils/Platform.h"
 #ifdef SIS_ANDROID
 #include "AndroidGlobals/Globals.Android.h"
 #include "android/asset_manager.h"

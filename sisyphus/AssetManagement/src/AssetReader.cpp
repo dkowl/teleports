@@ -1,6 +1,6 @@
 #include "AssetReader.h"
 #include "Utils/Throw.h"
-#include "Utils/PlatformMacros.h"
+#include "Utils/Platform.h"
 #include "AssetReaderPacked.h"
 #ifdef SIS_WINDOWS
 #include "AssetReaderUnpacked.Windows.h"
@@ -14,11 +14,12 @@ namespace Sisyphus::AssetManagement {
 	{
 		switch (type) {
 		case AssetReaderType::Unpacked:
-#ifdef SIS_ANDROID
-			SIS_THROW("AssetReaderUnpacked not supported on Android");
-#else
-			return std::make_unique<AssetReaderUnpacked>();
-#endif
+			if (CurrentPlatform() == Platform::Android) {
+				SIS_THROW("AssetReaderUnpacked not supported on Android");
+			}
+			else {
+				return std::make_unique<AssetReaderUnpacked>();
+			}
 			break;
 		case AssetReaderType::Packed:
 			return std::make_unique<AssetReaderPacked>();
@@ -26,12 +27,7 @@ namespace Sisyphus::AssetManagement {
 			SIS_THROW("Unexpected AssetReaderType");
 			return nullptr;
 		}
-#ifdef SIS_CLANG
-		// funny how clang complains about control reaching the end without return here,
-		// that's why the extra return is added
-		// MSVC however does not accept it because it's unreachable
-		// that's why it's #ifdefed out, even funnier
+		// compilers complain that control flow reaches the end without return...
 		return nullptr;
-#endif
 	}
 }

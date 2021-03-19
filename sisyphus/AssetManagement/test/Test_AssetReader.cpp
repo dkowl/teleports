@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "Utils/PlatformMacros.h"
+#include "Utils/Platform.h"
 #include "AssetManagement/AssetReader.h"
 #ifdef SIS_WINDOWS
 #include "Utils\FilesystemUtils.h"

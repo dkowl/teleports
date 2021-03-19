@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <sstream>
-#include "Utils/PlatformMacros.h"
+#include "Utils/Platform.h"
 #ifdef SIS_ANDROID
 #include <jni.h>
 #endif

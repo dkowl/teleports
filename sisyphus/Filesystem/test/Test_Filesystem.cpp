@@ -1,7 +1,7 @@
 #include "catch.hpp"
 #include "Filesystem.h"
 #include "Path.h"
-#include "Utils/PlatformMacros.h"
+#include "Utils/Platform.h"
 #include "Utils/StringUtils.h"
 #include "Logger/Logger.h"
 #include <fstream>

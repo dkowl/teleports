@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include "Utils/PlatformMacros.h"
+#include "Utils/Platform.h"
 #include <fstream>
 #include <iostream>
 #include <cstdio>

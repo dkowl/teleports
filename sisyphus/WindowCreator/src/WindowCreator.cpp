@@ -1,5 +1,5 @@
 #include "WindowCreator.h"
-#include "Utils/PlatformMacros.h"
+#include "Utils/Platform.h"
 #ifdef SIS_WINDOWS
 #include "Window.Windows.h"
 #endif

@@ -1,7 +1,7 @@
 #include "catch.hpp"
 #include "AssetManagement/AssetPacker.h"
 #include "AssetManagement/AssetReader.h"
-#include "Utils/PlatformMacros.h"
+#include "Utils/Platform.h"
 #include "Utils/UuidGenerator.h"
 #ifdef SIS_WINDOWS
 #include <filesystem>
