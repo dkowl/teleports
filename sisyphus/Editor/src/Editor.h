@@ -1,6 +1,8 @@
 #pragma once
-#include <unordered_map>
 #include <memory>
+#include <unordered_map>
+#include <vector>
+#include "Utils/Platform.h"
 #include "Project.h"
 #include "EditorState.h"
 
@@ -23,9 +25,12 @@ namespace Sisyphus::Editor {
 		void CloseCurrentProject();
 
 		Project* CurrentProject();
+		const std::vector<Platform>& AvailablePlatforms();
 
 	private:
 		std::unique_ptr<Project> currentProject;
 		EditorState state;
+
+		std::vector<Platform> platforms;
 	};
 }

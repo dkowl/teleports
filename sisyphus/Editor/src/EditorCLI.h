@@ -13,6 +13,8 @@ namespace Sisyphus::Editor {
 		void Help();
 		void Status();
 		void OpenProject();
+		void InitBuild();
+		void Build();
 		void PackAssets();
 
 	private:
@@ -30,6 +32,9 @@ namespace Sisyphus::Editor {
 		std::string openProject_path;
 
 		CLI::App* packAssetsCmd;
+
+		CLI::App* buildCmd;
+		std::string build_platform;
 
 		CLI::App* exitCmd;
 		bool exitFlag;

@@ -14,7 +14,9 @@ namespace Sisyphus::Editor {
 		}
 	}
 
-	Editor::Editor() {
+	Editor::Editor() :
+		platforms({Platform::Windows, Platform::Android})
+	{
 		ReadState();
 
 		const auto& lastProjectPaths = state.LastOpenedProjects();
@@ -80,5 +82,10 @@ namespace Sisyphus::Editor {
 		{
 			return nullptr;
 		}
+	}
+
+	const std::vector<Platform>& Editor::AvailablePlatforms()
+	{
+		return platforms;
 	}
 }

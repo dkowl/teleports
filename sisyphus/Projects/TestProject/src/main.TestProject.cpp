@@ -58,7 +58,7 @@ int main() {
 
 		wc::WindowCreator windowCreator;
 		auto window = windowCreator.Create(wc::WindowCreateInfo{
-			wc::Platform::Windows,
+			Platform::Windows,
 			{1280, 720}
 			});
 

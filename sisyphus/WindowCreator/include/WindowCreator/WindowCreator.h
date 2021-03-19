@@ -1,12 +1,9 @@
 #pragma once
 #include <memory>
+#include "Utils/Platform.h"
 #include "Window.h"
 
 namespace Sisyphus::WindowCreator {
-
-	enum class Platform {
-		Windows
-	};
 
 	struct WindowCreateInfo {
 		Platform platform;

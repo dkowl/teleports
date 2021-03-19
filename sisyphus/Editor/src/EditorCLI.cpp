@@ -1,4 +1,5 @@
 #include "EditorCLI.h"
+#include <vector>
 #include "Logger/Logger.h"
 
 namespace Sisyphus::Editor {
@@ -20,8 +21,24 @@ namespace Sisyphus::Editor {
 		packAssetsCmd = app.add_subcommand("pack_assets", "Packs assets");
 		packAssetsCmd->callback([this]() { PackAssets(); });
 
+		InitBuild();
+
 		exitCmd = app.add_subcommand("exit");
 		exitCmd->callback([this]() {exitFlag = true; });
+	}
+
+	void EditorCLI::InitBuild()
+	{
+		buildCmd = app.add_subcommand("build", "Builds a releasable version of the project");
+
+		std::string description;
+		const auto& platforms = editor.AvailablePlatforms();
+		for (auto&& platform : platforms) {
+			description += std::string(PlatformAsString(platform)) + " | ";
+		}
+		description += "All";
+		buildCmd->add_option("-p,--platform", description);
+		buildCmd->callback([this]() { Build(); });
 	}
 
 	void EditorCLI::Run()
@@ -61,6 +78,11 @@ namespace Sisyphus::Editor {
 	void EditorCLI::OpenProject()
 	{
 		editor.OpenProject(openProject_path);
+	}
+
+	void EditorCLI::Build()
+	{
+		// TODO
 	}
 
 	void EditorCLI::PackAssets() {

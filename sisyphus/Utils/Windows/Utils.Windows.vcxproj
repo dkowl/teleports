@@ -53,6 +53,7 @@
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\FunctionFileLine.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\Graph.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\Json.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\Platform.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\PlatformMacros.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\StringUtils.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\Throw.h" />
@@ -66,6 +67,7 @@
     <ClCompile Include="$(SolutionDir)Utils\src\Pch_Utils.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)Utils\src\Platform.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\StringUtils.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\Throw.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\UuidGenerator.cpp" />
