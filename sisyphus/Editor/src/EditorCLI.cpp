@@ -37,7 +37,7 @@ namespace Sisyphus::Editor {
 			description += std::string(PlatformAsString(platform)) + " | ";
 		}
 		description += "All";
-		buildCmd->add_option("-p,--platform", description);
+		buildCmd->add_option("-p,--platform", build_platform, description);
 		buildCmd->callback([this]() { Build(); });
 	}
 
@@ -82,7 +82,16 @@ namespace Sisyphus::Editor {
 
 	void EditorCLI::Build()
 	{
-		// TODO
+		auto project = editor.CurrentProject();
+		if (!project) {
+			out << "No project is open\n";
+		}
+		else {
+			Project::BuildOptions options;
+			options.platform = PlatformFromString(build_platform);
+
+			project->Build(options);
+		}
 	}
 
 	void EditorCLI::PackAssets() {
