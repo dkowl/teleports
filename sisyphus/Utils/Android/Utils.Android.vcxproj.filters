@@ -36,10 +36,16 @@
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\PosixUtils.Android.h">
       <Filter>Public Headers</Filter>
     </ClInclude>
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\SimpleTimer.h">
+      <Filter>Public Headers</Filter>
+    </ClInclude>
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\StringUtils.h">
       <Filter>Public Headers</Filter>
     </ClInclude>
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\Throw.h">
+      <Filter>Public Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\TimeUtils.h">
       <Filter>Public Headers</Filter>
     </ClInclude>
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\UuidGenerator.h">
@@ -68,10 +74,16 @@
     <ClCompile Include="$(SolutionDir)Utils\src\PosixUtils.Android.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)Utils\src\SimpleTimer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)Utils\src\StringUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(SolutionDir)Utils\src\Throw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SolutionDir)Utils\src\TimeUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(SolutionDir)Utils\src\UuidGenerator.cpp">

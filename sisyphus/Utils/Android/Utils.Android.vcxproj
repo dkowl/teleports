@@ -76,8 +76,10 @@
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\Json.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\Platform.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\PosixUtils.Android.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\SimpleTimer.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\StringUtils.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\Throw.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\TimeUtils.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\UuidGenerator.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\UuidJsonSerializer.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\UuidUtils.h" />
@@ -88,8 +90,10 @@
     <ClCompile Include="$(SolutionDir)Utils\src\Pch_Utils.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\Platform.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\PosixUtils.Android.cpp" />
+    <ClCompile Include="$(SolutionDir)Utils\src\SimpleTimer.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\StringUtils.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\Throw.cpp" />
+    <ClCompile Include="$(SolutionDir)Utils\src\TimeUtils.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\UuidGenerator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

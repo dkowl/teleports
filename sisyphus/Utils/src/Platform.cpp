@@ -14,6 +14,19 @@ namespace Sisyphus{
 		}
 	}
 
+	Platform PlatformFromString(const std::string& s) {
+		if (s == "Windows") {
+			return Platform::Windows;
+		}
+		else if (s == "Android") {
+			return Platform::Android;
+		}
+		else {
+			SIS_DEBUGASSERT_MSG(false, "Unknown platform name: " + s);
+			return Platform::Unknown;
+		}
+	}
+
 	Platform CurrentPlatform() {
 #ifdef SIS_WINDOWS
 		return Platform::Windows;

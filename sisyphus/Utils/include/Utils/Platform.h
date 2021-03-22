@@ -12,13 +12,17 @@
 #define SIS_CLANG
 #endif
 
+#include <string>
+
 namespace Sisyphus {
 
 	enum class Platform {
+		Unknown,
 		Windows,
 		Android
 	};
 
 	const char* PlatformAsString(Platform platform);
+	Platform PlatformFromString(const std::string& s);
 	Platform CurrentPlatform();
 }

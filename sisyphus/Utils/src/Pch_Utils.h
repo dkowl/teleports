@@ -3,6 +3,7 @@
 #include "json.hpp"
 #include <algorithm>
 #include <array>
+#include <chrono>
 #include <iostream>
 #include <memory>
 #include <random>
