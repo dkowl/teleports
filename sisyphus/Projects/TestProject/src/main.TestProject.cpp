@@ -50,8 +50,13 @@ Vertices MakeSquare(float x, float y, float z) {
 
 int main() {
 	try {
-		auto assetReader = AssetManagement::AssetReader::Create(AssetManagement::AssetReaderType::Unpacked);
-		assetReader->Read("Assets");
+#ifdef SIS_DEBUG
+		auto assetReaderType = AssetManagement::AssetReaderType::Unpacked;
+#else 
+		auto assetReaderType = AssetManagement::AssetReaderType::Packed;
+#endif
+		auto assetReader = AssetManagement::AssetReader::Create(assetReaderType);
+		assetReader->Read("assets");
 
 		using namespace Rendering;
 		namespace wc = WindowCreator;
