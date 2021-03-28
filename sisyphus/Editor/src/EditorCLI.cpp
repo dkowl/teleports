@@ -21,15 +21,15 @@ namespace Sisyphus::Editor {
 		packAssetsCmd = app.add_subcommand("pack_assets", "Packs assets");
 		packAssetsCmd->callback([this]() { PackAssets(); });
 
-		InitBuild();
+		InitRelease();
 
 		exitCmd = app.add_subcommand("exit");
 		exitCmd->callback([this]() {exitFlag = true; });
 	}
 
-	void EditorCLI::InitBuild()
+	void EditorCLI::InitRelease()
 	{
-		buildCmd = app.add_subcommand("build", "Builds a releasable version of the project");
+		releaseCmd = app.add_subcommand("release", "Builds a releasable version of the project");
 
 		std::string description;
 		const auto& platforms = editor.AvailablePlatforms();
@@ -37,8 +37,8 @@ namespace Sisyphus::Editor {
 			description += std::string(PlatformAsString(platform)) + " | ";
 		}
 		description += "All";
-		buildCmd->add_option("-p,--platform", build_platform, description);
-		buildCmd->callback([this]() { Build(); });
+		releaseCmd->add_option("-p,--platform", release_platform, description);
+		releaseCmd->callback([this]() { Release(); });
 	}
 
 	void EditorCLI::Run()
@@ -46,6 +46,7 @@ namespace Sisyphus::Editor {
 		Help();
 		while (!exitFlag) {
 			std::string cmd;
+			std::cout << (editor.CurrentProject() ? editor.CurrentProject()->Name() : "-no project-") << ":";
 			std::getline(std::cin, cmd);
 			try {
 				app.parse(cmd);
@@ -80,17 +81,17 @@ namespace Sisyphus::Editor {
 		editor.OpenProject(openProject_path);
 	}
 
-	void EditorCLI::Build()
+	void EditorCLI::Release()
 	{
 		auto project = editor.CurrentProject();
 		if (!project) {
 			out << "No project is open\n";
 		}
 		else {
-			Project::BuildOptions options;
-			options.platform = PlatformFromString(build_platform);
+			Project::ReleaseOptions options;
+			options.platform = PlatformFromString(release_platform);
 
-			project->Build(options);
+			project->Release(options);
 		}
 	}
 

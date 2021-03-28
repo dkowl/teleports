@@ -13,27 +13,35 @@ namespace Sisyphus::Editor {
 
 		std::string Name() const;
 
+		enum class Configuration {
+			Debug,
+			Release
+		};
+		static std::string ConfigurationAsString(Configuration config);
+
+		Fs::Path ProjectDir(Platform platform) const;
+
 		void PackAssets();
 
-		struct BuildOptions {
+		struct ReleaseOptions {
 			Platform platform;
 		};
 
-		enum class BuildStatus {
+		enum class ReleaseStatus {
 			Failed,
 			Successful
 		};
 
-		struct BuildResult {
-			BuildStatus status;
+		struct ReleaseResult {
+			ReleaseStatus status;
 			Fs::Path path;
 			double timeInSeconds;
 			uint64_t sizeInBytes;
 		};
-		BuildResult Build(BuildOptions options);
+		ReleaseResult Release(ReleaseOptions options);
 
 	private:
-		Fs::Path CreateNewBuildResultDir(BuildOptions options);
+		Fs::Path CreateNewReleaseResultDir(ReleaseOptions options);
 
 		std::string name;
 		Fs::Path path;

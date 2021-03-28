@@ -1,4 +1,5 @@
 #include "Project.h"
+#include "Utils/DebugAssert.h"
 #include "Utils/SimpleTimer.h"
 #include "Utils/TimeUtils.h"
 #include "Utils/Throw.h"
@@ -36,6 +37,24 @@ namespace Sisyphus::Editor {
 		return name;
 	}
 
+	std::string Project::ConfigurationAsString(Configuration config)
+	{
+		switch (config) {
+		case Configuration::Debug:
+			return "Debug";
+		case Configuration::Release:
+			return "Release";
+		default:
+			SIS_DEBUGASSERT_MSG(false, "Unknown project configuration");
+			return "Unknown";
+		}
+	}
+
+	Fs::Path Project::ProjectDir(Platform platform) const
+	{
+		return path / PlatformAsString(platform);
+	}
+
 	void Project::PackAssets()
 	{
 		Am::AssetPacker packer;
@@ -49,9 +68,9 @@ namespace Sisyphus::Editor {
 		}
 	}
 
-	Fs::Path Project::CreateNewBuildResultDir(BuildOptions options) {
+	Fs::Path Project::CreateNewReleaseResultDir(ReleaseOptions options) {
 		Fs::Path currentDir = path;
-		Fs::Path buildDir = path / "builds";
+		Fs::Path buildDir = path / "releases";
 		CreateDirIfNotExists(buildDir);
 		Fs::Path platformDir = buildDir / PlatformAsString(options.platform);
 		CreateDirIfNotExists(platformDir);
@@ -60,24 +79,71 @@ namespace Sisyphus::Editor {
 		return buildDir;
 	}
 
-	Project::BuildResult Project::Build(BuildOptions options) {
-		Logger().BeginSection("Building " + name);
+	struct CopyOperationDescriptor {
+		Fs::Path from;
+		Fs::Path to;
+		bool isDirectory;
+	};
+
+	Project::ReleaseResult Project::Release(ReleaseOptions options) {
+		Logger().BeginSection("Releasing " + name);
+		Logger().BeginSection("Options:");
+		Logger().Log(std::string("Platform: ") + PlatformAsString(options.platform));
+		Logger().EndSection();
 		auto timer = SimpleTimer::Start();
 
-		BuildResult result;
-		result.status = BuildStatus::Successful;
-		result.path = CreateNewBuildResultDir(options);
-		result.timeInSeconds = timer.ElapsedSeconds();
+		ReleaseResult result;
+		result.status = ReleaseStatus::Successful;
+		result.path = CreateNewReleaseResultDir(options);
 		result.sizeInBytes = 0;
 
-		// TODO: actually build something
+		std::vector<CopyOperationDescriptor> copiesToDo;
+		if (options.platform == Platform::Windows)
+		{
+			copiesToDo.emplace_back(CopyOperationDescriptor{ 
+				path / PlatformAsString(options.platform) / "out" / "x64" / "Release" / (name + ".Windows.exe"), 
+				result.path / (name + ".exe"), 
+				false 
+			});
 
-		if (result.status == BuildStatus::Successful) {
-			Logger().Log("Build successful");
+			copiesToDo.emplace_back(CopyOperationDescriptor{ 
+				path / "assets_packed",
+				result.path / "assets", 
+				true 
+			});
+		}
+		else {
+			Logger().Log("Unsupported platform");
+			result.status = ReleaseStatus::Failed;
+		}
+
+		for (auto&& copyDesc : copiesToDo) {
+			if (!Fs::Exists(copyDesc.from)) {
+				Logger().Log("File or directory not found: " + copyDesc.from.String());
+				result.status = ReleaseStatus::Failed;
+			}
+			else {
+				result.sizeInBytes += Fs::FileSize(copyDesc.from);
+			}
+		}
+
+		if (result.status != ReleaseStatus::Failed) {
+			for (auto&& copyDesc : copiesToDo) {
+				// https://stackoverflow.com/questions/33752732/xcopy-still-asking-f-file-d-directory-confirmation#:~:text=7%20Answers&text=The%20%2FI%20switch%20(not%20%2F,such%20prompt%20does%20never%20appear.
+				std::string command = std::string(copyDesc.isDirectory ? "x" : "") + "copy \"" + copyDesc.from.String() + "\" \"" + copyDesc.to.String() + "\"" + std::string(copyDesc.isDirectory ? " /i" : "");
+				Logger().Log("Executing: " + command);
+				system(command.c_str());
+			}
+		}
+
+		result.timeInSeconds = timer.ElapsedSeconds();
+
+		if (result.status == ReleaseStatus::Successful) {
+			Logger().Log("Release successful");
 			Logger().Log("Size: " + std::to_string(result.sizeInBytes) + " bytes");
 		}
 		else {
-			Logger().Log("Build failed");
+			Logger().Log("Release failed");
 		}
 		Logger().Log("Time elapsed: " + std::to_string(result.timeInSeconds) + " seconds");
 		Logger().EndSection();
