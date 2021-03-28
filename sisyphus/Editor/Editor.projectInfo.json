@@ -11,5 +11,7 @@
 	"platforms": [
 		"Windows"
 	],
+	"test": false,
+	"displayName" : "Sisyphus Editor",
 	"precompiledHeaders" : true
 }
