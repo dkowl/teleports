@@ -10,7 +10,7 @@ namespace Sisyphus::Logging {
 				{LogLevel::All, ANDROID_LOG_UNKNOWN},
 				{LogLevel::Trace, ANDROID_LOG_VERBOSE},
 				{LogLevel::Debug, ANDROID_LOG_DEBUG},
-				{LogLevel::Default, ANDROID_LOG_DEFAULT},
+				{LogLevel::Default, ANDROID_LOG_INFO},
 				{LogLevel::Info, ANDROID_LOG_INFO},
 				{LogLevel::Warn, ANDROID_LOG_WARN},
 				{LogLevel::Error, ANDROID_LOG_ERROR},
@@ -23,7 +23,7 @@ namespace Sisyphus::Logging {
 	}
 
 	void AndroidLogPresenter::Present(const std::string& s, LogLevel logLevel, const std::string& tag) {
-		std::string finalTag = "Sisyhpus";
+		std::string finalTag = "Sisyphus";
 		if (!tag.empty()) {
 			finalTag += "-" + tag;
 		}
