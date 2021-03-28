@@ -30,7 +30,7 @@ namespace Sisyphus{
 	Platform CurrentPlatform() {
 #ifdef SIS_WINDOWS
 		return Platform::Windows;
-#elif SIS_ANDROID
+#elif defined(SIS_ANDROID)
 		return Platform::Android;
 #endif
 	}

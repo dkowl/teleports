@@ -14,12 +14,12 @@ namespace Sisyphus::AssetManagement {
 	{
 		switch (type) {
 		case AssetReaderType::Unpacked:
-			if (CurrentPlatform() == Platform::Android) {
+#ifdef SIS_ANDROID
 				SIS_THROW("AssetReaderUnpacked not supported on Android");
-			}
-			else {
+				return nullptr;
+#else
 				return std::make_unique<AssetReaderUnpacked>();
-			}
+#endif
 			break;
 		case AssetReaderType::Packed:
 			return std::make_unique<AssetReaderPacked>();
@@ -27,7 +27,5 @@ namespace Sisyphus::AssetManagement {
 			SIS_THROW("Unexpected AssetReaderType");
 			return nullptr;
 		}
-		// compilers complain that control flow reaches the end without return...
-		return nullptr;
 	}
 }
