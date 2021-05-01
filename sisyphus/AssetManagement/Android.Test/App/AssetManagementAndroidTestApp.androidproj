@@ -52,6 +52,11 @@
     <Content Include="assets\test_data\AssetPacker\Assets_Packed\5d59b856-2e12-4aad-9499-e880c56d36b7" />
     <Content Include="assets\test_data\ResourceLoader\empty.txt" />
     <Content Include="assets\test_data\ResourceLoader\resource.txt" />
+    <Content Include="res\mipmap-hdpi\ic_sisyphus_test_launcher.png" />
+    <Content Include="res\mipmap-mdpi\ic_sisyphus_test_launcher.png" />
+    <Content Include="res\mipmap-xhdpi\ic_sisyphus_test_launcher.png" />
+    <Content Include="res\mipmap-xxhdpi\ic_sisyphus_test_launcher.png" />
+    <Content Include="res\mipmap-xxxhdpi\ic_sisyphus_test_launcher.png" />
     <Content Include="res\values\strings.xml" />
     <AntBuildXml Include="build.xml" />
     <AndroidManifest Include="AndroidManifest.xml" />

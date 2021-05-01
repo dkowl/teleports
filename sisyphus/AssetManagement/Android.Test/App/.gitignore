@@ -3,6 +3,11 @@ build.xml
 project.properties
 res/values/strings.xml
 src/com/AssetManagementAndroidTestApp/AssetManagementAndroidTestApp.java
+res/mipmap-hdpi/ic_sisyphus_test_launcher.png
+res/mipmap-mdpi/ic_sisyphus_test_launcher.png
+res/mipmap-xhdpi/ic_sisyphus_test_launcher.png
+res/mipmap-xxhdpi/ic_sisyphus_test_launcher.png
+res/mipmap-xxxhdpi/ic_sisyphus_test_launcher.png
 assets/test_data/AssetPacker/Test.AssetPacker.cpp
 assets/test_data/AssetPacker/Assets/DeathKnight_Unity.fbx
 assets/test_data/AssetPacker/Assets/DeathKnight_Unity.fbx.meta

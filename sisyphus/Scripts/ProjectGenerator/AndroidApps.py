@@ -55,6 +55,10 @@ class AndroidApp:
         sis.generateFiles(self.fileSrcDir(), self.appDir(), self.filesToCopy(), self.replaceDict())
         gitignorePaths = [filename for ignored, filename in self.filesToCopy()]
 
+        srcDir = os.path.join(self.fileSrcDir(), 'res')
+        dstDir = os.path.join(self.appDir(), 'res')
+        gitignorePaths += copyDirContent(srcDir, self.appDir(), self.fileSrcDir())
+
         return gitignorePaths
 
     def generate(self):
@@ -124,8 +128,10 @@ class AndroidApp:
         for itemPath in itemPaths:        
             contentElem = ET.SubElement(itemGroup, "Content")
             contentElem.set("Include", str(itemPath))
-        contentElem = ET.SubElement(itemGroup, "Content")
-        contentElem.set("Include", "res\\values\strings.xml")
+        itemPaths = getFilepathsRecursive(os.path.join(self.appDir(), 'res'), self.appDir())
+        for itemPath in itemPaths:        
+            contentElem = ET.SubElement(itemGroup, "Content")
+            contentElem.set("Include", str(itemPath))
         buildXmlElem = ET.SubElement(itemGroup, "AntBuildXml")
         buildXmlElem.set("Include", "build.xml")
         manifestElem = ET.SubElement(itemGroup, "AndroidManifest")

@@ -2,6 +2,11 @@ AndroidManifest.xml
 build.xml
 project.properties
 res/values/strings.xml
+res/mipmap-hdpi/ic_sisyphus_launcher.png
+res/mipmap-mdpi/ic_sisyphus_launcher.png
+res/mipmap-xhdpi/ic_sisyphus_launcher.png
+res/mipmap-xxhdpi/ic_sisyphus_launcher.png
+res/mipmap-xxxhdpi/ic_sisyphus_launcher.png
 assets/fragmentShader_C_C.glsl
 assets/fragmentShader_C_C.glsl.meta
 assets/vertexShader_PC_C.glsl

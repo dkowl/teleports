@@ -62,13 +62,40 @@
   <ItemGroup>
     <Folder Include="ProjectGenerator\" />
     <Folder Include="ProjectGenerator\items\" />
+    <Folder Include="ProjectGenerator\items\AndroidApp\" />
+    <Folder Include="ProjectGenerator\items\AndroidApp\res\" />
+    <Folder Include="ProjectGenerator\items\AndroidApp\res\mipmap-hdpi\" />
+    <Folder Include="ProjectGenerator\items\AndroidApp\res\mipmap-mdpi\" />
+    <Folder Include="ProjectGenerator\items\AndroidApp\res\mipmap-xhdpi\" />
+    <Folder Include="ProjectGenerator\items\AndroidApp\res\mipmap-xxhdpi\" />
+    <Folder Include="ProjectGenerator\items\AndroidApp\res\mipmap-xxxhdpi\" />
     <Folder Include="ProjectGenerator\items\AndroidTestApp\" />
+    <Folder Include="ProjectGenerator\items\AndroidTestApp\res\" />
+    <Folder Include="ProjectGenerator\items\AndroidTestApp\res\mipmap-hdpi\" />
+    <Folder Include="ProjectGenerator\items\AndroidTestApp\res\mipmap-mdpi\" />
+    <Folder Include="ProjectGenerator\items\AndroidTestApp\res\mipmap-xhdpi\" />
+    <Folder Include="ProjectGenerator\items\AndroidTestApp\res\mipmap-xxhdpi\" />
+    <Folder Include="ProjectGenerator\items\AndroidTestApp\res\mipmap-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ProjectGenerator\items\AndroidApp\AndroidManifest.xml" />
+    <Content Include="ProjectGenerator\items\AndroidApp\build.xml" />
+    <Content Include="ProjectGenerator\items\AndroidApp\project.properties" />
+    <Content Include="ProjectGenerator\items\AndroidApp\res\mipmap-hdpi\ic_sisyphus_launcher.png" />
+    <Content Include="ProjectGenerator\items\AndroidApp\res\mipmap-mdpi\ic_sisyphus_launcher.png" />
+    <Content Include="ProjectGenerator\items\AndroidApp\res\mipmap-xhdpi\ic_sisyphus_launcher.png" />
+    <Content Include="ProjectGenerator\items\AndroidApp\res\mipmap-xxhdpi\ic_sisyphus_launcher.png" />
+    <Content Include="ProjectGenerator\items\AndroidApp\res\mipmap-xxxhdpi\ic_sisyphus_launcher.png" />
+    <Content Include="ProjectGenerator\items\AndroidApp\strings.xml" />
     <Content Include="ProjectGenerator\items\AndroidTestApp\AndroidManifest.xml" />
     <Content Include="ProjectGenerator\items\AndroidTestApp\AndroidTestApp.java" />
     <Content Include="ProjectGenerator\items\AndroidTestApp\build.xml" />
     <Content Include="ProjectGenerator\items\AndroidTestApp\project.properties" />
+    <Content Include="ProjectGenerator\items\AndroidTestApp\res\mipmap-hdpi\ic_sisyphus_test_launcher.png" />
+    <Content Include="ProjectGenerator\items\AndroidTestApp\res\mipmap-mdpi\ic_sisyphus_test_launcher.png" />
+    <Content Include="ProjectGenerator\items\AndroidTestApp\res\mipmap-xhdpi\ic_sisyphus_test_launcher.png" />
+    <Content Include="ProjectGenerator\items\AndroidTestApp\res\mipmap-xxhdpi\ic_sisyphus_test_launcher.png" />
+    <Content Include="ProjectGenerator\items\AndroidTestApp\res\mipmap-xxxhdpi\ic_sisyphus_test_launcher.png" />
     <Content Include="ProjectGenerator\items\AndroidTestApp\strings.xml" />
     <Content Include="ProjectGenerator\items\catch.listener.cpp" />
     <Content Include="ProjectGenerator\items\catch.globals.h" />

@@ -39,6 +39,11 @@
     </AntPackage>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Content Include="res\mipmap-hdpi\ic_sisyphus_test_launcher.png" />
+    <Content Include="res\mipmap-mdpi\ic_sisyphus_test_launcher.png" />
+    <Content Include="res\mipmap-xhdpi\ic_sisyphus_test_launcher.png" />
+    <Content Include="res\mipmap-xxhdpi\ic_sisyphus_test_launcher.png" />
+    <Content Include="res\mipmap-xxxhdpi\ic_sisyphus_test_launcher.png" />
     <Content Include="res\values\strings.xml" />
     <AntBuildXml Include="build.xml" />
     <AndroidManifest Include="AndroidManifest.xml" />
