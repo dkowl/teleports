@@ -1,9 +1,11 @@
 #include <exception>
 #include <iostream>
-#include "Renderer\RendererFactory.h"
-#include "Logger/Logger.h"
 #include "AssetManagement/AssetReader.h"
-#include "Renderer\IDrawable.h"
+#include "Logger/Logger.h"
+#include "Renderer/IDrawable.h"
+#include "Renderer/RendererFactory.h"
+#include "Utils/DebugMacros.h"
+#include "Utils/Platform.h"
 
 using namespace Sisyphus;
 
