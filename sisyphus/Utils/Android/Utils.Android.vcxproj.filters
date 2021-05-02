@@ -12,6 +12,9 @@
     <ClInclude Include="$(SolutionDir)Utils\src\Pch_Utils.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\CompilerMacros.h">
+      <Filter>Public Headers</Filter>
+    </ClInclude>
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\DebugAssert.h">
       <Filter>Public Headers</Filter>
     </ClInclude>

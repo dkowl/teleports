@@ -8,10 +8,6 @@
 #define SIS_ANDROID
 #endif
 
-#ifdef __clang__
-#define SIS_CLANG
-#endif
-
 #include <string>
 
 namespace Sisyphus {

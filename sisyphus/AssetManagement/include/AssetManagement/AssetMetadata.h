@@ -1,8 +1,8 @@
 #pragma once
 #include "uuid.h"
-#include "json.hpp"
-#include "Utils\StringUtils.h"
-#include "Utils\UuidJsonSerializer.h"
+#include "Utils/Json.h"
+#include "Utils/StringUtils.h"
+#include "Utils/UuidJsonSerializer.h"
 
 namespace Sisyphus::AssetManagement {
 	class AssetMetadata {

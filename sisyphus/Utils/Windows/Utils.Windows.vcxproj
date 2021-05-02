@@ -47,6 +47,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="$(SolutionDir)Utils\src\Pch_Utils.h" />
+    <ClInclude Include="$(SolutionDir)Utils\include\Utils\CompilerMacros.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\DebugAssert.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\DebugMacros.h" />
     <ClInclude Include="$(SolutionDir)Utils\include\Utils\FilesystemUtils.h" />
