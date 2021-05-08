@@ -33,6 +33,20 @@ def projectConfigurations(platform):
     return root
 
 # returns a list of copied file paths relative to rootDir
+# Example 1: 
+#   srcDir - project/assets/
+#   dstDir - app/
+#   rootDir - project/
+# effect: files copied to app/assets
+# return value: ['assets/file1.txt', 'assets/file2.txt'] ... ]
+#
+# Example 2: (with dstRootDir)
+#   srcDir - project/assets/
+#   dstDir - app/weapons/swords/
+#   rootDir - project/assets/
+#   dstRootDit - app/
+# effect: files copied to app/weapons/swords/
+# return value: ['weapons/swords/file1.txt', 'weapons/swords/file2.txt' ... ]
 def copyDirContent(srcDir, dstDir, rootDir, dstRootDir = None):
     if not os.path.exists(srcDir):
         return []
