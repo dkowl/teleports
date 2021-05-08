@@ -28,6 +28,9 @@ class AndroidApp:
     def appDir(self):
         return os.path.join(self.libDir(), 'App')
 
+    def appAssetDir(self):
+        return os.path.join(self.appDir(), 'assets')
+
     def fileSrcDir(self):
         return os.path.join(constants.pythonSourceDir, 'items', 'AndroidApp')
 
@@ -165,11 +168,10 @@ class AndroidGameApp(AndroidApp):
     def copyNeededFiles(self):
         gitignorePaths = super().copyNeededFiles()
 
-        gitignorePaths += copyDirContent(
-            self.projectInfo.assetDir(),
-            self.appDir(),
-            self.projectInfo.dir()
-            )
+        symlinkDst = self.appAssetDir()
+        sis.ensureSymlinkExists(self.projectInfo.packedAssetDir(), symlinkDst)
+
+        gitignorePaths += os.path.relpath(symlinkDst, self.projectInfo.dir())
         return gitignorePaths
 
 

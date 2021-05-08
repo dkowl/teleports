@@ -83,6 +83,9 @@ class ProjectInfo:
     def assetDir(self):
         return os.path.join(self.dir(), 'assets')
 
+    def packedAssetDir(self):
+        return os.path.join(self.dir(), 'assets_packed')
+
     def includeDir(self):
         return os.path.join(self.dir(), 'include')
 
