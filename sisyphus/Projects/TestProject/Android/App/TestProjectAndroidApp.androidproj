@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|ARM">
       <Configuration>Debug</Configuration>
@@ -39,10 +39,6 @@
     </AntPackage>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Content Include="assets\fragmentShader_C_C.glsl" />
-    <Content Include="assets\fragmentShader_C_C.glsl.meta" />
-    <Content Include="assets\vertexShader_PC_C.glsl" />
-    <Content Include="assets\vertexShader_PC_C.glsl.meta" />
     <Content Include="res\mipmap-hdpi\ic_sisyphus_launcher.png" />
     <Content Include="res\mipmap-mdpi\ic_sisyphus_launcher.png" />
     <Content Include="res\mipmap-xhdpi\ic_sisyphus_launcher.png" />

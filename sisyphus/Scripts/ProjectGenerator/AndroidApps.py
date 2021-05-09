@@ -171,7 +171,7 @@ class AndroidGameApp(AndroidApp):
         symlinkDst = self.appAssetDir()
         sis.ensureSymlinkExists(self.projectInfo.packedAssetDir(), symlinkDst)
 
-        gitignorePaths += os.path.relpath(symlinkDst, self.projectInfo.dir())
+        gitignorePaths += [os.path.relpath(symlinkDst, self.appDir())]
         return gitignorePaths
 
 

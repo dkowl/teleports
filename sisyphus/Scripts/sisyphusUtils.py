@@ -27,20 +27,19 @@ def ensureSymlinkExists(src, dst):
     if not os.path.exists(src):
         raise f'Src path of your symlink does not exist: {src}'
 
-    if os.path.exists(dst):
-        if os.path.islink(dst):
-            prevSrc = os.readlink(dst)
-            if prevSrc == src:
-                # correct symlink already there, nothing to do
-                return
-            logging.info(f'symlink at {dst} alrady exists, but points to {prevSrc} instead of {src}, deleting...')
-            os.unlink(dst)
-        elif os.path.isfile(dst):
-            logging.info(f'{dst} already exists and is a file, deleting...')
-            os.remove(dst)
-        elif os.path.isdir(dst):
-            logging.info(f'{dst} already exists and is a directory, deleting...')
-            shutil.rmtree(dst)
+    if os.path.islink(dst):
+        prevSrc = os.readlink(dst)
+        if prevSrc == src:
+            # correct symlink already there, nothing to do
+            return
+        logging.info(f'symlink at {dst} alrady exists, but points to {prevSrc} instead of {src}, deleting...')
+        os.unlink(dst)
+    elif os.path.isfile(dst):
+        logging.info(f'{dst} already exists and is a file, deleting...')
+        os.remove(dst)
+    elif os.path.isdir(dst):
+        logging.info(f'{dst} already exists and is a directory, deleting...')
+        shutil.rmtree(dst)
 
     logging.info(f'Creating symlink to {src} at {dst}')
     os.symlink(src, dst)
