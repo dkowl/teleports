@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 import logging
 logger = logging.getLogger()
 
@@ -24,6 +25,10 @@ def ensureFileExists(filepath, defaultContent = ''):
             file.write(defaultContent)
 
 def ensureSymlinkExists(src, dst):
+    if sys.version_info < (3, 8):
+        logging.warn("Your python version is <3.8, creating symlinks may not work properly. \
+            make sure to run Windows in developer mode and install python 3.8 or greater.")
+
     if not os.path.exists(src):
         raise f'Src path of your symlink does not exist: {src}'
 
