@@ -25,7 +25,7 @@ def ensureFileExists(filepath, defaultContent = ''):
 
 def ensureSymlinkExists(src, dst):
     if not os.path.exists(src):
-        raise f"Src path of your symlink does not exist: {src}"
+        raise f'Src path of your symlink does not exist: {src}'
 
     if os.path.exists(dst):
         if os.path.islink(dst):
@@ -42,7 +42,7 @@ def ensureSymlinkExists(src, dst):
             logging.info(f'{dst} already exists and is a directory, deleting...')
             shutil.rmtree(dst)
 
-    logging.info('Creating symlink to {src} at {dst}')
+    logging.info(f'Creating symlink to {src} at {dst}')
     os.symlink(src, dst)
 
 def getFileContent(filepath, binary = False):
