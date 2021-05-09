@@ -10,7 +10,6 @@
     <OutputPath>.</OutputPath>
     <Name>Scripts</Name>
     <RootNamespace>Scripts</RootNamespace>
-    <InterpreterId>Global|PythonCore|3.9</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -101,9 +100,6 @@
     <Content Include="ProjectGenerator\items\catch.listener.cpp" />
     <Content Include="ProjectGenerator\items\catch.globals.h" />
     <Content Include="ProjectGenerator\items\catch.main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <InterpreterReference Include="Global|PythonCore|3.9" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
