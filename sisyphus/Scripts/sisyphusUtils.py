@@ -47,7 +47,7 @@ def ensureSymlinkExists(src, dst):
         shutil.rmtree(dst)
 
     logging.info(f'Creating symlink to {src} at {dst}')
-    os.symlink(src, dst)
+    os.symlink(os.path.relpath(src, dst), dst)
 
 def getFileContent(filepath, binary = False):
     content = None
