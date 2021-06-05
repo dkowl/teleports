@@ -144,8 +144,22 @@ int main() {
 }
 #elif defined(SIS_ANDROID)
 #include <android/native_activity.h>
+#include "AndroidGlobals/Globals.Android.h"
 // Android entry point
 void ANativeActivity_onCreate(ANativeActivity* activity, void* savedState, size_t savedStateSize) {
 	Sisyphus::Logger().Log("Hello from C++!");
+	try {
+		AndroidGlobals::InitAssetManager(activity->assetManager);
+
+		auto assetReaderType = AssetManagement::AssetReaderType::Packed;
+		auto assetReader = AssetManagement::AssetReader::Create(assetReaderType);
+		assetReader->Read("");
+	}
+	catch (std::exception& e) {
+		Logger().Log(e.what(), LogLevel::Fatal);
+	}
+	catch (...) {
+		Logger().Log("Unknown unhandled exception. Terminating.", LogLevel::Fatal);
+	}
 }
 #endif
