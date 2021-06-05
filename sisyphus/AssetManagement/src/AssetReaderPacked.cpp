@@ -1,6 +1,7 @@
 #include "AssetReaderPacked.h"
 #include "Filesystem/Filesystem.h"
 #include "Filesystem/Path.h"
+#include "Logger/Logger.h"
 #include "Utils/Throw.h"
 #include <vector>
 #include "Utils/Platform.h"
@@ -14,9 +15,11 @@ namespace Sisyphus::AssetManagement {
 		std::vector<Fs::Path> FindAllBundlePaths(const std::string& dir)
 		{
 			std::vector<Fs::Path> result;
+			Logger().BeginSection("Looking for asset bundles...");
 #ifdef SIS_WINDOWS
 			for (auto&& p : Fs::RecursiveDirectoryIterator(dir)) {
 				if (Fs::IsRegularFile(p) && p.Extension().String() != ".meta") {
+					Logger().Log(std::string("Found ") + p.String());
 					result.push_back(p);
 				}
 			}
@@ -25,9 +28,12 @@ namespace Sisyphus::AssetManagement {
 			while (true) {
 				auto filename = AAssetDir_getNextFileName(assetDir);
 				if (filename == nullptr) break;
-				result.push_back(Fs::Path(dir) / std::string(filename));
+				auto path = Fs::Path(dir) / std::string(filename);
+				Logger().Log(std::string("Found ") + path.String());
+				result.push_back(path);
 			}
 #endif
+			Logger().EndSection();
 			return result;
 		}
 	}
