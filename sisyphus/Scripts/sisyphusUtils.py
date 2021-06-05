@@ -25,6 +25,9 @@ def ensureFileExists(filepath, defaultContent = ''):
             file.write(defaultContent)
 
 def ensureSymlinkExists(src, dst):
+    src = os.path.abspath(src)
+    dst = os.path.abspath(dst)
+
     if sys.version_info < (3, 8):
         logging.warn("Your python version is <3.8, creating symlinks may not work properly. \
             make sure to run Windows in developer mode and install python 3.8 or greater.")
@@ -47,7 +50,7 @@ def ensureSymlinkExists(src, dst):
         shutil.rmtree(dst)
 
     logging.info(f'Creating symlink to {src} at {dst}')
-    os.symlink(os.path.relpath(src, dst), dst)
+    os.symlink(os.path.relpath(src, os.path.dirname(dst)), dst, True)
 
 def getFileContent(filepath, binary = False):
     content = None

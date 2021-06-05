@@ -39,6 +39,8 @@
     </AntPackage>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Content Include="assets\ce637e01-1d00-405c-8aaa-f0c022235745" />
+    <Content Include="assets\e1124008-e112-4008-a2f3-cf6233498020" />
     <Content Include="res\mipmap-hdpi\ic_sisyphus_launcher.png" />
     <Content Include="res\mipmap-mdpi\ic_sisyphus_launcher.png" />
     <Content Include="res\mipmap-xhdpi\ic_sisyphus_launcher.png" />
