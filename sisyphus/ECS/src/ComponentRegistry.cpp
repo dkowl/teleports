@@ -15,7 +15,7 @@ namespace Sisyphus::ECS {
 
 	bool ComponentRegistry::Register(const uuids::uuid& typeId, const std::string& name)
 	{
-		SIS_DEBUGASSERT(!GetRegistry().contains(typeId));
+		SIS_DEBUGASSERT(GetRegistry().find(typeId) == GetRegistry().end());
 		GetRegistry()[typeId] = name;
 		return true;
 	}

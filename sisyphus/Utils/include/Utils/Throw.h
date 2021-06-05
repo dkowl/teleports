@@ -1,5 +1,6 @@
 #pragma once
 #include <stdexcept>
+#include "Utils\DebugMacros.h"
 #include "Utils\StringUtils.h"
 #include "Utils\FunctionFileLine.h"
 
@@ -24,8 +25,8 @@
 namespace Sisyphus::Utils {
 	inline void Throw(const String& message)
 	{
-#if defined(_DEBUG) && defined(_WIN32) && !defined(SIS_NO_DEBUG_BREAK)
-		__debugbreak();
+#if !defined(SIS_NO_DEBUG_BREAK)
+		SIS_DEBUG_BREAK;
 #endif
 		throw std::runtime_error(message);
 	}

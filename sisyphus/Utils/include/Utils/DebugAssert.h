@@ -24,8 +24,8 @@ namespace Sisyphus::Utils {
 	{
 		if (!condition) {
 			std::cerr << "Assertion failed! " << message << std::endl;
-#if defined(_WIN32) && !defined(SIS_NO_DEBUG_BREAK)
-			__debugbreak();
+#if !defined(SIS_NO_DEBUG_BREAK)
+			SIS_DEBUG_BREAK;
 #endif
 		}
 	}
