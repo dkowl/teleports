@@ -6,6 +6,7 @@ namespace Sisyphus {
 	namespace AndroidGlobals {
 		void InitEnv(JNIEnv* inEnv);
 		void InitAssetManager(jobject inAssetManager);
+		void InitAssetManager(AAssetManager* inAssetManager);
 		void InitFilesDir(jstring filesDir);
 
 		JNIEnv* Env();

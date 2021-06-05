@@ -6,24 +6,30 @@
 namespace Sisyphus {
 	namespace AndroidGlobals {
 		JNIEnv* env = nullptr;
-		jobject assetManager = nullptr;
+		AAssetManager* assetManager = nullptr;
 		jstring filesDir = nullptr;
 
 		void InitEnv(JNIEnv* inEnv)
 		{
-			SIS_THROWASSERT(inEnv);
+			SIS_THROWASSERT(!env && inEnv);
 			env = inEnv;
 		}
 
 		void InitAssetManager(jobject inAssetManager)
 		{
-			SIS_THROWASSERT(inAssetManager);
+			SIS_THROWASSERT(!assetManager && inAssetManager); 
+			assetManager = AAssetManager_fromJava(Env(), inAssetManager);;
+		}
+
+		void InitAssetManager(AAssetManager* inAssetManager)
+		{
+			SIS_THROWASSERT(!assetManager && inAssetManager);
 			assetManager = inAssetManager;
 		}
 
 		void InitFilesDir(jstring inFilesDir)
 		{
-			SIS_THROWASSERT(inFilesDir);
+			SIS_THROWASSERT(!filesDir && inFilesDir);
 			filesDir = inFilesDir;
 		}
 
@@ -34,7 +40,7 @@ namespace Sisyphus {
 
 		AAssetManager* AssetManager() {
 			SIS_DEBUGASSERT(assetManager);
-			return AAssetManager_fromJava(Env(), assetManager);
+			return assetManager;
 		}
 
 		jstring FilesDir()
