@@ -65,6 +65,9 @@
     <ClCompile Include="$(SolutionDir)Utils\src\DebugAssert.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(SolutionDir)Utils\src\DebugMacros.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="$(SolutionDir)Utils\src\Pch_Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

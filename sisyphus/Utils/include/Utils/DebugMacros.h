@@ -20,3 +20,16 @@
 #else
 #define SIS_DEBUG_BREAK void(0)
 #endif
+
+namespace Sisyphus::Utils {
+	bool DebugBreakEnabled();
+	void EnableDebugBreak();
+	void DisableDebugBreak();
+}
+
+#define SIS_NO_DEBUG_BREAK(x) \
+	do { \
+		Sisyphus::Utils::DisableDebugBreak(); \
+		x; \
+		Sisyphus::Utils::EnableDebugBreak(); \
+	} while(0)

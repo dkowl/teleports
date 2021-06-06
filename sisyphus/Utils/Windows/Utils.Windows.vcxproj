@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Utils\src\DebugAssert.cpp" />
+    <ClCompile Include="$(SolutionDir)Utils\src\DebugMacros.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\Pch_Utils.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

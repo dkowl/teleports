@@ -25,9 +25,9 @@
 namespace Sisyphus::Utils {
 	inline void Throw(const String& message)
 	{
-#if !defined(SIS_NO_DEBUG_BREAK)
-		SIS_DEBUG_BREAK;
-#endif
+		if (DebugBreakEnabled()) {
+			SIS_DEBUG_BREAK;
+		}
 		throw std::runtime_error(message);
 	}
 	void ThrowAssert(bool condition, const String& message);

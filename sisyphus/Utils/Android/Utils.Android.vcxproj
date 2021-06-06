@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(SolutionDir)Utils\src\DebugAssert.cpp" />
+    <ClCompile Include="$(SolutionDir)Utils\src\DebugMacros.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\Pch_Utils.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\Platform.cpp" />
     <ClCompile Include="$(SolutionDir)Utils\src\PosixUtils.Android.cpp" />

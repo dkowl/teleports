@@ -2,6 +2,7 @@
 #include "AssetManagement/ResourceLoader.h"
 #include "AssetManagement/RawData.h"
 #include "AssetManagement/RawDataView.h"
+#include "Utils/DebugMacros.h"
 #include <string>
 
 using namespace Sisyphus;
@@ -46,5 +47,5 @@ TEST_CASE("Resource Loader") {
 	REQUIRE(!loadResult.ok);
 
 	auto makeDirLoader = []() {ResourceLoader dirLoader("test_data/ResourceLoader"); };
-	REQUIRE_THROWS(makeDirLoader());	
+	SIS_NO_DEBUG_BREAK(REQUIRE_THROWS(makeDirLoader()));
 }

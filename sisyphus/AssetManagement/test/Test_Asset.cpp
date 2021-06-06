@@ -1,7 +1,8 @@
 #include "catch.hpp"
-#include "AssetManagement/Asset.h"
-#include "AssetManagement/AssetUnpacked.h"
-#include "Utils/Platform.h"
+#include "AssetManagement\Asset.h"
+#include "AssetManagement\AssetUnpacked.h"
+#include "Utils\Platform.h"
+#include "Utils\DebugMacros.h"
 #ifdef SIS_WINDOWS
 #include "Utils\FilesystemUtils.h"
 #endif
@@ -19,7 +20,7 @@ TEST_CASE("Asset") {
 	Fs::Path assetPath = dirPath / "asset.txt";
 	auto createAsset = [assetPath]() {return AssetUnpacked(assetPath); };
 	SECTION("No file") {
-		REQUIRE_THROWS(createAsset());
+		SIS_NO_DEBUG_BREAK(REQUIRE_THROWS(createAsset()));
 	}
 	std::ofstream assetFile(assetPath.String());
 	String content = "Content\nContent\nContent";
@@ -63,7 +64,7 @@ TEST_CASE("Asset") {
 	file << "Random stuff";
 	file.close();
 
-	REQUIRE_THROWS(createAsset());
+	SIS_NO_DEBUG_BREAK(REQUIRE_THROWS(createAsset()));
 	fs::remove_all(dirPath.String());
 #endif
 #ifdef SIS_ANDROID

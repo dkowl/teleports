@@ -1,8 +1,7 @@
 #include "catch.hpp"
-#define SIS_NO_DEBUG_BREAK
+#include "Utils/DebugAssert.h"
 #include "Utils/FunctionFileLine.h"
 #include "Utils/Throw.h"
-#include "Utils/DebugAssert.h"
 #include <string>
 #include <iostream>
 
@@ -30,9 +29,11 @@ namespace {
 TEST_CASE("Macros") {
 	std::cout << "SIS_FUNCTION_FILE_LINE: " << Foo() << std::endl;
 
+	Sisyphus::Utils::DisableDebugBreak();
 	REQUIRE_THROWS(FooThrow());
 	REQUIRE_THROWS(FooThrowAssert());
 	REQUIRE_THROWS(FooThrowAssertMsg());
+	Sisyphus::Utils::EnableDebugBreak();
 
 	std::cout << "SIS_DEBUGASSERT: ";
 	SIS_DEBUGASSERT(1 == 2);
