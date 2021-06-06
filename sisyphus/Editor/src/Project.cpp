@@ -98,8 +98,7 @@ namespace Sisyphus::Editor {
 		result.sizeInBytes = 0;
 
 		std::vector<CopyOperationDescriptor> copiesToDo;
-		if (options.platform == Platform::Windows)
-		{
+		if (options.platform == Platform::Windows) {
 			copiesToDo.emplace_back(CopyOperationDescriptor{ 
 				path / PlatformAsString(options.platform) / "out" / "x64" / "Release" / (name + ".Windows.exe"), 
 				result.path / (name + ".exe"), 
@@ -110,6 +109,13 @@ namespace Sisyphus::Editor {
 				path / "assets_packed",
 				result.path / "assets", 
 				true 
+			});
+		}
+		else if (options.platform == Platform::Android) {
+			copiesToDo.emplace_back(CopyOperationDescriptor{
+				path / PlatformAsString(options.platform) / "App" / "ARM64" / "Release" / (name + "AndroidApp.apk"),
+				result.path / (name + ".apk"),
+				false
 			});
 		}
 		else {
