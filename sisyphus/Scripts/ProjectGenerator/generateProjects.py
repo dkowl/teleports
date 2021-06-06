@@ -409,25 +409,20 @@ def generateProject(projectInfo):
             if platform.name == 'Android':
                 platformSolutionProjects.mainAppProj = AndroidApps.AndroidGameApp(projectInfo).generate()
             elif platform.name == 'Windows':
-                copiedFiles = copyDirContent(
-                    projectInfo.assetDir(),
-                    projectInfo.projDir(platform),
-                    projectInfo.dir()
-                    )
-                generateGitignore(projectInfo.projDir(platform), copiedFiles)
-
+                projDir = projectInfo.projDir(platform)
+                symlinkPath = sis.ensureSymlinkExists(projectInfo.assetDir(), projDir)
+                if symlinkPath:
+                    generateGitignore(projDir, [os.path.relpath(symlinkPath, projDir)])
         if projectInfo.test:            
             platformSolutionProjects.testProj = generateVcxprojAndFilters(platform, projectInfo, True, projectInfo.testProjOutputType(platform))
             if platform.name == "Android":
                 platformSolutionProjects.testProj.addDependency(ProjectInfo.ProjectInfo.allProjects['AndroidGlobals'].solutionProjects['Android'].mainProj)
                 platformSolutionProjects.testAppProj = AndroidApps.AndroidTestApp(projectInfo).generate()
             elif platform.name == "Windows":
-                copiedFiles = copyDirContent(
-                    projectInfo.testDataDir(),
-                    projectInfo.testProjDir(platform),
-                    projectInfo.dir()
-                    )
-                generateGitignore(projectInfo.testProjDir(platform), copiedFiles)
+                testProjDir = projectInfo.testProjDir(platform)
+                symlinkPath = sis.ensureSymlinkExists(projectInfo.testDataDir(), testProjDir)
+                if symlinkPath:
+                    generateGitignore(testProjDir, [os.path.relpath(symlinkPath, testProjDir)])
         projectInfo.solutionProjects[platform.name] = platformSolutionProjects
     if projectInfo.outputType != 'Application':
         generateProps(projectInfo)

@@ -26,16 +26,22 @@ def ensureFileExists(filepath, defaultContent = ''):
         with open(filepath, 'w') as file:
             file.write(defaultContent)
 
+# example
+#   src = project/assets
+#   dst = app
+#   result - symlink at app/assets
+# returns the symlink path
 def ensureSymlinkExists(src, dst):
     src = os.path.abspath(src)
     dst = os.path.abspath(dst)
+    dst = os.path.join(dst, os.path.basename(src))
 
     if sys.version_info < (3, 8):
         logging.warn("Your python version is <3.8, creating symlinks may not work properly. \
             make sure to run Windows in developer mode and install python 3.8 or greater.")
 
     if not os.path.exists(src):
-        raise f'Src path of your symlink does not exist: {src}'
+        return None
 
     ensureDirExists(os.path.dirname(dst))
 
@@ -45,7 +51,7 @@ def ensureSymlinkExists(src, dst):
             prevSrc = os.path.abspath(os.path.join(os.path.dirname(dst), os.readlink(dst)))
         if prevSrc == src:
             # correct symlink already there, nothing to do
-            return
+            return dst
         logging.info(f'symlink at {dst} alrady exists, but points to {prevSrc} instead of {src}, deleting...')
         os.unlink(dst)
     elif os.path.isfile(dst):
@@ -59,6 +65,7 @@ def ensureSymlinkExists(src, dst):
     relSrc = os.path.relpath(src, os.path.dirname(dst))
     logging.info(f'Creating symlink to {relSrc} at {dst}')
     os.symlink(relSrc, dst, True)
+    return dst
 
 def getFileContent(filepath, binary = False):
     content = None

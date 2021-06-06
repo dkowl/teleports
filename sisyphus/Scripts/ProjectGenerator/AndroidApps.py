@@ -29,9 +29,8 @@ class AndroidApp:
         return os.path.join(self.libDir(), 'App')
 
     # 'assets' is the main "" directory in Android's AAssetManager, it contains various files by default
-    # we need an 'assets_packed' subdir in there to ensure it only contains asset bundles
     def appAssetDir(self):
-        return os.path.join(self.appDir(), 'assets', 'assets_packed')
+        return os.path.join(self.appDir(), 'assets')
 
     def fileSrcDir(self):
         return os.path.join(constants.pythonSourceDir, 'items', 'AndroidApp')
@@ -61,7 +60,7 @@ class AndroidApp:
         gitignorePaths = [filename for ignored, filename in self.filesToCopy()]
 
         srcDir = os.path.join(self.fileSrcDir(), 'res')
-        dstDir = os.path.join(self.appDir(), 'res')
+        # TODO: mirror dirs
         gitignorePaths += copyDirContent(srcDir, self.appDir(), self.fileSrcDir())
 
         return gitignorePaths
@@ -170,10 +169,10 @@ class AndroidGameApp(AndroidApp):
     def copyNeededFiles(self):
         gitignorePaths = super().copyNeededFiles()
 
-        symlinkDst = self.appAssetDir()
-        sis.ensureSymlinkExists(self.projectInfo.packedAssetDir(), symlinkDst)
+        symlinkPath = sis.ensureSymlinkExists(self.projectInfo.packedAssetDir(), self.appAssetDir())
+        if symlinkPath:
+            gitignorePaths += [os.path.relpath(symlinkPath, self.appDir())]
 
-        gitignorePaths += [os.path.relpath(symlinkDst, self.appDir())]
         return gitignorePaths
 
 
@@ -193,13 +192,11 @@ class AndroidTestApp(AndroidApp):
 
     def copyNeededFiles(self):
         gitignorePaths = super().copyNeededFiles()
+        
+        symlinkPath = sis.ensureSymlinkExists(self.projectInfo.testDataDir(), self.appAssetDir())
+        if symlinkPath:
+            gitignorePaths += [os.path.relpath(symlinkPath, self.appDir())]
 
-        gitignorePaths += copyDirContent(
-            self.projectInfo.testDataDir(),
-            os.path.join(self.appDir(), 'assets'),
-            self.projectInfo.dir(),
-            self.appDir()
-            )
         return gitignorePaths
 
 
