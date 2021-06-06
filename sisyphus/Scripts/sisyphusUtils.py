@@ -12,7 +12,9 @@ def replace(str, dict):
     return str
 
 def ensureDirExists(dir):
-    dir = os.path.dirname(dir)
+    if os.path.isfile(dir):
+        dir = os.path.dirname(dir)
+
     if not os.path.exists(dir):
         logger.info("Creating directory: {0}".format(dir))
         os.makedirs(dir)
@@ -35,8 +37,12 @@ def ensureSymlinkExists(src, dst):
     if not os.path.exists(src):
         raise f'Src path of your symlink does not exist: {src}'
 
+    ensureDirExists(os.path.dirname(dst))
+
     if os.path.islink(dst):
         prevSrc = os.readlink(dst)
+        if not os.path.isabs(prevSrc):
+            prevSrc = os.path.abspath(os.path.join(os.path.dirname(dst), os.readlink(dst)))
         if prevSrc == src:
             # correct symlink already there, nothing to do
             return
@@ -49,8 +55,10 @@ def ensureSymlinkExists(src, dst):
         logging.info(f'{dst} already exists and is a directory, deleting...')
         shutil.rmtree(dst)
 
-    logging.info(f'Creating symlink to {src} at {dst}')
-    os.symlink(os.path.relpath(src, os.path.dirname(dst)), dst, True)
+    # for some reason creating a symlink with an absolute path produces weird results during os.readlink()
+    relSrc = os.path.relpath(src, os.path.dirname(dst))
+    logging.info(f'Creating symlink to {relSrc} at {dst}')
+    os.symlink(relSrc, dst, True)
 
 def getFileContent(filepath, binary = False):
     content = None

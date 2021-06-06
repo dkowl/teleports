@@ -28,8 +28,10 @@ class AndroidApp:
     def appDir(self):
         return os.path.join(self.libDir(), 'App')
 
+    # 'assets' is the main "" directory in Android's AAssetManager, it contains various files by default
+    # we need an 'assets_packed' subdir in there to ensure it only contains asset bundles
     def appAssetDir(self):
-        return os.path.join(self.appDir(), 'assets')
+        return os.path.join(self.appDir(), 'assets', 'assets_packed')
 
     def fileSrcDir(self):
         return os.path.join(constants.pythonSourceDir, 'items', 'AndroidApp')

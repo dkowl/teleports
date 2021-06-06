@@ -77,7 +77,7 @@ def generateGitignore(dir, ignoredPaths):
 
 def getFilepathsRecursive(dir, rootDir = dir):
     paths = []
-    for dirpath, dirnames, filenames in os.walk(dir):
+    for dirpath, dirnames, filenames in os.walk(dir, followlinks = True):
         for filename in filenames:
             paths.append(os.path.relpath(os.path.join(dirpath, filename), rootDir))
     return paths

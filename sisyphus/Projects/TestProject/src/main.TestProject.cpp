@@ -153,7 +153,7 @@ void ANativeActivity_onCreate(ANativeActivity* activity, void* savedState, size_
 
 		auto assetReaderType = AssetManagement::AssetReaderType::Packed;
 		auto assetReader = AssetManagement::AssetReader::Create(assetReaderType);
-		assetReader->Read("");
+		assetReader->Read("assets_packed");
 	}
 	catch (std::exception& e) {
 		Logger().Log(e.what(), LogLevel::Fatal);

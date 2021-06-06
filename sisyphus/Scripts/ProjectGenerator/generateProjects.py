@@ -302,7 +302,7 @@ def generateVcxprojAndFilters(platform, projectInfo, isTest, outputType):
     folderName = platform.name
     if isTest:
         folderName += ".Test"
-    targetDir = os.path.join(projectInfo.dir(), folderName, "")
+    targetDir = os.path.join(projectInfo.dir(), folderName)
 
     sis.ensureDirExists(targetDir)
     if projectInfo.precompiledHeaders:
